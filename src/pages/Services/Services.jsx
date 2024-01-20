@@ -3,7 +3,6 @@ import ServiceCard from "./ServiceCard";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 
-
 const Services = () => {
     const services = useLoaderData();
    
@@ -25,7 +24,7 @@ const Services = () => {
     return (
         <div>
               <Helmet>
-                <title>Home Care | Books</title>
+                <title>Book Share | Books</title>
             </Helmet>
 
             <div className="text-center my-6">
@@ -40,7 +39,7 @@ const Services = () => {
                             setFilter(services);
                         }
                         else {
-                            const searchItem = services.filter(service => service.service_name.toLowerCase().includes(searchTerm.toLowerCase()))
+                            const searchItem = services.filter(service => service.book_name.toLowerCase().includes(searchTerm.toLowerCase()))
                             setFilter(searchItem);
                             
                         }

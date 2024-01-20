@@ -1,4 +1,4 @@
-import logo from "../../assets/mainlogo.webp";
+import logo from "../../assets/logo.png";
 const Footer = () => {
   return (
     <div className="mt-10">

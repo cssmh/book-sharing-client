@@ -17,7 +17,7 @@ const ServiceCard = ({ service }) => {
                 <p>Details: {smallDesc}...</p>
                 <div className="flex justify-center items-center gap-3 border-2 border-red-500 rounded-lg p-3">
                     <div className="avatar">
-                        <div className="w-16 rounded-full ring ring-primary ring-offset-base-100">
+                        <div className="w-12 rounded-full ring ring-primary ring-offset-base-100">
                             <img src={book_provider_image}/>
                         </div>
                     </div>

@@ -2,7 +2,7 @@ const ContactUs = () => {
     return (
         <section className="bg-yellow-50 p-4 rounded-lg">
             <div className="text-center mb-4 ">
-                <h1 className="text-h-font font-bold text-2xl  mb-5">
+                <h1 className="text-h-font font-bold text-3xl  mb-5">
                     Contact With Us
                 </h1>
             </div>

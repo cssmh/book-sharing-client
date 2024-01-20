@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProviders";
-import Logo from "../../../assets/mainlogo.webp";
+import Logo from "../../../assets/logo.png";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -11,7 +11,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-gray-200 rounded-lg mb-1 md:px-3">
+    <div className="navbar bg-gray-200 rounded-lg mb-1 md:px-4">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -58,10 +58,12 @@ const Navbar = () => {
             )}
           </ul>
         </div>
-        <div className="flex items-center">
-          <img className="w-12 rounded-2xl" src={Logo} alt="" />
-          <span className="ml-2 font-bold text-xl">Book Sharing web</span>
-        </div>
+        <Link to={"/"}>
+          <div className="flex items-center gap-1">
+            <img className="w-12 rounded-3xl" src={Logo} alt="" />
+            <span className="ml-2 font-bold text-lg md:text-2xl">Book Sharing web</span>
+          </div>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -95,7 +97,7 @@ const Navbar = () => {
         {user?.email ? (
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
+              <div className="w-12 rounded-full">
                 <img src={user.photoURL} alt={user.displayName} />
               </div>
             </label>
