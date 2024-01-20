@@ -19,10 +19,11 @@ const PopularServices = ({ services }) => {
       </div>
 
       <div className="flex justify-center">
-        <button className="btn btn-outline my-10">
-          {" "}
-          <Link to="/services">Show all</Link>
-        </button>
+        <Link to="/services">
+          <button className="btn my-10 bg-green-500 text-white">
+            Show all
+          </button>
+        </Link>
       </div>
     </div>
   );
