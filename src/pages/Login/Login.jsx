@@ -19,7 +19,7 @@ const Login = () => {
     const { signIn } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
-    console.log(location);
+    // console.log(location);
 
     const handleLogin = e => {
 
@@ -28,15 +28,13 @@ const Login = () => {
         const email = form.get('email');
         const password = form.get('password');
 
-        console.log(email, password);
+        // console.log(email, password);
         signIn(email, password)
             .then(result => {
-                console.log(result.user)
-
+                console.log(result.user.emailVerified);
                 toast('User logged in successfully');
-
-
                 navigate(location?.state ? location.state : '/')
+                
             })
             .catch(error => {
                 console.log(error.message);

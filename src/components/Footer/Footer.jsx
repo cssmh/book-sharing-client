@@ -69,7 +69,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <a rel="noopener noreferrer" href="#">
-                    share@book.com
+                  bookhaven@gmail.com
                   </a>
                 </li>
                 <li>
@@ -130,8 +130,8 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="py-6 text-sm text-center dark:text-gray-400">
-          © 2024 BookSharing web All rights reserved.
+        <div className="italic py-6 text-sm text-center dark:text-gray-400">
+          © 2024 MBSTU BookHaven All rights reserved.
         </div>
       </footer>
     </div>

@@ -99,18 +99,18 @@ const AddBookings = ({ service }) => {
 
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Instruction</span>
+                                <span className="label-text">A Message for Book Provider</span>
                             </label>
                             <textarea name="instruction" cols="20" rows="10" className="rounded-lg"></textarea>
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Phone</span>
+                                <span className="label-text">Your Phone</span>
                             </label>
                             <input type="text" name="phone" defaultValue="+880" className="input input-bordered" />
                         </div>
                         <div className="form-control mt-6">
-                            <button className="btn btn-outline bg-green-500 text-white">Purchase Service</button>
+                            <button className="btn btn-outline bg-green-500 text-white">Purchase Book</button>
                         </div>
                     </form>
                 </DialogContent>

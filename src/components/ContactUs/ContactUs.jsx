@@ -20,8 +20,9 @@ const ContactUs = () => {
                                 Address
                             </h2>
                             <p className="text-p-font font-poppins text-center">
-                                Tangail,<br></br>
-                                Dhaka,Bangladesh.
+                                Santosh,<br></br>
+                                Tangail-1902<br></br>
+                                Dhaka, Bangladesh
                             </p>
                         </div>
                     </div>
@@ -63,8 +64,8 @@ const ContactUs = () => {
                             Contact Info
                             </h2>
                             <p className="text-p-font font-poppins text-center">
-                            Phone : +88027383,
-                                <br />Email: book@share.com
+                            Phone : +880100000000,
+                                <br />Email: bookhaven@gmail.com
                             </p>
                         </div>
                     </div>
