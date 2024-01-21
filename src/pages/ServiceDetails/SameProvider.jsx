@@ -21,7 +21,7 @@ const SameProvider = ({email,name,id}) => {
              {
                 services.length == 0 ? <></> :
                 <div>
-                   <h3 className="text-center my-10 font-bold text-2xl italic">Others services of {name}</h3>  
+                   <h3 className="text-center my-10 font-bold text-2xl italic">Others Books of {name}</h3>  
                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                    {
                     filterServices.map(service => <ServiceCard key={service._id} service={service}></ServiceCard>)

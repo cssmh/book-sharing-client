@@ -16,11 +16,11 @@ const MySchedules = () => {
     return (
        <div>
         <Helmet>
-            <title>Book Share | My-Schedules</title>
+            <title>BookHaven | My-Cart</title>
         </Helmet>
          <div className="flex justify-center gap-4 my-10">
-            <button onClick={showBook}  className={activeComponent === 'MyBookings' ? 'btn  btn-primary' : 'btn'}>My Booking</button>
-            <button onClick={showWork}  className={activeComponent === 'MyWorks' ? 'btn btn-primary' : 'btn'}>MyPending</button>
+            <button onClick={showBook}  className={activeComponent === 'MyBookings' ? 'btn  btn-primary text-white' : 'btn'}>My Booking</button>
+            <button onClick={showWork}  className={activeComponent === 'MyWorks' ? 'btn btn-primary text-white' : 'btn'}>My Pending</button>
             </div>
             {activeComponent === 'MyBookings' && <MyBookings></MyBookings>}
             {activeComponent === 'MyWorks' && <MyWorks></MyWorks>}

@@ -19,7 +19,7 @@ const ManageServices = () => {
     return (
         <div>
             <Helmet>
-                <title>Book Share | My-Books</title>
+                <title>BookHaven | My-Books</title>
             </Helmet>
             <h2 className="text-3xl font-bold my-10 text-center italic">All Books Added By You</h2>
             {

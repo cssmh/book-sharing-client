@@ -25,7 +25,9 @@ const ServiceDetails = () => {
                 <div className="card-body items-center text-center">
                     <h2 className="card-title text-xl text-orange-500 font-bold">
                         Name : {book_provider_name}</h2>
+                    <p className="text-lg font-medium">Email: {book_provider_email}</p>
                     <p className="text-lg font-medium">Location: {location}</p>
+                    <p className="text-lg font-medium">Phone: <span className="text-green-600">{phone}</span></p>
                 </div>
             </div>
 
@@ -37,28 +39,16 @@ const ServiceDetails = () => {
             <div className="card-body items-center text-center">
                 <h2 className="card-title text-2xl  font-bold text-blue-900">{book_name}</h2>
                 <p>{description}</p>
-                
-                <div className="flex justify-center items-center gap-6 my-4 border-2 border-red-700 rounded-lg p-3">
-                    <div className="avatar">
-                        <div className="w-16 rounded-full ring ring-primary ring-offset-base-100">
-                            <img src={book_provider_image}/>
-                        </div>
-                    </div>
-                    <h2 className=" italic font-bold text-lg ">{book_provider_name}</h2>
-                </div>
-               
-               <p className="text-lg font-bold ">Phone: <span className="italic">{phone}</span></p>
-               <p className="text-lg font-bold mb-2">Location: <span className="italic">{location}</span></p>
-                 <div className="card-actions">
+                 <div className="card-actions mt-2">
                     <AddBookings service={service}></AddBookings>
                 </div>
             </div>
         </div>
 
 
-        <div>
+        {/* <div>
             <SameProvider email = {book_provider_email} name={book_provider_name} id={_id}></SameProvider>
-        </div>
+        </div> */}
 
                           
         </div>

@@ -25,7 +25,6 @@ const MyBookings = () => {
                 bookings.map(booking => <MyBookingCard key={booking._id} booking={booking}></MyBookingCard>)
               }
             </div>
-            // bookings.map(booking =>)
            }
         </div>
     );

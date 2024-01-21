@@ -13,7 +13,7 @@ const MyBookingCard = ({booking}) => {
            <p className="text-lg font-bold ">Owner Phone & Email: <br></br>
            {phone} <br></br> {book_provider_email}</p>
            <p className="text-lg font-bold text-green-500">Status : <span>{status}</span></p>
-           <p className="text-lg font-bold ">Date of Handover: <span className="italic">{date}</span></p>
+           <p className="text-lg font-bold ">Date of Handover: {date}</p>
         </div>
     </div>
     );

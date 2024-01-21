@@ -42,7 +42,7 @@ const UpdateService = () => {
     return (
         <div>
              <Helmet>
-                <title>Home Care | Update {_id}</title>
+                <title>Update {book_name}</title>
             </Helmet>
 
             <form onSubmit={handleService} className=" md:w-3/4 lg:w-1/2 mx-auto">

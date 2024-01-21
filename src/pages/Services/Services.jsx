@@ -24,7 +24,7 @@ const Services = () => {
     return (
         <div>
               <Helmet>
-                <title>Book Share | Books</title>
+                <title>BookHaven | Books</title>
             </Helmet>
 
             <div className="text-center my-6">
@@ -53,18 +53,6 @@ const Services = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
                 {
-
-
-                    // services
-                    //     .filter((service) => {
-                    //         if (searchTerm === '')
-                    //             return service;
-                    //         else if (service.service_name.toLowerCase().includes(searchTerm.toLowerCase()))
-                    //             return service;
-                    //     }).
-                    //     map(service => <ServiceCard key={service._id} service={service}></ServiceCard>)
-
-
                     isShow ? filter.map(service => <ServiceCard key={service._id} service={service}></ServiceCard>) :
                     filter.map(service => <ServiceCard key={service._id} service={service}></ServiceCard>)
                 }

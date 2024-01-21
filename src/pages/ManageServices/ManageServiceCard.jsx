@@ -3,9 +3,9 @@ import Swal from "sweetalert2";
 
 
 const ManageServiceCard = ({ service, services, setServices }) => {
-    console.log(service);
+    // console.log(service);
 
-    const { _id, book_name, book_image, book_provider_email, book_provider_name, description, phone } = service;
+    const { _id, book_name, book_image, phone } = service;
 
 
     const handleDelete = _id => {
@@ -21,7 +21,7 @@ const ManageServiceCard = ({ service, services, setServices }) => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                console.log('delete');
+                // console.log('delete');
 
                 fetch(`http://localhost:5000/services/${_id}`, {
                     method: 'DELETE'
@@ -32,7 +32,7 @@ const ManageServiceCard = ({ service, services, setServices }) => {
                         if (data.deletedCount > 0) {
                             Swal.fire(
                                 'Deleted!',
-                                'Your Service Deleted',
+                                'Your Book Deleted',
                                 'success'
                             )
                             const remaining = services.filter(car => car._id !== _id);

@@ -43,7 +43,7 @@ const AddService = () => {
     return (
         <div>
             <Helmet>
-                <title>Book Share | Add-service</title>
+                <title>BookHaven | Add-Book</title>
             </Helmet>
             <form onSubmit={handleAddService} className=" md:w-3/4 lg:w-1/2 mx-auto">
                 <div className="form-control">
