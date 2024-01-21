@@ -66,16 +66,9 @@ const Services = () => {
 
 
                     isShow ? filter.map(service => <ServiceCard key={service._id} service={service}></ServiceCard>) :
-                    filter.slice(0,6).map(service => <ServiceCard key={service._id} service={service}></ServiceCard>)
+                    filter.map(service => <ServiceCard key={service._id} service={service}></ServiceCard>)
                 }
             </div>
-            {
-               ( services.length > 6 && filter.length!=0) && <div className="flex justify-center my-6">
-                    {/* <button onClick={()=>setIsShow(!isShow)} className="btn bg-[#009444] text-white ">{isShow ? '' : "See All"}</button> */}
-                    {showButton && <button onClick={handleButton} className="btn bg-[#009444] text-white ">See All</button>}
-                </div>
-            }
-
         </div>
     );
 };

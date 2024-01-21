@@ -5,7 +5,6 @@ import { AuthContext } from "../../providers/AuthProviders";
 import { ToastContainer, toast,  } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Helmet } from "react-helmet-async";
-import { sendEmailVerification } from "firebase/auth";
 
 
 const Register = () => {
@@ -35,18 +34,12 @@ const Register = () => {
 
         createUser(email,password)
         .then(res => {
-            console.log(res.user);
             handleUpdateProfile(name, photo)
                 .then(() => {
                     // swal("User Created Successfully","success");
                     toast("User Created Successfully")
                     navigate(location?.state ? location.state : '/')
 
-                })
-                sendEmailVerification(res.user)
-                .then(console.log("verification sent"))
-                .catch(err => {
-                    console.log(err.message);
                 })
         })
         .catch(error =>{

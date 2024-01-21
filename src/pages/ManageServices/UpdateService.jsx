@@ -31,7 +31,7 @@ const UpdateService = () => {
                 if (res.data.modifiedCount > 0) {
                     Swal.fire({
                         icon: 'success',
-                        title: 'Service Updated',
+                        title: 'Details Updated',
 
                     })
                 }
@@ -98,7 +98,7 @@ const UpdateService = () => {
                     <input type="text" name="phone" defaultValue={phone} className="input input-bordered" />
                 </div>
                 <div className="form-control mt-6">
-                    <button className="btn btn-outline">Update Service</button>
+                    <button className="btn btn-outline">Update Book Details</button>
                 </div>
             </form>
         </div>

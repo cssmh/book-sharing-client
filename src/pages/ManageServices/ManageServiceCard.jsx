@@ -57,7 +57,7 @@ const ManageServiceCard = ({ service, services, setServices }) => {
                     <h2 className="card-title font-bold text-blue-900">{book_name}</h2>
 
 
-                    <p className="text-lg font-bold mb-4">Price : <span className="italic">{phone}</span></p>
+                    <p className="text-lg font-bold mb-4">Phone: {phone}</p>
                     <div className="card-actions">
                         <Link to={`/updateservice/${_id}`}>
                             <button className="btn btn-outline">Update Product</button>

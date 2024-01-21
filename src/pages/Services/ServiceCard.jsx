@@ -21,11 +21,11 @@ const ServiceCard = ({ service }) => {
                             <img src={book_provider_image}/>
                         </div>
                     </div>
-                    <h2 className="italic font-bold text-lg ">{book_provider_name}</h2>
+                    <h2 className="font-bold text-lg ">{book_provider_name}</h2>
                 </div>
                
-               <p className="text-lg font-bold">Phone: <span className="italic">{phone}</span></p>
-               <p className="text-lg font-bold">Location: <span className="italic">{location}</span></p>
+               <p className="text-lg font-bold">Phone: {phone}</p>
+               <p className="text-lg font-bold">Location: {location}</p>
                  <div className="card-actions">
                    <Link to={`/service/${_id}`}>
                     <button className="btn btn-outline btn-success">View Details</button>

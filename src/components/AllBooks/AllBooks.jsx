@@ -1,8 +1,8 @@
 import allBooks from "../../assets/allbooks.webp";
 const AllBooks = () => {
   return (
-    <div className="my-8 bg-blue-400 py-7">
-      <div className="flex flex-col md:flex-row justify-center text-white items-center">
+    <div className="my-8 bg-yellow-100 py-7">
+      <div className="flex flex-col md:flex-row justify-center items-center">
         <div className="px-4 md:px-0">
           <h1 className="text-4xl py-4">Best Place for Books Exchange</h1>
           <p>Welcome to Book Sharing website</p>
