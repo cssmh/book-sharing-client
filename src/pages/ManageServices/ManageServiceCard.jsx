@@ -44,7 +44,7 @@ const ManageServiceCard = ({ service, services, setServices }) => {
         })
     }
 
-// My Books page
+// My Books page card
 
     return (
         <div>
