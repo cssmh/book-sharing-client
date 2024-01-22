@@ -24,7 +24,7 @@ const AddService = () => {
             location,book_name,book_image,book_provider_email,book_provider_name,description,phone,book_provider_image
         }
 
-        console.log(service);
+        // console.log(service);
         axios.post('http://localhost:5000/services',service)
         .then(res=>{
            console.log(res.data);
@@ -40,6 +40,9 @@ const AddService = () => {
            console.log(err);
         })
     }
+
+    // Add Book Page + form
+
     return (
         <div>
             <Helmet>
@@ -56,7 +59,7 @@ const AddService = () => {
                     <label className="label">
                         <span className="label-text">Book Image Url</span>
                     </label>
-                    <input type="text"  required name="book_image"  className="input input-bordered" />
+                    <input type="text" required name="book_image" className="input input-bordered" />
                 </div>
                 <div className="form-control">
                     <label className="label">
