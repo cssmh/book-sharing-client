@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 const PopularServiceCard = ({ service }) => {
     const { _id, book_image, book_name, description, book_provider_image, book_provider_name, phone, location } = service;
     let smallDesc = description.slice(0,120)
+
+    // HomePage Popular Books card
+
     return (
         
    

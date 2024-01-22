@@ -38,7 +38,7 @@ const Navbar = () => {
               <NavLink to="/">Home</NavLink>
             </li>
             <li className="font-semibold text-base">
-              <NavLink to="/services">Books</NavLink>
+              <NavLink to="/services">All Books</NavLink>
             </li>
             {user && (
               <li>
@@ -51,7 +51,7 @@ const Navbar = () => {
                     <NavLink to="/add-service">Add-Book</NavLink>
                   </li>
                   <li className="font-semibold text-base">
-                    <NavLink to="/my-schedules">My-Cart</NavLink>
+                    <NavLink to="/my-schedules">My-Schedule</NavLink>
                   </li>
                 </ul>
               </li>
@@ -71,7 +71,7 @@ const Navbar = () => {
             <NavLink to="/">Home</NavLink>
           </li>
           <li className="font-semibold text-base">
-            <NavLink to="/services">Books</NavLink>
+            <NavLink to="/services">All Books</NavLink>
           </li>
           {user && (
             <li tabIndex={0}>
@@ -85,7 +85,7 @@ const Navbar = () => {
                     <NavLink to="/add-service">Add-Book</NavLink>
                   </li>
                   <li className="font-semibold text-base">
-                    <NavLink to="/my-schedules">My-Cart</NavLink>
+                    <NavLink to="/my-schedules">My-Schedule</NavLink>
                   </li>
                 </ul>
               </details>

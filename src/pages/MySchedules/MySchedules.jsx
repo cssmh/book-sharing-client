@@ -16,7 +16,7 @@ const MySchedules = () => {
     return (
        <div>
         <Helmet>
-            <title>BookHaven | My-Cart</title>
+            <title>BookHaven | My-Schedule</title>
         </Helmet>
          <div className="flex justify-center gap-4 my-10">
             <button onClick={showBook}  className={activeComponent === 'MyBookings' ? 'btn  btn-primary text-white' : 'btn'}>My Booking</button>

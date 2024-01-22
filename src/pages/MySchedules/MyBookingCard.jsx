@@ -3,6 +3,9 @@ const MyBookingCard = ({booking}) => {
     const {book_image,book_name,phone,status,date, book_provider_email} = booking;
     // let smallDesc;
     // description.length > 50 ? smallDesc = description.slice(0, 48) : description
+
+    // My Booking page card
+
     return (
         <div className="card  bg-yellow-50 hover:border-2  hover:border-blue-700 hover:bg-yellow-100 shadow-xl">
         <figure className="px-10 pt-10">

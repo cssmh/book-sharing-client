@@ -8,6 +8,9 @@ const ServiceDetails = () => {
     const service = useLoaderData();
     console.log(service);
     const { _id, book_image, book_name, description, location, book_provider_image, book_provider_email, book_provider_name, phone} = service;
+
+    // Book Details Page
+
     return (
         <div>
             <Helmet>

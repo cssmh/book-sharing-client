@@ -130,7 +130,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="italic py-6 text-sm text-center dark:text-gray-400">
+        <div className="py-6 text-sm text-center dark:text-gray-400">
           © 2024 MBSTU BookHaven All rights reserved.
         </div>
       </footer>

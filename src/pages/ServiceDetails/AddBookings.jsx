@@ -54,10 +54,10 @@ const AddBookings = ({ service }) => {
 
 
     }
-
+// Form for booking page
     return (
         <div>
-            <Button onClick={handlePopUp} color="primary" variant="contained">Add To Book</Button>
+            <Button onClick={handlePopUp} color="primary" variant="contained">Collect {book_name}</Button>
             <Dialog open={open} fullWidth maxWidth='lg'>
                   <DialogActions>
                     <Button onClick={closePop} color="error">X</Button>

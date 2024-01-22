@@ -31,6 +31,9 @@ const MyWorksCard = ({ work }) => {
       })
       .then((err) => console.log(err));
   };
+
+  // My pending page card
+  
   return (
     <div className="card  bg-yellow-50 hover:border-2  hover:border-blue-700 hover:bg-yellow-100 shadow-xl">
       <figure className="px-10 pt-10">
@@ -38,12 +41,17 @@ const MyWorksCard = ({ work }) => {
       </figure>
       <div className="card-body items-center text-center">
         <h2 className="card-title font-bold text-blue-900">{book_name}</h2>
-        <p className="text-lg font-bold ">Phone : {phone}</p>
-        <p className="text-lg font-bold ">Instruction : {instruction}</p>
+        <p className="text-lg font-bold">Collector Info:</p>
+        <div>
+          <p className="text-lg">Phone : {phone}</p>
+          <p className="text-lg">
+            Email : <span className="">{user_email}</span>
+          </p>
+          <p className="text-lg">Message : {instruction}</p>
+        </div>
         <p className="text-lg font-bold ">
-          Email : <span className="">{user_email}</span>
+          Need Book by : <span className="text-green-500">{date}</span>
         </p>
-        <p className="text-lg font-bold ">Date him/her Need: {date}</p>
 
         <select
           id="cars"

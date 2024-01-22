@@ -39,6 +39,8 @@ const UpdateService = () => {
             .then(err => console.log(err))
     }
 
+    // Update book details form
+
     return (
         <div>
              <Helmet>

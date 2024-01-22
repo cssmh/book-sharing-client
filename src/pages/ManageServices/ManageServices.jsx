@@ -16,6 +16,8 @@ const ManageServices = () => {
       .then(err=>console.log(err))
     },[url])
 
+    // My Books page
+
     return (
         <div>
             <Helmet>
@@ -23,7 +25,7 @@ const ManageServices = () => {
             </Helmet>
             <h2 className="text-3xl font-bold my-10 text-center italic">All Books Added By You</h2>
             {
-                services.length == 0 ? <p className="text-center text-2xl font-semibold text-red-600">No Service Added By You</p>:
+                services.length == 0 ? <p className="text-center text-2xl font-semibold text-red-600">No Book Added By You</p>:
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {

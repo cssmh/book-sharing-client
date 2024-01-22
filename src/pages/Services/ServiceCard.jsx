@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 const ServiceCard = ({ service }) => {
-    console.log(service);
+    // console.log(service);
     const { _id, book_image, book_name, description, book_provider_image, book_provider_name, phone,location} = service;
     let smallDesc = description.slice()
+    // All Books Page card
     return (
         <div className="card bg-yellow-50 shadow-xl hover:border-2  hover:border-blue-700 hover:bg-yellow-100">
             <div data-aos="zoom-in" data-aos-delay="400" data-aos-offset='100'>

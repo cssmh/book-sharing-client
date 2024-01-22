@@ -62,7 +62,7 @@ const AuthProviders = ({children}) => {
         return () =>{
             unSubscribe();
         }
-    },[])
+    },[user?.email])
 
     const logOut =()=>{
         setLoading(true)
