@@ -23,7 +23,7 @@ const ServiceDetails = () => {
             <div className="card max-w-xl mx-auto bg-amber-100 shadow-xl p-6 my-6">
             <h2 className="text-center font-bold text-3xl italic text-blue-800">Book Provider Information</h2>
                 <figure className="px-10 pt-10">
-                    <img className="rounded-xl" src={book_provider_image} alt="no image"  />
+                    <img className="rounded-xl w-24" src={book_provider_image} alt="no image"  />
                 </figure>
                 <div className="card-body items-center text-center">
                     <h2 className="card-title text-xl text-orange-500 font-bold">
@@ -37,7 +37,7 @@ const ServiceDetails = () => {
 
             <div className="card bg-yellow-50 shadow-xl">
             <figure className="px-10 pt-10">
-                <img src={book_image} alt="Shoes" className="rounded-xl" />
+                <img src={book_image} alt="Shoes" className="rounded-xl w-[380px]" />
             </figure>
             <div className="card-body items-center text-center">
                 <h2 className="card-title text-2xl  font-bold text-blue-900">{book_name}</h2>

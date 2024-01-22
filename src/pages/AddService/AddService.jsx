@@ -12,7 +12,11 @@ const AddService = () => {
         e.preventDefault();
         const form = event.target;
         const book_name = form.book_name.value;
-        const book_image = form.book_image.value;
+
+        const get_image = form.book_image.value;
+        const defaultImageUrl = 'https://i.ibb.co/2vCThtZ/Cover-Not-Available.jpg';
+
+        const book_image = get_image.trim() !== '' ? get_image : defaultImageUrl;
         const book_provider_name = form.book_provider_name.value;
         const book_provider_email = form.book_provider_email.value;
         const book_provider_image = user.photoURL;
@@ -59,7 +63,7 @@ const AddService = () => {
                     <label className="label">
                         <span className="label-text">Book Image Url</span>
                     </label>
-                    <input type="text" required name="book_image" className="input input-bordered" />
+                    <input type="text" name="book_image" className="input input-bordered" />
                 </div>
                 <div className="form-control">
                     <label className="label">
@@ -86,7 +90,7 @@ const AddService = () => {
                     <label className="label">
                         <span className="label-text">Description</span>
                     </label>
-                    <textarea name="description" required cols="20" rows="10" className="rounded-lg"></textarea>
+                    <textarea name="description" cols="20" rows="10" className="rounded-lg"></textarea>
                 </div>
 
                 <div className="form-control">
