@@ -24,11 +24,13 @@ const Register = () => {
         const password = form.get('password');
         console.log(name,photo,email,password);
        
-        if(!/^(?=.*[A-Z])(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>?]).{6,}$/.test(password)){
-            // swal("Oops!", "Password Atleast 6,one uppercase,one special character", "error");
-            toast('password must be at least 6 characters including one uppercase and special character');
+        if (password.length < 6) {
+            toast("Please insert at least 6 length password or more!");
             return;
-        }
+          } else if (!/[A-Z]/.test(password)) {
+            toast("Must use your password at least one Uppercase letter");
+            return;
+          }
 
 
 
@@ -66,7 +68,7 @@ const Register = () => {
                 <label className="label">
                     <span className="label-text font-semibold">Photo URL</span>
                 </label>
-                <input type="text" required name="photo" placeholder="Photo URL" className="input input-bordered  border-green-500" />
+                <input type="text" name="photo" placeholder="Photo URL" className="input input-bordered  border-green-500" />
             </div>
             <div className="form-control">
                 <label className="label">
