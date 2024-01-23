@@ -29,9 +29,8 @@ const AuthProviders = ({children}) => {
     }
 
     const handleUpdateProfile = (name, photo) => {
-        const defaultPhotoURL = 'https://i.ibb.co/xgt3MPz/default.jpg';
         return updateProfile(auth.currentUser, {
-            displayName: name, photoURL: photo || defaultPhotoURL
+            displayName: name, photoURL: photo
         })
     }
    
