@@ -8,7 +8,7 @@ const AllBooks = () => {
           <h1 className="text-4xl py-2">Best Place for Books Exchange</h1>
           <p>Welcome to Book Sharing website</p>
           <p className="w-96">
-            Connect with fellow book lovers worldwide! Share your favorite reads
+            Connect with fellow book lovers in the campus! Share your favorite reads
             and discover new ones. Simply list books you are willing to
             exchange, browse others collections, and arrange swaps. Enhance your
             reading experience with a global community of bibliophiles.
