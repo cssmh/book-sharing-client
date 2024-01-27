@@ -5,15 +5,15 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 
-
+const all = import.meta.env;
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDlcp20WnX8hVwh-5IHT_SavPTIlWA-WFI",
-  authDomain: "bookshare-c1817.firebaseapp.com",
-  projectId: "bookshare-c1817",
-  storageBucket: "bookshare-c1817.appspot.com",
-  messagingSenderId: "726577197775",
-  appId: "1:726577197775:web:4a5c5bda42d1ad7551bdba"
+  apiKey: all.VITE_apiKey,
+  authDomain: all.VITE_authDomain,
+  projectId: all.VITE_projectId,
+  storageBucket: all.VITE_storageBucket,
+  messagingSenderId: all.VITE_messagingSenderId,
+  appId: all.VITE_appId,
 };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

@@ -61,7 +61,9 @@ const Navbar = () => {
         <Link to={"/"}>
           <div className="flex items-center gap-1">
             <img className="w-12 rounded-3xl" src={Logo} alt="" />
-            <span className="ml-2 font-bold text-lg md:text-2xl">MBSTU BookHaven</span>
+            <span className="ml-2 font-bold text-lg md:text-2xl">
+              MBSTU BookHaven
+            </span>
           </div>
         </Link>
       </div>
@@ -98,7 +100,7 @@ const Navbar = () => {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-12 rounded-full">
-                <img src={user.photoURL} alt={user.displayName} />
+                <img src={user?.photoURL} alt={user?.displayName} />
               </div>
             </label>
             <ul
@@ -107,7 +109,7 @@ const Navbar = () => {
             >
               <li>
                 <button className="btn btn-sm  btn-ghost">
-                  {user.displayName}
+                  {user?.displayName}
                 </button>
               </li>
               <li>
