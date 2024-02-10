@@ -9,7 +9,7 @@ const ManageServices = () => {
     const {user} = useContext(AuthContext);
     const [services,setServices] = useState([]);
     // console.log(user);
-    const url = `http://localhost:5000/services?email=${user.email}`
+    const url = `https://book-sharing-server.vercel.app/services?email=${user.email}`
     useEffect(()=>{
       axios.get(url)
       .then(res=>setServices(res.data))

@@ -8,7 +8,7 @@ const MyBookings = () => {
     const {user} = useContext(AuthContext);
     const [bookings,setBookings] = useState([])
 
-    const url = `http://localhost:5000/bookings?email=${user.email}`
+    const url = `https://book-sharing-server.vercel.app/bookings?email=${user.email}`
     useEffect(()=>{
       axios.get(url,{withCredentials:true})
       .then(res=>setBookings(res.data))

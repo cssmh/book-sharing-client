@@ -46,14 +46,14 @@ const AuthProviders = ({children}) => {
           if(currentUser){
             // const loggedUser = {email : currentUser.email}
             // console.log(loggedUser);
-            axios.post('http://localhost:5000/jwt', loggedUser,{withCredentials: true})
+            axios.post('https://book-sharing-server.vercel.app/jwt', loggedUser,{withCredentials: true})
             .then(res=>{
                 console.log('token',res.data)
             })
 
           }
           else{
-            axios.post('http://localhost:5000/logout',loggedUser,{withCredentials: true})
+            axios.post('https://book-sharing-server.vercel.app/logout',loggedUser,{withCredentials: true})
             .then(res=>{
                 console.log('token response',res.data);
               })

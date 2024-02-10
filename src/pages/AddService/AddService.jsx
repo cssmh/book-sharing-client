@@ -29,7 +29,7 @@ const AddService = () => {
         }
 
         // console.log(service);
-        axios.post('http://localhost:5000/services',service)
+        axios.post('https://book-sharing-server.vercel.app/services',service)
         .then(res=>{
            console.log(res.data);
            if (res.data.insertedId) {

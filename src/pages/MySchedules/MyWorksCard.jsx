@@ -20,7 +20,7 @@ const MyWorksCard = ({ work }) => {
     const updatedStatus = { newStatus };
 
     axios
-      .put(`http://localhost:5000/bookings/${_id}`, updatedStatus)
+      .put(`https://book-sharing-server.vercel.app/bookings/${_id}`, updatedStatus)
       .then((res) => {
         if (res.data.modifiedCount > 0) {
           Swal.fire({

@@ -23,7 +23,7 @@ const ManageServiceCard = ({ service, services, setServices }) => {
 
                 // console.log('delete');
 
-                fetch(`http://localhost:5000/services/${_id}`, {
+                fetch(`https://book-sharing-server.vercel.app/services/${_id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())

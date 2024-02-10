@@ -1,15 +1,11 @@
-<!-- # React + Vite
+## Project Name : MBSTU BookHaven
+## Live Site: 
+## https://bookshare-c1817.web.app
+## https://bookhaven1.netlify.app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh -->
-* Project Name : Home Care
-* Live Site : https://career-maker-9a29c.web.app/
 * Feature of project :
-1. user signup with email and google account
+1. user signUp with email and google account
 2. user show services in service page
 3. user search service by name in service page
 4. user can add service
