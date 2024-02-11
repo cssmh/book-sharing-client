@@ -60,8 +60,8 @@ const Navbar = () => {
         </div>
         <Link to={"/"}>
           <div className="flex items-center gap-1">
-            <img className="w-12 rounded-3xl" src={Logo} alt="" />
-            <span className="ml-2 font-bold text-lg md:text-2xl">
+            <img className="w-0 md:w-12 rounded-3xl" src={Logo} alt="" />
+            <span className="md:ml-2 font-bold text-lg md:text-2xl">
               MBSTU BookHaven
             </span>
           </div>
