@@ -1,8 +1,8 @@
 ## MBSTU BookHaven
-<!-- ## Live: 
-### https://bookshare-c1817.web.app
-### https://bookhaven1.netlify.app -->
 
+## Live: 
+### https://bookshare-c1817.web.app
+### https://bookhaven1.netlify.app
 
 * Feature Of this Project:
 1. User signUp with email and google account

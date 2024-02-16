@@ -16,7 +16,7 @@ const PopularServiceCard = ({ service }) => {
   // HomePage Popular Books card
 
   return (
-    <div className="card bg-yellow-50 hover:border hover:border-blue-700 mx-1 md:mx-0">
+  <div className="card bg-yellow-50 hover:border hover:border-blue-700 mx-1 md:mx-0">
       <div data-aos="zoom-in" data-aos-delay="400" data-aos-offset="100">
         <figure className="px-10 pt-6">
           <img src={book_image} alt="Books" className="rounded-xl h-52" />
