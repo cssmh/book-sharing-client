@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import PopularServiceCard from "./PopularServiceCard";
 
 const PopularServices = ({ services }) => {
-
   // HomePage Popular Books
 
   return (
@@ -20,7 +19,6 @@ const PopularServices = ({ services }) => {
           ></PopularServiceCard>
         ))}
       </div>
-
       <div className="flex justify-center">
         <Link to="/services">
           <button className="btn my-10 bg-green-500 text-white">
