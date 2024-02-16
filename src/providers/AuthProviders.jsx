@@ -1,5 +1,16 @@
 import { createContext, useEffect, useState } from "react";
-import {  GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
+  sendEmailVerification,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+  updateProfile,
+} from "firebase/auth";
 import app from "../firebase/firebase.config";
 import axios from "axios";
 
@@ -7,85 +18,94 @@ export const AuthContext = createContext(null);
 const googleProvider = new GoogleAuthProvider();
 
 const auth = getAuth(app);
-const AuthProviders = ({children}) => {
+const AuthProviders = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    const [user,setUser] = useState(null);
-    const [loading,setLoading] =useState(true);
+  const googleLogin = () => {
+    setLoading(true);
+    return signInWithPopup(auth, googleProvider);
+  };
 
+  const createUser = (email, password) => {
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
 
-    const googleLogin = () => {
-        setLoading(true)
-        return signInWithPopup(auth, googleProvider);
-    }
+  const signIn = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
-    const createUser = (email,password) =>{
-        setLoading(true);
-        return createUserWithEmailAndPassword(auth, email, password)
-    }
+  const handleUpdateProfile = (name, photo) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+    });
+  };
 
-    const signIn = (email,password) =>{
-        setLoading(true);
-         return signInWithEmailAndPassword(auth,email,password)
-    }
+  const resetPassword = (email) => {
+    setLoading(true);
+    return sendPasswordResetEmail(auth, email);
+  };
 
-    const handleUpdateProfile = (name, photo) => {
-        return updateProfile(auth.currentUser, {
-            displayName: name, photoURL: photo
-        })
-    }
-   
+  const emailVerification = () => {
+    setLoading(true)
+    return sendEmailVerification(auth.currentUser)
+}
 
-    useEffect(()=>{
-      const unSubscribe =  onAuthStateChanged(auth,currentUser =>{
-          console.log('user in ',currentUser);
+  useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      console.log("user in ", currentUser);
 
-          const userEmail = currentUser?.email || user?.email
-          const loggedUser = {email:userEmail}
-          setUser(currentUser);
-          setLoading(false);
-          if(currentUser){
-            // const loggedUser = {email : currentUser.email}
-            // console.log(loggedUser);
-            axios.post('https://book-sharing-server.vercel.app/jwt', loggedUser,{withCredentials: true})
-            .then(res=>{
-                console.log('token',res.data)
-            })
+      const userEmail = currentUser?.email || user?.email;
+      const loggedUser = { email: userEmail };
+      setUser(currentUser);
+      setLoading(false);
+      if (currentUser) {
+        // const loggedUser = {email : currentUser.email}
+        // console.log(loggedUser);
+        axios
+          .post("https://book-sharing-server.vercel.app/jwt", loggedUser, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log("token", res.data);
+          });
+      } else {
+        axios
+          .post("https://book-sharing-server.vercel.app/logout", loggedUser, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log("token response", res.data);
+          });
+      }
+    });
+    return () => {
+      unSubscribe();
+    };
+  }, [user?.email]);
 
-          }
-          else{
-            axios.post('https://book-sharing-server.vercel.app/logout',loggedUser,{withCredentials: true})
-            .then(res=>{
-                console.log('token response',res.data);
-              })
-        }
-        });
-        return () =>{
-            unSubscribe();
-        }
-    },[user?.email])
+  const logOut = () => {
+    setLoading(true);
+    return signOut(auth);
+  };
 
-    const logOut =()=>{
-        setLoading(true)
-        return signOut(auth);
-    }
-   
-    const authInfo = {
-        user,
-        createUser,
-        signIn,
-        logOut,
-        loading,
-        handleUpdateProfile,
-        googleLogin 
-  
-
-       
-    }
-    return (
-        <AuthContext.Provider value={authInfo}>
-            {children}
-        </AuthContext.Provider>
-    );
+  const authInfo = {
+    user,
+    createUser,
+    signIn,
+    logOut,
+    loading,
+    handleUpdateProfile,
+    googleLogin,
+    resetPassword,
+    emailVerification
+  };
+  return (
+    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+  );
 };
 
 export default AuthProviders;
