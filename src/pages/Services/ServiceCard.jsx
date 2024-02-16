@@ -5,7 +5,7 @@ const ServiceCard = ({ service }) => {
     let smallDesc = description.slice()
     // All Books Page card
     return (
-        <div className="card bg-yellow-50 shadow-xl hover:border-2  hover:border-blue-700 hover:bg-yellow-100">
+        <div className="card bg-yellow-50 hover:border hover:border-blue-700 mx-1 md:mx-0">
             <div data-aos="zoom-in" data-aos-delay="400" data-aos-offset='100'>
             <figure className="px-10 pt-10" >
                 <img src={book_image} alt="books" className="h-52 rounded-xl" />
@@ -25,7 +25,7 @@ const ServiceCard = ({ service }) => {
                
                <p className="text-lg font-bold">Phone: {phone}</p>
                <p className="text-lg font-bold">Location: {location}</p>
-                 <div className="card-actions">
+                 <div className="card-actions mt-2">
                    <Link to={`/service/${_id}`}>
                     <button className="btn btn-outline btn-success">View Details</button>
                     </Link>
