@@ -6,9 +6,9 @@ const PopularServices = ({ services }) => {
 
   return (
     <div>
-      <div data-aos="zoom-in" data-asos-delay="100" data-aos-offset="100">
+      <div data-aos="zoom-in" data-aos-delay="100" data-aos-offset="100">
         <h3 className="text-center my-14 font-bold text-3xl italic border-b-2 pb-1 max-w-md mx-auto border-blue-700">
-          Our Popular Books
+          New Arrival Books
         </h3>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 max-w-7xl mx-auto gap-5">

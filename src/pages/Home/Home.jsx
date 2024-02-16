@@ -2,6 +2,8 @@ import { useLoaderData } from "react-router-dom";
 import Banner from "../../components/Header/Banner/Banner";
 import PopularServices from "../../components/PopularServices/PopularServices";
 import { Helmet } from "react-helmet-async";
+import Review from "../Review/Review";
+import AboutUs from "../AboutUs/AboutUs";
 
 const Home = () => {
   const popularServices = useLoaderData();
@@ -13,6 +15,8 @@ const Home = () => {
       </Helmet>
       <Banner></Banner>
       <PopularServices services={services}></PopularServices>
+      <AboutUs></AboutUs>
+      <Review></Review>
     </div>
   );
 };

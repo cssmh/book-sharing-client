@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Error from "../../assets/Error.jpg";
+import Error from "../../assets/ErrorLogo.png";
 import Navbar from "../../components/Header/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 

@@ -12,7 +12,7 @@ const MainLayout = () => {
         {navigationForSpinner.state === "loading" ? (
           <div className="flex justify-center">
             <FallingLines
-              color="#4fa94d"
+              color="#6fbf6d"
               width="70"
               visible={true}
               ariaLabel="falling-circles-loading"
