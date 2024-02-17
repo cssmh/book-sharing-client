@@ -1,13 +1,11 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import AddBookings from "./AddBookings";
-import SameProvider from "./SameProvider";
 import { Helmet } from "react-helmet-async";
 
 const ServiceDetails = () => {
   const service = useLoaderData();
-  console.log(service);
+  // console.log(service);
   const {
-    _id,
     book_image,
     book_name,
     description,
@@ -19,16 +17,11 @@ const ServiceDetails = () => {
   } = service;
 
   // Book Details Page
-
   return (
     <div>
       <Helmet>
         <title>{book_name}</title>
       </Helmet>
-
-      {/* <h2>{book_provider_name}</h2>
-             <img src={book_provider_image} alt="" /> */}
-
       <div className="card max-w-xl mx-auto bg-amber-100 shadow-xl p-6 my-6">
         <h2 className="text-center font-bold text-3xl italic text-blue-800">
           Book Provider Information
@@ -51,7 +44,6 @@ const ServiceDetails = () => {
           </p>
         </div>
       </div>
-
       <div className="card bg-yellow-50 shadow-xl">
         <figure className="px-10 pt-10">
           <img src={book_image} alt="Shoes" className="rounded-xl w-[380px]" />
@@ -66,10 +58,6 @@ const ServiceDetails = () => {
           </div>
         </div>
       </div>
-
-      {/* <div>
-            <SameProvider email = {book_provider_email} name={book_provider_name} id={_id}></SameProvider>
-        </div> */}
     </div>
   );
 };

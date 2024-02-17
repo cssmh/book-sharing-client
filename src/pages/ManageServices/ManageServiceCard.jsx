@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import swal from "sweetalert";
 import Swal from "sweetalert2";
 
 const ManageServiceCard = ({ service, services, setServices }) => {
@@ -6,8 +7,7 @@ const ManageServiceCard = ({ service, services, setServices }) => {
 
   const { _id, book_name, book_image, phone } = service;
 
-  const handleDelete = (_id) => {
-    console.log(_id);
+  const handleDelete = (_id, name) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -18,20 +18,19 @@ const ManageServiceCard = ({ service, services, setServices }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        // console.log('delete');
-
         fetch(`https://book-sharing-server.vercel.app/services/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
-
           .then((data) => {
             if (data.deletedCount > 0) {
-              Swal.fire("Deleted!", "Your Book Deleted", "success");
-              const remaining = services.filter((car) => car._id !== _id);
+              Swal.fire("success!", `${name} Deleted`, "success");
+              const remaining = services.filter((book) => book._id !== _id);
               setServices(remaining);
             }
           });
+      } else {
+        swal("Your file is safe!");
       }
     });
   };
@@ -53,7 +52,7 @@ const ManageServiceCard = ({ service, services, setServices }) => {
               <button className="btn btn-outline">Update Product</button>
             </Link>
             <button
-              onClick={() => handleDelete(_id)}
+              onClick={() => handleDelete(_id, book_name)}
               className="btn btn-outline"
             >
               delete product

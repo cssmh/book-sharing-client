@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import SameProviderCard from "./SameProviderCard";
 import ServiceCard from "../Services/ServiceCard";
 
 const SameProvider = ({ email, name, id }) => {

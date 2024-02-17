@@ -3,6 +3,7 @@ import { AuthContext } from "../../providers/AuthProviders";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import { toast } from "react-toastify";
 
 const AddService = () => {
   const { user } = useContext(AuthContext);
@@ -47,7 +48,7 @@ const AddService = () => {
         }
       })
       .then((err) => {
-        console.log(err);
+        toast.error(err);
       });
   };
 
@@ -58,7 +59,10 @@ const AddService = () => {
       <Helmet>
         <title>BookHaven | Add-Book</title>
       </Helmet>
-      <form onSubmit={handleAddService} className=" md:w-3/4 lg:w-1/2 mx-auto">
+      <form
+        onSubmit={handleAddService}
+        className="md:w-3/4 lg:w-1/2 mx-2 md:mx-auto"
+      >
         <div className="form-control">
           <label className="label">
             <span className="label-text">Book Name</span>

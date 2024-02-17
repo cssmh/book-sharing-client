@@ -12,7 +12,6 @@ const PopularServiceCard = ({ service }) => {
     location,
   } = service;
   let smallDesc = description.slice(0, 120);
-
   // HomePage Popular Books card
 
   return (
@@ -33,7 +32,6 @@ const PopularServiceCard = ({ service }) => {
           </div>
           <h2 className="font-bold text-lg ">{book_provider_name}</h2>
         </div>
-
         <p className="text-lg font-bold">Phone: {phone}</p>
         <p className="text-lg font-bold">Location: {location}</p>
         <div className="card-actions mt-2">

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProviders";
 // import toast from "react-hot-toast";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet-async";
 
@@ -11,45 +11,46 @@ const Register = () => {
     useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-
-  console.log(location);
-
+  // console.log(location);
   const handleRegister = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const name = form.get("name");
-    const photo = form.get("photo");
+
+    const get_image = form.get("photo");
+    const defaultImageUrl = "https://i.ibb.co/Nx4dhk0/default.jpg";
+    const photo = get_image.trim() !== "" ? get_image : defaultImageUrl;
+
     const email = form.get("email");
     const password = form.get("password");
-    console.log(name, photo, email, password);
+    // console.log(name, photo, email, password);
 
     if (password.length < 6) {
-      toast("Please insert at least 6 length password or more!");
+      toast(
+        "Make your password at least 6 character and one Uppercase letter!"
+      );
       return;
     } else if (!/[A-Z]/.test(password)) {
-      toast("Must use your password at least one Uppercase letter");
+      toast("Add at least one Uppercase letter");
       return;
     }
-
     createUser(email, password)
-      .then((res) => {
+      .then(() => {
         handleUpdateProfile(name, photo).then(() => {
-          // swal("User Created Successfully","success");
-          toast("User Created Successfully");
+          toast.success("User register success");
           emailVerification().then(() =>
-            toast.success("Check your email to verify your account!")
+            toast("Check your email to verify your account!")
           );
           navigate(location?.state ? location.state : "/");
         });
       })
-      .catch((error) => {
-        console.log(error.message);
-        // swal("Oops!", "Email Already Registered", "error");
-        toast("Email Already Registered");
+      .catch(() => {
+        toast.error("Email Already Registered");
       });
   };
+
   return (
-    <div data-aos="zoom-in" className="bg-green-50 p-5 rounded-lg">
+    <div data-aos="zoom-in" className="bg-green-50 p-5 rounded-lg mx-2 md:mx-0">
       <Helmet>
         <title>BookHaven | Register</title>
       </Helmet>
@@ -64,7 +65,7 @@ const Register = () => {
             required
             name="name"
             placeholder="Name"
-            className="input input-bordered  border-green-500"
+            className="input input-bordered border-green-500"
           />
         </div>
         <div className="form-control">
@@ -87,7 +88,7 @@ const Register = () => {
             required
             name="email"
             placeholder="Email"
-            className="input input-bordered  border-green-500"
+            className="input input-bordered border-green-500"
           />
         </div>
         <div className="form-control">
@@ -101,11 +102,11 @@ const Register = () => {
             placeholder="Password"
             className="input input-bordered  border-green-500"
           />
-          <label className="label">
+          {/* <label className="label">
             <a href="#" className="label-text-alt link link-hover">
               Forgot password?
             </a>
-          </label>
+          </label> */}
         </div>
         <div className="form-control mt-6">
           <button className="btn btn-success btn-outline">Register</button>
@@ -117,7 +118,6 @@ const Register = () => {
           Login
         </Link>
       </p>
-      <ToastContainer />
     </div>
   );
 };

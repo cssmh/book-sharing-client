@@ -13,11 +13,11 @@ const SocialLogin = () => {
   const handleSocialLogin = (media) => {
     media()
       .then(() => {
-        toast("User logged in successfully");
+        toast("User logged in success");
         navigate(location?.state ? location.state : "/");
       })
-      .catch((error) => {
-        toast.error(error.message);
+      .catch((err) => {
+        toast.error(err.message);
       });
   };
 

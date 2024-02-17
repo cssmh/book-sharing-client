@@ -16,8 +16,8 @@ import axios from "axios";
 
 export const AuthContext = createContext(null);
 const googleProvider = new GoogleAuthProvider();
-
 const auth = getAuth(app);
+
 const AuthProviders = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -38,6 +38,7 @@ const AuthProviders = ({ children }) => {
   };
 
   const handleUpdateProfile = (name, photo) => {
+    setLoading(true);
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
@@ -50,21 +51,18 @@ const AuthProviders = ({ children }) => {
   };
 
   const emailVerification = () => {
-    setLoading(true)
-    return sendEmailVerification(auth.currentUser)
-}
+    setLoading(true);
+    return sendEmailVerification(auth.currentUser);
+  };
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log("user in ", currentUser);
-
+      // console.log("user in ", currentUser);
       const userEmail = currentUser?.email || user?.email;
       const loggedUser = { email: userEmail };
       setUser(currentUser);
       setLoading(false);
       if (currentUser) {
-        // const loggedUser = {email : currentUser.email}
-        // console.log(loggedUser);
         axios
           .post("https://book-sharing-server.vercel.app/jwt", loggedUser, {
             withCredentials: true,
@@ -101,7 +99,7 @@ const AuthProviders = ({ children }) => {
     handleUpdateProfile,
     googleLogin,
     resetPassword,
-    emailVerification
+    emailVerification,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

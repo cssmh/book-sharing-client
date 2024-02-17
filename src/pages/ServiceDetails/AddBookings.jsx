@@ -1,11 +1,4 @@
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProviders";
 import axios from "axios";
@@ -13,16 +6,7 @@ import Swal from "sweetalert2";
 
 const AddBookings = ({ service }) => {
   const { user } = useContext(AuthContext);
-  const {
-    _id,
-    book_image,
-    book_name,
-    description,
-    book_provider_image,
-    book_provider_name,
-    book_provider_email,
-    phone,
-  } = service;
+  const { book_image, book_name, book_provider_email } = service;
   const [open, openChange] = useState(false);
 
   const handlePopUp = () => {
@@ -55,8 +39,7 @@ const AddBookings = ({ service }) => {
       phone,
       status,
     };
-
-    console.log(booking);
+    // console.log(booking);
 
     axios
       .post("https://book-sharing-server.vercel.app/bookings", booking)
