@@ -7,7 +7,7 @@ const PrivateRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const location = useLocation();
   // console.log(location);
-  if (loading)
+  if (loading) {
     return (
       <div className="flex justify-center">
         <FallingLines
@@ -18,10 +18,13 @@ const PrivateRoute = ({ children }) => {
         />
       </div>
     );
+  }
+
   if (user) {
     return children;
+  } else {
+    return <Navigate state={location.pathname} to="/login"></Navigate>;
   }
-  return <Navigate state={location.pathname} to="/login"></Navigate>;
 };
 
 export default PrivateRoute;

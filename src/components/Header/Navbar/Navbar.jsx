@@ -5,7 +5,6 @@ import Logo from "../../../assets/logo.png";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
-
   const handleSignOut = () => {
     logOut().then().catch();
   };
@@ -108,7 +107,7 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <button className="btn btn-sm  btn-ghost">
+                <button className="btn btn-sm btn-ghost">
                   {user?.displayName}
                 </button>
               </li>

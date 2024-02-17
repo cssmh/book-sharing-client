@@ -22,7 +22,7 @@ const Login = () => {
     signIn(email, password)
       .then((result) => {
         console.log(result.user.emailVerified);
-        toast("User logged in successfully");
+        toast("logged in success");
         navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
@@ -50,7 +50,6 @@ const Login = () => {
       <Helmet>
         <title>BookHaven | Login</title>
       </Helmet>
-
       <h2 className="text-3xl font-bold italic text-center">Please Login</h2>
       <form onSubmit={handleLogin} className=" md:w-3/4 lg:w-1/2 mx-auto">
         <div className="form-control">

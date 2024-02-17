@@ -55,7 +55,7 @@ const Register = () => {
         <title>BookHaven | Register</title>
       </Helmet>
       <h2 className="text-3xl font-bold italic text-center">Please Register</h2>
-      <form onSubmit={handleRegister} className=" md:w-3/4 lg:w-1/2 mx-auto">
+      <form onSubmit={handleRegister} className="md:w-3/4 lg:w-1/2 mx-auto">
         <div className="form-control">
           <label className="label">
             <span className="label-text font-semibold">Name</span>
@@ -102,11 +102,6 @@ const Register = () => {
             placeholder="Password"
             className="input input-bordered  border-green-500"
           />
-          {/* <label className="label">
-            <a href="#" className="label-text-alt link link-hover">
-              Forgot password?
-            </a>
-          </label> */}
         </div>
         <div className="form-control mt-6">
           <button className="btn btn-success btn-outline">Register</button>

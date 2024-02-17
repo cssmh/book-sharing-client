@@ -9,18 +9,20 @@ const MainLayout = () => {
   return (
     <div>
       <Navbar></Navbar>
-      {navigationForSpinner.state === "loading" ? (
-        <div className="flex justify-center">
-          <FallingLines
-            color="#6fbf6d"
-            width="70"
-            visible={true}
-            ariaLabel="falling-circles-loading"
-          />
-        </div>
-      ) : (
-        <Outlet></Outlet>
-      )}
+      <div className="min-h-[70vh]">
+        {navigationForSpinner.state === "loading" ? (
+          <div className="flex justify-center">
+            <FallingLines
+              color="#6fbf6d"
+              width="70"
+              visible={true}
+              ariaLabel="falling-circles-loading"
+            />
+          </div>
+        ) : (
+          <Outlet></Outlet>
+        )}
+      </div>
       <Footer></Footer>
       <ToastContainer />
     </div>

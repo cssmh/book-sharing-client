@@ -1,32 +1,31 @@
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
-import Swal from "sweetalert2";
 
 const ManageServiceCard = ({ service, services, setServices }) => {
   // console.log(service);
-
   const { _id, book_name, book_image, phone } = service;
 
   const handleDelete = (_id, name) => {
-    Swal.fire({
+    swal({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
       icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        // main code
         fetch(`https://book-sharing-server.vercel.app/services/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {
-              Swal.fire("success!", `${name} Deleted`, "success");
               const remaining = services.filter((book) => book._id !== _id);
               setServices(remaining);
+              swal(`${name} deleted!`, {
+                icon: "success",
+              });
             }
           });
       } else {
@@ -34,7 +33,6 @@ const ManageServiceCard = ({ service, services, setServices }) => {
       }
     });
   };
-
   // My Books page card
 
   return (

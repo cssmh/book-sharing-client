@@ -38,26 +38,26 @@ const router = createBrowserRouter([
           },
           {
             path:'/service/:id',
-            element:<PrivateRoute><ServiceDetails></ServiceDetails></PrivateRoute>,
+            element:<PrivateRoute><ServiceDetails /></PrivateRoute>,
               loader: ({params})=> fetch(`https://book-sharing-server.vercel.app/services/${params.id}`)
           },
           {
             path:'/add-service',
-            element:<PrivateRoute><AddService></AddService></PrivateRoute>
+            element:<PrivateRoute><AddService /></PrivateRoute>
           },
           {
             path:'/manage-service',
-            element:<PrivateRoute><ManageServices></ManageServices></PrivateRoute>
+            element:<PrivateRoute><ManageServices /></PrivateRoute>
           },
           {
             path:'/updateservice/:id',
-            element:<PrivateRoute><UpdateService></UpdateService></PrivateRoute>,
+            element:<PrivateRoute><UpdateService /></PrivateRoute>,
             loader:({params}) => fetch(`https://book-sharing-server.vercel.app/services/${params.id}`)
 
           },
           {
             path:'/my-schedules',
-            element:<PrivateRoute><MySchedules></MySchedules></PrivateRoute>
+            element:<PrivateRoute><MySchedules /></PrivateRoute>
           }
       ]
     },

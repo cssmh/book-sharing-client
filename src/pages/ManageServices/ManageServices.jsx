@@ -10,7 +10,9 @@ const ManageServices = () => {
   // console.log(user);
   const url = `https://book-sharing-server.vercel.app/services?email=${user.email}`;
   useEffect(() => {
-    axios.get(url).then((res) => setServices(res.data));
+    axios
+      .get(url)
+      .then((res) => setServices(res.data))
   }, [url]);
 
   // My Books page

@@ -1,6 +1,4 @@
-import { useContext } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../providers/AuthProviders";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
