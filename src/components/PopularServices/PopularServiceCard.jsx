@@ -23,7 +23,7 @@ const PopularServiceCard = ({ service }) => {
       </div>
       <div className="card-body items-center text-center">
         <h2 className="card-title font-bold text-blue-900">{book_name}</h2>
-        <p>{smallDesc}...</p>
+        <p>Details: {smallDesc}...</p>
         <div className="flex justify-center items-center gap-3 my-3 border-2 border-red-400 rounded-lg p-3">
           <div className="avatar">
             <div className="w-12 rounded-full ring ring-primary">

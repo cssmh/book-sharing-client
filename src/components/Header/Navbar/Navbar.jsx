@@ -72,7 +72,7 @@ const Navbar = () => {
             <NavLink to="/">Home</NavLink>
           </li>
           <li className="font-semibold text-base">
-            <NavLink to="/services">All Books</NavLink>
+            <NavLink to="/all-books">All Books</NavLink>
           </li>
           {user && (
             <li tabIndex={0}>
@@ -80,10 +80,10 @@ const Navbar = () => {
                 <summary className="font-semibold text-base">Dashboard</summary>
                 <ul className="p-2 menu menu-sm dropdown-content z-[1]">
                   <li className="font-semibold text-base">
-                    <NavLink to="/manage-service">My-Books</NavLink>
+                    <NavLink to="/my-books">My-Books</NavLink>
                   </li>
                   <li className="font-semibold text-base">
-                    <NavLink to="/add-service">Add-Book</NavLink>
+                    <NavLink to="/add-book">Add-Book</NavLink>
                   </li>
                   <li className="font-semibold text-base">
                     <NavLink to="/my-schedules">My-Schedule</NavLink>

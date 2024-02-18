@@ -21,7 +21,7 @@ const Services = () => {
   return (
     <div>
       <Helmet>
-        <title>BookHaven | Books</title>
+        <title>BookHaven | All Books</title>
       </Helmet>
       <div className="text-center my-6">
         <input
