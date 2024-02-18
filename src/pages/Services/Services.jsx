@@ -45,7 +45,7 @@ const Services = () => {
             }
           }}
         />
-        <h2 className="mt-4 text-3xl font-bold italic">
+        <h2 className="mt-4 text-2xl md:text-3xl font-bold italic">
           All Books Available for you
         </h2>
       </div>

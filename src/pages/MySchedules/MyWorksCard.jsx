@@ -27,7 +27,7 @@ const MyWorksCard = ({ work }) => {
         if (res.data.modifiedCount > 0) {
           Swal.fire({
             icon: "success",
-            title: `${book_name} Updated`,
+            title: "Status Updated",
           });
         }
       })
@@ -36,12 +36,12 @@ const MyWorksCard = ({ work }) => {
   // My pending page card
 
   return (
-    <div className="card bg-yellow-50 hover:border-2 hover:border-blue-700 hover:bg-yellow-100 shadow-xl">
+    <div className="card bg-yellow-50 hover:border hover:border-blue-700 hover:bg-yellow-50 shadow-xl mx-2 md:mx-0">
       <figure className="px-10 pt-10">
         <img
           src={book_image}
           alt="no images available"
-          className="rounded-xl h-52"
+          className="rounded-xl h-72 md:h-64"
         />
       </figure>
       <div className="card-body items-center text-center">

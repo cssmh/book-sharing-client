@@ -37,16 +37,19 @@ const ManageServiceCard = ({ service, services, setServices }) => {
 
   return (
     <div>
-      <div className="card  bg-yellow-50 hover:border hover:border-blue-700 hover:bg-yellow-50 shadow-xl">
-        <figure className="px-10 pt-10">
-          <img src={book_image} alt="Shoes" className="rounded-xl h-52" />
+      <div className="card h-auto md:h-[500px] bg-yellow-50 hover:border hover:border-blue-700 hover:bg-yellow-50 shadow-xl mx-2 md:mx-0">
+        <figure className="px-10 pt-6">
+          <img
+            src={book_image}
+            alt="book"
+            className="rounded-xl h-72 md:h-64"
+          />
         </figure>
         <div className="card-body items-center text-center">
           <h2 className="card-title font-bold text-blue-900">{book_name}</h2>
-
           <p className="text-lg font-bold mb-4">Phone: {phone}</p>
           <div className="card-actions">
-            <Link to={`/updateservice/${_id}`}>
+            <Link to={`/update-book/${_id}`}>
               <button className="btn btn-outline">Update Product</button>
             </Link>
             <button

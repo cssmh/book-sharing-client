@@ -5,9 +5,9 @@ const MyBookingCard = ({ booking }) => {
   // My Booking page card
 
   return (
-    <div className="card  bg-yellow-50 hover:border-2  hover:border-blue-700 hover:bg-yellow-100 shadow-xl">
-      <figure className="px-10 pt-10">
-        <img src={book_image} alt="Books" className="rounded-xl h-52" />
+    <div className="card h-auto bg-yellow-50 hover:border hover:border-blue-700 hover:bg-yellow-50 shadow-xl mx-2 md:mx-0">
+      <figure className="px-10 pt-8">
+        <img src={book_image} alt="Books" className="rounded-xl h-72 md:h-64" />
       </figure>
       <div className="card-body items-center text-center">
         <h2 className="card-title font-bold text-blue-900">{book_name}</h2>

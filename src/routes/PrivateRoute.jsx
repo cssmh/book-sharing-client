@@ -11,7 +11,7 @@ const PrivateRoute = ({ children }) => {
     return (
       <div className="flex justify-center">
         <FallingLines
-          color="#6fbf6d"
+          color="#800080"
           width="70"
           visible={true}
           ariaLabel="falling-circles-loading"

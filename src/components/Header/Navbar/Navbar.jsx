@@ -37,17 +37,17 @@ const Navbar = () => {
               <NavLink to="/">Home</NavLink>
             </li>
             <li className="font-semibold text-base">
-              <NavLink to="/services">All Books</NavLink>
+              <NavLink to="/all-books">All Books</NavLink>
             </li>
             {user && (
               <li>
                 <a className="font-semibold text-base">Dashboard</a>
                 <ul className="p-2">
                   <li className="font-semibold text-base">
-                    <NavLink to="/manage-service">My-Books</NavLink>
+                    <NavLink to="/my-books">My-Books</NavLink>
                   </li>
                   <li className="font-semibold text-base">
-                    <NavLink to="/add-service">Add-Book</NavLink>
+                    <NavLink to="/add-book">Add-Book</NavLink>
                   </li>
                   <li className="font-semibold text-base">
                     <NavLink to="/my-schedules">My-Schedule</NavLink>

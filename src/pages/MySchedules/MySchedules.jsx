@@ -18,7 +18,7 @@ const MySchedules = () => {
         <Helmet>
             <title>BookHaven | My-Schedule</title>
         </Helmet>
-         <div className="flex justify-center gap-4 my-10">
+         <div className="flex justify-center gap-4 my-6">
             <button onClick={showBook}  className={activeComponent === 'MyBookings' ? 'btn btn-primary text-white' : 'btn'}>My Booking</button>
             <button onClick={showWork}  className={activeComponent === 'MyWorks' ? 'btn btn-primary text-white' : 'btn'}>My Pending</button>
             </div>

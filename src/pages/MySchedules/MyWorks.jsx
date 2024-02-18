@@ -18,15 +18,15 @@ const MyWorks = () => {
 
   return (
     <div>
-      <h2 className="text-center text-2xl my-10 font-semibold italic">
-        User Booked Your Book
+      <h2 className="text-center text-xl md:text-2xl my-6 font-semibold italic">
+        User Booked Your Books
       </h2>
       {works.length == 0 ? (
-        <p className="text-center text-2xl font-semibold italic">
+        <p className="text-center text-xl md:text-2xl font-semibold italic">
           No User Booked Your Books
         </p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {works.map((work) => (
             <MyWorksCard key={work._id} work={work}></MyWorksCard>
           ))}

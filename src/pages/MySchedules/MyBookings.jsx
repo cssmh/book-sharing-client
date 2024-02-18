@@ -19,7 +19,7 @@ const MyBookings = () => {
 
   return (
     <div>
-      <h2 className="text-center text-2xl my-10 font-semibold italic">
+      <h2 className="text-center text-lg md:text-2xl my-6 font-semibold italic">
         All Bookings made by you
       </h2>
       {bookings.length == 0 ? (
