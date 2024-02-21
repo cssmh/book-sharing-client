@@ -1,12 +1,14 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProviders";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import SocialLogin from "./SocialLogin";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet-async";
 
 const Login = () => {
+  const [view, setView] = useState(true);
   const { signIn, resetPassword, logOut } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
@@ -68,17 +70,23 @@ const Login = () => {
             className="input input-bordered border-green-500"
           />
         </div>
-        <div className="form-control">
+        <div className="form-control relative">
           <label className="label">
             <span className="label-text font-semibold">Password</span>
           </label>
           <input
-            type="password"
+            type={view ? "password" : "text"}
             required
             name="password"
             placeholder="Password"
             className="input input-bordered border-green-500"
           />
+          <span
+            className="absolute top-[51px] right-4"
+            onClick={() => setView(!view)}
+          >
+            {view ? <FaRegEyeSlash /> : <FaRegEye />}
+          </span>
           <label className="label">
             <a
               onClick={handleForgotPassword}
