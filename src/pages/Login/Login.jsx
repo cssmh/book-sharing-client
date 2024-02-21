@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet-async";
 
 const Login = () => {
-  const { signIn, resetPassword } = useContext(AuthContext);
+  const { signIn, resetPassword, logOut } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   // console.log(location);
@@ -17,12 +17,18 @@ const Login = () => {
     const form = new FormData(e.currentTarget);
     const email = form.get("email");
     const password = form.get("password");
-
-    // console.log(email, password);
     signIn(email, password)
-      .then(() => {
-        toast("logged in success");
-        navigate(location?.state ? location.state : "/");
+      .then((res) => {
+        // No way login if not verified
+        if (!res.user.emailVerified) {
+          logOut().then().catch();
+          toast.error("Verify your Email first please!");
+          return;
+          // No way login if not verified end
+        } else {
+          toast("logged in success");
+          navigate(location?.state ? location.state : "/");
+        }
       })
       .catch((err) => toast(err.message));
   };
@@ -72,12 +78,13 @@ const Login = () => {
             className="input input-bordered border-green-500"
           />
           <label className="label">
-            <a
+            <button
               onClick={handleForgotPassword}
+              type="button"
               className="label-text-alt link link-hover"
             >
               Forgot password?
-            </a>
+            </button>
           </label>
         </div>
         <div className="form-control mt-6">
