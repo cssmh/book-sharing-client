@@ -20,16 +20,11 @@ const Login = () => {
 
     // console.log(email, password);
     signIn(email, password)
-      .then((result) => {
-        console.log(result.user.emailVerified);
+      .then(() => {
         toast("logged in success");
         navigate(location?.state ? location.state : "/");
       })
-      .catch((error) => {
-        console.log(error.message);
-        // swal("Good job!", `${error.message}`, "success");
-        toast(error.message);
-      });
+      .catch((err) => toast(err.message));
   };
 
   const getEmail = useRef(null);
@@ -91,7 +86,11 @@ const Login = () => {
       </form>
       <p className="text-center mt-4">
         Do not have an account{" "}
-        <Link className="text-green-400 font-bold" to="/register">
+        <Link
+          state={location.state}
+          className="text-green-400 font-bold"
+          to="/register"
+        >
           Register
         </Link>
       </p>

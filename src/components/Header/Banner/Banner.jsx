@@ -4,7 +4,7 @@ import banner3 from "./../../../assets/3.jpeg";
 
 const Banner = () => {
   return (
-    <div className="carousel w-full rounded-sm">
+    <div data-aos="zoom-in" className="carousel w-full rounded-sm">
       <div id="slide1" className="carousel-item relative w-full ">
         <img src={banner1} className="w-full " />
         <div className="absolute flex  transform -translate-y-1/2 left-5 right-5 bottom-0">
