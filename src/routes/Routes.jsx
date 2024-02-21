@@ -11,56 +11,86 @@ import AddService from "../pages/AddService/AddService";
 import ManageServices from "../pages/ManageServices/ManageServices";
 import UpdateService from "../pages/ManageServices/UpdateService";
 import MySchedules from "../pages/MySchedules/MySchedules";
+import Profile from "../components/Profile/Profile";
 
 const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <MainLayout></MainLayout>,
-      errorElement:<ErrorPage></ErrorPage>,
-      children:[
-        {
-            path:'/',
-            element:<Home></Home>,
-            loader: ()=> fetch('https://book-sharing-server.vercel.app/services')
-        },
-        {
-            path:'/login',
-            element:<Login></Login>
-          },
-          {
-            path:'/register',
-            element:<Register></Register>
-          },
-          {
-           path:'/all-books',
-           element:<Services></Services>,
-           loader: ()=> fetch('https://book-sharing-server.vercel.app/services')
-          },
-          {
-            path:'/book/:id',
-            element:<PrivateRoute><ServiceDetails /></PrivateRoute>,
-              loader: ({params})=> fetch(`https://book-sharing-server.vercel.app/services/${params.id}`)
-          },
-          {
-            path:'/add-book',
-            element:<PrivateRoute><AddService /></PrivateRoute>
-          },
-          {
-            path:'/my-books',
-            element:<PrivateRoute><ManageServices /></PrivateRoute>
-          },
-          {
-            path:'/update-book/:id',
-            element:<PrivateRoute><UpdateService /></PrivateRoute>,
-            loader:({params}) => fetch(`https://book-sharing-server.vercel.app/services/${params.id}`)
+  {
+    path: "/",
+    element: <MainLayout></MainLayout>,
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+        loader: () => fetch("https://book-sharing-server.vercel.app/services"),
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
+      },
+      {
+        path: "/profile",
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/all-books",
+        element: <Services></Services>,
+        loader: () => fetch("https://book-sharing-server.vercel.app/services"),
+      },
+      {
+        path: "/book/:id",
+        element: (
+          <PrivateRoute>
+            <ServiceDetails />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`https://book-sharing-server.vercel.app/services/${params.id}`),
+      },
+      {
+        path: "/add-book",
+        element: (
+          <PrivateRoute>
+            <AddService />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/my-books",
+        element: (
+          <PrivateRoute>
+            <ManageServices />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/update-book/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateService />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`https://book-sharing-server.vercel.app/services/${params.id}`),
+      },
+      {
+        path: "/my-schedules",
+        element: (
+          <PrivateRoute>
+            <MySchedules />
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
+]);
 
-          },
-          {
-            path:'/my-schedules',
-            element:<PrivateRoute><MySchedules /></PrivateRoute>
-          }
-      ]
-    },
-  ]);
-
-  export default router;
+export default router;

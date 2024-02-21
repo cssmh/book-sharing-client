@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProviders";
 // import toast from "react-hot-toast";
 import { toast } from "react-toastify";
@@ -9,7 +9,7 @@ import { Helmet } from "react-helmet-async";
 const Register = () => {
   const { createUser, handleUpdateProfile, emailVerification, logOut } =
     useContext(AuthContext);
-  const navigate = useNavigate();
+  const navigateTo = useNavigate();
   const location = useLocation();
   // console.log(location);
   const handleRegister = (e) => {
@@ -35,14 +35,19 @@ const Register = () => {
       return;
     }
     createUser(email, password)
-      .then(() => {
+      .then((res) => {
         handleUpdateProfile(name, photo).then(() => {
           toast.success("User register success");
-          emailVerification().then(() =>
-            toast("Check your email to verify your account!")
-          );
-          navigate(location?.state ? location.state : "/");
         });
+        emailVerification().then(() =>
+          toast.success("Check your email to verify your account!")
+        );
+        if (!res.user.emailVerified) {
+          logOut().then().catch();
+          navigateTo("/login");
+        } else {
+          navigateTo(location?.state ? location.state : "/");
+        }
       })
       .catch(() => {
         toast.error("Email Already Registered");

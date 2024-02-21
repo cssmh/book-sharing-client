@@ -108,7 +108,7 @@ const Navbar = () => {
             >
               <li>
                 <button className="btn btn-sm btn-ghost">
-                  {user?.displayName}
+                  <Link to={"/profile"}>{user?.displayName}</Link>
                 </button>
               </li>
               <li>

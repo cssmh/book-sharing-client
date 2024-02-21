@@ -38,7 +38,6 @@ const AuthProviders = ({ children }) => {
   };
 
   const handleUpdateProfile = (name, photo) => {
-    setLoading(true);
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
@@ -46,12 +45,12 @@ const AuthProviders = ({ children }) => {
   };
 
   const resetPassword = (email) => {
-    setLoading(true);
+    setLoading(true)
     return sendPasswordResetEmail(auth, email);
   };
 
   const emailVerification = () => {
-    setLoading(true);
+    setLoading(true)
     return sendEmailVerification(auth.currentUser);
   };
 

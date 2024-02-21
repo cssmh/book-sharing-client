@@ -17,6 +17,8 @@ const Login = () => {
     const form = new FormData(e.currentTarget);
     const email = form.get("email");
     const password = form.get("password");
+
+    // console.log(email, password);
     signIn(email, password)
       .then((res) => {
         // No way login if not verified
@@ -78,13 +80,13 @@ const Login = () => {
             className="input input-bordered border-green-500"
           />
           <label className="label">
-            <button
+            <a
               onClick={handleForgotPassword}
               type="button"
               className="label-text-alt link link-hover"
             >
               Forgot password?
-            </button>
+            </a>
           </label>
         </div>
         <div className="form-control mt-6">
