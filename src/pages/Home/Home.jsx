@@ -4,6 +4,8 @@ import PopularServices from "../../components/PopularServices/PopularServices";
 import { Helmet } from "react-helmet-async";
 import Review from "../Review/Review";
 import AboutUs from "../AboutUs/AboutUs";
+import BestSelling from "../../components/BestSelling/BestSelling";
+import GreenBook from "../../components/GreenBook/GreenBook";
 
 const Home = () => {
   const popularServices = useLoaderData();
@@ -16,7 +18,9 @@ const Home = () => {
       <Banner></Banner>
       <PopularServices services={services}></PopularServices>
       <AboutUs></AboutUs>
+      <BestSelling></BestSelling>
       <Review></Review>
+      <GreenBook></GreenBook>
     </div>
   );
 };
