@@ -16,7 +16,6 @@ const ServiceCard = ({ service }) => {
     <div className="card bg-yellow-50 hover:border hover:border-blue-700 mx-2 md:mx-0">
       <div
         data-aos="zoom-in"
-        data-aos-duration="1000"
         data-aos-delay="400"
         data-aos-offset="100"
       >
