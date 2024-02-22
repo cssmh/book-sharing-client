@@ -22,6 +22,9 @@ const AddService = () => {
     const location = form.location.value;
     const description = form.description.value;
     const phone = form.phone.value;
+    if (phone.length < 14) {
+      return toast.error("Enter a valid phone number!");
+    }
 
     const service = {
       location,
@@ -34,7 +37,6 @@ const AddService = () => {
       book_provider_image,
     };
 
-    // console.log(service);
     axios
       .post("https://book-sharing-server.vercel.app/services", service)
       .then((res) => {
@@ -70,6 +72,7 @@ const AddService = () => {
             type="text"
             name="book_name"
             className="input input-bordered"
+            required
           />
         </div>
         <div className="form-control">
