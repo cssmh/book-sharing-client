@@ -1,7 +1,11 @@
 import greenBook from "../../assets/green.png";
 const GreenBook = () => {
   return (
-    <div className="bg-base-200 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center py-4 space-y-6 lg:space-y-0">
+    <div
+      data-aos="zoom-in"
+      data-aos-duration="1000"
+      className="bg-base-200 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center py-4 space-y-6 lg:space-y-0 mb-10"
+    >
       <div>
         <img src={greenBook} alt="" />
       </div>

@@ -6,6 +6,7 @@ import Review from "../Review/Review";
 import AboutUs from "../AboutUs/AboutUs";
 import BestSelling from "../../components/BestSelling/BestSelling";
 import GreenBook from "../../components/GreenBook/GreenBook";
+import Count from "../../components/Count/Count";
 
 const Home = () => {
   const popularServices = useLoaderData();
@@ -19,8 +20,9 @@ const Home = () => {
       <PopularServices services={services}></PopularServices>
       <AboutUs></AboutUs>
       <BestSelling></BestSelling>
-      <Review></Review>
       <GreenBook></GreenBook>
+      <Review></Review>
+      <Count></Count>
     </div>
   );
 };

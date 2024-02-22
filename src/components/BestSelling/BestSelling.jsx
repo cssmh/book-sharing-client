@@ -10,7 +10,12 @@ const BestSelling = () => {
         AUTHOR BEST SELLING
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-0">
-        <div className="text-center lg:text-right space-y-5 lg:mr-5 px-3">
+        <div
+          data-aos="flip-left"
+          data-aos-easing="ease-out-cubic"
+          data-aos-duration="1000"
+          className="text-center lg:text-right space-y-5 lg:mr-5 px-3"
+        >
           <h1 className="text-7xl text-orange-500">
             J. K.<br></br> Rowling
           </h1>
@@ -29,10 +34,19 @@ const BestSelling = () => {
             truth behind the whispers that echo through the trees.
           </p>
         </div>
-        <div>
+        <div
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-anchor-placement="top-center"
+        >
           <img src={seller} className="rounded-md mx-auto lg:mx-0" alt="" />
         </div>
-        <div className="grid grid-cols-2">
+        <div
+          data-aos="flip-right"
+          data-aos-easing="ease-out-cubic"
+          data-aos-duration="1000"
+          className="grid grid-cols-2"
+        >
           <img src={book1} alt="" />
           <img src={book2} alt="" />
           <img src={book3} alt="" />

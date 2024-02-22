@@ -1,13 +1,31 @@
 import { Link } from "react-router-dom";
 const ServiceCard = ({ service }) => {
   // console.log(service);
-  const { _id, book_image, book_name, description, book_provider_image, book_provider_name, phone, location, } = service;
+  const {
+    _id,
+    book_image,
+    book_name,
+    description,
+    book_provider_image,
+    book_provider_name,
+    phone,
+    location,
+  } = service;
   // All Books Page card
   return (
     <div className="card bg-yellow-50 hover:border hover:border-blue-700 mx-2 md:mx-0">
-      <div data-aos="zoom-in" data-aos-delay="400" data-aos-offset="100">
+      <div
+        data-aos="zoom-in"
+        data-aos-duration="1000"
+        data-aos-delay="400"
+        data-aos-offset="100"
+      >
         <figure className="px-10 pt-10">
-          <img src={book_image} alt="books" className="h-72 md:h-60 rounded-lg" />
+          <img
+            src={book_image}
+            alt="books"
+            className="h-72 md:h-60 rounded-lg"
+          />
         </figure>
       </div>
       <div className="card-body items-center text-center">

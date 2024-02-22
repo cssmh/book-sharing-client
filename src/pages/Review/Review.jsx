@@ -10,7 +10,7 @@ const Review = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 my-10 gap-4">
         <div
           data-aos="zoom-in"
-          className="border bg-yellow-50 py-7 rounded-md space-y-2 text-center"
+          className="border bg-yellow-50 py-7 rounded-lg space-y-2 text-center"
         >
           <img
             src={momin}
@@ -35,7 +35,7 @@ const Review = () => {
         </div>
         <div
           data-aos="zoom-in"
-          className="border bg-yellow-50 pt-6 pb-3 rounded-md space-y-2 text-center"
+          className="border bg-yellow-50 pt-6 pb-3 rounded-lg space-y-2 text-center"
         >
           <img
             src={mahbub}
@@ -60,7 +60,7 @@ const Review = () => {
         </div>
         <div
           data-aos="zoom-in"
-          className="border bg-yellow-50 py-7 rounded-md space-y-2 text-center"
+          className="border bg-yellow-50 py-7 rounded-lg space-y-2 text-center"
         >
           <img
             src={mahbub}
@@ -85,7 +85,7 @@ const Review = () => {
         </div>
         <div
           data-aos="zoom-in"
-          className="border bg-yellow-50 py-7 rounded-md space-y-2 text-center"
+          className="border bg-yellow-50 py-7 rounded-lg space-y-2 text-center"
         >
           <img
             src={momin}
