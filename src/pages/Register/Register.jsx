@@ -19,7 +19,7 @@ const Register = () => {
     const name = form.get("name");
 
     const get_image = form.get("photo");
-    const defaultImageUrl = "https://i.ibb.co/Nx4dhk0/default.jpg";
+    const defaultImageUrl = "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/default.jpg";
     const photo = get_image.trim() !== "" ? get_image : defaultImageUrl;
 
     const email = form.get("email");

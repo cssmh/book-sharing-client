@@ -13,7 +13,7 @@ const AddService = () => {
     const book_name = form.book_name.value;
 
     const get_image = form.book_image.value;
-    const defaultImageUrl = "https://i.ibb.co/2vCThtZ/Cover-Not-Available.jpg";
+    const defaultImageUrl = "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/soon.jpg";
 
     const book_image = get_image.trim() !== "" ? get_image : defaultImageUrl;
     const book_provider_name = form.book_provider_name.value;
