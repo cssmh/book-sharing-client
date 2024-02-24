@@ -8,8 +8,7 @@
 
 - Feature Of this Project:
 
-1. User signUp with name, photoURL, email password <br>
-   also can login using google account
+1. User signUp with name, photoURL, email password, also can login using google account.
 2. Awesome Home page design with many component with aos
 3. User can see all Books in all Books page. There is a search Book Option in all Books page
 4. User can add Book, delete, update.
