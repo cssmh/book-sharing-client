@@ -33,9 +33,12 @@
     "react-leaflet": "^4.2.1",
     "react-loader-spinner": "^6.1.6",
     "react-router-dom": "^6.18.0",
+    "react-tinder-card": "^1.6.4",
+    "react-toastify": "^10.0.4",
     "sort-by": "^1.2.0",
     "styled-components": "^6.1.0",
     "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.10.5",
     "swiper": "^11.0.3"
   },
   "devDependencies": {
