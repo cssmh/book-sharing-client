@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../providers/AuthProviders";
+import { AuthContext } from "../../AuthProviders/AuthProviders";
 import axios from "axios";
 import MyWorksCard from "./MyWorksCard";
 

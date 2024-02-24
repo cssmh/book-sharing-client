@@ -1,8 +1,8 @@
 import axios from "axios";
-import Swal from "sweetalert2";
+import swal from "sweetalert";
 
 const MyWorksCard = ({ work }) => {
-  console.log(work);
+  // console.log(work);
   const {
     _id,
     book_image,
@@ -25,10 +25,7 @@ const MyWorksCard = ({ work }) => {
       )
       .then((res) => {
         if (res.data.modifiedCount > 0) {
-          Swal.fire({
-            icon: "success",
-            title: "Status Updated",
-          });
+          swal("Good job!", "Status Updated", "success");
         }
       })
       .then((err) => console.log(err));
