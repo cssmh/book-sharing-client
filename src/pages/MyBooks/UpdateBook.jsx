@@ -13,7 +13,12 @@ const UpdateBook = () => {
     e.preventDefault();
     const form = event.target;
     const book_name = form.book_name.value;
-    const book_image = form.book_image.value;
+
+    const get_image = form.book_image.value;
+    const defaultImageUrl =
+      "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/soon.jpg";
+
+    const book_image = get_image.trim() !== "" ? get_image : defaultImageUrl;
     const location = form.location.value;
     const description = form.description.value;
     const phone = form.phone.value;
