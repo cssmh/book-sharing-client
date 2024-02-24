@@ -10,7 +10,11 @@ const Profile = () => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
-    const photo = form.photo.value;
+
+    const get_image = form.photo.value;
+    const defaultImageUrl =
+      "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/default.jpg";
+    const photo = get_image.trim() !== "" ? get_image : defaultImageUrl;
     handleUpdateProfile(name, photo)
       .then(() => {
         toast.success("update success");
@@ -56,7 +60,12 @@ const Profile = () => {
           <input
             type="text"
             name="photo"
-            defaultValue={dp}
+            defaultValue={
+              dp ===
+              "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/default.jpg"
+                ? ""
+                : dp
+            }
             className="input input-bordered text-gray-500"
           />
         </div>

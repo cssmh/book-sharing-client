@@ -2,14 +2,26 @@ import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import AllBooksCard from "./AllBooksCard";
+import { FallingLines } from "react-loader-spinner";
 
 const AllBooks = () => {
   const allBooks = useLoaderData();
   let searchTerm;
   const [filter, setFilter] = useState(allBooks);
   // console.log(filter);
+  if (allBooks.length == 0) {
+    return (
+      <div className="flex justify-center">
+        <FallingLines
+          color="#6cc262"
+          width="70"
+          visible={true}
+          ariaLabel="falling-circles-loading"
+        />
+      </div>
+    );
+  }
 
-  // All Books Page
   return (
     <div>
       <Helmet>
