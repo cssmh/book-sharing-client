@@ -30,7 +30,7 @@ const ManageServices = () => {
       {loading && (
         <div className="flex justify-center">
           <FallingLines
-            color="#4fa94d"
+            color="#6cc262"
             width="70"
             visible={true}
             ariaLabel="falling-circles-loading"

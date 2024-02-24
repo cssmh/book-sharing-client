@@ -19,14 +19,17 @@ const ServiceCard = ({ service }) => {
           <img
             src={book_image}
             alt="books"
-            className="h-72 md:h-60 rounded-lg"
+            className="h-80 md:h-60 rounded-lg"
           />
         </figure>
       </div>
       <div className="card-body items-center text-center">
         <h2 className="card-title font-bold text-blue-900">{book_name}</h2>
         <p>Details: {description}...</p>
-        <div className="flex justify-center items-center gap-3 border-2 border-red-400 rounded-lg p-3">
+        <div
+          data-aos="zoom-in"
+          className="flex justify-center items-center gap-3 border-2 border-red-400 rounded-lg p-3"
+        >
           <div className="avatar">
             <div className="w-12 rounded-full ring ring-primary">
               <img src={book_provider_image} />
@@ -34,7 +37,6 @@ const ServiceCard = ({ service }) => {
           </div>
           <h2 className="font-bold text-lg ">{book_provider_name}</h2>
         </div>
-
         <p className="text-lg font-bold">Phone: {phone}</p>
         <p className="text-lg font-bold">Location: {location}</p>
         <div className="card-actions mt-2">

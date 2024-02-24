@@ -49,7 +49,7 @@ const AddBookings = ({ service }) => {
         if (res.data.insertedId) {
           Swal.fire({
             icon: "success",
-            title: "Book purchased",
+            title: "Book Purchased",
           });
         }
       })

@@ -43,7 +43,10 @@ const UpdateService = () => {
       <Helmet>
         <title>Update {book_name}</title>
       </Helmet>
-      <form onSubmit={handleUpdate} className=" md:w-3/4 lg:w-1/2 mx-2 md:mx-auto">
+      <form
+        onSubmit={handleUpdate}
+        className=" md:w-3/4 lg:w-1/2 mx-2 md:mx-auto"
+      >
         <div className="form-control">
           <label className="label">
             <span className="label-text">Book Name</span>
@@ -102,7 +105,7 @@ const UpdateService = () => {
           />
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-outline">Update Book Details</button>
+          <button className="btn border-green-400 hover:border-green-400 bg-base-100 hover:bg-green-400 text-green-400 hover:text-white">Update Book Details</button>
         </div>
       </form>
     </div>

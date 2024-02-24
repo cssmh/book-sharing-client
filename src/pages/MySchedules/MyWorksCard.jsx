@@ -36,7 +36,7 @@ const MyWorksCard = ({ work }) => {
   // My pending page card
 
   return (
-    <div className="card bg-yellow-50 hover:border hover:border-blue-700 hover:bg-yellow-50 shadow-xl mx-2 md:mx-0">
+    <div className="card bg-yellow-50 hover:border hover:border-blue-700 hover:bg-yellow-50 shadow-lg mx-2 md:mx-0">
       <figure className="px-10 pt-10">
         <img
           src={book_image}

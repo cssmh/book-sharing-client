@@ -42,7 +42,7 @@ const ManageServiceCard = ({ service, services, setServices }) => {
           <img
             src={book_image}
             alt="book"
-            className="rounded-xl h-72 md:h-64"
+            className="rounded-xl h-80 md:h-64"
           />
         </figure>
         <div className="card-body items-center text-center">
@@ -50,11 +50,11 @@ const ManageServiceCard = ({ service, services, setServices }) => {
           <p className="text-lg font-bold mb-4">Phone: {phone}</p>
           <div className="card-actions">
             <Link to={`/update-book/${_id}`}>
-              <button className="btn btn-outline">Update Product</button>
+              <button className="btn border-green-400 bg-base-100 hover:bg-green-400 text-green-400 hover:text-white">Update Product</button>
             </Link>
             <button
               onClick={() => handleDelete(_id, book_name)}
-              className="btn btn-outline"
+              className="btn border-black bg-base-100 hover:bg-black text-black hover:text-white"
             >
               delete product
             </button>
