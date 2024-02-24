@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 
 const AddBookings = ({ service }) => {
   const { user } = useContext(AuthContext);
-  const { book_image, book_name, book_provider_email } = service;
+  const { book_image, book_name, book_provider_email, phone } = service;
   const [open, openChange] = useState(false);
 
   const handlePopUp = () => {
@@ -26,17 +26,18 @@ const AddBookings = ({ service }) => {
     const user_email = form.user_email.value;
     const date = form.date.value;
     const instruction = form.instruction.value;
-    const phone = form.phone.value;
+    const buyerPhone = form.phone.value;
     const status = "pending";
 
     const booking = {
       book_name,
       book_image,
       book_provider_email,
+      phone,
       user_email,
       date,
       instruction,
-      phone,
+      buyerPhone,
       status,
     };
     // console.log(booking);
@@ -155,7 +156,7 @@ const AddBookings = ({ service }) => {
               />
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-outline bg-green-500 text-white">
+              <button className="btn btn-outline border-none bg-green-400 hover:bg-green-400 text-white">
                 Purchase Book
               </button>
             </div>

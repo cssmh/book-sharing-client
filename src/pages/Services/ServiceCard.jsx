@@ -14,11 +14,7 @@ const ServiceCard = ({ service }) => {
   // All Books Page card
   return (
     <div className="card bg-yellow-50 hover:border hover:border-blue-700 mx-2 md:mx-0">
-      <div
-        data-aos="zoom-in"
-        data-aos-delay="400"
-        data-aos-offset="100"
-      >
+      <div data-aos="zoom-in" data-aos-delay="400" data-aos-offset="100">
         <figure className="px-10 pt-10">
           <img
             src={book_image}
@@ -43,7 +39,7 @@ const ServiceCard = ({ service }) => {
         <p className="text-lg font-bold">Location: {location}</p>
         <div className="card-actions mt-2">
           <Link to={`/book/${_id}`}>
-            <button className="btn btn-outline btn-success">
+            <button className="btn border-green-400 hover:border-green-400 bg-yellow-50 hover:bg-green-400 text-green-400 hover:text-white">
               View Details
             </button>
           </Link>

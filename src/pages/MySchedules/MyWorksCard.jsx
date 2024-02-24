@@ -7,7 +7,7 @@ const MyWorksCard = ({ work }) => {
     _id,
     book_image,
     book_name,
-    phone,
+    buyerPhone,
     instruction,
     status,
     date,
@@ -48,7 +48,7 @@ const MyWorksCard = ({ work }) => {
         <h2 className="card-title font-bold text-blue-900">{book_name}</h2>
         <p className="text-lg font-bold">Collector Info: </p>
         <div>
-          <p className="text-lg">Phone: {phone}</p>
+          <p className="text-lg">Phone: {buyerPhone}</p>
           <p className="text-lg">
             Email: <span className="">{user_email}</span>
           </p>

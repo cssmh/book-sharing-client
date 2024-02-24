@@ -19,7 +19,8 @@ const Register = () => {
     const name = form.get("name");
 
     const get_image = form.get("photo");
-    const defaultImageUrl = "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/default.jpg";
+    const defaultImageUrl =
+      "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/default.jpg";
     const photo = get_image.trim() !== "" ? get_image : defaultImageUrl;
 
     const email = form.get("email");
@@ -43,12 +44,12 @@ const Register = () => {
         emailVerification().then(() =>
           toast.success("Check your email to verify your account!")
         );
-        if (!res.user.emailVerified) {
-          logOut().then().catch();
-          navigateTo("/login");
-        } else {
-          navigateTo(location?.state ? location.state : "/");
-        }
+        // if (!res.user.emailVerified) {
+        //   logOut().then().catch();
+        //   navigateTo("/login");
+        // } else {
+        // }
+        navigateTo(location?.state ? location.state : "/");
       })
       .catch(() => {
         toast.error("Email Already Registered");
@@ -116,7 +117,9 @@ const Register = () => {
           </span>
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-success btn-outline">Register</button>
+          <button className="btn border-green-400 hover:border-green-400 bg-base-100 hover:bg-green-400 text-green-400 hover:text-white">
+            Register
+          </button>
         </div>
       </form>
       <p className="text-center mt-4">

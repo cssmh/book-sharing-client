@@ -24,15 +24,15 @@ const Login = () => {
     signIn(email, password)
       .then((res) => {
         // No way login if not verified
-        if (!res.user.emailVerified) {
-          logOut().then().catch();
-          toast.error("Verify your Email first please!");
-          return;
-          // No way login if not verified end
-        } else {
-          toast("logged in success");
-          navigate(location?.state ? location.state : "/");
-        }
+        // if (!res.user.emailVerified) {
+        //   logOut().then().catch();
+        //   toast.error("Verify your Email first please!");
+        //   return;
+        //   // No way login if not verified end
+        // } else {
+        // }
+        toast("logged in success");
+        navigate(location?.state ? location.state : "/");
       })
       .catch((err) => toast(err.message));
   };
@@ -98,7 +98,9 @@ const Login = () => {
           </label>
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-success btn-outline">Login</button>
+          <button className="btn border-green-400 hover:border-green-400 bg-base-100 hover:bg-green-400 text-green-400 hover:text-white">
+            Login
+          </button>
         </div>
       </form>
       <p className="text-center mt-4">

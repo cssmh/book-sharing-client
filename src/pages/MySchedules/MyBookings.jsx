@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProviders";
 import axios from "axios";
 import MyBookingCard from "./MyBookingCard";
-import { FallingLines } from "react-loader-spinner";
 
 const MyBookings = () => {
   const { user } = useContext(AuthContext);
@@ -14,7 +13,7 @@ const MyBookings = () => {
       .get(url, { withCredentials: true })
       .then((res) => setBookings(res.data))
   }, [url]);
-  // console.log(bookings);
+  console.log(bookings);
   // My Booking page
 
   return (

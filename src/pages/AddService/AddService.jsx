@@ -38,7 +38,7 @@ const AddService = () => {
     };
 
     axios
-      .post("https://book-sharing-server.vercel.app/services", service)
+      .post("https://book-sharing-server.vercel.app/books", service)
       .then((res) => {
         console.log(res.data);
         if (res.data.insertedId) {
@@ -147,7 +147,7 @@ const AddService = () => {
         </div>
 
         <div className="form-control mt-6">
-          <button className="btn btn-primary">Add Book</button>
+          <button className="btn btn-primary text-white">Add Book</button>
         </div>
       </form>
     </div>

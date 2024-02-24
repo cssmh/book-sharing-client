@@ -15,7 +15,7 @@ const ManageServiceCard = ({ service, services, setServices }) => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        fetch(`https://book-sharing-server.vercel.app/services/${_id}`, {
+        fetch(`https://book-sharing-server.vercel.app/books/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

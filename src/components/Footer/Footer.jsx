@@ -20,7 +20,7 @@ const Footer = () => {
           </div>
           <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
             <div className="space-y-3">
-              <h3 className="tracki uppercase dark:text-gray-50">Product</h3>
+              <h3 className="tracki uppercase dark:text-gray-50">Books</h3>
               <ul className="space-y-1">
                 <li>
                   <a rel="noopener noreferrer" href="#">
@@ -64,7 +64,7 @@ const Footer = () => {
               <ul className="space-y-1">
                 <li>
                   <a rel="noopener noreferrer" href="#">
-                    +8801282937688
+                    +880176761606*
                   </a>
                 </li>
                 <li>

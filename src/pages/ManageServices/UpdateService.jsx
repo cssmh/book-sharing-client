@@ -25,7 +25,7 @@ const UpdateService = () => {
     };
     // console.log(service);
     axios
-      .put(`https://book-sharing-server.vercel.app/services/${_id}`, service)
+      .put(`https://book-sharing-server.vercel.app/books/${_id}`, service)
       .then((res) => {
         if (res.data.modifiedCount > 0) {
           Swal.fire({

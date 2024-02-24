@@ -36,7 +36,7 @@ const PopularServiceCard = ({ service }) => {
         <p className="text-lg font-bold">Location: {location}</p>
         <div className="card-actions mt-2">
           <Link to={`/book/${_id}`}>
-            <button className="btn btn-outline btn-success">
+            <button className="btn border-green-400 hover:border-green-400 bg-yellow-50 hover:bg-green-400 text-green-400 hover:text-white">
               View Details
             </button>
           </Link>
