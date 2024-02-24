@@ -17,7 +17,7 @@ const UpdateBook = () => {
     const location = form.location.value;
     const description = form.description.value;
     const phone = form.phone.value;
-    
+
     if (!/^(\+?8801|01)(\d{9})$/.test(phone)) {
       return toast.error("Enter a valid phone number!");
     }
@@ -71,7 +71,12 @@ const UpdateBook = () => {
           <input
             type="text"
             name="book_image"
-            defaultValue={book_image}
+            defaultValue={
+              book_image ===
+              "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/soon.jpg"
+                ? ""
+                : book_image
+            }
             className="input input-bordered"
           />
         </div>
