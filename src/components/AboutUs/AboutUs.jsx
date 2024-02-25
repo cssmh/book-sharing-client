@@ -6,8 +6,8 @@ const AboutUs = () => {
       data-aos="zoom-in"
       className="mb-6 text-center space-y-2 max-w-7xl mx-auto"
     >
-      <h1 className="text-3xl font-semibold text-center mb-5">About US</h1>
       <p className="px-4 md:px-9">
+        <h1 className="text-3xl font-semibold text-center mb-5">About US</h1>
         BookHaven is an innovative online platform dedicated to fostering a
         vibrant community of book lovers and avid readers. With its
         user-friendly interface and extensive library of titles, BookHaven

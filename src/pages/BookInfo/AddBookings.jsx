@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 const AddBookings = ({ getBookData }) => {
   const { user } = useContext(AuthContext);
-  const { book_name, book_provider_email, phone } = getBookData;
+  const { book_image, book_name, book_provider_email, phone } = getBookData;
   const [open, openChange] = useState(false);
 
   const handlePopUp = () => {
@@ -29,10 +29,6 @@ const AddBookings = ({ getBookData }) => {
     const instruction = form.instruction.value;
     const buyerPhone = form.phone.value;
     const status = "pending";
-
-    if (!/^(\+?8801|01)(\d{9})$/.test(phone)) {
-      return toast.error("Enter a valid phone number!");
-    }
 
     const booking = {
       book_name,
@@ -58,7 +54,7 @@ const AddBookings = ({ getBookData }) => {
         console.log(err);
       });
   };
-  
+
   return (
     <div>
       <Button onClick={handlePopUp} color="primary" variant="contained">
@@ -81,6 +77,18 @@ const AddBookings = ({ getBookData }) => {
                 readOnly
                 name="book_name"
                 defaultValue={book_name}
+                className="input input-bordered"
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Book Image URl</span>
+              </label>
+              <input
+                type="text"
+                readOnly
+                name="book_image"
+                defaultValue={book_image}
                 className="input input-bordered"
               />
             </div>
@@ -123,7 +131,9 @@ const AddBookings = ({ getBookData }) => {
 
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Any Message for Book Provider?</span>
+                <span className="label-text">
+                  Any Message for Book Provider?
+                </span>
               </label>
               <textarea
                 name="instruction"

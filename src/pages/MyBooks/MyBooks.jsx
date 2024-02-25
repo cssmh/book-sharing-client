@@ -8,12 +8,12 @@ import { FallingLines } from "react-loader-spinner";
 const MyBooks = () => {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
-  const [services, setServices] = useState([]);
+  const [myBooks, setMyBooks] = useState([]);
 
   const url = `https://book-sharing-server.vercel.app/books?email=${user.email}`;
   useEffect(() => {
     axios.get(url, { withCredentials: true }).then((res) => {
-      setServices(res.data);
+      setMyBooks(res.data);
       setLoading(false);
     });
   }, [url]);
@@ -36,18 +36,18 @@ const MyBooks = () => {
           />
         </div>
       )}
-      {services.length == 0 ? (
+      {myBooks.length == 0 ? (
         <p className="text-center text-xl md:text-2xl font-semibold text-red-600">
           No Book Added By You
         </p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {services.map((service) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+          {myBooks.map((book) => (
             <MyBooksCard
-              key={service._id}
-              service={service}
-              services={services}
-              setServices={setServices}
+              key={book._id}
+              getBook={book}
+              myBooks={myBooks}
+              setMyBooks={setMyBooks}
             ></MyBooksCard>
           ))}
         </div>

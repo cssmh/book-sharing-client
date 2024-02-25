@@ -50,7 +50,7 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-green-50 p-5 rounded-lg">
+    <div className="bg-green-50 p-7 md:p-10 rounded-lg">
       <Helmet>
         <title>BookHaven | Login</title>
       </Helmet>

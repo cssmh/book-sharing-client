@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
 
-const MyBooksCard = ({ service, services, setServices }) => {
+const MyBooksCard = ({ getBook, myBooks, setMyBooks }) => {
   // console.log(service);
-  const { _id, book_name, book_image, phone } = service;
+  const { _id, book_name, book_image, phone } = getBook;
 
   const handleDelete = (_id, name) => {
     swal({
@@ -21,9 +21,9 @@ const MyBooksCard = ({ service, services, setServices }) => {
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {
-              const remaining = services.filter((book) => book._id !== _id);
-              setServices(remaining);
-              swal(`${name} deleted!`, {
+              const remaining = myBooks.filter((book) => book._id !== _id);
+              setMyBooks(remaining);
+              swal(`${name} Deleted!`, {
                 icon: "success",
               });
             }
@@ -37,7 +37,7 @@ const MyBooksCard = ({ service, services, setServices }) => {
 
   return (
     <div>
-      <div className="card h-auto md:h-[500px] bg-yellow-50 hover:border hover:border-blue-700 hover:bg-yellow-50 shadow-xl mx-2 md:mx-0">
+      <div className="card h-auto md:h-[500px] bg-yellow-50 hover:border hover:border-blue-700 hover:bg-yellow-50 shadow-xl mx-2 md:mx-4">
         <figure className="px-10 pt-6">
           <img
             src={book_image}

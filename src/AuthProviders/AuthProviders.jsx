@@ -1,5 +1,5 @@
+import app from "../firebase/firebase.config";
 import { createContext, useEffect, useState } from "react";
-import app from "../components/Profile/firebase/firebase.config";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,

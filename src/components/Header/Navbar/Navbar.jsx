@@ -1,7 +1,9 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../AuthProviders/AuthProviders";
-import Logo from "../../../assets/logo.png";
+// import Logo from "../../../assets/logo.png";
+import Lottie from "lottie-react";
+import loggieData from "../../../assets/book.json";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -59,7 +61,8 @@ const Navbar = () => {
         </div>
         <Link to={"/"}>
           <div className="flex items-center gap-1">
-            <img className="w-0 md:w-12 rounded-3xl" src={Logo} alt="" />
+          <Lottie className="w-0 md:w-14" animationData={loggieData} />
+            {/* <img className="w-0 md:w-12 rounded-3xl" src={Logo} alt="" /> */}
             <span className="md:ml-2 font-bold text-lg md:text-2xl">
               MBSTU BookHaven
             </span>

@@ -1,4 +1,6 @@
-import logo from "../../assets/logo.png";
+// import logo from "../../assets/logo.png";
+import Lottie from "lottie-react";
+import loggieData from "../../assets/book.json";
 const Footer = () => {
   return (
     <div className="mt-10">
@@ -10,8 +12,9 @@ const Footer = () => {
               href="#"
               className="flex justify-center space-x-3 lg:justify-start"
             >
-              <div className="flex items-center justify-center w-12 h-12 rounded-full dark:bg-violet-400">
-                <img src={logo} alt="" className="rounded-full" />
+              <div className="flex items-center justify-center w-14 rounded-full dark:bg-violet-400">
+                {/* <img src={logo} alt="" className="rounded-full" /> */}
+                <Lottie animationData={loggieData} />
               </div>
               <span className="self-center text-2xl font-semibold">
                 Share a Book
