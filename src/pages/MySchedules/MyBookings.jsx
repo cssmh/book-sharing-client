@@ -20,21 +20,24 @@ const MyBookings = () => {
       .then((err) => console.log(err));
   }, [url]);
 
+  if (loading) {
+    return (
+      <div className="flex justify-center">
+        <FallingLines
+          color="#6cc262"
+          width="70"
+          visible={true}
+          ariaLabel="falling-circles-loading"
+        />
+      </div>
+    );
+  }
+
   return (
     <div>
       <h2 className="text-center text-lg md:text-2xl my-6 font-semibold italic">
         All Bookings made by you
       </h2>
-      {loading && (
-        <div className="flex justify-center">
-          <FallingLines
-            color="#6cc262"
-            width="70"
-            visible={true}
-            ariaLabel="falling-circles-loading"
-          />
-        </div>
-      )}
       {allBookings.length == 0 ? (
         <p className="text-center text-2xl font-semibold italic">No Booked</p>
       ) : (

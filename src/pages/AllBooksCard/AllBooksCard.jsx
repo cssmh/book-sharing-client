@@ -20,11 +20,11 @@ const AllBooksCard = ({ getBook }) => {
           data-aos-offset="100"
           src={book_image}
           alt="books"
-          className="rounded-xl w-1/2"
+          className="rounded-xl w-1/2 lg:h-[270px]"
         />
       </figure>
       <div className="card-body items-center text-center p-0 px-3 gap-1">
-        <h2 className="card-title font-bold text-blue-900 mt-2">{book_name}</h2>
+        <h2 className="text-[22px] font-bold text-blue-900 mt-2 px-1">{book_name}</h2>
         <p className="px-2">Details: {description}</p>
         <div className="flex justify-center items-center gap-3 my-1 border-2 border-red-400 rounded-lg px-3 py-2">
           <div className="avatar">

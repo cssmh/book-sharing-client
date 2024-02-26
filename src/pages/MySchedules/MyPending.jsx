@@ -19,23 +19,25 @@ const MyPending = () => {
       })
       .then((err) => console.log(err));
   }, [url]);
-  // My pending page
+
+  if (loading) {
+    return (
+      <div className="flex justify-center">
+        <FallingLines
+          color="#6cc262"
+          width="70"
+          visible={true}
+          ariaLabel="falling-circles-loading"
+        />
+      </div>
+    );
+  }
 
   return (
     <div>
       <h2 className="text-center text-xl md:text-2xl my-6 font-semibold italic">
         User Booked Your Books
       </h2>
-      {loading && (
-        <div className="flex justify-center">
-          <FallingLines
-            color="#6cc262"
-            width="70"
-            visible={true}
-            ariaLabel="falling-circles-loading"
-          />
-        </div>
-      )}
       {pending.length == 0 ? (
         <p className="text-center text-xl md:text-2xl font-semibold italic">
           No User Booked Your Books

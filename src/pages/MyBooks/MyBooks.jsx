@@ -18,24 +18,27 @@ const MyBooks = () => {
     });
   }, [url]);
 
+  if (loading) {
+    return (
+      <div className="flex justify-center">
+        <FallingLines
+          color="#6cc262"
+          width="70"
+          visible={true}
+          ariaLabel="falling-circles-loading"
+        />
+      </div>
+    );
+  }
+
   return (
     <div>
       <Helmet>
         <title>BookHaven | My-Books</title>
       </Helmet>
-      <h2 className="text-2xl md:text-3xl font-bold mt-9 mb-5 text-center italic">
+      <h2 className="text-2xl md:text-2xl font-bold my-5 text-center italic">
         All Books Added By You
       </h2>
-      {loading && (
-        <div className="flex justify-center">
-          <FallingLines
-            color="#6cc262"
-            width="70"
-            visible={true}
-            ariaLabel="falling-circles-loading"
-          />
-        </div>
-      )}
       {myBooks.length == 0 ? (
         <p className="text-center text-xl md:text-2xl font-semibold text-red-600">
           No Book Added By You

@@ -17,7 +17,7 @@ const PopularBookCard = ({ getBook }) => {
     <div className="card bg-base-100 shadow-xl py-4">
       <div data-aos="zoom-in" data-aos-delay="400" data-aos-offset="100">
         <figure>
-          <img src={book_image} alt="Books" className="rounded-xl w-1/2" />
+          <img src={book_image} alt="Books" className="rounded-xl w-1/2 lg:h-[270px]" />
         </figure>
       </div>
       <div className="card-body items-center text-center p-0 px-3 gap-1">

@@ -44,44 +44,27 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
   };
 
   return (
-    // <div className="card bg-yellow-50 hover:border hover:border-blue-700 hover:bg-yellow-50 shadow-xl mx-2 md:mx-4">
-    //   <figure className="px-10 pt-5">
-    //     <img src={book_image} alt="Books" className="rounded-xl h-72 md:h-64" />
-    //   </figure>
-    //   <div className="items-center my-1 py-0 w-[70%] mx-auto">
-    //     <h2 className="text-2xl text-blue-900">{book_name}</h2>
-    //     <div className="text-lg">
-    //       <p className="">Owner Information:</p>
-    //       <div className="text-left text-lg">
-    //         <p>{book_provider_email}</p>
-    //         <p>{phone}</p>
-    //         <p className="text-green-500">Status: {status}</p>
-    //         <p>Date of Handover: {date}</p>
-    //       </div>
-    //     </div>
-    //   </div>
-    //   <button
-    //     onClick={() => handleDelete(_id, book_name)}
-    //     className="btn mt-2 mb-4 w-2/5 mx-auto border-black bg-base-100 hover:bg-black text-black hover:text-white"
-    //   >
-    //     delete booking
-    //   </button>
-    // </div>
     <div data-aos="zoom-in" className="card bg-base-100 shadow-xl">
       <figure>
-        <img src={book_image} alt="book" className="rounded-xl w-1/2 mt-5" />
+        <img
+          src={book_image}
+          alt="book"
+          className="rounded-xl w-1/2 lg:h-[270px] mt-5"
+        />
       </figure>
       <div className="px-14 pt-3 pb-5">
         <p className="text-2xl">{book_name}</p>
-        <p>Owner Information:</p>
-        <p className="text-green-500">{phone}</p>
-        <p className="text-yellow-700">{book_provider_email}</p>
-        <p>
-          Status: <span className="text-green-500">{status}</span>
-        </p>
-        <p>
-          Date of Handover: <span className="text-blue-500">{date}</span>
-        </p>
+        <div className="text-lg">
+          <p>Owner Information:</p>
+          <p className="text-green-500">{phone}</p>
+          <p className="text-yellow-700">{book_provider_email}</p>
+          <p>
+            Status: <span className="text-green-500">{status}</span>
+          </p>
+          <p>
+            Date of Handover: <span className="text-blue-500">{date}</span>
+          </p>
+        </div>
         <div className="mt-2 card-actions justify-center">
           <button
             onClick={() => handleDelete(_id)}
