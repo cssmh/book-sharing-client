@@ -10,24 +10,20 @@ const PopularBookCard = ({ getBook }) => {
     phone,
     location,
   } = getBook;
-  let smallDesc = description.slice(0, 120);
+  let smallDesc = description.slice(0, 130);
   // HomePage Popular Books card
 
   return (
-    <div className="card bg-yellow-50 hover:border hover:border-blue-700 mx-2 md:mx-0 space-y-2 py-5">
+    <div className="card bg-base-100 shadow-xl py-4">
       <div data-aos="zoom-in" data-aos-delay="400" data-aos-offset="100">
         <figure>
-          <img
-            src={book_image}
-            alt="Books"
-            className="rounded-xl w-3/5 lg:w-1/2"
-          />
+          <img src={book_image} alt="Books" className="rounded-xl w-1/2" />
         </figure>
       </div>
       <div className="card-body items-center text-center p-0 px-3 gap-1">
-        <h2 className="card-title font-bold text-blue-900">{book_name}</h2>
-        <p>Details: {smallDesc}...</p>
-        <div className="flex justify-center items-center gap-3 my-1 border-2 border-red-400 rounded-lg p-3">
+        <h2 className="card-title font-bold text-blue-900 mt-2">{book_name}</h2>
+        <p className="px-2">Details: {smallDesc}...</p>
+        <div className="flex justify-center items-center gap-3 my-1 border-2 border-red-400 rounded-lg px-3 py-2">
           <div className="avatar">
             <div className="w-12 rounded-full ring ring-primary">
               <img src={book_provider_image} />
@@ -35,7 +31,7 @@ const PopularBookCard = ({ getBook }) => {
           </div>
           <h2 className="font-bold text-lg">{book_provider_name}</h2>
         </div>
-        <p className="text-lg">Phone: {phone}</p>
+        <p className="text-lg text-green-500">Phone: {phone}</p>
         <p className="text-lg">Location: {location}</p>
         <div className="card-actions mt-2">
           <Link to={`/book/${_id}`}>

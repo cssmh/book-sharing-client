@@ -1,8 +1,16 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import PopularBookCard from "./PopularBookCard";
+import PopularBookCard from "../PopularBookCard/PopularBookCard";
 
-const PopularBooks = ({ books }) => {
+const PopularBooks = () => {
   // HomePage Popular Books
+  const [popularBooks, setPopularBooks] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/allBooks")
+      .then((res) => res.json())
+      .then((data) => setPopularBooks(data));
+  }, []);
 
   return (
     <div>
@@ -12,8 +20,8 @@ const PopularBooks = ({ books }) => {
         </h3>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto gap-5">
-        {books?.map((book) => (
-          <PopularBookCard key={book._id} getBook={book}></PopularBookCard>
+        {popularBooks?.slice(0,3).map((books) => (
+          <PopularBookCard key={books._id} getBook={books}></PopularBookCard>
         ))}
       </div>
       <div className="flex justify-center my-10">

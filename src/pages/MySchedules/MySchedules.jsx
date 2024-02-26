@@ -9,8 +9,8 @@ const MySchedules = () => {
   const showBook = () => {
     setActiveComponent("MyBookings");
   };
-  const showWork = () => {
-    setActiveComponent("MyWorks");
+  const showPending = () => {
+    setActiveComponent("MyPending");
   };
   return (
     <div>
@@ -29,16 +29,18 @@ const MySchedules = () => {
           My Booking
         </button>
         <button
-          onClick={showWork}
+          onClick={showPending}
           className={
-            activeComponent === "MyWorks" ? "btn btn-primary text-white" : "btn"
+            activeComponent === "MyPending"
+              ? "btn btn-primary text-white"
+              : "btn"
           }
         >
           My Pending
         </button>
       </div>
       {activeComponent === "MyBookings" && <MyBookings></MyBookings>}
-      {activeComponent === "MyWorks" && <MyPending></MyPending>}
+      {activeComponent === "MyPending" && <MyPending></MyPending>}
     </div>
   );
 };

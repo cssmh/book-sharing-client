@@ -19,7 +19,7 @@ const MyPendingCard = ({ getPending }) => {
     const newStatus = event.target.value;
     const updatedStatus = { newStatus };
     axios
-      .put(`https://book-sharing-server.vercel.app/bookings/${_id}`, updatedStatus)
+      .put(`http://localhost:5000/bookings/${_id}`, updatedStatus)
       .then((res) => {
         if (res.data.modifiedCount > 0) {
           swal("Good job!", `Updated to ${newStatus}`, "success");
@@ -30,32 +30,22 @@ const MyPendingCard = ({ getPending }) => {
   // My pending page card
 
   return (
-    <div className="card bg-yellow-50 hover:border hover:border-blue-700 hover:bg-yellow-50 shadow-lg mx-2 md:mx-4">
-      <figure className="px-10 pt-10">
-        <img
-          src={book_image}
-          alt="no images available"
-          className="rounded-xl h-72 md:h-64"
-        />
+    <div data-aos="zoom-in" className="card bg-base-100 shadow-xl">
+      <figure>
+        <img src={book_image} alt="book" className="rounded-xl w-1/2 mt-5" />
       </figure>
       <div>
-        <h2 className="text-[22px] font-bold text-blue-900 text-center">
-          {book_name}
-        </h2>
-        <p className="text-lg font-bold text-center mt-1">Collector Info: </p>
-        <div className="flex border border-green-400 p-2 my-3 mx-6 rounded-md gap-1">
-          <div>
-            <p>Phone: {buyerPhone}</p>
-            <p>Email: {user_email}</p>
-          </div>
-          <div>
-            <p>Message: {instruction}</p>
-            <p>Need Book by: {date}</p>
-          </div>
+        <h2 className="text-2xl text-blue-900 text-center">{book_name}</h2>
+        <p className="text-xl text-center">Collector Info: </p>
+        <div className="mb-2 text-lg w-2/3 mx-auto">
+          <p>Phone: {buyerPhone}</p>
+          <p>Email: {user_email}</p>
+          <p>Message: {instruction}</p>
+          <p>Need Book by: {date}</p>
         </div>
         <div className="text-center mb-4">
           <select
-            id="cars"
+            id="book"
             name="book_name"
             defaultValue={status}
             onChange={() => handleStatus(event, _id)}

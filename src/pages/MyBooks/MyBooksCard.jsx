@@ -15,7 +15,7 @@ const MyBooksCard = ({ getBook, myBooks, setMyBooks }) => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        fetch(`https://book-sharing-server.vercel.app/books/${_id}`, {
+        fetch(`http://localhost:5000/books/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -37,20 +37,22 @@ const MyBooksCard = ({ getBook, myBooks, setMyBooks }) => {
 
   return (
     <div>
-      <div className="card h-auto md:h-[500px] bg-yellow-50 hover:border hover:border-blue-700 hover:bg-yellow-50 shadow-xl mx-2 md:mx-4">
-        <figure className="px-10 pt-6">
+      <div data-aos="zoom-in" className="card bg-base-100 shadow-xl">
+        <figure className="pt-6 mb-2">
           <img
             src={book_image}
             alt="book"
-            className="rounded-xl h-80 md:h-64"
+            className="rounded-xl w-1/2"
           />
         </figure>
-        <div className="card-body items-center text-center">
-          <h2 className="card-title font-bold text-blue-900">{book_name}</h2>
-          <p className="text-lg font-bold mb-4">Phone: {phone}</p>
-          <div className="card-actions">
+        <div className="items-center text-center space-y-2 mb-5">
+          <h2 className="text-[22px] font-bold text-blue-900">{book_name}</h2>
+          <p className="text-lg">Phone: {phone}</p>
+          <div className="space-x-1">
             <Link to={`/update-book/${_id}`}>
-              <button className="btn border-green-400 bg-base-100 hover:bg-green-400 text-green-400 hover:text-white">Update Product</button>
+              <button className="btn border-green-400 bg-base-100 hover:bg-green-400 text-green-400 hover:text-white">
+                Update Product
+              </button>
             </Link>
             <button
               onClick={() => handleDelete(_id, book_name)}

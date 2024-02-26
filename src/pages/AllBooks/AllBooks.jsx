@@ -1,13 +1,13 @@
 import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import AllBooksCard from "./AllBooksCard";
+import AllBooksCard from "../AllBooksCard/AllBooksCard";
 
 const AllBooks = () => {
-  const allBooks = useLoaderData();
+  const loadAllBooks = useLoaderData();
   let searchTerm;
-  const [filter, setFilter] = useState(allBooks);
-  // console.log(filter);
+  const [allBooks, setAllBooks] = useState(loadAllBooks);
+  // console.log(allBooks);
 
   return (
     <div>
@@ -25,14 +25,12 @@ const AllBooks = () => {
             console.log(searchTerm);
 
             if (searchTerm === "") {
-              setFilter(allBooks);
+              setAllBooks(loadAllBooks);
             } else {
-              const searchItem = allBooks.filter((service) =>
-                service.book_name
-                  .toLowerCase()
-                  .includes(searchTerm.toLowerCase())
+              const searchItem = loadAllBooks.filter((books) =>
+                books.book_name.toLowerCase().includes(searchTerm.toLowerCase())
               );
-              setFilter(searchItem);
+              setAllBooks(searchItem);
             }
           }}
         />
@@ -40,8 +38,8 @@ const AllBooks = () => {
           All Books Available for you
         </h2>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
-        {filter.map((book) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+        {allBooks.map((book) => (
           <AllBooksCard key={book._id} getBook={book}></AllBooksCard>
         ))}
       </div>

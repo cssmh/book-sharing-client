@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../AuthProviders/AuthProviders";
 import toast from "react-hot-toast";
 
@@ -25,6 +26,9 @@ const Profile = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>BookHaven | My Profile</title>
+      </Helmet>
       <div className="flex flex-col-reverse lg:flex-row items-center gap-5 mt-6">
         <div className="lg:w-1/2">
           <img
@@ -34,7 +38,7 @@ const Profile = () => {
           />
         </div>
         <div className="space-y-2 mb-3 lg:mb-0 font-semibold border p-4 rounded-lg">
-          <h1>Hi, {displayName}</h1>
+          <p>Hi, {displayName}</p>
           <p>{email}</p>
           <p>Created At: {metadata.creationTime}</p>
         </div>

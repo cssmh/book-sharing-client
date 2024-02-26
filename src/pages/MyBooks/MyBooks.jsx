@@ -1,16 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../AuthProviders/AuthProviders";
 import MyBooksCard from "./MyBooksCard";
+import { FallingLines } from "react-loader-spinner";
 import axios from "axios";
 import { Helmet } from "react-helmet-async";
-import { FallingLines } from "react-loader-spinner";
 
 const MyBooks = () => {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const [myBooks, setMyBooks] = useState([]);
 
-  const url = `https://book-sharing-server.vercel.app/books?email=${user.email}`;
+  const url = `http://localhost:5000/books?email=${user.email}`;
   useEffect(() => {
     axios.get(url, { withCredentials: true }).then((res) => {
       setMyBooks(res.data);
@@ -41,7 +41,7 @@ const MyBooks = () => {
           No Book Added By You
         </p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
           {myBooks.map((book) => (
             <MyBooksCard
               key={book._id}
