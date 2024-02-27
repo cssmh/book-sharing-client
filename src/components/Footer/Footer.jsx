@@ -87,7 +87,7 @@ const Footer = () => {
               <div className="flex justify-start space-x-3">
                 <a
                   rel="noopener noreferrer"
-                  href="#"
+                  href="http://facebook.com/touristmomen"
                   title="Facebook"
                   className="flex items-center p-1"
                 >

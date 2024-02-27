@@ -1,6 +1,6 @@
-import banner1 from "./../../../assets/1.jpeg";
-import banner2 from "./../../../assets/2.jpeg";
-import banner3 from "./../../../assets/3.jpeg";
+import banner1 from "../../assets/1.jpeg";
+import banner2 from "../../assets/2.jpeg";
+import banner3 from "../../assets/3.jpeg";
 
 const Banner = () => {
   return (

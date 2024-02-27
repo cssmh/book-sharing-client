@@ -121,12 +121,12 @@ const Register = () => {
           </button>
         </div>
       </form>
-      <p className="text-center mt-4">
+      <div className="text-center mt-4">
         Already have an account?{" "}
         <Link className="text-green-400 font-bold" to="/login">
           Login
         </Link>
-      </p>
+      </div>
     </div>
   );
 };

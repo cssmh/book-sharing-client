@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Error from "../../assets/ErrorLogo.png";
-import Navbar from "../Header/Navbar/Navbar";
 import Footer from "../Footer/Footer";
+import Navbar from "../Navbar/Navbar";
 
 const ErrorPage = () => {
   return (

@@ -9,7 +9,7 @@ const MyBookings = () => {
   const [loading, setLoading] = useState(true);
   const [allBookings, setAllBookings] = useState([]);
 
-  const url = `http://localhost:5000/bookings?email=${user.email}`;
+  const url = `https://book-sharing-server.vercel.app/bookings?email=${user.email}`;
   useEffect(() => {
     axios
       .get(url, { withCredentials: true })

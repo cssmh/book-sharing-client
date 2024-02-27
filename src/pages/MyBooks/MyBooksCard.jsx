@@ -15,7 +15,7 @@ const MyBooksCard = ({ getBook, myBooks, setMyBooks }) => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        fetch(`http://localhost:5000/books/${_id}`, {
+        fetch(`https://book-sharing-server.vercel.app/books/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -36,7 +36,6 @@ const MyBooksCard = ({ getBook, myBooks, setMyBooks }) => {
   // My Books page card
 
   return (
-    <div>
       <div data-aos="zoom-in" className="card bg-base-100 shadow-xl">
         <figure className="pt-6 mb-2">
           <img
@@ -47,7 +46,7 @@ const MyBooksCard = ({ getBook, myBooks, setMyBooks }) => {
         </figure>
         <div className="items-center text-center space-y-2 mb-5">
           <h2 className="text-[22px] font-bold text-blue-900">{book_name}</h2>
-          <p className="text-lg">Phone: {phone}</p>
+          <p className="text-lg pb-1">Phone: {phone}</p>
           <div className="space-x-1">
             <Link to={`/update-book/${_id}`}>
               <button className="btn border-green-400 bg-base-100 hover:bg-green-400 text-green-400 hover:text-white">
@@ -62,7 +61,6 @@ const MyBooksCard = ({ getBook, myBooks, setMyBooks }) => {
             </button>
           </div>
         </div>
-      </div>
     </div>
   );
 };

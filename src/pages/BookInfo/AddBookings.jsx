@@ -1,12 +1,11 @@
 import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
+import swal from "sweetalert";
+import axios from "axios";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../AuthProviders/AuthProviders";
-import axios from "axios";
-import swal from "sweetalert";
-import toast from "react-hot-toast";
 
 const AddBookings = ({ getBookData }) => {
-  const { user } = useContext(AuthContext);
+  const { user, cart } = useContext(AuthContext);
   const { book_image, book_name, book_provider_email, phone } = getBookData;
   const [open, openChange] = useState(false);
 
@@ -43,7 +42,7 @@ const AddBookings = ({ getBookData }) => {
     };
 
     axios
-      .post("http://localhost:5000/bookings", booking)
+      .post("https://book-sharing-server.vercel.app/bookings", booking)
       .then((res) => {
         // console.log(res.data);
         if (res.data.insertedId) {

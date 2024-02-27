@@ -19,7 +19,7 @@ const MyPendingCard = ({ getPending }) => {
     const newStatus = event.target.value;
     const updatedStatus = { newStatus };
     axios
-      .put(`http://localhost:5000/bookings/${_id}`, updatedStatus)
+      .put(`https://book-sharing-server.vercel.app/bookings/${_id}`, updatedStatus)
       .then((res) => {
         if (res.data.modifiedCount > 0) {
           swal("Good job!", `Updated to ${newStatus}`, "success");
@@ -36,9 +36,9 @@ const MyPendingCard = ({ getPending }) => {
       </figure>
       <div>
         <h2 className="text-2xl text-blue-900 text-center">{book_name}</h2>
-        <p className="text-xl text-center">Collector Info: </p>
+        <h1 className="text-xl text-center">Collector Info: </h1>
         <div className="mb-2 text-lg w-2/3 mx-auto">
-          <p className="text-green-400">Phone: {buyerPhone}</p>
+          <p className="text-green-500">Phone: {buyerPhone}</p>
           <p className="text-yellow-700">Email: {user_email}</p>
           <p>Message: {instruction}</p>
           <p>Need Book by: <span className="text-blue-500">{date}</span></p>

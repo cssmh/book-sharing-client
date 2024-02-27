@@ -63,7 +63,7 @@ const AuthProviders = ({ children }) => {
       setLoading(false);
       if (currentUser) {
         axios
-          .post("http://localhost:5000/jwt", loggedUser, {
+          .post("https://book-sharing-server.vercel.app/jwt", loggedUser, {
             withCredentials: true,
           })
           .then((res) => {
@@ -71,7 +71,7 @@ const AuthProviders = ({ children }) => {
           });
       } else {
         axios
-          .post("http://localhost:5000/logout", loggedUser, {
+          .post("https://book-sharing-server.vercel.app/logout", loggedUser, {
             withCredentials: true,
           })
           .then((res) => {

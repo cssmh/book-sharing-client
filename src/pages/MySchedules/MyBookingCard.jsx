@@ -23,7 +23,7 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        fetch(`http://localhost:5000/bookings/${idx}`, {
+        fetch(`https://book-sharing-server.vercel.app/bookings/${idx}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -67,7 +67,7 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
         </div>
         <div className="mt-2 card-actions justify-center">
           <button
-            onClick={() => handleDelete(_id)}
+            onClick={() => handleDelete(_id, book_name)}
             className="btn border-black bg-base-100 hover:bg-black text-black hover:text-white"
           >
             Delete Booking

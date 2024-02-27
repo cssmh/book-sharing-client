@@ -102,7 +102,7 @@ const Login = () => {
           </button>
         </div>
       </form>
-      <p className="text-center mt-4">
+      <div className="text-center mt-4">
         Do not have an account{" "}
         <Link
           state={location.state}
@@ -111,7 +111,7 @@ const Login = () => {
         >
           Register
         </Link>
-      </p>
+      </div>
       <SocialLogin></SocialLogin>
     </div>
   );
