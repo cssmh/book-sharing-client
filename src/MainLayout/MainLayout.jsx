@@ -10,10 +10,10 @@ const MainLayout = () => {
     <div>
       <Navbar></Navbar>
       {navigationForSpinner.state === "loading" ? (
-        <div className="flex justify-center">
+        <div className="flex justify-center min-h-[70vh]">
           <FallingLines
-            color="#6cc262"
-            width="70"
+            color="#9933FF"
+            width="60"
             visible={true}
             ariaLabel="falling-circles-loading"
           />

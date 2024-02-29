@@ -1,31 +1,29 @@
 import MyBookingCard from "./MyBookingCard";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import useContextHook from "../../useCustomHook/useContextHook";
+import useAxiosHook from "../../useCustomHook/useAxiosHook";
 import { FallingLines } from "react-loader-spinner";
-import { AuthContext } from "../../AuthProviders/AuthProviders";
-import axios from "axios";
 
 const MyBookings = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useContextHook();
   const [loading, setLoading] = useState(true);
   const [allBookings, setAllBookings] = useState([]);
+  const axiosCustom = useAxiosHook();
 
-  const url = `https://book-sharing-server.vercel.app/bookings?email=${user.email}`;
+  const url = `/bookings?email=${user.email}`;
   useEffect(() => {
-    axios
-      .get(url, { withCredentials: true })
-      .then((res) => {
-        setAllBookings(res.data);
-        setLoading(false);
-      })
-      .then((err) => console.log(err));
-  }, [url]);
+    axiosCustom?.get(url)?.then((res) => {
+      setAllBookings(res.data);
+      setLoading(false);
+    });
+  }, [axiosCustom, url]);
 
   if (loading) {
     return (
       <div className="flex justify-center">
         <FallingLines
-          color="#6cc262"
-          width="70"
+          color="#9933FF"
+          width="60"
           visible={true}
           ariaLabel="falling-circles-loading"
         />

@@ -1,18 +1,17 @@
-import { useContext } from "react";
-import { AuthContext } from "../AuthProviders/AuthProviders";
+import useContextHook from "../useCustomHook/useContextHook";
 import { Navigate, useLocation } from "react-router-dom";
 import { FallingLines } from "react-loader-spinner";
 
 const PrivateRoute = ({ children }) => {
-  const { user, loading } = useContext(AuthContext);
+  const { user, loading } = useContextHook();
   const location = useLocation();
   // console.log(location);
   if (loading) {
     return (
       <div className="flex justify-center">
         <FallingLines
-          color="#6cc262"
-          width="70"
+          color="#9933FF"
+          width="60"
           visible={true}
           ariaLabel="falling-circles-loading"
         />

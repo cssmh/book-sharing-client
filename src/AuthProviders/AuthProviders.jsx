@@ -45,49 +45,42 @@ const AuthProviders = ({ children }) => {
   };
 
   const resetPassword = (email) => {
-    setLoading(true);
     return sendPasswordResetEmail(auth, email);
   };
 
   const emailVerification = () => {
-    setLoading(true);
     return sendEmailVerification(auth.currentUser);
+  };
+
+  const logOut = () => {
+    return signOut(auth);
   };
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       // console.log("user in ", currentUser);
-      const userEmail = currentUser?.email || user?.email;
-      const loggedUser = { email: userEmail };
+      const loggedEmail = currentUser?.email || user?.email;
+      const getEmail = { email: loggedEmail };
       setUser(currentUser);
       setLoading(false);
-      if (currentUser) {
+      if (loggedEmail) {
         axios
-          .post("https://book-sharing-server.vercel.app/jwt", loggedUser, {
+          .post("https://book-sharing-server.vercel.app/jwt", getEmail, {
             withCredentials: true,
           })
-          .then((res) => {
-            console.log("token", res.data);
-          });
+          .then((res) => console.log("login token res", res.data));
       } else {
         axios
-          .post("https://book-sharing-server.vercel.app/logout", loggedUser, {
+          .post("https://book-sharing-server.vercel.app/logout", getEmail, {
             withCredentials: true,
           })
-          .then((res) => {
-            console.log("token response", res.data);
-          });
+          .then((res) => console.log("logout token res", res.data));
       }
     });
     return () => {
       unSubscribe();
     };
   }, [user?.email]);
-
-  const logOut = () => {
-    setLoading(true);
-    return signOut(auth);
-  };
 
   const authInfo = {
     user,

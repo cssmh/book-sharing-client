@@ -16,15 +16,15 @@ const Counting = () => {
         >
           <div>
             <p className="text-red-500">Books</p>
-            <p className="text-gray-500">10</p>
+            <p className="text-gray-500">21</p>
           </div>
           <div>
-            <p className="text-green-500">Author</p>
-            <p className="text-gray-500">27</p>
+            <p className="text-green-500">Provider</p>
+            <p className="text-gray-500">16</p>
           </div>
           <div>
-            <p className="text-blue-500">User</p>
-            <p className="text-gray-500">40</p>
+            <p className="text-blue-500">Author</p>
+            <p className="text-gray-500">37</p>
           </div>
         </div>
       </div>

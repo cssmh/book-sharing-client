@@ -1,11 +1,11 @@
 import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
 import swal from "sweetalert";
+import useContextHook from "../../useCustomHook/useContextHook";
 import axios from "axios";
-import { useContext, useState } from "react";
-import { AuthContext } from "../../AuthProviders/AuthProviders";
+import { useState } from "react";
 
 const AddBookings = ({ getBookData }) => {
-  const { user, cart } = useContext(AuthContext);
+  const { user, cart } = useContextHook();
   const { book_image, book_name, book_provider_email, phone } = getBookData;
   const [open, openChange] = useState(false);
 
@@ -27,7 +27,7 @@ const AddBookings = ({ getBookData }) => {
     const date = form.date.value;
     const instruction = form.instruction.value;
     const buyerPhone = form.phone.value;
-    const status = "pending";
+    const status = "Pending";
 
     const booking = {
       book_name,

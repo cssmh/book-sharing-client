@@ -1,6 +1,5 @@
-import { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../AuthProviders/AuthProviders";
+import useContextHook from "../../useCustomHook/useContextHook";
 import { FcGoogle } from "react-icons/fc";
 import toast from "react-hot-toast";
 
@@ -8,7 +7,7 @@ const SocialLogin = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { googleLogin } = useContext(AuthContext);
+  const { googleLogin } = useContextHook()
   const handleSocialLogin = (media) => {
     media()
       .then(() => {

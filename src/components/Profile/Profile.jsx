@@ -1,10 +1,10 @@
-import { useContext, useState } from "react";
+import useContextHook from "../../useCustomHook/useContextHook";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { AuthContext } from "../../AuthProviders/AuthProviders";
 import toast from "react-hot-toast";
 
 const Profile = () => {
-  const { user, handleUpdateProfile } = useContext(AuthContext);
+  const { user, handleUpdateProfile } = useContextHook();
   const { photoURL, email, displayName, metadata } = user;
   const [dp, setDp] = useState(photoURL);
   const handleUpdate = (e) => {

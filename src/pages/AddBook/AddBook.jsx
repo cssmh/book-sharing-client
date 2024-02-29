@@ -1,12 +1,11 @@
-import { useContext } from "react";
-import { AuthContext } from "../../AuthProviders/AuthProviders";
 import axios from "axios";
 import swal from "sweetalert";
+import useContextHook from "../../useCustomHook/useContextHook";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 
 const AddBook = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useContextHook();
   const handleAddBook = (e) => {
     e.preventDefault();
     const form = e.target;

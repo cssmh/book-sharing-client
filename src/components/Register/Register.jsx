@@ -1,14 +1,14 @@
-import { useContext, useState } from "react";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../AuthProviders/AuthProviders";
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useContextHook from "../../useCustomHook/useContextHook";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const Register = () => {
   const [view, setView] = useState(true);
   const { createUser, handleUpdateProfile, emailVerification, logOut } =
-    useContext(AuthContext);
+    useContextHook();
   const navigateTo = useNavigate();
   const location = useLocation();
   // console.log(location);
@@ -36,7 +36,7 @@ const Register = () => {
       return;
     }
     createUser(email, password)
-      .then((res) => {
+      .then(() => {
         handleUpdateProfile(name, photo).then(() => {
           toast.success("User register success");
         });

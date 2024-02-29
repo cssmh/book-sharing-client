@@ -1,31 +1,29 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FallingLines } from "react-loader-spinner";
-import { AuthContext } from "../../AuthProviders/AuthProviders";
-import axios from "axios";
+import useContextHook from "../../useCustomHook/useContextHook";
+import useAxiosHook from "../../useCustomHook/useAxiosHook";
 import MyPendingCard from "./MyPendingCard";
 
 const MyPending = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useContextHook();
   const [loading, setLoading] = useState(true);
   const [pending, setPending] = useState([]);
+  const axiosCustom = useAxiosHook();
 
-  const url = `https://book-sharing-server.vercel.app/pending?email=${user.email}`;
+  const url = `/pending?email=${user.email}`;
   useEffect(() => {
-    axios
-      .get(url, { withCredentials: true })
-      .then((res) => {
-        setPending(res.data);
-        setLoading(false);
-      })
-      .then((err) => console.log(err));
-  }, [url]);
+    axiosCustom?.get(url)?.then((res) => {
+      setPending(res.data);
+      setLoading(false);
+    });
+  }, [axiosCustom, url]);
 
   if (loading) {
     return (
       <div className="flex justify-center">
         <FallingLines
-          color="#6cc262"
-          width="70"
+          color="#9933FF"
+          width="60"
           visible={true}
           ariaLabel="falling-circles-loading"
         />

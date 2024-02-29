@@ -1,6 +1,6 @@
-import { useContext, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import useContextHook from "../../useCustomHook/useContextHook";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../AuthProviders/AuthProviders";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import SocialLogin from "./SocialLogin";
 import { Helmet } from "react-helmet-async";
@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 
 const Login = () => {
   const [view, setView] = useState(true);
-  const { signIn, resetPassword, logOut } = useContext(AuthContext);
+  const { signIn, resetPassword, logOut } = useContextHook()
   const location = useLocation();
   const navigate = useNavigate();
   // console.log(location);

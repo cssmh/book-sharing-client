@@ -1,12 +1,12 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 // import Logo from "../../../assets/logo.png";
-import { AuthContext } from "../../AuthProviders/AuthProviders";
+import useContextHook from "../../useCustomHook/useContextHook";
 import Lottie from "lottie-react";
 import loggieData from "../../assets/book.json";
 
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut } = useContextHook();
   const handleSignOut = () => {
     logOut().then().catch();
   };

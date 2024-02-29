@@ -1,29 +1,31 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../AuthProviders/AuthProviders";
+import { useEffect, useState } from "react";
 import MyBooksCard from "./MyBooksCard";
+import useContextHook from "../../useCustomHook/useContextHook";
 import { FallingLines } from "react-loader-spinner";
 import axios from "axios";
 import { Helmet } from "react-helmet-async";
+import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const MyBooks = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useContextHook();
   const [loading, setLoading] = useState(true);
   const [myBooks, setMyBooks] = useState([]);
+  const axiosCustom = useAxiosHook();
 
-  const url = `https://book-sharing-server.vercel.app/books?email=${user.email}`;
+  const url = `/books?email=${user.email}`;
   useEffect(() => {
-    axios.get(url, { withCredentials: true }).then((res) => {
+    axiosCustom?.get(url)?.then((res) => {
       setMyBooks(res.data);
       setLoading(false);
     });
-  }, [url]);
+  }, [axiosCustom, url]);
 
   if (loading) {
     return (
       <div className="flex justify-center">
         <FallingLines
-          color="#6cc262"
-          width="70"
+          color="#9933FF"
+          width="60"
           visible={true}
           ariaLabel="falling-circles-loading"
         />

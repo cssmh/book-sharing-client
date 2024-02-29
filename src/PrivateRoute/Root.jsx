@@ -52,7 +52,7 @@ const Root = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://book-sharing-server.vercel.app/books/${params.id}`),
+          fetch(`https://book-sharing-server.vercel.app/book/${params.id}`),
       },
       {
         path: "/add-book",
