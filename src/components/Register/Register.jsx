@@ -41,14 +41,9 @@ const Register = () => {
           toast.success("User register success");
         });
         emailVerification().then(() =>
-          toast("Check your email to verify your account!")
+          toast("Check your email to verify your account first!")
         );
-        // if (!res.user.emailVerified) {
-        //   logOut().then().catch();
-        //   navigateTo("/login");
-        // } else {
-        // }
-        navigateTo(location?.state ? location.state : "/");
+        navigateTo("/login");
       })
       .catch(() => {
         toast.error("Email Already Registered");

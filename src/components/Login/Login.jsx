@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 
 const Login = () => {
   const [view, setView] = useState(true);
-  const { signIn, resetPassword, logOut } = useContextHook()
+  const { signIn, resetPassword, logOut } = useContextHook();
   const location = useLocation();
   const navigate = useNavigate();
   // console.log(location);
@@ -19,21 +19,28 @@ const Login = () => {
     const email = form.get("email");
     const password = form.get("password");
 
-    // console.log(email, password);
-    signIn(email, password)
-      .then((res) => {
-        // No way login if not verified
-        // if (!res.user.emailVerified) {
-        //   logOut().then().catch();
-        //   toast.error("Verify your Email first please!");
-        //   return;
-        //   // No way login if not verified end
-        // } else {
-        // }
+    // if because custom gmail login without verification
+    if (email == "Kona@mail.com") {
+      signIn(email, password).then(() => {
         toast.success("logged in success");
         navigate(location?.state ? location.state : "/");
-      })
-      .catch((err) => toast.error(err.message));
+      });
+    } else {
+      signIn(email, password)
+        .then((res) => {
+          // No way login if not verified
+          if (!res.user.emailVerified) {
+            logOut().then().catch();
+            toast.error("Verify your Email first please!");
+            return;
+            // No way login if not verified end
+          } else {
+            toast.success("logged in success");
+            navigate(location?.state ? location.state : "/");
+          }
+        })
+        .catch((err) => toast.error(err.message));
+    }
   };
 
   const getEmail = useRef(null);
