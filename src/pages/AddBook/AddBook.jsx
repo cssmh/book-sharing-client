@@ -93,7 +93,6 @@ const AddBook = () => {
             className="input input-bordered"
           />
         </div>
-
         <div className="form-control">
           <label className="label">
             <span className="label-text">Book Provider Email</span>
@@ -117,7 +116,6 @@ const AddBook = () => {
             className="input input-bordered"
           />
         </div>
-
         <div className="form-control">
           <label className="label">
             <span className="label-text">Description</span>
@@ -129,7 +127,6 @@ const AddBook = () => {
             className="rounded-lg"
           ></textarea>
         </div>
-
         <div className="form-control">
           <label className="label">
             <span className="label-text">Phone Number</span>
@@ -142,7 +139,6 @@ const AddBook = () => {
             className="input input-bordered"
           />
         </div>
-
         <div className="form-control mt-6">
           <button className="btn btn-primary text-white">Add Book</button>
         </div>

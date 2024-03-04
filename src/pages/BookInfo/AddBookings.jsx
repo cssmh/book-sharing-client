@@ -5,7 +5,7 @@ import axios from "axios";
 import { useState } from "react";
 
 const AddBookings = ({ getBookData }) => {
-  const { user, cart } = useContextHook();
+  const { user } = useContextHook();
   const { book_image, book_name, book_provider_email, phone } = getBookData;
   const [open, openChange] = useState(false);
 

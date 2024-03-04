@@ -43,6 +43,7 @@ const Register = () => {
         emailVerification().then(() =>
           toast("Check your email to verify your account first!")
         );
+        logOut().then().catch();
         navigateTo("/login");
       })
       .catch(() => {
