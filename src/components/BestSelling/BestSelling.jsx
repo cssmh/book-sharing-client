@@ -1,8 +1,8 @@
-import seller from "../../assets/seller.webp";
-import book1 from "../../assets/book1.webp";
-import book2 from "../../assets/book2.webp";
-import book3 from "../../assets/book3.webp";
-import book4 from "../../assets/book4.webp";
+import seller from "../../assets/Reader.png";
+import book1 from "../../assets/Book1.jpg";
+import book2 from "../../assets/Book2.jpg";
+import book3 from "../../assets/Book3.jpg";
+import book4 from "../../assets/Book4.jpg";
 const BestSelling = () => {
   return (
     <div className="my-12 max-w-7xl mx-auto">
@@ -17,21 +17,21 @@ const BestSelling = () => {
           className="text-center lg:text-right space-y-5 lg:mr-5 px-3"
         >
           <h1 className="text-7xl text-orange-500">
-            J. K.<br></br> Rowling
+            Mern<br></br> Stack
           </h1>
-          <p>CATEGORIES:BOOKS , THE WHISPERING FOREST</p>
+          <p>MONGODB, EXPRESS.JS, REACT.JS, and NODE.JS</p>
           <p className="text-gray-500">
-            Title: The Whispering Forest In the heart of the ancient woods lies
-            a secret known only to a select few. The Whispering Forest penned by
-            acclaimed author Emily Mayfield, unravels the enigmatic tale of a
-            young girl named Elara who stumbles upon the hidden realm within the
-            woods. Elara, an adventurous soul with an insatiable curiosity,
-            discovers an entrance to a magical world concealed from ordinary
-            eyes. As she ventures deeper into the forest, Elara encounters
-            mystical creatures, each guarding a piece of the forest ancient
-            history. With the help of a wise old owl named Thalwyn and a
-            mischievous fox named Finn, she embarks on a journey to uncover the
-            truth behind the whispers that echo through the trees.
+            MongoDB is a NoSQL database that stores data in flexible, JSON-like
+            documents, making it ideal for handling large volumes of structured
+            or unstructured data. Express.js is a minimalist web application
+            framework for Node.js that simplifies the process of building web
+            applications and APIs by providing a robust set of features for
+            routing, middleware, and HTTP utility methods. React.js is a
+            JavaScript library for building user interfaces, developed by
+            Facebook. It enables developers to create reusable UI components
+            that efficiently update and render data changes. Node.js is a
+            JavaScript runtime built on Chrome V8 JavaScript engine, allowing
+            developers to run JavaScript code outside of a web browser.
           </p>
         </div>
         <div
@@ -45,12 +45,12 @@ const BestSelling = () => {
           data-aos="flip-right"
           data-aos-easing="ease-out-cubic"
           data-aos-duration="1000"
-          className="grid grid-cols-2"
+          className="grid grid-cols-2 gap-7 mx-4 lg:mx-0"
         >
-          <img src={book1} alt="" />
-          <img src={book2} alt="" />
-          <img src={book3} alt="" />
-          <img src={book4} alt="" />
+          <img src={book1} className="rounded-md" alt="" />
+          <img src={book2} className="rounded-md" alt="" />
+          <img src={book3} className="rounded-md" alt="" />
+          <img src={book4} className="rounded-md" alt="" />
         </div>
       </div>
     </div>
