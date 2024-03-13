@@ -43,7 +43,7 @@ const AddBook = () => {
       .then((res) => {
         // console.log(res.data);
         if (res.data.insertedId) {
-          swal("Good job!", `${book_name} added`, "success");
+          swal("Good job!", `${book_name} Book added`, "success");
           form.reset();
         }
       })

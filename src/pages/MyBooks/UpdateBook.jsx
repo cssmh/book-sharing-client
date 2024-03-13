@@ -42,7 +42,7 @@ const UpdateBook = () => {
       )
       .then((res) => {
         if (res.data.modifiedCount > 0) {
-          swal("Good job!", `${book_name} Updated`, "success");
+          swal("Good job!", `Your ${book_name} book Updated`, "success");
           navigateTo(-1);
         }
       });

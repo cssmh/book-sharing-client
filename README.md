@@ -6,7 +6,7 @@
 
 ### https://bookhaven1.netlify.app
 
-- Feature Of this Project:
+- Feature of this Project:
 
 1. User signUp with name, photoURL, email password, also can login using google account.
 2. Awesome Home page design with many component with aos
