@@ -1,6 +1,6 @@
 // import logo from "../../assets/logo.png";
 import Lottie from "lottie-react";
-import loggieData from "../../../public/bookFavicon.json";
+import loggieData from "../../assets/bookFavicon.json";
 const Footer = () => {
   return (
     <div className="mt-10">
