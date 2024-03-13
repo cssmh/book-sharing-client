@@ -1,5 +1,9 @@
+import swal from "sweetalert";
 import atomicHabit from "../../assets/Atomic.png";
 const AtomicHabit = () => {
+  const handleBuy = () => {
+    swal("Sorry!", "Atomic Habits is not available Now!");
+  };
   return (
     <div className="bg-base-200 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center py-4 space-y-6 lg:space-y-0 mb-10">
       <div data-aos="zoom-in" data-aos-duration="1000">
@@ -20,8 +24,14 @@ const AtomicHabit = () => {
         <p>By: James Clear</p>
       </div>
       <div className="text-center space-y-2">
-        <p className="text-3xl">$23.18</p>
-        <button className="btn bg-green-600 text-white">Add to Cart</button>
+        <p className="text-4xl">Order Now</p>
+        <p className="text-2xl">350 BDT</p>
+        <button
+          onClick={handleBuy}
+          className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+        >
+          Add to Cart
+        </button>
       </div>
     </div>
   );
