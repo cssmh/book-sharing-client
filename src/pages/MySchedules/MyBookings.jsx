@@ -33,22 +33,26 @@ const MyBookings = () => {
 
   return (
     <div>
-      <h2 className="text-center text-lg md:text-2xl my-6 font-semibold italic">
-        All Bookings made by you
-      </h2>
       {allBookings.length == 0 ? (
-        <p className="text-center text-2xl font-semibold italic">No Booked</p>
+        <p className="text-center text-2xl font-semibold text-red-600 italic">
+          You have No Booking
+        </p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          {allBookings.map((booking) => (
-            <MyBookingCard
-              key={booking._id}
-              getBooking={booking}
-              allBookings={allBookings}
-              setAllBookings={setAllBookings}
-            ></MyBookingCard>
-          ))}
-        </div>
+        <>
+          <h2 className="text-center text-lg md:text-2xl my-6 font-semibold italic">
+            All Bookings made by you
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+            {allBookings.map((booking) => (
+              <MyBookingCard
+                key={booking._id}
+                getBooking={booking}
+                allBookings={allBookings}
+                setAllBookings={setAllBookings}
+              ></MyBookingCard>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );

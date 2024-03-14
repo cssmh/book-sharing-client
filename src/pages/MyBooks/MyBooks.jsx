@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import MyBooksCard from "./MyBooksCard";
 import useContextHook from "../../useCustomHook/useContextHook";
 import { FallingLines } from "react-loader-spinner";
-import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
@@ -32,30 +31,32 @@ const MyBooks = () => {
       </div>
     );
   }
-
+  
   return (
     <div>
       <Helmet>
         <title>BookHaven | My-Books</title>
       </Helmet>
-      <h2 className="text-2xl md:text-2xl font-bold my-5 text-center italic">
-        All Books Added By You
-      </h2>
       {myBooks.length == 0 ? (
-        <p className="text-center text-xl md:text-2xl font-semibold text-red-600">
+        <p className="text-center text-xl md:text-2xl font-semibold text-red-600 italic mt-6">
           No Book Added By You
         </p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          {myBooks.map((book) => (
-            <MyBooksCard
-              key={book._id}
-              getBook={book}
-              myBooks={myBooks}
-              setMyBooks={setMyBooks}
-            ></MyBooksCard>
-          ))}
-        </div>
+        <>
+          <h2 className="text-2xl md:text-2xl font-bold my-5 text-center italic">
+            All Books Added By You
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+            {myBooks.map((book) => (
+              <MyBooksCard
+                key={book._id}
+                getBook={book}
+                myBooks={myBooks}
+                setMyBooks={setMyBooks}
+              ></MyBooksCard>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
