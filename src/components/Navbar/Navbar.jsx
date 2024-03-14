@@ -1,12 +1,17 @@
-import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-// import Logo from "../../../assets/logo.png";
 import useContextHook from "../../useCustomHook/useContextHook";
 import Lottie from "lottie-react";
 import loggieData from "../../assets/bookFavicon.json";
+import { useState } from "react";
 
 const Navbar = () => {
   const { user, logOut } = useContextHook();
+  const [showProfileOptions, setShowProfileOptions] = useState(false);
+
+  const handleProfileClick = () => {
+    setShowProfileOptions(!showProfileOptions);
+  };
+
   const handleSignOut = () => {
     logOut().then().catch();
   };
@@ -62,7 +67,6 @@ const Navbar = () => {
         <Link to={"/"}>
           <div className="flex items-center gap-1">
             <Lottie className="w-0 md:w-14" animationData={loggieData} />
-            {/* <img className="w-0 md:w-12 rounded-3xl" src={Logo} alt="" /> */}
             <span className="md:ml-2 font-bold text-lg md:text-2xl">
               MBSTU BookHaven
             </span>
@@ -100,29 +104,36 @@ const Navbar = () => {
       <div className="navbar-end">
         {user?.email ? (
           <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+            <label
+              tabIndex={0}
+              className="btn btn-ghost btn-circle avatar"
+              onClick={handleProfileClick}
+            >
               <div className="w-12 rounded-full">
                 <img src={user?.photoURL} alt={user?.displayName} />
               </div>
             </label>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <button className="btn btn-sm btn-ghost">
-                  <Link to={"/profile"}>{user?.displayName}</Link>
-                </button>
-              </li>
-              <li>
-                <button
-                  className="btn btn-sm  btn-ghost"
-                  onClick={handleSignOut}
-                >
-                  Logout
-                </button>
-              </li>
-            </ul>
+            {showProfileOptions && (
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <p className="btn btn-sm btn-ghost">{user?.displayName}</p>
+                  <button className="btn btn-sm btn-ghost">
+                    <Link to={"/profile"}>View Profile</Link>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="btn btn-sm btn-ghost"
+                    onClick={handleSignOut}
+                  >
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            )}
           </div>
         ) : (
           <Link to="/login">

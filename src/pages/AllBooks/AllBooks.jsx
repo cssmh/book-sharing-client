@@ -19,11 +19,10 @@ const AllBooks = () => {
           type="text"
           name="name"
           placeholder="Search Here"
-          className="input input-bordered w-80 border-red-500 "
+          className="input input-bordered w-80 border-red-500"
           onChange={(e) => {
             searchTerm = e.target.value;
-            console.log(searchTerm);
-
+            // console.log(searchTerm);
             if (searchTerm === "") {
               setAllBooks(loadAllBooks);
             } else {
