@@ -1,5 +1,6 @@
 import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
 import swal from "sweetalert";
+import toast from "react-hot-toast";
 import useContextHook from "../../useCustomHook/useContextHook";
 import axios from "axios";
 import { useState } from "react";
@@ -10,6 +11,9 @@ const AddBookings = ({ getBookData }) => {
   const [open, openChange] = useState(false);
 
   const handlePopUp = () => {
+    if (book_provider_email === user?.email) {
+      return toast.error("You are collecting your own book!");
+    }
     openChange(true);
   };
   const closePop = () => {
@@ -115,7 +119,6 @@ const AddBookings = ({ getBookData }) => {
                 className="input input-bordered"
               />
             </div>
-
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Date You Need this book</span>
@@ -127,7 +130,6 @@ const AddBookings = ({ getBookData }) => {
                 className="input input-bordered"
               />
             </div>
-
             <div className="form-control">
               <label className="label">
                 <span className="label-text">
