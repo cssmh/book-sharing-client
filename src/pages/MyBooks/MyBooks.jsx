@@ -4,6 +4,7 @@ import useContextHook from "../../useCustomHook/useContextHook";
 import { FallingLines } from "react-loader-spinner";
 import { Helmet } from "react-helmet-async";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import noBooks from "../../assets/noBooks.png";
 
 const MyBooks = () => {
   const { user } = useContextHook();
@@ -31,16 +32,19 @@ const MyBooks = () => {
       </div>
     );
   }
-  
+
   return (
     <div>
       <Helmet>
         <title>BookHaven | My-Books</title>
       </Helmet>
       {myBooks.length == 0 ? (
-        <p className="text-center text-xl md:text-2xl font-semibold text-red-600 italic mt-6">
-          No Book Added By You
-        </p>
+        <div>
+          <p className="text-center text-xl md:text-2xl font-semibold text-red-600 italic mt-6">
+            No Book Added By You
+          </p>
+          <img src={noBooks} className="mx-auto" alt="" />
+        </div>
       ) : (
         <>
           <h2 className="text-2xl md:text-2xl font-bold my-5 text-center italic">
