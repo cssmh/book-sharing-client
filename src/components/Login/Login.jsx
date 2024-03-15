@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useContextHook from "../../useCustomHook/useContextHook";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
@@ -8,10 +8,18 @@ import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const [view, setView] = useState(true);
-  const { signIn, resetPassword, emailVerification, logOut } = useContextHook();
+  const { user, signIn, resetPassword, emailVerification, logOut } =
+    useContextHook();
   const location = useLocation();
   const navigate = useNavigate();
   // console.log(location);
+
+  useEffect(() => {
+    // If user is already logged in, redirect to home page
+    if (user?.emailVerified) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   const handleLogin = (e) => {
     e.preventDefault();

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import useContextHook from "../../useCustomHook/useContextHook";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
@@ -7,11 +7,17 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const Register = () => {
   const [view, setView] = useState(true);
-  const { createUser, handleUpdateProfile, emailVerification, logOut } =
+  const { user, createUser, handleUpdateProfile, emailVerification, logOut } =
     useContextHook();
   const navigateTo = useNavigate();
-  const location = useLocation();
-  // console.log(location);
+
+  useEffect(() => {
+    // If user is already logged in, redirect to home page
+    if (user?.emailVerified) {
+      navigateTo("/");
+    }
+  }, [user, navigateTo]);
+
   const handleRegister = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
