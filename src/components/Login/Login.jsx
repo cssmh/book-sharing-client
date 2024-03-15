@@ -2,13 +2,13 @@ import { useRef, useState } from "react";
 import useContextHook from "../../useCustomHook/useContextHook";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import toast from "react-hot-toast";
 import SocialLogin from "./SocialLogin";
 import { Helmet } from "react-helmet-async";
-import toast from "react-hot-toast";
 
 const Login = () => {
   const [view, setView] = useState(true);
-  const { signIn, resetPassword, logOut } = useContextHook();
+  const { signIn, resetPassword, emailVerification, logOut } = useContextHook();
   const location = useLocation();
   const navigate = useNavigate();
   // console.log(location);
@@ -30,6 +30,11 @@ const Login = () => {
         .then((res) => {
           // No way login if not verified
           if (!res.user.emailVerified) {
+            emailVerification()
+              .then(() => {
+                toast.success("We sent you a verification email");
+              })
+              .catch();
             logOut().then().catch();
             toast.error("Verify your Email first please!");
             return;
