@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Error from "../../assets/ErrorLogo.png";
+import Error from "../../assets/Error.png";
 import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 
@@ -10,11 +10,8 @@ const ErrorPage = () => {
       <div className="max-w-7xl mx-auto flex justify-center">
         <div>
           <img src={Error} alt="" />
-          <p className="text-center mt-3">
-            Sorry, the page you are looking for does not exist!
-          </p>
-          <div className="flex justify-center my-3">
-            <button className="btn bg-green-400 text-white ">
+          <div className="flex justify-center mt-3">
+            <button className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
               <Link to="/">Return to Home</Link>
             </button>
           </div>
