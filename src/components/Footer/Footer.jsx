@@ -72,7 +72,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <a rel="noopener noreferrer" href="#">
-                    bookhaven@mail.com
+                    mominitmbstu@gmail.com
                   </a>
                 </li>
                 <li>

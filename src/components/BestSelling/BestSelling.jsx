@@ -13,6 +13,7 @@ const BestSelling = () => {
         <div
           data-aos="flip-left"
           data-aos-easing="ease-out-cubic"
+          data-aos-duration="1000"
           className="text-center lg:text-right space-y-5 lg:mr-5 px-3"
         >
           <h1 className="text-7xl text-orange-500">
@@ -36,12 +37,14 @@ const BestSelling = () => {
         <div
           data-aos="fade-up"
           data-aos-anchor-placement="top-center"
+          data-aos-duration="1000"
         >
           <img src={seller} className="rounded-md mx-auto lg:mx-0" alt="" />
         </div>
         <div
           data-aos="flip-right"
           data-aos-easing="ease-out-cubic"
+          data-aos-duration="1000"
           className="grid grid-cols-2 gap-7 mx-4 lg:mx-0"
         >
           <img src={book1} className="rounded-md" alt="" />
