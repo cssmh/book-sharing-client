@@ -9,7 +9,7 @@ const Review = () => {
       <h1 className="text-3xl font-semibold text-center">Some Books Review</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 my-10 gap-4">
         <div
-          data-aos="fade-right"
+          data-aos="zoom-in"
           className="border bg-yellow-50 py-7 rounded-lg space-y-2 text-center"
         >
           <img
@@ -34,7 +34,7 @@ const Review = () => {
           <img src={review} className="mx-auto" alt="" />
         </div>
         <div
-          data-aos="fade-left"
+          data-aos="zoom-in"
           className="border bg-yellow-50 pt-6 pb-3 rounded-lg space-y-2 text-center"
         >
           <img
@@ -59,7 +59,7 @@ const Review = () => {
           <img src={review} className="mx-auto" alt="" />
         </div>
         <div
-          data-aos="fade-right"
+          data-aos="zoom-in"
           className="border bg-yellow-50 py-7 rounded-lg space-y-2 text-center"
         >
           <img
@@ -84,7 +84,7 @@ const Review = () => {
           <img src={review} className="mx-auto" alt="" />
         </div>
         <div
-          data-aos="fade-left"
+          data-aos="zoom-in"
           className="border bg-yellow-50 py-7 rounded-lg space-y-2 text-center"
         >
           <img

@@ -24,7 +24,7 @@ const AtomicHabit = () => {
         <p>By: James Clear</p>
       </div>
       <div
-        data-aos="zoom-in-left"
+        data-aos="zoom-in"
         data-aos-duration="1000"
         className="text-center space-y-2"
       >
