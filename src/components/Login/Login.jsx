@@ -28,7 +28,7 @@ const Login = () => {
     const password = form.get("password");
 
     // if because custom gmail login without verification
-    if (email == "Kona@mail.com") {
+    if (email == "Kona@mail.com" || email == "admin@admin.com") {
       signIn(email, password).then(() => {
         toast.success("logged in success");
         navigate(location?.state ? location.state : "/");

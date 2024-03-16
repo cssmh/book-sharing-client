@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../MainLayout/MainLayout";
 import ErrorPage from "../components/ErrorPage/ErrorPage";
 import Home from "../components/Home/Home";
-import Login from "../Components/Login/Login";
 import Register from "../Components/Register/Register";
 import PrivateRoute from "./PrivateRoute";
 import Profile from "../Components/Profile/Profile";
@@ -12,6 +11,9 @@ import MySchedules from "../pages/MySchedules/MySchedules";
 import MyBooks from "../Pages/MyBooks/MyBooks";
 import BookDetails from "../Pages/BookInfo/BookDetails";
 import AddBook from "../pages/AddBook/AddBook";
+import Login from "../components/Login/Login";
+import Admin from "../Components/Admin/Admin";
+import AdminPrivateRoute from "../AdminPrivateRoute/AdminPrivateRoute";
 
 const Root = createBrowserRouter([
   {
@@ -42,7 +44,7 @@ const Root = createBrowserRouter([
       {
         path: "/all-books",
         element: <AllBooks />,
-        loader: () => fetch("https://book-sharing-server.vercel.app/allBooks"),
+        loader: () => fetch("http://localhost:5000/allBooks"),
       },
       {
         path: "/book/:id",
@@ -52,7 +54,7 @@ const Root = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://book-sharing-server.vercel.app/book/${params.id}`),
+          fetch(`http://localhost:5000/book/${params.id}`),
       },
       {
         path: "/add-book",
@@ -78,7 +80,7 @@ const Root = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://book-sharing-server.vercel.app/book/${params.id}`),
+          fetch(`http://localhost:5000/book/${params.id}`),
       },
       {
         path: "/my-schedules",
@@ -86,6 +88,14 @@ const Root = createBrowserRouter([
           <PrivateRoute>
             <MySchedules />
           </PrivateRoute>
+        ),
+      },
+      {
+        path: "/admin",
+        element: (
+          <AdminPrivateRoute>
+            <Admin />
+          </AdminPrivateRoute>
         ),
       },
     ],

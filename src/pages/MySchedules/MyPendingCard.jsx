@@ -20,7 +20,7 @@ const MyPendingCard = ({ getPending }) => {
     const updatedStatus = { newStatus };
     axios
       .put(
-        `https://book-sharing-server.vercel.app/bookings/${_id}`,
+        `http://localhost:5000/bookings/${_id}`,
         updatedStatus
       )
       .then((res) => {

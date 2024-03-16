@@ -46,6 +46,11 @@ const Navbar = () => {
             <li className="font-semibold text-base">
               <NavLink to="/all-books">All Books</NavLink>
             </li>
+            {user?.email == "admin@admin.com" && (
+              <li className="font-semibold text-base">
+                <NavLink to="/admin">Admin</NavLink>
+              </li>
+            )}
             {user && (
               <li>
                 <a className="font-semibold text-base">Dashboard</a>
@@ -81,6 +86,11 @@ const Navbar = () => {
           <li className="font-semibold text-base">
             <NavLink to="/all-books">All Books</NavLink>
           </li>
+          {user?.email == "admin@admin.com" && (
+            <li className="font-semibold text-base">
+              <NavLink to="/admin">Admin</NavLink>
+            </li>
+          )}
           {user && (
             <li tabIndex={0}>
               <details>

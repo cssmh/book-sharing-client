@@ -1,8 +1,8 @@
 import { Outlet, useNavigation } from "react-router-dom";
+import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import { FallingLines } from "react-loader-spinner";
 import { Toaster } from "react-hot-toast";
-import Navbar from "../Components/Navbar/Navbar";
 
 const MainLayout = () => {
   const navigationForSpinner = useNavigation();
