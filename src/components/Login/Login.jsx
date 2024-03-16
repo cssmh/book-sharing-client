@@ -52,7 +52,7 @@ const Login = () => {
             navigate(location?.state ? location.state : "/");
           }
         })
-        .catch((err) => toast.error(err.message));
+        .catch(() => toast.error("Incorrect Password. Please try again"));
     }
   };
 
