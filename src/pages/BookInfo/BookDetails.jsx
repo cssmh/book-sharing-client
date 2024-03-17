@@ -1,11 +1,16 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import AddBookings from "./AddBookings";
 import { Helmet } from "react-helmet-async";
+import swal from "sweetalert";
+import useContextHook from "../../useCustomHook/useContextHook";
 
 const BookDetails = () => {
+  const { user } = useContextHook();
   const bookData = useLoaderData();
+  const navigateTo = useNavigate();
   // console.log(service);
   const {
+    _id,
     book_image,
     book_name,
     description,
@@ -15,6 +20,34 @@ const BookDetails = () => {
     book_provider_name,
     phone,
   } = bookData;
+
+  const handleDelete = (_id) => {
+    swal({
+      title: "Check again if you want!",
+      text: "Delete Confirm?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        // main code
+        fetch(`https://book-sharing-server.vercel.app/books/${_id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              swal("Book Deleted!", {
+                icon: "success",
+              });
+            }
+            navigateTo(-1);
+          });
+      } else {
+        swal("File is safe!");
+      }
+    });
+  };
 
   return (
     <div>
@@ -57,6 +90,14 @@ const BookDetails = () => {
           <div className="card-actions mt-2">
             <AddBookings getBookData={bookData}></AddBookings>
           </div>
+          {user?.email == "admin@admin.com" && (
+            <button
+              onClick={() => handleDelete(_id)}
+              className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+            >
+              Delete {book_name}
+            </button>
+          )}
         </div>
       </div>
     </div>

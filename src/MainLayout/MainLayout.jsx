@@ -24,7 +24,7 @@ const MainLayout = () => {
         </div>
       )}
       <Footer></Footer>
-      <Toaster position="top-center" reverseOrder={false} />
+      <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
 };

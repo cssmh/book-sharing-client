@@ -3,16 +3,42 @@ import swal from "sweetalert";
 import toast from "react-hot-toast";
 import useContextHook from "../../useCustomHook/useContextHook";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const AddBookings = ({ getBookData }) => {
   const { user } = useContextHook();
   const { book_image, book_name, book_provider_email, phone } = getBookData;
   const [open, openChange] = useState(false);
+  const [matching, setMatching] = useState([]);
+
+  // check already booked or not
+  const [allBookings, setAllBookings] = useState([]);
+  // console.log(allBookings);
+
+  // check already booked or not
+  useEffect(() => {
+    const matchFound = allBookings.filter((myData) =>
+      book_name.includes(myData.book_name)
+    );
+    setMatching(matchFound);
+  }, [allBookings, book_name]);
+  // check already booked or not end
+
+  const axiosCustom = useAxiosHook();
+  const url = `/bookings?email=${user.email}`;
+  useEffect(() => {
+    axiosCustom?.get(url)?.then((res) => {
+      setAllBookings(res.data);
+    });
+  }, [axiosCustom, url]);
 
   const handlePopUp = () => {
     if (book_provider_email === user?.email) {
       return toast.error("You are collecting your own book!");
+    }
+    if (matching.length > 0) {
+      return toast.error("You already added to booking!");
     }
     openChange(true);
   };
@@ -46,11 +72,12 @@ const AddBookings = ({ getBookData }) => {
     };
 
     axios
-      .post("http://localhost:5000/bookings", booking)
+      .post("https://book-sharing-server.vercel.app/bookings", booking)
       .then((res) => {
         // console.log(res.data);
         if (res.data.insertedId) {
-          swal("Good job!", "Book Purchased", "success");
+          swal("Congratulations!", "Booking Complete", "success");
+          setMatching(res.data.insertedId);
         }
       })
       .then((err) => {
@@ -121,7 +148,7 @@ const AddBookings = ({ getBookData }) => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Date You Need this book</span>
+                <span className="label-text">Pick a Date You Need this book</span>
               </label>
               <input
                 type="date"
@@ -138,8 +165,8 @@ const AddBookings = ({ getBookData }) => {
               </label>
               <textarea
                 name="instruction"
-                cols="20"
-                rows="10"
+                cols="5"
+                rows="5"
                 className="rounded-lg"
               ></textarea>
             </div>

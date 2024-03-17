@@ -6,9 +6,9 @@ import book4 from "../../assets/Book4.jpg";
 const BestSelling = () => {
   return (
     <div className="my-12 max-w-7xl mx-auto">
-      <h1 className="font-semibold text-center lg:text-left">
+      <p className="font-semibold text-center lg:text-left">
         AUTHOR BEST SELLING
-      </h1>
+      </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-0">
         <div
           data-aos="flip-left"
@@ -16,9 +16,9 @@ const BestSelling = () => {
           data-aos-duration="1000"
           className="text-center lg:text-right space-y-5 lg:mr-5 px-3"
         >
-          <h1 className="text-7xl text-orange-500">
+          <p className="text-7xl text-orange-500">
             Mern<br></br> Stack
-          </h1>
+          </p>
           <p>MONGODB, EXPRESS.JS, REACT.JS, and NODE.JS</p>
           <p className="text-gray-500">
             MongoDB is a NoSQL database that stores data in flexible, JSON-like

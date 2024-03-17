@@ -13,14 +13,14 @@ const AtomicHabit = () => {
         <p className="p-2 bg-orange-500 w-24 mx-auto lg:mx-0 text-white rounded-md">
           FEATURED
         </p>
-        <h1
+        <p
           data-aos="zoom-in"
           data-aos-duration="1000"
           className="text-4xl font-semibold"
         >
           Atomic Habits will teach you how to make small changes that will
           transform your habits and deliver amazing results.
-        </h1>
+        </p>
         <p>By: James Clear</p>
       </div>
       <div

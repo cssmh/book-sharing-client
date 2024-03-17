@@ -44,7 +44,7 @@ const Profile = () => {
         </div>
       </div>
       <form onSubmit={handleUpdate} className="card-body mb-4">
-        <h1 className="text-3xl font-semibold text-center">Update info</h1>
+        <p className="text-3xl font-semibold text-center">Update info</p>
         <div className="form-control">
           <label className="label">
             <span className="label-text">Your Name</span>
