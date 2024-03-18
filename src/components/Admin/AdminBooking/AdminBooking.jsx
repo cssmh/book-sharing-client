@@ -1,16 +1,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import AdminBookingCard from "../AdminBookingCard/AdminBookingCard";
-import noBooks from "../../../assets/noBooks.png"
+import noBooks from "../../../assets/noBooks.png";
+import useContextHook from "../../../useCustomHook/useContextHook";
 
 const AdminBooking = () => {
+  const { user } = useContextHook();
   const [adminBookings, setAdminBookings] = useState([]);
 
   useEffect(() => {
     axios
-      .get("https://book-sharing-server.vercel.app/allBookings")
+      .get("https://book-sharing-server.vercel.app/allBookingsForAdmin")
       .then((res) => setAdminBookings(res.data));
-  }, []);
+  }, [user?.email]);
 
   return (
     <div>

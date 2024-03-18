@@ -7,11 +7,16 @@ const SocialLogin = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { googleLogin } = useContextHook()
+  const { googleLogin } = useContextHook();
   const handleSocialLogin = (media) => {
     media()
       .then(() => {
-        toast.success("User logged in success");
+        toast.loading("logging in...", {
+          duration: 500,
+        });
+        setTimeout(() => {
+          toast.success("User logged in success");
+        }, 500);
         navigate(location?.state ? location.state : "/");
       })
       .catch((err) => {

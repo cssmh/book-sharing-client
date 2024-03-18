@@ -38,7 +38,7 @@ const AddBookings = ({ getBookData }) => {
       return toast.error("You are collecting your own book!");
     }
     if (matching.length > 0) {
-      return toast.error("You already added to booking!");
+      return toast.error("already booked this!");
     }
     openChange(true);
   };

@@ -27,12 +27,21 @@ const Login = () => {
     const email = form.get("email");
     const password = form.get("password");
 
-    // if because custom gmail login without verification
+    // if condition because of custom gmail login without verification
+    // duration: 500 for loading happen 500 millisecond then success
+    // show after 500 millisecond
     if (email == "Kona@mail.com" || email == "admin@admin.com") {
-      signIn(email, password).then(() => {
-        toast.success("logged in success");
-        navigate(location?.state ? location.state : "/");
-      });
+      signIn(email, password)
+        .then(() => {
+          toast.loading("logging in...", {
+            duration: 500,
+          });
+          setTimeout(() => {
+            toast.success("logged in success");
+          }, 500);
+          navigate(location?.state ? location.state : "/");
+        })
+        .catch(() => toast.error("Incorrect Password. Please try again"));
     } else {
       signIn(email, password)
         .then((res) => {
@@ -48,7 +57,12 @@ const Login = () => {
             return;
             // No way login if not verified end
           } else {
-            toast.success("logged in success");
+            toast.loading("logging in...", {
+              duration: 500,
+            });
+            setTimeout(() => {
+              toast.success("logged in success");
+            }, 500);
             navigate(location?.state ? location.state : "/");
           }
         })
