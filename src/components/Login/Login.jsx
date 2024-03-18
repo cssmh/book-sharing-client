@@ -34,11 +34,11 @@ const Login = () => {
       signIn(email, password)
         .then(() => {
           toast.loading("logging in...", {
-            duration: 500,
+            duration: 700,
           });
           setTimeout(() => {
             toast.success("logged in success");
-          }, 500);
+          }, 700);
           navigate(location?.state ? location.state : "/");
         })
         .catch(() => toast.error("Incorrect Password. Please try again"));
@@ -58,11 +58,11 @@ const Login = () => {
             // No way login if not verified end
           } else {
             toast.loading("logging in...", {
-              duration: 500,
+              duration: 700,
             });
             setTimeout(() => {
               toast.success("logged in success");
-            }, 500);
+            }, 700);
             navigate(location?.state ? location.state : "/");
           }
         })

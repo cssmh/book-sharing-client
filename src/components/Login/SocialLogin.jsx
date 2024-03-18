@@ -12,11 +12,11 @@ const SocialLogin = () => {
     media()
       .then(() => {
         toast.loading("logging in...", {
-          duration: 500,
+          duration: 700,
         });
         setTimeout(() => {
           toast.success("User logged in success");
-        }, 500);
+        }, 700);
         navigate(location?.state ? location.state : "/");
       })
       .catch((err) => {
