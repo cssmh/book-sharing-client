@@ -15,11 +15,11 @@ const Login = () => {
   // console.log(location);
 
   useEffect(() => {
-    // If user is already logged in, redirect to home page
+    // If user is already logged in, will redirect to home page
     if (user?.emailVerified) {
       navigate("/");
     }
-  }, [user, navigate]);
+  }, [user?.emailVerified, navigate]);
 
   const handleLogin = (e) => {
     e.preventDefault();

@@ -5,11 +5,11 @@ import Home from "../components/Home/Home";
 import Register from "../Components/Register/Register";
 import PrivateRoute from "./PrivateRoute";
 import Profile from "../Components/Profile/Profile";
-import AllBooks from "../pages/AllBooks/AllBooks";
 import Login from "../components/Login/Login";
 import UpdateBook from "../Pages/MyBooks/UpdateBook";
 import MySchedules from "../pages/MySchedules/MySchedules";
 import MyBooks from "../Pages/MyBooks/MyBooks";
+import AllBooks from "../Pages/AllBooks/AllBooks";
 import BookDetails from "../Pages/BookInfo/BookDetails";
 import AddBook from "../pages/AddBook/AddBook";
 import AdminPrivateRoute from "../AdminPrivateRoute/AdminPrivateRoute";
@@ -97,6 +97,7 @@ const Root = createBrowserRouter([
             <AdminBooking />
           </AdminPrivateRoute>
         ),
+        loader: () => fetch("https://book-sharing-server.vercel.app/allBooks"),
       },
     ],
   },

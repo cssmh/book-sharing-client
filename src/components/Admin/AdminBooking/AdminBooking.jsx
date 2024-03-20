@@ -4,9 +4,11 @@ import AdminBookingCard from "../AdminBookingCard/AdminBookingCard";
 import noBooks from "../../../assets/noBooks.png";
 import useContextHook from "../../../useCustomHook/useContextHook";
 import { HashLoader } from "react-spinners";
+import { Link, useLoaderData } from "react-router-dom";
 
 const AdminBooking = () => {
   const { user } = useContextHook();
+  const loadAllBooks = useLoaderData();
   const [adminBookings, setAdminBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -28,6 +30,7 @@ const AdminBooking = () => {
       ) : (
         <>
           <p className="text-center text-2xl my-4">
+            Total Books <Link to={"/all-books"}>{loadAllBooks.length}</Link> and
             Total Bookings {adminBookings.length}
           </p>
           {adminBookings.length == 0 ? (

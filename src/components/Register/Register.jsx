@@ -12,11 +12,11 @@ const Register = () => {
   const navigateTo = useNavigate();
 
   useEffect(() => {
-    // If user is already logged in, redirect to home page
+    // If user is already logged in, will redirect to home page
     if (user?.emailVerified) {
       navigateTo("/");
     }
-  }, [user, navigateTo]);
+  }, [user?.emailVerified, navigateTo]);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -34,7 +34,7 @@ const Register = () => {
 
     if (password.length < 6) {
       toast.error(
-        "Make your password at least 6 character and one Uppercase letter!"
+        "Make your password at least 6 character or more and one Uppercase letter!"
       );
       return;
     } else if (!/[A-Z]/.test(password)) {
