@@ -1,5 +1,17 @@
+import { useLoaderData } from "react-router-dom";
 import pencil from "../../assets/pencil.jpg";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 const Counting = () => {
+  const [allBooks, setAllBooks] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://book-sharing-server.vercel.app/allBooks")
+      .then((res) => setAllBooks(res.data));
+  }, []);
+
   return (
     <div
       className="hero min-h-[30vh]"
@@ -16,7 +28,7 @@ const Counting = () => {
         >
           <div>
             <p className="text-red-500">Books</p>
-            <p className="text-gray-500">21</p>
+            <p className="text-gray-500">{allBooks?.length}</p>
           </div>
           <div>
             <p className="text-green-500">Provider</p>
