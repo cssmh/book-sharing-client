@@ -11,7 +11,7 @@ const MainLayout = () => {
       <Navbar></Navbar>
       {navigationForSpinner.state === "loading" ? (
         <div className="flex justify-center min-h-[70vh] mt-5">
-          <HashLoader color="#9933FF" />
+          <HashLoader color="#9933FF" size={36} />
         </div>
       ) : (
         <div className="min-h-[70vh]">
