@@ -19,8 +19,8 @@ const AdminBookingCard = ({
 
   const handleDelete = (idx) => {
     swal({
-      title: "Check again if you want!",
-      text: "Delete Confirm?",
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
       icon: "warning",
       buttons: true,
       dangerMode: true,

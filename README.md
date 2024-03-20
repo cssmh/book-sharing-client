@@ -1,7 +1,6 @@
 ## MBSTU BookHaven
 
 ## Live:
-
 ### https://bookshare-c1817.web.app
 
 ### https://bookhaven1.netlify.app
