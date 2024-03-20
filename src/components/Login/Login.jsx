@@ -11,15 +11,15 @@ const Login = () => {
   const { user, signIn, resetPassword, emailVerification, logOut } =
     useContextHook();
   const location = useLocation();
-  const navigate = useNavigate();
+  const navigateTo = useNavigate();
   // console.log(location);
 
   useEffect(() => {
     // If user is already logged in, will redirect to home page
     if (user?.emailVerified) {
-      navigate("/");
+      navigateTo("/");
     }
-  }, [user?.emailVerified, navigate]);
+  }, [user?.emailVerified, navigateTo]);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -28,8 +28,8 @@ const Login = () => {
     const password = form.get("password");
 
     // if condition because of custom gmail login without verification
-    // duration: 500 for loading happen 500 millisecond then success
-    // show after 500 millisecond
+    // duration: 700 for loading happen 700 millisecond then success
+    // show after 700 millisecond
     if (email == "Kona@mail.com" || email == "admin@admin.com") {
       signIn(email, password)
         .then(() => {
@@ -39,7 +39,7 @@ const Login = () => {
           setTimeout(() => {
             toast.success("logged in success");
           }, 700);
-          navigate(location?.state ? location.state : "/");
+          navigateTo(location?.state ? location.state : "/");
         })
         .catch(() => toast.error("Incorrect Password. Please try again"));
     } else {
@@ -63,7 +63,7 @@ const Login = () => {
             setTimeout(() => {
               toast.success("logged in success");
             }, 700);
-            navigate(location?.state ? location.state : "/");
+            navigateTo(location?.state ? location.state : "/");
           }
         })
         .catch(() => toast.error("Incorrect Password. Please try again"));
@@ -100,7 +100,7 @@ const Login = () => {
             required
             name="email"
             placeholder="Email"
-            className="input input-bordered border-green-500"
+            className="input input-bordered border-green-700"
           />
         </div>
         <div className="form-control relative">
@@ -112,7 +112,7 @@ const Login = () => {
             required
             name="password"
             placeholder="Password"
-            className="input input-bordered border-green-500"
+            className="input input-bordered border-green-700"
           />
           <span
             className="absolute top-[51px] right-4"
