@@ -1,8 +1,8 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import AdminBookingCard from "../AdminBookingCard/AdminBookingCard";
-import noBooks from "../../../assets/noBooks.png";
+import useAxiosHook from "../../../useCustomHook/useAxiosHook";
 import useContextHook from "../../../useCustomHook/useContextHook";
+import noBooks from "../../../assets/noBooks.png";
 import { HashLoader } from "react-spinners";
 import { Link, useLoaderData } from "react-router-dom";
 
@@ -11,21 +11,21 @@ const AdminBooking = () => {
   const loadAllBooks = useLoaderData();
   const [adminBookings, setAdminBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const axiosCustom = useAxiosHook();
 
+  const url = `/allBookings?email=${user?.email}`;
   useEffect(() => {
-    axios
-      .get("https://book-sharing-server.vercel.app/allBookingsForAdmin")
-      .then((res) => {
-        setAdminBookings(res.data);
-        setIsLoading(false);
-      });
-  }, [user?.email]);
+    axiosCustom?.get(url)?.then((res) => {
+      setAdminBookings(res.data);
+      setIsLoading(false);
+    });
+  }, [axiosCustom, url]);
 
   return (
     <div>
       {isLoading ? (
         <div className="flex justify-center mt-5">
-          <HashLoader color="#FB0F5A" size={36} /> 
+          <HashLoader color="#FB0F5A" size={36} />
         </div>
       ) : (
         <>
