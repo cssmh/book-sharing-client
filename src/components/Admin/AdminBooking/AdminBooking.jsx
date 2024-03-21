@@ -29,7 +29,7 @@ const AdminBooking = () => {
         </div>
       ) : (
         <>
-          <p className="text-center text-2xl my-4">
+          <p className="text-center text-lg lg:text-2xl my-4">
             Total Books <Link to={"/all-books"}>{loadAllBooks.length}</Link> and
             Total Bookings {adminBookings.length}
           </p>

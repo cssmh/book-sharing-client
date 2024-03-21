@@ -4,20 +4,15 @@ import { FcGoogle } from "react-icons/fc";
 import toast from "react-hot-toast";
 
 const SocialLogin = () => {
-  const navigate = useNavigate();
+  const navigateTo = useNavigate();
   const location = useLocation();
 
   const { googleLogin } = useContextHook();
-  const handleSocialLogin = (media) => {
-    media()
+  const handleSocialLogin = () => {
+    googleLogin()
       .then(() => {
-        toast.loading("logging in...", {
-          duration: 700,
-        });
-        setTimeout(() => {
-          toast.success("User logged in success");
-        }, 700);
-        navigate(location?.state ? location.state : "/");
+        toast.success("User logged in success");
+        navigateTo(location?.state ? location.state : "/");
       })
       .catch((err) => {
         toast.error(err.message);
@@ -28,7 +23,7 @@ const SocialLogin = () => {
     <>
       <div className="divider max-w-2xl mx-auto italic">continue with</div>
       <div className="flex justify-around">
-        <button onClick={() => handleSocialLogin(googleLogin)} className="btn ">
+        <button onClick={handleSocialLogin} className="btn ">
           <FcGoogle className="text-2xl"></FcGoogle>
         </button>
       </div>

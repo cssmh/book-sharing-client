@@ -50,19 +50,19 @@ const AdminBookingCard = ({
   };
 
   return (
-    <div className="max-w-[1180px] mx-auto">
-      <div className="flex justify-center items-center border border-green-500 p-5 rounded-lg">
+    <div className="max-w-[1180px] mx-2 lg:mx-auto">
+      <div className="flex flex-col md:flex-row justify-center items-center border border-green-500 p-5 rounded-lg">
         <div className="flex-1 text-center">
           <img
             src={book_image}
             className="w-36 rounded-md mx-auto mb-1"
-            alt=""
+            alt="no image"
           />
           <p className="md:text-[22px] font-bold text-cyan-500">{book_name}</p>
           <p className="md:text-lg">{book_provider_email}</p>
-          <p className="text-lg text-green-500">{phone}</p>
+          <p className="text-lg text-green-500 mb-2 md:mb-0">{phone}</p>
         </div>
-        <div className="flex-1 text-center md:text-lg">
+        <div className="flex-1 text-center md:text-lg border-t-2  md:border-t-0 pt-2 md:pt-0">
           <p>Collector</p>
           <p className="text-lg">
             Status:{" "}

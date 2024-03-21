@@ -33,12 +33,7 @@ const Login = () => {
     if (email == "Kona@mail.com" || email == "admin@admin.com") {
       signIn(email, password)
         .then(() => {
-          toast.loading("logging in...", {
-            duration: 700,
-          });
-          setTimeout(() => {
-            toast.success("logged in success");
-          }, 700);
+          toast.success("logged in success");
           navigateTo(location?.state ? location.state : "/");
         })
         .catch(() => toast.error("Incorrect Password. Please try again"));
@@ -57,16 +52,11 @@ const Login = () => {
             return;
             // No way login if not verified end
           } else {
-            toast.loading("logging in...", {
-              duration: 700,
-            });
-            setTimeout(() => {
-              toast.success("logged in success");
-            }, 700);
+            toast.success("logged in success");
             navigateTo(location?.state ? location.state : "/");
           }
         })
-        .catch(() => toast.error("Incorrect Password. Please try again"));
+        .catch((err) => toast.error(err.message));
     }
   };
 
