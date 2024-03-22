@@ -12,14 +12,17 @@ const Login = () => {
     useContextHook();
   const location = useLocation();
   const navigateTo = useNavigate();
-  // console.log(location);
 
   useEffect(() => {
     // If user is already logged in, will redirect to home page
-    if (user?.emailVerified) {
+    if (
+      user?.emailVerified ||
+      user?.email == "kona@mail.com" ||
+      user?.email == "admin@admin.com"
+    ) {
       navigateTo("/");
     }
-  }, [user?.emailVerified, navigateTo]);
+  }, [user?.emailVerified, user?.email, navigateTo]);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -28,8 +31,6 @@ const Login = () => {
     const password = form.get("password");
 
     // if condition because of custom gmail login without verification
-    // duration: 700 for loading happen 700 millisecond then success
-    // show after 700 millisecond
     if (email == "Kona@mail.com" || email == "admin@admin.com") {
       signIn(email, password)
         .then(() => {

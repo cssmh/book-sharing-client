@@ -13,10 +13,14 @@ const Register = () => {
 
   useEffect(() => {
     // If user is already logged in, will redirect to home page
-    if (user?.emailVerified) {
+    if (
+      user?.emailVerified ||
+      user?.email == "kona@mail.com" ||
+      user?.email == "admin@admin.com"
+    ) {
       navigateTo("/");
     }
-  }, [user?.emailVerified, navigateTo]);
+  }, [user?.emailVerified, user?.email, navigateTo]);
 
   const handleRegister = (e) => {
     e.preventDefault();
