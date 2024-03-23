@@ -30,4 +30,3 @@
 20. AllBookings from database only admin authorized only. Valid token valid user can't access that. Implemented admin email condition there in server.
 21. Admin can delete completed bookings also can delete any bookings if he want.
 22. In Book Details page of any Book there is also a delete option for that book only visible for admin.
-kala
