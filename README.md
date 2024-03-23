@@ -25,8 +25,9 @@
 15. While booking a book there will be showing status: pending, only that book owner can change it.
 16. Added React Spinners, HashLoader for outlet while it is idle.
 17. Implemented Json Web token for authorization. only logged in user can access his/her own data, not others.
-18. There is also an admin dashboard only for admin@admin.com. Other user will auto redirect to home page while accessing this route.
-19. In admin dashboard admin can see how many books added and all bookings with bookings details.
-20. AllBookings from database only admin authorized only. Valid token valid user can't access that. Implemented admin email condition there in server.
-21. Admin can delete completed bookings also can delete any bookings if he want.
-22. In Book Details page of any Book there is also a delete option for that book only visible for admin.
+18. Used interceptors, while token expire or any issue user will automatically logout.
+19. There is also an admin dashboard only for admin@admin.com. Other user will auto redirect to home page while accessing this route.
+20. In admin dashboard admin can see how many books added and all bookings with bookings details.
+21. AllBookings from database made only admin authorized only. Valid token and valid user but still user can't access that. Implemented admin email condition there in server to access for admin only.
+22. Admin can delete completed bookings also can delete any bookings if he want.
+23. In Book Details page of any Book there is also a delete option for that book only visible for admin.
