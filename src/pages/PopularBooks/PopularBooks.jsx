@@ -25,7 +25,7 @@ const PopularBooks = () => {
         </h3>
       </div>
       {isLoading ? (
-        <div className="flex justify-center mt-5">
+        <div className="flex justify-center my-5">
           <HashLoader color="#FB0F5A" size={36} />
         </div>
       ) : (
