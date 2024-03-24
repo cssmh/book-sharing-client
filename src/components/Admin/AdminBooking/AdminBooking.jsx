@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import AdminBookingCard from "../AdminBookingCard/AdminBookingCard";
-import useAxiosHook from "../../../useCustomHook/useAxiosHook";
-import useContextHook from "../../../useCustomHook/useContextHook";
 import noBooks from "../../../assets/noBooks.png";
-import { HashLoader } from "react-spinners";
 import { Link, useLoaderData } from "react-router-dom";
+import AdminBookingCard from "../AdminBookingCard/AdminBookingCard";
+import axios from "axios";
+import useAxiosHook from "../../../useCustomHook/useAxiosHook";
+import swal from "sweetalert";
+import { HashLoader } from "react-spinners";
+import useContextHook from "../../../useCustomHook/useContextHook";
 
 const AdminBooking = () => {
   const { user } = useContextHook();
@@ -20,6 +22,30 @@ const AdminBooking = () => {
       setIsLoading(false);
     });
   }, [axiosCustom, url]);
+
+  const handleDeleteAllBookings = () => {
+    swal({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        // main code
+        axios.delete("https://book-sharing-server.vercel.app/allBookings").then((res) => {
+          if (res.data.acknowledged) {
+            setAdminBookings([]);
+            swal("All Bookings Deleted!", {
+              icon: "success",
+            });
+          }
+        });
+      } else {
+        swal("All Bookings is safe!");
+      }
+    });
+  };
 
   return (
     <div>
@@ -45,6 +71,14 @@ const AdminBooking = () => {
                   setAdminBookings={setAdminBookings}
                 ></AdminBookingCard>
               ))}
+              <div className="flex justify-center">
+                <button
+                  onClick={handleDeleteAllBookings}
+                  className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                >
+                  Delete all Bookings
+                </button>
+              </div>
             </div>
           )}
         </>
