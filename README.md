@@ -31,3 +31,4 @@
 21. AllBookings from database made only admin authorized only. Valid token and valid user but still user can't access that. Implemented admin email condition there in server to access for admin only.
 22. Admin can delete completed bookings also can delete any bookings if he want.
 23. In Book Details page of any Book there is also a delete option for that book only visible for admin.
+24. Pagination added in all books page. User can change number of books he/she wants to see in a page.
