@@ -1,6 +1,5 @@
-import { useLoaderData } from "react-router-dom";
-import pencil from "../../assets/pencil.jpg";
 import { useEffect, useState } from "react";
+import pencil from "../../assets/pencil.jpg";
 import axios from "axios";
 
 const Counting = () => {
@@ -9,7 +8,7 @@ const Counting = () => {
   useEffect(() => {
     axios
       .get("https://book-sharing-server.vercel.app/allBooks")
-      .then((res) => setAllBooks(res.data));
+      .then((res) => setAllBooks(res.data.result));
   }, []);
 
   return (

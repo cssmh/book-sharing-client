@@ -17,7 +17,9 @@ const AllBooks = () => {
 
   useEffect(() => {
     axios
-      .get(`https://book-sharing-server.vercel.app/allBooks?page=${page}&limit=${limit}`)
+      .get(
+        `https://book-sharing-server.vercel.app/allBooks?page=${page}&limit=${limit}`
+      )
       .then((res) => {
         setAllBooks(res?.data?.result);
         setTotalBooks(res?.data?.totalBooks);
@@ -109,7 +111,10 @@ const AllBooks = () => {
               </div>
               <div className="text-center mb-4">
                 <select
-                  onClick={(e) => setLimit(parseInt(e.target.value))}
+                  onChange={(e) => {
+                    setLimit(parseInt(e.target.value));
+                    setPage(1);
+                  }}
                   defaultValue={limit}
                   className="input input-bordered border-green-400 text-green-500 outline-none"
                 >

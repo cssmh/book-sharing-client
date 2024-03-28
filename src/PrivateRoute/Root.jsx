@@ -44,7 +44,6 @@ const Root = createBrowserRouter([
       {
         path: "/all-books",
         element: <AllBooks />,
-        // loader: () => fetch("https://book-sharing-server.vercel.app/allBooks"),
       },
       {
         path: "/book/:id",

@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import noBooks from "../../../assets/noBooks.png";
 import { Link, useLoaderData } from "react-router-dom";
 import AdminBookingCard from "../AdminBookingCard/AdminBookingCard";
+import swal from "sweetalert";
 import axios from "axios";
 import useAxiosHook from "../../../useCustomHook/useAxiosHook";
-import swal from "sweetalert";
 import { HashLoader } from "react-spinners";
 import useContextHook from "../../../useCustomHook/useContextHook";
 
 const AdminBooking = () => {
   const { user } = useContextHook();
-  const loadAllBooks = useLoaderData();
+  const { result } = useLoaderData();
   const [adminBookings, setAdminBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const axiosCustom = useAxiosHook();
@@ -33,14 +33,16 @@ const AdminBooking = () => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axios.delete("https://book-sharing-server.vercel.app/allBookings").then((res) => {
-          if (res.data.acknowledged) {
-            setAdminBookings([]);
-            swal("All Bookings Deleted!", {
-              icon: "success",
-            });
-          }
-        });
+        axios
+          .delete("https://book-sharing-server.vercel.app/allBookings")
+          .then((res) => {
+            if (res.data.acknowledged) {
+              setAdminBookings([]);
+              swal("All Bookings Deleted!", {
+                icon: "success",
+              });
+            }
+          });
       } else {
         swal("All Bookings is safe!");
       }
@@ -56,8 +58,8 @@ const AdminBooking = () => {
       ) : (
         <>
           <p className="text-center text-lg lg:text-2xl my-4">
-            Total Books <Link to={"/all-books"}>{loadAllBooks.length}</Link> and
-            Total Bookings {adminBookings.length}
+            Total Books <Link to={"/all-books"}>{result.length}</Link> and Total
+            Bookings {adminBookings.length}
           </p>
           {adminBookings.length == 0 ? (
             <img src={noBooks} className="mx-auto" alt="" />
