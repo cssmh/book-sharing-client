@@ -11,21 +11,19 @@ const AllBooks = () => {
   const [allBooks, setAllBooks] = useState([]);
   const [totalBooks, setTotalBooks] = useState(0);
   const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(9);
   const [isLoading, setIsLoading] = useState(true);
-  const limit = 9;
-  const booksPerPageCount = Math.ceil(totalBooks / 9);
+  const booksPerPageCount = Math.ceil(totalBooks / limit);
 
   useEffect(() => {
     axios
-      .get(
-        `https://book-sharing-server.vercel.app/allBooks?page=${page}&limit=${limit}`
-      )
+      .get(`https://book-sharing-server.vercel.app/allBooks?page=${page}&limit=${limit}`)
       .then((res) => {
         setAllBooks(res?.data?.result);
         setTotalBooks(res?.data?.totalBooks);
         setIsLoading(false);
       });
-  }, [page]);
+  }, [page, limit]);
 
   const handlePrevious = () => {
     if (page > 1) setPage(page - 1);
@@ -33,6 +31,7 @@ const AllBooks = () => {
   const handleNext = () => {
     if (page < booksPerPageCount) setPage(page + 1);
   };
+
   return (
     <div>
       <Helmet>
@@ -107,6 +106,23 @@ const AllBooks = () => {
                 >
                   Next
                 </button>
+              </div>
+              <div className="text-center mb-4">
+                <select
+                  onClick={(e) => setLimit(parseInt(e.target.value))}
+                  defaultValue={limit}
+                  className="input input-bordered border-green-400 text-green-500 outline-none"
+                >
+                  <option value="3">
+                    <button>3</button>
+                  </option>
+                  <option value="6">
+                    <button>6</button>
+                  </option>
+                  <option value="9">
+                    <button>9</button>
+                  </option>
+                </select>
               </div>
             </div>
           </div>
