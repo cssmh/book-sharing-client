@@ -27,7 +27,7 @@ const AdminBookingCard = ({
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        fetch(`http://localhost:5000/bookings/${idx}`, {
+        fetch(`https://book-sharing-server.vercel.app/bookings/${idx}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
