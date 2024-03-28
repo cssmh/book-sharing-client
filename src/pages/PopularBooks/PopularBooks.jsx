@@ -4,15 +4,14 @@ import { HashLoader } from "react-spinners";
 import PopularBookCard from "../PopularBookCard/PopularBookCard";
 
 const PopularBooks = () => {
-  // HomePage Popular Books
   const [popularBooks, setPopularBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://book-sharing-server.vercel.app/allBooks")
+    fetch("http://localhost:5000/allBooks")
       .then((res) => res.json())
       .then((data) => {
-        setPopularBooks(data);
+        setPopularBooks(data.result);
         setIsLoading(false);
       });
   }, []);
