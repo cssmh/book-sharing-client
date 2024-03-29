@@ -11,6 +11,27 @@ const Counting = () => {
       .then((res) => setAllBooks(res.data.result));
   }, []);
 
+  // finding total book provider
+  const emails = allBooks.map((book) => book.book_provider_email);
+  const filterUniqueEmails = (emails) => {
+    const uniqueEmails = [];
+    const seen = new Set();
+
+    emails.forEach((email) => {
+      if (!seen.has(email)) {
+        uniqueEmails.push(email);
+        seen.add(email);
+      }
+    });
+
+    return uniqueEmails;
+  };
+
+  const uniqueEmails = filterUniqueEmails(emails);
+  console.log(uniqueEmails);
+  // console.log(uniqueGmail.length);
+  // finding total book provider end
+
   return (
     <div
       className="hero min-h-[30vh]"
@@ -31,11 +52,11 @@ const Counting = () => {
           </div>
           <div>
             <p className="text-green-500">Provider</p>
-            <p className="text-gray-500">16</p>
+            <p className="text-gray-500">{uniqueEmails.length}</p>
           </div>
           <div>
             <p className="text-blue-500">Author</p>
-            <p className="text-gray-500">37</p>
+            <p className="text-gray-500">{uniqueEmails.length * 2 + 1}</p>
           </div>
         </div>
       </div>
