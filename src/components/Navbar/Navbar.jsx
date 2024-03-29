@@ -15,9 +15,9 @@ const Navbar = () => {
   const handleSignOut = () => {
     logOut().then().catch();
   };
-
+  // bg-gray-200
   return (
-    <div className="navbar bg-gray-200 rounded-lg mb-1 md:px-4">
+    <div className="navbar bg-base-300 rounded-lg mb-1 md:px-4">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
