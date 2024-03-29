@@ -97,8 +97,6 @@ const Root = createBrowserRouter([
             <SameProvider />
           </PrivateRoute>
         ),
-        loader: ({ params }) =>
-          fetch(`https://book-sharing-server.vercel.app/myBooks?email=${params.email}`),
       },
       {
         path: "/admin",
