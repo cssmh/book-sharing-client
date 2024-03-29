@@ -6,7 +6,10 @@ const AtomicHabit = () => {
   };
   return (
     <div className="bg-base-200 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center py-4 space-y-6 lg:space-y-0 mb-10">
-      <div data-aos="zoom-in-right" data-aos-duration="1000">
+      <div
+      // data-aos="zoom-in-right"
+      // data-aos-duration="1000"
+      >
         <img src={atomicHabit} className="w-3/4 mx-auto" alt="" />
       </div>
       <div className="space-y-2 text-center lg:text-left">

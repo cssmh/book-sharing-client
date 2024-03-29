@@ -55,7 +55,7 @@ const Banner = () => {
           className="w-full bg-gradient-to-r from-green-300 via-blue-500 to-blue-500 bg-clip-text text-transparent sm:text-5xl text-3xl font-bold lg:text-6xl aos-init"
           data-aos="fade-up"
           data-aos-easing="ease-in"
-          data-aos-duration="1000"
+          data-aos-duration="900"
         >
           Share Exchange Unleashed
         </h1>
@@ -63,7 +63,7 @@ const Banner = () => {
           className="max-w-lg mx-auto mt-6 text-gray-500 dark:text-gray-300 aos-init"
           data-aos="fade-up"
           data-aos-easing="ease-in"
-          data-aos-duration="1200"
+          data-aos-duration="900"
         >
           Discover new books, provide and share the knowledge that <br></br>{" "}
           shape our future.
@@ -72,8 +72,8 @@ const Banner = () => {
           <button
             data-aos="fade-up"
             data-aos-easing="ease-in"
-            data-aos-duration="1400"
-            className="px-4 py-2 mt-6 text-sm font-medium leading-5 text-center text-white capitalize bg-green-400 rounded-md hover:bg-green-300/90 lg:mx-0 lg:w-auto focus:outline-none transition duration-300 flex gap-1 aos-init"
+            data-aos-duration="900"
+            className="px-4 py-2 mt-6 text-sm font-medium leading-5 text-center text-white capitalize bg-green-400 rounded-md hover:bg-green-400/90 lg:mx-0 lg:w-auto focus:outline-none transition duration-300 flex gap-1 aos-init"
           >
             <span>Start sharing now</span>
             <span>
@@ -100,7 +100,7 @@ const Banner = () => {
         <p
           data-aos="fade-up"
           data-aos-easing="ease-in"
-          data-aos-duration="1600"
+          data-aos-duration="900"
           className="mt-3 font-medium text-gray-600 text-sm dark:text-gray-400 aos-init"
         >
           Have a good day!
@@ -109,7 +109,7 @@ const Banner = () => {
       <div
         data-aos="fade-up"
         data-aos-easing="ease-in"
-        data-aos-duration="1500"
+        data-aos-duration="900"
         className="flex justify-center mt-10 aos-init"
       >
         <img

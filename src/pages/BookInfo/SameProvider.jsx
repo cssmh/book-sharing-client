@@ -4,7 +4,7 @@ import ServiceCard from "../Services/ServiceCard";
 
 const SameProvider = ({ email, name, id }) => {
   const [services, setServices] = useState([]);
-  const url = `http://localhost:5000/books?email=${email}`;
+  const url = `https://book-sharing-server.vercel.app/books?email=${email}`;
   useEffect(() => {
     axios
       .get(url)

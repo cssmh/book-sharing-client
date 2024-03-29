@@ -8,7 +8,7 @@ const PopularBooks = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/allBooks")
+    fetch("https://book-sharing-server.vercel.app/allBooks")
       .then((res) => res.json())
       .then((data) => {
         setPopularBooks(data.result);
