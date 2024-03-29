@@ -1,7 +1,7 @@
 import axios from "axios";
 import swal from "sweetalert";
 import useContextHook from "../../useCustomHook/useContextHook";
-import addBook from "../../assets/addBook.png";
+import addBook from "../../assets/BookAdd.png";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 
@@ -40,7 +40,7 @@ const AddBook = () => {
     };
 
     axios
-      .post("http://localhost:5000/books", BookInformation)
+      .post("https://book-sharing-server.vercel.app/books", BookInformation)
       .then((res) => {
         // console.log(res.data);
         if (res.data.insertedId) {

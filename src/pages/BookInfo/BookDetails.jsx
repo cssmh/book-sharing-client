@@ -29,7 +29,7 @@ const BookDetails = () => {
   // for same provider book button length
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/allbooks?email=${book_provider_email}`)
+      .get(`https://book-sharing-server.vercel.app/allbooks?email=${book_provider_email}`)
       .then((res) => {
         setProviderBook(res.data.result);
         setIsLoading(false);
@@ -47,7 +47,7 @@ const BookDetails = () => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        fetch(`http://localhost:5000/books/${_id}`, {
+        fetch(`https://book-sharing-server.vercel.app/books/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

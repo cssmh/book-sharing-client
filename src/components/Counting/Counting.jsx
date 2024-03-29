@@ -7,7 +7,7 @@ const Counting = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/allBooks")
+      .get("https://book-sharing-server.vercel.app/allBooks")
       .then((res) => setAllBooks(res.data.result));
   }, []);
 
@@ -28,7 +28,6 @@ const Counting = () => {
   };
 
   const uniqueEmails = filterUniqueEmails(emails);
-  console.log(uniqueEmails);
   // console.log(uniqueGmail.length);
   // finding total book provider end
 

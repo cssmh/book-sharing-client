@@ -37,7 +37,7 @@ const UpdateBook = () => {
     };
     // console.log(service);
     axios
-      .put(`http://localhost:5000/books/${_id}`, updatedBookInfo)
+      .put(`https://book-sharing-server.vercel.app/books/${_id}`, updatedBookInfo)
       .then((res) => {
         if (res.data.modifiedCount > 0) {
           swal("Good job!", "Book Info Updated", "success");
