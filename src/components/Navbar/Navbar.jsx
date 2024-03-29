@@ -35,9 +35,9 @@ const Navbar = () => {
   //   document.querySelector("html").setAttribute("data-theme", localTheme);
   // }, [theme]);
   // // use theme from local storage if available or set cupcake theme end
-
+  // bg-base-200
   return (
-    <div className="navbar bg-base-300 rounded-lg mb-1 md:px-4">
+    <div className="navbar  rounded-lg mb-1 md:px-4 border-b border-gray-200">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">

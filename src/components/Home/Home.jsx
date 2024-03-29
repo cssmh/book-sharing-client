@@ -1,11 +1,11 @@
 import { Helmet } from "react-helmet-async";
-import PopularBooks from "../../pages/PopularBooks/PopularBooks";
-import Review from "../Review/Review";
-import AtomicHabit from "../AtomicHabit/AtomicHabit";
-import BestSelling from "../BestSelling/BestSelling";
-import Counting from "../Counting/Counting";
-import AboutUs from "../AboutUs/AboutUs";
 import Banner from "../Banner/Banner";
+import PopularBooks from "../../pages/PopularBooks/PopularBooks";
+import AboutUs from "../AboutUs/AboutUs";
+import BestSelling from "../BestSelling/BestSelling";
+import AtomicHabit from "../AtomicHabit/AtomicHabit";
+import Review from "../Review/Review";
+import Counting from "../Counting/Counting";
 
 const Home = () => {
   return (
