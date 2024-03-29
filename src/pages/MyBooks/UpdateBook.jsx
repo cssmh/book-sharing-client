@@ -2,6 +2,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import swal from "sweetalert";
+import updateImage from "../../assets/update.png";
 import toast from "react-hot-toast";
 
 const UpdateBook = () => {
@@ -36,10 +37,7 @@ const UpdateBook = () => {
     };
     // console.log(service);
     axios
-      .put(
-        `http://localhost:5000/books/${_id}`,
-        updatedBookInfo
-      )
+      .put(`http://localhost:5000/books/${_id}`, updatedBookInfo)
       .then((res) => {
         if (res.data.modifiedCount > 0) {
           swal("Good job!", "Book Info Updated", "success");
@@ -48,79 +46,90 @@ const UpdateBook = () => {
       });
   };
 
-  // Update book details form
   return (
     <div>
       <Helmet>
         <title>Update {book_name}</title>
       </Helmet>
-      <form
-        onSubmit={handleUpdate}
-        className=" md:w-3/4 lg:w-1/2 mx-2 md:mx-auto"
-      >
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Book Name</span>
-          </label>
-          <input
-            name="book_name"
-            required
-            defaultValue={book_name}
-            className="input input-bordered"
-          />
+      <div className="flex flex-col md:flex-row justify-center items-center gap-3 my-6">
+        <img src={updateImage} className="w-[28%]" alt="" />
+        <div className="text-center">
+          <h1 className="text-2xl md:text-3xl font-bold">
+            Update <span className="text-green-400">{book_name}</span>
+          </h1>
+          <p className="text-gray-500 mt-2">
+            Enter Book details and click Update Book Details button to <br></br>
+            Update the Book data to database
+          </p>
         </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Book Image Url</span>
-          </label>
-          <input
-            type="text"
-            name="book_image"
-            defaultValue={
-              book_image ===
-              "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/soon.jpg"
-                ? ""
-                : book_image
-            }
-            className="input input-bordered"
-          />
+      </div>
+      <form onSubmit={handleUpdate} className="max-w-6xl mx-auto">
+        <div className="flex flex-col md:flex-row gap-3">
+          <div className="form-control md:w-1/2 mx-2 lg:mx-0">
+            <label className="label">
+              <span className="label-text">Book Name</span>
+            </label>
+            <input
+              name="book_name"
+              required
+              defaultValue={book_name}
+              className="input input-bordered"
+            />
+          </div>
+          <div className="form-control md:w-1/2 mx-2 lg:mx-0">
+            <label className="label">
+              <span className="label-text">Book Image Url</span>
+            </label>
+            <input
+              type="text"
+              name="book_image"
+              defaultValue={
+                book_image ===
+                "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/soon.jpg"
+                  ? ""
+                  : book_image
+              }
+              className="input input-bordered"
+            />
+          </div>
         </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Location</span>
-          </label>
-          <input
-            type="text"
-            required
-            name="location"
-            defaultValue={location}
-            className="input input-bordered"
-          />
+        <div className="flex flex-col md:flex-row gap-3">
+          <div className="form-control md:w-1/2 mx-2 lg:mx-0">
+            <label className="label">
+              <span className="label-text">Location</span>
+            </label>
+            <input
+              type="text"
+              required
+              name="location"
+              defaultValue={location}
+              className="input input-bordered"
+            />
+          </div>
+          <div className="form-control md:w-1/2 mx-2 lg:mx-0">
+            <label className="label">
+              <span className="label-text">Phone</span>
+            </label>
+            <input
+              type="text"
+              required
+              name="phone"
+              defaultValue={phone}
+              className="input input-bordered"
+            />
+          </div>
         </div>
-
-        <div className="form-control">
+        <div className="form-control mx-3 lg:mx-0">
           <label className="label">
             <span className="label-text">Description</span>
           </label>
           <textarea
             name="description"
             defaultValue={description}
-            cols="20"
-            rows="10"
+            cols="10"
+            rows="5"
             className="rounded-lg"
           ></textarea>
-        </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Phone</span>
-          </label>
-          <input
-            type="text"
-            required
-            name="phone"
-            defaultValue={phone}
-            className="input input-bordered"
-          />
         </div>
         <div className="form-control mt-6">
           <button className="btn border-green-400 hover:border-green-400 bg-base-100 hover:bg-green-400 text-green-400 hover:text-white">

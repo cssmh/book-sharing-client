@@ -5,7 +5,7 @@ import review from "../../assets/review.png";
 const Review = () => {
   return (
     <div className="max-w-7xl mx-auto">
-      <h1 className="text-3xl font-semibold text-center">Some Books Review</h1>
+      <h1 className="text-3xl font-semibold text-center hover:scale-105 transition-all duration-300">Some Books Review</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 my-10 gap-4">
         <div
           data-aos="zoom-in"

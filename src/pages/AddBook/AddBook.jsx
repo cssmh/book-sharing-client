@@ -1,7 +1,7 @@
 import axios from "axios";
 import swal from "sweetalert";
 import useContextHook from "../../useCustomHook/useContextHook";
-import addBook from "../../assets/addBook.png"
+import addBook from "../../assets/addBook.png";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 
@@ -52,21 +52,24 @@ const AddBook = () => {
         console.log(err);
       });
   };
-  
+
   return (
     <div>
       <Helmet>
         <title>BookHaven | Add-Book</title>
       </Helmet>
-      <div className="text-center mt-10">
-        <h1 className="text-2xl md:text-3xl font-bold">
-          Add Book to the <span className="text-green-400">Database</span>
-        </h1>
-        <p className="text-gray-500 mt-2">
-          Enter Book details and click Add Book button to add the <br></br> Book
-          to the database
-        </p>
-        <img src={addBook} className="mx-2 md:mx-auto my-5" alt="" />
+      <div className="flex flex-col md:flex-row justify-center items-center gap-3 my-6">
+        <img src={addBook} alt="" />
+        <div className="text-center">
+          <h1 className="text-2xl md:text-3xl font-bold">
+            Add Book to the <span className="text-green-400">Database</span>
+          </h1>
+          <p className="text-gray-500 mt-2">
+            Enter Book details and click Add Book button to add <br></br> Book
+            to the database. Must add your location <br></br> and your Valid
+            Phone number
+          </p>
+        </div>
       </div>
       <form onSubmit={handleAddBook} className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row gap-3">
@@ -148,7 +151,7 @@ const AddBook = () => {
           </label>
           <textarea
             name="description"
-            placeholder="Write your Book description here..."
+            placeholder="Write something about your book..."
             cols="10"
             rows="5"
             className="rounded-xl"

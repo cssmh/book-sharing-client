@@ -3,11 +3,14 @@ import React from "react";
 const AboutUs = () => {
   return (
     <div
-      data-aos="zoom-in"
+      data-aos="zoom-in-up"
+      data-aos-duration="1200"
       className="mb-6 text-center space-y-2 max-w-7xl mx-auto"
     >
       <div className="px-4 md:px-9">
-        <p className="text-3xl font-semibold text-center mb-5">About US</p>
+        <p className="text-3xl font-semibold text-center mb-5 hover:scale-105 transition-all duration-300">
+          About US
+        </p>
         <p>
           BookHaven is an innovative online platform dedicated to fostering a
           vibrant community of book lovers and avid readers. With its

@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import useContextHook from "../../useCustomHook/useContextHook";
 import Lottie from "lottie-react";
 import loggieData from "../../assets/bookFavicon.json";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const Navbar = () => {
   const { user, logOut } = useContextHook();

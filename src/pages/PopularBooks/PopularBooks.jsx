@@ -39,7 +39,7 @@ const PopularBooks = () => {
           </div>
           <div className="flex justify-center my-10">
             <Link to="/all-books">
-              <button className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+              <button className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 hover:scale-105 transition-all duration-300">
                 Show all Books
               </button>
             </Link>
