@@ -4,7 +4,7 @@ import PopularBooks from "../../pages/PopularBooks/PopularBooks";
 import AboutUs from "../AboutUs/AboutUs";
 import BestSelling from "../BestSelling/BestSelling";
 import AtomicHabit from "../AtomicHabit/AtomicHabit";
-import Review from "../Review/Review";
+import UserReview from "../UserReview/UserReview";
 import Counting from "../Counting/Counting";
 
 const Home = () => {
@@ -18,7 +18,7 @@ const Home = () => {
       <AboutUs></AboutUs>
       <BestSelling></BestSelling>
       <AtomicHabit></AtomicHabit>
-      <Review></Review>
+      <UserReview></UserReview>
       <Counting></Counting>
     </div>
   );

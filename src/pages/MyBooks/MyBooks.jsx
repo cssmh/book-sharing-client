@@ -15,7 +15,7 @@ const MyBooks = () => {
   const url = `/myBooks?email=${user.email}`;
   useEffect(() => {
     axiosCustom?.get(url).then((res) => {
-      setMyBooks(res.data.result);
+      setMyBooks(res.data);
       setLoading(false);
     });
   }, [axiosCustom, url]);

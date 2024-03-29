@@ -1,4 +1,4 @@
-import seller from "../../assets/Reader.png";
+import Reader from "../../assets/Reader.png";
 import book1 from "../../assets/Book1.jpg";
 import book2 from "../../assets/Book2.jpg";
 import book3 from "../../assets/Book3.jpg";
@@ -13,7 +13,7 @@ const BestSelling = () => {
         <div
           data-aos="flip-left"
           data-aos-easing="ease-out-cubic"
-          data-aos-duration="1000"
+          data-aos-duration="900"
           className="text-center lg:text-right space-y-5 lg:mr-5 px-3"
         >
           <p className="text-7xl text-orange-500">
@@ -39,12 +39,12 @@ const BestSelling = () => {
           data-aos-anchor-placement="top-center"
           data-aos-duration="1000"
         >
-          <img src={seller} className="rounded-md mx-auto lg:mx-0" alt="" />
+          <img src={Reader} className="rounded-md mx-auto lg:mx-0" alt="" />
         </div>
         <div
           data-aos="flip-right"
           data-aos-easing="ease-out-cubic"
-          data-aos-duration="1000"
+          data-aos-duration="900"
           className="grid grid-cols-2 gap-7 mx-4 lg:mx-0"
         >
           <img src={book1} className="rounded-md" alt="" />

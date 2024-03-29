@@ -1,8 +1,8 @@
 import momin from "../../assets/momin.jpeg";
 import mahbub from "../../assets/mahbub.jpg";
-import review from "../../assets/review.png";
+import review from "../../assets/Review.png";
 
-const Review = () => {
+const UserReview = () => {
   return (
     <div className="max-w-7xl mx-auto">
       <h1 className="text-3xl font-semibold text-center hover:scale-105 transition-all duration-300">
@@ -16,7 +16,7 @@ const Review = () => {
             alt=""
           />
           <div data-aos="zoom-in-up" data-aos-duration="1000">
-            <h1 className="text-xl font-semibold text-green-400">
+            <h1 className="text-xl font-semibold text-green-400 mb-2">
               Programming with C++
             </h1>
             <p className="px-5">
@@ -40,7 +40,7 @@ const Review = () => {
             alt=""
           />
           <div data-aos="zoom-in-up" data-aos-duration="1000">
-            <h1 className="text-xl font-semibold text-green-400">
+            <h1 className="text-xl font-semibold text-green-400 mb-2">
               OPERATING SYSTEM
             </h1>
             <p className="px-5">
@@ -64,7 +64,7 @@ const Review = () => {
             alt=""
           />
           <div data-aos="zoom-in-up" data-aos-duration="1000">
-            <h1 className="text-xl font-semibold text-green-400">
+            <h1 className="text-xl font-semibold text-green-400 mb-2">
               Data Structure
             </h1>
             <p className="px-5">
@@ -88,7 +88,7 @@ const Review = () => {
             alt=""
           />
           <div data-aos="zoom-in-up" data-aos-duration="1000">
-            <h1 className="text-xl font-semibold text-green-400">
+            <h1 className="text-xl font-semibold text-green-400 mb-2">
               Discrete Mathematics
             </h1>
             <p className="px-5">
@@ -109,4 +109,4 @@ const Review = () => {
   );
 };
 
-export default Review;
+export default UserReview;
