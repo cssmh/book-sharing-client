@@ -14,6 +14,7 @@ import BookDetails from "../Pages/BookInfo/BookDetails";
 import AddBook from "../pages/AddBook/AddBook";
 import AdminPrivateRoute from "../AdminPrivateRoute/AdminPrivateRoute";
 import AdminBooking from "../Components/Admin/AdminBooking/AdminBooking";
+import SameProvider from "../Pages/SameProvider/SameProvider";
 
 const Root = createBrowserRouter([
   {
@@ -53,7 +54,7 @@ const Root = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://book-sharing-server.vercel.app/book/${params.id}`),
+          fetch(`http://localhost:5000/book/${params.id}`),
       },
       {
         path: "/add-book",
@@ -79,7 +80,7 @@ const Root = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://book-sharing-server.vercel.app/book/${params.id}`),
+          fetch(`http://localhost:5000/book/${params.id}`),
       },
       {
         path: "/my-schedules",
@@ -90,13 +91,23 @@ const Root = createBrowserRouter([
         ),
       },
       {
+        path: "/provider/:email",
+        element: (
+          <PrivateRoute>
+            <SameProvider />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/allbooks?email=${params.email}`),
+      },
+      {
         path: "/admin",
         element: (
           <AdminPrivateRoute>
             <AdminBooking />
           </AdminPrivateRoute>
         ),
-        loader: () => fetch("https://book-sharing-server.vercel.app/allBooks"),
+        loader: () => fetch("http://localhost:5000/allBooks"),
       },
     ],
   },

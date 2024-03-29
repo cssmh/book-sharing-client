@@ -34,7 +34,7 @@ const AdminBooking = () => {
       if (willDelete) {
         // main code
         axios
-          .delete("https://book-sharing-server.vercel.app/allBookings")
+          .delete("http://localhost:5000/allBookings")
           .then((res) => {
             if (res.data.acknowledged) {
               setAdminBookings([]);

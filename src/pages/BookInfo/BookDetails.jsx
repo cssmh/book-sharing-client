@@ -1,14 +1,17 @@
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import AddBookings from "./AddBookings";
 import { Helmet } from "react-helmet-async";
 import swal from "sweetalert";
 import useContextHook from "../../useCustomHook/useContextHook";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const BookDetails = () => {
   const { user } = useContextHook();
   const bookData = useLoaderData();
   const navigateTo = useNavigate();
-  // console.log(service);
+  const [providerBook, setProviderBook] = useState([]);
+
   const {
     _id,
     book_image,
@@ -21,6 +24,14 @@ const BookDetails = () => {
     phone,
   } = bookData;
 
+  // for same provider book button length
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/allbooks?email=${book_provider_email}`)
+      .then((res) => setProviderBook(res.data.result));
+  }, [book_provider_email]);
+  // for same provider book button length end
+
   const handleDelete = (_id) => {
     swal({
       title: "Check again if you want!",
@@ -31,7 +42,7 @@ const BookDetails = () => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        fetch(`https://book-sharing-server.vercel.app/books/${_id}`, {
+        fetch(`http://localhost:5000/books/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -86,10 +97,17 @@ const BookDetails = () => {
           <h2 className="card-title text-2xl font-bold text-blue-900 pt-5">
             {book_name}
           </h2>
-          <p>{description}</p>
+          <p className="w-2/3 mx-auto">{description}</p>
           <div className="card-actions mt-2">
             <AddBookings getBookData={bookData}></AddBookings>
           </div>
+          {providerBook.length > 1 && (
+            <Link to={`/provider/${book_provider_email}`}>
+              <button className="btn btn-sm btn-success text-white mt-1">
+                Other Books Of {book_provider_name}
+              </button>
+            </Link>
+          )}
           {user?.email == "admin@admin.com" && (
             <button
               onClick={() => handleDelete(_id)}
