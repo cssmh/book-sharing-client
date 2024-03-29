@@ -16,7 +16,7 @@ const AllBooksCard = ({ getBook }) => {
       <figure>
         <img
           data-aos="zoom-in"
-          data-aos-delay="400"
+          data-aos-duration="700"
           data-aos-offset="100"
           src={book_image}
           alt="books"

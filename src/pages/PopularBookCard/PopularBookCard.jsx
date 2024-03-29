@@ -15,13 +15,19 @@ const PopularBookCard = ({ getBook }) => {
 
   return (
     <div className="card bg-base-100 shadow-xl py-4">
-      <div data-aos="zoom-in" data-aos-delay="400" data-aos-offset="100">
+      <div data-aos="zoom-in" data-aos-duration="700" data-aos-offset="100">
         <figure>
-          <img src={book_image} alt="Books" className="rounded-xl w-1/2 lg:h-[270px]" />
+          <img
+            src={book_image}
+            alt="Books"
+            className="rounded-xl w-1/2 lg:h-[270px]"
+          />
         </figure>
       </div>
       <div className="card-body items-center text-center p-0 px-3 gap-1">
-        <h2 className="text-[24px] font-bold text-blue-900 mt-2">{book_name}</h2>
+        <h2 className="text-[24px] font-bold text-blue-900 mt-2">
+          {book_name}
+        </h2>
         <p className="px-2">Details: {smallDesc}...</p>
         <div className="flex justify-center items-center gap-3 my-1 border-2 border-red-400 rounded-lg px-3 py-2">
           <div className="avatar">
