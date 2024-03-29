@@ -1,6 +1,7 @@
 import axios from "axios";
 import swal from "sweetalert";
 import useContextHook from "../../useCustomHook/useContextHook";
+import addBook from "../../assets/addBook.png"
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 
@@ -39,7 +40,7 @@ const AddBook = () => {
     };
 
     axios
-      .post("https://book-sharing-server.vercel.app/books", BookInformation)
+      .post("http://localhost:5000/books", BookInformation)
       .then((res) => {
         // console.log(res.data);
         if (res.data.insertedId) {
@@ -51,93 +52,107 @@ const AddBook = () => {
         console.log(err);
       });
   };
-
+  
   return (
     <div>
       <Helmet>
         <title>BookHaven | Add-Book</title>
       </Helmet>
-      <form
-        onSubmit={handleAddBook}
-        className="md:w-3/4 lg:w-1/2 mx-2 md:mx-auto"
-      >
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Book Name</span>
-          </label>
-          <input
-            type="text"
-            name="book_name"
-            className="input input-bordered"
-            required
-          />
+      <div className="text-center mt-10">
+        <h1 className="text-2xl md:text-3xl font-bold">
+          Add Book to the <span className="text-green-400">Database</span>
+        </h1>
+        <p className="text-gray-500 mt-2">
+          Enter Book details and click Add Book button to add the <br></br> Book
+          to the database
+        </p>
+        <img src={addBook} className="mx-2 md:mx-auto my-5" alt="" />
+      </div>
+      <form onSubmit={handleAddBook} className="max-w-6xl mx-auto">
+        <div className="flex flex-col md:flex-row gap-3">
+          <div className="form-control md:w-1/2 mx-2 lg:mx-0">
+            <label className="label">
+              <span className="label-text">Book Name</span>
+            </label>
+            <input
+              type="text"
+              name="book_name"
+              className="input input-bordered"
+              required
+            />
+          </div>
+          <div className="form-control md:w-1/2 mx-2 lg:mx-0">
+            <label className="label">
+              <span className="label-text">Book Image Url</span>
+            </label>
+            <input
+              type="text"
+              name="book_image"
+              className="input input-bordered"
+            />
+          </div>
         </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Book Image Url</span>
-          </label>
-          <input
-            type="text"
-            name="book_image"
-            className="input input-bordered"
-          />
+        <div className="flex flex-col md:flex-row gap-3">
+          <div className="form-control md:w-1/2 mx-2 lg:mx-0">
+            <label className="label">
+              <span className="label-text">Book Provider Name</span>
+            </label>
+            <input
+              type="text"
+              name="book_provider_name"
+              defaultValue={user?.displayName}
+              className="input input-bordered"
+            />
+          </div>
+          <div className="form-control md:w-1/2 mx-2 lg:mx-0">
+            <label className="label">
+              <span className="label-text">Book Provider Email</span>
+            </label>
+            <input
+              type="email"
+              readOnly
+              name="book_provider_email"
+              defaultValue={user?.email}
+              className="input input-bordered"
+            />
+          </div>
         </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Book Provider Name</span>
-          </label>
-          <input
-            type="text"
-            name="book_provider_name"
-            defaultValue={user?.displayName}
-            className="input input-bordered"
-          />
+        <div className="flex flex-col md:flex-row gap-3">
+          <div className="form-control md:w-1/2 mx-2 lg:mx-0">
+            <label className="label">
+              <span className="label-text">Location</span>
+            </label>
+            <input
+              type="text"
+              required
+              name="location"
+              className="input input-bordered"
+            />
+          </div>
+          <div className="form-control md:w-1/2 mx-2 lg:mx-0">
+            <label className="label">
+              <span className="label-text">Phone Number</span>
+            </label>
+            <input
+              type="text"
+              required
+              defaultValue={"+880"}
+              name="phone"
+              className="input input-bordered"
+            />
+          </div>
         </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Book Provider Email</span>
-          </label>
-          <input
-            type="email"
-            readOnly
-            name="book_provider_email"
-            defaultValue={user?.email}
-            className="input input-bordered"
-          />
-        </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Location</span>
-          </label>
-          <input
-            type="text"
-            required
-            name="location"
-            className="input input-bordered"
-          />
-        </div>
-        <div className="form-control">
+        <div className="form-control mx-3 lg:mx-0">
           <label className="label">
             <span className="label-text">Description</span>
           </label>
           <textarea
             name="description"
-            cols="20"
-            rows="10"
-            className="rounded-lg"
+            placeholder="Write your Book description here..."
+            cols="10"
+            rows="5"
+            className="rounded-xl"
           ></textarea>
-        </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Phone Number</span>
-          </label>
-          <input
-            type="text"
-            required
-            defaultValue={"+880"}
-            name="phone"
-            className="input input-bordered"
-          />
         </div>
         <div className="form-control mt-6">
           <button className="btn btn-primary text-white">Add Book</button>

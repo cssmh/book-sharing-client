@@ -18,7 +18,7 @@ const AllBooks = () => {
   useEffect(() => {
     axios
       .get(
-        `https://book-sharing-server.vercel.app/allBooks?page=${page}&limit=${limit}`
+        `http://localhost:5000/allBooks?page=${page}&limit=${limit}`
       )
       .then((res) => {
         setAllBooks(res?.data?.result);

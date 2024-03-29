@@ -16,7 +16,7 @@ const AtomicHabit = () => {
         <p
           data-aos="zoom-in"
           data-aos-duration="1000"
-          className="text-4xl font-semibold"
+          className="text-3xl md:text-4xl font-semibold mx-3 md:mx-0"
         >
           Atomic Habits will teach you how to make small changes that will
           transform your habits and deliver amazing results.

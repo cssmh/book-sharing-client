@@ -53,7 +53,7 @@ const Root = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://book-sharing-server.vercel.app/book/${params.id}`),
+          fetch(`http://localhost:5000/book/${params.id}`),
       },
       {
         path: "/add-book",
@@ -79,7 +79,7 @@ const Root = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://book-sharing-server.vercel.app/book/${params.id}`),
+          fetch(`http://localhost:5000/book/${params.id}`),
       },
       {
         path: "/my-schedules",
@@ -96,7 +96,7 @@ const Root = createBrowserRouter([
             <AdminBooking />
           </AdminPrivateRoute>
         ),
-        loader: () => fetch("https://book-sharing-server.vercel.app/allBooks"),
+        loader: () => fetch("http://localhost:5000/allBooks"),
       },
     ],
   },
