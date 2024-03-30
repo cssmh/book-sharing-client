@@ -1,5 +1,5 @@
 import swal from "sweetalert";
-import atomicHabit from "../../assets/Atomic.png";
+import atomicHabit from "../../assets/BookAtomic.png";
 const AtomicHabit = () => {
   const handleBuy = () => {
     swal("Sorry!", "Atomic Habits is not available Now!");

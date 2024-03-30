@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import noBooks from "../../../assets/noBooks.png";
+import NoBook from "../../../assets/NoBook.png";
 import { Link, useLoaderData } from "react-router-dom";
 import AdminBookingCard from "../AdminBookingCard/AdminBookingCard";
 import swal from "sweetalert";
@@ -96,7 +96,7 @@ const AdminBooking = () => {
             ))}
           </div>
           {adminBookings.length == 0 ? (
-            <img src={noBooks} className="mx-auto" alt="" />
+            <img src={NoBook} className="mx-auto" alt="" />
           ) : (
             <div className="space-y-5">
               {adminBookings.map((booking) => (

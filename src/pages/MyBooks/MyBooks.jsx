@@ -4,7 +4,7 @@ import useContextHook from "../../useCustomHook/useContextHook";
 import { FallingLines } from "react-loader-spinner";
 import { Helmet } from "react-helmet-async";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
-import noBooks from "../../assets/noBooks.png";
+import NoBook from "../../assets/NoBook.png";
 
 const MyBooks = () => {
   const { user } = useContextHook();
@@ -41,7 +41,7 @@ const MyBooks = () => {
               <p className="text-center text-xl md:text-2xl font-semibold text-red-600 italic mt-6">
                 No Book Added By You
               </p>
-              <img src={noBooks} className="mx-auto" alt="" />
+              <img src={NoBook} className="mx-auto" alt="" />
             </div>
           ) : (
             <>
