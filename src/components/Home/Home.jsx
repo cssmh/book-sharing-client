@@ -15,9 +15,9 @@ const Home = () => {
       </Helmet>
       <Banner></Banner>
       <PopularBooks></PopularBooks>
+      <AtomicHabit></AtomicHabit>
       <AboutUs></AboutUs>
       <BestSelling></BestSelling>
-      <AtomicHabit></AtomicHabit>
       <Review></Review>
       <Counting></Counting>
     </div>
