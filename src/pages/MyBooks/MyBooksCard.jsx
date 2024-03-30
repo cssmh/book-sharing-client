@@ -41,7 +41,7 @@ const MyBooksCard = ({ getBook, myBooks, setMyBooks }) => {
         <img
           src={book_image}
           alt="book"
-          className="rounded-xl w-1/2 lg:h-[270px]"
+          className="rounded-xl w-[40%] md:w-1/2 lg:h-[270px]"
         />
       </figure>
       <div className="items-center text-center space-y-2 mb-5">

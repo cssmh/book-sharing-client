@@ -82,7 +82,7 @@ const AdminBooking = () => {
         </div>
       ) : (
         <>
-          <p className="text-center text-lg lg:text-2xl my-4">
+          <p className="text-center text-lg md:text-2xl my-4 mx-5 md:mx-0">
             Total{" "}
             <Link className="text-green-500" to={"/all-books"}>
               {result?.length}{" "}
@@ -90,7 +90,7 @@ const AdminBooking = () => {
             Books, Total {uniqueEmails?.length} Book Providers and Total{" "}
             {adminBookings?.length} Bookings
           </p>
-          <div className="max-w-[1180px] mx-2 lg:mx-auto grid grid-cols-3 py-3 text-center border border-green-400 rounded-lg mb-3">
+          <div className="max-w-[1180px] mx-2 lg:mx-auto grid md:grid-cols-3 py-3 text-center border border-green-400 rounded-lg mb-3">
             {uniqueEmails?.map((provider, idx) => (
               <p key={idx}>{provider}</p>
             ))}
