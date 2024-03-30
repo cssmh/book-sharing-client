@@ -16,7 +16,7 @@ const AllBooks = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/allBooks?page=${page}&limit=${limit}`)
+      .get(`https://book-sharing-server.vercel.app/allBooks?page=${page}&limit=${limit}`)
       .then((res) => {
         setAllBooks(res?.data?.result);
         setTotalBooks(res?.data?.totalBooks);
@@ -26,7 +26,7 @@ const AllBooks = () => {
 
   // for search book
   useEffect(() => {
-    fetch("http://localhost:5000/allBooks")
+    fetch("https://book-sharing-server.vercel.app/allBooks")
       .then((res) => res.json())
       .then((data) => {
         setTotalBooksForSearch(data.result);

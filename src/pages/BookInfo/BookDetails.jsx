@@ -48,7 +48,7 @@ const BookDetails = () => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        fetch(`http://localhost:5000/books/${_id}`, {
+        fetch(`https://book-sharing-server.vercel.app/books/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
