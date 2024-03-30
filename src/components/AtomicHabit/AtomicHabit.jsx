@@ -13,7 +13,7 @@ const AtomicHabit = () => {
         <img src={atomicHabit} className="w-3/4 mx-auto" alt="" />
       </div>
       <div className="space-y-2 text-center lg:text-left">
-        <p className="p-2 bg-orange-500 w-24 mx-auto lg:mx-0 text-white rounded-md">
+        <p className="p-2 bg-orange-500 w-24 mx-auto lg:mx-0 text-white rounded-md mb-4 md:mb-0">
           FEATURED
         </p>
         <p

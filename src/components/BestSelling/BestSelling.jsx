@@ -42,9 +42,9 @@ const BestSelling = () => {
           <img src={Reader} className="rounded-md mx-auto lg:mx-0" alt="" />
         </div>
         <div
-          data-aos="flip-right"
-          data-aos-easing="ease-out-cubic"
-          data-aos-duration="900"
+          // data-aos="flip-right"
+          // data-aos-easing="ease-out-cubic"
+          // data-aos-duration="900"
           className="grid grid-cols-2 gap-7 mx-4 lg:mx-0"
         >
           <img src={book1} className="rounded-md" alt="" />

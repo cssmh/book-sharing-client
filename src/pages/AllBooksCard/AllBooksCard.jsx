@@ -20,7 +20,7 @@ const AllBooksCard = ({ getBook }) => {
           data-aos-offset="100"
           src={book_image}
           alt="books"
-          className="rounded-xl w-1/2 lg:h-[270px]"
+          className="rounded-xl w-[46%] lg:h-[270px]"
         />
       </figure>
       <div className="card-body items-center text-center p-0 px-3 gap-1">

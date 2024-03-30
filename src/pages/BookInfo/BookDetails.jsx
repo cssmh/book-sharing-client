@@ -6,11 +6,13 @@ import useContextHook from "../../useCustomHook/useContextHook";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { HashLoader } from "react-spinners";
+import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const BookDetails = () => {
   const { user } = useContextHook();
   const bookData = useLoaderData();
   const navigateTo = useNavigate();
+  const axiosCustom = useAxiosHook();
   const [providerBook, setProviderBook] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -27,14 +29,13 @@ const BookDetails = () => {
   } = bookData;
 
   // for same provider book button length
+  const url = `/myBooks?email=${book_provider_email}`;
   useEffect(() => {
-    axios
-      .get(`https://book-sharing-server.vercel.app/allbooks?email=${book_provider_email}`)
-      .then((res) => {
-        setProviderBook(res.data.result);
-        setIsLoading(false);
-      });
-  }, [book_provider_email]);
+    axiosCustom?.get(url).then((res) => {
+      setProviderBook(res.data);
+      setIsLoading(false);
+    });
+  }, [axiosCustom, url]);
   // for same provider book button length end
 
   const handleDelete = (_id) => {
@@ -47,7 +48,7 @@ const BookDetails = () => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        fetch(`https://book-sharing-server.vercel.app/books/${_id}`, {
+        fetch(`http://localhost:5000/books/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -98,7 +99,7 @@ const BookDetails = () => {
                 Location: <span className="text-blue-500">{location}</span>
               </p>
               <p className="text-lg font-medium">
-                Phone: <span className="text-green-600">{phone}</span>
+                Phone: <span className="text-cyan-500">{phone}</span>
               </p>
             </div>
           </div>
@@ -114,7 +115,7 @@ const BookDetails = () => {
               <h2 className="card-title text-2xl font-bold text-blue-900 pt-5">
                 {book_name}
               </h2>
-              <p className="w-2/3 mx-auto">{description}</p>
+              <p className="md:w-[80%] mx-auto">{description}</p>
               <div className="card-actions mt-2">
                 <AddBookings getBookData={bookData}></AddBookings>
               </div>

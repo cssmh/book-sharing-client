@@ -20,7 +20,7 @@ const PopularBookCard = ({ getBook }) => {
           <img
             src={book_image}
             alt="Books"
-            className="rounded-xl w-1/2 lg:h-[270px]"
+            className="rounded-xl w-[46%] lg:h-[270px]"
           />
         </figure>
       </div>

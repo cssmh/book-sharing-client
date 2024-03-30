@@ -1,5 +1,5 @@
 {
-  "name": "career-maker-client",
+  "name": "book-sharing-client",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -17,6 +17,7 @@
     "@mui/styled-engine-sc": "^6.0.0-alpha.4",
     "aos": "^2.3.4",
     "axios": "^1.6.0",
+    "dates-picker": "^1.0.18",
     "firebase": "^10.5.2",
     "flowbite": "^2.0.0",
     "flowbite-react": "^0.6.4",

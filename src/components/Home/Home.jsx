@@ -6,6 +6,7 @@ import BestSelling from "../BestSelling/BestSelling";
 import AtomicHabit from "../AtomicHabit/AtomicHabit";
 import UserReview from "../UserReview/UserReview";
 import Counting from "../Counting/Counting";
+import Kana from "../Kana/Kana";
 
 const Home = () => {
   return (
@@ -20,6 +21,7 @@ const Home = () => {
       <AtomicHabit></AtomicHabit>
       <UserReview></UserReview>
       <Counting></Counting>
+      <Kana></Kana>
     </div>
   );
 };

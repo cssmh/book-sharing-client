@@ -40,7 +40,7 @@ const AddBook = () => {
     };
 
     axios
-      .post("https://book-sharing-server.vercel.app/books", BookInformation)
+      .post("http://localhost:5000/books", BookInformation)
       .then((res) => {
         // console.log(res.data);
         if (res.data.insertedId) {
@@ -64,8 +64,8 @@ const AddBook = () => {
           <h1 className="text-2xl md:text-3xl font-bold">
             Add Book to the <span className="text-green-400">Database</span>
           </h1>
-          <p className="text-gray-500 mt-2">
-            Enter Book details and click Add Book button to add <br></br> Book
+          <p className="text-gray-500 mt-2 mx-2 md:mx-0">
+            Enter Book details and click Add Book button to add Book <br></br>
             to the database. Must add your location <br></br> and your Valid
             Phone number
           </p>
@@ -73,7 +73,7 @@ const AddBook = () => {
       </div>
       <form onSubmit={handleAddBook} className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row gap-3">
-          <div className="form-control md:w-1/2 mx-2 lg:mx-0">
+          <div className="form-control md:w-1/2 mx-3 lg:mx-0">
             <label className="label">
               <span className="label-text">Book Name</span>
             </label>
@@ -84,7 +84,7 @@ const AddBook = () => {
               required
             />
           </div>
-          <div className="form-control md:w-1/2 mx-2 lg:mx-0">
+          <div className="form-control md:w-1/2 mx-3 lg:mx-0">
             <label className="label">
               <span className="label-text">Book Image Url</span>
             </label>
@@ -96,7 +96,7 @@ const AddBook = () => {
           </div>
         </div>
         <div className="flex flex-col md:flex-row gap-3">
-          <div className="form-control md:w-1/2 mx-2 lg:mx-0">
+          <div className="form-control md:w-1/2 mx-3 lg:mx-0">
             <label className="label">
               <span className="label-text">Book Provider Name</span>
             </label>
@@ -107,7 +107,7 @@ const AddBook = () => {
               className="input input-bordered"
             />
           </div>
-          <div className="form-control md:w-1/2 mx-2 lg:mx-0">
+          <div className="form-control md:w-1/2 mx-3 lg:mx-0">
             <label className="label">
               <span className="label-text">Book Provider Email</span>
             </label>
@@ -121,7 +121,7 @@ const AddBook = () => {
           </div>
         </div>
         <div className="flex flex-col md:flex-row gap-3">
-          <div className="form-control md:w-1/2 mx-2 lg:mx-0">
+          <div className="form-control md:w-1/2 mx-3 lg:mx-0">
             <label className="label">
               <span className="label-text">Location</span>
             </label>
@@ -132,7 +132,7 @@ const AddBook = () => {
               className="input input-bordered"
             />
           </div>
-          <div className="form-control md:w-1/2 mx-2 lg:mx-0">
+          <div className="form-control md:w-1/2 mx-3 lg:mx-0">
             <label className="label">
               <span className="label-text">Phone Number</span>
             </label>
