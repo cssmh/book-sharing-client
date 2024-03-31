@@ -2,7 +2,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import swal from "sweetalert";
-import updateImage from "../../assets/LogoUpdate.png";
+import updateImage from "../../assets/Update.png";
 import toast from "react-hot-toast";
 
 const UpdateBook = () => {
@@ -35,7 +35,7 @@ const UpdateBook = () => {
       description,
       phone,
     };
-    
+
     axios
       .put(`https://book-sharing-server.vercel.app/books/${_id}`, updatedBookInfo)
       .then((res) => {
@@ -54,10 +54,10 @@ const UpdateBook = () => {
       <div className="flex flex-col md:flex-row justify-center items-center gap-3 my-6">
         <img src={updateImage} className="md:w-[28%]" alt="" />
         <div className="text-center">
-          <h1 className="text-2xl md:text-3xl font-bold">
+          <h1 className="text-2xl md:text-3xl font-bold mx-2 md:mx-0">
             Update <span className="text-green-400">{book_name}</span>
           </h1>
-          <p className="text-gray-500 mt-2">
+          <p className="text-gray-500 mt-2 mx-2 md:mx-0">
             Enter Book details and click Update Book Details button to <br></br>
             Update the Book data to database
           </p>

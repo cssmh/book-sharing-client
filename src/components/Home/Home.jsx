@@ -20,7 +20,7 @@ const Home = () => {
       <AtomicHabit></AtomicHabit>
       <Review></Review>
       <Counting></Counting>
-    </div>
+      </div>
   );
 };
 

@@ -118,6 +118,15 @@ const Navbar = () => {
               <div className="w-12 rounded-full">
                 <img src={user?.photoURL} alt={user?.displayName} />
               </div>
+              {/* active green icon on photo */}
+              {/* <div className="avatar online">
+                <div className="w-12 rounded-full">
+                  <img
+                    src={user?.photoURL}
+                    style={{ boxShadow: "0 0 0 2px #4299e1" }}
+                  />
+                </div>
+              </div> */}
             </label>
             {showProfileOptions && (
               <ul

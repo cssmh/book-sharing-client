@@ -1,8 +1,8 @@
 import { Outlet, useNavigation } from "react-router-dom";
-import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import { Toaster } from "react-hot-toast";
 import { HashLoader } from "react-spinners";
+import Navbar from "../Components/Navbar/Navbar";
 
 const MainLayout = () => {
   const navigationForSpinner = useNavigation();

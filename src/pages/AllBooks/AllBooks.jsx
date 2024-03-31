@@ -131,7 +131,7 @@ const AllBooks = () => {
                     <option value="3">3</option>
                     <option value="6">6</option>
                     <option value="9">9</option>
-                    <option value="12">12o</option>
+                  <option value="12">12</option>
                   </select>
                 </div>
               </div>

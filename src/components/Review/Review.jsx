@@ -7,11 +7,11 @@ const Review = () => {
   return (
     <div className="max-w-[1200px] mx-auto flex flex-col lg:flex-row justify-center items-center gap-3 my-12">
       <div className="lg:w-2/5 text-center lg:text-left">
-        <p className="text-[35px] font-semibold">
+        <p className="text-[35px] font-semibold mx-1 md:mx-0">
           Hear from Our <span className="text-green-400">Happy Authors</span>
         </p>
-        <p className="text-gray-500 mt-1 font-semibold">
-          Our satisfied collectors share their experiences with us.<br></br>{" "}
+        <p className="lg:w-4/5 text-gray-500 mt-1 font-semibold mx-3 md:mx-0">
+          Our satisfied collectors share their experiences with us.
           Read what they have to say about our services.
         </p>
       </div>
@@ -21,7 +21,7 @@ const Review = () => {
           data-aos-duration="1000"
           className="shadow-xl p-6"
         >
-          <p className="font-medium text-gray-500 pb-2 hover:scale-105 transition-all duration-300">
+          <p className="font-medium text-gray-500 pb-2 hover:scale-105 transition-all duration-300 mb-1">
             I am striving to improve the quality of services and books offered
             by this website. I am committed to attention to detail and
             excellence, aiming for unparalleled quality.
@@ -39,7 +39,7 @@ const Review = () => {
           data-aos-duration="1000"
           className="shadow-xl p-6"
         >
-          <p className="font-medium text-gray-500 pb-2 hover:scale-105 transition-all duration-300">
+          <p className="font-medium text-gray-500 pb-2 hover:scale-105 transition-all duration-300 mb-1">
             Working with this web has been a pleasure. Their dedication to
             customer satisfaction is truly remarkable. I highly recommend their
             services.
@@ -57,7 +57,7 @@ const Review = () => {
           data-aos-duration="1000"
           className="shadow-xl p-6"
         >
-          <p className="font-medium text-gray-500 pb-2 hover:scale-105 transition-all duration-300">
+          <p className="font-medium text-gray-500 pb-2 hover:scale-105 transition-all duration-300 mb-1">
             The team at this web is not only professional but also incredibly
             friendly. They made our project a huge success and exceeded our
             expectations
@@ -75,7 +75,7 @@ const Review = () => {
           data-aos-duration="1000"
           className="shadow-xl p-6"
         >
-          <p className="font-medium text-gray-500 pb-2 hover:scale-105 transition-all duration-300">
+          <p className="font-medium text-gray-500 pb-2 hover:scale-105 transition-all duration-300 mb-1">
             We have been partners with this web for years, and they have
             consistently delivered top-notch solutions. They truly understand
             our business needs.
