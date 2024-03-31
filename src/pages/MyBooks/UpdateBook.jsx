@@ -7,7 +7,17 @@ import toast from "react-hot-toast";
 
 const UpdateBook = () => {
   const bookData = useLoaderData();
-  const { _id, book_image, book_name, description, location, phone } = bookData;
+  const {
+    _id,
+    book_image,
+    book_name,
+    book_provider_name,
+    book_provider_image,
+    description,
+    location,
+    phone,
+  } = bookData;
+  console.log(bookData);
   const navigateTo = useNavigate();
 
   const handleUpdate = (e) => {
@@ -15,29 +25,39 @@ const UpdateBook = () => {
     const form = event.target;
     const book_name = form.book_name.value;
 
-    const get_image = form.book_image.value;
-    const defaultImageUrl =
+    const get_book_image = form.book_image.value;
+    const defaultBookImageUrl =
       "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/soon.jpg";
 
-    const book_image = get_image.trim() !== "" ? get_image : defaultImageUrl;
+    const book_image =
+      get_book_image.trim() !== "" ? get_book_image : defaultBookImageUrl;
     const location = form.location.value;
     const description = form.description.value;
     const phone = form.phone.value;
+    const book_provider_name = form.book_provider_name.value;
+
+    const provider_image = form.book_provider_image.value;
+    const defaultProviderImageUrl =
+      "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/default.jpg";
+    const book_provider_image =
+      provider_image.trim() !== "" ? provider_image : defaultProviderImageUrl;
 
     if (!/^(\+?8801|01)(\d{9})$/.test(phone)) {
       return toast.error("Enter a valid phone number!");
     }
 
     const updatedBookInfo = {
-      location,
       book_name,
       book_image,
-      description,
+      book_provider_name,
+      book_provider_image,
+      location,
       phone,
+      description,
     };
 
     axios
-      .put(`https://book-sharing-server.vercel.app/books/${_id}`, updatedBookInfo)
+      .put(`http://localhost:5000/books/${_id}`, updatedBookInfo)
       .then((res) => {
         if (res.data.modifiedCount > 0) {
           swal("Good job!", "Book Info Updated", "success");
@@ -88,6 +108,35 @@ const UpdateBook = () => {
                 "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/soon.jpg"
                   ? ""
                   : book_image
+              }
+              className="input input-bordered"
+            />
+          </div>
+        </div>
+        <div className="flex flex-col md:flex-row gap-3">
+          <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+            <label className="label">
+              <span className="label-text">Your Name</span>
+            </label>
+            <input
+              name="book_provider_name"
+              required
+              defaultValue={book_provider_name}
+              className="input input-bordered"
+            />
+          </div>
+          <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+            <label className="label">
+              <span className="label-text">Your Image Url</span>
+            </label>
+            <input
+              type="text"
+              name="book_provider_image"
+              defaultValue={
+                book_provider_image ===
+                "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/default.jpg"
+                  ? ""
+                  : book_provider_image
               }
               className="input input-bordered"
             />

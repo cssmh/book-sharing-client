@@ -2,18 +2,17 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import PopularBookCard from "../PopularBookCard/PopularBookCard";
+import axios from "axios";
 
 const PopularBooks = () => {
   const [popularBooks, setPopularBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://book-sharing-server.vercel.app/allBooks")
-      .then((res) => res.json())
-      .then((data) => {
-        setPopularBooks(data.result);
-        setIsLoading(false);
-      });
+    axios.get("http://localhost:5000/allBooks").then((res) => {
+      setPopularBooks(res.data.result);
+      setIsLoading(false);
+    });
   }, []);
 
   return (

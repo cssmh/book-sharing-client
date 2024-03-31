@@ -14,7 +14,7 @@ const MainLayout = () => {
           <HashLoader color="#9933FF" size={36} />
         </div>
       ) : (
-        <div className="min-h-[70vh]">
+        <div className="min-h-min md:min-h-[70vh]">
           <Outlet></Outlet>
         </div>
       )}

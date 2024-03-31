@@ -16,7 +16,7 @@ const AllBooks = () => {
 
   useEffect(() => {
     axios
-      .get(`https://book-sharing-server.vercel.app/allBooks?page=${page}&limit=${limit}`)
+      .get(`http://localhost:5000/allBooks?page=${page}&limit=${limit}`)
       .then((res) => {
         setAllBooks(res?.data?.result);
         setTotalBooks(res?.data?.totalBooks);
@@ -26,11 +26,9 @@ const AllBooks = () => {
 
   // for search book
   useEffect(() => {
-    fetch("https://book-sharing-server.vercel.app/allBooks")
-      .then((res) => res.json())
-      .then((data) => {
-        setTotalBooksForSearch(data.result);
-      });
+    axios
+      .get("http://localhost:5000/allBooks")
+      .then((res) => setTotalBooksForSearch(res.data.result));
   }, []);
   // for search book end
 
@@ -131,7 +129,7 @@ const AllBooks = () => {
                     <option value="3">3</option>
                     <option value="6">6</option>
                     <option value="9">9</option>
-                  <option value="12">12</option>
+                    <option value="12">12</option>
                   </select>
                 </div>
               </div>

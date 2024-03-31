@@ -19,7 +19,7 @@ const AddBook = () => {
     const book_image = get_image.trim() !== "" ? get_image : defaultImageUrl;
     const book_provider_name = form.book_provider_name.value;
     const book_provider_email = form.book_provider_email.value;
-    const book_provider_image = user.photoURL;
+    const book_provider_image = user?.photoURL;
     const location = form.location.value;
     const description = form.description.value;
     const phone = form.phone.value;
@@ -40,7 +40,7 @@ const AddBook = () => {
     };
 
     axios
-      .post("https://book-sharing-server.vercel.app/books", BookInformation)
+      .post("http://localhost:5000/books", BookInformation)
       .then((res) => {
         // console.log(res.data);
         if (res.data.insertedId) {
@@ -98,7 +98,7 @@ const AddBook = () => {
         <div className="flex flex-col md:flex-row gap-3">
           <div className="form-control md:w-1/2 mx-3 lg:mx-0">
             <label className="label">
-              <span className="label-text">Book Provider Name</span>
+              <span className="label-text">Your Name</span>
             </label>
             <input
               type="text"
@@ -109,7 +109,7 @@ const AddBook = () => {
           </div>
           <div className="form-control md:w-1/2 mx-3 lg:mx-0">
             <label className="label">
-              <span className="label-text">Book Provider Email</span>
+              <span className="label-text">Your Email</span>
             </label>
             <input
               type="email"

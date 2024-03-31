@@ -40,10 +40,10 @@ const Profile = () => {
         <div className="space-y-2 mb-3 lg:mb-0 font-semibold border p-4 rounded-lg">
           <p>Hi, {displayName}</p>
           <p>{email}</p>
-          <p>Created At: {metadata.creationTime}</p>
+          <p>Created At: {metadata?.creationTime}</p>
         </div>
       </div>
-      <form onSubmit={handleUpdate} className="card-body mb-4">
+      <form onSubmit={handleUpdate} className="card-body pb-0">
         <p className="text-3xl font-semibold text-center">Update info</p>
         <div className="form-control">
           <label className="label">
@@ -51,7 +51,7 @@ const Profile = () => {
           </label>
           <input
             type="text"
-            defaultValue={user.displayName}
+            defaultValue={user?.displayName}
             name="name"
             className="input input-bordered text-gray-500"
             required

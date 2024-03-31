@@ -12,7 +12,7 @@ const AllBooksCard = ({ getBook }) => {
   } = getBook;
 
   return (
-    <div className="card bg-base-100 shadow-xl py-4">
+    <div className="card bg-base-100 shadow-xl py-4 hover:scale-105 transition-all duration-300">
       <figure>
         <img
           data-aos="zoom-in"

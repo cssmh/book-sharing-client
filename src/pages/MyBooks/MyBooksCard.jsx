@@ -15,7 +15,7 @@ const MyBooksCard = ({ getBook, myBooks, setMyBooks }) => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        fetch(`https://book-sharing-server.vercel.app/books/${_id}`, {
+        fetch(`http://localhost:5000/books/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -45,21 +45,26 @@ const MyBooksCard = ({ getBook, myBooks, setMyBooks }) => {
         />
       </figure>
       <div className="items-center text-center space-y-2 mb-5">
-        <h2 className="text-[22px] font-bold text-blue-900 px-4">
+        <h2 className="text-2xl font-bold text-blue-900 px-4">
           {book_name}
         </h2>
         <p className="text-lg pb-1">Phone: {phone}</p>
         <div className="space-x-1">
+          <Link to={`/book/${_id}`}>
+            <button className="btn border-green-400 hover:border-green-400 bg-yellow-50 hover:bg-green-400 text-green-400 hover:text-white">
+              Details
+            </button>
+          </Link>
           <Link to={`/update-book/${_id}`}>
             <button className="btn border-green-400 bg-base-100 hover:bg-green-400 text-green-400 hover:text-white">
-              Update book
+              Update
             </button>
           </Link>
           <button
             onClick={() => handleDelete(_id, book_name)}
             className="btn border-black bg-base-100 hover:bg-black text-black hover:text-white"
           >
-            delete book
+            delete
           </button>
         </div>
       </div>

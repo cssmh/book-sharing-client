@@ -34,9 +34,9 @@ const AddBookings = ({ getBookData }) => {
   }, [axiosCustom, url]);
 
   const handlePopUp = () => {
-    if (book_provider_email === user?.email) {
-      return toast.error("You are collecting your own book!");
-    }
+    // if (book_provider_email === user?.email) {
+    //   return toast.error("You are collecting your own book!");
+    // }
     if (matching.length > 0) {
       return toast.error("You already booked this!");
     }
@@ -46,12 +46,13 @@ const AddBookings = ({ getBookData }) => {
     openChange(false);
   };
 
+  const bookPhotoFromBookData = book_image;
   const handleBook = (e) => {
     e.preventDefault();
     openChange(false);
+    const book_image = bookPhotoFromBookData;
     const form = event.target;
     const book_name = form.book_name.value;
-    const book_image = form.book_image.value;
     const book_provider_email = form.book_provider_email.value;
     const user_email = form.user_email.value;
     const date = form.date.value;
@@ -72,7 +73,7 @@ const AddBookings = ({ getBookData }) => {
     };
 
     axios
-      .post("https://book-sharing-server.vercel.app/bookings", booking)
+      .post("http://localhost:5000/bookings", booking)
       .then((res) => {
         // console.log(res.data);
         if (res.data.insertedId) {
@@ -93,7 +94,7 @@ const AddBookings = ({ getBookData }) => {
       <Dialog open={open} fullWidth maxWidth="lg">
         <DialogActions>
           <Button onClick={closePop} color="error">
-            X
+            x
           </Button>
         </DialogActions>
         <DialogContent>
@@ -107,18 +108,6 @@ const AddBookings = ({ getBookData }) => {
                 readOnly
                 name="book_name"
                 defaultValue={book_name}
-                className="input input-bordered"
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Book Image URl</span>
-              </label>
-              <input
-                type="text"
-                readOnly
-                name="book_image"
-                defaultValue={book_image}
                 className="input input-bordered"
               />
             </div>
@@ -148,7 +137,9 @@ const AddBookings = ({ getBookData }) => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Pick a Date You Need this book</span>
+                <span className="label-text">
+                  Pick a Date You Need this book
+                </span>
               </label>
               <input
                 type="date"
@@ -172,7 +163,7 @@ const AddBookings = ({ getBookData }) => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Your Phone</span>
+                <span className="label-text">Your Phone Number</span>
               </label>
               <input
                 type="text"

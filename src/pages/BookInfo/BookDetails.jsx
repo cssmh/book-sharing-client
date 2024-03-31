@@ -4,7 +4,6 @@ import { Helmet } from "react-helmet-async";
 import swal from "sweetalert";
 import useContextHook from "../../useCustomHook/useContextHook";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { HashLoader } from "react-spinners";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
@@ -48,7 +47,7 @@ const BookDetails = () => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        fetch(`https://book-sharing-server.vercel.app/books/${_id}`, {
+        fetch(`http://localhost:5000/books/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -116,16 +115,26 @@ const BookDetails = () => {
                 {book_name}
               </h2>
               <p className="md:w-[80%] mx-auto">{description}</p>
-              <div className="card-actions mt-2">
-                <AddBookings getBookData={bookData}></AddBookings>
-              </div>
-              {providerBook.length > 1 && (
-                <Link to={`/provider/${book_provider_email}`}>
-                  <button className="btn btn-sm btn-success text-white mt-1">
-                    Other Books Of {book_provider_name}
+              {book_provider_email !== user?.email && (
+                <div className="card-actions mt-2">
+                  <AddBookings getBookData={bookData}></AddBookings>
+                </div>
+              )}
+              {book_provider_email === user?.email && (
+                <Link to={`/update-book/${_id}`}>
+                  <button className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2">
+                    Update {book_name}
                   </button>
                 </Link>
               )}
+              {providerBook.length > 1 &&
+                book_provider_email !== user?.email && (
+                  <Link to={`/provider/${book_provider_email}`}>
+                    <button className="btn btn-sm rounded-md btn-success text-white mt-1">
+                      Other Books Of {book_provider_name}
+                    </button>
+                  </Link>
+                )}
               {user?.email == "admin@admin.com" && (
                 <button
                   onClick={() => handleDelete(_id)}

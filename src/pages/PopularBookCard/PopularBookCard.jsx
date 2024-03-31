@@ -14,7 +14,7 @@ const PopularBookCard = ({ getBook }) => {
   // HomePage Popular Books card
 
   return (
-    <div className="card bg-base-100 shadow-xl py-4">
+    <div className="card bg-base-100 shadow-xl py-4 hover:scale-105 transition-all duration-300">
       <div data-aos="zoom-in" data-aos-duration="700" data-aos-offset="100">
         <figure>
           <img

@@ -34,7 +34,7 @@ const AdminBooking = () => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axios.delete("https://book-sharing-server.vercel.app/allBookings").then((res) => {
+        axios.delete("http://localhost:5000/allBookings").then((res) => {
           if (res.data.acknowledged) {
             setAdminBookings([]);
             swal("All Bookings Deleted!", {
@@ -50,7 +50,7 @@ const AdminBooking = () => {
 
   useEffect(() => {
     axios
-      .get("https://book-sharing-server.vercel.app/allBooks")
+      .get("http://localhost:5000/allBooks")
       .then((res) => setAllBooks(res.data?.result));
   }, []);
 
@@ -110,7 +110,7 @@ const AdminBooking = () => {
               <div className="flex justify-center">
                 <button
                   onClick={handleDeleteAllBookings}
-                  className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                  className="text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 >
                   Delete all Bookings
                 </button>
