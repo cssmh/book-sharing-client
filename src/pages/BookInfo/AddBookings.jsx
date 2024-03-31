@@ -34,9 +34,6 @@ const AddBookings = ({ getBookData }) => {
   }, [axiosCustom, url]);
 
   const handlePopUp = () => {
-    // if (book_provider_email === user?.email) {
-    //   return toast.error("You are collecting your own book!");
-    // }
     if (matching.length > 0) {
       return toast.error("You already booked this!");
     }
@@ -73,7 +70,7 @@ const AddBookings = ({ getBookData }) => {
     };
 
     axios
-      .post("http://localhost:5000/bookings", booking)
+      .post("https://book-sharing-server.vercel.app/bookings", booking)
       .then((res) => {
         // console.log(res.data);
         if (res.data.insertedId) {
