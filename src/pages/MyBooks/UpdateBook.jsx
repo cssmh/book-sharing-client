@@ -16,9 +16,10 @@ const UpdateBook = () => {
   const axiosCustom = useAxiosHook();
 
   useEffect(() => {
-    // If match not found that means user can't update others book data
+    // If match not found that means Now user can't
+    // update other user book data
     if (!matchFound) {
-      toast.error("Don't try Updating other's Data!");
+      toast.error("Don't try to Update other's Data!");
       navigateTo("/");
     }
   }, [matchFound, navigateTo]);
@@ -81,9 +82,13 @@ const UpdateBook = () => {
     };
 
     axios
-      .put(`https://book-sharing-server.vercel.app/books/${_id}`, updatedBookInfo, {
-        withCredentials: true,
-      })
+      .put(
+        `https://book-sharing-server.vercel.app/books/${_id}`,
+        updatedBookInfo,
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
         if (res?.data?.modifiedCount > 0) {
           swal("Good job!", "Book Info Updated", "success");
