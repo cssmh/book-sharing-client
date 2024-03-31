@@ -113,21 +113,21 @@ const BookDetails = () => {
             </div>
           </div>
           <div className="bg-yellow-50 shadow-xl">
-            <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-center items-center gap-7 py-8">
+            <div className="max-w-[1200px] mx-auto flex flex-col lg:flex-row justify-center items-center gap-3 lg:gap-7 py-8">
               <div className="flex-1">
                 <figure>
                   <img
                     src={book_image}
                     alt="book"
-                    className="rounded-xl w-[85%] lg:w-2/3 mx-auto md:mx-0 md:ml-auto"
+                    className="rounded-xl w-[65%] lg:w-[45%] mx-auto lg:mx-0 lg:ml-auto"
                   />
                 </figure>
               </div>
-              <div className="flex-1 space-y-1 text-center md:text-left">
-                <h2 className="text-2xl font-bold text-blue-900">
+              <div className="flex-1 space-y-1 text-center lg:text-left">
+                <h2 className="text-2xl font-bold text-blue-900 lg:w-[90%] mx-3 lg:mx-0">
                   {book_name}
                 </h2>
-                <p className="mx-4 md:mx-0">{description}</p>
+                <p className="mx-4 lg:mx-0 lg:w-[90%]">{description}</p>
                 {book_provider_email !== user?.email && (
                   <AddBookings getBookData={loadBookData}></AddBookings>
                 )}

@@ -37,4 +37,4 @@
 27. Admin can delete completed bookings also can delete any bookings if he want.
 28. In Book Details page of any Book there is also a delete option for that book only visible for admin.
 29. Pagination added in all books page. User can also change number of books he/she wants to see in a page.
-30. Search system also will work will pagination, search item found will decide pagination.
+30. Search system also will work with pagination, search item found will decide pagination.
