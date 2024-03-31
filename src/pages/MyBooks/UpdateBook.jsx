@@ -1,12 +1,38 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
+import useContextHook from "../../useCustomHook/useContextHook";
 import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import swal from "sweetalert";
 import updateImage from "../../assets/Update.png";
 import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
+import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const UpdateBook = () => {
-  const bookData = useLoaderData();
+  const { user } = useContextHook();
+  const navigateTo = useNavigate();
+  const loaderBookData = useLoaderData();
+  const [matchFound, setMatchFound] = useState([]);
+  const axiosCustom = useAxiosHook();
+
+  useEffect(() => {
+    // If match not found that means user can't update others book data
+    if (!matchFound) {
+      toast.error("Don't try Updating other's Data!");
+      navigateTo("/");
+    }
+  }, [matchFound, navigateTo]);
+
+  const url = `/myBooks?email=${user?.email}`;
+  useEffect(() => {
+    axiosCustom?.get(url).then((res) => {
+      const findMatching = res?.data.find((book) =>
+        loaderBookData._id.includes(book._id)
+      );
+      setMatchFound(findMatching);
+    });
+  }, [axiosCustom, url, loaderBookData._id]);
+
   const {
     _id,
     book_image,
@@ -16,9 +42,7 @@ const UpdateBook = () => {
     description,
     location,
     phone,
-  } = bookData;
-  console.log(bookData);
-  const navigateTo = useNavigate();
+  } = loaderBookData;
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -57,9 +81,11 @@ const UpdateBook = () => {
     };
 
     axios
-      .put(`http://localhost:5000/books/${_id}`, updatedBookInfo)
+      .put(`http://localhost:5000/books/${_id}`, updatedBookInfo, {
+        withCredentials: true,
+      })
       .then((res) => {
-        if (res.data.modifiedCount > 0) {
+        if (res?.data?.modifiedCount > 0) {
           swal("Good job!", "Book Info Updated", "success");
           navigateTo(-1);
         }
@@ -127,7 +153,7 @@ const UpdateBook = () => {
           </div>
           <div className="form-control md:w-1/2 mx-3 lg:mx-0">
             <label className="label">
-              <span className="label-text">Your Image Url</span>
+              <span className="label-text">Your Photo Image Url</span>
             </label>
             <input
               type="text"
@@ -177,7 +203,7 @@ const UpdateBook = () => {
             defaultValue={description}
             cols="10"
             rows="5"
-            className="rounded-lg"
+            className="rounded-2xl border-gray-300"
           ></textarea>
         </div>
         <div className="form-control mt-6">

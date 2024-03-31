@@ -9,7 +9,7 @@ import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const BookDetails = () => {
   const { user } = useContextHook();
-  const bookData = useLoaderData();
+  const loadBookData = useLoaderData();
   const navigateTo = useNavigate();
   const axiosCustom = useAxiosHook();
   const [providerBook, setProviderBook] = useState([]);
@@ -25,7 +25,7 @@ const BookDetails = () => {
     book_provider_email,
     book_provider_name,
     phone,
-  } = bookData;
+  } = loadBookData;
 
   // for same provider book button length
   const url = `/myBooks?email=${book_provider_email}`;
@@ -87,7 +87,7 @@ const BookDetails = () => {
                 alt="no image"
               />
             </figure>
-            <div className="card-body items-center text-center p-5">
+            <div className="card-body items-center text-center p-5 pb-0">
               <h2 className="card-title text-xl text-orange-500 font-bold">
                 Name : {book_provider_name}
               </h2>
@@ -101,48 +101,52 @@ const BookDetails = () => {
                 Phone: <span className="text-cyan-500">{phone}</span>
               </p>
             </div>
-          </div>
-          <div className="card bg-yellow-50 shadow-xl">
-            <figure className="px-10 pt-7">
-              <img
-                src={book_image}
-                alt="book"
-                className="rounded-xl w-[380px]"
-              />
-            </figure>
-            <div className="card-body items-center text-center pt-0">
-              <h2 className="card-title text-2xl font-bold text-blue-900 pt-5">
-                {book_name}
-              </h2>
-              <p className="md:w-[80%] mx-auto">{description}</p>
-              {book_provider_email !== user?.email && (
-                <div className="card-actions mt-2">
-                  <AddBookings getBookData={bookData}></AddBookings>
-                </div>
-              )}
-              {book_provider_email === user?.email && (
-                <Link to={`/update-book/${_id}`}>
-                  <button className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2">
-                    Update {book_name}
-                  </button>
-                </Link>
-              )}
+            <div className="flex justify-center mt-2">
               {providerBook.length > 1 &&
                 book_provider_email !== user?.email && (
                   <Link to={`/provider/${book_provider_email}`}>
-                    <button className="btn btn-sm rounded-md btn-success text-white mt-1">
-                      Other Books Of {book_provider_name}
+                    <button className="btn btn-sm rounded-lg btn-success text-white mt-1">
+                      More Books Of {book_provider_name}
                     </button>
                   </Link>
                 )}
-              {user?.email == "admin@admin.com" && (
-                <button
-                  onClick={() => handleDelete(_id)}
-                  className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                >
-                  Delete {book_name}
-                </button>
-              )}
+            </div>
+          </div>
+          <div className="bg-yellow-50 shadow-xl">
+            <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-center items-center gap-7 py-8">
+              <div className="flex-1">
+                <figure>
+                  <img
+                    src={book_image}
+                    alt="book"
+                    className="rounded-xl w-[85%] lg:w-2/3 mx-auto md:mx-0 md:ml-auto"
+                  />
+                </figure>
+              </div>
+              <div className="flex-1 space-y-1 text-center md:text-left">
+                <h2 className="text-2xl font-bold text-blue-900">
+                  {book_name}
+                </h2>
+                <p className="mx-4 md:mx-0">{description}</p>
+                {book_provider_email !== user?.email && (
+                  <AddBookings getBookData={loadBookData}></AddBookings>
+                )}
+                {book_provider_email === user?.email && (
+                  <Link to={`/update-book/${_id}`}>
+                    <button className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mt-1 mx-2 md:mx-0">
+                      Update {book_name}
+                    </button>
+                  </Link>
+                )}
+                {user?.email == "admin@admin.com" && (
+                  <button
+                    onClick={() => handleDelete(_id)}
+                    className="text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-2 md:mx-0"
+                  >
+                    Delete {book_name}
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>

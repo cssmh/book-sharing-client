@@ -154,7 +154,7 @@ const AddBook = () => {
             placeholder="Write something about your book..."
             cols="10"
             rows="5"
-            className="rounded-xl"
+            className="rounded-2xl border-gray-300"
           ></textarea>
         </div>
         <div className="form-control mt-6">

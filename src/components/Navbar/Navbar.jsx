@@ -68,7 +68,7 @@ const Navbar = () => {
         <Link to={"/"}>
           <div className="flex items-center gap-1">
             <Lottie className="w-0 md:w-14" animationData={loggieData} />
-            <span className="md:ml-2 font-bold text-lg md:text-2xl">
+            <span className="md:ml-1 font-bold text-lg md:text-2xl">
               MBSTU BookHaven
             </span>
           </div>

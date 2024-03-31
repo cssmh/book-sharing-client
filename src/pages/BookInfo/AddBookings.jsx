@@ -18,8 +18,8 @@ const AddBookings = ({ getBookData }) => {
 
   // check already booked or not
   useEffect(() => {
-    const matchFound = allBookings.filter((myData) =>
-      book_name.includes(myData.book_name)
+    const matchFound = allBookings.filter((myBooked) =>
+      book_name.includes(myBooked.book_name)
     );
     setMatching(matchFound);
   }, [allBookings, book_name]);
@@ -89,7 +89,7 @@ const AddBookings = ({ getBookData }) => {
   return (
     <div>
       <Button onClick={handlePopUp} color="primary" variant="contained">
-        Collect {book_name}
+        Collect this Book
       </Button>
       <Dialog open={open} fullWidth maxWidth="lg">
         <DialogActions>

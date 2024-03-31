@@ -6,7 +6,7 @@ import { FallingLines } from "react-loader-spinner";
 
 const MyBookings = () => {
   const { user } = useContextHook();
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [allBookings, setAllBookings] = useState([]);
   const axiosCustom = useAxiosHook();
 
@@ -14,45 +14,45 @@ const MyBookings = () => {
   useEffect(() => {
     axiosCustom?.get(url)?.then((res) => {
       setAllBookings(res.data);
-      setLoading(false);
+      setIsLoading(false);
     });
   }, [axiosCustom, url]);
 
-  if (loading) {
-    return (
-      <div className="flex justify-center">
-        <FallingLines
-          color="#9933FF"
-          width="60"
-          visible={true}
-          ariaLabel="falling-circles-loading"
-        />
-      </div>
-    );
-  }
-
   return (
     <div>
-      {allBookings.length == 0 ? (
-        <p className="text-center text-2xl font-semibold text-red-600 italic">
-          You have No Booking
-        </p>
+      {isLoading ? (
+        <div className="flex justify-center">
+          <FallingLines
+            color="#9933FF"
+            width="60"
+            visible={true}
+            ariaLabel="falling-circles-loading"
+          />
+        </div>
       ) : (
-        <>
-          <h2 className="text-center text-lg md:text-2xl my-6 font-semibold italic">
-            All Bookings made by you
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-            {allBookings.map((booking) => (
-              <MyBookingCard
-                key={booking._id}
-                getBooking={booking}
-                allBookings={allBookings}
-                setAllBookings={setAllBookings}
-              ></MyBookingCard>
-            ))}
-          </div>
-        </>
+        <div>
+          {allBookings.length == 0 ? (
+            <p className="text-center text-2xl font-semibold text-red-600 italic">
+              You have No Booking
+            </p>
+          ) : (
+            <>
+              <h2 className="text-center text-lg md:text-2xl my-6 font-semibold italic">
+                All Bookings made by you
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+                {allBookings.map((booking) => (
+                  <MyBookingCard
+                    key={booking._id}
+                    getBooking={booking}
+                    allBookings={allBookings}
+                    setAllBookings={setAllBookings}
+                  ></MyBookingCard>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
       )}
     </div>
   );

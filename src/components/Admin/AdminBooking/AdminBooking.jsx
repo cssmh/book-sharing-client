@@ -71,7 +71,7 @@ const AdminBooking = () => {
   };
 
   const uniqueEmails = filterUniqueEmails(emails);
-  console.log(uniqueEmails);
+  // console.log(uniqueEmails);
   // finding total book provider end
 
   return (

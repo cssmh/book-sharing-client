@@ -2,11 +2,14 @@ import useContextHook from "../../useCustomHook/useContextHook";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
+import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { user, handleUpdateProfile } = useContextHook();
   const { photoURL, email, displayName, metadata } = user;
   const [dp, setDp] = useState(photoURL);
+
   const handleUpdate = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -29,18 +32,18 @@ const Profile = () => {
       <Helmet>
         <title>BookHaven | My Profile</title>
       </Helmet>
-      <div className="flex flex-col-reverse lg:flex-row items-center gap-5 mt-6">
-        <div className="lg:w-1/2">
+      <div className="flex flex-col-reverse md:flex-row items-center gap-5 mt-6">
+        <div className="w-1/2">
           <img
             src={dp}
             className="rounded-lg lg:w-60 ml-auto px-3 lg:px-0"
             alt=""
           />
         </div>
-        <div className="space-y-2 mb-3 lg:mb-0 font-semibold border p-4 rounded-lg">
+        <div className="space-y-2 mb-3 lg:mb-0 font-semibold border p-4 rounded-lg text-center md:text-left">
           <p>Hi, {displayName}</p>
           <p>{email}</p>
-          <p>Created At: {metadata?.creationTime}</p>
+          <p>Account Created: {metadata?.creationTime}</p>
         </div>
       </div>
       <form onSubmit={handleUpdate} className="card-body pb-0">

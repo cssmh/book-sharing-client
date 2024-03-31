@@ -20,6 +20,7 @@ const Login = () => {
       user?.email == "kona@mail.com" ||
       user?.email == "admin@admin.com"
     ) {
+      toast.success("You already logged in");
       navigateTo("/");
     }
   }, [user?.emailVerified, user?.email, navigateTo]);
