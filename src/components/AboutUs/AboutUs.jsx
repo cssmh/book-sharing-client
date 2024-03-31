@@ -8,10 +8,10 @@ const AboutUs = () => {
       className="mb-6 text-center space-y-2 max-w-7xl mx-auto"
     >
       <div className="px-4 md:px-9">
-        <p className="text-3xl font-semibold text-center mb-5 hover:scale-105 transition-all duration-300">
+        <p className="text-3xl font-semibold text-center mb-5">
           About US
         </p>
-        <p>
+        <p className="text-gray-500 hover:scale-105 transition-all duration-300">
           BookHaven is an innovative online platform dedicated to fostering a
           vibrant community of book lovers and avid readers. With its
           user-friendly interface and extensive library of titles, BookHaven

@@ -34,9 +34,9 @@ const MyPending = () => {
   return (
     <div>
       {pending.length == 0 ? (
-        <p className="text-center text-xl md:text-2xl font-semibold text-red-600 italic">
-          No User Booked Your Books
-        </p>
+          <p className="text-center text-xl md:text-2xl font-semibold text-red-600 italic">
+            No User Booked Your Books
+          </p>
       ) : (
         <>
           <h2 className="text-center text-xl md:text-2xl my-6 font-semibold italic">

@@ -32,9 +32,9 @@ const MyBookings = () => {
       ) : (
         <div>
           {allBookings.length == 0 ? (
-            <p className="text-center text-2xl font-semibold text-red-600 italic">
-              You have No Booking
-            </p>
+              <p className="text-center text-2xl font-semibold text-red-600 italic">
+                You have No Booking
+              </p>
           ) : (
             <>
               <h2 className="text-center text-lg md:text-2xl my-6 font-semibold italic">
