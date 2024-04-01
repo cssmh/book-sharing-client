@@ -1,3 +1,4 @@
+import axios from "axios";
 import swal from "sweetalert";
 
 const AdminBookingCard = ({
@@ -27,22 +28,15 @@ const AdminBookingCard = ({
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        fetch(`http://localhost:5000/bookings/${idx}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            if (data.deletedCount > 0) {
-              const remaining = adminBookings.filter(
-                (book) => book._id !== idx
-              );
-              setAdminBookings(remaining);
-              swal("Deleted!", {
-                icon: "success",
-              });
-            }
-          });
+        axios.delete(`http://localhost:5000/bookings/${idx}`).then((res) => {
+          if (res?.data?.deletedCount > 0) {
+            const remaining = adminBookings.filter((book) => book._id !== idx);
+            setAdminBookings(remaining);
+            swal("Booking Deleted!", {
+              icon: "success",
+            });
+          }
+        });
       } else {
         swal("File is safe!");
       }

@@ -3,6 +3,7 @@ import AddBookings from "./AddBookings";
 import { Helmet } from "react-helmet-async";
 import swal from "sweetalert";
 import useContextHook from "../../useCustomHook/useContextHook";
+import axios from "axios";
 import { HashLoader } from "react-spinners";
 import useProviderBookHook from "../../useCustomHook/useProviderBookHook";
 
@@ -26,7 +27,7 @@ const BookDetails = () => {
   const url = `/myBooks?email=${book_provider_email}`;
   const { isLoading, bookData } = useProviderBookHook(url);
 
-  const handleDelete = (_id) => {
+  const handleDeleteByAdmin = (idx, book) => {
     swal({
       title: "Check again if you want!",
       text: "Delete Confirm?",
@@ -36,18 +37,14 @@ const BookDetails = () => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        fetch(`http://localhost:5000/books/${_id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.deletedCount > 0) {
-              swal("Book Deleted!", {
-                icon: "success",
-              });
-            }
-            navigateTo(-1);
-          });
+        axios.delete(`http://localhost:5000/books/${idx}`).then((res) => {
+          if (res?.data?.deletedCount > 0) {
+            swal(`${book} Deleted!`, {
+              icon: "success",
+            });
+          }
+          navigateTo(-1);
+        });
       } else {
         swal("File is safe!");
       }
@@ -128,7 +125,7 @@ const BookDetails = () => {
                 )}
                 {user?.email == "admin@admin.com" && (
                   <button
-                    onClick={() => handleDelete(_id)}
+                    onClick={() => handleDeleteByAdmin(_id, book_name)}
                     className="text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-2 md:mx-0"
                   >
                     Delete {book_name}

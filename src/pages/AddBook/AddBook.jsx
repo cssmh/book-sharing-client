@@ -103,6 +103,7 @@ const AddBook = () => {
             <input
               type="text"
               name="book_provider_name"
+              readOnly
               defaultValue={user?.displayName}
               className="input input-bordered"
             />

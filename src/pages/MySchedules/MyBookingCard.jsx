@@ -1,3 +1,4 @@
+import axios from "axios";
 import swal from "sweetalert";
 
 const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
@@ -13,7 +14,7 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
   } = getBooking;
   // console.log(_id);
 
-  const handleDelete = (idx, name) => {
+  const handleBookingDelete = (idx) => {
     swal({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -23,20 +24,15 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        fetch(`http://localhost:5000/bookings/${idx}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            if (data.deletedCount > 0) {
-              const remaining = allBookings.filter((book) => book._id !== idx);
-              setAllBookings(remaining);
-              swal(`${name} Deleted!`, {
-                icon: "success",
-              });
-            }
-          });
+        axios.delete(`http://localhost:5000/bookings/${idx}`).then((res) => {
+          if (res?.data?.deletedCount > 0) {
+            const remaining = allBookings.filter((book) => book._id !== idx);
+            setAllBookings(remaining);
+            swal("Deleted!", {
+              icon: "success",
+            });
+          }
+        });
       } else {
         swal("Your file is safe!");
       }
@@ -67,7 +63,7 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
         </div>
         <div className="mt-2 card-actions justify-center">
           <button
-            onClick={() => handleDelete(_id, book_name)}
+            onClick={() => handleBookingDelete(_id)}
             className="btn border-black bg-base-100 hover:bg-black text-black hover:text-white"
           >
             Delete Booking
