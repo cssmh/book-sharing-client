@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import MyBooksCard from "./MyBooksCard";
 import useContextHook from "../../useCustomHook/useContextHook";
-import { FallingLines } from "react-loader-spinner";
+import useFallingLines from "../../useCustomHook/useFallingLines";
 import { Helmet } from "react-helmet-async";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 import NoBook from "../../assets/NoBook.png";
@@ -20,20 +20,14 @@ const MyBooks = () => {
     });
   }, [axiosCustom, url]);
 
+  const fallingLines = useFallingLines();
   return (
     <div>
       <Helmet>
         <title>BookHaven | My-Books</title>
       </Helmet>
       {loading ? (
-        <div className="flex justify-center">
-          <FallingLines
-            color="#9933FF"
-            width="60"
-            visible={true}
-            ariaLabel="falling-circles-loading"
-          />
-        </div>
+        fallingLines
       ) : (
         <div>
           {myBooks.length == 0 ? (

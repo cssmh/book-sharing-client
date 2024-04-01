@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { FallingLines } from "react-loader-spinner";
 import useContextHook from "../../useCustomHook/useContextHook";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 import MyPendingCard from "./MyPendingCard";
+import useFallingLines from "../../useCustomHook/useFallingLines";
 
 const MyPending = () => {
   const { user } = useContextHook();
@@ -18,25 +18,17 @@ const MyPending = () => {
     });
   }, [axiosCustom, url]);
 
+  const fallingLines = useFallingLines();
   if (loading) {
-    return (
-      <div className="flex justify-center">
-        <FallingLines
-          color="#9933FF"
-          width="60"
-          visible={true}
-          ariaLabel="falling-circles-loading"
-        />
-      </div>
-    );
+    return fallingLines;
   }
 
   return (
     <div>
       {pending.length == 0 ? (
-          <p className="text-center text-xl md:text-2xl font-semibold text-red-600 italic">
-            No User Booked Your Books
-          </p>
+        <p className="text-center text-xl md:text-2xl font-semibold text-red-600 italic">
+          No User Booked Your Books
+        </p>
       ) : (
         <>
           <h2 className="text-center text-xl md:text-2xl my-6 font-semibold italic">

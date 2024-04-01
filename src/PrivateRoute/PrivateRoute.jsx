@@ -1,22 +1,14 @@
 import useContextHook from "../useCustomHook/useContextHook";
 import { Navigate, useLocation } from "react-router-dom";
-import { FallingLines } from "react-loader-spinner";
+import useFallingLines from "../useCustomHook/useFallingLines";
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useContextHook();
   const location = useLocation();
   // console.log(location);
+  const fallingLines = useFallingLines();
   if (loading) {
-    return (
-      <div className="flex justify-center">
-        <FallingLines
-          color="#9933FF"
-          width="60"
-          visible={true}
-          ariaLabel="falling-circles-loading"
-        />
-      </div>
-    );
+    return fallingLines;
   }
 
   if (!loading && user?.email) {

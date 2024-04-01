@@ -12,7 +12,6 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
     date,
     book_provider_email,
   } = getBooking;
-  // console.log(_id);
 
   const handleBookingDelete = (idx) => {
     swal({
