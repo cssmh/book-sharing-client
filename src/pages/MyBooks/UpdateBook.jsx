@@ -1,12 +1,12 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import useContextHook from "../../useCustomHook/useContextHook";
 import { useEffect, useState } from "react";
-import useAxiosHook from "../../useCustomHook/useAxiosHook";
-import axios from "axios";
-import { Helmet } from "react-helmet-async";
 import swal from "sweetalert";
-import updateImage from "../../assets/Update.png";
+import axios from "axios";
+import useAxiosHook from "../../useCustomHook/useAxiosHook";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
+import updateImage from "../../assets/Update.png";
 
 const UpdateBook = () => {
   const { user } = useContextHook();
@@ -83,7 +83,7 @@ const UpdateBook = () => {
 
     axios
       .put(
-        `http://localhost:5000/books/${_id}`,
+        `https://book-sharing-server.vercel.app/books/${_id}`,
         updatedBookInfo,
         {
           withCredentials: true,

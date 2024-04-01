@@ -21,6 +21,7 @@ const useAxiosHook = () => {
         if (error.response.status === 401 || error.response.status === 403) {
           logOut()
             .then(() => {
+              // token expire or any 401 || 403 happened
               toast.error("Authorization error, login again!");
               navigateTo("/login");
             })
