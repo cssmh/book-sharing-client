@@ -9,6 +9,9 @@ const SameProvider = () => {
   // same provider book data getting
   const url = `/myBooks?email=${getUser?.email}`;
   const { isLoading, bookData } = useProviderBookHook(url);
+  // if more than one book then show books plural
+  const bookText =
+    bookData?.length === 1 || bookData?.length === 0 ? "Book" : "Books";
 
   return (
     <>
@@ -19,7 +22,7 @@ const SameProvider = () => {
       ) : (
         <>
           <p className="my-4 text-center font-semibold text-2xl">
-            Total {bookData?.length} Books
+            {`Total ${bookData?.length} ${bookText}`}
           </p>
           <div className="max-w-7xl mx-auto gap-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {bookData?.map((soloBook) => (

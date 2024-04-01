@@ -35,7 +35,7 @@ const AdminBooking = () => {
       if (willDelete) {
         // main code
         axios.delete("http://localhost:5000/allBookings").then((res) => {
-          if (res.data.acknowledged) {
+          if (res.data?.acknowledged) {
             setAdminBookings([]);
             swal("All Bookings Deleted!", {
               icon: "success",

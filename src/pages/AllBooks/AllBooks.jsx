@@ -54,8 +54,8 @@ const AllBooks = () => {
             <input
               type="text"
               name="name"
-              placeholder="Search Here"
-              className="input input-bordered w-80 border-red-500"
+              placeholder="Search for Books or Authors"
+              className="input input-bordered md:w-80 border-red-500"
               onChange={(e) => {
                 searchTerm = e.target.value;
                 // console.log(searchTerm);
@@ -63,26 +63,38 @@ const AllBooks = () => {
                   setAllBooks(totalBooksForSearch);
                   setTotalBooks(totalBooksForSearch.length);
                 } else {
-                  const searchItem = totalBooksForSearch.filter((books) =>
-                    books.book_name
-                      .toLowerCase()
-                      .includes(searchTerm.toLowerCase())
+                  const searchItem = totalBooksForSearch.filter(
+                    (books) =>
+                      books.book_name
+                        .toLowerCase()
+                        .includes(searchTerm.toLowerCase()) ||
+                      books.book_provider_name
+                        .toLowerCase()
+                        .includes(searchTerm.toLowerCase())
                   );
                   setAllBooks(searchItem);
                   setTotalBooks(searchItem.length);
                 }
               }}
             />
-            <h2 className="mt-4 text-2xl md:text-3xl font-semibold italic">
-              All Books Available for you
-            </h2>
+            {allBooks.length > 0 && (
+              <h2 className="mt-4 text-xl md:text-[28px] font-semibold italic">
+                All Books Available for you
+              </h2>
+            )}
           </div>
           <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-              {allBooks.map((book) => (
-                <AllBooksCard key={book._id} getBook={book}></AllBooksCard>
-              ))}
-            </div>
+            {allBooks.length === 0 ? (
+              <p className="text-center text-xl md:text-2xl font-semibold text-red-600 mt-10">
+                No Book found!
+              </p>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+                {allBooks.map((book) => (
+                  <AllBooksCard key={book._id} getBook={book}></AllBooksCard>
+                ))}
+              </div>
+            )}
             {allBooks.length > 0 && (
               <div className="flex justify-center mt-8">
                 <div className="join">

@@ -91,14 +91,13 @@ const BookDetails = () => {
               </p>
             </div>
             <div className="flex justify-center mt-2">
-              {bookData.length > 1 &&
-                book_provider_email !== user?.email && (
-                  <Link to={`/provider/${book_provider_email}`}>
-                    <button className="btn btn-sm rounded-lg btn-success text-white mt-1">
-                      More Books Of {book_provider_name}
-                    </button>
-                  </Link>
-                )}
+              {bookData.length > 1 && book_provider_email !== user?.email && (
+                <Link to={`/provider/${book_provider_email}`}>
+                  <button className="btn btn-sm rounded-lg btn-success text-white mt-1">
+                    More Books Of {book_provider_name}
+                  </button>
+                </Link>
+              )}
             </div>
           </div>
           <div className="bg-yellow-50 shadow-xl">

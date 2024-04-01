@@ -83,7 +83,7 @@ const UpdateBook = () => {
 
     axios
       .put(
-        `https://book-sharing-server.vercel.app/books/${_id}`,
+        `http://localhost:5000/books/${_id}`,
         updatedBookInfo,
         {
           withCredentials: true,
