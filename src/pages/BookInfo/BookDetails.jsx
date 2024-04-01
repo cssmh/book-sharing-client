@@ -3,17 +3,13 @@ import AddBookings from "./AddBookings";
 import { Helmet } from "react-helmet-async";
 import swal from "sweetalert";
 import useContextHook from "../../useCustomHook/useContextHook";
-import { useEffect, useState } from "react";
 import { HashLoader } from "react-spinners";
-import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import useMyBooksCustomHook from "../../useCustomHook/useMyBooksCustomHook";
 
 const BookDetails = () => {
   const { user } = useContextHook();
   const loadBookData = useLoaderData();
   const navigateTo = useNavigate();
-  const axiosCustom = useAxiosHook();
-  const [providerBook, setProviderBook] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   const {
     _id,
@@ -27,15 +23,8 @@ const BookDetails = () => {
     phone,
   } = loadBookData;
 
-  // for same provider book button length
   const url = `/myBooks?email=${book_provider_email}`;
-  useEffect(() => {
-    axiosCustom?.get(url).then((res) => {
-      setProviderBook(res.data);
-      setIsLoading(false);
-    });
-  }, [axiosCustom, url]);
-  // for same provider book button length end
+  const { isLoading, providerBook } = useMyBooksCustomHook(url);
 
   const handleDelete = (_id) => {
     swal({
@@ -47,7 +36,7 @@ const BookDetails = () => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        fetch(`https://book-sharing-server.vercel.app/books/${_id}`, {
+        fetch(`http://localhost:5000/books/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -75,7 +64,7 @@ const BookDetails = () => {
           <HashLoader color="#9933FF" size={36} />
         </div>
       ) : (
-        <div>
+        <>
           <div className="card max-w-xl mx-auto bg-amber-100 shadow-xl p-6 my-6">
             <h2 className="text-center font-bold text-3xl italic text-blue-800">
               Book Provider Information
@@ -149,7 +138,7 @@ const BookDetails = () => {
               </div>
             </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );
