@@ -11,7 +11,6 @@ const PopularBookCard = ({ getBook }) => {
     location,
   } = getBook;
   let smallDesc = description.slice(0, 130);
-  // HomePage Popular Books card
 
   return (
     <div className="card bg-base-100 shadow-xl py-4 hover:scale-105 transition-all duration-300">
@@ -20,7 +19,7 @@ const PopularBookCard = ({ getBook }) => {
           <img
             src={book_image}
             alt="Books"
-            className="rounded-xl w-[46%] lg:h-[270px]"
+            className="rounded-xl w-[46%]"
           />
         </figure>
       </div>

@@ -25,7 +25,7 @@ const SameProviderCard = ({ getBooks }) => {
             <img
               src={book_image}
               alt="Books"
-              className="rounded-xl w-[46%]"
+              className="rounded-xl w-[46%] h-[270px]"
             />
           </figure>
         </div>

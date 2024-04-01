@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 import swal from "sweetalert";
 import useContextHook from "../../useCustomHook/useContextHook";
 import { HashLoader } from "react-spinners";
-import useMyBooksCustomHook from "../../useCustomHook/useMyBooksCustomHook";
+import useProviderBookHook from "../../useCustomHook/useProviderBookHook";
 
 const BookDetails = () => {
   const { user } = useContextHook();
@@ -24,7 +24,7 @@ const BookDetails = () => {
   } = loadBookData;
 
   const url = `/myBooks?email=${book_provider_email}`;
-  const { isLoading, providerBook } = useMyBooksCustomHook(url);
+  const { isLoading, bookData } = useProviderBookHook(url);
 
   const handleDelete = (_id) => {
     swal({
@@ -91,7 +91,7 @@ const BookDetails = () => {
               </p>
             </div>
             <div className="flex justify-center mt-2">
-              {providerBook.length > 1 &&
+              {bookData.length > 1 &&
                 book_provider_email !== user?.email && (
                   <Link to={`/provider/${book_provider_email}`}>
                     <button className="btn btn-sm rounded-lg btn-success text-white mt-1">

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import NoBook from "../../../assets/NoBook.png";
+import NoBook from "../../../assets/CartEmpty.png";
 import { Link, useLoaderData } from "react-router-dom";
 import AdminBookingCard from "../AdminBookingCard/AdminBookingCard";
 import swal from "sweetalert";
@@ -7,6 +7,7 @@ import axios from "axios";
 import useAxiosHook from "../../../useCustomHook/useAxiosHook";
 import { HashLoader } from "react-spinners";
 import useContextHook from "../../../useCustomHook/useContextHook";
+import useTotalProviderHook from "../../../useCustomHook/useTotalProviderHook";
 
 const AdminBooking = () => {
   const { user } = useContextHook();
@@ -14,7 +15,7 @@ const AdminBooking = () => {
   const [adminBookings, setAdminBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const axiosCustom = useAxiosHook();
-  const [allBooks, setAllBooks] = useState([]);
+  const { uniqueEmails } = useTotalProviderHook();
 
   const url = `/allBookings?email=${user?.email}`;
   useEffect(() => {
@@ -47,32 +48,6 @@ const AdminBooking = () => {
       }
     });
   };
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/allBooks")
-      .then((res) => setAllBooks(res.data?.result));
-  }, []);
-
-  // finding total book provider
-  const emails = allBooks?.map((book) => book.book_provider_email);
-  const filterUniqueEmails = (emails) => {
-    const uniqueEmails = [];
-    const seen = new Set();
-
-    emails?.forEach((email) => {
-      if (!seen.has(email)) {
-        uniqueEmails.push(email);
-        seen.add(email);
-      }
-    });
-
-    return uniqueEmails;
-  };
-
-  const uniqueEmails = filterUniqueEmails(emails);
-  // console.log(uniqueEmails);
-  // finding total book provider end
 
   return (
     <div>

@@ -43,7 +43,7 @@ const AddBook = () => {
       .post("http://localhost:5000/books", BookInformation)
       .then((res) => {
         // console.log(res.data);
-        if (res.data.insertedId) {
+        if (res.data?.insertedId) {
           swal("Thank You!", `${book_name} Book added`, "success");
           form.reset();
         }

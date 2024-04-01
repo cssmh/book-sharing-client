@@ -28,7 +28,7 @@ const AllBooks = () => {
   useEffect(() => {
     axios
       .get("http://localhost:5000/allBooks")
-      .then((res) => setTotalBooksForSearch(res.data.result));
+      .then((res) => setTotalBooksForSearch(res.data?.result));
   }, []);
   // for search book end
 

@@ -25,10 +25,7 @@ const AboutUs = () => {
           for every reader. One of the standout features of BookHaven is its
           emphasis on community engagement. Users can join book clubs,
           participate in discussion forums, and even organize local meetups with
-          other members who share their interests. This sense of camaraderie and
-          shared passion for reading creates a supportive and dynamic
-          environment where users can connect with like-minded individuals from
-          around the world.
+          other members who share their interests.
         </p>
       </div>
     </div>

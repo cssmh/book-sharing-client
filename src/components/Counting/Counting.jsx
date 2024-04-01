@@ -1,35 +1,8 @@
-import { useEffect, useState } from "react";
 import pencil from "../../assets/pencil.jpg";
-import axios from "axios";
+import useTotalProviderHook from "../../useCustomHook/useTotalProviderHook";
 
 const Counting = () => {
-  const [allBooks, setAllBooks] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/allBooks")
-      .then((res) => setAllBooks(res.data.result));
-  }, []);
-
-  // finding total book provider
-  const emails = allBooks.map((book) => book.book_provider_email);
-  const filterUniqueEmails = (emails) => {
-    const uniqueEmails = [];
-    const seen = new Set();
-
-    emails.forEach((email) => {
-      if (!seen.has(email)) {
-        uniqueEmails.push(email);
-        seen.add(email);
-      }
-    });
-
-    return uniqueEmails;
-  };
-
-  const uniqueEmails = filterUniqueEmails(emails);
-  // console.log(uniqueGmail.length);
-  // finding total book provider end
+  const { uniqueEmails, allBooks } = useTotalProviderHook();
 
   return (
     <div
