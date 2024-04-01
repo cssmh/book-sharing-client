@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet-async";
 const MySchedules = () => {
   const [activeComponent, setActiveComponent] = useState("MyBookings");
 
-  const showBook = () => {
+  const showBooking = () => {
     setActiveComponent("MyBookings");
   };
   const showPending = () => {
@@ -19,7 +19,7 @@ const MySchedules = () => {
       </Helmet>
       <div className="flex justify-center gap-4 mt-6 mb-4">
         <button
-          onClick={showBook}
+          onClick={showBooking}
           className={
             activeComponent === "MyBookings"
               ? "btn btn-primary text-white"
