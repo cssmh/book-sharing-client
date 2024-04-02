@@ -34,7 +34,7 @@ const Navbar = () => {
   ) {
     greeting = "Good night";
   } else if (currentTime >= 1 && currentTime < 4) {
-    greeting = "Working late";
+    greeting = "Working late?";
   }
   // console.log(greeting);
 

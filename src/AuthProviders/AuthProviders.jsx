@@ -66,13 +66,13 @@ const AuthProviders = ({ children }) => {
       setLoading(false);
       if (loggedEmail) {
         axios
-          .post("http://localhost:5000/jwt", getEmail, {
+          .post("https://book-sharing-server.vercel.app/jwt", getEmail, {
             withCredentials: true,
           })
           .then((res) => console.log("login token res", res.data));
       } else {
         axios
-          .post("http://localhost:5000/logout", getEmail, {
+          .post("https://book-sharing-server.vercel.app/logout", getEmail, {
             withCredentials: true,
           })
           .then((res) => console.log("logout token res", res.data));

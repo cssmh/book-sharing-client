@@ -33,4 +33,4 @@
 24. In admin dashboard admin can see Total Books, Total Book Providers, Providers email and Total Bookings also all bookings with their details.
 25. AllBookings from database made only admin authorized only. Valid token and valid user but still user can't access that. Implemented admin email condition there in server to access for admin email only.
 26. Admin can delete any bookings like completed bookings or all bookings at a time.
-27. One user can't update other user book data using book id from url.
+27. One user can't update other user's book data using book id from url.
