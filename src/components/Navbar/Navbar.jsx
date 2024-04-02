@@ -7,6 +7,7 @@ import { useState } from "react";
 const Navbar = () => {
   const { user, logOut } = useContextHook();
   const [showProfileOptions, setShowProfileOptions] = useState(false);
+
   const handleProfileClick = () => {
     setShowProfileOptions(!showProfileOptions);
   };
@@ -14,6 +15,21 @@ const Navbar = () => {
   const handleLogout = () => {
     logOut().then().catch();
   };
+
+  const date = new Date();
+  const currentTime = date.getHours();
+
+  let greeting;
+  if (currentTime >= 6 && currentTime < 12) {
+    greeting = "Good morning";
+  } else if (currentTime >= 12 && currentTime < 18) {
+    greeting = "Good afternoon";
+  } else if (currentTime >= 18 && currentTime < 20) {
+    greeting = "Good evening";
+  } else {
+    greeting = "Good night";
+  }
+  // console.log(greeting);
 
   return (
     <div className="navbar bg-base-200 rounded-lg mb-1 md:px-4">
@@ -108,6 +124,17 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
+        <div className="flex flex-col items-center justify-center text-center font-semibold text-sm md:btn pointer-events-none mr-1 md:mr-0">
+          {user ? (
+            <>
+              <p>{greeting}</p>
+              <p>{user.displayName}</p>
+            </>
+          ) : (
+            <p>{greeting}</p>
+          )}
+        </div>
+
         {user?.email ? (
           <div className="dropdown dropdown-end">
             <label
@@ -134,7 +161,9 @@ const Navbar = () => {
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
               >
                 <li>
-                  <p className="btn btn-sm btn-ghost">{user?.displayName}</p>
+                  <p className="btn pointer-events-none btn-sm btn-ghost">
+                    {user?.displayName}
+                  </p>
                   <button className="btn btn-sm btn-ghost">
                     <Link to={"/profile"}>View Profile</Link>
                   </button>
