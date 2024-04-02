@@ -109,10 +109,12 @@ const BookDetails = () => {
                 </figure>
               </div>
               <div className="flex-1 space-y-1 text-center lg:text-left">
-                <h2 className="text-2xl font-bold text-blue-900 lg:w-[90%] mx-3 lg:mx-0">
+                <h2 className="text-2xl font-bold text-blue-900 lg:w-[90%] mx-3 md:mx-0">
                   {book_name}
                 </h2>
-                <p className="mx-4 lg:mx-0 lg:w-[90%]">{description}</p>
+                <p className="mx-4 lg:mx-0 md:w-[80%] lg:w-[90%] md:mx-auto">
+                  {description}
+                </p>
                 {book_provider_email !== user?.email && (
                   <AddBookings getBookData={loadBookData}></AddBookings>
                 )}

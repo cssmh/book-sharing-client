@@ -10,7 +10,7 @@ const PopularBooks = () => {
 
   useEffect(() => {
     axios.get("https://book-sharing-server.vercel.app/allBooks").then((res) => {
-      setPopularBooks(res.data.result);
+      setPopularBooks(res?.data?.result);
       setIsLoading(false);
     });
   }, []);
