@@ -59,19 +59,20 @@ const AuthProviders = ({ children }) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       // console.log("user in ", currentUser);
+
       const loggedEmail = currentUser?.email || user?.email;
       const getEmail = { email: loggedEmail };
       setUser(currentUser);
       setLoading(false);
       if (loggedEmail) {
         axios
-          .post("https://book-sharing-server.vercel.app/jwt", getEmail, {
+          .post("http://localhost:5000/jwt", getEmail, {
             withCredentials: true,
           })
           .then((res) => console.log("login token res", res.data));
       } else {
         axios
-          .post("https://book-sharing-server.vercel.app/logout", getEmail, {
+          .post("http://localhost:5000/logout", getEmail, {
             withCredentials: true,
           })
           .then((res) => console.log("logout token res", res.data));

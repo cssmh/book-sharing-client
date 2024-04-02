@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useContextHook from "../../useCustomHook/useContextHook";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
@@ -10,6 +10,8 @@ const Register = () => {
   const { user, createUser, handleUpdateProfile, emailVerification, logOut } =
     useContextHook();
   const navigateTo = useNavigate();
+  const location = useLocation();
+  console.log(location.state);
 
   useEffect(() => {
     // If user is already logged in, will redirect to home page
@@ -18,7 +20,7 @@ const Register = () => {
       user?.email == "kona@mail.com" ||
       user?.email == "admin@admin.com"
     ) {
-      toast.success("You already logged in")
+      toast.success("You already logged in");
       navigateTo("/");
     }
   }, [user?.emailVerified, user?.email, navigateTo]);
@@ -49,16 +51,22 @@ const Register = () => {
     createUser(email, password)
       .then(() => {
         handleUpdateProfile(name, photo).then(() => {
-          toast.success("User register success");
+          emailVerification().then(() =>
+            toast.success(
+              "Register success! Check your inbox for a verification email!"
+            )
+          );
         });
-        emailVerification().then(() =>
-          toast("Check your email to verify your account first!")
-        );
-        logOut().then().catch();
-        navigateTo("/login");
+        navigateTo(location?.state ? location.state : "/");
+        // Introduce a 1-second delay before showing the toast error
+        setTimeout(() => {
+          toast.error("Sorry! Email verification Required");
+          logOut().then().catch();
+          navigateTo("/login");
+        }, 1500);
       })
-      .catch(() => {
-        toast.error("Email Already Registered");
+      .catch((err) => {
+        toast.error(err.message);
       });
   };
 
