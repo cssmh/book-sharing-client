@@ -11,7 +11,6 @@ const Register = () => {
     useContextHook();
   const navigateTo = useNavigate();
   const location = useLocation();
-  console.log(location.state);
 
   useEffect(() => {
     // If user is already logged in, will redirect to home page
