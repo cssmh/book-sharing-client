@@ -37,7 +37,7 @@ const BookDetails = () => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axios.delete(`https://book-sharing-server.vercel.app/books/${idx}`).then((res) => {
+        axios.delete(`http://localhost:5000/books/${idx}`).then((res) => {
           if (res?.data?.deletedCount > 0) {
             swal(`${book} Deleted!`, {
               icon: "success",

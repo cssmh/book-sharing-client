@@ -82,13 +82,9 @@ const UpdateBook = () => {
     };
 
     axios
-      .put(
-        `https://book-sharing-server.vercel.app/books/${_id}`,
-        updatedBookInfo,
-        {
-          withCredentials: true,
-        }
-      )
+      .put(`http://localhost:5000/books/${_id}`, updatedBookInfo, {
+        withCredentials: true,
+      })
       .then((res) => {
         if (res?.data?.modifiedCount > 0) {
           swal("Good job!", "Book Info Updated", "success");
@@ -121,10 +117,12 @@ const UpdateBook = () => {
               <span className="label-text">Book Name</span>
             </label>
             <input
+              type="text"
               name="book_name"
               required
               defaultValue={book_name}
-              className="input input-bordered"
+              className="input input-bordered focus:border-transparent"
+              style={{ outline: "none" }}
             />
           </div>
           <div className="form-control md:w-1/2 mx-3 lg:mx-0">
@@ -140,7 +138,8 @@ const UpdateBook = () => {
                   ? ""
                   : book_image
               }
-              className="input input-bordered"
+              className="input input-bordered focus:border-transparent"
+              style={{ outline: "none" }}
             />
           </div>
         </div>
@@ -150,10 +149,12 @@ const UpdateBook = () => {
               <span className="label-text">Your Name</span>
             </label>
             <input
+              type="text"
               name="book_provider_name"
               required
               defaultValue={book_provider_name}
-              className="input input-bordered"
+              className="input input-bordered focus:border-transparent"
+              style={{ outline: "none" }}
             />
           </div>
           <div className="form-control md:w-1/2 mx-3 lg:mx-0">
@@ -169,7 +170,8 @@ const UpdateBook = () => {
                   ? ""
                   : book_provider_image
               }
-              className="input input-bordered"
+              className="input input-bordered focus:border-transparent"
+              style={{ outline: "none" }}
             />
           </div>
         </div>
@@ -183,7 +185,8 @@ const UpdateBook = () => {
               required
               name="location"
               defaultValue={location}
-              className="input input-bordered"
+              className="input input-bordered focus:border-transparent"
+              style={{ outline: "none" }}
             />
           </div>
           <div className="form-control md:w-1/2 mx-3 lg:mx-0">
@@ -195,7 +198,8 @@ const UpdateBook = () => {
               required
               name="phone"
               defaultValue={phone}
-              className="input input-bordered"
+              className="input input-bordered focus:border-transparent"
+              style={{ outline: "none" }}
             />
           </div>
         </div>
@@ -208,7 +212,7 @@ const UpdateBook = () => {
             defaultValue={description}
             cols="10"
             rows="5"
-            className="rounded-2xl border-gray-300"
+            className="rounded-2xl border-gray-300 focus:border-transparent"
           ></textarea>
         </div>
         <div className="form-control mt-6">

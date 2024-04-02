@@ -40,7 +40,7 @@ const AddBook = () => {
     };
 
     axios
-      .post("https://book-sharing-server.vercel.app/books", BookInformation)
+      .post("http://localhost:5000/books", BookInformation)
       .then((res) => {
         // console.log(res.data);
         if (res.data?.insertedId) {
@@ -80,8 +80,9 @@ const AddBook = () => {
             <input
               type="text"
               name="book_name"
-              className="input input-bordered"
               required
+              className="input input-bordered focus:border-transparent"
+              style={{ outline: "none" }}
             />
           </div>
           <div className="form-control md:w-1/2 mx-3 lg:mx-0">
@@ -91,7 +92,8 @@ const AddBook = () => {
             <input
               type="text"
               name="book_image"
-              className="input input-bordered"
+              className="input input-bordered focus:border-transparent"
+              style={{ outline: "none" }}
             />
           </div>
         </div>
@@ -105,7 +107,8 @@ const AddBook = () => {
               name="book_provider_name"
               readOnly
               defaultValue={user?.displayName}
-              className="input input-bordered"
+              className="input input-bordered focus:border-transparent"
+              style={{ outline: "none" }}
             />
           </div>
           <div className="form-control md:w-1/2 mx-3 lg:mx-0">
@@ -117,7 +120,8 @@ const AddBook = () => {
               readOnly
               name="book_provider_email"
               defaultValue={user?.email}
-              className="input input-bordered"
+              className="input input-bordered focus:border-transparent"
+              style={{ outline: "none" }}
             />
           </div>
         </div>
@@ -130,7 +134,8 @@ const AddBook = () => {
               type="text"
               required
               name="location"
-              className="input input-bordered"
+              className="input input-bordered focus:border-transparent"
+              style={{ outline: "none" }}
             />
           </div>
           <div className="form-control md:w-1/2 mx-3 lg:mx-0">
@@ -142,7 +147,8 @@ const AddBook = () => {
               required
               defaultValue={"+880"}
               name="phone"
-              className="input input-bordered"
+              className="input input-bordered focus:border-transparent"
+              style={{ outline: "none" }}
             />
           </div>
         </div>
@@ -155,7 +161,7 @@ const AddBook = () => {
             placeholder="Write something about your book..."
             cols="10"
             rows="5"
-            className="rounded-2xl border-gray-300"
+            className="rounded-2xl border-gray-300 focus:border-transparent"
           ></textarea>
         </div>
         <div className="form-control mt-6">

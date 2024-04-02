@@ -43,16 +43,15 @@ const AddBookings = ({ getBookData }) => {
     openChange(false);
   };
 
-  const bookPhotoFromBookData = book_image;
   const handleBook = (e) => {
     e.preventDefault();
     openChange(false);
-    const book_image = bookPhotoFromBookData;
     const form = event.target;
     const book_name = form.book_name.value;
     const book_provider_email = form.book_provider_email.value;
     const user_email = form.user_email.value;
     const date = form.date.value;
+    const book_image = form.book_image_URL.value;
     const instruction = form.instruction.value;
     const buyerPhone = form.phone.value;
     const status = "Pending";
@@ -70,7 +69,7 @@ const AddBookings = ({ getBookData }) => {
     };
 
     axios
-      .post("https://book-sharing-server.vercel.app/bookings", booking)
+      .post("http://localhost:5000/bookings", booking)
       .then((res) => {
         // console.log(res.data);
         if (res.data.insertedId) {
@@ -90,62 +89,98 @@ const AddBookings = ({ getBookData }) => {
       </Button>
       <Dialog open={open} fullWidth maxWidth="lg">
         <DialogActions>
-          <Button onClick={closePop} color="error">
+          <Button onClick={closePop} color="info">
             x
           </Button>
         </DialogActions>
         <DialogContent>
-          <form onSubmit={handleBook} className=" md:w-3/4 lg:w-1/2 mx-auto">
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Book Name</span>
-              </label>
-              <input
-                type="text"
-                readOnly
-                name="book_name"
-                defaultValue={book_name}
-                className="input input-bordered"
-              />
+          <form onSubmit={handleBook} className="md:w-[65%] mx-auto">
+            <div className="flex flex-col md:flex-row gap-3">
+              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+                <label className="label">
+                  <span className="label-text">Book Name</span>
+                </label>
+                <input
+                  type="text"
+                  readOnly
+                  name="book_name"
+                  defaultValue={book_name}
+                  className="input input-bordered focus:border-transparent"
+                  style={{ outline: "none" }}
+                />
+              </div>
+              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+                <label className="label">
+                  <span className="label-text">Book Image URL</span>
+                </label>
+                <input
+                  type="text"
+                  readOnly
+                  name="book_image_URL"
+                  defaultValue={book_image}
+                  className="input input-bordered focus:border-transparent"
+                  style={{ outline: "none" }}
+                />
+              </div>
             </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Book Provider Email</span>
-              </label>
-              <input
-                type="email"
-                readOnly
-                name="book_provider_email"
-                defaultValue={book_provider_email}
-                className="input input-bordered"
-              />
+            <div className="flex flex-col md:flex-row gap-3">
+              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+                <label className="label">
+                  <span className="label-text">Your Email</span>
+                </label>
+                <input
+                  type="email"
+                  readOnly
+                  name="user_email"
+                  defaultValue={user?.email}
+                  className="input input-bordered focus:border-transparent"
+                  style={{ outline: "none" }}
+                />
+              </div>
+              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+                <label className="label">
+                  <span className="label-text">Book Provider Email</span>
+                </label>
+                <input
+                  type="email"
+                  readOnly
+                  name="book_provider_email"
+                  defaultValue={book_provider_email}
+                  className="input input-bordered focus:border-transparent"
+                  style={{ outline: "none" }}
+                />
+              </div>
             </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Your Email</span>
-              </label>
-              <input
-                type="email"
-                readOnly
-                name="user_email"
-                defaultValue={user?.email}
-                className="input input-bordered"
-              />
+            <div className="flex flex-col md:flex-row gap-3">
+              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+                <label className="label">
+                  <span className="label-text">Your Phone Number</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  name="phone"
+                  defaultValue="+880"
+                  className="input input-bordered focus:border-transparent"
+                  style={{ outline: "none" }}
+                />
+              </div>
+              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+                <label className="label">
+                  <span className="label-text">
+                    Pick a Date You Need this book
+                  </span>
+                </label>
+                <input
+                  type="date"
+                  name="date"
+                  required
+                  className="input input-bordered focus:border-transparent"
+                  style={{ outline: "none" }}
+                />
+              </div>
             </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">
-                  Pick a Date You Need this book
-                </span>
-              </label>
-              <input
-                type="date"
-                name="date"
-                required
-                className="input input-bordered"
-              />
-            </div>
-            <div className="form-control">
+            <div className="form-control mx-3 lg:mx-0">
               <label className="label">
                 <span className="label-text">
                   Any Message for Book Provider?
@@ -155,22 +190,10 @@ const AddBookings = ({ getBookData }) => {
                 name="instruction"
                 cols="5"
                 rows="5"
-                className="rounded-lg"
+                className="rounded-2xl focus:border-transparent"
               ></textarea>
             </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Your Phone Number</span>
-              </label>
-              <input
-                type="text"
-                required
-                name="phone"
-                defaultValue="+880"
-                className="input input-bordered"
-              />
-            </div>
-            <div className="form-control mt-6">
+            <div className="form-control mt-5">
               <button className="btn btn-outline border-none bg-green-400 hover:bg-green-400 text-white">
                 Purchase Book
               </button>
