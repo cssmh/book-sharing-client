@@ -48,6 +48,19 @@ const AdminBooking = () => {
     });
   };
 
+  // if length is 0 or more than one book then
+  // show Books/Providers/Bookings plural form. Just a try
+  const resultText =
+    result?.length === 1 || result?.length === 0 ? "Book" : "Books";
+  const uniqueEmailsText =
+    uniqueEmails?.length === 1 || uniqueEmails?.length === 0
+      ? "Provider"
+      : "Providers";
+  const adminBookingsText =
+    adminBookings?.length === 1 || adminBookings?.length === 0
+      ? "Booking"
+      : "Bookings";
+
   return (
     <div>
       {isLoading ? (
@@ -61,8 +74,8 @@ const AdminBooking = () => {
             <Link className="text-green-500" to={"/all-books"}>
               {result?.length}{" "}
             </Link>
-            Books, Total {uniqueEmails?.length} Book Providers and Total{" "}
-            {adminBookings?.length} Bookings
+            {resultText}, Total {uniqueEmails?.length} Book {uniqueEmailsText}{" "}
+            and Total {adminBookings?.length} {adminBookingsText}
           </p>
           <div className="max-w-[1180px] mx-2 lg:mx-auto grid md:grid-cols-3 py-3 text-center border border-green-400 rounded-lg mb-3">
             {uniqueEmails?.map((provider, idx) => (
