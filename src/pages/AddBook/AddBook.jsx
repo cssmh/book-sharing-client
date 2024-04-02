@@ -40,7 +40,7 @@ const AddBook = () => {
     };
 
     axios
-      .post("https://book-sharing-server.vercel.app/books", BookInformation)
+      .post("http://localhost:5000/books", BookInformation)
       .then((res) => {
         // console.log(res.data);
         if (res.data?.insertedId) {

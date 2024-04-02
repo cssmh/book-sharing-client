@@ -66,7 +66,7 @@ const Login = () => {
   const handleForgotPassword = () => {
     const email = getEmail.current.value;
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      toast.error("Give me a valid email address");
+      toast.error("Please provide a valid email address");
       return;
     } else {
       resetPassword(email)
@@ -92,7 +92,8 @@ const Login = () => {
             required
             name="email"
             placeholder="Email"
-            className="input input-bordered border-green-700"
+            className="input input-bordered border-green-500 focus:border-transparent"
+            style={{ outline: "none" }}
           />
         </div>
         <div className="form-control relative">
@@ -104,7 +105,8 @@ const Login = () => {
             required
             name="password"
             placeholder="Password"
-            className="input input-bordered border-green-700"
+            className="input input-bordered border-green-500 focus:border-transparent"
+            style={{ outline: "none" }}
           />
           <span
             className="absolute top-[51px] right-4"
@@ -129,7 +131,7 @@ const Login = () => {
         </div>
       </form>
       <div className="text-center mt-4">
-        Do not have an account{" "}
+        Do not have an account?{" "}
         <Link
           state={location.state}
           className="text-green-400 font-bold"

@@ -135,7 +135,7 @@ const Navbar = () => {
           {user ? (
             <>
               <p>{greeting}</p>
-              <p>{user.displayName}</p>
+              <p>{user?.displayName}</p>
             </>
           ) : (
             <p>{greeting}</p>

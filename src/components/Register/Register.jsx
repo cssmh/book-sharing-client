@@ -7,6 +7,7 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const Register = () => {
   const [view, setView] = useState(true);
+  const [passError, setPassError] = useState("");
   const { user, createUser, handleUpdateProfile, emailVerification, logOut } =
     useContextHook();
   const navigateTo = useNavigate();
@@ -24,6 +25,22 @@ const Register = () => {
     }
   }, [user?.emailVerified, user?.email, navigateTo]);
 
+  // Password condition now handling using onchange
+  const handleEyeOnPassword = (e) => {
+    const getPassword = e.target.value;
+    if (getPassword === "") {
+      setPassError("");
+    } else if (getPassword.length < 6) {
+      setPassError(
+        "Make your password at least 6 character and one Uppercase letter!"
+      );
+    } else if (!/[A-Z]/.test(getPassword)) {
+      setPassError("Add at least one Uppercase letter");
+    } else {
+      setPassError("");
+    }
+  };
+
   const handleRegister = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
@@ -37,16 +54,10 @@ const Register = () => {
     const email = form.get("email");
     const password = form.get("password");
     // console.log(name, photo, email, password);
-
-    if (password.length < 6) {
-      toast.error(
-        "Make your password at least 6 character or more and one Uppercase letter!"
-      );
-      return;
-    } else if (!/[A-Z]/.test(password)) {
-      toast.error("Add at least one Uppercase letter");
+    if (passError) {
       return;
     }
+
     createUser(email, password)
       .then(() => {
         handleUpdateProfile(name, photo).then(() => {
@@ -57,12 +68,12 @@ const Register = () => {
           );
         });
         navigateTo(location?.state ? location.state : "/");
-        // Introduce a 1-second delay before showing the toast error
+        // Introduce a 1.7-second delay before showing the toast error
         setTimeout(() => {
           toast.error("Sorry! Email verification Required");
           logOut().then().catch();
           navigateTo("/login");
-        }, 1500);
+        }, 1700);
       })
       .catch((err) => {
         toast.error(err.message);
@@ -85,7 +96,8 @@ const Register = () => {
             required
             name="name"
             placeholder="Name"
-            className="input input-bordered border-green-500"
+            className="input input-bordered border-green-500 focus:border-transparent"
+            style={{ outline: "none" }}
           />
         </div>
         <div className="form-control">
@@ -96,7 +108,8 @@ const Register = () => {
             type="text"
             name="photo"
             placeholder="Photo URL"
-            className="input input-bordered  border-green-500"
+            className="input input-bordered border-green-500 focus:border-transparent"
+            style={{ outline: "none" }}
           />
         </div>
         <div className="form-control">
@@ -108,7 +121,8 @@ const Register = () => {
             required
             name="email"
             placeholder="Email"
-            className="input input-bordered border-green-500"
+            className="input input-bordered border-green-500 focus:border-transparent"
+            style={{ outline: "none" }}
           />
         </div>
         <div className="form-control relative">
@@ -118,9 +132,11 @@ const Register = () => {
           <input
             type={view ? "password" : "text"}
             required
+            onChange={handleEyeOnPassword}
             name="password"
             placeholder="Password"
-            className="input input-bordered  border-green-500"
+            className="input input-bordered border-green-500 focus:border-transparent"
+            style={{ outline: "none" }}
           />
           <span
             className="absolute top-[51px] right-4"
@@ -128,8 +144,11 @@ const Register = () => {
           >
             {view ? <FaRegEyeSlash /> : <FaRegEye />}
           </span>
+          <span className="text-red-500 text-[16px] font-normal mt-1 ml-3">
+            {passError}
+          </span>
         </div>
-        <div className="form-control mt-6">
+        <div className="form-control mt-5">
           <button className="btn border-green-400 hover:border-green-400 bg-base-100 hover:bg-green-400 text-green-400 hover:text-white">
             Register
           </button>
