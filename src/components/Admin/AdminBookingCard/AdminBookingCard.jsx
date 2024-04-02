@@ -28,7 +28,7 @@ const AdminBookingCard = ({
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axios.delete(`http://localhost:5000/bookings/${idx}`).then((res) => {
+        axios.delete(`https://book-sharing-server.vercel.app/bookings/${idx}`).then((res) => {
           if (res?.data?.deletedCount > 0) {
             const remaining = adminBookings.filter((book) => book._id !== idx);
             setAdminBookings(remaining);

@@ -5,7 +5,7 @@ const useTotalProviderHook = () => {
   const [allBooks, setAllBooks] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/allBooks")
+      .get("https://book-sharing-server.vercel.app/allBooks")
       .then((res) => setAllBooks(res.data?.result));
   }, []);
 
