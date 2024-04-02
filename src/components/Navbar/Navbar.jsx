@@ -20,14 +20,21 @@ const Navbar = () => {
   const currentTime = date.getHours();
 
   let greeting;
-  if (currentTime >= 6 && currentTime < 12) {
+  if (currentTime >= 4 && currentTime < 6) {
+    greeting = "Whoa, early bird";
+  } else if (currentTime >= 6 && currentTime < 12) {
     greeting = "Good morning";
-  } else if (currentTime >= 12 && currentTime < 18) {
+  } else if (currentTime >= 12 && currentTime < 16) {
     greeting = "Good afternoon";
-  } else if (currentTime >= 18 && currentTime < 20) {
+  } else if (currentTime >= 16 && currentTime < 20) {
     greeting = "Good evening";
-  } else {
+  } else if (
+    (currentTime >= 20 && currentTime <= 23) ||
+    (currentTime >= 0 && currentTime < 1)
+  ) {
     greeting = "Good night";
+  } else if (currentTime >= 1 && currentTime < 4) {
+    greeting = "Working late";
   }
   // console.log(greeting);
 
