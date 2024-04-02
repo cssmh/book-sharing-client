@@ -1,12 +1,11 @@
 ## MBSTU BookHaven
 
 ## Live:
-
 ### https://bookshare-c1817.web.app
-
 ### https://bookhaven1.netlify.app
+### https://open-rest.surge.sh
 
-- Feature of this Project:
+### Feature of this Project:
 
 1. User signUp with name, photoURL, email password, also can login using google account.
 2. Verification email will be sent while new user register. New Register user can't login without email verification.
