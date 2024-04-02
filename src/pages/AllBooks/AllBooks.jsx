@@ -7,19 +7,21 @@ import { HashLoader } from "react-spinners";
 const AllBooks = () => {
   let searchTerm;
   const [allBooks, setAllBooks] = useState([]);
-  const [totalBooks, setTotalBooks] = useState(0);
+  const [totalBooksCount, setTotalBooksCount] = useState(0);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(9);
   const [isLoading, setIsLoading] = useState(true);
-  const booksPerPageCount = Math.ceil(totalBooks / limit);
   const [totalBooksForSearch, setTotalBooksForSearch] = useState([]);
+  const booksPerPageCount = Math.ceil(totalBooksCount / limit);
 
   useEffect(() => {
     axios
-      .get(`https://book-sharing-server.vercel.app/allBooks?page=${page}&limit=${limit}`)
+      .get(
+        `https://book-sharing-server.vercel.app/allBooks?page=${page}&limit=${limit}`
+      )
       .then((res) => {
         setAllBooks(res?.data?.result);
-        setTotalBooks(res?.data?.totalBooks);
+        setTotalBooksCount(res?.data?.totalBooks);
         setIsLoading(false);
       });
   }, [page, limit]);
@@ -55,13 +57,13 @@ const AllBooks = () => {
               type="text"
               name="name"
               placeholder="Search for Books or Authors"
-              className="input input-bordered md:w-80 border-red-500"
+              className="input input-bordered min-w-[75%] md:min-w-[320px] border-red-500"
               onChange={(e) => {
                 searchTerm = e.target.value;
                 // console.log(searchTerm);
                 if (searchTerm === "") {
                   setAllBooks(totalBooksForSearch);
-                  setTotalBooks(totalBooksForSearch.length);
+                  setTotalBooksCount(totalBooksForSearch.length);
                 } else {
                   const searchItem = totalBooksForSearch.filter(
                     (books) =>
@@ -73,7 +75,7 @@ const AllBooks = () => {
                         .includes(searchTerm.toLowerCase())
                   );
                   setAllBooks(searchItem);
-                  setTotalBooks(searchItem.length);
+                  setTotalBooksCount(searchItem.length);
                 }
               }}
             />
@@ -96,53 +98,59 @@ const AllBooks = () => {
               </div>
             )}
             {allBooks.length > 0 && (
-              <div className="flex justify-center mt-8">
-                <div className="join">
-                  <button
-                    onClick={handlePrevious}
-                    className="join-item btn btn-active hover:border-green-400 hover:bg-yellow-50 border-green-400 bg-yellow-50 hover:text-green-40 text-green-400"
-                  >
-                    Previous
-                  </button>
-                  {Array(booksPerPageCount)
-                    .fill(0)
-                    .map((getPage, idx) => {
-                      const pageNumber = idx + 1;
-                      return (
-                        <button
-                          onClick={() => setPage(pageNumber)}
-                          key={pageNumber}
-                          className={
-                            page === pageNumber
-                              ? "btn border-green-400 hover:border-green-400 bg-green-400 text-white rounded-none"
-                              : "btn border-green-400 hover:border-green-400 bg-yellow-50 hover:bg-green-400 text-green-400 hover:text-white rounded-none"
-                          }
-                        >
-                          {pageNumber}
-                        </button>
-                      );
-                    })}
-                  <button
-                    onClick={handleNext}
-                    className="join-item btn btn-active hover:border-green-400 hover:bg-yellow-50 border-green-400 bg-yellow-50 hover:text-green-40 text-green-400"
-                  >
-                    Next
-                  </button>
-                </div>
-                <div className="text-center mb-4">
-                  <select
-                    onChange={(e) => {
-                      setLimit(parseInt(e.target.value));
-                      setPage(1);
-                    }}
-                    defaultValue={limit}
-                    className="input input-bordered border-green-400 text-green-500 outline-none"
-                  >
-                    <option value="3">3</option>
-                    <option value="6">6</option>
-                    <option value="9">9</option>
-                    <option value="12">12</option>
-                  </select>
+              <div className="flex justify-center">
+                <div className="flex flex-col md:flex-row justify-center mt-8">
+                  <div className="join">
+                    <button
+                      onClick={handlePrevious}
+                      className="join-item btn btn-active hover:border-green-400 hover:bg-yellow-50 border-green-400 bg-yellow-50 hover:text-green-40 text-green-400"
+                    >
+                      Previous
+                    </button>
+                    {/* flex md:flex-wrap justify-center md:justify-start 
+                    to avoid space */}
+                    <div className="flex flex-wrap m-0 justify-center md:justify-start">
+                      {Array(booksPerPageCount)
+                        .fill(0)
+                        .map((getPage, idx) => {
+                          const pageNumber = idx + 1;
+                          return (
+                            <button
+                              onClick={() => setPage(pageNumber)}
+                              key={pageNumber}
+                              className={
+                                page === pageNumber
+                                  ? "btn border-green-400 hover:border-green-400 bg-green-400 text-white rounded-none mb-2"
+                                  : "btn border-green-400 hover:border-green-400 bg-yellow-50 hover:bg-green-400 text-green-400 hover:text-white rounded-none mb-2 md:mb-0"
+                              }
+                            >
+                              {pageNumber}
+                            </button>
+                          );
+                        })}
+                    </div>
+                    <button
+                      onClick={handleNext}
+                      className="join-item btn btn-active hover:border-green-400 hover:bg-yellow-50 border-green-400 bg-yellow-50 hover:text-green-40 text-green-400"
+                    >
+                      Next
+                    </button>
+                  </div>
+                  <div className="ml-6 md:ml-0 text-center md:text-left mt-2 md:mt-0">
+                    <select
+                      onChange={(e) => {
+                        setLimit(parseInt(e.target.value));
+                        setPage(1);
+                      }}
+                      defaultValue={limit}
+                      className="input input-bordered border-green-400 text-green-500 outline-none"
+                    >
+                      <option value="3">3</option>
+                      <option value="6">6</option>
+                      <option value="9">9</option>
+                      <option value="12">12</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             )}
