@@ -14,7 +14,7 @@ const AddBook = () => {
 
     const get_image = form.book_image.value;
     const defaultImageUrl =
-      "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/soon.jpg";
+      "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/CoverSoon.png";
 
     const book_image = get_image.trim() !== "" ? get_image : defaultImageUrl;
     const book_provider_name = form.book_provider_name.value;

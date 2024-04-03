@@ -2,13 +2,13 @@ import useContextHook from "../../useCustomHook/useContextHook";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
-import useAxiosHook from "../../useCustomHook/useAxiosHook";
-import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { user, handleUpdateProfile } = useContextHook();
   const { photoURL, email, displayName, metadata } = user;
+  // state for show changed at a time update, no need to reload.
   const [dp, setDp] = useState(photoURL);
+  const [name, setName] = useState(displayName);
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -23,6 +23,7 @@ const Profile = () => {
       .then(() => {
         toast.success("update success");
         setDp(photo);
+        setName(name);
       })
       .catch((err) => toast.error(err.message));
   };
@@ -56,7 +57,7 @@ const Profile = () => {
           </label>
           <input
             type="text"
-            defaultValue={user?.displayName}
+            defaultValue={name}
             name="name"
             className="input input-bordered text-gray-500"
             required

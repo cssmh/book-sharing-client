@@ -52,7 +52,7 @@ const UpdateBook = () => {
 
     const get_book_image = form.book_image.value;
     const defaultBookImageUrl =
-      "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/soon.jpg";
+      "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/CoverSoon.png";
 
     const book_image =
       get_book_image.trim() !== "" ? get_book_image : defaultBookImageUrl;
@@ -134,7 +134,7 @@ const UpdateBook = () => {
               name="book_image"
               defaultValue={
                 book_image ===
-                "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/soon.jpg"
+                "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/CoverSoon.png"
                   ? ""
                   : book_image
               }
