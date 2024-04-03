@@ -69,14 +69,14 @@ const BookDetails = () => {
             <h2 className="text-center font-bold text-3xl italic text-blue-800">
               Book Provider Information
             </h2>
-            <figure className="px-10 pt-7">
+            <figure className="px-10 pt-5">
               <img
-                className="rounded-xl w-24"
+                className="rounded-lg w-24 md:w-28"
                 src={book_provider_image}
                 alt="no image"
               />
             </figure>
-            <div className="card-body items-center text-center p-5 pb-0">
+            <div className="card-body items-center text-center p-4 pb-0">
               <h2 className="card-title text-xl text-orange-500 font-bold">
                 Name : {book_provider_name}
               </h2>
@@ -84,7 +84,7 @@ const BookDetails = () => {
                 Email: {book_provider_email}
               </p>
               <p className="text-lg font-medium">
-                Location: <span className="text-blue-500">{location}</span>
+                Location: <span className="text-blue-600">{location}</span>
               </p>
               <p className="text-lg font-medium">
                 Phone: <span className="text-cyan-500">{phone}</span>
@@ -100,46 +100,70 @@ const BookDetails = () => {
               )}
             </div>
           </div>
-          <div className="bg-yellow-50 shadow-xl">
-            <div className="max-w-[1200px] mx-auto flex flex-col lg:flex-row justify-center items-center gap-3 lg:gap-7 py-8">
-              <div className="flex-1">
-                <figure>
-                  <img
-                    src={book_image}
-                    alt="book"
-                    className="rounded-xl w-[65%] lg:w-[45%] mx-auto lg:mx-0 lg:ml-auto"
-                  />
-                </figure>
-              </div>
-              <div className="flex-1 space-y-1 text-center lg:text-left">
-                <h2 className="text-2xl font-bold text-blue-900 lg:w-[90%] mx-3 md:mx-0">
-                  {book_name}
-                </h2>
-                <p className="mx-4 lg:mx-0 md:w-[80%] lg:w-[90%] md:mx-auto">
-                  {description}
-                </p>
-                {book_provider_email !== user?.email && (
-                  <AddBookings getBookData={loadBookData}></AddBookings>
-                )}
-                <div>
-                  {book_provider_email === user?.email && (
-                    <Link to={`/update-book/${_id}`}>
-                      <button className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mt-1 mx-2 md:mx-0">
-                        Update {book_name}
-                      </button>
-                    </Link>
-                  )}
-                </div>
-                <div>
-                  {user?.email == "admin@admin.com" && (
+          <div className="max-w-[1200px] mx-auto flex flex-col lg:flex-row justify-center items-center gap-3 lg:gap-7 py-8">
+            <div className="flex-1">
+              <figure>
+                <img
+                  src={book_image}
+                  alt="book"
+                  className="rounded-xl w-[65%] lg:w-[45%] mx-auto lg:mx-0 lg:ml-auto"
+                />
+              </figure>
+            </div>
+            <div className="flex-1 space-y-1 text-center lg:text-left">
+              <h2 className="text-2xl font-bold text-blue-900 lg:w-[90%] mx-3 md:mx-0">
+                {book_name}
+              </h2>
+              <div className="mx-4 lg:mx-0 md:w-[80%] lg:w-[90%] md:mx-auto">
+                {description.length < 750 ? (
+                  description
+                ) : (
+                  <>
+                    {description.slice(0, 730)}
                     <button
-                      onClick={() => handleDeleteByAdmin(_id, book_name)}
-                      className="text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-2 md:mx-0"
+                      className="btn btn-sm ml-1 rounded-lg"
+                      onClick={() =>
+                        document.getElementById("my_modal_4").showModal()
+                      }
                     >
-                      Delete {book_name}
+                      More Details...
                     </button>
-                  )}
-                </div>
+                    <dialog id="my_modal_4" className="modal">
+                      <div className="modal-box w-11/12 max-w-5xl">
+                        <div className="modal-action mt-0">
+                          <form method="dialog">
+                            <button className="btn btn-primary text-white btn-sm rounded-lg">
+                              close
+                            </button>
+                          </form>
+                        </div>
+                        <p className="py-1">{description}</p>
+                      </div>
+                    </dialog>
+                  </>
+                )}
+              </div>
+              {book_provider_email !== user?.email && (
+                <AddBookings getBookData={loadBookData}></AddBookings>
+              )}
+              <div>
+                {book_provider_email === user?.email && (
+                  <Link to={`/update-book/${_id}`}>
+                    <button className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mt-1 mx-2 md:mx-0">
+                      Update {book_name}
+                    </button>
+                  </Link>
+                )}
+              </div>
+              <div>
+                {user?.email == "admin@admin.com" && (
+                  <button
+                    onClick={() => handleDeleteByAdmin(_id, book_name)}
+                    className="text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-2 md:mx-0"
+                  >
+                    Delete {book_name}
+                  </button>
+                )}
               </div>
             </div>
           </div>

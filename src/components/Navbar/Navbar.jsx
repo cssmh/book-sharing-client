@@ -28,14 +28,14 @@ const Navbar = () => {
     greeting = "Good afternoon";
   } else if (currentTime >= 16 && currentTime < 20) {
     greeting = "Good evening";
-  } else if (
-    (currentTime >= 20 && currentTime <= 23) ||
-    (currentTime >= 0 && currentTime < 1)
-  ) {
+  } else if (currentTime >= 20 && currentTime < 24) {
     greeting = "Good night";
+  } else if (currentTime >= 24 || currentTime < 1) {
+    greeting = "Sleep tight";
   } else if (currentTime >= 1 && currentTime < 4) {
     greeting = "Working late?";
   }
+
   // console.log(greeting);
 
   return (
