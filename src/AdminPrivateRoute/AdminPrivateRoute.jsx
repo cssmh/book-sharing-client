@@ -1,20 +1,26 @@
 import { Navigate } from "react-router-dom";
 import useContextHook from "../useCustomHook/useContextHook";
-import useFallingLines from "../useCustomHook/useFallingLines";
-import toast from "react-hot-toast";
+import { FallingLines } from "react-loader-spinner";
 
 const AdminPrivateRoute = ({ children }) => {
   const { user, loading } = useContextHook();
-  const fallingLines = useFallingLines();
 
   if (loading) {
-    return fallingLines;
+    return (
+      <div className="flex justify-center">
+        <FallingLines
+          color="#9933FF"
+          width="60"
+          visible={true}
+          ariaLabel="falling-circles-loading"
+        />
+      </div>
+    );
   }
 
   if (user?.email == "admin@admin.com") {
     return children;
   } else {
-    toast.error("Admin route access violation detected. Access denied.");
     return <Navigate to="/"></Navigate>;
   }
 };

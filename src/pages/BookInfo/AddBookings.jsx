@@ -69,12 +69,12 @@ const AddBookings = ({ getBookData }) => {
     };
 
     axios
-      .post("https://book-sharing-server.vercel.app/bookings", booking)
+      .post("http://localhost:5000/addBooking", booking)
       .then((res) => {
         // console.log(res.data);
-        if (res.data.insertedId) {
+        if (res.data?.insertedId) {
           swal("Congratulations!", "Booking Complete", "success");
-          setMatching(res.data.insertedId);
+          setMatching(res.data?.insertedId);
         }
       })
       .then((err) => {

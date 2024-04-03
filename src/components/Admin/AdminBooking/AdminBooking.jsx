@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import AdminBookingCard from "../AdminBookingCard/AdminBookingCard";
-import swal from "sweetalert";
-import axios from "axios";
-import useAxiosHook from "../../../useCustomHook/useAxiosHook";
-import { HashLoader } from "react-spinners";
 import useContextHook from "../../../useCustomHook/useContextHook";
 import useTotalProviderHook from "../../../useCustomHook/useTotalProviderHook";
+import useAxiosHook from "../../../useCustomHook/useAxiosHook";
+import swal from "sweetalert";
+import { HashLoader } from "react-spinners";
 
 const AdminBooking = () => {
   const { user } = useContextHook();
@@ -34,8 +33,9 @@ const AdminBooking = () => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axios.delete("https://book-sharing-server.vercel.app/allBookings").then((res) => {
+        axiosCustom.delete(`/allBookings?email=${user?.email}`).then((res) => {
           if (res.data?.acknowledged) {
+            console.log(res.data);
             setAdminBookings([]);
             swal("All Bookings Deleted!", {
               icon: "success",
@@ -88,7 +88,7 @@ const AdminBooking = () => {
             </p>
           ) : (
             <div className="space-y-5">
-              {adminBookings.map((booking) => (
+              {adminBookings?.map((booking) => (
                 <AdminBookingCard
                   key={booking._id}
                   getAllBooking={booking}

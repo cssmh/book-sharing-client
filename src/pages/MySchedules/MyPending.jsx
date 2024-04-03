@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useContextHook from "../../useCustomHook/useContextHook";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 import MyPendingCard from "./MyPendingCard";
-import useFallingLines from "../../useCustomHook/useFallingLines";
+import { FallingLines } from "react-loader-spinner";
 
 const MyPending = () => {
   const { user } = useContextHook();
@@ -18,9 +18,17 @@ const MyPending = () => {
     });
   }, [axiosCustom, url]);
 
-  const fallingLines = useFallingLines();
   if (loading) {
-    return fallingLines;
+    return (
+      <div className="flex justify-center">
+        <FallingLines
+          color="#9933FF"
+          width="60"
+          visible={true}
+          ariaLabel="falling-circles-loading"
+        />
+      </div>
+    );
   }
 
   return (

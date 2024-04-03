@@ -2,7 +2,7 @@ import MyBookingCard from "./MyBookingCard";
 import { useEffect, useState } from "react";
 import useContextHook from "../../useCustomHook/useContextHook";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
-import useFallingLines from "../../useCustomHook/useFallingLines";
+import { FallingLines } from "react-loader-spinner";
 
 const MyBookings = () => {
   const { user } = useContextHook();
@@ -18,11 +18,17 @@ const MyBookings = () => {
     });
   }, [axiosCustom, url]);
 
-  const fallingLines = useFallingLines();
   return (
     <div>
       {isLoading ? (
-        fallingLines
+        <div className="flex justify-center">
+          <FallingLines
+            color="#9933FF"
+            width="60"
+            visible={true}
+            ariaLabel="falling-circles-loading"
+          />
+        </div>
       ) : (
         <div>
           {allBookings.length == 0 ? (

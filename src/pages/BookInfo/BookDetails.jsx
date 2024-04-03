@@ -3,12 +3,13 @@ import AddBookings from "./AddBookings";
 import { Helmet } from "react-helmet-async";
 import swal from "sweetalert";
 import useContextHook from "../../useCustomHook/useContextHook";
-import axios from "axios";
 import { HashLoader } from "react-spinners";
 import useProviderBookHook from "../../useCustomHook/useProviderBookHook";
+import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const BookDetails = () => {
   const { user } = useContextHook();
+  const axiosCustom = useAxiosHook();
   const loadBookData = useLoaderData();
   const navigateTo = useNavigate();
 
@@ -37,14 +38,16 @@ const BookDetails = () => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axios.delete(`https://book-sharing-server.vercel.app/books/${idx}`).then((res) => {
-          if (res?.data?.deletedCount > 0) {
-            swal(`${book} Deleted!`, {
-              icon: "success",
-            });
-          }
-          navigateTo(-1);
-        });
+        axiosCustom
+          .delete(`/books/${idx}/${book_provider_email}`)
+          .then((res) => {
+            if (res?.data?.deletedCount > 0) {
+              swal(`${book} Deleted!`, {
+                icon: "success",
+              });
+            }
+            navigateTo(-1);
+          });
       } else {
         swal("File is safe!");
       }
@@ -118,21 +121,25 @@ const BookDetails = () => {
                 {book_provider_email !== user?.email && (
                   <AddBookings getBookData={loadBookData}></AddBookings>
                 )}
-                {book_provider_email === user?.email && (
-                  <Link to={`/update-book/${_id}`}>
-                    <button className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mt-1 mx-2 md:mx-0">
-                      Update {book_name}
+                <div>
+                  {book_provider_email === user?.email && (
+                    <Link to={`/update-book/${_id}`}>
+                      <button className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mt-1 mx-2 md:mx-0">
+                        Update {book_name}
+                      </button>
+                    </Link>
+                  )}
+                </div>
+                <div>
+                  {user?.email == "admin@admin.com" && (
+                    <button
+                      onClick={() => handleDeleteByAdmin(_id, book_name)}
+                      className="text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-2 md:mx-0"
+                    >
+                      Delete {book_name}
                     </button>
-                  </Link>
-                )}
-                {user?.email == "admin@admin.com" && (
-                  <button
-                    onClick={() => handleDeleteByAdmin(_id, book_name)}
-                    className="text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-2 md:mx-0"
-                  >
-                    Delete {book_name}
-                  </button>
-                )}
+                  )}
+                </div>
               </div>
             </div>
           </div>

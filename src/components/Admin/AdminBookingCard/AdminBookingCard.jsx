@@ -18,7 +18,7 @@ const AdminBookingCard = ({
     buyerPhone,
   } = getAllBooking;
 
-  const handleDelete = (idx) => {
+  const handleDeleteByAdmin = (idx) => {
     swal({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -28,7 +28,7 @@ const AdminBookingCard = ({
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axios.delete(`https://book-sharing-server.vercel.app/bookings/${idx}`).then((res) => {
+        axios.delete(`http://localhost:5000/bookings/${idx}`).then((res) => {
           if (res?.data?.deletedCount > 0) {
             const remaining = adminBookings.filter((book) => book._id !== idx);
             setAdminBookings(remaining);
@@ -76,7 +76,7 @@ const AdminBookingCard = ({
           <p>{buyerPhone}</p>
           <p className="mb-1">{date}</p>
           <button
-            onClick={() => handleDelete(_id)}
+            onClick={() => handleDeleteByAdmin(_id)}
             className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center"
           >
             Delete Booking

@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
+import useContextHook from "../../useCustomHook/useContextHook";
+import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const MyBooksCard = ({ getBook, myBooks, setMyBooks }) => {
-  // console.log(service);
+  const { user } = useContextHook();
+  const axiosCustom = useAxiosHook();
   const { _id, book_name, book_image, phone } = getBook;
 
   const handleDelete = (_id, name) => {
@@ -15,19 +18,15 @@ const MyBooksCard = ({ getBook, myBooks, setMyBooks }) => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        fetch(`https://book-sharing-server.vercel.app/books/${_id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.deletedCount > 0) {
-              const remaining = myBooks.filter((book) => book._id !== _id);
-              setMyBooks(remaining);
-              swal(`${name} Deleted!`, {
-                icon: "success",
-              });
-            }
-          });
+        axiosCustom.delete(`/books/${_id}/${user?.email}`).then((res) => {
+          if (res.data?.deletedCount > 0) {
+            const remaining = myBooks.filter((book) => book._id !== _id);
+            setMyBooks(remaining);
+            swal(`${name} Deleted!`, {
+              icon: "success",
+            });
+          }
+        });
       } else {
         swal("Your file is safe!");
       }
@@ -45,9 +44,7 @@ const MyBooksCard = ({ getBook, myBooks, setMyBooks }) => {
         />
       </figure>
       <div className="items-center text-center space-y-2 mb-5">
-        <h2 className="text-2xl font-bold text-blue-900 px-4">
-          {book_name}
-        </h2>
+        <h2 className="text-2xl font-bold text-blue-900 px-4">{book_name}</h2>
         <p className="text-lg pb-1">Phone: {phone}</p>
         <div className="space-x-1">
           <Link to={`/book/${_id}`}>
