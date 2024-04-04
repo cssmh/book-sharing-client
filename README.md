@@ -1,8 +1,11 @@
 ## MBSTU BookHaven
 
 ## Live:
+
 ### https://bookshare-c1817.web.app
+
 ### https://bookhaven1.netlify.app
+
 ### https://open-rest.surge.sh
 
 ## - Feature of this Project:
@@ -34,3 +37,5 @@
 25. AllBookings from database made only admin authorized only. Valid token and valid user but still user can't access that. Implemented admin email condition there in server to access for admin email only.
 26. Admin can delete any bookings like completed bookings or all bookings at a time.
 27. One user can't update other user's book data using book id from url.
+28. User can't delete any book using Postman using id from book details url, there provider email with jwt verification needed to delete. Only admin and that book owner can delete a book.
+29. Same allBooking for admin also now only admin can delete. Postman not gonna work there because of jwt verification and query admin email condition.

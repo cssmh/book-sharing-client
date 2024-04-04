@@ -27,7 +27,12 @@ const Review = () => {
             excellence, aiming for unparalleled quality.
           </p>
           <div className="flex gap-2">
-            <img src={Reviewer1} className="w-12 rounded-3xl" alt="" />
+            <img
+              src={Reviewer1}
+              className="w-12 rounded-3xl"
+              alt=""cl
+              onContextMenu={(e) => e.preventDefault()}
+            />
             <div>
               <p className="font-semibold">Md. Momin Hossain</p>
               <p className="text-gray-500">Admin of BookHaven</p>
@@ -45,7 +50,12 @@ const Review = () => {
             services.
           </p>
           <div className="flex gap-2">
-            <img src={Reviewer2} className="w-12 rounded-3xl" alt="" />
+            <img
+              src={Reviewer2}
+              className="w-12 rounded-3xl"
+              alt=""
+              onContextMenu={(e) => e.preventDefault()}
+            />
             <div>
               <p className="font-semibold">Sarah Johnson</p>
               <p className="text-gray-500">Doctor of Heart Disease</p>
@@ -63,7 +73,12 @@ const Review = () => {
             expectations
           </p>
           <div className="flex gap-2">
-            <img src={Reviewer3} className="w-12 rounded-3xl" alt="" />
+            <img
+              src={Reviewer3}
+              className="w-12 rounded-3xl"
+              alt=""
+              onContextMenu={(e) => e.preventDefault()}
+            />
             <div>
               <p className="font-semibold">Sydney Sweeney</p>
               <p className="text-gray-500">Madame Web Cast</p>
@@ -81,7 +96,12 @@ const Review = () => {
             our business needs.
           </p>
           <div className="flex gap-2">
-            <img src={Reviewer4} className="w-12 rounded-3xl" alt="" />
+            <img
+              src={Reviewer4}
+              className="w-12 rounded-3xl"
+              alt=""
+              onContextMenu={(e) => e.preventDefault()}
+            />
             <div>
               <p className="font-semibold">Md. Mobarok Hossain</p>
               <p className="text-gray-500">Active Member & Provider</p>

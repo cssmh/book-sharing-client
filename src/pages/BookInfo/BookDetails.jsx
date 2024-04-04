@@ -126,7 +126,7 @@ const BookDetails = () => {
                         document.getElementById("my_modal_4").showModal()
                       }
                     >
-                      More Details...
+                      Read more...
                     </button>
                     <dialog id="my_modal_4" className="modal">
                       <div className="modal-box w-11/12 max-w-5xl">
