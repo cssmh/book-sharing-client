@@ -12,13 +12,12 @@ const AddBookings = ({ getBookData }) => {
   const [open, openChange] = useState(false);
   const [matchFound, setMatchFound] = useState([]);
 
-  // check already booked or not
+  // check already booked or not state
   const [allBookings, setAllBookings] = useState([]);
-  // console.log(allBookings);
 
   // check already booked or not
   useEffect(() => {
-    const matching = allBookings.filter((myBooked) =>
+    const matching = allBookings?.filter((myBooked) =>
       book_name.includes(myBooked?.book_name)
     );
     setMatchFound(matching);
@@ -71,14 +70,15 @@ const AddBookings = ({ getBookData }) => {
     axios
       .post("https://book-sharing-server.vercel.app/addBooking", booking)
       .then((res) => {
-        // console.log(res.data);
         if (res.data?.insertedId) {
+          // Update allBookings state after successfully adding the booking
+          setAllBookings([...allBookings, booking]);
           swal("Congratulations!", "Booking Complete", "success");
           matchFound(res.data?.insertedId);
         }
       })
-      .then((err) => {
-        console.log(err);
+      .then(() => {
+        // console.log(err);
       });
   };
 

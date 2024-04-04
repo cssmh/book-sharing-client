@@ -16,7 +16,7 @@ const useTotalProviderHook = () => {
     const seen = new Set();
 
     emails?.forEach((email) => {
-      if (!seen.has(email)) {
+      if (!seen?.has(email)) {
         uniqueEmails.push(email);
         seen.add(email);
       }

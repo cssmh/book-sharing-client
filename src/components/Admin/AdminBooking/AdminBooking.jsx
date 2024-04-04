@@ -62,7 +62,7 @@ const AdminBooking = () => {
 
   return (
     <div>
-      {isLoading ? (
+      {isLoading & user?.email ? (
         <div className="flex justify-center mt-5">
           <HashLoader color="#FB0F5A" size={36} />
         </div>
