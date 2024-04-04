@@ -45,6 +45,18 @@ const UpdateBook = () => {
     phone,
   } = loaderBookData;
 
+  let rowsValue;
+  // Set the rows value based on conditions
+  if (description.length > 2000) {
+    rowsValue = 20;
+  } else if (description.length > 500) {
+    rowsValue = 10;
+  } else {
+    rowsValue = 5;
+  }
+  const rows = rowsValue;
+  // Set the rows value based on conditions end
+
   const handleUpdate = (e) => {
     e.preventDefault();
     const form = event.target;
@@ -211,7 +223,7 @@ const UpdateBook = () => {
             name="description"
             defaultValue={description}
             cols="10"
-            rows="5"
+            rows={rows}
             className="rounded-2xl border-gray-300 focus:border-transparent"
           ></textarea>
         </div>
