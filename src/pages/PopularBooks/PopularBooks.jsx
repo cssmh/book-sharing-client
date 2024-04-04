@@ -10,7 +10,7 @@ const PopularBooks = () => {
 
   useEffect(() => {
     axios.get("http://localhost:5000/allBooks").then((res) => {
-      setPopularBooks(res?.data?.result);
+      setPopularBooks(res.data?.result);
       setIsLoading(false);
     });
   }, []);

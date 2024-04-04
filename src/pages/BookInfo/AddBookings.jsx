@@ -10,7 +10,7 @@ const AddBookings = ({ getBookData }) => {
   const { user } = useContextHook();
   const { book_image, book_name, book_provider_email, phone } = getBookData;
   const [open, openChange] = useState(false);
-  const [matching, setMatching] = useState([]);
+  const [matchFound, setMatchFound] = useState([]);
 
   // check already booked or not
   const [allBookings, setAllBookings] = useState([]);
@@ -18,15 +18,15 @@ const AddBookings = ({ getBookData }) => {
 
   // check already booked or not
   useEffect(() => {
-    const matchFound = allBookings.filter((myBooked) =>
-      book_name.includes(myBooked.book_name)
+    const matching = allBookings.filter((myBooked) =>
+      book_name.includes(myBooked?.book_name)
     );
-    setMatching(matchFound);
+    setMatchFound(matching);
   }, [allBookings, book_name]);
   // check already booked or not end
 
   const axiosCustom = useAxiosHook();
-  const url = `/bookings?email=${user.email}`;
+  const url = `/bookings?email=${user?.email}`;
   useEffect(() => {
     axiosCustom?.get(url)?.then((res) => {
       setAllBookings(res.data);
@@ -34,7 +34,7 @@ const AddBookings = ({ getBookData }) => {
   }, [axiosCustom, url]);
 
   const handlePopUp = () => {
-    if (matching.length > 0) {
+    if (matchFound.length > 0) {
       return toast.error("You already booked this!");
     }
     openChange(true);
@@ -74,7 +74,7 @@ const AddBookings = ({ getBookData }) => {
         // console.log(res.data);
         if (res.data?.insertedId) {
           swal("Congratulations!", "Booking Complete", "success");
-          setMatching(res.data?.insertedId);
+          matchFound(res.data?.insertedId);
         }
       })
       .then((err) => {
