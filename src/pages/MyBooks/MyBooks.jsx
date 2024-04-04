@@ -8,15 +8,15 @@ import { FallingLines } from "react-loader-spinner";
 
 const MyBooks = () => {
   const { user } = useContextHook();
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [myBooks, setMyBooks] = useState([]);
   const axiosCustom = useAxiosHook();
 
-  const url = `/myBooks?email=${user.email}`;
+  const url = `/myBooks?email=${user?.email}`;
   useEffect(() => {
     axiosCustom?.get(url).then((res) => {
       setMyBooks(res.data);
-      setLoading(false);
+      setIsLoading(false);
     });
   }, [axiosCustom, url]);
 
@@ -25,7 +25,7 @@ const MyBooks = () => {
       <Helmet>
         <title>BookHaven | My-Books</title>
       </Helmet>
-      {loading ? (
+      {isLoading ? (
         <div className="flex justify-center">
           <FallingLines
             color="#9933FF"

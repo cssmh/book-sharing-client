@@ -10,6 +10,7 @@ const AllBooksCard = ({ getBook }) => {
     phone,
     location,
   } = getBook;
+  console.log(book_image);
 
   return (
     <div className="card bg-base-100 shadow-xl py-4 hover:scale-105 transition-all duration-300">

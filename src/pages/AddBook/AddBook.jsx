@@ -28,7 +28,7 @@ const AddBook = () => {
     const book_name = form.book_name.value;
 
     // Check for duplicate book name
-    const isDuplicate = myAddedBooks.find(
+    const isDuplicate = myAddedBooks?.find(
       (myBook) => myBook.book_name === book_name
     );
     if (isDuplicate) {
@@ -65,8 +65,10 @@ const AddBook = () => {
     axios
       .post("https://book-sharing-server.vercel.app/book", BookInformation)
       .then((res) => {
-        // console.log(res.data);
         if (res.data?.insertedId) {
+          // Update myAddedBooks state after successfully adding the book
+          // To prevent duplicate adding
+          setMyAddedBooks([...myAddedBooks, BookInformation]);
           swal("Thank You!", `${book_name} Book added`, "success");
           form.reset();
         }

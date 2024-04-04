@@ -10,7 +10,7 @@ const MyBookings = () => {
   const [allBookings, setAllBookings] = useState([]);
   const axiosCustom = useAxiosHook();
 
-  const url = `/bookings?email=${user.email}`;
+  const url = `/bookings?email=${user?.email}`;
   useEffect(() => {
     axiosCustom?.get(url)?.then((res) => {
       setAllBookings(res.data);
@@ -37,7 +37,7 @@ const MyBookings = () => {
             </p>
           ) : (
             <>
-              <h2 className="text-center text-lg md:text-2xl my-6 font-semibold italic">
+              <h2 className="text-center text-lg md:text-2xl my-5 font-semibold italic">
                 All Bookings made by you
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">

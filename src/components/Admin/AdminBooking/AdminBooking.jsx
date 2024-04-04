@@ -33,9 +33,8 @@ const AdminBooking = () => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axiosCustom.delete(`/allBookings?email=${user?.email}`).then((res) => {
+        axiosCustom?.delete(`/allBookings?email=${user?.email}`).then((res) => {
           if (res.data?.acknowledged) {
-            console.log(res.data);
             setAdminBookings([]);
             swal("All Bookings Deleted!", {
               icon: "success",

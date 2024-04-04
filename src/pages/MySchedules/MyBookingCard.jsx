@@ -44,7 +44,7 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
         <img
           src={book_image}
           alt="book"
-          className="rounded-xl w-1/2 lg:h-[270px] mt-5"
+          className="rounded-xl w-1/2 mt-2"
         />
       </figure>
       <div className="px-14 pt-3 pb-5">

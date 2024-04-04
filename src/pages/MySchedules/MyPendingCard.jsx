@@ -34,11 +34,11 @@ const MyPendingCard = ({ getPending }) => {
         <img
           src={book_image}
           alt="book"
-          className="rounded-xl w-1/2 lg:h-[270px] mt-5"
+          className="rounded-xl w-1/2 mt-2"
         />
       </figure>
       <div>
-        <h2 className="text-2xl text-blue-900 text-center">{book_name}</h2>
+        <h2 className="text-2xl text-blue-900 text-center mt-1">{book_name}</h2>
         <h1 className="text-xl text-center">Collector Info: </h1>
         <div className="mb-2 text-lg w-2/3 mx-auto">
           <p className="text-green-500">Phone: {buyerPhone}</p>
