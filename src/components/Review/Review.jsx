@@ -30,7 +30,7 @@ const Review = () => {
             <img
               src={Reviewer1}
               className="w-12 rounded-3xl"
-              alt=""cl
+              alt=""
               onContextMenu={(e) => e.preventDefault()}
             />
             <div>

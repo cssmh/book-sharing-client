@@ -41,7 +41,12 @@ const MyBooks = () => {
               <p className="text-center text-xl md:text-2xl font-semibold text-red-600 italic mt-6">
                 No Book Added By You
               </p>
-              <img src={NoBook} className="mx-auto" alt="" />
+              <img
+                src={NoBook}
+                className="mx-auto"
+                alt=""
+                onContextMenu={(e) => e.preventDefault()}
+              />
             </div>
           ) : (
             <>

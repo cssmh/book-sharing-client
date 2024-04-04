@@ -88,7 +88,11 @@ const AddBook = () => {
       ) : (
         <>
           <div className="flex flex-col md:flex-row justify-center items-center gap-3 my-6">
-            <img src={addBook} alt="" />
+            <img
+              src={addBook}
+              alt="no image"
+              onContextMenu={(e) => e.preventDefault()}
+            />
             <div className="text-center">
               <h1 className="text-2xl md:text-3xl font-bold mx-2 md:mx-0">
                 Add Book to the <span className="text-green-400">Database</span>

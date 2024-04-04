@@ -94,9 +94,13 @@ const UpdateBook = () => {
     };
 
     axios
-      .put(`https://book-sharing-server.vercel.app/books/${_id}`, updatedBookInfo, {
-        withCredentials: true,
-      })
+      .put(
+        `https://book-sharing-server.vercel.app/books/${_id}`,
+        updatedBookInfo,
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
         if (res?.data?.modifiedCount > 0) {
           swal("Good job!", "Book Info Updated", "success");
@@ -111,7 +115,12 @@ const UpdateBook = () => {
         <title>Update {book_name}</title>
       </Helmet>
       <div className="flex flex-col md:flex-row justify-center items-center gap-3 my-6">
-        <img src={updateImage} className="md:w-[28%]" alt="" />
+        <img
+          src={updateImage}
+          className="md:w-[28%]"
+          alt=""
+          onContextMenu={(e) => e.preventDefault()}
+        />
         <div className="text-center">
           <h1 className="text-2xl md:text-3xl font-bold mx-2 md:mx-0">
             Update <span className="text-green-400">{book_name}</span>

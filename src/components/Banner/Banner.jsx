@@ -69,6 +69,7 @@ const Banner = () => {
         <img
           className="object-cover w-full lg:h-96 rounded-xl lg:w-4/5"
           src={banner}
+          onContextMenu={(e) => e.preventDefault()}
         />
       </div>
     </div>

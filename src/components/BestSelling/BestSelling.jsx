@@ -37,7 +37,7 @@ const BestSelling = () => {
           data-aos-duration="1000"
           className="lg:w-1/4 mx-auto mt-5 lg:mt-0"
         >
-          <img src={Reader} className="" alt="" />
+          <img src={Reader} alt="" onContextMenu={(e) => e.preventDefault()} />
         </div>
       </div>
     </div>
