@@ -9,7 +9,7 @@ const PopularBooks = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/allBooks").then((res) => {
+    axios.get("https://book-sharing-server.vercel.app/allBooks").then((res) => {
       setPopularBooks(res.data?.result);
       setIsLoading(false);
     });
