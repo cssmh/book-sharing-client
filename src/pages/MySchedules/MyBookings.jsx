@@ -13,7 +13,7 @@ const MyBookings = () => {
   const url = `/bookings?email=${user?.email}`;
   useEffect(() => {
     axiosCustom?.get(url)?.then((res) => {
-      setAllBookings(res.data);
+      setAllBookings(res?.data);
       setIsLoading(false);
     });
   }, [axiosCustom, url]);
@@ -32,7 +32,7 @@ const MyBookings = () => {
       ) : (
         <div>
           {allBookings.length == 0 ? (
-            <p className="text-center text-2xl font-semibold text-red-600 italic">
+            <p className="text-center md:text-2xl font-semibold text-red-600 italic">
               You have No Booking
             </p>
           ) : (

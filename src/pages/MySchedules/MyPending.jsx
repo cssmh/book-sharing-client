@@ -13,7 +13,7 @@ const MyPending = () => {
   const url = `/pending?email=${user?.email}`;
   useEffect(() => {
     axiosCustom?.get(url)?.then((res) => {
-      setMyPending(res.data);
+      setMyPending(res?.data);
       setIsLoading(false);
     });
   }, [axiosCustom, url]);
