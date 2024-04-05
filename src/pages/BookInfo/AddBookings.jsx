@@ -27,7 +27,7 @@ const AddBookings = ({ getBookData }) => {
   const axiosCustom = useAxiosHook();
   const url = `/bookings?email=${user?.email}`;
   useEffect(() => {
-    axiosCustom?.get(url)?.then((res) => {
+    axiosCustom.get(url)?.then((res) => {
       setAllBookings(res.data);
     });
   }, [axiosCustom, url]);
@@ -74,7 +74,6 @@ const AddBookings = ({ getBookData }) => {
           // Update allBookings state after successfully adding the booking
           setAllBookings([...allBookings, booking]);
           swal("Congratulations!", "Booking Complete", "success");
-          matchFound(res.data?.insertedId);
         }
       })
       .then(() => {

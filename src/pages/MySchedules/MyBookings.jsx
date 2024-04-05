@@ -12,7 +12,7 @@ const MyBookings = () => {
 
   const url = `/bookings?email=${user?.email}`;
   useEffect(() => {
-    axiosCustom?.get(url)?.then((res) => {
+    axiosCustom.get(url)?.then((res) => {
       setAllBookings(res?.data);
       setIsLoading(false);
     });

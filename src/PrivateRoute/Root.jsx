@@ -13,8 +13,8 @@ import AllBooks from "../Pages/AllBooks/AllBooks";
 import BookDetails from "../Pages/BookInfo/BookDetails";
 import AddBook from "../pages/AddBook/AddBook";
 import AdminPrivateRoute from "../AdminPrivateRoute/AdminPrivateRoute";
-import AdminBooking from "../Components/Admin/AdminBooking/AdminBooking";
 import SameProvider from "../Pages/SameProvider/SameProvider";
+import AdminBooking from "../Components/Admin/AdminBooking/AdminBooking";
 
 const Root = createBrowserRouter([
   {

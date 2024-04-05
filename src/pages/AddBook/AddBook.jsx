@@ -16,7 +16,7 @@ const AddBook = () => {
 
   const url = `/myBooks?email=${user?.email}`;
   useEffect(() => {
-    axiosCustom?.get(url).then((res) => {
+    axiosCustom.get(url).then((res) => {
       setMyAddedBooks(res?.data);
       setIsLoading(false);
     });

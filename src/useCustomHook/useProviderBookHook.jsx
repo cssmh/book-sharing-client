@@ -7,7 +7,7 @@ const useProviderBookHook = (url) => {
   const axiosCustom = useAxiosHook();
 
   useEffect(() => {
-    axiosCustom?.get(url).then((res) => {
+    axiosCustom.get(url).then((res) => {
       setBookData(res.data);
       setIsLoading(false);
     });

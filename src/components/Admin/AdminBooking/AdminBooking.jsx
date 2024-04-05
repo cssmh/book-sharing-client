@@ -1,10 +1,10 @@
+import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import AdminBookingCard from "../AdminBookingCard/AdminBookingCard";
 import useContextHook from "../../../useCustomHook/useContextHook";
 import useTotalProviderHook from "../../../useCustomHook/useTotalProviderHook";
 import useAxiosHook from "../../../useCustomHook/useAxiosHook";
-import swal from "sweetalert";
 import { HashLoader } from "react-spinners";
 
 const AdminBooking = () => {
@@ -17,7 +17,7 @@ const AdminBooking = () => {
 
   const url = `/allBookings?email=${user?.email}`;
   useEffect(() => {
-    axiosCustom?.get(url)?.then((res) => {
+    axiosCustom.get(url)?.then((res) => {
       setAdminBookings(res.data);
       setIsLoading(false);
     });
@@ -33,7 +33,7 @@ const AdminBooking = () => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axiosCustom?.delete(`/allBookings?email=${user?.email}`).then((res) => {
+        axiosCustom.delete(`/allBookings?email=${user?.email}`).then((res) => {
           if (res.data?.acknowledged) {
             setAdminBookings([]);
             swal("All Bookings Deleted!", {

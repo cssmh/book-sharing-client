@@ -26,7 +26,7 @@ const UpdateBook = () => {
 
   const url = `/myBooks?email=${user?.email}`;
   useEffect(() => {
-    axiosCustom?.get(url).then((res) => {
+    axiosCustom.get(url).then((res) => {
       const findMatching = res?.data.find((book) =>
         loaderBookData._id.includes(book._id)
       );
