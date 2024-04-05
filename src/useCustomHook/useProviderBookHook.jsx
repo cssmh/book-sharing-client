@@ -8,7 +8,7 @@ const useProviderBookHook = (url) => {
 
   useEffect(() => {
     axiosCustom.get(url).then((res) => {
-      setBookData(res.data);
+      setBookData(res?.data);
       setIsLoading(false);
     });
   }, [axiosCustom, url]);

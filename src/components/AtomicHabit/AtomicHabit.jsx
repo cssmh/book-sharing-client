@@ -7,7 +7,12 @@ const AtomicHabit = () => {
   return (
     <div className="bg-base-200 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center py-4 space-y-6 lg:space-y-0 mb-10">
       <div>
-        <img src={atomicHabit} className="w-3/4 mx-auto" alt="" />
+        <img
+          src={atomicHabit}
+          className="w-3/4 mx-auto"
+          alt=""
+          onContextMenu={(e) => e.preventDefault()}
+        />
       </div>
       <div className="space-y-2 text-center lg:text-left">
         <p className="p-2 bg-orange-500 w-24 mx-auto lg:mx-0 text-white rounded-md mb-4 md:mb-0">

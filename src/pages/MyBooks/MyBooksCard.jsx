@@ -8,7 +8,7 @@ const MyBooksCard = ({ getBook, myBooks, setMyBooks }) => {
   const axiosCustom = useAxiosHook();
   const { _id, book_name, book_image, phone } = getBook;
 
-  const handleDelete = (_id, name) => {
+  const handleDelete = (idx, name) => {
     swal({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -18,9 +18,9 @@ const MyBooksCard = ({ getBook, myBooks, setMyBooks }) => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axiosCustom.delete(`/books/${_id}/${user?.email}`).then((res) => {
+        axiosCustom.delete(`/books/${idx}/${user?.email}`).then((res) => {
           if (res.data?.deletedCount > 0) {
-            const remaining = myBooks.filter((book) => book._id !== _id);
+            const remaining = myBooks.filter((book) => book._id !== idx);
             setMyBooks(remaining);
             swal(`${name} Deleted!`, {
               icon: "success",
@@ -32,16 +32,11 @@ const MyBooksCard = ({ getBook, myBooks, setMyBooks }) => {
       }
     });
   };
-  // My Books page card
 
   return (
     <div data-aos="zoom-in" className="card bg-base-100 shadow-xl">
       <figure className="pt-6 mb-2">
-        <img
-          src={book_image}
-          alt="book"
-          className="rounded-xl w-[46%]"
-        />
+        <img src={book_image} alt="book" className="rounded-xl w-[46%]" />
       </figure>
       <div className="items-center text-center space-y-2 mb-5">
         <h2 className="text-2xl font-bold text-blue-900 px-4">{book_name}</h2>

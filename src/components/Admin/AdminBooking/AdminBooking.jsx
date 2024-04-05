@@ -18,7 +18,7 @@ const AdminBooking = () => {
   const url = `/allBookings?email=${user?.email}`;
   useEffect(() => {
     axiosCustom.get(url)?.then((res) => {
-      setAdminBookings(res.data);
+      setAdminBookings(res?.data);
       setIsLoading(false);
     });
   }, [axiosCustom, url]);

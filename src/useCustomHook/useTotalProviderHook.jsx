@@ -30,3 +30,5 @@ const useTotalProviderHook = () => {
 };
 
 export default useTotalProviderHook;
+
+// Used in Counting and AdminBooking

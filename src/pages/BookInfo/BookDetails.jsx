@@ -39,7 +39,7 @@ const BookDetails = () => {
       if (willDelete) {
         // main code
         axiosCustom
-          .delete(`/books/${idx}/${book_provider_email}`)
+          .delete(`/books/${idx}/admin@admin.com`)
           .then((res) => {
             if (res?.data?.deletedCount > 0) {
               swal(`${book} Deleted!`, {
@@ -156,7 +156,7 @@ const BookDetails = () => {
                 )}
               </div>
               <div>
-                {user?.email == "admin@admin.com" && (
+                {user?.email === "admin@admin.com" && (
                   <button
                     onClick={() => handleDeleteByAdmin(_id, book_name)}
                     className="text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-2 md:mx-0"
