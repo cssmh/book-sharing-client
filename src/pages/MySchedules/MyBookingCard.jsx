@@ -23,8 +23,8 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axios.delete(`https://book-sharing-server.vercel.app/bookings/${idx}`).then((res) => {
-          if (res?.data?.deletedCount > 0) {
+        axios.delete(`https://book-sharing-server.vercel.app/booking/${idx}`).then((res) => {
+          if (res.data?.deletedCount > 0) {
             const remaining = allBookings.filter((book) => book._id !== idx);
             setAllBookings(remaining);
             swal("Deleted!", {

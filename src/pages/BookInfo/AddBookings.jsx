@@ -48,7 +48,7 @@ const AddBookings = ({ getBookData }) => {
     const form = event.target;
     const book_name = form.book_name.value;
     const book_provider_email = form.book_provider_email.value;
-    const user_email = form.user_email.value;
+    const book_purchaser_email = form.book_purchaser_email.value;
     const date = form.date.value;
     const book_image = form.book_image_URL.value;
     const instruction = form.instruction.value;
@@ -60,7 +60,7 @@ const AddBookings = ({ getBookData }) => {
       book_image,
       book_provider_email,
       phone,
-      user_email,
+      book_purchaser_email,
       date,
       instruction,
       buyerPhone,
@@ -130,7 +130,7 @@ const AddBookings = ({ getBookData }) => {
                 <input
                   type="email"
                   readOnly
-                  name="user_email"
+                  name="book_purchaser_email"
                   defaultValue={user?.email}
                   className="input input-bordered focus:border-transparent"
                   style={{ outline: "none" }}

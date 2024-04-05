@@ -18,7 +18,7 @@ const MyBooksCard = ({ getBook, myBooks, setMyBooks }) => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axiosCustom.delete(`/books/${idx}/${user?.email}`).then((res) => {
+        axiosCustom.delete(`/book/${idx}/${user?.email}`).then((res) => {
           if (res.data?.deletedCount > 0) {
             const remaining = myBooks.filter((book) => book._id !== idx);
             setMyBooks(remaining);

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import useAxiosHook from "./useAxiosHook";
 
 const useProviderBookHook = (url) => {
-  const [bookData, setBookData] = useState(null);
+  const [bookData, setBookData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const axiosCustom = useAxiosHook();
 

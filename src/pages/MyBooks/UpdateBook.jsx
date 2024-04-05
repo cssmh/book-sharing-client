@@ -95,14 +95,11 @@ const UpdateBook = () => {
 
     axios
       .put(
-        `https://book-sharing-server.vercel.app/books/${_id}`,
-        updatedBookInfo,
-        {
-          withCredentials: true,
-        }
+        `https://book-sharing-server.vercel.app/book/${_id}`,
+        updatedBookInfo
       )
       .then((res) => {
-        if (res?.data?.modifiedCount > 0) {
+        if (res.data?.modifiedCount > 0) {
           swal("Good job!", "Book Info Updated", "success");
           navigateTo(-1);
         }

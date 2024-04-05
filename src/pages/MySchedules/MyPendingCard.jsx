@@ -11,7 +11,7 @@ const MyPendingCard = ({ getPending }) => {
     instruction,
     status,
     date,
-    user_email,
+    book_purchaser_email,
   } = getPending;
 
   const handleStatus = (event, _id) => {
@@ -19,30 +19,29 @@ const MyPendingCard = ({ getPending }) => {
     const newStatus = event.target.value;
     const updatedStatus = { newStatus };
     axios
-      .put(`https://book-sharing-server.vercel.app/bookings/${_id}`, updatedStatus)
+      .put(
+        `https://book-sharing-server.vercel.app/bookings/${_id}`,
+        updatedStatus
+      )
       .then((res) => {
-        if (res.data.modifiedCount > 0) {
+        if (res.data?.modifiedCount > 0) {
           swal("Thank You!", `Updated to ${newStatus}`, "success");
         }
       })
-      .then((err) => console.log(err));
+      .then();
   };
 
   return (
     <div data-aos="zoom-in" className="card bg-base-100 shadow-xl">
       <figure>
-        <img
-          src={book_image}
-          alt="book"
-          className="rounded-xl w-1/2 mt-2"
-        />
+        <img src={book_image} alt="book" className="rounded-xl w-1/2 mt-2" />
       </figure>
       <div>
         <h2 className="text-2xl text-blue-900 text-center mt-1">{book_name}</h2>
         <h1 className="text-xl text-center">Collector Info: </h1>
         <div className="mb-2 text-lg w-2/3 mx-auto">
           <p className="text-green-500">Phone: {buyerPhone}</p>
-          <p className="text-yellow-700">Email: {user_email}</p>
+          <p className="text-yellow-700">Email: {book_purchaser_email}</p>
           <p>Message: {instruction}</p>
           <p>
             Need Book by: <span className="text-blue-500">{date}</span>

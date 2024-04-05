@@ -68,7 +68,7 @@ const Navbar = () => {
             <li className="font-semibold text-base">
               <NavLink to="/all-books">All Books</NavLink>
             </li>
-            {user?.email === "admin@admin.com" && (
+            {user?.email == "admin@admin.com" && (
               <li className="font-semibold text-green-400">
                 <NavLink to="/admin">Admin</NavLink>
               </li>
@@ -105,7 +105,7 @@ const Navbar = () => {
           <li className="font-semibold text-base">
             <NavLink to="/all-books">All Books</NavLink>
           </li>
-          {user?.email === "admin@admin.com" && (
+          {user?.email == "admin@admin.com" && (
             <li className="font-semibold text-base">
               <NavLink to="/admin">Admin</NavLink>
             </li>

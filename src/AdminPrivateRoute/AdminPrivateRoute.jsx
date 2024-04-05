@@ -13,7 +13,7 @@ const AdminPrivateRoute = ({ children }) => {
     );
   }
 
-  if (user?.email === "admin@admin.com") {
+  if (user?.email == "admin@admin.com") {
     return children;
   } else {
     return <Navigate to="/"></Navigate>;

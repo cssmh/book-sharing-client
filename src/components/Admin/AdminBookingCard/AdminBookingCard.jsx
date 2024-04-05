@@ -14,7 +14,7 @@ const AdminBookingCard = ({
     phone,
     status,
     date,
-    user_email,
+    book_purchaser_email,
     buyerPhone,
   } = getAllBooking;
 
@@ -28,7 +28,7 @@ const AdminBookingCard = ({
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axios.delete(`https://book-sharing-server.vercel.app/bookings/${idx}`).then((res) => {
+        axios.delete(`https://book-sharing-server.vercel.app/booking/${idx}`).then((res) => {
           if (res?.data?.deletedCount > 0) {
             const remaining = adminBookings.filter((book) => book._id !== idx);
             setAdminBookings(remaining);
@@ -70,7 +70,7 @@ const AdminBookingCard = ({
           </p>
           <p>
             <span className="bg-gradient-to-r from-cyan-500 to-blue-500 text-transparent bg-clip-text">
-              {user_email}
+              {book_purchaser_email}
             </span>
           </p>
           <p>{buyerPhone}</p>

@@ -18,8 +18,8 @@ const AllBooks = () => {
     axios
       .get(`https://book-sharing-server.vercel.app/allBooks?page=${page}&limit=${limit}`)
       .then((res) => {
-        setAllBooks(res?.data?.result);
-        setTotalBooksCount(res?.data?.totalBooks);
+        setAllBooks(res.data?.result);
+        setTotalBooksCount(res.data?.totalBooks);
         setIsLoading(false);
       });
   }, [page, limit]);
