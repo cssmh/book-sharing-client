@@ -74,6 +74,7 @@ const BookDetails = () => {
                 className="rounded-lg w-24 md:w-28"
                 src={book_provider_image}
                 alt="no image"
+                onContextMenu={(e) => e.preventDefault()}
               />
             </figure>
             <div className="card-body items-center text-center p-4 pb-0">

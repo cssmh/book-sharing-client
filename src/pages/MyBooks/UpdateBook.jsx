@@ -2,7 +2,6 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import useContextHook from "../../useCustomHook/useContextHook";
 import { useEffect, useState } from "react";
 import swal from "sweetalert";
-import axios from "axios";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
@@ -93,11 +92,8 @@ const UpdateBook = () => {
       description,
     };
 
-    axios
-      .put(
-        `https://book-sharing-server.vercel.app/book/${_id}`,
-        updatedBookInfo
-      )
+    axiosCustom
+      .put(`https://book-sharing-server.vercel.app/book/${_id}/${user?.email}`, updatedBookInfo)
       .then((res) => {
         if (res.data?.modifiedCount > 0) {
           swal("Good job!", "Book Info Updated", "success");
@@ -177,7 +173,7 @@ const UpdateBook = () => {
           </div>
           <div className="form-control md:w-1/2 mx-3 lg:mx-0">
             <label className="label">
-              <span className="label-text">Your Photo Image Url</span>
+              <span className="label-text">Your Photo Url in This Book</span>
             </label>
             <input
               type="text"

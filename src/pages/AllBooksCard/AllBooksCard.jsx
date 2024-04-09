@@ -31,7 +31,10 @@ const AllBooksCard = ({ getBook }) => {
         <div className="flex justify-center items-center gap-3 my-1 border-2 border-red-400 rounded-lg px-3 py-2">
           <div className="avatar">
             <div className="w-12 rounded-full ring ring-primary">
-              <img src={book_provider_image} />
+              <img
+                src={book_provider_image}
+                onContextMenu={(e) => e.preventDefault()}
+              />
             </div>
           </div>
           <h2 className="font-bold text-lg">{book_provider_name}</h2>

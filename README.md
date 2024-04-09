@@ -37,6 +37,6 @@
 25. In admin dashboard admin can see Total Books, Total Book Providers, Providers email and Total Bookings also all bookings with their details.
 26. AllBookings from database made only admin authorized only. Valid token and valid user but still user can't access that. Implemented admin email condition there in server to access for admin email only.
 27. Admin can delete any bookings like completed bookings or all bookings at a time.
-28. One user can't update other user's book data using book id from url.
+28. One user can't update other user's book data using book id from url. Same provider validation added both server and client side. Postman not gonna work because of jwt token verification while updating.
 29. User can't delete any book using Postman using id from book details url, there provider email with jwt verification needed to delete. Only admin and that book owner can delete a book.
 30. Same allBooking for admin also now only admin can delete. Postman not gonna work there because of jwt verification and query admin email condition.

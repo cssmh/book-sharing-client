@@ -2,7 +2,7 @@ import axios from "axios";
 import swal from "sweetalert";
 
 const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
-  // console.log(booking);
+  // console.log(getBooking);
   const {
     _id,
     book_image,
@@ -39,35 +39,38 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
   };
 
   return (
-    <div data-aos="zoom-in" className="card bg-base-100 shadow-xl">
-      <figure>
-        <img
-          src={book_image}
-          alt="book"
-          className="rounded-xl w-1/2 mt-2"
-        />
-      </figure>
-      <div className="px-14 pt-3 pb-5">
+    <div
+      data-aos="zoom-in"
+      className="bg-base-100 shadow-xl px-14 pt-3 py-6 flex flex-col"
+    >
+      <div className="flex-grow">
+        <figure>
+          <img
+            src={book_image}
+            alt="book"
+            className="rounded-xl w-[60%] mx-auto my-2"
+          />
+        </figure>
         <p className="text-2xl">{book_name}</p>
         <div className="text-lg">
-          <p>Owner Information:</p>
+          <p>Provider Information:</p>
           <p className="text-green-500">{phone}</p>
           <p className="text-yellow-700">{book_provider_email}</p>
           <p>
             Status: <span className="text-green-500">{status}</span>
           </p>
           <p>
-            Date of Handover: <span className="text-blue-500">{date}</span>
+          Required Date: <span className="text-blue-500">{date}</span>
           </p>
         </div>
-        <div className="mt-2 card-actions justify-center">
-          <button
-            onClick={() => handleBookingDelete(_id)}
-            className="btn border-black bg-base-100 hover:bg-black text-black hover:text-white"
-          >
-            Delete Booking
-          </button>
-        </div>
+      </div>
+      <div className="mt-2 card-actions justify-center">
+        <button
+          onClick={() => handleBookingDelete(_id)}
+          className="btn border-black bg-base-100 hover:bg-black text-black hover:text-white"
+        >
+          Delete Booking
+        </button>
       </div>
     </div>
   );

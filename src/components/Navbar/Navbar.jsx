@@ -141,7 +141,6 @@ const Navbar = () => {
             <p>{greeting}</p>
           )}
         </div>
-
         {user?.email ? (
           <div className="dropdown dropdown-end">
             <label
@@ -149,18 +148,11 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar"
               onClick={handleProfileClick}
             >
-              <div className="w-12 rounded-full">
-                <img src={user?.photoURL} alt={user?.displayName} />
-              </div>
-              {/* active green icon on photo */}
-              {/* <div className="avatar online">
+              <div className="avatar online">
                 <div className="w-12 rounded-full">
-                  <img
-                    src={user?.photoURL}
-                    style={{ boxShadow: "0 0 0 2px #4299e1" }}
-                  />
+                  <img src={user?.photoURL} alt={user?.displayName} />
                 </div>
-              </div> */}
+              </div>
             </label>
             {showProfileOptions && (
               <ul
