@@ -25,7 +25,7 @@ const SameProvider = () => {
           <p className="my-4 text-center font-semibold text-2xl">
             Total {bookData?.length} {bookText}
           </p>
-          <div className="max-w-7xl mx-auto gap-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
             {bookData?.map((soloBook) => (
               <SameProviderCard
                 key={soloBook._id}

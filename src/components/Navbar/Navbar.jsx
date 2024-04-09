@@ -148,10 +148,8 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar"
               onClick={handleProfileClick}
             >
-              <div className="avatar online">
-                <div className="w-12 rounded-full">
-                  <img src={user?.photoURL} alt={user?.displayName} />
-                </div>
+              <div className="w-12 rounded-full">
+                <img src={user?.photoURL} alt={user?.displayName} />
               </div>
             </label>
             {showProfileOptions && (
