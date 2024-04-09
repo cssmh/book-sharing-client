@@ -38,7 +38,6 @@ const Profile = () => {
           <img
             src={dp}
             className="rounded-lg lg:w-60 ml-auto px-3 lg:px-0"
-            alt=""
           />
         </div>
         <div className="space-y-2 mb-3 lg:mb-0 font-semibold border p-4 rounded-lg text-center md:text-left">

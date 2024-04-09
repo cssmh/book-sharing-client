@@ -38,16 +38,14 @@ const BookDetails = () => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axiosCustom
-          .delete(`/book/${idx}/${user?.email}`)
-          .then((res) => {
-            if (res.data?.deletedCount > 0) {
-              swal(`${book} Deleted!`, {
-                icon: "success",
-              });
-            }
-            navigateTo(-1);
-          });
+        axiosCustom.delete(`/book/${idx}/${user?.email}`).then((res) => {
+          if (res.data?.deletedCount > 0) {
+            swal(`${book} Deleted!`, {
+              icon: "success",
+            });
+          }
+          navigateTo(-1);
+        });
       } else {
         swal("File is safe!");
       }
@@ -73,8 +71,8 @@ const BookDetails = () => {
               <img
                 className="rounded-lg w-24 md:w-28"
                 src={book_provider_image}
-                alt="no image"
                 onContextMenu={(e) => e.preventDefault()}
+                alt="no image"
               />
             </figure>
             <div className="card-body items-center text-center p-4 pb-0">
@@ -106,7 +104,7 @@ const BookDetails = () => {
               <figure>
                 <img
                   src={book_image}
-                  alt="book"
+                  onContextMenu={(e) => e.preventDefault()}
                   className="rounded-xl w-[65%] lg:w-[45%] mx-auto lg:mx-0 lg:ml-auto"
                 />
               </figure>

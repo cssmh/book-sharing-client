@@ -92,7 +92,6 @@ const AddBook = () => {
           <div className="flex flex-col md:flex-row justify-center items-center gap-3 my-6">
             <img
               src={addBook}
-              alt="no image"
               onContextMenu={(e) => e.preventDefault()}
             />
             <div className="text-center">

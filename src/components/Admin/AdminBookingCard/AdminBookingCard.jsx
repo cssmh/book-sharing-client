@@ -51,6 +51,7 @@ const AdminBookingCard = ({
             src={book_image}
             className="w-2/3 md:w-36 rounded-md mx-auto mb-1"
             alt="no image"
+            onContextMenu={(e) => e.preventDefault()}
           />
           <p className="text-[22px] font-bold text-cyan-500">{book_name}</p>
           <p className="text-lg">{book_provider_email}</p>

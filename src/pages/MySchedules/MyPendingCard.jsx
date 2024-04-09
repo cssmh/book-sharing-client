@@ -34,7 +34,11 @@ const MyPendingCard = ({ getPending }) => {
   return (
     <div data-aos="zoom-in" className="card bg-base-100 shadow-xl">
       <figure>
-        <img src={book_image} alt="book" className="rounded-xl w-1/2 mt-2" />
+        <img
+          src={book_image}
+          onContextMenu={(e) => e.preventDefault()}
+          className="rounded-xl w-1/2 mt-2"
+        />
       </figure>
       <div>
         <h2 className="text-2xl text-blue-900 text-center mt-1">{book_name}</h2>

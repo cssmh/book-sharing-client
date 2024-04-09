@@ -23,15 +23,17 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axios.delete(`https://book-sharing-server.vercel.app/booking/${idx}`).then((res) => {
-          if (res.data?.deletedCount > 0) {
-            const remaining = allBookings.filter((book) => book._id !== idx);
-            setAllBookings(remaining);
-            swal("Deleted!", {
-              icon: "success",
-            });
-          }
-        });
+        axios
+          .delete(`https://book-sharing-server.vercel.app/booking/${idx}`)
+          .then((res) => {
+            if (res.data?.deletedCount > 0) {
+              const remaining = allBookings.filter((book) => book._id !== idx);
+              setAllBookings(remaining);
+              swal("Deleted!", {
+                icon: "success",
+              });
+            }
+          });
       } else {
         swal("Your file is safe!");
       }
@@ -47,7 +49,7 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
         <figure>
           <img
             src={book_image}
-            alt="book"
+            onContextMenu={(e) => e.preventDefault()}
             className="rounded-xl w-[60%] mx-auto my-2"
           />
         </figure>
@@ -60,7 +62,7 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
             Status: <span className="text-green-500">{status}</span>
           </p>
           <p>
-          Required Date: <span className="text-blue-500">{date}</span>
+            Required Date: <span className="text-blue-500">{date}</span>
           </p>
         </div>
       </div>

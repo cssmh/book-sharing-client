@@ -30,7 +30,6 @@ const Review = () => {
             <img
               src={Reviewer1}
               className="w-12 rounded-3xl"
-              alt=""
               onContextMenu={(e) => e.preventDefault()}
             />
             <div>
@@ -53,7 +52,6 @@ const Review = () => {
             <img
               src={Reviewer2}
               className="w-12 rounded-3xl"
-              alt=""
               onContextMenu={(e) => e.preventDefault()}
             />
             <div>
@@ -76,7 +74,6 @@ const Review = () => {
             <img
               src={Reviewer3}
               className="w-12 rounded-3xl"
-              alt=""
               onContextMenu={(e) => e.preventDefault()}
             />
             <div>
@@ -99,7 +96,6 @@ const Review = () => {
             <img
               src={Reviewer4}
               className="w-12 rounded-3xl"
-              alt=""
               onContextMenu={(e) => e.preventDefault()}
             />
             <div>

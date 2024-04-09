@@ -36,7 +36,11 @@ const MyBooksCard = ({ getBook, myBooks, setMyBooks }) => {
   return (
     <div data-aos="zoom-in" className="card bg-base-100 shadow-xl">
       <figure className="pt-6 mb-2">
-        <img src={book_image} alt="book" className="rounded-xl w-[46%]" />
+        <img
+          src={book_image}
+          className="rounded-xl w-[46%]"
+          onContextMenu={(e) => e.preventDefault()}
+        />
       </figure>
       <div className="items-center text-center space-y-2 mb-5">
         <h2 className="text-2xl font-bold text-blue-900 px-4">{book_name}</h2>

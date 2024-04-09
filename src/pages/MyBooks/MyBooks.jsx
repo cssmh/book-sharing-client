@@ -44,7 +44,6 @@ const MyBooks = () => {
               <img
                 src={NoBook}
                 className="mx-auto"
-                alt=""
                 onContextMenu={(e) => e.preventDefault()}
               />
             </div>

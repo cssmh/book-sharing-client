@@ -10,7 +10,6 @@ const AtomicHabit = () => {
         <img
           src={atomicHabit}
           className="w-3/4 mx-auto"
-          alt=""
           onContextMenu={(e) => e.preventDefault()}
         />
       </div>

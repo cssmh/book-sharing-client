@@ -16,7 +16,11 @@ const PopularBookCard = ({ getBook }) => {
     <div className="card bg-base-100 shadow-xl py-4 hover:scale-105 transition-all duration-300">
       <div data-aos="zoom-in" data-aos-duration="700" data-aos-offset="100">
         <figure>
-          <img src={book_image} alt="Books" className="rounded-xl w-[46%]" />
+          <img
+            src={book_image}
+            onContextMenu={(e) => e.preventDefault()}
+            className="rounded-xl w-[46%]"
+          />
         </figure>
       </div>
       <div className="card-body items-center text-center p-0 px-3 gap-1">

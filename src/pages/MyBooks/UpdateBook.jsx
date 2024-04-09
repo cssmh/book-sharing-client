@@ -111,7 +111,6 @@ const UpdateBook = () => {
         <img
           src={updateImage}
           className="md:w-[28%]"
-          alt=""
           onContextMenu={(e) => e.preventDefault()}
         />
         <div className="text-center">

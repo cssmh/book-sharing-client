@@ -19,7 +19,8 @@ const AllBooksCard = ({ getBook }) => {
           data-aos-duration="700"
           data-aos-offset="100"
           src={book_image}
-          alt="books"
+          alt="book"
+          onContextMenu={(e) => e.preventDefault()}
           className="rounded-xl w-[46%]"
         />
       </figure>
