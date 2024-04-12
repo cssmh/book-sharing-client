@@ -63,7 +63,11 @@ const AdminBookingCard = ({
             Status:{" "}
             <span
               className={
-                status === "Pending" ? "text-red-500" : "text-green-500"
+                status === "Pending"
+                  ? "text-red-500"
+                  : status === "Completed"
+                  ? "text-green-500"
+                  : "text-blue-500"
               }
             >
               {status}

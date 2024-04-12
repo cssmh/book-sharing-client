@@ -23,17 +23,15 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axios
-          .delete(`https://book-sharing-server.vercel.app/booking/${idx}`)
-          .then((res) => {
-            if (res.data?.deletedCount > 0) {
-              const remaining = allBookings.filter((book) => book._id !== idx);
-              setAllBookings(remaining);
-              swal("Deleted!", {
-                icon: "success",
-              });
-            }
-          });
+        axios.delete(`https://book-sharing-server.vercel.app/booking/${idx}`).then((res) => {
+          if (res.data?.deletedCount > 0) {
+            const remaining = allBookings.filter((book) => book._id !== idx);
+            setAllBookings(remaining);
+            swal("Deleted!", {
+              icon: "success",
+            });
+          }
+        });
       } else {
         swal("Your file is safe!");
       }
@@ -43,7 +41,7 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
   return (
     <div
       data-aos="zoom-in"
-      className="bg-base-100 shadow-xl px-14 pt-3 py-6 flex flex-col"
+      className="bg-base-100 shadow-xl rounded-xl px-14 pt-3 py-6 flex flex-col"
     >
       <div className="flex-grow">
         <figure>
@@ -56,10 +54,21 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
         <p className="text-2xl">{book_name}</p>
         <div className="text-lg">
           <p>Provider Information:</p>
-          <p className="text-green-500">{phone}</p>
-          <p className="text-yellow-700">{book_provider_email}</p>
+          <p className="text-green-600">{phone}</p>
+          <p className="text-purple-800">{book_provider_email}</p>
           <p>
-            Status: <span className="text-green-500">{status}</span>
+            Status:{" "}
+            <span
+              className={
+                status === "Pending"
+                  ? "text-red-500"
+                  : status === "Completed"
+                  ? "text-green-500"
+                  : "text-blue-500"
+              }
+            >
+              {status}
+            </span>
           </p>
           <p>
             Required Date: <span className="text-blue-500">{date}</span>

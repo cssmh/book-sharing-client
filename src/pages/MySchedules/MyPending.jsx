@@ -39,7 +39,7 @@ const MyPending = () => {
         </p>
       ) : (
         <>
-          <h2 className="text-center text-lg md:text-2xl my-6 font-semibold italic">
+          <h2 className="text-center text-lg md:text-2xl my-5 font-semibold italic">
             User Booked Your Books
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
