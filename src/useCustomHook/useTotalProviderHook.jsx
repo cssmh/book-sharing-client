@@ -9,8 +9,23 @@ const useTotalProviderHook = () => {
       .then((res) => setAllBooks(res.data?.result));
   }, []);
 
-  // finding total book provider
-  const emails = allBooks?.map((book) => book.book_provider_email);
+  // Function to count the number of books each provider has
+  const countBooksByProvider = (booksData) => {
+    let bookCounts = [];
+
+    booksData.forEach((book) => {
+      const email = book.book_provider_email;
+      if (bookCounts[email]) {
+        bookCounts[email]++;
+      } else {
+        bookCounts[email] = 1;
+      }
+    });
+
+    return bookCounts;
+  };
+
+  // Function to filter unique emails
   const filterUniqueEmails = (emails) => {
     const uniqueEmails = [];
     const seen = new Set();
@@ -25,8 +40,12 @@ const useTotalProviderHook = () => {
     return uniqueEmails;
   };
 
+  // Finding total book provider
+  const emails = allBooks?.map((book) => book.book_provider_email);
   const uniqueEmails = filterUniqueEmails(emails);
-  return { uniqueEmails, allBooks };
+  const booksByProvider = countBooksByProvider(allBooks);
+
+  return { uniqueEmails, allBooks, booksByProvider };
 };
 
 export default useTotalProviderHook;

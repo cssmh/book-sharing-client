@@ -1,12 +1,12 @@
 import swal from "sweetalert";
+import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import AdminBookingCard from "../AdminBookingCard/AdminBookingCard";
+import { HashLoader } from "react-spinners";
 import useContextHook from "../../../useCustomHook/useContextHook";
 import useTotalProviderHook from "../../../useCustomHook/useTotalProviderHook";
 import useAxiosHook from "../../../useCustomHook/useAxiosHook";
-import { HashLoader } from "react-spinners";
-import { Helmet } from "react-helmet-async";
 
 const AdminBooking = () => {
   const { user } = useContextHook();
@@ -14,7 +14,13 @@ const AdminBooking = () => {
   const [adminBookings, setAdminBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const axiosCustom = useAxiosHook();
-  const { uniqueEmails } = useTotalProviderHook();
+  const { uniqueEmails, booksByProvider } = useTotalProviderHook();
+  const providerArray = Object.entries(booksByProvider).map(
+    ([email, count]) => ({
+      email,
+      count,
+    })
+  );
 
   const url = `/allBookings?email=${user?.email}`;
   useEffect(() => {
@@ -82,8 +88,16 @@ const AdminBooking = () => {
               and Total {adminBookings?.length} {adminBookingsText}
             </p>
             <div className="max-w-[1180px] mx-2 lg:mx-auto grid md:grid-cols-3 py-3 text-center border border-green-400 rounded-lg mb-3">
-              {uniqueEmails?.map((provider, idx) => (
-                <p key={idx}>{provider}</p>
+              {providerArray?.map((provider, idx) => (
+                <p key={idx}>
+                  {provider.email}:{" "}
+                  <Link
+                    className="text-green-500"
+                    to={`/provider/${provider.email}`}
+                  >
+                    {provider.count}
+                  </Link>
+                </p>
               ))}
             </div>
             {adminBookings.length == 0 ? (

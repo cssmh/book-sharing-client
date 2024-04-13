@@ -15,7 +15,7 @@ const SameProvider = () => {
     bookData?.length === 1 || bookData?.length === 0 ? "Book" : "Books";
 
   return (
-    <>
+    <div>
       {isLoading ? (
         <div className="flex justify-center min-h-[70vh] mt-5">
           <HashLoader color="#9933FF" size={36} />
@@ -35,7 +35,7 @@ const SameProvider = () => {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 };
 
