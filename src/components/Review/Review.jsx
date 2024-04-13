@@ -56,7 +56,7 @@ const Review = () => {
             />
             <div>
               <p className="font-semibold">Sarah Johnson</p>
-              <p className="text-gray-500">Doctor of Heart Disease</p>
+              <p className="text-gray-500">Happy Book Enthusiasts</p>
             </div>
           </div>
         </div>
