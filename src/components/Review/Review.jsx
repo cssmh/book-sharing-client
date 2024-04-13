@@ -1,4 +1,4 @@
-import Reviewer1 from "../../assets/Reviewer1.jpeg";
+import Reviewer1 from "../../assets/Reviewer1.png";
 import Reviewer2 from "../../assets/Reviewer2.jpg";
 import Reviewer3 from "../../assets/Reviewer3.jpeg";
 import Reviewer4 from "../../assets/Reviewer4.jpg";
@@ -8,7 +8,7 @@ const Review = () => {
     <div className="max-w-[1200px] mx-auto flex flex-col lg:flex-row justify-center items-center gap-4 my-12">
       <div className="lg:w-2/5 text-center lg:text-left">
         <p className="text-[35px] font-semibold mx-1 md:mx-0">
-          Hear from Our <span className="text-green-400">Happy Authors</span>
+          Hear from Our <span className="text-green-400">Happy Readers</span>
         </p>
         <p className="lg:w-4/5 text-gray-500 mt-1 font-semibold mx-3 md:mx-0">
           Our satisfied collectors share their experiences with us. Read what
@@ -78,7 +78,7 @@ const Review = () => {
             />
             <div>
               <p className="font-semibold">Sydney Sweeney</p>
-              <p className="text-gray-500">Madame Web Cast</p>
+              <p className="text-gray-500">Lovely Book Purchaser</p>
             </div>
           </div>
         </div>

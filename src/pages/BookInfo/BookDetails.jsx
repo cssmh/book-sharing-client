@@ -83,10 +83,10 @@ const BookDetails = () => {
                 Email: {book_provider_email}
               </p>
               <p className="text-lg font-medium">
-                Location: <span className="text-blue-600">{location}</span>
+                Location: <span className="text-blue-500">{location}</span>
               </p>
               <p className="text-lg font-medium">
-                Phone: <span className="text-cyan-500">{phone}</span>
+                Phone: <span className="text-green-500">{phone}</span>
               </p>
             </div>
             <div className="flex justify-center mt-2">
