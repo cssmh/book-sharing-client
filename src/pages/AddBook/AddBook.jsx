@@ -1,7 +1,7 @@
 import axios from "axios";
 import swal from "sweetalert";
 import useContextHook from "../../useCustomHook/useContextHook";
-import addBook from "../../assets/BookAdd.png";
+import addBook from "../../assets/DataAdd.png";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
@@ -89,7 +89,7 @@ const AddBook = () => {
         </div>
       ) : (
         <>
-          <div className="flex flex-col md:flex-row justify-center items-center gap-3 my-6">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-3 my-6 px-1 md:px-0">
             <img
               src={addBook}
               onContextMenu={(e) => e.preventDefault()}

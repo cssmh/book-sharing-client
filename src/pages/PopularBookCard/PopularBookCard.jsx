@@ -13,7 +13,7 @@ const PopularBookCard = ({ getBook }) => {
   let smallDesc = description.slice(0, 130);
 
   return (
-    <div className="card bg-base-100 shadow-xl py-4 hover:scale-105 transition-all duration-300">
+    <div className="card bg-base-100 shadow-xl py-4 md:hover:scale-105 transition-all duration-300">
       <div data-aos="zoom-in" data-aos-duration="700" data-aos-offset="100">
         <figure>
           <img

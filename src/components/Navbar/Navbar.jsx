@@ -35,7 +35,6 @@ const Navbar = () => {
   } else if (currentTime >= 1 && currentTime < 4) {
     greeting = "Working late?";
   }
-
   // console.log(greeting);
 
   return (
@@ -69,7 +68,7 @@ const Navbar = () => {
               <NavLink to="/all-books">All Books</NavLink>
             </li>
             {user?.email == "admin@admin.com" && (
-              <li className="font-semibold text-green-400">
+              <li className="font-semibold text-base">
                 <NavLink to="/admin">Admin</NavLink>
               </li>
             )}

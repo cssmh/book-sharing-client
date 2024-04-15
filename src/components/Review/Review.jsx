@@ -5,14 +5,14 @@ import Reviewer4 from "../../assets/Reviewer4.jpg";
 
 const Review = () => {
   return (
-    <div className="max-w-[1200px] mx-auto flex flex-col lg:flex-row justify-center items-center gap-4 my-12">
-      <div className="lg:w-2/5 text-center lg:text-left">
-        <p className="text-[35px] font-semibold mx-1 md:mx-0">
-          Hear from Our <span className="text-green-400">Happy Readers</span>
+    <div className="max-w-[1220px] mx-auto flex flex-col lg:flex-row justify-center items-center gap-4 my-12">
+      <div className="lg:w-2/5 text-center lg:text-left space-y-1 md:space-y-2">
+        <p className="text-2xl md:text-[35px] font-semibold mx-2 md:mx-0">
+          Hear from Happy <span className="text-green-400">Book Lovers</span>
         </p>
-        <p className="lg:w-4/5 text-gray-500 mt-1 font-semibold mx-3 md:mx-0">
-          Our satisfied collectors share their experiences with us. Read what
-          they have to say about our services.
+        <p className="text-gray-500 mt-1 font-semibold mx-4 md:mx-0">
+          Discover the stories of satisfaction from our avid book lovers, as
+          they share their experiences with our bookhaven.
         </p>
       </div>
       <div className="lg:w-3/5 grid md:grid-cols-2 gap-4 md:mx-2 lg:mx-0">

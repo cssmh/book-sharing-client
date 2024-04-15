@@ -3,7 +3,7 @@ import MainLayout from "../MainLayout/MainLayout";
 import ErrorPage from "../components/ErrorPage/ErrorPage";
 import Home from "../components/Home/Home";
 import Register from "../Components/Register/Register";
-import PrivateRoute from "./PrivateRoute";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import Profile from "../Components/Profile/Profile";
 import Login from "../components/Login/Login";
 import UpdateBook from "../Pages/MyBooks/UpdateBook";

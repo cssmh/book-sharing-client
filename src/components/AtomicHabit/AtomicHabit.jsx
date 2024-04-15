@@ -1,11 +1,11 @@
 import swal from "sweetalert";
-import atomicHabit from "../../assets/BookAtomic.png";
+import atomicHabit from "../../assets/Atomic.png";
 const AtomicHabit = () => {
   const handleBuy = () => {
     swal("Sorry!", "Atomic Habits is not available Now!");
   };
   return (
-    <div className="bg-base-200 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center py-4 space-y-6 lg:space-y-0 mb-10">
+    <div className="bg-base-200 grid grid-cols-1 lg:grid-cols-3 items-center space-y-6 pt-7 pb-7 lg:pb-0 lg:space-y-0 mb-10">
       <div>
         <img
           src={atomicHabit}

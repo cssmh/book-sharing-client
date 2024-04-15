@@ -33,7 +33,7 @@ const AdminBooking = () => {
   const handleDeleteAllBookings = () => {
     swal({
       title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      text: "Once deleted, it can't be recovered!",
       icon: "warning",
       buttons: true,
       dangerMode: true,

@@ -107,7 +107,7 @@ const UpdateBook = () => {
       <Helmet>
         <title>Update {book_name}</title>
       </Helmet>
-      <div className="flex flex-col md:flex-row justify-center items-center gap-3 my-6">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-3 my-6 px-1 md:px-0">
         <img
           src={updateImage}
           className="md:w-[28%]"

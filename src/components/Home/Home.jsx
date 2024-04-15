@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import Banner from "../Banner/Banner";
 import PopularBooks from "../../pages/PopularBooks/PopularBooks";
 import AboutUs from "../AboutUs/AboutUs";
-import BestSelling from "../BestSelling/BestSelling";
+import MagicSharing from "../MagicSharing/MagicSharing";
 import AtomicHabit from "../AtomicHabit/AtomicHabit";
 import Review from "../Review/Review";
 import Counting from "../Counting/Counting";
@@ -16,7 +16,7 @@ const Home = () => {
       <Banner></Banner>
       <PopularBooks></PopularBooks>
       <AboutUs></AboutUs>
-      <BestSelling></BestSelling>
+      <MagicSharing></MagicSharing>
       <AtomicHabit></AtomicHabit>
       <Review></Review>
       <Counting></Counting>

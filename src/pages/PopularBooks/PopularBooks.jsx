@@ -7,13 +7,33 @@ import axios from "axios";
 const PopularBooks = () => {
   const [popularBooks, setPopularBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [sliceSize, setSliceSize] = useState(6);
 
   useEffect(() => {
-    axios.get("https://book-sharing-server.vercel.app/allBooks").then((res) => {
-      setPopularBooks(res.data?.result);
-      setIsLoading(false);
-    });
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setSliceSize(3);
+      } else {
+        setSliceSize(6);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
+
+  useEffect(() => {
+    axios
+      .get(`https://book-sharing-server.vercel.app/allBooks?limit=${sliceSize}`)
+      .then((res) => {
+        setPopularBooks(res.data?.result);
+        setIsLoading(false);
+      });
+  }, [sliceSize]);
 
   return (
     <div>
@@ -29,7 +49,7 @@ const PopularBooks = () => {
       ) : (
         <div>
           <div className="max-w-7xl mx-auto gap-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {popularBooks?.slice(0, 3).map((books) => (
+            {popularBooks?.map((books) => (
               <PopularBookCard
                 key={books._id}
                 getBook={books}
