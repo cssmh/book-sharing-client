@@ -8,36 +8,36 @@
 
 ### https://open-rest.surge.sh
 
-## - Feature of this Project:
+## Features of the Project:
 
-1. User signUp with name, photoURL, email password, also can login using google account.
-2. Verification email will be sent while new user register. New Register user can't login without email verification.
-3. Without login if any user go to private route and will navigate to login page with state of that root he/she wanted to go. But then if that user enter login to register page that state still will be with him/her. And after registration that user can go to that private route for 1.5 second, but then not to make email verification that user gonna redirect to login page.
-4. There is also a forgot password option in login page.
-5. If user is already logged in will auto redirect to home page while trying to go to login/register page.
-6. Awesome Home page with good design having a lot component with aos. Used Lottie Animation for BookHaven icon.
-7. Full responsive design for both mobile and Tablet.
-8. User can see all Books in all Books page. There is a search Book option in all Books page. User can search by Book name or Provider name.
-9. User can add Book, delete, update. while adding a book there is regex for valid phone number. user can't add invalid BD phone number.
-10. While updating user photo and name from profile it will automatically update all his book data with that provider photo and name.
-11. Duplicate adding Book is not allowed.
-12. User can't collect their own book also can't make booking a book more than one time.
-13. There is a lot of condition in Book details page, Owner only see Update that book button, "more book of that user" button will shown to other user only if that user added more than one book. Purchase button will not be shown to the owner in book details page.
-14. Admin can only delete book from book details page. that button also only shown for admin.
-15. If you make book image field empty while adding a book, there will be a default photo added for the book and while updating book details photo url field will be empty every time if it has that default photo url.
-16. While sign up there is also a default photo for new user. same condition as book photo updating.
-17. Added a view Profile page. there is an option to update username and photo for user. if user make image url field empty it will again set default photo and let the field empty every time, url gonna show only if user set any photo!
-18. my booking is which books i booked to get and my pending is if any user booked any of my books.
-19. While booking a book there will be showing status: Pending, only that book owner can change it Process and Completed.
-20. Added React Spinners, HashLoader and more Awesome react Packages.
-21. Counting component in Home page Total User and Book Provider count is Dynamic.
-22. Implemented Json Web token for authorization. only logged in user can access his/her own data, not others.
-23. Used interceptors, while token expire or any issue with the token user will automatically logout and redirect to login page.
-24. There is also an admin dashboard only for admin@admin.com. Other user will auto redirect to home page while accessing this route and see a toast not to enter there.
-25. More book of an User page and Admin Page if book length is 0 and 1 then book But more than one then show Books/Providers/Bookings plural form. Just a try.
-26. In admin dashboard admin can see Total Books, Total Book Providers, Providers email and Total Bookings also all bookings with their details.
-27. AllBookings from database made only admin authorized only. Valid token and valid user but still user can't access that. Implemented admin email condition there in server to access for admin email only.
-28. Admin can delete any bookings like completed bookings or all bookings at a time.
-29. One user can't update other user's book data using book id from url. Same provider validation added both server and client side. Postman not gonna work because of jwt token verification while updating.
-30. User can't delete any book using Postman using id from book details url, there provider email with jwt verification needed to delete. Only admin and that book owner can delete a book.
-31. Same allBooking for admin also now only admin can delete. Postman not gonna work there because of jwt verification and query admin email condition.
+1. Users can sign up with their name, photo URL, email, and password. They can also log in using their Google account.
+2. A verification email will be sent when a new user registers. New users cannot log in without email verification.
+3. If a user attempts to access a private route without logging in, they will be redirected to the login page with the intended route saved. After registration, the user can access the intended private route for 1.5 seconds, but if email verification is not completed, they will be redirected back to the login page.
+4. The login page includes a "forgot password" option.
+5. Logged-in users will be automatically redirected to the home page if they attempt to access the login/register page.
+6. The home page features a sleek design with various components using AOS. Lottie Animation is used for the BookHaven icon.
+7. The design is fully responsive for both mobile and tablet devices.
+8. Users can view all books on the "All Books" page and use the search function to find books by name or provider.
+9. Users can add, delete, and update books. When adding a book, there is regex validation for a valid phone number, ensuring only valid Bangladeshi phone numbers are accepted.
+10. When a user updates their profile photo and name, these changes will automatically reflect across all their book data, including the provider's name and photo.
+11. Duplicate book entries are not allowed.
+12. Users cannot collect their own books or book a book more than once.
+13. The book details page includes various conditions, such as only allowing the owner to update the book and displaying a "More Books of That User" button if the user has more than one book. The purchase button is hidden from the owner on the book details page.
+14. Only the admin can delete books from the book details page. That delete button also only shown for admin.
+15. If the book image field is left empty when adding a book, a default photo will be added. When updating book details, the photo URL field will be emptied if it contains the default photo URL.
+16. A default photo is provided for new users during sign-up, following the same conditions as updating book photos.
+17. Added a "View Profile" page. Users have the option to update their username and photo. If a user leaves the image URL field empty, the default photo will be set, and the field will remain empty each time. The URL will only be displayed if the user sets any photo.
+18. "My Booking" displays the books the user has booked to receive, while "My Pending" indicates if any user has booked any of the user's books.
+19. While booking a book, the status will display as "Pending." Only the book owner can change it to "Process" or "Completed."
+20. Added React Spinners, HashLoader, and other awesome React packages.
+21. The counting component on the homepage dynamically displays the total number of users and book providers.
+22. Implemented JSON Web Token (JWT) for authorization. Only logged-in users can access their own data, not others.
+23. Used interceptors to automatically log out users and redirect them to the login page if the token expires or encounters any issues.
+24. Created an admin dashboard accessible only to admin@admin.com. Other users attempting to access this route will be automatically redirected to the homepage.
+25. The "More Books of a User" page and the Admin Page display book details. If the book count is 0 or 1, the page title will be singular ("Book"). If there are more than one book, it will display in plural form ("Books"/"Providers"/"Bookings").
+26. In the admin dashboard, the admin can view the total number of books, total number of book providers, and provider emails, along with the count of books each user has added. Each count number serves as a link to see the books added by that user. Additionally, the admin can access total bookings and their details.
+27. Access to all bookings from the database is restricted to authorized admins only. Even with a valid token and user credentials, users cannot access this data. The server implements an admin email condition to restrict access to admin emails only.
+28. The admin can delete any bookings, including completed bookings, or all bookings at once.
+29. Users cannot update other users' book data using the book ID from the URL. Provider validation is applied both server-side and client-side. Postman requests will not work due to JWT token verification during updates.
+30. Users cannot delete any book using Postman with the book ID from the book details URL. Provider email and JWT verification are required for deletion. Only the admin and the book owner can delete a book.
+31. Similarly, access to all bookings for the admin is restricted. Only the admin can delete bookings. Postman requests will not work due to JWT verification and query conditions restricting access to admin emails.

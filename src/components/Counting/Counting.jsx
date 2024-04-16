@@ -19,7 +19,7 @@ const Counting = () => {
             <p className="text-gray-500">{allBooks?.length}</p>
           </div>
           <div data-aos="flip-up" data-aos-duration="1000">
-            <p className="text-green-500">Provider</p>
+            <p className="text-green-500">Providers</p>
             <p className="text-gray-500">{uniqueEmails.length}</p>
           </div>
           <div data-aos="flip-right" data-aos-duration="1000">
