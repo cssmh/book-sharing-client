@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import useContextHook from "../../useCustomHook/useContextHook";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { user, handleUpdateProfile } = useContextHook();
@@ -58,6 +59,13 @@ const Profile = () => {
           <p>Hi, {displayName}</p>
           <p>{email}</p>
           <p>Account Created: {metadata?.creationTime}</p>
+          <Link
+            to={
+              "https://github.com/cssmh/book-sharing-client#features-of-the-project"
+            }
+          >
+            <p className="text-green-500">Features of this Project</p>
+          </Link>
         </div>
       </div>
       <form onSubmit={handleUpdate} className="card-body pb-0">
