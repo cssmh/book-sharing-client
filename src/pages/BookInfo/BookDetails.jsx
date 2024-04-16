@@ -1,11 +1,11 @@
+import swal from "sweetalert";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import AddBookings from "./AddBookings";
-import { Helmet } from "react-helmet-async";
-import swal from "sweetalert";
-import useContextHook from "../../useCustomHook/useContextHook";
 import { HashLoader } from "react-spinners";
-import useProviderBookHook from "../../useCustomHook/useProviderBookHook";
+import { Helmet } from "react-helmet-async";
+import useContextHook from "../../useCustomHook/useContextHook";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import useProviderBookHook from "../../useCustomHook/useProviderBookHook";
 
 const BookDetails = () => {
   const { user } = useContextHook();
@@ -114,13 +114,13 @@ const BookDetails = () => {
                 {book_name}
               </h2>
               <div className="mx-4 lg:mx-0 md:w-[80%] lg:w-[90%] md:mx-auto">
-                {description.length < 750 ? (
+                {description.length < 720 ? (
                   description
                 ) : (
                   <>
-                    {description.slice(0, 730)}
+                    {description.slice(0, 720)}
                     <button
-                      className="btn btn-sm ml-1 rounded-lg"
+                      className="btn btn-sm rounded-lg"
                       onClick={() =>
                         document.getElementById("my_modal_4").showModal()
                       }

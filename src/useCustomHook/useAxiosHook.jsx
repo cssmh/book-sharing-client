@@ -1,7 +1,7 @@
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useEffect } from "react";
 import useContextHook from "./useContextHook";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const axiosSecure = axios.create({
@@ -35,7 +35,7 @@ const useAxiosHook = () => {
       }
     );
   }, [logOut, navigateTo]);
-  
+
   return { axiosSecure, axiosNoToken };
 };
 

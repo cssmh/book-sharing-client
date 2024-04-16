@@ -8,8 +8,8 @@ const AdminPrivateRoute = ({ children }) => {
   if (loading) {
     return (
       <div className="flex justify-center mt-5">
-          <HashLoader color="#FB0F5A" size={36} />
-        </div>
+        <HashLoader color="#FB0F5A" size={36} />
+      </div>
     );
   }
 
