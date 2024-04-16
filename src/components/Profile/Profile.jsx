@@ -1,10 +1,12 @@
-import useContextHook from "../../useCustomHook/useContextHook";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import useContextHook from "../../useCustomHook/useContextHook";
 import toast from "react-hot-toast";
+import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const Profile = () => {
   const { user, handleUpdateProfile } = useContextHook();
+  const axiosCustom = useAxiosHook();
   const { photoURL, email, displayName, metadata } = user;
   // state for show changed at a time update, no need to reload.
   const [dp, setDp] = useState(photoURL);
@@ -19,11 +21,26 @@ const Profile = () => {
     const defaultImageUrl =
       "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/default.jpg";
     const photo = get_image.trim() !== "" ? get_image : defaultImageUrl;
+
+    const updateMyAllBookInfo = {
+      name,
+      photo,
+    };
+
     handleUpdateProfile(name, photo)
       .then(() => {
-        toast.success("update success");
         setDp(photo);
         setName(name);
+        toast.success("update success");
+
+        axiosCustom
+          .put(`/myBooks/${user?.email}`, updateMyAllBookInfo)
+          .then((res) => {
+            console.log(res.data);
+            if (res.data?.modifiedCount > 0) {
+              toast.success("Book information updated");
+            }
+          });
       })
       .catch((err) => toast.error(err.message));
   };
@@ -35,10 +52,7 @@ const Profile = () => {
       </Helmet>
       <div className="flex flex-col-reverse md:flex-row items-center gap-5 mt-6">
         <div className="w-1/2">
-          <img
-            src={dp}
-            className="rounded-lg lg:w-60 ml-auto px-3 lg:px-0"
-          />
+          <img src={dp} className="rounded-lg lg:w-60 ml-auto px-3 lg:px-0" />
         </div>
         <div className="space-y-2 mb-3 lg:mb-0 font-semibold border p-4 rounded-lg text-center md:text-left">
           <p>Hi, {displayName}</p>

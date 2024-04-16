@@ -8,6 +8,7 @@ import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const AddBookings = ({ getBookData }) => {
   const { user } = useContextHook();
+  const axiosCustom = useAxiosHook();
   const { book_image, book_name, book_provider_email, phone } = getBookData;
   const [open, openChange] = useState(false);
   const [matchFound, setMatchFound] = useState([]);
@@ -24,7 +25,6 @@ const AddBookings = ({ getBookData }) => {
   }, [allBookings, book_name]);
   // check already booked or not end
 
-  const axiosCustom = useAxiosHook();
   const url = `/bookings?email=${user?.email}`;
   useEffect(() => {
     axiosCustom.get(url)?.then((res) => {
@@ -45,7 +45,7 @@ const AddBookings = ({ getBookData }) => {
   const handleBook = (e) => {
     e.preventDefault();
     openChange(false);
-    const form = event.target;
+    const form = e.target;
     const book_name = form.book_name.value;
     const book_provider_email = form.book_provider_email.value;
     const book_purchaser_email = form.book_purchaser_email.value;

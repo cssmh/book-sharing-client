@@ -3,9 +3,11 @@ import { Helmet } from "react-helmet-async";
 import axios from "axios";
 import AllBooksCard from "../AllBooksCard/AllBooksCard";
 import { HashLoader } from "react-spinners";
+import useAxiosNoToken from "../../useCustomHook/useAxiosNoToken";
 
 const AllBooks = () => {
   let searchTerm;
+  const axiosNoToken = useAxiosNoToken();
   const [allBooks, setAllBooks] = useState([]);
   const [totalBooksCount, setTotalBooksCount] = useState(0);
   const [page, setPage] = useState(1);
@@ -15,14 +17,12 @@ const AllBooks = () => {
   const booksPerPageCount = Math.ceil(totalBooksCount / limit);
 
   useEffect(() => {
-    axios
-      .get(`https://book-sharing-server.vercel.app/allBooks?page=${page}&limit=${limit}`)
-      .then((res) => {
-        setAllBooks(res.data?.result);
-        setTotalBooksCount(res.data?.totalBooks);
-        setIsLoading(false);
-      });
-  }, [page, limit]);
+    axiosNoToken.get(`/allBooks?page=${page}&limit=${limit}`).then((res) => {
+      setAllBooks(res.data?.result);
+      setTotalBooksCount(res.data?.totalBooks);
+      setIsLoading(false);
+    });
+  }, [page, limit, axiosNoToken]);
 
   // for search book
   useEffect(() => {

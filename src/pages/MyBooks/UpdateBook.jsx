@@ -37,8 +37,6 @@ const UpdateBook = () => {
     _id,
     book_image,
     book_name,
-    book_provider_name,
-    book_provider_image,
     description,
     location,
     phone,
@@ -58,7 +56,7 @@ const UpdateBook = () => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    const form = event.target;
+    const form = e.target;
     const book_name = form.book_name.value;
 
     const get_book_image = form.book_image.value;
@@ -70,13 +68,6 @@ const UpdateBook = () => {
     const location = form.location.value;
     const description = form.description.value;
     const phone = form.phone.value;
-    const book_provider_name = form.book_provider_name.value;
-
-    const provider_image = form.book_provider_image.value;
-    const defaultProviderImageUrl =
-      "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/default.jpg";
-    const book_provider_image =
-      provider_image.trim() !== "" ? provider_image : defaultProviderImageUrl;
 
     if (!/^(\+?8801|01)(\d{9})$/.test(phone)) {
       return toast.error("Enter a valid phone number!");
@@ -85,8 +76,6 @@ const UpdateBook = () => {
     const updatedBookInfo = {
       book_name,
       book_image,
-      book_provider_name,
-      book_provider_image,
       location,
       phone,
       description,
@@ -150,38 +139,6 @@ const UpdateBook = () => {
                 "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/CoverSoon.png"
                   ? ""
                   : book_image
-              }
-              className="input input-bordered focus:border-transparent"
-              style={{ outline: "none" }}
-            />
-          </div>
-        </div>
-        <div className="flex flex-col md:flex-row gap-3">
-          <div className="form-control md:w-1/2 mx-3 lg:mx-0">
-            <label className="label">
-              <span className="label-text">Your Name</span>
-            </label>
-            <input
-              type="text"
-              name="book_provider_name"
-              required
-              defaultValue={book_provider_name}
-              className="input input-bordered focus:border-transparent"
-              style={{ outline: "none" }}
-            />
-          </div>
-          <div className="form-control md:w-1/2 mx-3 lg:mx-0">
-            <label className="label">
-              <span className="label-text">Your Photo Url in This Book</span>
-            </label>
-            <input
-              type="text"
-              name="book_provider_image"
-              defaultValue={
-                book_provider_image ===
-                "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/default.jpg"
-                  ? ""
-                  : book_provider_image
               }
               className="input input-bordered focus:border-transparent"
               style={{ outline: "none" }}

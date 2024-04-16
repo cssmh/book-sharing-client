@@ -73,11 +73,7 @@ const AdminBookingCard = ({
               {status}
             </span>
           </p>
-          <p>
-            <span className="bg-gradient-to-r from-cyan-500 to-blue-500 text-transparent bg-clip-text">
-              {book_purchaser_email}
-            </span>
-          </p>
+          <p className="text-blue-800">{book_purchaser_email}</p>
           <p>{buyerPhone}</p>
           <p className="mb-1">{date}</p>
           <button
