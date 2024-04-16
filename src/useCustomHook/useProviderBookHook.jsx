@@ -4,14 +4,14 @@ import useAxiosHook from "./useAxiosHook";
 const useProviderBookHook = (url) => {
   const [bookData, setBookData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const axiosCustom = useAxiosHook();
+  const { axiosSecure } = useAxiosHook();
 
   useEffect(() => {
-    axiosCustom.get(url).then((res) => {
+    axiosSecure.get(url)?.then((res) => {
       setBookData(res?.data);
       setIsLoading(false);
     });
-  }, [axiosCustom, url]);
+  }, [axiosSecure, url]);
 
   return { bookData, isLoading };
 };

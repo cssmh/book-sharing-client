@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import PopularBookCard from "../PopularBookCard/PopularBookCard";
-import axios from "axios";
+import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const PopularBooks = () => {
+  const { axiosNoToken } = useAxiosHook();
   const [popularBooks, setPopularBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [sliceSize, setSliceSize] = useState(6);
@@ -27,13 +28,11 @@ const PopularBooks = () => {
   }, []);
 
   useEffect(() => {
-    axios
-      .get(`https://book-sharing-server.vercel.app/allBooks?limit=${sliceSize}`)
-      .then((res) => {
-        setPopularBooks(res.data?.result);
-        setIsLoading(false);
-      });
-  }, [sliceSize]);
+    axiosNoToken.get(`/allBooks?limit=${sliceSize}`).then((res) => {
+      setPopularBooks(res.data?.result);
+      setIsLoading(false);
+    });
+  }, [sliceSize, axiosNoToken]);
 
   return (
     <div>

@@ -1,18 +1,18 @@
+import swal from "sweetalert";
+import toast from "react-hot-toast";
+import updateImage from "../../assets/Update.png";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import useContextHook from "../../useCustomHook/useContextHook";
-import { useEffect, useState } from "react";
-import swal from "sweetalert";
-import useAxiosHook from "../../useCustomHook/useAxiosHook";
-import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
-import updateImage from "../../assets/Update.png";
+import { useEffect, useState } from "react";
+import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const UpdateBook = () => {
   const { user } = useContextHook();
   const navigateTo = useNavigate();
   const loaderBookData = useLoaderData();
   const [matchFound, setMatchFound] = useState([]);
-  const axiosCustom = useAxiosHook();
+  const { axiosSecure } = useAxiosHook();
 
   useEffect(() => {
     // If match not found that means Now user can't
@@ -25,13 +25,13 @@ const UpdateBook = () => {
 
   const url = `/myBooks?email=${user?.email}`;
   useEffect(() => {
-    axiosCustom.get(url).then((res) => {
+    axiosSecure.get(url).then((res) => {
       const findMatching = res?.data.find((book) =>
         loaderBookData._id.includes(book._id)
       );
       setMatchFound(findMatching);
     });
-  }, [axiosCustom, url, loaderBookData._id]);
+  }, [axiosSecure, url, loaderBookData._id]);
 
   const {
     _id,
@@ -81,8 +81,8 @@ const UpdateBook = () => {
       description,
     };
 
-    axiosCustom
-      .put(`https://book-sharing-server.vercel.app/book/${_id}/${user?.email}`, updatedBookInfo)
+    axiosSecure
+      .put(`/book/${_id}/${user?.email}`, updatedBookInfo)
       .then((res) => {
         if (res.data?.modifiedCount > 0) {
           swal("Good job!", "Book Info Updated", "success");

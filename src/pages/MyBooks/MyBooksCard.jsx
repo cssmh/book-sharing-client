@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
 import swal from "sweetalert";
+import { Link } from "react-router-dom";
 import useContextHook from "../../useCustomHook/useContextHook";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const MyBooksCard = ({ getBook, myBooks, setMyBooks }) => {
   const { user } = useContextHook();
-  const axiosCustom = useAxiosHook();
+  const { axiosSecure } = useAxiosHook();
   const { _id, book_name, book_image, phone } = getBook;
 
   const handleDelete = (idx, name) => {
@@ -18,7 +18,7 @@ const MyBooksCard = ({ getBook, myBooks, setMyBooks }) => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axiosCustom.delete(`/book/${idx}/${user?.email}`).then((res) => {
+        axiosSecure.delete(`/book/${idx}/${user?.email}`).then((res) => {
           if (res.data?.deletedCount > 0) {
             const remaining = myBooks.filter((book) => book._id !== idx);
             setMyBooks(remaining);

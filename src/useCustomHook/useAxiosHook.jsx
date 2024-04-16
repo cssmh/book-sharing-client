@@ -1,13 +1,18 @@
 import axios from "axios";
+import toast from "react-hot-toast";
 import { useEffect } from "react";
 import useContextHook from "./useContextHook";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 
 const axiosSecure = axios.create({
   baseURL: "https://book-sharing-server.vercel.app",
   withCredentials: true,
 });
+
+const axiosNoToken = axios.create({
+  baseURL: "https://book-sharing-server.vercel.app",
+});
+
 const useAxiosHook = () => {
   const { logOut } = useContextHook();
   const navigateTo = useNavigate();
@@ -30,7 +35,8 @@ const useAxiosHook = () => {
       }
     );
   }, [logOut, navigateTo]);
-  return axiosSecure;
+  
+  return { axiosSecure, axiosNoToken };
 };
 
 export default useAxiosHook;

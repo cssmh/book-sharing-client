@@ -1,5 +1,5 @@
-import axios from "axios";
 import swal from "sweetalert";
+import useAxiosHook from "../../../useCustomHook/useAxiosHook";
 
 const AdminBookingCard = ({
   getAllBooking,
@@ -17,6 +17,7 @@ const AdminBookingCard = ({
     book_purchaser_email,
     buyerPhone,
   } = getAllBooking;
+  const { axiosNoToken } = useAxiosHook();
 
   const handleDeleteByAdmin = (idx) => {
     swal({
@@ -28,7 +29,7 @@ const AdminBookingCard = ({
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axios.delete(`https://book-sharing-server.vercel.app/booking/${idx}`).then((res) => {
+        axiosNoToken.delete(`/booking/${idx}`).then((res) => {
           if (res?.data?.deletedCount > 0) {
             const remaining = adminBookings.filter((book) => book._id !== idx);
             setAdminBookings(remaining);

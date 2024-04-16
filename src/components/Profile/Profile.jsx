@@ -1,12 +1,12 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import useContextHook from "../../useCustomHook/useContextHook";
-import toast from "react-hot-toast";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const Profile = () => {
   const { user, handleUpdateProfile } = useContextHook();
-  const axiosCustom = useAxiosHook();
+  const { axiosSecure } = useAxiosHook();
   const { photoURL, email, displayName, metadata } = user;
   // state for show changed at a time update, no need to reload.
   const [dp, setDp] = useState(photoURL);
@@ -33,7 +33,7 @@ const Profile = () => {
         setName(name);
         toast.success("update success");
 
-        axiosCustom
+        axiosSecure
           .put(`/myBooks/${user?.email}`, updateMyAllBookInfo)
           .then((res) => {
             console.log(res.data);

@@ -10,17 +10,17 @@ import { HashLoader } from "react-spinners";
 
 const AddBook = () => {
   const { user } = useContextHook();
-  const axiosCustom = useAxiosHook();
+  const { axiosSecure, axiosNoToken } = useAxiosHook();
   const [myAddedBooks, setMyAddedBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const url = `/myBooks?email=${user?.email}`;
   useEffect(() => {
-    axiosCustom.get(url).then((res) => {
+    axiosSecure.get(url).then((res) => {
       setMyAddedBooks(res?.data);
       setIsLoading(false);
     });
-  }, [axiosCustom, url]);
+  }, [axiosSecure, url]);
 
   const handleAddBook = (e) => {
     e.preventDefault();
@@ -62,8 +62,8 @@ const AddBook = () => {
       book_provider_image,
     };
 
-    axios
-      .post("https://book-sharing-server.vercel.app/book", BookInformation)
+    axiosNoToken
+      .post("/book", BookInformation)
       .then((res) => {
         if (res.data?.insertedId) {
           // Update myAddedBooks state after successfully adding the book
@@ -90,10 +90,7 @@ const AddBook = () => {
       ) : (
         <>
           <div className="flex flex-col md:flex-row justify-center items-center gap-3 my-6 px-1 md:px-0">
-            <img
-              src={addBook}
-              onContextMenu={(e) => e.preventDefault()}
-            />
+            <img src={addBook} onContextMenu={(e) => e.preventDefault()} />
             <div className="text-center">
               <h1 className="text-2xl md:text-3xl font-bold mx-2 md:mx-0">
                 Add Book to the <span className="text-green-400">Database</span>

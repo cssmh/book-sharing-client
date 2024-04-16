@@ -1,22 +1,22 @@
+import MyPendingCard from "./MyPendingCard";
 import { useEffect, useState } from "react";
+import { FallingLines } from "react-loader-spinner";
 import useContextHook from "../../useCustomHook/useContextHook";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
-import MyPendingCard from "./MyPendingCard";
-import { FallingLines } from "react-loader-spinner";
 
 const MyPending = () => {
   const { user } = useContextHook();
   const [isLoading, setIsLoading] = useState(true);
   const [myPending, setMyPending] = useState([]);
-  const axiosCustom = useAxiosHook();
+  const { axiosSecure } = useAxiosHook();
 
   const url = `/pending?email=${user?.email}`;
   useEffect(() => {
-    axiosCustom.get(url)?.then((res) => {
+    axiosSecure.get(url)?.then((res) => {
       setMyPending(res?.data);
       setIsLoading(false);
     });
-  }, [axiosCustom, url]);
+  }, [axiosSecure, url]);
 
   if (isLoading) {
     return (

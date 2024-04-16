@@ -1,14 +1,13 @@
 import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
 import swal from "sweetalert";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useContextHook from "../../useCustomHook/useContextHook";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const AddBookings = ({ getBookData }) => {
   const { user } = useContextHook();
-  const axiosCustom = useAxiosHook();
+  const { axiosSecure, axiosNoToken } = useAxiosHook();
   const { book_image, book_name, book_provider_email, phone } = getBookData;
   const [open, openChange] = useState(false);
   const [matchFound, setMatchFound] = useState([]);
@@ -27,10 +26,10 @@ const AddBookings = ({ getBookData }) => {
 
   const url = `/bookings?email=${user?.email}`;
   useEffect(() => {
-    axiosCustom.get(url)?.then((res) => {
+    axiosSecure.get(url)?.then((res) => {
       setAllBookings(res.data);
     });
-  }, [axiosCustom, url]);
+  }, [axiosSecure, url]);
 
   const handlePopUp = () => {
     if (matchFound.length > 0) {
@@ -67,8 +66,8 @@ const AddBookings = ({ getBookData }) => {
       status,
     };
 
-    axios
-      .post("https://book-sharing-server.vercel.app/addBooking", booking)
+    axiosNoToken
+      .post("/addBooking", booking)
       .then((res) => {
         if (res.data?.insertedId) {
           // Update allBookings state after successfully adding the booking

@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import axios from "axios";
 import AllBooksCard from "../AllBooksCard/AllBooksCard";
 import { HashLoader } from "react-spinners";
-import useAxiosNoToken from "../../useCustomHook/useAxiosNoToken";
+import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const AllBooks = () => {
   let searchTerm;
-  const axiosNoToken = useAxiosNoToken();
+  const { axiosNoToken } = useAxiosHook();
   const [allBooks, setAllBooks] = useState([]);
   const [totalBooksCount, setTotalBooksCount] = useState(0);
   const [page, setPage] = useState(1);
@@ -26,10 +25,10 @@ const AllBooks = () => {
 
   // for search book
   useEffect(() => {
-    axios
-      .get("https://book-sharing-server.vercel.app/allBooks")
+    axiosNoToken
+      .get("/allBooks")
       .then((res) => setTotalBooksForSearch(res.data?.result));
-  }, []);
+  }, [axiosNoToken]);
   // for search book end
 
   const handlePrevious = () => {

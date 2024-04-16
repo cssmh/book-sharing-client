@@ -8,15 +8,15 @@ const MyBookings = () => {
   const { user } = useContextHook();
   const [isLoading, setIsLoading] = useState(true);
   const [allBookings, setAllBookings] = useState([]);
-  const axiosCustom = useAxiosHook();
+  const { axiosSecure } = useAxiosHook();
 
   const url = `/bookings?email=${user?.email}`;
   useEffect(() => {
-    axiosCustom.get(url)?.then((res) => {
+    axiosSecure.get(url)?.then((res) => {
       setAllBookings(res?.data);
       setIsLoading(false);
     });
-  }, [axiosCustom, url]);
+  }, [axiosSecure, url]);
 
   return (
     <div>

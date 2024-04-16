@@ -9,7 +9,7 @@ import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const BookDetails = () => {
   const { user } = useContextHook();
-  const axiosCustom = useAxiosHook();
+  const { axiosSecure } = useAxiosHook();
   const loadBookData = useLoaderData();
   const navigateTo = useNavigate();
 
@@ -38,7 +38,7 @@ const BookDetails = () => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axiosCustom.delete(`/book/${idx}/${user?.email}`).then((res) => {
+        axiosSecure.delete(`/book/${idx}/${user?.email}`).then((res) => {
           if (res.data?.deletedCount > 0) {
             swal(`${book} Deleted!`, {
               icon: "success",

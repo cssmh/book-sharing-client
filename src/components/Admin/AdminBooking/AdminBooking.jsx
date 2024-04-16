@@ -13,7 +13,7 @@ const AdminBooking = () => {
   const { result } = useLoaderData();
   const [adminBookings, setAdminBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const axiosCustom = useAxiosHook();
+  const { axiosSecure } = useAxiosHook();
   const { uniqueEmails, booksByProvider } = useTotalProviderHook();
   const providerArray = Object.entries(booksByProvider).map(
     ([email, count]) => ({
@@ -24,11 +24,11 @@ const AdminBooking = () => {
 
   const url = `/allBookings?email=${user?.email}`;
   useEffect(() => {
-    axiosCustom.get(url)?.then((res) => {
+    axiosSecure.get(url)?.then((res) => {
       setAdminBookings(res?.data);
       setIsLoading(false);
     });
-  }, [axiosCustom, url]);
+  }, [axiosSecure, url]);
 
   const handleDeleteAllBookings = () => {
     swal({
@@ -40,7 +40,7 @@ const AdminBooking = () => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axiosCustom.delete(`/allBookings?email=${user?.email}`).then((res) => {
+        axiosSecure.delete(`/allBookings?email=${user?.email}`).then((res) => {
           if (res.data?.acknowledged) {
             setAdminBookings([]);
             swal("All Bookings Deleted!", {

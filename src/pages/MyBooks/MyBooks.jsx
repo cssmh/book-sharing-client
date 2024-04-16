@@ -10,15 +10,15 @@ const MyBooks = () => {
   const { user } = useContextHook();
   const [isLoading, setIsLoading] = useState(true);
   const [myBooks, setMyBooks] = useState([]);
-  const axiosCustom = useAxiosHook();
+  const { axiosSecure } = useAxiosHook();
 
   const url = `/myBooks?email=${user?.email}`;
   useEffect(() => {
-    axiosCustom.get(url).then((res) => {
+    axiosSecure.get(url).then((res) => {
       setMyBooks(res.data);
       setIsLoading(false);
     });
-  }, [axiosCustom, url]);
+  }, [axiosSecure, url]);
 
   return (
     <div>

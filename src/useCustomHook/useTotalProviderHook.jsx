@@ -1,13 +1,12 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import useAxiosHook from "./useAxiosHook";
 
 const useTotalProviderHook = () => {
+  const { axiosNoToken } = useAxiosHook();
   const [allBooks, setAllBooks] = useState([]);
   useEffect(() => {
-    axios
-      .get("https://book-sharing-server.vercel.app/allBooks")
-      .then((res) => setAllBooks(res.data?.result));
-  }, []);
+    axiosNoToken.get("/allBooks").then((res) => setAllBooks(res.data?.result));
+  }, [axiosNoToken]);
 
   // Function to count the number of books each provider has
   const countBooksByProvider = (booksData) => {

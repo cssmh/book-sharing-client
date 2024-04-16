@@ -1,7 +1,8 @@
-import axios from "axios";
 import swal from "sweetalert";
+import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const MyPendingCard = ({ getPending }) => {
+  const { axiosNoToken } = useAxiosHook();
   // console.log(getPending);
   const {
     _id,
@@ -18,8 +19,8 @@ const MyPendingCard = ({ getPending }) => {
     // console.log(event.target.value, _id);
     const newStatus = event.target.value;
     const updatedStatus = { newStatus };
-    axios
-      .put(`https://book-sharing-server.vercel.app/bookings/${_id}`, updatedStatus)
+    axiosNoToken
+      .put(`/bookings/${_id}`, updatedStatus)
       .then((res) => {
         if (res.data?.modifiedCount > 0) {
           swal("Thank You!", `Updated to ${newStatus}`, "success");
@@ -41,7 +42,9 @@ const MyPendingCard = ({ getPending }) => {
             className="rounded-xl w-1/2 mx-auto my-3"
           />
         </figure>
-        <h2 className="text-2xl text-blue-900 text-center mt-2 mb-1 px-2">{book_name}</h2>
+        <h2 className="text-2xl text-blue-900 text-center mt-2 mb-1 px-2">
+          {book_name}
+        </h2>
         <h1 className="text-xl text-center">Collector Info: </h1>
         <div className="mb-2 text-lg w-2/3 mx-auto">
           <p className="text-green-500">Phone: {buyerPhone}</p>

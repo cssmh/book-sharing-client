@@ -1,7 +1,8 @@
-import axios from "axios";
 import swal from "sweetalert";
+import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
+  const { axiosNoToken } = useAxiosHook();
   // console.log(getBooking);
   const {
     _id,
@@ -23,15 +24,17 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axios.delete(`https://book-sharing-server.vercel.app/booking/${idx}`).then((res) => {
-          if (res.data?.deletedCount > 0) {
-            const remaining = allBookings.filter((book) => book._id !== idx);
-            setAllBookings(remaining);
-            swal("Deleted!", {
-              icon: "success",
-            });
-          }
-        });
+        axiosNoToken
+          .delete(`/booking/${idx}`)
+          .then((res) => {
+            if (res.data?.deletedCount > 0) {
+              const remaining = allBookings.filter((book) => book._id !== idx);
+              setAllBookings(remaining);
+              swal("Deleted!", {
+                icon: "success",
+              });
+            }
+          });
       } else {
         swal("Your file is safe!");
       }
