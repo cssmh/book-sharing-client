@@ -47,7 +47,7 @@ const PopularBooks = () => {
         </div>
       ) : (
         <div>
-          <div className="max-w-7xl mx-auto gap-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
             {popularBooks?.map((books) => (
               <PopularBookCard
                 key={books._id}

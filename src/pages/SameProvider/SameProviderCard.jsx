@@ -12,7 +12,7 @@ const SameProviderCard = ({ getBooks }) => {
     phone,
     location,
   } = getBooks;
-  let smallDesc = description.slice(0, 130);
+  let smallDesc = description.slice(0, 90);
 
   return (
     <div>

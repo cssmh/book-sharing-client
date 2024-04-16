@@ -10,7 +10,7 @@ const PopularBookCard = ({ getBook }) => {
     phone,
     location,
   } = getBook;
-  let smallDesc = description.slice(0, 130);
+  let smallDesc = description.slice(0, 90);
 
   return (
     <div className="card bg-base-100 shadow-xl py-4 md:hover:scale-105 transition-all duration-300">
