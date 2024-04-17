@@ -9,41 +9,47 @@ const AddBookings = ({ getBookData }) => {
   const { user } = useContextHook();
   const { axiosSecure, axiosNoToken } = useAxiosHook();
   const { book_image, book_name, book_provider_email, phone } = getBookData;
-  const [open, openChange] = useState(false);
+  const [open, setOpen] = useState(false);
   const [matchFound, setMatchFound] = useState([]);
-
-  // check already booked or not state
   const [allBookings, setAllBookings] = useState([]);
+  const [todayDate, setTodayDate] = useState("");
 
-  // check already booked or not
+  // Fetch all bookings for the current user
+  useEffect(() => {
+    const url = `/bookings?email=${user?.email}`;
+    axiosSecure.get(url).then((res) => {
+      setAllBookings(res.data);
+    });
+  }, [axiosSecure, user?.email]);
+
+  // Check if the selected book is already booked
   useEffect(() => {
     const matching = allBookings?.filter((myBooked) =>
       book_name.includes(myBooked?.book_name)
     );
     setMatchFound(matching);
   }, [allBookings, book_name]);
-  // check already booked or not end
 
-  const url = `/bookings?email=${user?.email}`;
+  // Set today's date as default and prevent selection of past dates
   useEffect(() => {
-    axiosSecure.get(url)?.then((res) => {
-      setAllBookings(res.data);
-    });
-  }, [axiosSecure, url]);
+    const today = new Date().toISOString().split("T")[0];
+    setTodayDate(today);
+  }, []);
 
   const handlePopUp = () => {
     if (matchFound.length > 0) {
       return toast.error("You already booked this!");
     }
-    openChange(true);
+    setOpen(true);
   };
+
   const closePop = () => {
-    openChange(false);
+    setOpen(false);
   };
 
   const handleBook = (e) => {
     e.preventDefault();
-    openChange(false);
+
     const form = e.target;
     const book_name = form.book_name.value;
     const book_provider_email = form.book_provider_email.value;
@@ -54,12 +60,12 @@ const AddBookings = ({ getBookData }) => {
     const buyerPhone = form.phone.value;
     const status = "Pending";
 
-    const booking = {
+    const bookingData = {
       book_name,
       book_image,
       book_provider_email,
-      phone,
       book_purchaser_email,
+      phone,
       date,
       instruction,
       buyerPhone,
@@ -67,16 +73,20 @@ const AddBookings = ({ getBookData }) => {
     };
 
     axiosNoToken
-      .post("/addBooking", booking)
+      .post("/addBooking", bookingData)
       .then((res) => {
         if (res.data?.insertedId) {
-          // Update allBookings state after successfully adding the booking
-          setAllBookings([...allBookings, booking]);
+          // Update allBookings state after successfully adding
+          // the booking to prevent already booked.
+          setAllBookings([...allBookings, bookingData]);
           swal("Congratulations!", "Booking Complete", "success");
         }
       })
-      .then(() => {
-        // console.log(err);
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        setOpen(false);
       });
   };
 
@@ -172,6 +182,8 @@ const AddBookings = ({ getBookData }) => {
                 <input
                   type="date"
                   name="date"
+                  min={todayDate}
+                  defaultValue={todayDate}
                   required
                   className="input input-bordered focus:border-transparent"
                   style={{ outline: "none" }}
