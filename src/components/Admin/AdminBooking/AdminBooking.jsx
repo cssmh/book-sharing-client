@@ -12,9 +12,12 @@ const AdminBooking = () => {
   const { user } = useContextHook();
   const { result } = useLoaderData();
   const [adminBookings, setAdminBookings] = useState([]);
+  const [filterAdminBookings, setFilterAdminBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [filterType, setFilterType] = useState("All");
   const { axiosSecure } = useAxiosHook();
   const { uniqueEmails, booksByProvider } = useTotalProviderHook();
+
   const providerArray = Object.entries(booksByProvider).map(
     ([email, count]) => ({
       email,
@@ -26,6 +29,7 @@ const AdminBooking = () => {
   useEffect(() => {
     axiosSecure.get(url)?.then((res) => {
       setAdminBookings(res?.data);
+      setFilterAdminBookings(res?.data);
       setIsLoading(false);
     });
   }, [axiosSecure, url]);
@@ -67,6 +71,20 @@ const AdminBooking = () => {
       ? "Booking"
       : "Bookings";
 
+  // filter type
+  const handleFilter = (e) => {
+    const filterType = e.target.value;
+    setFilterType(filterType);
+    if (filterType === "All") {
+      setFilterAdminBookings(adminBookings);
+    } else {
+      const filterNow = adminBookings.filter(
+        (allType) => allType.status === filterType
+      );
+      setFilterAdminBookings(filterNow);
+    }
+  };
+
   return (
     <div>
       <Helmet>
@@ -100,28 +118,53 @@ const AdminBooking = () => {
                 </p>
               ))}
             </div>
-            {adminBookings.length == 0 ? (
+            {adminBookings.length === 0 ? (
               <p className="text-center text-xl md:text-2xl font-semibold text-red-600 mt-10">
                 No Booking
               </p>
             ) : (
-              <div className="space-y-5">
-                {adminBookings?.map((booking) => (
-                  <AdminBookingCard
-                    key={booking._id}
-                    getAllBooking={booking}
-                    adminBookings={adminBookings}
-                    setAdminBookings={setAdminBookings}
-                  ></AdminBookingCard>
-                ))}
-                <div className="flex justify-center">
-                  <button
-                    onClick={handleDeleteAllBookings}
-                    className="text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              <div className="max-w-[1180px] mx-2 lg:mx-auto">
+                <div className="text-right mb-3">
+                  <select
+                    className="input text-sm px-3 border-green-500 rounded-2xl focus:border-transparent"
+                    style={{ outline: "none", height: "38px" }}
+                    defaultValue="All"
+                    onChange={(e) => handleFilter(e)}
                   >
-                    Delete all Bookings
-                  </button>
+                    <option value="All">All</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Progress">Progress</option>
+                    <option value="Completed">Completed</option>
+                  </select>
                 </div>
+                {filterAdminBookings.length === 0 ? (
+                  <p className="text-center text-xl md:text-2xl font-semibold text-red-600 mt-10">
+                    No {filterType} Booking!
+                  </p>
+                ) : (
+                  <div className="space-y-5">
+                    {filterAdminBookings?.map((booking) => (
+                      <AdminBookingCard
+                        key={booking._id}
+                        getAllBooking={booking}
+                        adminBookings={adminBookings}
+                        setAdminBookings={setAdminBookings}
+                        filterAdminBookings={filterAdminBookings}
+                        setFilterAdminBookings={setFilterAdminBookings}
+                      />
+                    ))}
+                  </div>
+                )}
+                {adminBookings.length > 0 && filterType === "All" && (
+                  <div className="flex justify-center mt-5">
+                    <button
+                      onClick={handleDeleteAllBookings}
+                      className="text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                    >
+                      Delete all Bookings
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </>

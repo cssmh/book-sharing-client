@@ -15,9 +15,9 @@ const MyPendingCard = ({ getPending }) => {
     book_purchaser_email,
   } = getPending;
 
-  const handleStatus = (event, _id) => {
-    // console.log(event.target.value, _id);
-    const newStatus = event.target.value;
+  const handleStatus = (e, _id) => {
+    // console.log(e.target.value, _id);
+    const newStatus = e.target.value;
     const updatedStatus = { newStatus };
     axiosNoToken
       .put(`/bookings/${_id}`, updatedStatus)
@@ -60,7 +60,7 @@ const MyPendingCard = ({ getPending }) => {
           id="book"
           name="book_name"
           defaultValue={status}
-          onChange={() => handleStatus(event, _id)}
+          onChange={(e) => handleStatus(e, _id)}
           className="input input-bordered focus:border-transparent"
           style={{ outline: "none" }}
         >

@@ -5,6 +5,8 @@ const AdminBookingCard = ({
   getAllBooking,
   adminBookings,
   setAdminBookings,
+  filterAdminBookings,
+  setFilterAdminBookings,
 }) => {
   const {
     _id,
@@ -30,9 +32,15 @@ const AdminBookingCard = ({
       if (willDelete) {
         // main code
         axiosNoToken.delete(`/booking/${idx}`).then((res) => {
-          if (res?.data?.deletedCount > 0) {
-            const remaining = adminBookings.filter((book) => book._id !== idx);
-            setAdminBookings(remaining);
+          if (res.data?.deletedCount > 0) {
+            const remainingAdminBookings = adminBookings.filter(
+              (book) => book._id !== idx
+            );
+            setAdminBookings(remainingAdminBookings);
+            const remainingFilterAdminBookings = filterAdminBookings.filter(
+              (book) => book._id !== _id
+            );
+            setFilterAdminBookings(remainingFilterAdminBookings);
             swal("Booking Deleted!", {
               icon: "success",
             });
@@ -45,7 +53,7 @@ const AdminBookingCard = ({
   };
 
   return (
-    <div className="max-w-[1180px] mx-2 lg:mx-auto">
+    <div>
       <div className="flex flex-col md:flex-row justify-center items-center border border-green-500 p-5 rounded-lg">
         <div className="flex-1 text-center">
           <img
