@@ -52,14 +52,14 @@ const AddBook = () => {
     }
 
     const BookInformation = {
-      location,
       book_name,
       book_image,
-      book_provider_email,
       book_provider_name,
-      description,
-      phone,
+      book_provider_email,
       book_provider_image,
+      phone,
+      location,
+      description,
     };
 
     axiosNoToken

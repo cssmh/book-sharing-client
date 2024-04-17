@@ -6,12 +6,12 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
   // console.log(getBooking);
   const {
     _id,
-    book_image,
     book_name,
-    phone,
-    status,
-    date,
+    book_image,
     book_provider_email,
+    phone,
+    date,
+    status,
   } = getBooking;
 
   const handleBookingDelete = (idx) => {
@@ -24,17 +24,15 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axiosNoToken
-          .delete(`/booking/${idx}`)
-          .then((res) => {
-            if (res.data?.deletedCount > 0) {
-              const remaining = allBookings.filter((book) => book._id !== idx);
-              setAllBookings(remaining);
-              swal("Deleted!", {
-                icon: "success",
-              });
-            }
-          });
+        axiosNoToken.delete(`/booking/${idx}`).then((res) => {
+          if (res.data?.deletedCount > 0) {
+            const remaining = allBookings.filter((book) => book._id !== idx);
+            setAllBookings(remaining);
+            swal("Deleted!", {
+              icon: "success",
+            });
+          }
+        });
       } else {
         swal("Your file is safe!");
       }

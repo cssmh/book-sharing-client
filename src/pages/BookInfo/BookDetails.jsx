@@ -15,14 +15,14 @@ const BookDetails = () => {
 
   const {
     _id,
-    book_image,
     book_name,
-    description,
-    location,
-    book_provider_image,
-    book_provider_email,
+    book_image,
     book_provider_name,
+    book_provider_email,
+    book_provider_image,
     phone,
+    location,
+    description,
   } = loadBookData;
 
   const url = `/myBooks?email=${book_provider_email}`;
