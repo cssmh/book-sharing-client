@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { HashLoader } from "react-spinners";
+import SkeletonCard from "./SkeletonCard";
 import PopularBookCard from "../PopularBookCard/PopularBookCard";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
@@ -28,6 +28,7 @@ const PopularBooks = () => {
   }, []);
 
   useEffect(() => {
+    setIsLoading(true);
     axiosNoToken.get(`/allBooks?limit=${sliceSize}`).then((res) => {
       setPopularBooks(res.data?.result);
       setIsLoading(false);
@@ -42,8 +43,10 @@ const PopularBooks = () => {
         </h3>
       </div>
       {isLoading ? (
-        <div className="flex justify-center my-5">
-          <HashLoader color="#FB0F5A" size={36} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto my-10">
+          {[...Array(sliceSize)].map((_, index) => (
+            <SkeletonCard key={index} />
+          ))}
         </div>
       ) : (
         <div>
