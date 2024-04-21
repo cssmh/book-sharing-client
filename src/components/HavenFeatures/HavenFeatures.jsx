@@ -36,7 +36,8 @@ const HavenFeatures = () => {
             using AOS. Lottie Animation is used for the BookHaven icon. <br />
             <br />
             7. The design is fully responsive for both mobile and tablet
-            devices. <br />
+            devices. Added skeleton in Home page popular books while loading.{" "}
+            <br />
             <br />
             8. Users can view all books on the &quot;All Books&quot; page and
             use the search function to find books by name or provider. <br />

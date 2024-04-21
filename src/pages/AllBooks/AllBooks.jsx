@@ -54,7 +54,8 @@ const AllBooks = () => {
               type="text"
               name="name"
               placeholder="Search for Books or Authors"
-              className="input input-bordered min-w-[75%] md:min-w-[320px] border-red-500"
+              className="input input-bordered rounded-3xl min-w-[75%] md:min-w-[320px] border-red-500"
+              style={{ outline: "none" }}
               onChange={(e) => {
                 searchTerm = e.target.value;
                 // console.log(searchTerm);

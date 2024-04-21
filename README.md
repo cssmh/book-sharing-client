@@ -16,7 +16,7 @@
 4. The login page includes a "forgot password" option.
 5. Logged-in users will be automatically redirected to the home page if they attempt to access the login/register page.
 6. The home page features a sleek design with various components using AOS. Lottie Animation is used for the BookHaven icon.
-7. The design is fully responsive for both mobile and tablet devices.
+7. The design is fully responsive for both mobile and tablet devices. Added skeleton in Home page popular books while loading.
 8. Users can view all books on the "All Books" page and use the search function to find books by name or provider.
 9. Users can add, delete, and update books. When adding a book, there is regex validation for a valid phone number, ensuring only valid Bangladeshi phone numbers are accepted.
 10. When a user updates their profile photo and name, these changes will automatically reflect across all their book data, including the provider's name and photo.
@@ -33,7 +33,7 @@
 21. The counting component on the homepage dynamically displays the total number of users and book providers.
 22. Implemented JSON Web Token (JWT) for authorization. Only logged-in users can access their own data, not others.
 23. Used interceptors to automatically log out users and redirect them to the login page if the token expires or encounters any issues.
-24. Created an admin dashboard accessible only to admin@***.com. Other users attempting to access this route will be automatically redirected to the homepage.
+24. Created an admin dashboard accessible only to admin@\*\*\*.com. Other users attempting to access this route will be automatically redirected to the homepage.
 25. The "More Books of a User" page and the Admin Page display book details. If the book count is 0 or 1, the page title will be singular ("Book"). If there are more than one book, it will display in plural form ("Books"/"Providers"/"Bookings").
 26. In the admin dashboard, the admin can view the total number of books, total number of book providers, and provider emails, along with the count of books each user has added. Each count number serves as a link to see the books added by that user. Additionally, the admin can access total bookings and their details.
 27. Access to all bookings from the database is restricted to authorized admins only. Even with a valid token and user credentials, users cannot access this data. The server implements an admin email condition to restrict access to admin emails only.

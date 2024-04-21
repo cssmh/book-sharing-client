@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react";
-import useContextHook from "../../useCustomHook/useContextHook";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
 import SocialLogin from "./SocialLogin";
 import { Helmet } from "react-helmet-async";
+import { useEffect, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import useContextHook from "../../useCustomHook/useContextHook";
 
 const Login = () => {
   const [view, setView] = useState(true);

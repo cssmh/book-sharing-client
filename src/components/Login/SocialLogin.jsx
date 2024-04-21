@@ -1,7 +1,7 @@
+import toast from "react-hot-toast";
+import { FcGoogle } from "react-icons/fc";
 import { useLocation, useNavigate } from "react-router-dom";
 import useContextHook from "../../useCustomHook/useContextHook";
-import { FcGoogle } from "react-icons/fc";
-import toast from "react-hot-toast";
 
 const SocialLogin = () => {
   const navigateTo = useNavigate();
