@@ -44,7 +44,7 @@ const PopularBooks = () => {
       </div>
       {isLoading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto my-10">
-          {[...Array(3)].map((_, index) => (
+          {[...Array(sliceSize)].map((_, index) => (
             <SkeletonCard key={index} />
           ))}
         </div>
