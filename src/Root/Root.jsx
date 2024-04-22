@@ -99,7 +99,7 @@ const Root = createBrowserRouter([
         ),
       },
       {
-        path: "/admin",
+        path: "/admin-dashboard",
         element: (
           <AdminPrivateRoute>
             <AdminBooking />

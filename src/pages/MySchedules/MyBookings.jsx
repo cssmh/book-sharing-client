@@ -21,7 +21,7 @@ const MyBookings = () => {
   return (
     <div>
       {isLoading ? (
-        <div className="flex justify-center">
+        <div className="flex justify-center md:mt-[6px]">
           <FallingLines
             color="#9933FF"
             width="55"

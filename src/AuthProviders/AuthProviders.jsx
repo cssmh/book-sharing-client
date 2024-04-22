@@ -57,25 +57,24 @@ const AuthProviders = ({ children }) => {
   };
 
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
       // console.log("user in ", currentUser);
-
-      const loggedEmail = currentUser?.email || user?.email;
-      const getEmail = { email: loggedEmail };
       setUser(currentUser);
+      const getEmail = currentUser?.email || user?.email;
+      const emailToSend = { email: getEmail };
       setLoading(false);
-      if (loggedEmail) {
-        axios
-          .post("https://book-sharing-server.vercel.app/jwt", getEmail, {
+      if (getEmail) {
+        await axios
+          .post("https://book-sharing-server.vercel.app/jwt", emailToSend, {
             withCredentials: true,
           })
-          .then((res) => console.log("login token res", res.data));
+          .then((res) => console.log("login token res", res?.data));
       } else {
-        axios
-          .post("https://book-sharing-server.vercel.app/logout", getEmail, {
+        await axios
+          .post("https://book-sharing-server.vercel.app/logout", emailToSend, {
             withCredentials: true,
           })
-          .then((res) => console.log("logout token res", res.data));
+          .then((res) => console.log("logout token res", res?.data));
       }
     });
     return () => {
