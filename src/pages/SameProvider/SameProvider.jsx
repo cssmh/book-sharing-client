@@ -18,7 +18,7 @@ const SameProvider = () => {
     <div>
       {isLoading ? (
         <div className="flex justify-center min-h-[70vh] mt-5">
-          <HashLoader color="#9933FF" size={36} />
+          <HashLoader color="#9933FF" size={32} />
         </div>
       ) : (
         <>

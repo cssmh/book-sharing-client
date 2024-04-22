@@ -23,7 +23,7 @@ const MyPending = () => {
       <div className="flex justify-center">
         <FallingLines
           color="#9933FF"
-          width="60"
+          width="55"
           visible={true}
           ariaLabel="falling-circles-loading"
         />
@@ -34,12 +34,12 @@ const MyPending = () => {
   return (
     <div>
       {myPending.length == 0 ? (
-        <p className="text-center text-lg md:text-2xl font-semibold text-red-600 italic">
+        <p className="text-center text-lg md:text-2xl my-2 md:my-4 font-semibold text-red-600 italic">
           No User Booked Your Books
         </p>
       ) : (
         <>
-          <h2 className="text-center text-lg md:text-2xl md:my-5 font-semibold italic">
+          <h2 className="text-center text-lg md:text-2xl my-2 md:my-4 font-semibold italic">
             User Booked Your Books
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">

@@ -85,7 +85,7 @@ const AddBook = () => {
       </Helmet>
       {isLoading ? (
         <div className="flex justify-center my-5">
-          <HashLoader color="#9933FF" size={36} />
+          <HashLoader color="#9933FF" size={32} />
         </div>
       ) : (
         <>
