@@ -42,7 +42,7 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
   return (
     <div
       data-aos="zoom-in"
-      className="bg-base-100 shadow-xl rounded-xl px-14 pt-3 py-6 flex flex-col"
+      className="bg-base-100 shadow-xl rounded-xl px-14 pt-2 md:pt-3 py-6 flex flex-col"
     >
       <div className="flex-grow">
         <figure>

@@ -1,8 +1,8 @@
-import { Link, NavLink } from "react-router-dom";
-import useContextHook from "../../useCustomHook/useContextHook";
+import { useState } from "react";
 import Lottie from "lottie-react";
 import loggieData from "../../assets/Logo.json";
-import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import useContextHook from "../../useCustomHook/useContextHook";
 
 const Navbar = () => {
   const { user, logOut } = useContextHook();

@@ -35,7 +35,7 @@ const MyBooksCard = ({ getBook, myBooks, setMyBooks }) => {
 
   return (
     <div data-aos="zoom-in" className="card bg-base-100 shadow-xl">
-      <figure className="pt-6 mb-2">
+      <figure className="pt-4 mb-2">
         <img
           src={book_image}
           className="rounded-xl w-[46%]"
