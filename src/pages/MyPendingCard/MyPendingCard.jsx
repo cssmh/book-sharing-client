@@ -20,46 +20,32 @@ const MyPendingCard = ({ getPending }) => {
   const [bookStatus, setBookStatus] = useState(status);
 
   const handleUpdateStatus = (e, idx, bookIdx, email) => {
-    // console.log(e.target.value, _id);
     const newStatus = e.target.value;
-    const updatedStatus = { newStatus };
+    const bookStatus =
+      newStatus === "Pending" || newStatus === "Progress"
+        ? "available"
+        : "Unavailable";
+
+    const updatedStatus = { bookStatus };
+
     axiosSecure
-      .put(`/bookings/${idx}/${email}`, updatedStatus)
+      .put(`/bookings/${idx}/${email}`, { newStatus })
       .then((res) => {
         if (res.data?.modifiedCount > 0) {
           setBookStatus(newStatus);
           swal("Thank You!", `Updated to ${newStatus}`, "success");
         }
       })
-      .then();
-
-    if (newStatus === "Pending") {
-      const bookStatus = "available";
-      axiosSecure
-        .put(`/book-status/${bookIdx}/${email}`, { bookStatus })
-        .then((res) => {
-          if (res.data.modifiedCount > 0) {
-            toast.success(`This Book is now ${bookStatus}`);
-          }
-        })
-        .catch((res) => toast.error(res));
-    } else if (newStatus === "Progress") {
-      const bookStatus = "available";
-      axiosSecure
-        .put(`/book-status/${bookIdx}/${email}`, { bookStatus })
-        .then()
-        .catch((res) => toast.error(res));
-    } else if (newStatus === "Completed") {
-      const bookStatus = "Unavailable";
-      axiosSecure
-        .put(`/book-status/${bookIdx}/${email}`, { bookStatus })
-        .then((res) => {
-          if (res.data.modifiedCount > 0) {
-            toast(`This Book is now ${bookStatus}`);
-          }
-        })
-        .catch((res) => toast.error(res));
-    }
+      .then(() => {
+        axiosSecure
+          .put(`/book-status/${bookIdx}/${email}`, updatedStatus)
+          .catch((err) => {
+            toast.error(err);
+          });
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
   };
 
   return (

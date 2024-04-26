@@ -1,6 +1,6 @@
 import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
 import swal from "sweetalert";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import useContextHook from "../../useCustomHook/useContextHook";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
@@ -8,6 +8,7 @@ import useAxiosHook from "../../useCustomHook/useAxiosHook";
 const AddBookings = ({ getBookData }) => {
   const { user } = useContextHook();
   const { axiosSecure, axiosNoToken } = useAxiosHook();
+
   const {
     _id,
     book_image,
@@ -15,11 +16,13 @@ const AddBookings = ({ getBookData }) => {
     book_provider_email,
     book_provider_phone,
   } = getBookData;
-  
+
   const [open, setOpen] = useState(false);
   const [matchFound, setMatchFound] = useState([]);
   const [allBookings, setAllBookings] = useState([]);
   const [todayDate, setTodayDate] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const submitTimeoutRef = useRef(null);
 
   // Fetch all bookings for the current user
   useEffect(() => {
@@ -61,6 +64,16 @@ const AddBookings = ({ getBookData }) => {
 
   const handleAddBooking = (e) => {
     e.preventDefault();
+    // Prevent multiple submissions clicking
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+    if (submitTimeoutRef.current) {
+      clearTimeout(submitTimeoutRef.current);
+    }
+    submitTimeoutRef.current = setTimeout(() => {
+      setIsSubmitting(false);
+    }, 1000);
+    //  more than one time in a second
     const form = e.target;
     const book_id = _id;
     const book_name = form.book_name.value;
