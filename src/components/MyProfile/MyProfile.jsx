@@ -5,7 +5,7 @@ import useContextHook from "../../useCustomHook/useContextHook";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 import HavenFeatures from "../HavenFeatures/HavenFeatures";
 
-const Profile = () => {
+const MyProfile = () => {
   const { user, handleUpdateProfile } = useContextHook();
   const { axiosSecure } = useAxiosHook();
   const { photoURL, email, displayName, metadata } = user;
@@ -108,4 +108,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default MyProfile;

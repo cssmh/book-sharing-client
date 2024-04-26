@@ -1,7 +1,7 @@
 import { useState } from "react";
-import MyBookings from "./MyBookings";
-import MyPending from "./MyPending";
 import { Helmet } from "react-helmet-async";
+import MyBookings from "../MyBookings/MyBookings";
+import MyPending from "../MyPending/MyPending";
 
 const MySchedules = () => {
   const [activeComponent, setActiveComponent] = useState("MyBookings");

@@ -9,7 +9,7 @@ const MainLayout = () => {
   return (
     <div>
       <Navbar />
-      <div className="min-h-[60vh] md:min-h-[70vh]">
+      <div className="min-h-[65vh] md:min-h-[70vh]">
         {navigation.state === "loading" ? (
           <div className="flex justify-center mt-5">
             <HashLoader color="#9933FF" size={32} />

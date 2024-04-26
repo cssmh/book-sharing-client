@@ -1,6 +1,6 @@
-import MyPendingCard from "./MyPendingCard";
 import { useEffect, useState } from "react";
 import { FallingLines } from "react-loader-spinner";
+import MyPendingCard from "../MyPendingCard/MyPendingCard";
 import useContextHook from "../../useCustomHook/useContextHook";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 

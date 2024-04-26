@@ -1,12 +1,13 @@
 import Lottie from "lottie-react";
+import { Link } from "react-router-dom";
 import loggieData from "../../assets/Logo.json";
 const Footer = () => {
   return (
     <div className="mt-10">
       <footer className="px-4 divide-y bg-base-300">
-        <div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
+        <div className="container flex flex-col justify-between py-4 md:py-12 mx-auto space-y-8 lg:flex-row lg:space-y-0">
           <div className="lg:w-1/3">
-            <a
+            <Link
               rel="noopener noreferrer"
               href="#"
               className="flex justify-center space-x-3 lg:justify-start"
@@ -14,10 +15,10 @@ const Footer = () => {
               <div className="flex items-center justify-center w-14 rounded-full dark:bg-violet-400">
                 <Lottie animationData={loggieData} />
               </div>
-              <span className="self-center text-2xl font-semibold">
+              <span className="self-center text-xl md:text-2xl font-semibold">
                 Share a Book
               </span>
-            </a>
+            </Link>
           </div>
           <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4 px-5 md:px-0">
             <div className="space-y-3">
@@ -131,7 +132,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="py-6 text-sm text-center dark:text-gray-400">
+        <div className="pb-8 md:pb-10 text-sm text-center dark:text-gray-400">
           © 2024 MBSTU BookHaven All rights reserved.
         </div>
       </footer>

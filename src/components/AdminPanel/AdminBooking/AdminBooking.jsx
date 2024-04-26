@@ -1,12 +1,11 @@
-import swal from "sweetalert";
 import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
-import AdminBookingCard from "../AdminBookingCard/AdminBookingCard";
 import { HashLoader } from "react-spinners";
+import { Link, useLoaderData } from "react-router-dom";
+import useAxiosHook from "../../../useCustomHook/useAxiosHook";
 import useContextHook from "../../../useCustomHook/useContextHook";
 import useTotalProviderHook from "../../../useCustomHook/useTotalProviderHook";
-import useAxiosHook from "../../../useCustomHook/useAxiosHook";
+import AdminBookingCard from "../AdminBookingCard/AdminBookingCard";
 
 const AdminBooking = () => {
   const { user } = useContextHook();
@@ -69,7 +68,7 @@ const AdminBooking = () => {
       <div>
         {isLoading ? (
           <div className="flex justify-center mt-5">
-            <HashLoader color="#FB0F5A" size={32} />
+            <HashLoader color="#00CC66" size={32} />
           </div>
         ) : (
           <>
@@ -127,7 +126,7 @@ const AdminBooking = () => {
                         setAdminBookings={setAdminBookings}
                         filterAdminBookings={filterAdminBookings}
                         setFilterAdminBookings={setFilterAdminBookings}
-                      />
+                      ></AdminBookingCard>
                     ))}
                   </div>
                 )}

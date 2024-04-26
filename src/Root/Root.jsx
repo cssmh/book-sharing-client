@@ -2,25 +2,25 @@ import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../MainLayout/MainLayout";
 import ErrorPage from "../components/ErrorPage/ErrorPage";
 import Home from "../components/Home/Home";
-import Register from "../Components/Register/Register";
-import PrivateRoute from "../PrivateRoute/PrivateRoute";
-import Profile from "../Components/Profile/Profile";
 import Login from "../components/Login/Login";
-import UpdateBook from "../Pages/MyBooks/UpdateBook";
-import MySchedules from "../pages/MySchedules/MySchedules";
-import MyBooks from "../Pages/MyBooks/MyBooks";
-import AllBooks from "../Pages/AllBooks/AllBooks";
-import BookDetails from "../pages/BookInfo/BookDetails";
+import Register from "../components/Register/Register";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import MyProfile from "../components/MyProfile/MyProfile";
+import AllBooks from "../pages/AllBooks/AllBooks";
+import BookDetails from "../pages/BookDetails/BookDetails";
 import AddBook from "../pages/AddBook/AddBook";
+import MyBooks from "../pages/MyBooks/MyBooks";
+import UpdateBook from "../pages/UpdateBook/UpdateBook";
+import MySchedules from "../pages/MySchedules/MySchedules";
+import SameProvider from "../pages/SameProvider/SameProvider";
 import AdminPrivateRoute from "../AdminPrivateRoute/AdminPrivateRoute";
-import SameProvider from "../Pages/SameProvider/SameProvider";
-import AdminBooking from "../Components/Admin/AdminBooking/AdminBooking";
+import AdminBooking from "../Components/AdminPanel/AdminBooking/AdminBooking";
 
 const Root = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    errorElement: <ErrorPage />,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -35,10 +35,10 @@ const Root = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: "/profile",
+        path: "/my-profile",
         element: (
           <PrivateRoute>
-            <Profile />
+            <MyProfile />
           </PrivateRoute>
         ),
       },

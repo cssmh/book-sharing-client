@@ -33,7 +33,7 @@ const AtomicHabit = () => {
         className="md:pb-4 lg:pb-0 text-center space-y-2"
       >
         <p className="text-4xl">Order Now</p>
-        <p className="text-2xl">350 BDT</p>
+        <p className="text-2xl">340 BDT</p>
         <button
           onClick={handleBuy}
           className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2  hover:scale-105 transition-all duration-300"

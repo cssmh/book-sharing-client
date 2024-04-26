@@ -3,7 +3,7 @@ import banner from "../../assets/Banner.jpeg";
 
 const Banner = () => {
   return (
-    <div className="px-6 py-10 lg:pt-24 mx-auto text-center dark:bg-gray-950">
+    <div className="px-6 pt-10 lg:pt-24 mx-auto text-center dark:bg-gray-950">
       <div className="max-w-4xl mx-auto flex flex-col justify-center items-center">
         <h1
           className="w-full bg-gradient-to-r from-green-300 via-blue-500 to-blue-500 bg-clip-text text-transparent sm:text-5xl text-3xl font-bold lg:text-6xl aos-init"
@@ -14,7 +14,7 @@ const Banner = () => {
           Share Exchange Unleashed
         </h1>
         <p
-          className="max-w-lg mx-auto mt-4 md:mt-6 text-gray-500 dark:text-gray-300 aos-init"
+          className="max-w-lg mx-auto mt-4 text-gray-500 dark:text-gray-300 aos-init"
           data-aos="fade-up"
           data-aos-easing="ease-in"
           data-aos-duration="900"
@@ -27,7 +27,7 @@ const Banner = () => {
             data-aos="fade-up"
             data-aos-easing="ease-in"
             data-aos-duration="900"
-            className="px-4 py-2 mt-4 md:mt-6 text-sm font-medium leading-5 text-center text-white capitalize bg-green-400 rounded-md hover:bg-green-400/90 lg:mx-0 lg:w-auto focus:outline-none transition duration-300 flex gap-1 aos-init"
+            className="px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white capitalize bg-green-400 rounded-md hover:bg-green-400/90 lg:mx-0 lg:w-auto focus:outline-none transition duration-300 flex gap-1 aos-init"
           >
             <span>Start sharing now</span>
             <span>

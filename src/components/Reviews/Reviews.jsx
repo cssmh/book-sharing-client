@@ -3,7 +3,7 @@ import Reviewer2 from "../../assets/Reviewer2.jpg";
 import Reviewer3 from "../../assets/Reviewer3.jpeg";
 import Reviewer4 from "../../assets/Reviewer4.jpg";
 
-const Review = () => {
+const Reviews = () => {
   return (
     <div className="max-w-[1220px] mx-auto flex flex-col lg:flex-row justify-center items-center gap-4 my-12">
       <div className="lg:w-2/5 text-center lg:text-left space-y-1 md:space-y-2">
@@ -109,4 +109,4 @@ const Review = () => {
   );
 };
 
-export default Review;
+export default Reviews;

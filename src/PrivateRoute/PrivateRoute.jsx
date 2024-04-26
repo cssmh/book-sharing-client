@@ -1,11 +1,10 @@
+import { FallingLines } from "react-loader-spinner";
 import useContextHook from "../useCustomHook/useContextHook";
 import { Navigate, useLocation } from "react-router-dom";
-import { FallingLines } from "react-loader-spinner";
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useContextHook();
   const location = useLocation();
-  // console.log(location);
   
   if (loading) {
     return (
@@ -20,10 +19,10 @@ const PrivateRoute = ({ children }) => {
     );
   }
 
-  if (!loading && user?.email) {
+  if (user?.email) {
     return children;
   } else {
-    return <Navigate state={location.pathname} to="/login"></Navigate>;
+    return <Navigate state={location?.pathname} to="/login"></Navigate>;
   }
 };
 

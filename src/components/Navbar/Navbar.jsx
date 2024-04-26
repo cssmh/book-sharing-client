@@ -163,7 +163,7 @@ const Navbar = () => {
                     {user?.displayName}
                   </p>
                   <button className="btn btn-sm btn-ghost">
-                    <Link to={"/profile"}>View Profile</Link>
+                    <Link to={"/my-profile"}>View Profile</Link>
                   </button>
                 </li>
                 <li>

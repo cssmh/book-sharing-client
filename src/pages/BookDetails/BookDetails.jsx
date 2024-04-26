@@ -1,17 +1,17 @@
-import swal from "sweetalert";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
-import AddBookings from "./AddBookings";
+import swal from "sweetalert";
 import { HashLoader } from "react-spinners";
 import { Helmet } from "react-helmet-async";
-import useContextHook from "../../useCustomHook/useContextHook";
+import AddBookings from "../BookInfo/AddBookings";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
-import useProviderBookHook from "../../useCustomHook/useProviderBookHook";
+import useProviderHook from "../../useCustomHook/useProviderHook";
+import useContextHook from "../../useCustomHook/useContextHook";
 
 const BookDetails = () => {
   const { user } = useContextHook();
-  const { axiosSecure } = useAxiosHook();
-  const loadBookData = useLoaderData();
   const navigateTo = useNavigate();
+  const loadBookData = useLoaderData();
+  const { axiosSecure } = useAxiosHook();
 
   const {
     _id,
@@ -27,7 +27,7 @@ const BookDetails = () => {
   } = loadBookData;
 
   const url = `/myBooks?email=${book_provider_email}`;
-  const { isLoading, bookData } = useProviderBookHook(url);
+  const { isLoading, bookData } = useProviderHook(url);
 
   const handleDeleteByAdmin = (idx, book) => {
     swal({
@@ -150,9 +150,7 @@ const BookDetails = () => {
                   <AddBookings getBookData={loadBookData}></AddBookings>
                 )
               ) : (
-                <p className="text-lg text-red-600">
-                  This Book is already Taken by someone!
-                </p>
+                <p className="text-lg text-red-600">Unavailable to Collect..</p>
               )}
               <div>
                 {book_status === "available" &&

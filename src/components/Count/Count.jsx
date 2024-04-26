@@ -1,7 +1,7 @@
 import pencil from "../../assets/pencil.jpg";
 import useTotalProviderHook from "../../useCustomHook/useTotalProviderHook";
 
-const Counting = () => {
+const Count = () => {
   const { uniqueEmails, allBooks } = useTotalProviderHook();
 
   return (
@@ -32,4 +32,4 @@ const Counting = () => {
   );
 };
 
-export default Counting;
+export default Count;

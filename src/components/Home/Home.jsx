@@ -2,11 +2,10 @@ import { Helmet } from "react-helmet-async";
 import Banner from "../Banner/Banner";
 import PopularBooks from "../../pages/PopularBooks/PopularBooks";
 import AboutUs from "../AboutUs/AboutUs";
-import MagicSharing from "../MagicSharing/MagicSharing";
+import ShareMagic from "../ShareMagic/ShareMagic";
 import AtomicHabit from "../AtomicHabit/AtomicHabit";
-import Review from "../Review/Review";
-import Counting from "../Counting/Counting";
-
+import Reviews from "../Reviews/Reviews";
+import Count from "../Count/Count";
 const Home = () => {
   return (
     <div>
@@ -16,10 +15,10 @@ const Home = () => {
       <Banner></Banner>
       <PopularBooks></PopularBooks>
       <AboutUs></AboutUs>
-      <MagicSharing></MagicSharing>
+      <ShareMagic></ShareMagic>
       <AtomicHabit></AtomicHabit>
-      <Review></Review>
-      <Counting></Counting>
+      <Reviews></Reviews>
+      <Count></Count>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import SkeletonCard from "./SkeletonCard";
+import SkeletonCard from "../SkeletonCard/SkeletonCard";
 import PopularBookCard from "../PopularBookCard/PopularBookCard";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
@@ -38,7 +38,7 @@ const PopularBooks = () => {
   return (
     <div>
       <div data-aos="zoom-in" data-aos-delay="100" data-aos-offset="100">
-        <h3 className="text-center my-8 font-bold text-2xl md:text-3xl italic border-b-2 pb-3 max-w-md mx-auto border-blue-700">
+        <h3 className="text-center my-5 md:my-8 font-bold text-2xl md:text-3xl italic border-b-2 pb-3 max-w-md mx-auto border-blue-700">
           Our Popular Books
         </h3>
       </div>
@@ -60,7 +60,7 @@ const PopularBooks = () => {
           </div>
           <div className="flex justify-center my-10">
             <Link to="/all-books">
-              <button className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+              <button className="text-white bg-gradient-to-r from-green-400 via-green-400 to-green-500 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
                 Show all Books
               </button>
             </Link>
