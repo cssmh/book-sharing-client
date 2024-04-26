@@ -1,11 +1,10 @@
+import { HashLoader } from "react-spinners";
 import { useParams } from "react-router-dom";
 import SameProviderCard from "./SameProviderCard";
-import { HashLoader } from "react-spinners";
 import useProviderBookHook from "../../useCustomHook/useProviderBookHook";
 
 const SameProvider = () => {
   const getUser = useParams();
-
   // same provider book data getting
   const url = `/myBooks?email=${getUser?.email}`;
   const { isLoading, bookData } = useProviderBookHook(url);

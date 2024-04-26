@@ -35,7 +35,7 @@ const Profile = () => {
         toast.success("update success");
 
         axiosSecure
-          .put(`/myBooks/${user?.email}`, updateMyAllBookInfo)
+          .put(`/myAllBooks/${user?.email}`, updateMyAllBookInfo)
           .then((res) => {
             console.log(res.data);
             if (res.data?.modifiedCount > 0) {

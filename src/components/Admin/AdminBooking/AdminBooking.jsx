@@ -34,30 +34,6 @@ const AdminBooking = () => {
     });
   }, [axiosSecure, url]);
 
-  const handleDeleteAllBookings = () => {
-    swal({
-      title: "Are you sure?",
-      text: "Once deleted, it can't be recovered!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        // main code
-        axiosSecure.delete(`/allBookings?email=${user?.email}`).then((res) => {
-          if (res.data?.acknowledged) {
-            setAdminBookings([]);
-            swal("All Bookings Deleted!", {
-              icon: "success",
-            });
-          }
-        });
-      } else {
-        swal("All Bookings is safe!");
-      }
-    });
-  };
-
   // if length is 0 or more than one book then
   // show Books/Providers/Bookings plural form. Just a try
   const resultText =
@@ -153,16 +129,6 @@ const AdminBooking = () => {
                         setFilterAdminBookings={setFilterAdminBookings}
                       />
                     ))}
-                  </div>
-                )}
-                {adminBookings.length > 0 && filterType === "All" && (
-                  <div className="flex justify-center mt-5">
-                    <button
-                      onClick={handleDeleteAllBookings}
-                      className="text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                    >
-                      Delete all Bookings
-                    </button>
                   </div>
                 )}
               </div>

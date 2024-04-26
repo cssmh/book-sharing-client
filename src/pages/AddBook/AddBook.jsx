@@ -43,11 +43,12 @@ const AddBook = () => {
     const book_provider_name = form.book_provider_name.value;
     const book_provider_email = form.book_provider_email.value;
     const book_provider_image = user?.photoURL;
-    const location = form.location.value;
+    const pickup_location = form.pickup_location.value;
     const description = form.description.value;
-    const phone = form.phone.value;
+    const book_provider_phone = form.book_provider_phone.value;
+    const book_status = "available";
 
-    if (!/^(\+?8801|01)(\d{9})$/.test(phone)) {
+    if (!/^(\+?8801|01)(\d{9})$/.test(book_provider_phone)) {
       return toast.error("Enter a valid phone number!");
     }
 
@@ -55,11 +56,12 @@ const AddBook = () => {
       book_name,
       book_image,
       book_provider_name,
-      book_provider_email,
       book_provider_image,
-      phone,
-      location,
+      book_provider_email,
+      book_provider_phone,
+      pickup_location,
       description,
+      book_status,
     };
 
     axiosNoToken
@@ -165,7 +167,7 @@ const AddBook = () => {
                 <input
                   type="text"
                   required
-                  name="location"
+                  name="pickup_location"
                   className="input input-bordered focus:border-transparent"
                   style={{ outline: "none" }}
                 />
@@ -178,7 +180,7 @@ const AddBook = () => {
                   type="text"
                   required
                   defaultValue={"+880"}
-                  name="phone"
+                  name="book_provider_phone"
                   className="input input-bordered focus:border-transparent"
                   style={{ outline: "none" }}
                 />

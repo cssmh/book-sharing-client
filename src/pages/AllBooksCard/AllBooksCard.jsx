@@ -4,11 +4,11 @@ const AllBooksCard = ({ getBook }) => {
     _id,
     book_image,
     book_name,
-    description,
     book_provider_image,
     book_provider_name,
-    phone,
-    location,
+    book_provider_phone,
+    pickup_location,
+    description,
   } = getBook;
 
   return (
@@ -28,7 +28,7 @@ const AllBooksCard = ({ getBook }) => {
         <h2 className="text-blue-900 text-xl md:text-2xl font-bold mt-2 px-1">
           {book_name}
         </h2>
-        <p className="px-2">{description?.slice(0, 135)}...</p>
+        <p className="px-2">{description?.slice(0, 90)}...</p>
         <div className="flex justify-center items-center gap-3 my-1 border-2 border-red-400 rounded-lg px-3 py-2">
           <div className="avatar">
             <div className="w-12 rounded-full ring ring-primary">
@@ -40,8 +40,8 @@ const AllBooksCard = ({ getBook }) => {
           </div>
           <h2 className="font-bold text-lg">{book_provider_name}</h2>
         </div>
-        <p className="text-lg text-green-500">Phone: {phone}</p>
-        <p className="text-lg">Location: {location}</p>
+        <p className="text-lg text-green-500">Phone: {book_provider_phone}</p>
+        <p className="text-lg">Location: {pickup_location}</p>
         <div className="card-actions mt-2">
           <Link to={`/book/${_id}`}>
             <button className="btn border-green-400 hover:border-green-400 bg-yellow-50 hover:bg-green-400 text-green-400 hover:text-white">

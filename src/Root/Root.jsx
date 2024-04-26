@@ -10,7 +10,7 @@ import UpdateBook from "../Pages/MyBooks/UpdateBook";
 import MySchedules from "../pages/MySchedules/MySchedules";
 import MyBooks from "../Pages/MyBooks/MyBooks";
 import AllBooks from "../Pages/AllBooks/AllBooks";
-import BookDetails from "../Pages/BookInfo/BookDetails";
+import BookDetails from "../pages/BookInfo/BookDetails";
 import AddBook from "../pages/AddBook/AddBook";
 import AdminPrivateRoute from "../AdminPrivateRoute/AdminPrivateRoute";
 import SameProvider from "../Pages/SameProvider/SameProvider";

@@ -35,11 +35,11 @@ const UpdateBook = () => {
 
   const {
     _id,
-    book_image,
     book_name,
+    book_image,
+    book_provider_phone,
     description,
-    location,
-    phone,
+    pickup_location,
   } = loaderBookData;
 
   let rowsValue;
@@ -65,19 +65,19 @@ const UpdateBook = () => {
 
     const book_image =
       get_book_image.trim() !== "" ? get_book_image : defaultBookImageUrl;
-    const location = form.location.value;
+    const pickup_location = form.pickup_location.value;
     const description = form.description.value;
-    const phone = form.phone.value;
+    const book_provider_phone = form.book_provider_phone.value;
 
-    if (!/^(\+?8801|01)(\d{9})$/.test(phone)) {
+    if (!/^(\+?8801|01)(\d{9})$/.test(book_provider_phone)) {
       return toast.error("Enter a valid phone number!");
     }
 
     const updatedBookInfo = {
       book_name,
       book_image,
-      location,
-      phone,
+      book_provider_phone,
+      pickup_location,
       description,
     };
 
@@ -153,8 +153,8 @@ const UpdateBook = () => {
             <input
               type="text"
               required
-              name="location"
-              defaultValue={location}
+              name="pickup_location"
+              defaultValue={pickup_location}
               className="input input-bordered focus:border-transparent"
               style={{ outline: "none" }}
             />
@@ -166,8 +166,8 @@ const UpdateBook = () => {
             <input
               type="text"
               required
-              name="phone"
-              defaultValue={phone}
+              name="book_provider_phone"
+              defaultValue={book_provider_phone}
               className="input input-bordered focus:border-transparent"
               style={{ outline: "none" }}
             />

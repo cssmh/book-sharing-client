@@ -1,14 +1,20 @@
 import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
 import swal from "sweetalert";
-import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
 import useContextHook from "../../useCustomHook/useContextHook";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const AddBookings = ({ getBookData }) => {
   const { user } = useContextHook();
   const { axiosSecure, axiosNoToken } = useAxiosHook();
-  const { book_image, book_name, book_provider_email, phone } = getBookData;
+  const {
+    _id,
+    book_image,
+    book_name,
+    book_provider_email,
+    book_provider_phone,
+  } = getBookData;
   const [open, setOpen] = useState(false);
   const [matchFound, setMatchFound] = useState([]);
   const [allBookings, setAllBookings] = useState([]);
@@ -30,10 +36,15 @@ const AddBookings = ({ getBookData }) => {
     setMatchFound(matching);
   }, [allBookings, book_name]);
 
-  // Set today's date as default and prevent selection of past dates
+  // Set today's date as default
   useEffect(() => {
-    const today = new Date().toISOString().split("T")[0];
-    setTodayDate(today);
+    const today = new Date();
+    const formattedDate = `${today.getDate().toString().padStart(2, "0")}-${(
+      today.getMonth() + 1
+    )
+      .toString()
+      .padStart(2, "0")}-${today.getFullYear()}`;
+    setTodayDate(formattedDate);
   }, []);
 
   const handlePopUp = () => {
@@ -47,38 +58,43 @@ const AddBookings = ({ getBookData }) => {
     setOpen(false);
   };
 
-  const handleBook = (e) => {
+  const handleAddBooking = (e) => {
     e.preventDefault();
-
     const form = e.target;
+    const book_id = _id;
     const book_name = form.book_name.value;
     const book_provider_email = form.book_provider_email.value;
-    const book_purchaser_email = form.book_purchaser_email.value;
-    const date = form.date.value;
+    const user_email = user?.email;
+    const user_date = form.user_date.value;
     const book_image = form.book_image_URL.value;
-    const instruction = form.instruction.value;
-    const buyerPhone = form.phone.value;
+    const user_message = form.user_message.value;
+    const user_phone = form.user_phone.value;
     const status = "Pending";
 
-    const bookingData = {
+    if (!/^(\+?8801|01)(\d{9})$/.test(user_phone)) {
+      return toast.error("Enter a valid phone number!");
+    }
+
+    const AddBookingData = {
+      book_id,
       book_name,
       book_image,
       book_provider_email,
-      book_purchaser_email,
-      phone,
-      date,
-      instruction,
-      buyerPhone,
+      book_provider_phone,
+      user_email,
+      user_phone,
+      user_date,
+      user_message,
       status,
     };
 
     axiosNoToken
-      .post("/addBooking", bookingData)
+      .post("/addBooking", AddBookingData)
       .then((res) => {
         if (res.data?.insertedId) {
           // Update allBookings state after successfully adding
           // the booking to prevent already booked.
-          setAllBookings([...allBookings, bookingData]);
+          setAllBookings([...allBookings, AddBookingData]);
           swal("Congratulations!", "Booking Complete", "success");
         }
       })
@@ -102,7 +118,7 @@ const AddBookings = ({ getBookData }) => {
           </Button>
         </DialogActions>
         <DialogContent>
-          <form onSubmit={handleBook} className="md:w-[65%] mx-auto">
+          <form onSubmit={handleAddBooking} className="md:w-[65%] mx-auto">
             <div className="flex flex-col md:flex-row gap-3">
               <div className="form-control md:w-1/2 mx-3 lg:mx-0">
                 <label className="label">
@@ -139,7 +155,6 @@ const AddBookings = ({ getBookData }) => {
                 <input
                   type="email"
                   readOnly
-                  name="book_purchaser_email"
                   defaultValue={user?.email}
                   className="input input-bordered focus:border-transparent"
                   style={{ outline: "none" }}
@@ -167,7 +182,7 @@ const AddBookings = ({ getBookData }) => {
                 <input
                   type="text"
                   required
-                  name="phone"
+                  name="user_phone"
                   defaultValue="+880"
                   className="input input-bordered focus:border-transparent"
                   style={{ outline: "none" }}
@@ -175,16 +190,13 @@ const AddBookings = ({ getBookData }) => {
               </div>
               <div className="form-control md:w-1/2 mx-3 lg:mx-0">
                 <label className="label">
-                  <span className="label-text">
-                    Pick a Date You Need this book
-                  </span>
+                  <span className="label-text">Booking Date (Today)</span>
                 </label>
                 <input
-                  type="date"
-                  name="date"
-                  min={todayDate}
+                  type="text"
+                  name="user_date"
+                  readOnly
                   defaultValue={todayDate}
-                  required
                   className="input input-bordered focus:border-transparent"
                   style={{ outline: "none" }}
                 />
@@ -197,7 +209,7 @@ const AddBookings = ({ getBookData }) => {
                 </span>
               </label>
               <textarea
-                name="instruction"
+                name="user_message"
                 cols="5"
                 rows="5"
                 className="rounded-2xl focus:border-transparent"

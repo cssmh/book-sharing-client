@@ -10,14 +10,13 @@ const AdminBookingCard = ({
 }) => {
   const {
     _id,
-    book_image,
     book_name,
+    book_image,
     book_provider_email,
-    phone,
+    book_provider_phone,
+    user_email,
+    user_phone,
     status,
-    date,
-    book_purchaser_email,
-    buyerPhone,
   } = getAllBooking;
   const { axiosNoToken } = useAxiosHook();
 
@@ -64,9 +63,11 @@ const AdminBookingCard = ({
           />
           <p className="text-[22px] font-bold text-cyan-500">{book_name}</p>
           <p className="text-lg">{book_provider_email}</p>
-          <p className="text-lg text-green-500 mb-2 md:mb-0">{phone}</p>
+          <p className="text-lg text-green-500 mb-2 md:mb-0">
+            {book_provider_phone}
+          </p>
         </div>
-        <div className="flex-1 text-center md:text-lg border-t-2  md:border-t-0 pt-2 md:pt-0">
+        <div className="flex-1 text-center md:text-lg border-t-2 md:border-t-0 pt-2 md:pt-0 text-lg">
           <p>Collector</p>
           <p className="text-lg">
             Status:{" "}
@@ -82,15 +83,16 @@ const AdminBookingCard = ({
               {status}
             </span>
           </p>
-          <p className="text-blue-800">{book_purchaser_email}</p>
-          <p>{buyerPhone}</p>
-          <p className="mb-1">{date}</p>
-          <button
-            onClick={() => handleDeleteByAdmin(_id)}
-            className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-          >
-            Delete Booking
-          </button>
+          <p className="text-blue-800">{user_email}</p>
+          <p className="text-cyan-500">{user_phone}</p>
+          {status !== "Completed" && (
+            <button
+              onClick={() => handleDeleteByAdmin(_id)}
+              className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+            >
+              Delete Booking
+            </button>
+          )}
         </div>
       </div>
     </div>

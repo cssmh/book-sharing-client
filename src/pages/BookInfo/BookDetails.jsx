@@ -20,9 +20,10 @@ const BookDetails = () => {
     book_provider_name,
     book_provider_email,
     book_provider_image,
-    phone,
-    location,
+    book_provider_phone,
+    pickup_location,
     description,
+    book_status,
   } = loadBookData;
 
   const url = `/myBooks?email=${book_provider_email}`;
@@ -83,10 +84,12 @@ const BookDetails = () => {
                 Email: {book_provider_email}
               </p>
               <p className="text-lg font-medium">
-                Location: <span className="text-blue-500">{location}</span>
+                Location:{" "}
+                <span className="text-blue-500">{pickup_location}</span>
               </p>
               <p className="text-lg font-medium">
-                Phone: <span className="text-green-500">{phone}</span>
+                Phone:{" "}
+                <span className="text-green-500">{book_provider_phone}</span>
               </p>
             </div>
             <div className="flex justify-center mt-2">
@@ -142,27 +145,35 @@ const BookDetails = () => {
                   </>
                 )}
               </div>
-              {book_provider_email !== user?.email && (
-                <AddBookings getBookData={loadBookData}></AddBookings>
+              {book_status === "available" ? (
+                book_provider_email !== user?.email && (
+                  <AddBookings getBookData={loadBookData}></AddBookings>
+                )
+              ) : (
+                <p className="text-lg text-red-600">
+                  This Book is already Taken by someone!
+                </p>
               )}
               <div>
-                {book_provider_email === user?.email && (
-                  <Link to={`/update-book/${_id}`}>
-                    <button className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mt-1 mx-2 md:mx-0">
-                      Update {book_name}
-                    </button>
-                  </Link>
-                )}
+                {book_status === "available" &&
+                  book_provider_email === user?.email && (
+                    <Link to={`/update-book/${_id}`}>
+                      <button className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mt-1 mx-2 md:mx-0">
+                        Update {book_name}
+                      </button>
+                    </Link>
+                  )}
               </div>
               <div>
-                {user?.email == "admin@admin.com" && (
-                  <button
-                    onClick={() => handleDeleteByAdmin(_id, book_name)}
-                    className="text-white bg-gradient-to-r from-pink-500 via-pink-500 to-pink-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-2 md:mx-0"
-                  >
-                    Delete {book_name}
-                  </button>
-                )}
+                {book_status === "available" &&
+                  user?.email == "admin@admin.com" && (
+                    <button
+                      onClick={() => handleDeleteByAdmin(_id, book_name)}
+                      className="text-white bg-gradient-to-r from-pink-500 via-pink-500 to-pink-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-2 md:mx-0"
+                    >
+                      Delete {book_name}
+                    </button>
+                  )}
               </div>
             </div>
           </div>

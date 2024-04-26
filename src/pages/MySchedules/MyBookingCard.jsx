@@ -3,14 +3,13 @@ import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
   const { axiosNoToken } = useAxiosHook();
-  // console.log(getBooking);
   const {
     _id,
     book_name,
     book_image,
     book_provider_email,
-    phone,
-    date,
+    book_provider_phone,
+    user_date,
     status,
   } = getBooking;
 
@@ -54,8 +53,8 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
         </figure>
         <p className="text-2xl">{book_name}</p>
         <div className="text-lg">
-          <p>Provider Information:</p>
-          <p className="text-green-600">{phone}</p>
+          <p>Provider Information</p>
+          <p className="text-green-600">{book_provider_phone}</p>
           <p className="text-purple-800">{book_provider_email}</p>
           <p>
             Status:{" "}
@@ -72,18 +71,20 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
             </span>
           </p>
           <p>
-            Required Date: <span className="text-blue-500">{date}</span>
+            Booking Date: <span className="text-blue-500">{user_date}</span>
           </p>
         </div>
       </div>
-      <div className="mt-2 card-actions justify-center">
-        <button
-          onClick={() => handleBookingDelete(_id)}
-          className="btn border-black bg-base-100 hover:bg-black text-black hover:text-white"
-        >
-          Delete Booking
-        </button>
-      </div>
+      {status !== "Completed" && (
+        <div className="mt-2 card-actions justify-center">
+          <button
+            onClick={() => handleBookingDelete(_id)}
+            className="btn border-black bg-base-100 hover:bg-black text-black hover:text-white"
+          >
+            Delete Booking
+          </button>
+        </div>
+      )}
     </div>
   );
 };
