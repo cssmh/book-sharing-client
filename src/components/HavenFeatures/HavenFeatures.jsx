@@ -56,7 +56,9 @@ const HavenFeatures = () => {
             will automatically reflect across all their book data, including the
             provider&lsquo;s name and photo. <br />
             <br />
-            12. Duplicate book entries are not allowed. <br />
+            12. Duplicate book entries are not allowed, and clicking multiple
+            times at once will not result in adding multiple book purchase
+            requests. <br />
             <br />
             13. Users cannot collect their own books. Each book can only be
             collected by a user once. <br />
