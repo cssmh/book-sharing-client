@@ -66,7 +66,7 @@ const Login = () => {
   const handleForgotPassword = () => {
     const email = getEmail.current.value;
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      toast.error("Please provide a valid email address");
+      toast.error("Please Provide a valid email address");
       return;
     } else {
       resetPassword(email)

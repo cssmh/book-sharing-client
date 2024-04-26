@@ -75,10 +75,10 @@ const Navbar = () => {
             {user && (
               <ul>
                 <li className="font-semibold text-base">
-                  <NavLink to="/my-books">My-Books</NavLink>
+                  <NavLink to="/add-book">Add Book</NavLink>
                 </li>
                 <li className="font-semibold text-base">
-                  <NavLink to="/add-book">Add-Book</NavLink>
+                  <NavLink to="/my-books">My-Books</NavLink>
                 </li>
                 <li className="font-semibold text-base">
                   <NavLink to="/my-schedules">My-Schedule</NavLink>
@@ -104,6 +104,11 @@ const Navbar = () => {
           <li className="font-semibold text-base">
             <NavLink to="/all-books">All Books</NavLink>
           </li>
+          {user?.email && (
+            <li className="font-semibold text-base">
+              <NavLink to="/add-book">Add Book</NavLink>
+            </li>
+          )}
           {user?.email == "admin@admin.com" && (
             <li className="font-semibold text-base">
               <NavLink to="/admin-dashboard">Admin</NavLink>
@@ -116,9 +121,6 @@ const Navbar = () => {
                 <ul className="p-2 menu menu-sm dropdown-content z-[1]">
                   <li className="font-semibold text-base">
                     <NavLink to="/my-books">My-Books</NavLink>
-                  </li>
-                  <li className="font-semibold text-base">
-                    <NavLink to="/add-book">Add-Book</NavLink>
                   </li>
                   <li className="font-semibold text-base">
                     <NavLink to="/my-schedules">My-Schedule</NavLink>

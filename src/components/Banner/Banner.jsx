@@ -14,20 +14,20 @@ const Banner = () => {
           Share Exchange Unleashed
         </h1>
         <p
-          className="max-w-lg mx-auto mt-6 text-gray-500 dark:text-gray-300 aos-init"
+          className="max-w-lg mx-auto mt-4 md:mt-6 text-gray-500 dark:text-gray-300 aos-init"
           data-aos="fade-up"
           data-aos-easing="ease-in"
           data-aos-duration="900"
         >
           Discover new books, provide and share the knowledge that <br></br>{" "}
-          shape our future.
+          shape our future together.
         </p>
         <Link to={"/add-book"}>
           <button
             data-aos="fade-up"
             data-aos-easing="ease-in"
             data-aos-duration="900"
-            className="px-4 py-2 mt-6 text-sm font-medium leading-5 text-center text-white capitalize bg-green-400 rounded-md hover:bg-green-400/90 lg:mx-0 lg:w-auto focus:outline-none transition duration-300 flex gap-1 aos-init"
+            className="px-4 py-2 mt-4 md:mt-6 text-sm font-medium leading-5 text-center text-white capitalize bg-green-400 rounded-md hover:bg-green-400/90 lg:mx-0 lg:w-auto focus:outline-none transition duration-300 flex gap-1 aos-init"
           >
             <span>Start sharing now</span>
             <span>
