@@ -20,7 +20,7 @@ const AddBookings = ({ getBookData }) => {
   const [open, setOpen] = useState(false);
   const [matchFound, setMatchFound] = useState([]);
   const [allBookings, setAllBookings] = useState([]);
-  const [todayDate, setTodayDate] = useState("");
+  const [todayDateTime, setTodayDateTime] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const submitTimeoutRef = useRef(null);
 
@@ -40,7 +40,7 @@ const AddBookings = ({ getBookData }) => {
     setMatchFound(matching);
   }, [allBookings, book_name]);
 
-  // Set today's date as default
+  // Set today's date and time as default
   useEffect(() => {
     const today = new Date();
     const formattedDate = `${today.getDate().toString().padStart(2, "0")}-${(
@@ -48,8 +48,15 @@ const AddBookings = ({ getBookData }) => {
     )
       .toString()
       .padStart(2, "0")}-${today.getFullYear()}`;
-    setTodayDate(formattedDate);
+    const formattedTime = today.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+    const dateTime = `${formattedDate}, ${formattedTime}`;
+    setTodayDateTime(dateTime);
   }, []);
+  // Set today's date and time as default end
 
   const handlePopUp = () => {
     if (matchFound.length > 0) {
@@ -204,13 +211,15 @@ const AddBookings = ({ getBookData }) => {
               </div>
               <div className="form-control md:w-1/2 mx-3 lg:mx-0">
                 <label className="label">
-                  <span className="label-text">Booking Date (Today)</span>
+                  <span className="label-text">
+                    Booking Date & Time (Today)
+                  </span>
                 </label>
                 <input
                   type="text"
                   name="user_date"
                   readOnly
-                  defaultValue={todayDate}
+                  defaultValue={todayDateTime}
                   className="input input-bordered focus:border-transparent"
                   style={{ outline: "none" }}
                 />

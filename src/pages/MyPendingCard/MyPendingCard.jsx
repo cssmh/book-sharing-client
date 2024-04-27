@@ -1,5 +1,5 @@
 import swal from "sweetalert";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
@@ -15,9 +15,12 @@ const MyPendingCard = ({ getPending }) => {
     user_date,
     user_message,
     status,
+    completed_at,
   } = getPending;
   const { axiosSecure } = useAxiosHook();
   const [bookStatus, setBookStatus] = useState(status);
+  const [todayDateTime, setTodayDateTime] = useState("");
+  const [completed, setCompleted] = useState(completed_at);
 
   const handleUpdateStatus = (e, idx, bookIdx, email) => {
     const newStatus = e.target.value;
@@ -26,8 +29,6 @@ const MyPendingCard = ({ getPending }) => {
         ? "available"
         : "Unavailable";
 
-    const updatedStatus = { bookStatus };
-
     axiosSecure
       .put(`/bookings/${idx}/${email}`, { newStatus })
       .then((res) => {
@@ -35,10 +36,17 @@ const MyPendingCard = ({ getPending }) => {
           setBookStatus(newStatus);
           swal("Thank You!", `Updated to ${newStatus}`, "success");
         }
+        if (newStatus === "Completed") {
+          axiosSecure
+            .patch(`/add-time/${idx}/${email}`, { todayDateTime })
+            .then(() => setCompleted(todayDateTime))
+            .catch();
+        }
       })
       .then(() => {
         axiosSecure
-          .put(`/book-status/${bookIdx}/${email}`, updatedStatus)
+          .put(`/book-status/${bookIdx}/${email}`, { bookStatus })
+          .then()
           .catch((err) => {
             toast.error(err);
           });
@@ -47,6 +55,24 @@ const MyPendingCard = ({ getPending }) => {
         toast.error(err);
       });
   };
+
+  // Set today's date and time for completed booking
+  useEffect(() => {
+    const today = new Date();
+    const formattedDate = `${today.getDate().toString().padStart(2, "0")}-${(
+      today.getMonth() + 1
+    )
+      .toString()
+      .padStart(2, "0")}-${today.getFullYear()}`;
+    const formattedTime = today.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+    const dateTime = `${formattedDate}, ${formattedTime}`;
+    setTodayDateTime(dateTime);
+  }, []);
+  // Set today's date and time for completed booking end
 
   return (
     <div
@@ -57,20 +83,23 @@ const MyPendingCard = ({ getPending }) => {
         <img
           src={book_image}
           onContextMenu={(e) => e.preventDefault()}
-          className="rounded-xl w-1/2 mx-auto my-3"
+          className="rounded-xl w-1/2 mx-auto my-2"
         />
       </figure>
-      <h2 className="text-2xl text-blue-900 text-center mt-2 mb-1 px-2">
-        {book_name}
-      </h2>
-      <h1 className="text-xl text-center">Collector Info: </h1>
-      <div className="mb-2 text-lg w-2/3 mx-auto">
-        <p className="text-green-500">Phone: {user_phone}</p>
-        <p className="text-yellow-800">{user_email}</p>
+      <div className="mb-2 text-lg w-[73%] mx-auto">
+        <h2 className="text-2xl">{book_name}</h2>
+        <h1 className="text-xl">Collector Info: </h1>
+        <p className="text-green-600">Phone: {user_phone}</p>
+        <p className="text-purple-800">{user_email}</p>
         {user_message.length > 0 && <p>Message: {user_message}</p>}
-        <p>
-          Booking Date: <span className="text-blue-500">{user_date}</span>
-        </p>
+        {bookStatus === "Completed" ? (
+          <p>
+            Booked: {user_date} Completed:{" "}
+            <span className="text-cyan-500">{completed}</span>
+          </p>
+        ) : (
+          <p>Booked: {user_date}</p>
+        )}
       </div>
       <div className="text-center mt-1">
         <select

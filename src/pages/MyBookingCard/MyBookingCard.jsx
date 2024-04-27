@@ -11,6 +11,7 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
     book_provider_phone,
     user_date,
     status,
+    completed_at,
   } = getBooking;
 
   const handleBookingDelete = (idx) => {
@@ -53,7 +54,7 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
         </figure>
         <p className="text-2xl">{book_name}</p>
         <div className="text-lg">
-          <p>Provider Information</p>
+          <p className="text-xl">Provider Information</p>
           <p className="text-green-600">{book_provider_phone}</p>
           <p className="text-purple-800">{book_provider_email}</p>
           <p>
@@ -70,9 +71,12 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
               {status}
             </span>
           </p>
-          <p>
-            Booking Date: <span className="text-blue-500">{user_date}</span>
-          </p>
+          <p>Booked: {user_date}</p>
+          {completed_at && (
+            <p>
+              Completed: <span className="text-cyan-500">{completed_at}</span>
+            </p>
+          )}
         </div>
       </div>
       {status !== "Completed" && (

@@ -6,6 +6,9 @@ import useAxiosHook from "../../../useCustomHook/useAxiosHook";
 import useContextHook from "../../../useCustomHook/useContextHook";
 import useTotalProviderHook from "../../../useCustomHook/useTotalProviderHook";
 import AdminBookingCard from "../AdminBookingCard/AdminBookingCard";
+import MakeBookingsPending from "../MakeBookingsPending/MakeBookingsPending";
+import MakeBooksAvailable from "../MakeBooksAvailable/MakeBooksAvailable";
+import DeleteAllBookings from "../DeleteAllBookings/DeleteAllBookings";
 
 const AdminBooking = () => {
   const { user } = useContextHook();
@@ -99,7 +102,18 @@ const AdminBooking = () => {
               </p>
             ) : (
               <div className="max-w-[1180px] mx-2 lg:mx-auto">
-                <div className="text-right mb-3">
+                <div className="flex flex-col md:flex-row justify-end items-center gap-[6px] mb-3">
+                  <p className="border border-green-500 px-3 py-[6px] rounded-md">
+                    Think before using these Buttons
+                  </p>
+                  <p className="bg-green-500 px-3 py-[6px] rounded-md text-white">
+                    Hello BookHaven Admin
+                  </p>
+                  <DeleteAllBookings
+                    setAdminBookings={setAdminBookings}
+                  ></DeleteAllBookings>
+                  <MakeBookingsPending></MakeBookingsPending>
+                  <MakeBooksAvailable></MakeBooksAvailable>
                   <select
                     className="input text-sm px-3 border-green-500 rounded-2xl focus:border-transparent"
                     style={{ outline: "none", height: "38px" }}
