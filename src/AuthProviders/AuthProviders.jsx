@@ -65,13 +65,13 @@ const AuthProviders = ({ children }) => {
       setLoading(false);
       if (getEmail) {
         await axios
-          .post("https://book-sharing-server.vercel.app/jwt", emailToSend, {
+          .post("http://localhost:5000/jwt", emailToSend, {
             withCredentials: true,
           })
           .then((res) => console.log("login token res", res?.data));
       } else {
         await axios
-          .post("https://book-sharing-server.vercel.app/logout", emailToSend, {
+          .post("http://localhost:5000/logout", emailToSend, {
             withCredentials: true,
           })
           .then((res) => console.log("logout token res", res?.data));

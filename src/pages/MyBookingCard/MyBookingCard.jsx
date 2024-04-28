@@ -1,10 +1,13 @@
 import swal from "sweetalert";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import { useEffect, useState } from "react";
 
 const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
   const { axiosNoToken } = useAxiosHook();
+  const [available, setAvailable] = useState("");
   const {
     _id,
+    book_id,
     book_name,
     book_image,
     book_provider_email,
@@ -23,7 +26,6 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        // main code
         axiosNoToken.delete(`/booking/${idx}`).then((res) => {
           if (res.data?.deletedCount > 0) {
             const remaining = allBookings.filter((book) => book._id !== idx);
@@ -38,6 +40,12 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
       }
     });
   };
+
+  useEffect(() => {
+    axiosNoToken
+      .get(`/book/${book_id}`)
+      .then((res) => setAvailable(res.data?.book_status));
+  }, [book_id, axiosNoToken]);
 
   return (
     <div
@@ -57,20 +65,24 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
           <p className="text-xl">Provider Information</p>
           <p className="text-green-600">{book_provider_phone}</p>
           <p className="text-purple-800">{book_provider_email}</p>
-          <p>
-            Status:{" "}
-            <span
-              className={
-                status === "Pending"
-                  ? "text-red-500"
-                  : status === "Completed"
-                  ? "text-green-500"
-                  : "text-blue-500"
-              }
-            >
-              {status}
-            </span>
-          </p>
+          {available === "Unavailable" ? (
+            <p className="text-red-700">Sorry! got by someone else!</p>
+          ) : (
+            <p>
+              Status:{" "}
+              <span
+                className={
+                  status === "Pending"
+                    ? "text-red-500"
+                    : status === "Completed"
+                    ? "text-green-500"
+                    : "text-blue-500"
+                }
+              >
+                {status}
+              </span>
+            </p>
+          )}
           <p>Booked: {user_date}</p>
           {completed_at && (
             <p>
