@@ -29,7 +29,7 @@
 17. A default photo is provided for new users during sign-up, following the same conditions as updating book photos.
 18. Added a "View Profile" page. Users have the option to update their username and photo. If a user leaves the image URL field empty, the default photo will be set, and the field will remain empty each time. The URL will only be displayed if the user sets any photo.
 19. "My Booking" displays the books the user has booked to receive, while "My Pending" indicates if any user has booked any of the user's books with booked date and time.
-20. While booking a book, the status will display as "Pending." Only the book owner can change it to "Process" or "Completed."
+20. While booking a book, the status will display as 'Pending.' Only the book owner can change it to 'Processing' or 'Completed.' However, if a provider receives multiple bookings for their book, they can only assign it to one user. Therefore, when they mark one user's booking as 'Completed,' the buttons for other bookings of the same book will be disabled. Other collectors will then see that the book has already been taken by someone in their booking.
 21. While adding a book, a default value of 'available' will be assigned to the book status on the server. When a user requests a book and the owner sets it from 'pending' to 'completed', the book status will change to 'unavailable'. Afterward, other users won't be able to collect that book, and it will indicate that the book has already been taken.
 22. There will be shown completed date and time while booking completed and also Booked date time.
 23. Added React Spinners, HashLoader, and other awesome React packages.

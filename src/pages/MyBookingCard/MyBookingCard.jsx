@@ -46,7 +46,7 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
       .get(`/book/${book_id}`)
       .then((res) => setAvailable(res.data?.book_status));
   }, [book_id, axiosNoToken]);
-  
+
   return (
     <div
       data-aos="zoom-in"
@@ -66,7 +66,7 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
           <p className="text-green-600">{book_provider_phone}</p>
           <p className="text-purple-800">{book_provider_email}</p>
           {available === "Unavailable" && status !== "Completed" ? (
-            <p className="text-red-700">Sorry! got by someone else!</p>
+            <p className="text-red-700">Sorry, taken by someone else!</p>
           ) : (
             <p>
               Status:{" "}

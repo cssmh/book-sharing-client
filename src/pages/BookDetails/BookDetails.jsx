@@ -25,7 +25,6 @@ const BookDetails = () => {
     description,
     book_status,
   } = loadBookData;
-  console.log(loadBookData);
 
   const url = `/myBooks?email=${book_provider_email}`;
   const { isLoading, bookData } = useProviderHook(url);
@@ -152,7 +151,7 @@ const BookDetails = () => {
                 )}
               {book_provider_email === user?.email &&
                 book_status === "Unavailable" && (
-                  <p className="text-green-600">You Delivered this book</p>
+                  <p className="text-green-600">You shared this book.</p>
                 )}
               {book_provider_email !== user?.email &&
                 book_status === "Unavailable" && (

@@ -113,8 +113,13 @@ const HavenFeatures = () => {
             <br />
             <br />
             20. While booking a book, the status will display as
-            &quot;Pending.&quot; Only the book owner can change it to
-            &quot;Process&quot; or &quot;Completed.&quot; &quot;
+            &apos;Pending.&apos; Only the book owner can change it to
+            &apos;Processing&apos; or &apos;Completed.&apos; However, if a
+            provider receives multiple bookings for their book, they can only
+            assign it to one user. Therefore, when they mark one user&apos;s
+            booking as &apos;Completed,&apos; the buttons for other bookings of
+            the same book will be disabled. Other collectors will then see that
+            the book has already been taken by someone in their booking.
             <br />
             <br />
             21. While adding a book, a default value of &lsquo;available&rsquo;
