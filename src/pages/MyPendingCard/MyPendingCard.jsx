@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
-const MyPendingCard = ({ getPending }) => {
+const MyPendingCard = ({ getPending, completedBookIds, handleComplete }) => {
   const {
     _id,
     book_id,
@@ -14,6 +14,7 @@ const MyPendingCard = ({ getPending }) => {
     user_phone,
     user_date,
     user_message,
+    user_location,
     status,
     completed_at,
   } = getPending;
@@ -41,13 +42,17 @@ const MyPendingCard = ({ getPending }) => {
           axiosSecure
             .patch(`/add-time/${idx}/${email}`, { todayDateTime })
             .then(() => setCompleted(todayDateTime))
+            .then(() => {
+              // Notify parent that this book_id is completed
+              handleComplete(book_id);
+            })
             .catch();
         }
       })
       .then(() => {
         axiosSecure
           .put(`/book-status/${bookIdx}/${email}`, { bookStatus })
-          .then()
+          .then((res) => console.log(res.data))
           .catch((err) => {
             toast.error(err);
           });
@@ -75,6 +80,9 @@ const MyPendingCard = ({ getPending }) => {
   }, []);
   // Set today's date and time for completed booking end
 
+  // Check if this book_id is completed
+  const isCompleted = completedBookIds.includes(book_id);
+
   return (
     <div
       data-aos="zoom-in"
@@ -90,7 +98,7 @@ const MyPendingCard = ({ getPending }) => {
       <div className="mb-2 text-lg w-[73%] mx-auto">
         <h2 className="text-2xl">{book_name}</h2>
         <h1 className="text-xl">Collector Info: </h1>
-        <p className="text-green-600">Phone: {user_phone}</p>
+        <p className="text-green-600">{user_phone}</p>
         <p className="text-purple-800">{user_email}</p>
         {user_message.length > 0 && <p>Message: {user_message}</p>}
         {bookStatus === "Completed" ? (
@@ -101,6 +109,7 @@ const MyPendingCard = ({ getPending }) => {
         ) : (
           <p>Booked: {user_date}</p>
         )}
+        <p className="text-blue-500">Location: {user_location}</p>
       </div>
       <div className="text-center mt-1">
         <select
@@ -111,7 +120,8 @@ const MyPendingCard = ({ getPending }) => {
             handleUpdateStatus(e, _id, book_id, book_provider_email)
           }
           className="border border-blue-500 focus:border-transparent rounded-2xl"
-          disabled={bookStatus === "Completed"}
+          // Disable if completed or if this book_id is completed
+          disabled={bookStatus === "Completed" || isCompleted} 
         >
           <option value="Pending">Pending</option>
           <option value="Progress">Progress</option>

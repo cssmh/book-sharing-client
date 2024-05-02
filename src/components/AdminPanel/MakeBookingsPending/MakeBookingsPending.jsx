@@ -34,7 +34,7 @@ const MakeBookingsPending = () => {
       onClick={handleMakeBookingsPending}
       className="bg-green-500 px-3 py-[6px] rounded-md text-white"
     >
-      Make all Bookings Pending
+      Make all Bookings Pending & Delete Completed at
     </button>
   );
 };

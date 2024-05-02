@@ -10,7 +10,7 @@ const SameProviderCard = ({ getBooks }) => {
     book_provider_image,
     book_provider_name,
     book_provider_phone,
-    pickup_location,
+    provider_location,
   } = getBooks;
 
   return (
@@ -45,7 +45,7 @@ const SameProviderCard = ({ getBooks }) => {
             <h2 className="font-bold text-lg">{book_provider_name}</h2>
           </div>
           <p className="text-lg text-green-500">Phone: {book_provider_phone}</p>
-          <p className="text-lg">Location: {pickup_location}</p>
+          <p className="text-lg">Location: {provider_location}</p>
           <div className="card-actions mt-2">
             <Link to={`/book/${_id}`}>
               <button className="btn border-green-400 hover:border-green-400 bg-yellow-50 hover:bg-green-400 text-green-400 hover:text-white">

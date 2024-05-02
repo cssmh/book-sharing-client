@@ -39,7 +39,7 @@ const UpdateBook = () => {
     book_image,
     book_provider_phone,
     description,
-    pickup_location,
+    provider_location,
   } = loaderBookData;
 
   let rowsValue;
@@ -65,9 +65,9 @@ const UpdateBook = () => {
 
     const book_image =
       get_book_image.trim() !== "" ? get_book_image : defaultBookImageUrl;
-    const pickup_location = form.pickup_location.value;
+      const book_provider_phone = form.book_provider_phone.value;
+    const provider_location = form.provider_location.value;
     const description = form.description.value;
-    const book_provider_phone = form.book_provider_phone.value;
 
     if (!/^(\+?8801|01)(\d{9})$/.test(book_provider_phone)) {
       return toast.error("Enter a valid phone number!");
@@ -77,18 +77,20 @@ const UpdateBook = () => {
       book_name,
       book_image,
       book_provider_phone,
-      pickup_location,
+      provider_location,
       description,
     };
 
     axiosSecure
       .put(`/book/${_id}/${user?.email}`, updatedBookInfo)
       .then((res) => {
+        console.log(res.data);
         if (res.data?.modifiedCount > 0) {
           swal("Good job!", "Book Info Updated", "success");
           navigateTo(-1);
         }
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -153,15 +155,15 @@ const UpdateBook = () => {
             <input
               type="text"
               required
-              name="pickup_location"
-              defaultValue={pickup_location}
+              name="provider_location"
+              defaultValue={provider_location}
               className="input input-bordered focus:border-transparent"
               style={{ outline: "none" }}
             />
           </div>
           <div className="form-control md:w-1/2 mx-3 lg:mx-0">
             <label className="label">
-              <span className="label-text">Phone</span>
+              <span className="label-text">Phone Number</span>
             </label>
             <input
               type="text"

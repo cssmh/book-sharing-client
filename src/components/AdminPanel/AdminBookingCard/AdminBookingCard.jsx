@@ -19,7 +19,6 @@ const AdminBookingCard = ({
     status,
     completed_at,
   } = getAllBooking;
-  console.log(completed_at);
   const { axiosNoToken } = useAxiosHook();
 
   const handleDeleteByAdmin = (idx) => {
@@ -85,7 +84,7 @@ const AdminBookingCard = ({
               {status}
             </span>
           </p>
-          {completed_at && completed_at}
+          <p>{completed_at}</p>
           <p className="text-blue-800">{user_email}</p>
           <p className="text-cyan-500 mb-1">{user_phone}</p>
           {status !== "Completed" && (

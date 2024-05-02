@@ -102,12 +102,12 @@ const AdminBooking = () => {
               </p>
             ) : (
               <div className="max-w-[1180px] mx-2 lg:mx-auto">
-                <div className="flex flex-col md:flex-row justify-end items-center gap-[6px] mb-3">
+                <div className="flex flex-col md:flex-row justify-end items-center gap-[5px] mb-3">
                   <p className="border border-green-500 px-3 py-[6px] rounded-md">
-                    Think before using these Buttons
+                    Button use Restriction!
                   </p>
                   <p className="bg-green-500 px-3 py-[6px] rounded-md text-white">
-                    Hello BookHaven Admin
+                    Hello Admin
                   </p>
                   <DeleteAllBookings
                     setAdminBookings={setAdminBookings}

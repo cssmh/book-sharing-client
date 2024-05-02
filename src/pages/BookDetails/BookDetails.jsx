@@ -21,10 +21,11 @@ const BookDetails = () => {
     book_provider_email,
     book_provider_image,
     book_provider_phone,
-    pickup_location,
+    provider_location,
     description,
     book_status,
   } = loadBookData;
+  console.log(loadBookData);
 
   const url = `/myBooks?email=${book_provider_email}`;
   const { isLoading, bookData } = useProviderHook(url);
@@ -85,7 +86,7 @@ const BookDetails = () => {
               </p>
               <p className="text-lg font-medium">
                 Location:{" "}
-                <span className="text-blue-500">{pickup_location}</span>
+                <span className="text-blue-500">{provider_location}</span>
               </p>
               <p className="text-lg font-medium">
                 Phone:{" "}
@@ -145,13 +146,20 @@ const BookDetails = () => {
                   </>
                 )}
               </div>
-              {book_status === "available" ? (
-                book_provider_email !== user?.email && (
+              {book_provider_email !== user?.email &&
+                book_status === "available" && (
                   <AddBookings getBookData={loadBookData}></AddBookings>
-                )
-              ) : (
-                <p className="text-lg text-red-600">Unavailable to Collect..</p>
-              )}
+                )}
+              {book_provider_email === user?.email &&
+                book_status === "Unavailable" && (
+                  <p className="text-green-600">You Delivered this book</p>
+                )}
+              {book_provider_email !== user?.email &&
+                book_status === "Unavailable" && (
+                  <p className="text-lg text-red-600">
+                    Unavailable to Collect..
+                  </p>
+                )}
               <div>
                 {book_status === "available" &&
                   book_provider_email === user?.email && (

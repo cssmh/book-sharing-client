@@ -87,7 +87,7 @@ const AddBookings = ({ getBookData }) => {
     const book_provider_email = form.book_provider_email.value;
     const user_email = user?.email;
     const user_date = form.user_date.value;
-    const book_image = form.book_image_URL.value;
+    const user_location = form.user_location.value;
     const user_message = form.user_message.value;
     const user_phone = form.user_phone.value;
     const status = "Pending";
@@ -104,6 +104,7 @@ const AddBookings = ({ getBookData }) => {
       book_provider_phone,
       user_email,
       user_phone,
+      user_location,
       user_date,
       user_message,
       status,
@@ -156,13 +157,15 @@ const AddBookings = ({ getBookData }) => {
               </div>
               <div className="form-control md:w-1/2 mx-3 lg:mx-0">
                 <label className="label">
-                  <span className="label-text">Book Image URL</span>
+                  <span className="label-text">
+                    Booking Date & Time (Today)
+                  </span>
                 </label>
                 <input
                   type="text"
+                  name="user_date"
                   readOnly
-                  name="book_image_URL"
-                  defaultValue={book_image}
+                  defaultValue={todayDateTime}
                   className="input input-bordered focus:border-transparent"
                   style={{ outline: "none" }}
                 />
@@ -211,15 +214,12 @@ const AddBookings = ({ getBookData }) => {
               </div>
               <div className="form-control md:w-1/2 mx-3 lg:mx-0">
                 <label className="label">
-                  <span className="label-text">
-                    Booking Date & Time (Today)
-                  </span>
+                  <span className="label-text">Your Location</span>
                 </label>
                 <input
                   type="text"
-                  name="user_date"
-                  readOnly
-                  defaultValue={todayDateTime}
+                  required
+                  name="user_location"
                   className="input input-bordered focus:border-transparent"
                   style={{ outline: "none" }}
                 />
@@ -240,7 +240,7 @@ const AddBookings = ({ getBookData }) => {
             </div>
             <div className="form-control mt-5">
               <button className="btn btn-outline border-none bg-green-400 hover:bg-green-400 text-white">
-                Purchase Book
+                Add Booking
               </button>
             </div>
           </form>

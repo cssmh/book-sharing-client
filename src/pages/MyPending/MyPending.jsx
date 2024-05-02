@@ -8,6 +8,7 @@ const MyPending = () => {
   const { user } = useContextHook();
   const [isLoading, setIsLoading] = useState(true);
   const [myPending, setMyPending] = useState([]);
+  const [completedBookIds, setCompletedBookIds] = useState([]);
   const { axiosSecure } = useAxiosHook();
 
   const url = `/pending?email=${user?.email}`;
@@ -17,6 +18,10 @@ const MyPending = () => {
       setIsLoading(false);
     });
   }, [axiosSecure, url]);
+
+  const handleComplete = (bookId) => {
+    setCompletedBookIds([...completedBookIds, bookId]);
+  };
 
   return (
     <div>
@@ -45,6 +50,8 @@ const MyPending = () => {
                   <MyPendingCard
                     key={pending._id}
                     getPending={pending}
+                    completedBookIds={completedBookIds}
+                    handleComplete={handleComplete}
                   ></MyPendingCard>
                 ))}
               </div>

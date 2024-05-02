@@ -42,9 +42,9 @@ const AddBook = () => {
     const book_provider_name = form.book_provider_name.value;
     const book_provider_email = form.book_provider_email.value;
     const book_provider_image = user?.photoURL;
-    const pickup_location = form.pickup_location.value;
-    const description = form.description.value;
     const book_provider_phone = form.book_provider_phone.value;
+    const provider_location = form.provider_location.value;
+    const description = form.description.value;
     const book_status = "available";
 
     if (!/^(\+?8801|01)(\d{9})$/.test(book_provider_phone)) {
@@ -55,10 +55,10 @@ const AddBook = () => {
       book_name,
       book_image,
       book_provider_name,
-      book_provider_image,
       book_provider_email,
+      book_provider_image,
       book_provider_phone,
-      pickup_location,
+      provider_location,
       description,
       book_status,
     };
@@ -166,7 +166,7 @@ const AddBook = () => {
                 <input
                   type="text"
                   required
-                  name="pickup_location"
+                  name="provider_location"
                   className="input input-bordered focus:border-transparent"
                   style={{ outline: "none" }}
                 />
