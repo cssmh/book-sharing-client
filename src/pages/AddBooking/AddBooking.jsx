@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import useContextHook from "../../useCustomHook/useContextHook";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
-const AddBookings = ({ getBookData }) => {
+const AddBooking = ({ getBookData }) => {
   const { user } = useContextHook();
   const { axiosSecure, axiosNoToken } = useAxiosHook();
 
@@ -174,18 +174,6 @@ const AddBookings = ({ getBookData }) => {
             <div className="flex flex-col md:flex-row gap-3">
               <div className="form-control md:w-1/2 mx-3 lg:mx-0">
                 <label className="label">
-                  <span className="label-text">Your Email</span>
-                </label>
-                <input
-                  type="email"
-                  readOnly
-                  defaultValue={user?.email}
-                  className="input input-bordered focus:border-transparent"
-                  style={{ outline: "none" }}
-                />
-              </div>
-              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
-                <label className="label">
                   <span className="label-text">Book Provider Email</span>
                 </label>
                 <input
@@ -193,6 +181,18 @@ const AddBookings = ({ getBookData }) => {
                   readOnly
                   name="book_provider_email"
                   defaultValue={book_provider_email}
+                  className="input input-bordered focus:border-transparent"
+                  style={{ outline: "none" }}
+                />
+              </div>
+              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+                <label className="label">
+                  <span className="label-text">Your Email</span>
+                </label>
+                <input
+                  type="email"
+                  readOnly
+                  defaultValue={user?.email}
                   className="input input-bordered focus:border-transparent"
                   style={{ outline: "none" }}
                 />
@@ -250,4 +250,4 @@ const AddBookings = ({ getBookData }) => {
   );
 };
 
-export default AddBookings;
+export default AddBooking;

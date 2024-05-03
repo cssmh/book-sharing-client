@@ -17,14 +17,14 @@ const MakeBookingsPending = () => {
           .put("/updateToPending")
           .then((res) => {
             if (res.data?.modifiedCount > 0) {
-              swal("All bookings are bow pending!", {
+              swal("all bookings are now pending!", {
                 icon: "success",
               });
             }
           })
           .catch((err) => toast.error(err));
       } else {
-        swal("All bookings remain same");
+        swal("all bookings remain same");
       }
     });
   };

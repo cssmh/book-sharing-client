@@ -70,7 +70,7 @@ const Login = () => {
       return;
     } else {
       resetPassword(email)
-        .then(toast("reset email sent!"))
+        .then(() => toast.success("reset email sent!"))
         .catch((err) => toast.error(err.message));
     }
   };

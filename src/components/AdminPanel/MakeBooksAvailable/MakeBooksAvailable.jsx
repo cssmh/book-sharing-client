@@ -17,14 +17,14 @@ const MakeBooksAvailable = () => {
           .put("/allBooksAvailable")
           .then((res) => {
             if (res.data?.modifiedCount > 0) {
-              swal("All books are now available", {
+              swal("all books are now available", {
                 icon: "success",
               });
             }
           })
           .catch((err) => toast.error(err));
       } else {
-        swal("All books are safe to make available");
+        swal("okay cancelled");
       }
     });
   };

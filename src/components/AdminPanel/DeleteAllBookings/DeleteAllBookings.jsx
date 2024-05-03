@@ -18,14 +18,14 @@ const DeleteAllBookings = ({ setAdminBookings }) => {
           .then((res) => {
             if (res.data.deletedCount > 0) {
               setAdminBookings([]);
-              swal("All bookings are deleted!", {
+              swal("all bookings are deleted!", {
                 icon: "success",
               });
             }
           })
           .catch((err) => toast.error(err));
       } else {
-        swal("All bookings are safe");
+        swal("bookings are safe");
       }
     });
   };

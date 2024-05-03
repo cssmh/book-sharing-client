@@ -2,7 +2,7 @@ import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { HashLoader } from "react-spinners";
 import { Helmet } from "react-helmet-async";
-import AddBookings from "../BookInfo/AddBookings";
+import AddBooking from "../AddBooking/AddBooking";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 import useProviderHook from "../../useCustomHook/useProviderHook";
 import useContextHook from "../../useCustomHook/useContextHook";
@@ -147,7 +147,7 @@ const BookDetails = () => {
               </div>
               {book_provider_email !== user?.email &&
                 book_status === "available" && (
-                  <AddBookings getBookData={loadBookData}></AddBookings>
+                  <AddBooking getBookData={loadBookData}></AddBooking>
                 )}
               {book_provider_email === user?.email &&
                 book_status === "Unavailable" && (
