@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { HashLoader } from "react-spinners";
 import { Helmet } from "react-helmet-async";
@@ -6,20 +6,12 @@ import AddBooking from "../AddBooking/AddBooking";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 import useProviderHook from "../../useCustomHook/useProviderHook";
 import useContextHook from "../../useCustomHook/useContextHook";
-import { useEffect, useState } from "react";
 
 const BookDetails = () => {
   const { user } = useContextHook();
   const navigateTo = useNavigate();
-  const { id } = useParams();
-  const [loadBookData, setLoadBookData] = useState([]);
-  const { axiosSecure, axiosNoToken } = useAxiosHook();
-
-  useEffect(() => {
-    axiosNoToken
-      .get(`http://localhost:5000/book/${id}`)
-      .then((res) => setLoadBookData(res.data));
-  }, [axiosNoToken, id]);
+  const loadBookData = useLoaderData();
+  const { axiosSecure } = useAxiosHook();
 
   const {
     _id,

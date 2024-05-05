@@ -3,27 +3,16 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import updateImage from "../../assets/Update.png";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import useContextHook from "../../useCustomHook/useContextHook";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
-import { HashLoader } from "react-spinners";
 
 const UpdateBook = () => {
   const { user } = useContextHook();
   const navigateTo = useNavigate();
-  const { id } = useParams();
-  const [loaderBookData, setLoaderBookData] = useState(null);
+  const loaderBookData = useLoaderData();
   const [matchFound, setMatchFound] = useState([]);
-  const { axiosSecure, axiosNoToken } = useAxiosHook();
-
-  useEffect(() => {
-    axiosNoToken
-      .get(`http://localhost:5000/book/${id}`)
-      .then((res) => {
-        setLoaderBookData(res?.data);
-      })
-      .catch();
-  }, [axiosNoToken, id]);
+  const { axiosSecure } = useAxiosHook();
 
   useEffect(() => {
     // If match not found that means Now user can't
@@ -37,17 +26,12 @@ const UpdateBook = () => {
   const url = `/my-books?email=${user?.email}`;
   useEffect(() => {
     axiosSecure.get(url).then((res) => {
-      const findMatching = res?.data.find((book) => book._id === id);
+      const findMatching = res?.data.find((book) =>
+        loaderBookData._id.includes(book._id)
+      );
       setMatchFound(findMatching);
     });
-  }, [axiosSecure, url, id]);
-
-  if (!loaderBookData)
-    return (
-      <div className="flex justify-center mt-5">
-        <HashLoader color="#9933FF" size={32} />
-      </div>
-    );
+  }, [axiosSecure, url, loaderBookData._id]);
 
   const {
     _id,
