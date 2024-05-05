@@ -26,9 +26,9 @@ const AddBooking = ({ getBookData }) => {
 
   // Fetch all bookings for the current user
   useEffect(() => {
-    const url = `/bookings?email=${user?.email}`;
+    const url = `/my-bookings?email=${user?.email}`;
     axiosSecure.get(url).then((res) => {
-      setAllBookings(res.data);
+      setAllBookings(res?.data);
     });
   }, [axiosSecure, user?.email]);
 
@@ -111,7 +111,7 @@ const AddBooking = ({ getBookData }) => {
     };
 
     axiosNoToken
-      .post("/addBooking", AddBookingData)
+      .post("/add-booking", AddBookingData)
       .then((res) => {
         if (res.data?.insertedId) {
           // Update allBookings state after successfully adding

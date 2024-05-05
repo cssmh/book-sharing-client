@@ -10,7 +10,7 @@ const MyBookings = () => {
   const [allBookings, setAllBookings] = useState([]);
   const { axiosSecure } = useAxiosHook();
 
-  const url = `/bookings?email=${user?.email}`;
+  const url = `/my-bookings?email=${user?.email}`;
   useEffect(() => {
     axiosSecure.get(url)?.then((res) => {
       setAllBookings(res?.data);

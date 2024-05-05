@@ -14,7 +14,7 @@ const MakeBookingsPending = () => {
     }).then((willDelete) => {
       if (willDelete) {
         axiosSecure
-          .put("/updateToPending")
+          .put("/update-to-pending")
           .then((res) => {
             if (res.data?.modifiedCount > 0) {
               swal("all bookings are now pending!", {

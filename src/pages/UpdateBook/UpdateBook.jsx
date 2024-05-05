@@ -3,16 +3,27 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import updateImage from "../../assets/Update.png";
 import { useEffect, useState } from "react";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useContextHook from "../../useCustomHook/useContextHook";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import { HashLoader } from "react-spinners";
 
 const UpdateBook = () => {
   const { user } = useContextHook();
   const navigateTo = useNavigate();
-  const loaderBookData = useLoaderData();
+  const { id } = useParams();
+  const [loaderBookData, setLoaderBookData] = useState(null);
   const [matchFound, setMatchFound] = useState([]);
-  const { axiosSecure } = useAxiosHook();
+  const { axiosSecure, axiosNoToken } = useAxiosHook();
+
+  useEffect(() => {
+    axiosNoToken
+      .get(`http://localhost:5000/book/${id}`)
+      .then((res) => {
+        setLoaderBookData(res?.data);
+      })
+      .catch();
+  }, [axiosNoToken, id]);
 
   useEffect(() => {
     // If match not found that means Now user can't
@@ -23,15 +34,20 @@ const UpdateBook = () => {
     }
   }, [matchFound, navigateTo]);
 
-  const url = `/myBooks?email=${user?.email}`;
+  const url = `/my-books?email=${user?.email}`;
   useEffect(() => {
     axiosSecure.get(url).then((res) => {
-      const findMatching = res?.data.find((book) =>
-        loaderBookData._id.includes(book._id)
-      );
+      const findMatching = res?.data.find((book) => book._id === id);
       setMatchFound(findMatching);
     });
-  }, [axiosSecure, url, loaderBookData._id]);
+  }, [axiosSecure, url, id]);
+
+  if (!loaderBookData)
+    return (
+      <div className="flex justify-center mt-5">
+        <HashLoader color="#9933FF" size={32} />
+      </div>
+    );
 
   const {
     _id,
@@ -65,7 +81,7 @@ const UpdateBook = () => {
 
     const book_image =
       get_book_image.trim() !== "" ? get_book_image : defaultBookImageUrl;
-      const book_provider_phone = form.book_provider_phone.value;
+    const book_provider_phone = form.book_provider_phone.value;
     const provider_location = form.provider_location.value;
     const description = form.description.value;
 

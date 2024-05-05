@@ -13,7 +13,7 @@ const AddBook = () => {
   const [myAddedBooks, setMyAddedBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const url = `/myBooks?email=${user?.email}`;
+  const url = `/my-books?email=${user?.email}`;
   useEffect(() => {
     axiosSecure.get(url).then((res) => {
       setMyAddedBooks(res?.data);
@@ -74,9 +74,7 @@ const AddBook = () => {
           form.reset();
         }
       })
-      .then(() => {
-        // console.log(err);
-      });
+      .catch();
   };
 
   return (

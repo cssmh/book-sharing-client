@@ -33,11 +33,9 @@ const MyProfile = () => {
         setDp(photo);
         setName(name);
         toast.success("update success");
-
         axiosSecure
-          .put(`/myAllBooks/${user?.email}`, updateMyAllBookInfo)
+          .put(`/my-all-books/${user?.email}`, updateMyAllBookInfo)
           .then((res) => {
-            console.log(res.data);
             if (res.data?.modifiedCount > 0) {
               toast.success("Book information updated");
             }

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useContextHook from "../../useCustomHook/useContextHook";
-import { Helmet } from "react-helmet-async";
-import toast from "react-hot-toast";
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const Register = () => {
   const [view, setView] = useState(true);
@@ -68,12 +68,12 @@ const Register = () => {
           );
         });
         navigateTo(location?.state ? location.state : "/");
-        // Introduce a 1.7-second delay before showing the toast error
+        // Introduce a 1.9-second delay before showing the toast error
         setTimeout(() => {
           toast.error("Sorry! Email verification Required");
           logOut().then().catch();
           navigateTo("/login");
-        }, 1700);
+        }, 1900);
       })
       .catch((err) => {
         toast.error(err.message);

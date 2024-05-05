@@ -5,7 +5,7 @@ const useTotalProviderHook = () => {
   const { axiosNoToken } = useAxiosHook();
   const [allBooks, setAllBooks] = useState([]);
   useEffect(() => {
-    axiosNoToken.get("/allBooks").then((res) => setAllBooks(res.data?.result));
+    axiosNoToken.get("/all-books").then((res) => setAllBooks(res.data?.result));
   }, [axiosNoToken]);
 
   // Function to count the number of books each provider has

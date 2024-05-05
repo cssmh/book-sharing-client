@@ -14,7 +14,7 @@ const DeleteAllBookings = ({ setAdminBookings }) => {
     }).then((willDelete) => {
       if (willDelete) {
         axiosSecure
-          .delete("/AllBookings")
+          .delete("/all-bookings")
           .then((res) => {
             if (res.data.deletedCount > 0) {
               setAdminBookings([]);

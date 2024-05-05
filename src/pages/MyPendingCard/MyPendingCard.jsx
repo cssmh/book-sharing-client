@@ -20,42 +20,43 @@ const MyPendingCard = ({ getPending, completedBookIds, handleComplete }) => {
   } = getPending;
 
   const { axiosSecure } = useAxiosHook();
-  const [bookStatus, setBookStatus] = useState(status);
+  const [myPendingStatus, setMyPendingStatus] = useState(status);
   const [todayDateTime, setTodayDateTime] = useState("");
-  const [completed, setCompleted] = useState(completed_at);
+  const [completedAt, setCompletedAt] = useState(completed_at);
 
-  const handleUpdateStatus = (e, idx, bookIdx, email) => {
-    const newStatus = e.target.value;
+  const handleUpdateStatus = (e, idx, book_id, provider_email) => {
+    const updatedPendingStatus = e.target.value;
     const bookStatus =
-      newStatus === "Pending" || newStatus === "Progress"
+      updatedPendingStatus === "Pending" || updatedPendingStatus === "Progress"
         ? "available"
         : "Unavailable";
 
     axiosSecure
-      .put(`/bookings/${idx}/${email}`, { newStatus })
+      .put(`/booking-status/${idx}/${provider_email}`, {
+        updatedPendingStatus,
+      })
       .then((res) => {
         if (res.data?.modifiedCount > 0) {
-          setBookStatus(newStatus);
-          swal("Thank You!", `Updated to ${newStatus}`, "success");
+          setMyPendingStatus(updatedPendingStatus);
+          swal("Thank You!", `Updated to ${updatedPendingStatus}`, "success");
         }
-        if (newStatus === "Completed") {
+        axiosSecure
+          .put(`/book-status/${book_id}/${provider_email}`, { bookStatus })
+          .then()
+          .catch((err) => {
+            toast.error(err);
+          });
+        if (updatedPendingStatus === "Completed") {
           axiosSecure
-            .patch(`/add-time/${idx}/${email}`, { todayDateTime })
-            .then(() => setCompleted(todayDateTime))
+            .put(`/add-time/${idx}/${provider_email}`, { todayDateTime })
             .then(() => {
+              setCompletedAt(todayDateTime);
+              setMyPendingStatus(updatedPendingStatus);
               // Notify parent that this book_id is completed
               handleComplete(book_id);
             })
             .catch();
         }
-      })
-      .then(() => {
-        axiosSecure
-          .put(`/book-status/${bookIdx}/${email}`, { bookStatus })
-          .then((res) => console.log(res.data))
-          .catch((err) => {
-            toast.error(err);
-          });
       })
       .catch((err) => {
         toast.error(err);
@@ -101,10 +102,10 @@ const MyPendingCard = ({ getPending, completedBookIds, handleComplete }) => {
         <p className="text-green-600">{user_phone}</p>
         <p className="text-purple-800">{user_email}</p>
         {user_message.length > 0 && <p>Message: {user_message}</p>}
-        {bookStatus === "Completed" ? (
+        {myPendingStatus === "Completed" ? (
           <p>
             Booked: {user_date} Completed:{" "}
-            <span className="text-cyan-500">{completed}</span>
+            <span className="text-cyan-500">{completedAt}</span>
           </p>
         ) : (
           <p>Booked: {user_date}</p>
@@ -113,15 +114,13 @@ const MyPendingCard = ({ getPending, completedBookIds, handleComplete }) => {
       </div>
       <div className="text-center mt-1">
         <select
-          id="book"
-          name="book_name"
-          defaultValue={status}
+          defaultValue={myPendingStatus}
           onChange={(e) =>
             handleUpdateStatus(e, _id, book_id, book_provider_email)
           }
           className="border border-blue-500 focus:border-transparent rounded-2xl"
           // Disable if completed or if this book_id is completed
-          disabled={bookStatus === "Completed" || isCompleted} 
+          disabled={myPendingStatus === "Completed" || isCompleted}
         >
           <option value="Pending">Pending</option>
           <option value="Progress">Progress</option>

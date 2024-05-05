@@ -11,7 +11,14 @@ const MyPending = () => {
   const [completedBookIds, setCompletedBookIds] = useState([]);
   const { axiosSecure } = useAxiosHook();
 
-  const url = `/pending?email=${user?.email}`;
+  useEffect(() => {
+    axiosSecure.get(`/unavailable-ids?email=${user?.email}`).then((res) => {
+      const bookIds = res.data?.map((book) => book._id);
+      setCompletedBookIds(bookIds);
+    });
+  }, [user?.email, axiosSecure]);
+
+  const url = `/my-pending?email=${user?.email}`;
   useEffect(() => {
     axiosSecure.get(url)?.then((res) => {
       setMyPending(res?.data);

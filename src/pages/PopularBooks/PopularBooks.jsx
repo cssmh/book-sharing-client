@@ -29,7 +29,7 @@ const PopularBooks = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    axiosNoToken.get(`/allBooks?limit=${sliceSize}`).then((res) => {
+    axiosNoToken.get(`/all-books?limit=${sliceSize}`).then((res) => {
       setPopularBooks(res.data?.result);
       setIsLoading(false);
     });

@@ -14,7 +14,7 @@ const MakeBooksAvailable = () => {
     }).then((willDelete) => {
       if (willDelete) {
         axiosSecure
-          .put("/allBooksAvailable")
+          .put("/available-all-books")
           .then((res) => {
             if (res.data?.modifiedCount > 0) {
               swal("all books are now available", {

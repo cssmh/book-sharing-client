@@ -16,7 +16,7 @@ const AllBooks = () => {
   const booksPerPageCount = Math.ceil(totalBooksCount / limit);
 
   useEffect(() => {
-    axiosNoToken.get(`/allBooks?page=${page}&limit=${limit}`).then((res) => {
+    axiosNoToken.get(`/all-books?page=${page}&limit=${limit}`).then((res) => {
       setAllBooks(res.data?.result);
       setTotalBooksCount(res.data?.totalBooks);
       setIsLoading(false);
@@ -26,7 +26,7 @@ const AllBooks = () => {
   // for search book
   useEffect(() => {
     axiosNoToken
-      .get("/allBooks")
+      .get("/all-books")
       .then((res) => setTotalBooksForSearch(res.data?.result));
   }, [axiosNoToken]);
   // for search book end

@@ -12,7 +12,7 @@ const MyBooks = () => {
   const [myBooks, setMyBooks] = useState([]);
   const { axiosSecure } = useAxiosHook();
 
-  const url = `/myBooks?email=${user?.email}`;
+  const url = `/my-books?email=${user?.email}`;
   useEffect(() => {
     axiosSecure.get(url).then((res) => {
       setMyBooks(res.data);

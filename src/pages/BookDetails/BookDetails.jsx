@@ -1,4 +1,4 @@
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import swal from "sweetalert";
 import { HashLoader } from "react-spinners";
 import { Helmet } from "react-helmet-async";
@@ -6,12 +6,20 @@ import AddBooking from "../AddBooking/AddBooking";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 import useProviderHook from "../../useCustomHook/useProviderHook";
 import useContextHook from "../../useCustomHook/useContextHook";
+import { useEffect, useState } from "react";
 
 const BookDetails = () => {
   const { user } = useContextHook();
   const navigateTo = useNavigate();
-  const loadBookData = useLoaderData();
-  const { axiosSecure } = useAxiosHook();
+  const { id } = useParams();
+  const [loadBookData, setLoadBookData] = useState([]);
+  const { axiosSecure, axiosNoToken } = useAxiosHook();
+
+  useEffect(() => {
+    axiosNoToken
+      .get(`http://localhost:5000/book/${id}`)
+      .then((res) => setLoadBookData(res.data));
+  }, [axiosNoToken, id]);
 
   const {
     _id,
@@ -26,7 +34,7 @@ const BookDetails = () => {
     book_status,
   } = loadBookData;
 
-  const url = `/myBooks?email=${book_provider_email}`;
+  const url = `/my-books?email=${book_provider_email}`;
   const { isLoading, bookData } = useProviderHook(url);
 
   const handleDeleteByAdmin = (idx, book) => {

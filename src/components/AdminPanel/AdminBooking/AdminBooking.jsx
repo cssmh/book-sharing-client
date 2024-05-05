@@ -1,23 +1,21 @@
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
 import { HashLoader } from "react-spinners";
-import { Link, useLoaderData } from "react-router-dom";
 import useAxiosHook from "../../../useCustomHook/useAxiosHook";
-import useContextHook from "../../../useCustomHook/useContextHook";
 import AdminBookingCard from "../AdminBookingCard/AdminBookingCard";
-import useTotalProviderHook from "../../../useCustomHook/useTotalProviderHook";
 import MakeBookingsPending from "../MakeBookingsPending/MakeBookingsPending";
+import useTotalProviderHook from "../../../useCustomHook/useTotalProviderHook";
 import MakeBooksAvailable from "../MakeBooksAvailable/MakeBooksAvailable";
 import DeleteAllBookings from "../DeleteAllBookings/DeleteAllBookings";
 
 const AdminBooking = () => {
-  const { user } = useContextHook();
-  const { result } = useLoaderData();
+  const [result, setResult] = useState([]);
   const [adminBookings, setAdminBookings] = useState([]);
   const [filterAdminBookings, setFilterAdminBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filterType, setFilterType] = useState("All");
-  const { axiosSecure } = useAxiosHook();
+  const { axiosSecure, axiosNoToken } = useAxiosHook();
   const { uniqueEmails, booksByProvider } = useTotalProviderHook();
 
   const providerArray = Object.entries(booksByProvider).map(
@@ -27,14 +25,17 @@ const AdminBooking = () => {
     })
   );
 
-  const url = `/allBookings?email=${user?.email}`;
   useEffect(() => {
-    axiosSecure.get(url)?.then((res) => {
+    axiosNoToken.get("/all-books").then((res) => setResult(res.data?.result));
+  }, [axiosNoToken]);
+
+  useEffect(() => {
+    axiosSecure.get("all-bookings")?.then((res) => {
       setAdminBookings(res?.data);
       setFilterAdminBookings(res?.data);
       setIsLoading(false);
     });
-  }, [axiosSecure, url]);
+  }, [axiosSecure]);
 
   // if length is 0 or more than one book then
   // show Books/Providers/Bookings plural form. Just a try
