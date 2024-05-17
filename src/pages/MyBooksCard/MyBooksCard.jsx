@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import useContextHook from "../../useCustomHook/useContextHook";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
-const MyBooksCard = ({ getBook, myBooks, setMyBooks }) => {
+const MyBooksCard = ({ getBook, refetch }) => {
   const { user } = useContextHook();
   const { axiosSecure } = useAxiosHook();
   const { _id, book_name, book_image, book_provider_phone, book_status } =
@@ -21,8 +21,7 @@ const MyBooksCard = ({ getBook, myBooks, setMyBooks }) => {
         // main code
         axiosSecure.delete(`/book/${idx}/${user?.email}`).then((res) => {
           if (res.data?.deletedCount > 0) {
-            const remaining = myBooks.filter((book) => book._id !== idx);
-            setMyBooks(remaining);
+            refetch();
             swal(`${name} Deleted!`, {
               icon: "success",
             });

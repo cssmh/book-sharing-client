@@ -2,7 +2,7 @@ import swal from "sweetalert";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 import { useEffect, useState } from "react";
 
-const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
+const MyBookingCard = ({ getBooking, refetch }) => {
   const { axiosNoToken } = useAxiosHook();
   const [available, setAvailable] = useState("");
   const {
@@ -28,8 +28,7 @@ const MyBookingCard = ({ getBooking, allBookings, setAllBookings }) => {
       if (willDelete) {
         axiosNoToken.delete(`/booking/${idx}`).then((res) => {
           if (res.data?.deletedCount > 0) {
-            const remaining = allBookings.filter((book) => book._id !== idx);
-            setAllBookings(remaining);
+            refetch();
             swal("Deleted!", {
               icon: "success",
             });

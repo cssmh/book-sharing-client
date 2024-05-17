@@ -3,12 +3,26 @@ import { Link } from "react-router-dom";
 import SkeletonCard from "../SkeletonCard/SkeletonCard";
 import PopularBookCard from "../PopularBookCard/PopularBookCard";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import { useQuery } from "@tanstack/react-query";
 
 const PopularBooks = () => {
   const { axiosNoToken } = useAxiosHook();
-  const [popularBooks, setPopularBooks] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [sliceSize, setSliceSize] = useState(6);
+
+  const getPopularBooks = async () => {
+    const res = await axiosNoToken.get(`/all-books?limit=${sliceSize}`);
+    return res?.data;
+  };
+
+  const {
+    isLoading,
+    error,
+    data: popularBooks,
+  } = useQuery({
+    queryKey: ["popularBooks", sliceSize],
+    queryFn: getPopularBooks,
+    keepPreviousData: true, // Keep previous data while fetching new data
+  });
 
   useEffect(() => {
     const handleResize = () => {
@@ -27,13 +41,23 @@ const PopularBooks = () => {
     };
   }, []);
 
-  useEffect(() => {
-    setIsLoading(true);
-    axiosNoToken.get(`/all-books?limit=${sliceSize}`).then((res) => {
-      setPopularBooks(res.data?.result);
-      setIsLoading(false);
-    });
-  }, [sliceSize, axiosNoToken]);
+  if (isLoading) {
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto my-10">
+        {[...Array(3)].map((_, index) => (
+          <SkeletonCard key={index} />
+        ))}
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center text-xl md:text-2xl font-semibold text-red-600 italic mt-6">
+        An error occurred while fetching popular books.
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -42,31 +66,20 @@ const PopularBooks = () => {
           Our Popular Books
         </h3>
       </div>
-      {isLoading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto my-10">
-          {[...Array(3)].map((_, index) => (
-            <SkeletonCard key={index} />
+      <div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+          {popularBooks?.result?.map((book) => (
+            <PopularBookCard key={book._id} getBook={book}></PopularBookCard>
           ))}
         </div>
-      ) : (
-        <div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-            {popularBooks?.map((books) => (
-              <PopularBookCard
-                key={books._id}
-                getBook={books}
-              ></PopularBookCard>
-            ))}
-          </div>
-          <div className="flex justify-center my-10">
-            <Link to="/all-books">
-              <button className="text-white bg-gradient-to-r from-green-400 via-green-400 to-green-500 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-                Show all Books
-              </button>
-            </Link>
-          </div>
+        <div className="flex justify-center my-10">
+          <Link to="/all-books">
+            <button className="text-white bg-gradient-to-r from-green-400 via-green-400 to-green-500 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+              Show all Books
+            </button>
+          </Link>
         </div>
-      )}
+      </div>
     </div>
   );
 };
