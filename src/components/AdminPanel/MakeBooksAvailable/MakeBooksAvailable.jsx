@@ -3,7 +3,7 @@ import useAxiosHook from "../../../useCustomHook/useAxiosHook";
 import toast from "react-hot-toast";
 
 const MakeBooksAvailable = () => {
-  const { axiosSecure } = useAxiosHook();
+  const axiosSecure = useAxiosHook();
   const handleMakeBooksAvailable = () => {
     swal({
       title: "Are you sure?",
@@ -23,8 +23,6 @@ const MakeBooksAvailable = () => {
             }
           })
           .catch((err) => toast.error(err));
-      } else {
-        swal("okay cancelled");
       }
     });
   };

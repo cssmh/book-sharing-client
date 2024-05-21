@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 const MyPending = () => {
   const { user } = useContextHook();
   const [completedBookIds, setCompletedBookIds] = useState([]);
-  const { axiosSecure } = useAxiosHook();
+  const axiosSecure = useAxiosHook();
 
   useEffect(() => {
     axiosSecure.get(`/unavailable-ids?email=${user?.email}`).then((res) => {

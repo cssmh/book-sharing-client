@@ -3,7 +3,7 @@ import useAxiosHook from "../../../useCustomHook/useAxiosHook";
 import toast from "react-hot-toast";
 
 const MakeBookingsPending = () => {
-  const { axiosSecure } = useAxiosHook();
+  const axiosSecure = useAxiosHook();
   const handleMakeBookingsPending = () => {
     swal({
       title: "Are you sure?",
@@ -23,8 +23,6 @@ const MakeBookingsPending = () => {
             }
           })
           .catch((err) => toast.error(err));
-      } else {
-        swal("all bookings remain same");
       }
     });
   };

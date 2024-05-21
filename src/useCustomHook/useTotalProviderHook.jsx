@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react";
-import useAxiosHook from "./useAxiosHook";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "./useAxiosPublic";
 
 const useTotalProviderHook = () => {
-  const { axiosNoToken } = useAxiosHook();
-  const [allBooks, setAllBooks] = useState([]);
-  useEffect(() => {
-    axiosNoToken.get("/all-books").then((res) => setAllBooks(res.data?.result));
-  }, [axiosNoToken]);
+  const axiosNoToken = useAxiosPublic();
+
+  const { data: allBooks = [] } = useQuery({
+    queryKey: ["allBooksData"],
+    queryFn: async () => {
+      const res = await axiosNoToken.get("/all-books");
+      return res.data?.result;
+    },
+  });
 
   // Function to count the number of books each provider has
   const countBooksByProvider = (booksData) => {
@@ -49,4 +53,4 @@ const useTotalProviderHook = () => {
 
 export default useTotalProviderHook;
 
-// Used in Counting and AdminBooking
+// Used in Count and AdminBooking

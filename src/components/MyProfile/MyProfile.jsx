@@ -7,7 +7,7 @@ import HavenFeatures from "../HavenFeatures/HavenFeatures";
 
 const MyProfile = () => {
   const { user, handleUpdateProfile } = useContextHook();
-  const { axiosSecure } = useAxiosHook();
+  const axiosSecure = useAxiosHook();
   const { photoURL, email, displayName, metadata } = user;
   // state for show changed at a time update, no need to reload.
   const [dp, setDp] = useState(photoURL);

@@ -4,13 +4,13 @@ import MyBookings from "../MyBookings/MyBookings";
 import MyPending from "../MyPending/MyPending";
 
 const MySchedules = () => {
-  const [activeComponent, setActiveComponent] = useState("MyBookings");
+  const [activeSchedule, setActiveSchedule] = useState("MyBookings");
 
   const showBooking = () => {
-    setActiveComponent("MyBookings");
+    setActiveSchedule("MyBookings");
   };
   const showPending = () => {
-    setActiveComponent("MyPending");
+    setActiveSchedule("MyPending");
   };
   return (
     <div>
@@ -21,7 +21,7 @@ const MySchedules = () => {
         <button
           onClick={showBooking}
           className={
-            activeComponent === "MyBookings"
+            activeSchedule === "MyBookings"
               ? "btn btn-primary text-white"
               : "btn"
           }
@@ -31,7 +31,7 @@ const MySchedules = () => {
         <button
           onClick={showPending}
           className={
-            activeComponent === "MyPending"
+            activeSchedule === "MyPending"
               ? "btn btn-primary text-white"
               : "btn"
           }
@@ -39,8 +39,8 @@ const MySchedules = () => {
           My Pending
         </button>
       </div>
-      {activeComponent === "MyBookings" && <MyBookings></MyBookings>}
-      {activeComponent === "MyPending" && <MyPending></MyPending>}
+      {activeSchedule === "MyBookings" && <MyBookings></MyBookings>}
+      {activeSchedule === "MyPending" && <MyPending></MyPending>}
     </div>
   );
 };

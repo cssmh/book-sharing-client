@@ -1,37 +1,44 @@
-import { HashLoader } from "react-spinners";
 import { useParams } from "react-router-dom";
 import SameProviderCard from "../SameProviderCard/SameProviderCard";
-import useProviderHook from "../../useCustomHook/useProviderHook";
+import { HashLoader } from "react-spinners";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
 
 const SameProvider = () => {
-  const getUser = useParams();
-  // same provider book data getting
-  const url = `/my-books?email=${getUser?.email}`;
-  const { isLoading, bookData } = useProviderHook(url);
+  const { email } = useParams();
+  const axiosNoToken = useAxiosPublic()
+
+  const { data: loadSameProvider, isLoading } = useQuery({
+    queryKey: ["loadSameProvider", email],
+    queryFn: async () => {
+      const res = await axiosNoToken.get(`my-books?email=${email}`);
+      return res?.data;
+    },
+  });
+
   const bookText =
-    bookData?.length === 1 || bookData?.length === 0 ? "Book" : "Books";
+    loadSameProvider?.length === 1 || loadSameProvider?.length === 0
+      ? "Book"
+      : "Books";
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center mt-5">
+        <HashLoader color="#9933FF" size={32} />
+      </div>
+    );
+  }
 
   return (
     <div>
-      {isLoading ? (
-        <div className="flex justify-center min-h-[70vh] mt-5">
-          <HashLoader color="#9933FF" size={32} />
-        </div>
-      ) : (
-        <>
-          <p className="my-4 text-center font-semibold text-2xl">
-            Total {bookData?.length} {bookText}
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-            {bookData?.map((soloBook) => (
-              <SameProviderCard
-                key={soloBook._id}
-                getBooks={soloBook}
-              ></SameProviderCard>
-            ))}
-          </div>
-        </>
-      )}
+      <p className="my-4 text-center font-semibold text-2xl">
+        Total {loadSameProvider?.length} {bookText}
+      </p>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+        {loadSameProvider?.map((book) => (
+          <SameProviderCard key={book._id} getBooks={book}></SameProviderCard>
+        ))}
+      </div>
     </div>
   );
 };

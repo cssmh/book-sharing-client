@@ -2,17 +2,12 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SkeletonCard from "../SkeletonCard/SkeletonCard";
 import PopularBookCard from "../PopularBookCard/PopularBookCard";
-import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 
 const PopularBooks = () => {
-  const { axiosNoToken } = useAxiosHook();
+  const axiosNoToken = useAxiosPublic()
   const [sliceSize, setSliceSize] = useState(6);
-
-  const getPopularBooks = async () => {
-    const res = await axiosNoToken.get(`/all-books?limit=${sliceSize}`);
-    return res?.data;
-  };
 
   const {
     isLoading,
@@ -20,7 +15,10 @@ const PopularBooks = () => {
     data: popularBooks,
   } = useQuery({
     queryKey: ["popularBooks", sliceSize],
-    queryFn: getPopularBooks,
+    queryFn: async () => {
+      const res = await axiosNoToken.get(`/all-books?limit=${sliceSize}`);
+      return res?.data;
+    },
     keepPreviousData: true, // Keep previous data while fetching new data
   });
 

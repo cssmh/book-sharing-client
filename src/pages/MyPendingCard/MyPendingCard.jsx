@@ -19,7 +19,7 @@ const MyPendingCard = ({ getPending, completedBookIds, handleComplete }) => {
     completed_at,
   } = getPending;
 
-  const { axiosSecure } = useAxiosHook();
+  const axiosSecure = useAxiosHook();
   const [myPendingStatus, setMyPendingStatus] = useState(status);
   const [todayDateTime, setTodayDateTime] = useState("");
   const [completedAt, setCompletedAt] = useState(completed_at);

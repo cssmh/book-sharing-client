@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const MyBookings = () => {
   const { user } = useContextHook();
-  const { axiosSecure } = useAxiosHook();
+  const axiosSecure = useAxiosHook();
 
   const getMyBookings = async () => {
     const res = await axiosSecure.get(`/my-bookings?email=${user?.email}`);
@@ -17,7 +17,7 @@ const MyBookings = () => {
     isLoading,
     error,
     data: myBookings,
-    refetch
+    refetch,
   } = useQuery({
     queryKey: ["myBookings", user?.email],
     queryFn: getMyBookings,

@@ -1,5 +1,5 @@
-import axios from "axios";
 import app from "../firebase/firebase.config";
+import useAxiosPublic from "../useCustomHook/useAxiosPublic";
 import { createContext, useEffect, useState } from "react";
 import {
   GoogleAuthProvider,
@@ -19,6 +19,7 @@ const googleProvider = new GoogleAuthProvider();
 const auth = getAuth(app);
 
 const AuthProviders = ({ children }) => {
+  const axiosNoToken = useAxiosPublic();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -64,23 +65,23 @@ const AuthProviders = ({ children }) => {
       const emailToSend = { email: getEmail };
       setLoading(false);
       if (getEmail) {
-        await axios
-          .post("https://book-sharing-server.vercel.app/jwt", emailToSend, {
+        await axiosNoToken
+          .post("/jwt", emailToSend, {
             withCredentials: true,
           })
-          .then((res) => console.log("login token response", res?.data));
+          .then((res) => console.log("login token response", res.data));
       } else {
-        await axios
-          .post("https://book-sharing-server.vercel.app/logout", emailToSend, {
+        await axiosNoToken
+          .post("/logout", emailToSend, {
             withCredentials: true,
           })
-          .then((res) => console.log("logout token response", res?.data));
+          .then((res) => console.log("logout token response", res.data));
       }
     });
     return () => {
       unSubscribe();
     };
-  }, [user?.email]);
+  }, [user?.email, axiosNoToken]);
 
   const authInfo = {
     user,

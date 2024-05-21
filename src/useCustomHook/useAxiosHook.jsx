@@ -1,16 +1,12 @@
 import axios from "axios";
-import toast from "react-hot-toast";
-import useContextHook from "./useContextHook";
 import { useEffect } from "react";
+import swal from "sweetalert";
+import useContextHook from "./useContextHook";
 import { useNavigate } from "react-router-dom";
 
 const axiosSecure = axios.create({
   baseURL: "https://book-sharing-server.vercel.app",
   withCredentials: true,
-});
-
-const axiosNoToken = axios.create({
-  baseURL: "https://book-sharing-server.vercel.app",
 });
 
 const useAxiosHook = () => {
@@ -24,19 +20,23 @@ const useAxiosHook = () => {
       (error) => {
         // console.log("error in interceptor", error.response);
         if (error.response.status === 401 || error.response.status === 403) {
-          logOut()
-            .then(() => {
-              // token expire or any 401 || 403 happened
-              toast.error("Authorization error, login again!");
-              navigateTo("/login");
-            })
-            .catch();
+          swal(
+            "Your Session has expired",
+            "Please log in again to continue",
+            "warning"
+          ).then(() => {
+            logOut()
+              .then(() => {
+                navigateTo("/login");
+              })
+              .catch();
+          });
         }
       }
     );
   }, [logOut, navigateTo]);
 
-  return { axiosSecure, axiosNoToken };
+  return axiosSecure;
 };
 
 export default useAxiosHook;

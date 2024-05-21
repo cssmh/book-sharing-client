@@ -1,5 +1,5 @@
 import swal from "sweetalert";
-import useAxiosHook from "../../../useCustomHook/useAxiosHook";
+import useAxiosPublic from "../../../useCustomHook/useAxiosPublic";
 
 const AdminBookingCard = ({
   getAllBooking,
@@ -19,7 +19,7 @@ const AdminBookingCard = ({
     status,
     completed_at,
   } = getAllBooking;
-  const { axiosNoToken } = useAxiosHook();
+  const axiosNoToken = useAxiosPublic()
 
   const handleDeleteByAdmin = (idx) => {
     swal({
@@ -46,8 +46,6 @@ const AdminBookingCard = ({
             });
           }
         });
-      } else {
-        swal("File is safe!");
       }
     });
   };

@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { HashLoader } from "react-spinners";
 import AllBooksCard from "../AllBooksCard/AllBooksCard";
-import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
 
 const AllBooks = () => {
   let searchTerm;
-  const { axiosNoToken } = useAxiosHook();
+  const axiosNoToken = useAxiosPublic()
   const [allBooks, setAllBooks] = useState([]);
   const [totalBooksCount, setTotalBooksCount] = useState(0);
   const [page, setPage] = useState(1);
@@ -22,7 +22,7 @@ const AllBooks = () => {
       setIsLoading(false);
     });
   }, [page, limit, axiosNoToken]);
-
+  
   // for search book
   useEffect(() => {
     axiosNoToken
@@ -37,7 +37,7 @@ const AllBooks = () => {
   const handleNext = () => {
     if (page < booksPerPageCount) setPage(page + 1);
   };
-
+  
   return (
     <div>
       <Helmet>
@@ -90,7 +90,7 @@ const AllBooks = () => {
               </p>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-                {allBooks.map((book) => (
+                {allBooks?.map((book) => (
                   <AllBooksCard key={book._id} getBook={book}></AllBooksCard>
                 ))}
               </div>

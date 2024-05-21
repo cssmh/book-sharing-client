@@ -1,37 +1,61 @@
 import swal from "sweetalert";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
+import { HashLoader } from "react-spinners";
 import updateImage from "../../assets/Update.png";
 import { useEffect, useState } from "react";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useContextHook from "../../useCustomHook/useContextHook";
+import { useQuery } from "@tanstack/react-query";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
 
 const UpdateBook = () => {
   const { user } = useContextHook();
+  const { id } = useParams();
   const navigateTo = useNavigate();
-  const loaderBookData = useLoaderData();
-  const [matchFound, setMatchFound] = useState([]);
-  const { axiosSecure } = useAxiosHook();
+  const [matchFound, setMatchFound] = useState(null);
+  const axiosSecure = useAxiosHook();
+  const axiosNoToken = useAxiosPublic()
+
+  const { data: bookData, isLoading } = useQuery({
+    queryKey: ["bookData", id],
+    queryFn: async () => {
+      const res = await axiosNoToken.get(`book/${id}`);
+      return res?.data;
+    },
+  });
 
   useEffect(() => {
-    // If match not found that means Now user can't
-    // update other user book data
-    if (!matchFound) {
-      toast.error("Don't try to Update other's Data!");
+    if (matchFound === false) {
+      toast.error("Don't try to update other's data!");
       navigateTo("/");
     }
   }, [matchFound, navigateTo]);
 
-  const url = `/my-books?email=${user?.email}`;
   useEffect(() => {
-    axiosSecure.get(url).then((res) => {
-      const findMatching = res?.data.find((book) =>
-        loaderBookData._id.includes(book._id)
-      );
-      setMatchFound(findMatching);
-    });
-  }, [axiosSecure, url, loaderBookData._id]);
+    if (bookData && user) {
+      const url = `/my-books?email=${user?.email}`;
+      axiosNoToken.get(url).then((res) => {
+        const findMatching = res?.data.find(
+          (book) => book._id === bookData._id
+        );
+        setMatchFound(!!findMatching);
+      });
+    }
+  }, [axiosNoToken, bookData, user]);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center mt-5">
+        <HashLoader color="#9933FF" size={32} />
+      </div>
+    );
+  }
+
+  if (!bookData) {
+    return null;
+  }
 
   const {
     _id,
@@ -40,10 +64,9 @@ const UpdateBook = () => {
     book_provider_phone,
     description,
     provider_location,
-  } = loaderBookData;
+  } = bookData;
 
   let rowsValue;
-  // Set the rows value based on conditions
   if (description.length > 2000) {
     rowsValue = 20;
   } else if (description.length > 500) {
@@ -52,17 +75,14 @@ const UpdateBook = () => {
     rowsValue = 5;
   }
   const rows = rowsValue;
-  // Set the rows value based on conditions end
 
   const handleUpdate = (e) => {
     e.preventDefault();
     const form = e.target;
     const book_name = form.book_name.value;
-
     const get_book_image = form.book_image.value;
     const defaultBookImageUrl =
       "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/CoverSoon.png";
-
     const book_image =
       get_book_image.trim() !== "" ? get_book_image : defaultBookImageUrl;
     const book_provider_phone = form.book_provider_phone.value;
@@ -109,7 +129,7 @@ const UpdateBook = () => {
             Update <span className="text-green-400">{book_name}</span>
           </h1>
           <p className="text-gray-500 mt-2 mx-2 md:mx-0">
-            Enter Book details and click Update Book Details button to <br></br>
+            Enter Book details and click Update Book Details button to <br />{" "}
             Update the Book data to database
           </p>
         </div>

@@ -3,15 +3,15 @@ import NoBook from "../../assets/NoBook.png";
 import MyBooksCard from "../MyBooksCard/MyBooksCard";
 import { FallingLines } from "react-loader-spinner";
 import useContextHook from "../../useCustomHook/useContextHook";
-import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 
 const MyBooks = () => {
   const { user } = useContextHook();
-  const { axiosSecure } = useAxiosHook();
+  const axiosNoToken = useAxiosPublic()
 
   const getMyBooks = async () => {
-    const res = await axiosSecure.get(`/my-books?email=${user?.email}`);
+    const res = await axiosNoToken.get(`/my-books?email=${user?.email}`);
     return res?.data;
   };
 

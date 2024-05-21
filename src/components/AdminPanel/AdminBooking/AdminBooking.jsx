@@ -1,21 +1,23 @@
 import { HashLoader } from "react-spinners";
 import { useEffect, useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import AdminBookingCard from "../AdminBookingCard/AdminBookingCard";
 import useAxiosHook from "../../../useCustomHook/useAxiosHook";
+import useAxiosPublic from "../../../useCustomHook/useAxiosPublic";
 import MakeBookingsPending from "../MakeBookingsPending/MakeBookingsPending";
 import useTotalProviderHook from "../../../useCustomHook/useTotalProviderHook";
 import MakeBooksAvailable from "../MakeBooksAvailable/MakeBooksAvailable";
 import DeleteAllBookings from "../DeleteAllBookings/DeleteAllBookings";
 
 const AdminBooking = () => {
-  const { result } = useLoaderData();
+  const [result, setResult] = useState([]);
   const [adminBookings, setAdminBookings] = useState([]);
   const [filterAdminBookings, setFilterAdminBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filterType, setFilterType] = useState("All");
-  const { axiosSecure } = useAxiosHook();
+  const axiosSecure = useAxiosHook();
+  const axiosNoToken = useAxiosPublic()
   const { uniqueEmails, booksByProvider } = useTotalProviderHook();
 
   const providerArray = Object.entries(booksByProvider).map(
@@ -24,6 +26,10 @@ const AdminBooking = () => {
       count,
     })
   );
+
+  useEffect(() => {
+    axiosNoToken.get("/all-books").then((res) => setResult(res.data?.result));
+  }, [axiosNoToken]);
 
   useEffect(() => {
     axiosSecure.get("/all-bookings")?.then((res) => {

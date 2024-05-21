@@ -1,17 +1,28 @@
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import swal from "sweetalert";
 import { HashLoader } from "react-spinners";
 import { Helmet } from "react-helmet-async";
 import AddBooking from "../AddBooking/AddBooking";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
 import useProviderHook from "../../useCustomHook/useProviderHook";
 import useContextHook from "../../useCustomHook/useContextHook";
+import { useQuery } from "@tanstack/react-query";
 
 const BookDetails = () => {
   const { user } = useContextHook();
   const navigateTo = useNavigate();
-  const loadBookData = useLoaderData();
-  const { axiosSecure } = useAxiosHook();
+  const { id } = useParams();
+  const axiosSecure = useAxiosHook();
+  const axiosNoToken = useAxiosPublic()
+
+  const { data: loadBookData = [], isLoading: bookDataLoading } = useQuery({
+    queryKey: ["loadBookData", id],
+    queryFn: async () => {
+      const res = await axiosNoToken.get(`/book/${id}`);
+      return res?.data;
+    },
+  });
 
   const {
     _id,
@@ -47,8 +58,6 @@ const BookDetails = () => {
           }
           navigateTo(-1);
         });
-      } else {
-        swal("File is safe!");
       }
     });
   };
@@ -58,7 +67,7 @@ const BookDetails = () => {
       <Helmet>
         <title>{book_name}</title>
       </Helmet>
-      {isLoading ? (
+      {isLoading || bookDataLoading ? (
         <div className="flex justify-center mt-5">
           <HashLoader color="#9933FF" size={32} />
         </div>

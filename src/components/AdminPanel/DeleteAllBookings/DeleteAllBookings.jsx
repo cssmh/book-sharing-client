@@ -3,7 +3,7 @@ import useAxiosHook from "../../../useCustomHook/useAxiosHook";
 import toast from "react-hot-toast";
 
 const DeleteAllBookings = ({ setAdminBookings }) => {
-  const { axiosSecure } = useAxiosHook();
+  const axiosSecure = useAxiosHook();
   const handleDeleteAllBookings = () => {
     swal({
       title: "Are you sure?",
@@ -24,8 +24,6 @@ const DeleteAllBookings = ({ setAdminBookings }) => {
             }
           })
           .catch((err) => toast.error(err));
-      } else {
-        swal("bookings are safe");
       }
     });
   };

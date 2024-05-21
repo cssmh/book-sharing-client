@@ -1,10 +1,10 @@
 import swal from "sweetalert";
-import useAxiosHook from "../../useCustomHook/useAxiosHook";
-import { useEffect, useState } from "react";
+import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const MyBookingCard = ({ getBooking, refetch }) => {
-  const { axiosNoToken } = useAxiosHook();
-  const [available, setAvailable] = useState("");
+  const axiosNoToken = useAxiosPublic()
+
   const {
     _id,
     book_id,
@@ -17,7 +17,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
     completed_at,
   } = getBooking;
 
-  const handleBookingDelete = (idx) => {
+  const handleBookingDelete = (idx, name) => {
     swal({
       title: "Are you sure?",
       text: "Once deleted, it can't be recovered!",
@@ -25,26 +25,26 @@ const MyBookingCard = ({ getBooking, refetch }) => {
       buttons: true,
       dangerMode: true,
     }).then((willDelete) => {
-      if (willDelete) {
+      if (willDelete){ 
         axiosNoToken.delete(`/booking/${idx}`).then((res) => {
           if (res.data?.deletedCount > 0) {
             refetch();
-            swal("Deleted!", {
+            swal(`Booking on ${name} Deleted!`, {
               icon: "success",
             });
           }
         });
-      } else {
-        swal("Your file is safe!");
       }
     });
   };
 
-  useEffect(() => {
-    axiosNoToken
-      .get(`/book/${book_id}`)
-      .then((res) => setAvailable(res.data?.book_status));
-  }, [book_id, axiosNoToken]);
+  const { data: available = "" } = useQuery({
+    queryKey: ["available", book_id],
+    queryFn: async () => {
+      const res = await axiosNoToken.get(`/book/${book_id}`);
+      return res?.data?.book_status;
+    },
+  });
 
   return (
     <div
@@ -93,7 +93,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
       {status !== "Completed" && (
         <div className="mt-2 card-actions justify-center">
           <button
-            onClick={() => handleBookingDelete(_id)}
+            onClick={() => handleBookingDelete(_id, book_name)}
             className="btn border-black bg-base-100 hover:bg-black text-black hover:text-white"
           >
             Delete Booking

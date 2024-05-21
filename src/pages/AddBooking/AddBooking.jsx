@@ -1,13 +1,16 @@
 import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
 import swal from "sweetalert";
-import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import useContextHook from "../../useCustomHook/useContextHook";
+import { useEffect, useRef, useState } from "react";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
+import useContextHook from "../../useCustomHook/useContextHook";
+import { useQuery } from "@tanstack/react-query";
 
 const AddBooking = ({ getBookData }) => {
   const { user } = useContextHook();
-  const { axiosSecure, axiosNoToken } = useAxiosHook();
+  const axiosSecure = useAxiosHook();
+  const axiosNoToken = useAxiosPublic();
 
   const {
     _id,
@@ -19,18 +22,17 @@ const AddBooking = ({ getBookData }) => {
 
   const [open, setOpen] = useState(false);
   const [matchFound, setMatchFound] = useState([]);
-  const [allBookings, setAllBookings] = useState([]);
   const [todayDateTime, setTodayDateTime] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const submitTimeoutRef = useRef(null);
 
-  // Fetch all bookings for the current user
-  useEffect(() => {
-    const url = `/my-bookings?email=${user?.email}`;
-    axiosSecure.get(url).then((res) => {
-      setAllBookings(res?.data);
-    });
-  }, [axiosSecure, user?.email]);
+  const { data: allBookings = [], refetch } = useQuery({
+    queryKey: ["bookings", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/my-bookings?email=${user?.email}`);
+      return res?.data;
+    },
+  });
 
   // Check if the selected book is already booked
   useEffect(() => {
@@ -116,7 +118,7 @@ const AddBooking = ({ getBookData }) => {
         if (res.data?.insertedId) {
           // Update allBookings state after successfully adding
           // the booking to prevent already booked.
-          setAllBookings([...allBookings, AddBookingData]);
+          refetch();
           swal("Congratulations!", "Booking Complete", "success");
         }
       })

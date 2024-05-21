@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 import useContextHook from "../useCustomHook/useContextHook";
 import { HashLoader } from "react-spinners";
 
-const AdminPrivateRoute = ({ children }) => {
+const AdminRoute = ({ children }) => {
   const { user, loading } = useContextHook();
 
   if (loading) {
@@ -20,4 +20,4 @@ const AdminPrivateRoute = ({ children }) => {
   }
 };
 
-export default AdminPrivateRoute;
+export default AdminRoute;

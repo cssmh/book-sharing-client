@@ -1,25 +1,30 @@
 import swal from "sweetalert";
-import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { HashLoader } from "react-spinners";
 import { Helmet } from "react-helmet-async";
 import addBook from "../../assets/DataAdd.png";
 import useContextHook from "../../useCustomHook/useContextHook";
-import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const AddBook = () => {
   const { user } = useContextHook();
-  const { axiosSecure, axiosNoToken } = useAxiosHook();
-  const [myAddedBooks, setMyAddedBooks] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const axiosNoToken = useAxiosPublic()
 
-  const url = `/my-books?email=${user?.email}`;
-  useEffect(() => {
-    axiosSecure.get(url).then((res) => {
-      setMyAddedBooks(res?.data);
-      setIsLoading(false);
-    });
-  }, [axiosSecure, url]);
+  const getMyAddedBooks = async () => {
+    const res = await axiosNoToken.get(`/my-books?email=${user?.email}`);
+    return res?.data;
+  };
+
+  const {
+    isLoading,
+    data: myAddedBooks,
+    refetch,
+  } = useQuery({
+    queryKey: ["myAddedBooks", user?.email],
+    queryFn: getMyAddedBooks,
+    enabled: !!user?.email,
+  });
 
   const handleAddBook = (e) => {
     e.preventDefault();
@@ -67,9 +72,7 @@ const AddBook = () => {
       .post("/book", BookInformation)
       .then((res) => {
         if (res.data?.insertedId) {
-          // Update myAddedBooks state after successfully adding the book
-          // To prevent duplicate adding
-          setMyAddedBooks([...myAddedBooks, BookInformation]);
+          refetch();
           swal("Thank You!", `${book_name} Book added`, "success");
           form.reset();
         }

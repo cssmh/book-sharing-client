@@ -1,21 +1,20 @@
-import { useState, useEffect } from "react";
-import useAxiosHook from "./useAxiosHook";
+import useAxiosPublic from "./useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const useProviderHook = (url) => {
-  const [bookData, setBookData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const { axiosSecure } = useAxiosHook();
+  const axiosNoToken = useAxiosPublic()
 
-  useEffect(() => {
-    axiosSecure.get(url)?.then((res) => {
-      setBookData(res?.data);
-      setIsLoading(false);
-    });
-  }, [axiosSecure, url]);
+  const { data: bookData = [], isLoading } = useQuery({
+    queryKey: ["bookData", url],
+    queryFn: async () => {
+      const res = await axiosNoToken.get(url);
+      return res?.data;
+    },
+  });
 
-  return { bookData, isLoading };
+  return { isLoading, bookData };
 };
 
 export default useProviderHook;
 
-// used BookDetails and SameProvider.jsx
+// used BookDetails

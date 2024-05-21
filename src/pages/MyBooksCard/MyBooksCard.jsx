@@ -5,7 +5,7 @@ import useAxiosHook from "../../useCustomHook/useAxiosHook";
 
 const MyBooksCard = ({ getBook, refetch }) => {
   const { user } = useContextHook();
-  const { axiosSecure } = useAxiosHook();
+  const axiosSecure = useAxiosHook();
   const { _id, book_name, book_image, book_provider_phone, book_status } =
     getBook;
 
@@ -27,8 +27,6 @@ const MyBooksCard = ({ getBook, refetch }) => {
             });
           }
         });
-      } else {
-        swal("Your file is safe!");
       }
     });
   };

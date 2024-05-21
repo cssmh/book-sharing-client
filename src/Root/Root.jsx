@@ -6,14 +6,14 @@ import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import MyProfile from "../components/MyProfile/MyProfile";
-import AllBooks from "../pages/AllBooks/AllBooks";
+import AllBooks from "../Pages/AllBooks/AllBooks";
 import BookDetails from "../pages/BookDetails/BookDetails";
 import AddBook from "../pages/AddBook/AddBook";
 import MyBooks from "../pages/MyBooks/MyBooks";
 import UpdateBook from "../pages/UpdateBook/UpdateBook";
 import MySchedules from "../pages/MySchedules/MySchedules";
 import SameProvider from "../pages/SameProvider/SameProvider";
-import AdminPrivateRoute from "../AdminPrivateRoute/AdminPrivateRoute";
+import AdminRoute from "../AdminRoute/AdminRoute";
 import AdminBooking from "../Components/AdminPanel/AdminBooking/AdminBooking";
 
 const Root = createBrowserRouter([
@@ -52,9 +52,7 @@ const Root = createBrowserRouter([
           <PrivateRoute>
             <BookDetails />
           </PrivateRoute>
-        ),
-        loader: ({ params }) =>
-          fetch(`https://book-sharing-server.vercel.app/book/${params.id}`),
+        )
       },
       {
         path: "/add-book",
@@ -78,9 +76,7 @@ const Root = createBrowserRouter([
           <PrivateRoute>
             <UpdateBook />
           </PrivateRoute>
-        ),
-        loader: ({ params }) =>
-          fetch(`https://book-sharing-server.vercel.app/book/${params.id}`),
+        )
       },
       {
         path: "/my-schedules",
@@ -96,16 +92,15 @@ const Root = createBrowserRouter([
           <PrivateRoute>
             <SameProvider />
           </PrivateRoute>
-        ),
+        )
       },
       {
         path: "/admin-dashboard",
         element: (
-          <AdminPrivateRoute>
+          <AdminRoute>
             <AdminBooking />
-          </AdminPrivateRoute>
-        ),
-        loader: () => fetch("https://book-sharing-server.vercel.app/all-books"),
+          </AdminRoute>
+        )
       },
     ],
   },

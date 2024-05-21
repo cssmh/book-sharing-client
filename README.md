@@ -34,7 +34,7 @@
 22. There will be shown completed date and time while booking completed and also Booked date time.
 23. Added React Spinners, HashLoader, and other awesome React packages.
 24. The counting component on the homepage dynamically displays the total number of users and book providers.
-25. Implemented JSON Web Token (JWT) for authorization. Only logged-in users can access their own data, not others.
+25. Implemented JSON Web Token (JWT) for authorization. Only logged-in users can access their own data, not others. Also used tan stack query.
 26. Used interceptors to automatically log out users and redirect them to the login page if the token expires or encounters any issues.
 27. Created an admin dashboard accessible only to admin@\*\*\*.com. Other users attempting to access this route will be automatically redirected to the homepage.
 28. The "More Books of a User" page and the Admin Page display book details. If the book count is 0 or 1, the page title will be singular ("Book"). If there are more than one book, it will display in plural form ("Books"/"Providers"/"Bookings").

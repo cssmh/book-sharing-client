@@ -3,7 +3,7 @@ import Banner from "../Banner/Banner";
 import PopularBooks from "../../pages/PopularBooks/PopularBooks";
 import AboutUs from "../AboutUs/AboutUs";
 import ShareMagic from "../ShareMagic/ShareMagic";
-import AtomicHabit from "../AtomicHabit/AtomicHabit";
+import AppLaunched from "../AppLaunched/AppLaunched";
 import Reviews from "../Reviews/Reviews";
 import Count from "../Count/Count";
 const Home = () => {
@@ -16,7 +16,7 @@ const Home = () => {
       <PopularBooks></PopularBooks>
       <AboutUs></AboutUs>
       <ShareMagic></ShareMagic>
-      <AtomicHabit></AtomicHabit>
+      <AppLaunched></AppLaunched>
       <Reviews></Reviews>
       <Count></Count>
     </div>

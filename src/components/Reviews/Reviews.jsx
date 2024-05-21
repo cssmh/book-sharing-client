@@ -1,7 +1,7 @@
 import Reviewer1 from "../../assets/Reviewer1.png";
 import Reviewer2 from "../../assets/Reviewer2.jpg";
 import Reviewer3 from "../../assets/Reviewer3.jpeg";
-import Reviewer4 from "../../assets/Reviewer4.jpg";
+import Reviewer4 from "../../assets/Reviewer4.jpeg";
 
 const Reviews = () => {
   return (
@@ -99,7 +99,7 @@ const Reviews = () => {
               onContextMenu={(e) => e.preventDefault()}
             />
             <div>
-              <p className="font-semibold">Mahbubur Rahman</p>
+              <p className="font-semibold">Mr. Tourist</p>
               <p className="text-gray-500">Best Provider & Reader</p>
             </div>
           </div>
