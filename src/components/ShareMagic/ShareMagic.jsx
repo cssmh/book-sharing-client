@@ -2,7 +2,12 @@ import Reader from "../../assets/Reader.png";
 const ShareMagic = () => {
   return (
     <div className="my-12 max-w-[1220px] mx-auto">
-      <p className="font-semibold text-center lg:text-left mb-2 lg:mb-0">
+      <p
+        data-aos="fade-up"
+        data-aos-anchor-placement="top-center"
+        data-aos-duration="1000"
+        className="font-semibold text-center lg:text-left mb-2 lg:mb-0"
+      >
         THE MAGIC OF SHARING
       </p>
       <div className="flex flex-col lg:flex-row">
@@ -26,9 +31,9 @@ const ShareMagic = () => {
             stimulate creativity and imagination by exposing readers to new
             ideas, worlds, and possibilities. Sharing books encourages
             individuals to explore their imagination and think critically about
-            the content they encounter. Books have the power to inspire, educate,
-            and motivate individuals. By sharing books, we provide others with
-            the opportunity for personal
+            the content they encounter. Books have the power to inspire,
+            educate, and motivate individuals. By sharing books, we provide
+            others with the opportunity for personal
           </p>
         </div>
         <div

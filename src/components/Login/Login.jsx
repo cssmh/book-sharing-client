@@ -5,13 +5,18 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import useContextHook from "../../useCustomHook/useContextHook";
+import ResetPasswordModal from "./ResetPasswordModal";
 
 const Login = () => {
+  let [isOpen, setIsOpen] = useState(false);
   const [view, setView] = useState(true);
-  const { user, signIn, resetPassword, emailVerification, logOut } =
+  const { user, login, resetPassword, emailVerification, logOut } =
     useContextHook();
   const location = useLocation();
   const navigateTo = useNavigate();
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   useEffect(() => {
     // If user is already logged in, will redirect to home page
@@ -33,14 +38,14 @@ const Login = () => {
 
     // if condition because of custom gmail login without verification
     if (email == "Kona@mail.com" || email == "admin@admin.com") {
-      signIn(email, password)
+      login(email, password)
         .then(() => {
           toast.success("logged in success");
           navigateTo(location?.state ? location.state : "/");
         })
         .catch(() => toast.error("Incorrect Password. Please try again"));
     } else {
-      signIn(email, password)
+      login(email, password)
         .then((res) => {
           // No way login if not verified
           if (!res.user.emailVerified) {
@@ -58,13 +63,14 @@ const Login = () => {
             navigateTo(location?.state ? location.state : "/");
           }
         })
-        .catch((err) => toast.error(err.message));
+        .catch(() => toast.error("Invalid user password. Try again"));
     }
   };
 
-  const getEmail = useRef(null);
-  const handleForgotPassword = () => {
-    const email = getEmail.current.value;
+  const handleForgotPassword = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       toast.error("Please Provide a valid email address");
       return;
@@ -88,10 +94,9 @@ const Login = () => {
           </label>
           <input
             type="email"
-            ref={getEmail}
             required
             name="email"
-            placeholder="Email"
+            placeholder="Enter Your Email Here"
             className="input input-bordered border-green-500 focus:border-transparent"
             style={{ outline: "none" }}
           />
@@ -116,7 +121,7 @@ const Login = () => {
           </span>
           <label className="label">
             <a
-              onClick={handleForgotPassword}
+              onClick={() => setIsOpen(true)}
               type="button"
               className="label-text-alt link link-hover"
             >
@@ -141,6 +146,11 @@ const Login = () => {
         </Link>
       </div>
       <SocialLogin></SocialLogin>
+      <ResetPasswordModal
+        closeModal={closeModal}
+        isOpen={isOpen}
+        handleForgotPassword={handleForgotPassword}
+      ></ResetPasswordModal>
     </div>
   );
 };

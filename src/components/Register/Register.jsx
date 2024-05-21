@@ -7,7 +7,12 @@ import useContextHook from "../../useCustomHook/useContextHook";
 
 const Register = () => {
   const [view, setView] = useState(true);
+  const [viewConfirmPass, setViewConfirmPass] = useState(true);
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [passError, setPassError] = useState("");
+  const [passSuccess, setPassSuccess] = useState("");
+  const [confirmPassError, setConfirmPassError] = useState("");
   const { user, createUser, handleUpdateProfile, emailVerification, logOut } =
     useContextHook();
   const navigateTo = useNavigate();
@@ -17,44 +22,70 @@ const Register = () => {
     // If user is already logged in, will redirect to home page
     if (
       user?.emailVerified ||
-      user?.email == "kona@mail.com" ||
-      user?.email == "admin@admin.com"
+      user?.email === "kona@mail.com" ||
+      user?.email === "admin@admin.com"
     ) {
-      toast.success("You already logged in");
+      toast.success("You are already logged in");
       navigateTo("/");
     }
   }, [user?.emailVerified, user?.email, navigateTo]);
 
-  // Password condition now handling using onchange
-  const handleEyeOnPassword = (e) => {
-    const getPassword = e.target.value;
-    if (getPassword === "") {
+  // Password validation function
+  const validatePassword = (password) => {
+    if (password === "") {
       setPassError("");
-    } else if (getPassword.length < 6) {
-      setPassError(
-        "Make your password at least 6 character and one Uppercase letter!"
-      );
-    } else if (!/[A-Z]/.test(getPassword)) {
-      setPassError("Add at least one Uppercase letter");
+      setPassSuccess("");
+    } else if (password.length < 6) {
+      setPassError("Make your password at least 6 characters long");
+      setPassSuccess("");
+    } else if (!/[A-Z]/.test(password)) {
+      setPassError("Add at least one uppercase letter");
+      setPassSuccess("");
     } else {
       setPassError("");
+      setPassSuccess("✔️ Good job! Strong password");
     }
+  };
+
+  // Confirm password validation function
+  const validateConfirmPassword = (confirmPassword) => {
+    if (confirmPassword === "") {
+      setConfirmPassError("");
+    } else if (password === "") {
+      setConfirmPassError("Insert your password first");
+    } else if (confirmPassword !== password) {
+      setConfirmPassError("Passwords do not match");
+    } else {
+      setConfirmPassError("");
+      if (!passError && confirmPassword === password) {
+        setPassSuccess("✔️ Good job! Passwords match and are strong");
+      }
+    }
+  };
+
+  const handlePasswordChange = (e) => {
+    const password = e.target.value;
+    setPassword(password);
+    validatePassword(password);
+    validateConfirmPassword(confirmPassword); // Re-validate confirm password when main password changes
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    const confirmPassword = e.target.value;
+    setConfirmPassword(confirmPassword);
+    validateConfirmPassword(confirmPassword);
   };
 
   const handleRegister = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const name = form.get("name");
-
     const get_image = form.get("photo");
     const defaultImageUrl =
       "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/default.jpg";
     const photo = get_image.trim() !== "" ? get_image : defaultImageUrl;
-
     const email = form.get("email");
-    const password = form.get("password");
-    // console.log(name, photo, email, password);
-    if (passError) {
+    if (passError || confirmPassError) {
       return;
     }
 
@@ -68,12 +99,12 @@ const Register = () => {
           );
         });
         navigateTo(location?.state ? location.state : "/");
-        // Introduce a 1.9-second delay before showing the toast error
+        // Introduce a 2-second delay before showing the toast error
         setTimeout(() => {
           toast.error("Sorry! Email verification Required");
           logOut().then().catch();
           navigateTo("/login");
-        }, 1900);
+        }, 2000);
       })
       .catch((err) => {
         toast.error(err.message);
@@ -132,20 +163,47 @@ const Register = () => {
           <input
             type={view ? "password" : "text"}
             required
-            onChange={handleEyeOnPassword}
+            onChange={handlePasswordChange}
             name="password"
             placeholder="Password"
             className="input input-bordered border-green-500 focus:border-transparent"
             style={{ outline: "none" }}
           />
           <span
-            className="absolute top-[51px] right-4"
+            className="absolute top-[51px] right-4 cursor-pointer"
             onClick={() => setView(!view)}
           >
             {view ? <FaRegEyeSlash /> : <FaRegEye />}
           </span>
+          <span
+            className={`${
+              passError.length > 0 ? "text-red-500" : "text-green-500"
+            } text-[16px] font-normal mt-1 ml-3`}
+          >
+            {passError.length > 0 ? passError : passSuccess}
+          </span>
+        </div>
+        <div className="form-control relative">
+          <label className="label">
+            <span className="label-text font-semibold">Confirm Password</span>
+          </label>
+          <input
+            type={viewConfirmPass ? "password" : "text"}
+            required
+            onChange={handleConfirmPasswordChange}
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            className="input input-bordered border-green-500 focus:border-transparent"
+            style={{ outline: "none" }}
+          />
+          <span
+            className="absolute top-[51px] right-4 cursor-pointer"
+            onClick={() => setViewConfirmPass(!viewConfirmPass)}
+          >
+            {viewConfirmPass ? <FaRegEyeSlash /> : <FaRegEye />}
+          </span>
           <span className="text-red-500 text-[16px] font-normal mt-1 ml-3">
-            {passError}
+            {confirmPassError}
           </span>
         </div>
         <div className="form-control mt-5">
