@@ -67,7 +67,8 @@ const Register = () => {
     const password = e.target.value;
     setPassword(password);
     validatePassword(password);
-    validateConfirmPassword(confirmPassword); // Re-validate confirm password when main password changes
+    validateConfirmPassword(confirmPassword); 
+    // Re-validate confirm password when main password changes
   };
 
   const handleConfirmPasswordChange = (e) => {

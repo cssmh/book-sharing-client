@@ -160,7 +160,9 @@ const Navbar = () => {
               >
                 <li>
                   <p className="btn pointer-events-none btn-sm btn-ghost">
-                    {user?.displayName.slice(0, 17)}
+                    {user?.displayName?.length > 16
+                      ? user.displayName.slice(0, 17)
+                      : user.displayName}
                   </p>
                   <button className="btn btn-sm btn-ghost">
                     <Link to={"/my-profile"}>View Profile</Link>

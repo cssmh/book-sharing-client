@@ -1,6 +1,8 @@
 import swal from "sweetalert";
 import Banner from "../../assets/Notification.jpg";
 import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
 
 const BannerImg = {
   backgroundImage: `url(${Banner})`,
@@ -12,16 +14,37 @@ const BannerImg = {
 };
 
 const emailCheck = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/;
-const handleSubmitEmail = (e) => {
-  e.preventDefault();
-  const getEmail = e.target.email.value;
-  if (!emailCheck.test(getEmail)) {
-    return toast.error("Enter valid email!");
-  }
-  swal("Thank you", `We will update you via ${getEmail}`, "success");
-};
-
 const GetNotified = () => {
+  const axiosNoToken = useAxiosPublic();
+
+  const { data: userEmails, refetch } = useQuery({
+    queryKey: ["userEmails"],
+    queryFn: async () => {
+      const res = await axiosNoToken.get("/emails");
+      return res.data?.map((user) => user?.email);
+    },
+  });
+
+  const handleSubmitEmail = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value.trim();
+
+    if (!emailCheck.test(email)) {
+      return toast.error("Enter a valid email!");
+    }
+
+    if (userEmails.includes(email)) {
+      return toast.error("This email has already been submitted!");
+    }
+
+    axiosNoToken.post("/email", { email }).then((res) => {
+      if (res.data?.insertedId) {
+        refetch();
+        swal("Thank you", `We will update you via ${email}`, "success");
+      }
+    });
+  };
+
   return (
     <div
       data-aos="zoom-in"
@@ -31,9 +54,7 @@ const GetNotified = () => {
     >
       <div className="container backdrop-blur-sm py-10">
         <div className="space-y-6 max-w-xl mx-auto">
-          <h1
-            className="text-2xl !text-center sm:text-left sm:text-4xl font-semibold"
-          >
+          <h1 className="text-2xl !text-center sm:text-left sm:text-4xl font-semibold">
             Get Notified About New Books
           </h1>
           <form onSubmit={handleSubmitEmail}>
