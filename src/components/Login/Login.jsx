@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
 import SocialLogin from "./SocialLogin";
 import { Helmet } from "react-helmet-async";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import useContextHook from "../../useCustomHook/useContextHook";
@@ -76,8 +76,9 @@ const Login = () => {
       return;
     } else {
       resetPassword(email)
-        .then(() => toast.success("reset email sent!"))
+        .then(() => toast.success("reset email sent to your mail."))
         .catch((err) => toast.error(err.message));
+      setIsOpen(false);
     }
   };
 
@@ -96,7 +97,7 @@ const Login = () => {
             type="email"
             required
             name="email"
-            placeholder="Enter Your Email Here"
+            placeholder="Enter Email"
             className="input input-bordered border-green-500 focus:border-transparent"
             style={{ outline: "none" }}
           />

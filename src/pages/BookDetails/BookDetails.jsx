@@ -117,7 +117,7 @@ const BookDetails = () => {
                 <img
                   src={book_image}
                   onContextMenu={(e) => e.preventDefault()}
-                  className="rounded-xl w-[65%] lg:w-[45%] mx-auto lg:mx-0 lg:ml-auto"
+                  className="rounded-xl w-[170px] lg:w-[263px] mx-auto lg:mx-0 lg:ml-auto"
                 />
               </figure>
             </div>

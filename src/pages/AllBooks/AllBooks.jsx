@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { HashLoader } from "react-spinners";
 import AllBooksCard from "../AllBooksCard/AllBooksCard";
 import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
+import useTotalProviderHook from "../../useCustomHook/useTotalProviderHook";
 
 const AllBooks = () => {
   let searchTerm;
@@ -12,10 +13,8 @@ const AllBooks = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(9);
   const [isLoading, setIsLoading] = useState(true);
-  const [totalBooksForSearch, setTotalBooksForSearch] = useState([]);
-  const [showAvailable, setShowAvailable] = useState(true);
-  const [availableText, setAvailableText] = useState("");
   const booksPerPageCount = Math.ceil(totalBooksCount / limit);
+  const { allBooks: totalBooksForSearch } = useTotalProviderHook();
 
   useEffect(() => {
     axiosNoToken.get(`/all-books?page=${page}&limit=${limit}`).then((res) => {
@@ -25,38 +24,11 @@ const AllBooks = () => {
     });
   }, [page, limit, axiosNoToken]);
 
-  // for search book
-  useEffect(() => {
-    axiosNoToken
-      .get("/all-books")
-      .then((res) => setTotalBooksForSearch(res.data?.result));
-  }, [axiosNoToken]);
-  // for search book end
-
   const handlePrevious = () => {
     if (page > 1) setPage(page - 1);
   };
   const handleNext = () => {
     if (page < booksPerPageCount) setPage(page + 1);
-  };
-
-  const handleShowAvailable = () => {
-    setShowAvailable(!showAvailable);
-    if (showAvailable) {
-      const filterAvailable = totalBooksForSearch.filter(
-        (book) => book.book_status === "available"
-      );
-      setAllBooks(filterAvailable.slice(0, limit));
-      setTotalBooksCount(filterAvailable.length);
-      setAvailableText("All Books Available for you");
-    } else {
-      const filterAvailable = totalBooksForSearch.filter(
-        (book) => book.book_status === "Unavailable"
-      );
-      setAllBooks(filterAvailable.slice(0, limit));
-      setTotalBooksCount(filterAvailable.length);
-      setAvailableText("Unavailable Books");
-    }
   };
 
   return (
@@ -100,24 +72,9 @@ const AllBooks = () => {
             />
             {allBooks.length > 0 && (
               <div className="max-w-7xl mx-auto md:relative mt-4">
-                <button
-                  onClick={() => {
-                    setAllBooks(totalBooksForSearch.slice(0, limit));
-                    setAvailableText("All Books Available for you");
-                  }}
-                >
-                  <h2 className="text-xl md:text-[28px] font-semibold italic text-center">
-                    {availableText.length > 0
-                      ? availableText
-                      : "All Books Available for you"}
-                  </h2>
-                </button>
-                <button
-                  onClick={handleShowAvailable}
-                  className="md:absolute md:right-0 md:top-1/2 md:transform md:-translate-y-1/2 border border-green-600 font-medium rounded-lg text-sm px-3 py-[6px] text-center me-2 mb-2"
-                >
-                  {showAvailable ? "Available Books" : "Unavailable Books"}
-                </button>
+                <h2 className="text-xl md:text-[28px] font-semibold italic text-center">
+                  All Books Available for you
+                </h2>
               </div>
             )}
           </div>
@@ -143,8 +100,6 @@ const AllBooks = () => {
                     >
                       Previous
                     </button>
-                    {/* flex md:flex-wrap justify-center md:justify-start 
-                    to avoid space */}
                     <div className="flex flex-wrap m-0 justify-center md:justify-start">
                       {Array(booksPerPageCount)
                         .fill(0)

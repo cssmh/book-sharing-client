@@ -69,7 +69,7 @@ const Navbar = () => {
             </li>
             {user?.email == "admin@admin.com" && (
               <li className="font-semibold text-base">
-                <NavLink to="/admin-dashboard">Admin</NavLink>
+                <NavLink to="/admin-dashboard">Admin Dashboard</NavLink>
               </li>
             )}
             {user && (

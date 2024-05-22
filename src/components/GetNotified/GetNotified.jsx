@@ -1,5 +1,5 @@
 import swal from "sweetalert";
-import Banner from "../../assets/green.jpg";
+import Banner from "../../assets/Notification.jpg";
 import toast from "react-hot-toast";
 
 const BannerImg = {
@@ -26,12 +26,14 @@ const GetNotified = () => {
     <div
       data-aos="zoom-in"
       data-aos-duration="1000"
-      className="mb-20 bg-gray-100 dark:bg-gray-800 text-white "
+      className="text-white rounded-md"
       style={BannerImg}
     >
       <div className="container backdrop-blur-sm py-10">
         <div className="space-y-6 max-w-xl mx-auto">
-          <h1 className="text-2xl !text-center sm:text-left sm:text-4xl font-semibold">
+          <h1
+            className="text-2xl !text-center sm:text-left sm:text-4xl font-semibold"
+          >
             Get Notified About New Books
           </h1>
           <form onSubmit={handleSubmitEmail}>

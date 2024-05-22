@@ -2,6 +2,7 @@ import swal from "sweetalert";
 import useAxiosPublic from "../../../useCustomHook/useAxiosPublic";
 
 const AdminBookingCard = ({
+  getIndex,
   getAllBooking,
   adminBookings,
   setAdminBookings,
@@ -19,8 +20,8 @@ const AdminBookingCard = ({
     status,
     completed_at,
   } = getAllBooking;
-  const axiosNoToken = useAxiosPublic()
 
+  const axiosNoToken = useAxiosPublic();
   const handleDeleteByAdmin = (idx) => {
     swal({
       title: "Are you sure?",
@@ -53,10 +54,11 @@ const AdminBookingCard = ({
   return (
     <div>
       <div className="flex flex-col md:flex-row justify-center items-center border border-green-500 p-5 rounded-lg">
+        <p className="mb-1 md:mb-0">{getIndex}.</p>
         <div className="flex-1 text-center">
           <img
             src={book_image}
-            className="w-2/3 md:w-36 rounded-md mx-auto mb-1"
+            className="rounded-xl w-[170px] lg:w-[180px] mx-auto mb-1"
             alt="no image"
             onContextMenu={(e) => e.preventDefault()}
           />

@@ -1,6 +1,5 @@
-import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
-import { TbFidgetSpinner } from "react-icons/tb";
+import { Dialog, Transition } from "@headlessui/react";
 
 const ResetPasswordModal = ({ closeModal, isOpen, handleForgotPassword }) => {
   return (

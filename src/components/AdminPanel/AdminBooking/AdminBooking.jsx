@@ -4,21 +4,18 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import AdminBookingCard from "../AdminBookingCard/AdminBookingCard";
 import useAxiosHook from "../../../useCustomHook/useAxiosHook";
-import useAxiosPublic from "../../../useCustomHook/useAxiosPublic";
 import MakeBookingsPending from "../MakeBookingsPending/MakeBookingsPending";
 import useTotalProviderHook from "../../../useCustomHook/useTotalProviderHook";
 import MakeBooksAvailable from "../MakeBooksAvailable/MakeBooksAvailable";
 import DeleteAllBookings from "../DeleteAllBookings/DeleteAllBookings";
 
 const AdminBooking = () => {
-  const [result, setResult] = useState([]);
   const [adminBookings, setAdminBookings] = useState([]);
   const [filterAdminBookings, setFilterAdminBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filterType, setFilterType] = useState("All");
   const axiosSecure = useAxiosHook();
-  const axiosNoToken = useAxiosPublic()
-  const { uniqueEmails, booksByProvider } = useTotalProviderHook();
+  const { uniqueEmails, allBooks, booksByProvider } = useTotalProviderHook();
 
   const providerArray = Object.entries(booksByProvider).map(
     ([email, count]) => ({
@@ -26,10 +23,6 @@ const AdminBooking = () => {
       count,
     })
   );
-
-  useEffect(() => {
-    axiosNoToken.get("/all-books").then((res) => setResult(res.data?.result));
-  }, [axiosNoToken]);
 
   useEffect(() => {
     axiosSecure.get("/all-bookings")?.then((res) => {
@@ -42,7 +35,7 @@ const AdminBooking = () => {
   // if length is 0 or more than one book then
   // show Books/Providers/Bookings plural form. Just a try
   const resultText =
-    result?.length === 1 || result?.length === 0 ? "Book" : "Books";
+    allBooks?.length === 1 || allBooks?.length === 0 ? "Book" : "Books";
   const uniqueEmailsText =
     uniqueEmails?.length === 1 || uniqueEmails?.length === 0
       ? "Provider"
@@ -81,12 +74,12 @@ const AdminBooking = () => {
             <p className="text-center text-lg md:text-2xl my-4 mx-5 md:mx-0">
               Total{" "}
               <Link className="text-green-500" to={"/all-books"}>
-                {result?.length}{" "}
+                {allBooks?.length}{" "}
               </Link>
               {resultText}, Total {uniqueEmails?.length} Book {uniqueEmailsText}{" "}
               and Total {adminBookings?.length} {adminBookingsText}
             </p>
-            <div className="max-w-[1180px] mx-2 lg:mx-auto grid md:grid-cols-3 py-3 text-center border border-green-400 rounded-lg mb-3">
+            <div className="max-w-[1180px] mx-2 lg:mx-auto grid md:grid-cols-3 py-3  border border-green-400 rounded-lg mb-3 px-10 md:px-0 md:text-center">
               {providerArray?.map((provider, idx) => (
                 <p key={idx}>
                   {provider.email}:{" "}
@@ -94,7 +87,7 @@ const AdminBooking = () => {
                     className="text-green-500"
                     to={`/provider/${provider.email}`}
                   >
-                    {provider.count}
+                    {provider.count} Books
                   </Link>
                 </p>
               ))}
@@ -135,9 +128,10 @@ const AdminBooking = () => {
                   </p>
                 ) : (
                   <div className="space-y-5">
-                    {filterAdminBookings?.map((booking) => (
+                    {filterAdminBookings?.map((booking, index) => (
                       <AdminBookingCard
                         key={booking._id}
+                        getIndex={index + 1}
                         getAllBooking={booking}
                         adminBookings={adminBookings}
                         setAdminBookings={setAdminBookings}
