@@ -2,10 +2,10 @@ import { useState } from "react";
 import Lottie from "lottie-react";
 import loggieData from "../../assets/Logo.json";
 import { Link, NavLink } from "react-router-dom";
-import useContextHook from "../../useCustomHook/useContextHook";
+import useAuth from "../../useCustomHook/useAuth";
 
 const Navbar = () => {
-  const { user, logOut } = useContextHook();
+  const { user, logOut } = useAuth();
   const [showProfileOptions, setShowProfileOptions] = useState(false);
 
   const handleProfileClick = () => {

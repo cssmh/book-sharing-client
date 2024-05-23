@@ -4,14 +4,14 @@ import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import useContextHook from "../../useCustomHook/useContextHook";
+import useAuth from "../../useCustomHook/useAuth";
 import ResetPasswordModal from "./ResetPasswordModal";
 
 const Login = () => {
   let [isOpen, setIsOpen] = useState(false);
   const [view, setView] = useState(true);
   const { user, login, resetPassword, emailVerification, logOut } =
-    useContextHook();
+    useAuth();
   const location = useLocation();
   const navigateTo = useNavigate();
   function closeModal() {

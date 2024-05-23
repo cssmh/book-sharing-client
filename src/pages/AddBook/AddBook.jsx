@@ -3,12 +3,12 @@ import toast from "react-hot-toast";
 import { HashLoader } from "react-spinners";
 import { Helmet } from "react-helmet-async";
 import addBook from "../../assets/DataAdd.png";
-import useContextHook from "../../useCustomHook/useContextHook";
+import useAuth from "../../useCustomHook/useAuth";
 import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 
 const AddBook = () => {
-  const { user } = useContextHook();
+  const { user } = useAuth();
   const axiosNoToken = useAxiosPublic()
 
   const getMyAddedBooks = async () => {

@@ -1,5 +1,5 @@
 import swal from "sweetalert";
-import Banner from "../../assets/Notification.jpg";
+import Banner from "../../assets/notification.avif";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../useCustomHook/useAxiosPublic";

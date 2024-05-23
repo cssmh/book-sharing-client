@@ -4,11 +4,11 @@ import toast from "react-hot-toast";
 import { useEffect, useRef, useState } from "react";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
-import useContextHook from "../../useCustomHook/useContextHook";
+import useAuth from "../../useCustomHook/useAuth";
 import { useQuery } from "@tanstack/react-query";
 
 const AddBooking = ({ getBookData }) => {
-  const { user } = useContextHook();
+  const { user } = useAuth();
   const axiosSecure = useAxiosHook();
   const axiosNoToken = useAxiosPublic();
 

@@ -6,7 +6,7 @@ import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 
 const PopularBooks = () => {
-  const axiosNoToken = useAxiosPublic()
+  const axiosNoToken = useAxiosPublic();
   const [sliceSize, setSliceSize] = useState(6);
 
   const {
@@ -17,7 +17,7 @@ const PopularBooks = () => {
     queryKey: ["popularBooks", sliceSize],
     queryFn: async () => {
       const res = await axiosNoToken.get(`/all-books?limit=${sliceSize}`);
-      return res?.data;
+      return res.data?.result;
     },
     keepPreviousData: true, // Keep previous data while fetching new data
   });
@@ -66,7 +66,7 @@ const PopularBooks = () => {
       </div>
       <div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          {popularBooks?.result?.map((book) => (
+          {popularBooks?.map((book) => (
             <PopularBookCard key={book._id} getBook={book}></PopularBookCard>
           ))}
         </div>

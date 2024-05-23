@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import useContextHook from "../../useCustomHook/useContextHook";
+import useAuth from "../../useCustomHook/useAuth";
 
 const Register = () => {
   const [view, setView] = useState(true);
@@ -14,7 +14,7 @@ const Register = () => {
   const [passSuccess, setPassSuccess] = useState("");
   const [confirmPassError, setConfirmPassError] = useState("");
   const { user, createUser, handleUpdateProfile, emailVerification, logOut } =
-    useContextHook();
+    useAuth();
   const navigateTo = useNavigate();
   const location = useLocation();
 

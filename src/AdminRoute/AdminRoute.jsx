@@ -1,9 +1,9 @@
 import { Navigate } from "react-router-dom";
-import useContextHook from "../useCustomHook/useContextHook";
+import useAuth from "../useCustomHook/useAuth";
 import { HashLoader } from "react-spinners";
 
 const AdminRoute = ({ children }) => {
-  const { user, loading } = useContextHook();
+  const { user, loading } = useAuth();
 
   if (loading) {
     return (

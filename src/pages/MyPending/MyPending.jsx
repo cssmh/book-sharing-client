@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { FallingLines } from "react-loader-spinner";
 import MyPendingCard from "../MyPendingCard/MyPendingCard";
-import useContextHook from "../../useCustomHook/useContextHook";
+import useAuth from "../../useCustomHook/useAuth";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 import { useQuery } from "@tanstack/react-query";
 
 const MyPending = () => {
-  const { user } = useContextHook();
+  const { user } = useAuth();
   const [completedBookIds, setCompletedBookIds] = useState([]);
   const axiosSecure = useAxiosHook();
 

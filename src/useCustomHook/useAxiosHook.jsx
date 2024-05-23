@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect } from "react";
 import swal from "sweetalert";
-import useContextHook from "./useContextHook";
+import useAuth from "./useAuth";
 import { useNavigate } from "react-router-dom";
 
 const axiosSecure = axios.create({
@@ -10,7 +10,7 @@ const axiosSecure = axios.create({
 });
 
 const useAxiosHook = () => {
-  const { logOut } = useContextHook();
+  const { logOut } = useAuth();
   const navigateTo = useNavigate();
   useEffect(() => {
     axiosSecure.interceptors.response.use(

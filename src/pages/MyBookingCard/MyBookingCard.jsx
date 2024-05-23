@@ -1,9 +1,19 @@
 import swal from "sweetalert";
 import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import ReviewModal from "./ReviewModal";
+import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import useAuth from "../../useCustomHook/useAuth";
 
 const MyBookingCard = ({ getBooking, refetch }) => {
-  const axiosNoToken = useAxiosPublic()
+  const { user } = useAuth();
+  const axiosSecure = useAxiosHook();
+  const axiosNoToken = useAxiosPublic();
+  let [isOpen, setIsOpen] = useState(false);
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   const {
     _id,
@@ -17,6 +27,14 @@ const MyBookingCard = ({ getBooking, refetch }) => {
     completed_at,
   } = getBooking;
 
+  const { data: bookData = [], refetch: reviewRefetch } = useQuery({
+    queryKey: ["bookData", book_id],
+    queryFn: async () => {
+      const res = await axiosNoToken.get(`/book/${book_id}`);
+      return res?.data;
+    },
+  });
+
   const handleBookingDelete = (idx, name) => {
     swal({
       title: "Are you sure?",
@@ -25,7 +43,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
       buttons: true,
       dangerMode: true,
     }).then((willDelete) => {
-      if (willDelete){ 
+      if (willDelete) {
         axiosNoToken.delete(`/booking/${idx}`).then((res) => {
           if (res.data?.deletedCount > 0) {
             refetch();
@@ -46,12 +64,28 @@ const MyBookingCard = ({ getBooking, refetch }) => {
     },
   });
 
+  const handleAddReview = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const review = form.review.value;
+    const name = user?.displayName;
+    axiosSecure
+      .patch(`/add-review/${book_id}`, { review, name })
+      .then((res) => {
+        if (res.data?.acknowledged) {
+          reviewRefetch();
+          setIsOpen(false);
+          swal("Thank you!", "Review added", "success");
+        }
+      });
+  };
+
   return (
     <div
       data-aos="zoom-in"
       className="bg-base-100 shadow-xl rounded-xl px-14 pt-2 md:pt-3 py-6 flex flex-col"
     >
-      <div className="flex-grow">
+      <div className="flex-grow pb-1">
         <figure>
           <img
             src={book_image}
@@ -90,7 +124,17 @@ const MyBookingCard = ({ getBooking, refetch }) => {
           )}
         </div>
       </div>
-      {status !== "Completed" && (
+      {status === "Completed" ? (
+        !bookData?.user_review && (
+          <button
+            type="button"
+            onClick={() => setIsOpen(true)}
+            className="text-white bg-green-400 font-medium rounded-lg text-sm px-5 py-2.5"
+          >
+            Add a Review
+          </button>
+        )
+      ) : (
         <div className="mt-2 card-actions justify-center">
           <button
             onClick={() => handleBookingDelete(_id, book_name)}
@@ -100,6 +144,12 @@ const MyBookingCard = ({ getBooking, refetch }) => {
           </button>
         </div>
       )}
+      <ReviewModal
+        closeModal={closeModal}
+        book_name={book_name}
+        isOpen={isOpen}
+        handleAddReview={handleAddReview}
+      ></ReviewModal>
     </div>
   );
 };

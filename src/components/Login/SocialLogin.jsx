@@ -1,13 +1,13 @@
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { useLocation, useNavigate } from "react-router-dom";
-import useContextHook from "../../useCustomHook/useContextHook";
+import useAuth from "../../useCustomHook/useAuth";
 
 const SocialLogin = () => {
   const navigateTo = useNavigate();
   const location = useLocation();
 
-  const { googleLogin } = useContextHook();
+  const { googleLogin } = useAuth();
   const handleSocialLogin = () => {
     googleLogin()
       .then(() => {

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
-import useContextHook from "../../useCustomHook/useContextHook";
+import useAuth from "../../useCustomHook/useAuth";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 import HavenFeatures from "../HavenFeatures/HavenFeatures";
 
 const MyProfile = () => {
-  const { user, handleUpdateProfile } = useContextHook();
+  const { user, handleUpdateProfile } = useAuth();
   const axiosSecure = useAxiosHook();
   const { photoURL, email, displayName, metadata } = user;
   // state for show changed at a time update, no need to reload.

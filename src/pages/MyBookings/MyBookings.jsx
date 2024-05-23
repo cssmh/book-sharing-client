@@ -1,11 +1,11 @@
 import { FallingLines } from "react-loader-spinner";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
-import useContextHook from "../../useCustomHook/useContextHook";
+import useAuth from "../../useCustomHook/useAuth";
 import MyBookingCard from "../MyBookingCard/MyBookingCard";
 import { useQuery } from "@tanstack/react-query";
 
 const MyBookings = () => {
-  const { user } = useContextHook();
+  const { user } = useAuth();
   const axiosSecure = useAxiosHook();
 
   const getMyBookings = async () => {

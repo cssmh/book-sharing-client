@@ -5,13 +5,13 @@ import { HashLoader } from "react-spinners";
 import updateImage from "../../assets/Update.png";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import useContextHook from "../../useCustomHook/useContextHook";
+import useAuth from "../../useCustomHook/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosHook from "../../useCustomHook/useAxiosHook";
 import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
 
 const UpdateBook = () => {
-  const { user } = useContextHook();
+  const { user } = useAuth();
   const { id } = useParams();
   const navigateTo = useNavigate();
   const [matchFound, setMatchFound] = useState(null);

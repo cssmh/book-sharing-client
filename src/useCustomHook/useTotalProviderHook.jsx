@@ -47,7 +47,6 @@ const useTotalProviderHook = () => {
   const emails = allBooks?.map((book) => book.book_provider_email);
   const uniqueEmails = filterUniqueEmails(emails);
   const booksByProvider = countBooksByProvider(allBooks);
-
   return { uniqueEmails, allBooks, booksByProvider };
 };
 
