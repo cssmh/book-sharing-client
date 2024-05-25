@@ -1,5 +1,5 @@
 import swal from "sweetalert";
-import Banner from "../../assets/notification.avif";
+import Banner from "../../assets/notification.jpg";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
@@ -46,21 +46,18 @@ const GetNotified = () => {
   };
 
   return (
-    <div
-      data-aos="zoom-in"
-      data-aos-duration="1000"
-      className="text-white rounded-md"
-      style={BannerImg}
-    >
+    <div className="text-white rounded-md" style={BannerImg}>
       <div className="container backdrop-blur-sm py-10">
-        <div className="space-y-6 max-w-xl mx-auto">
+        <div
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          className="space-y-6 max-w-xl mx-auto"
+        >
           <h1 className="text-2xl !text-center sm:text-left sm:text-4xl font-semibold">
             Get Notified About New Books
           </h1>
           <form onSubmit={handleSubmitEmail}>
             <input
-              data-aos="fade-up"
-              data-aos-duration="1000"
               type="email"
               name="email"
               required

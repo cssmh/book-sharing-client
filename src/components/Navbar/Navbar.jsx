@@ -110,9 +110,14 @@ const Navbar = () => {
             </li>
           )}
           {user?.email == "admin@admin.com" && (
-            <li className="font-semibold text-base">
-              <NavLink to="/admin-dashboard">Admin</NavLink>
-            </li>
+            <>
+              <li className="font-semibold text-base">
+                <NavLink to="/admin-dashboard">Admin</NavLink>
+              </li>
+              <li className="font-semibold text-base">
+                <NavLink to="/admin">Admin Dashboard</NavLink>
+              </li>
+            </>
           )}
           {user && (
             <li tabIndex={0}>

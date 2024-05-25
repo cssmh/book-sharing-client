@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosNoToken = axios.create({
-  baseURL: "https://book-sharing-server.vercel.app",
+  baseURL: "http://localhost:5000",
 });
 
 const useAxiosPublic = () => {

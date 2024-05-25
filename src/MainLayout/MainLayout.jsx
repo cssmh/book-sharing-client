@@ -1,4 +1,3 @@
-import { Toaster } from "react-hot-toast";
 import { HashLoader } from "react-spinners";
 import { Outlet, useNavigation } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
@@ -7,7 +6,7 @@ import Footer from "../components/Footer/Footer";
 const MainLayout = () => {
   const navigation = useNavigation();
   return (
-    <div>
+    <>
       <Navbar />
       <div className="min-h-[65vh] md:min-h-[70vh]">
         {navigation.state === "loading" ? (
@@ -19,8 +18,7 @@ const MainLayout = () => {
         )}
       </div>
       <Footer />
-      <Toaster position="top-right" reverseOrder={false} />
-    </div>
+    </>
   );
 };
 

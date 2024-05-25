@@ -4,7 +4,7 @@ import { HashLoader } from "react-spinners";
 import { Helmet } from "react-helmet-async";
 import useAuth from "../../useCustomHook/useAuth";
 import AddBooking from "../AddBooking/AddBooking";
-import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import useAxiosSecure from "../../useCustomHook/useAxiosSecure";
 import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
 import useProviderHook from "../../useCustomHook/useProviderHook";
 import { useQuery } from "@tanstack/react-query";
@@ -13,7 +13,7 @@ const BookDetails = () => {
   const { user } = useAuth();
   const navigateTo = useNavigate();
   const { id } = useParams();
-  const axiosSecure = useAxiosHook();
+  const axiosSecure = useAxiosSecure();
   const axiosNoToken = useAxiosPublic();
 
   const { data: loadBookData = [], isLoading: bookDataLoading } = useQuery({
@@ -193,20 +193,20 @@ const BookDetails = () => {
               </div>
             </div>
           </div>
+          {user_review && (
+            <div className="max-w-[1200px] mx-4 lg:mx-auto">
+              <div className="flex gap-2 items-center relative">
+                <p className="bg-green-400 px-3 py-2 text-white rounded-md mb-2 relative group">
+                  Collector Review
+                  <span className="absolute left-0 top-full mt-1 min-w-max bg-black text-white text-center rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                    {user_name}
+                  </span>
+                </p>
+              </div>
+              <p>{user_review}</p>
+            </div>
+          )}
         </>
-      )}
-      {user_review && (
-        <div className="max-w-[1200px] mx-4 lg:mx-auto">
-          <div className="flex gap-2 items-center relative">
-            <p className="bg-green-400 px-3 py-2 text-white rounded-md mb-2 relative group">
-              Collector Review
-              <span className="absolute left-0 top-full mt-1 min-w-max bg-black text-white text-center rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                {user_name}
-              </span>
-            </p>
-          </div>
-          <p>{user_review}</p>
-        </div>
       )}
     </div>
   );

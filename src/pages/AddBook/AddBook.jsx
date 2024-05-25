@@ -9,7 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const AddBook = () => {
   const { user } = useAuth();
-  const axiosNoToken = useAxiosPublic()
+  const axiosNoToken = useAxiosPublic();
 
   const getMyAddedBooks = async () => {
     const res = await axiosNoToken.get(`/my-books?email=${user?.email}`);
@@ -91,9 +91,15 @@ const AddBook = () => {
         </div>
       ) : (
         <>
-          <div className="flex flex-col md:flex-row justify-center items-center gap-3 my-6 px-1 md:px-0">
-            <img src={addBook} onContextMenu={(e) => e.preventDefault()} />
-            <div className="text-center">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-3 mt-6 px-1 md:px-0">
+            <div className="w-2/3 md:w-1/3">
+              <img
+                className="md:w-[65%] mx-auto"
+                src={addBook}
+                onContextMenu={(e) => e.preventDefault()}
+              />
+            </div>
+            <div className="text-center md:w-2/2">
               <h1 className="text-2xl md:text-3xl font-bold mx-2 md:mx-0">
                 Add Book to the <span className="text-green-400">Database</span>
               </h1>

@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "../../useCustomHook/useAuth";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import useAxiosSecure from "../../useCustomHook/useAxiosSecure";
 import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
 
 const UpdateBook = () => {
@@ -15,8 +15,8 @@ const UpdateBook = () => {
   const { id } = useParams();
   const navigateTo = useNavigate();
   const [matchFound, setMatchFound] = useState(null);
-  const axiosSecure = useAxiosHook();
-  const axiosNoToken = useAxiosPublic()
+  const axiosSecure = useAxiosSecure();
+  const axiosNoToken = useAxiosPublic();
 
   const { data: bookData, isLoading } = useQuery({
     queryKey: ["bookData", id],
@@ -118,13 +118,15 @@ const UpdateBook = () => {
       <Helmet>
         <title>Update {book_name}</title>
       </Helmet>
-      <div className="flex flex-col md:flex-row justify-center items-center gap-3 my-6 px-1 md:px-0">
-        <img
-          src={updateImage}
-          className="md:w-[28%]"
-          onContextMenu={(e) => e.preventDefault()}
-        />
-        <div className="text-center">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-3 mt-6 px-1 md:px-0">
+        <div className="w-2/3 md:w-1/3">
+          <img
+            src={updateImage}
+            className="md:w-[55%] mx-auto"
+            onContextMenu={(e) => e.preventDefault()}
+          />
+        </div>
+        <div className="text-center md:w-2/2">
           <h1 className="text-2xl md:text-3xl font-bold mx-2 md:mx-0">
             Update <span className="text-green-400">{book_name}</span>
           </h1>

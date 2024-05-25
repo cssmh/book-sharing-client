@@ -2,14 +2,14 @@ import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
 import swal from "sweetalert";
 import toast from "react-hot-toast";
 import { useEffect, useRef, useState } from "react";
-import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import useAxiosSecure from "../../useCustomHook/useAxiosSecure";
 import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
 import useAuth from "../../useCustomHook/useAuth";
 import { useQuery } from "@tanstack/react-query";
 
 const AddBooking = ({ getBookData }) => {
   const { user } = useAuth();
-  const axiosSecure = useAxiosHook();
+  const axiosSecure = useAxiosSecure();
   const axiosNoToken = useAxiosPublic();
 
   const {

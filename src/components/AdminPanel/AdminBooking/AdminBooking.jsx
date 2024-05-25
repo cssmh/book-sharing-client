@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import AdminBookingCard from "../AdminBookingCard/AdminBookingCard";
-import useAxiosHook from "../../../useCustomHook/useAxiosHook";
+import useAxiosSecure from "../../../useCustomHook/useAxiosSecure";
 import MakeBookingsPending from "../MakeBookingsPending/MakeBookingsPending";
 import useTotalProviderHook from "../../../useCustomHook/useTotalProviderHook";
 import MakeBooksAvailable from "../MakeBooksAvailable/MakeBooksAvailable";
@@ -14,7 +14,8 @@ const AdminBooking = () => {
   const [filterAdminBookings, setFilterAdminBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filterType, setFilterType] = useState("All");
-  const axiosSecure = useAxiosHook();
+  const [status, setStatus] = useState("");
+  const axiosSecure = useAxiosSecure();
   const { uniqueEmails, allBooks, booksByProvider } = useTotalProviderHook();
 
   const providerArray = Object.entries(booksByProvider).map(
@@ -108,7 +109,9 @@ const AdminBooking = () => {
                   <DeleteAllBookings
                     setAdminBookings={setAdminBookings}
                   ></DeleteAllBookings>
-                  <MakeBookingsPending></MakeBookingsPending>
+                  <MakeBookingsPending
+                    setStatus={setStatus}
+                  ></MakeBookingsPending>
                   <MakeBooksAvailable></MakeBooksAvailable>
                   <select
                     className="input text-sm px-3 border-green-500 rounded-2xl focus:border-transparent"
@@ -133,6 +136,7 @@ const AdminBooking = () => {
                         key={booking._id}
                         getIndex={index + 1}
                         getAllBooking={booking}
+                        allBookStatus={status}
                         adminBookings={adminBookings}
                         setAdminBookings={setAdminBookings}
                         filterAdminBookings={filterAdminBookings}

@@ -2,12 +2,12 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import useAuth from "../../useCustomHook/useAuth";
-import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import useAxiosSecure from "../../useCustomHook/useAxiosSecure";
 import HavenFeatures from "../HavenFeatures/HavenFeatures";
 
 const MyProfile = () => {
   const { user, handleUpdateProfile } = useAuth();
-  const axiosSecure = useAxiosHook();
+  const axiosSecure = useAxiosSecure();
   const { photoURL, email, displayName, metadata } = user;
   // state for show changed at a time update, no need to reload.
   const [dp, setDp] = useState(photoURL);
@@ -96,7 +96,7 @@ const MyProfile = () => {
         </div>
         <div className="form-control mt-6">
           <input
-            className="btn bg-red-500 hover:bg-red-500 text-white"
+            className="btn bg-green-400 hover:bg-red-500 text-white"
             type="submit"
             value="Update Info"
           />

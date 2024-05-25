@@ -1,7 +1,7 @@
 import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import useAxiosSecure from "../../useCustomHook/useAxiosSecure";
 
 const MyPendingCard = ({ getPending, completedBookIds, handleComplete }) => {
   const {
@@ -19,7 +19,7 @@ const MyPendingCard = ({ getPending, completedBookIds, handleComplete }) => {
     completed_at,
   } = getPending;
 
-  const axiosSecure = useAxiosHook();
+  const axiosSecure = useAxiosSecure();
   const [myPendingStatus, setMyPendingStatus] = useState(status);
   const [todayDateTime, setTodayDateTime] = useState("");
   const [completedAt, setCompletedAt] = useState(completed_at);
@@ -89,15 +89,15 @@ const MyPendingCard = ({ getPending, completedBookIds, handleComplete }) => {
       data-aos="zoom-in"
       className="bg-base-100 shadow-xl rounded-xl pt-2 md:pt-3 py-6 flex flex-col"
     >
-      <figure>
-        <img
-          src={book_image}
-          onContextMenu={(e) => e.preventDefault()}
-          className="rounded-xl w-1/2 mx-auto my-2"
-        />
-      </figure>
-      <div className="mb-2 text-lg w-[73%] mx-auto">
-        <h2 className="text-2xl">{book_name}</h2>
+      <div className="flex-grow mb-2 text-lg w-[73%] mx-auto">
+        <figure>
+          <img
+            src={book_image}
+            onContextMenu={(e) => e.preventDefault()}
+            className="rounded-xl w-[38%] md:w-[50%] mx-auto my-2"
+          />
+        </figure>
+        <h2 className="text-xl md:text-2xl">{book_name}</h2>
         <h1 className="text-xl">Collector Info: </h1>
         <p className="text-green-600">{user_phone}</p>
         <p className="text-purple-800">{user_email}</p>

@@ -4,6 +4,7 @@ import useAxiosPublic from "../../../useCustomHook/useAxiosPublic";
 const AdminBookingCard = ({
   getIndex,
   getAllBooking,
+  allBookStatus,
   adminBookings,
   setAdminBookings,
   filterAdminBookings,
@@ -74,14 +75,16 @@ const AdminBookingCard = ({
             Status:{" "}
             <span
               className={
-                status === "Pending"
+                allBookStatus.length > 0
+                  ? "text-red-500"
+                  : status === "Pending"
                   ? "text-red-500"
                   : status === "Completed"
                   ? "text-green-500"
                   : "text-blue-500"
               }
             >
-              {status}
+              {allBookStatus.length > 0 ? allBookStatus : status}
             </span>
           </p>
           <p>{completed_at}</p>

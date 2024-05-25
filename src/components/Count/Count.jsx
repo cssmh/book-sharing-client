@@ -22,13 +22,7 @@ const Count = () => {
             >
               Books
             </p>
-            <p
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              className="text-gray-500"
-            >
-              {allBooks?.length}
-            </p>
+            <p className="text-gray-500">{allBooks?.length}</p>
           </div>
           <div>
             <p
@@ -38,13 +32,7 @@ const Count = () => {
             >
               Providers
             </p>
-            <p
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              className="text-gray-500"
-            >
-              {uniqueEmails.length}
-            </p>
+            <p className="text-gray-500">{uniqueEmails.length}</p>
           </div>
           <div>
             <p
@@ -54,13 +42,7 @@ const Count = () => {
             >
               Readers
             </p>
-            <p
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              className="text-gray-500"
-            >
-              {uniqueEmails.length * 2 + 1}
-            </p>
+            <p className="text-gray-500">{uniqueEmails.length * 2 + 1}</p>
           </div>
         </div>
       </div>

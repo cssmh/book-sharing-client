@@ -1,9 +1,9 @@
 import swal from "sweetalert";
-import useAxiosHook from "../../../useCustomHook/useAxiosHook";
+import useAxiosSecure from "../../../useCustomHook/useAxiosSecure";
 import toast from "react-hot-toast";
 
 const MakeBooksAvailable = () => {
-  const axiosSecure = useAxiosHook();
+  const axiosSecure = useAxiosSecure();
   const handleMakeBooksAvailable = () => {
     swal({
       title: "Are you sure?",
@@ -20,6 +20,8 @@ const MakeBooksAvailable = () => {
               swal("all books are now available", {
                 icon: "success",
               });
+            }else {
+              swal("already available");
             }
           })
           .catch((err) => toast.error(err));

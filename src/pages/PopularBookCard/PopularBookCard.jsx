@@ -18,11 +18,11 @@ const PopularBookCard = ({ getBook }) => {
           <img
             src={book_image}
             onContextMenu={(e) => e.preventDefault()}
-            className="rounded-xl w-[30%] md:w-[42%]"
+            className="rounded-xl w-[27%] md:w-[36%]"
           />
         </figure>
       </div>
-      <div className="card-body items-center text-center p-0 px-3 gap-1">
+      <div className="card-body items-center text-center p-0 px-3 gap-[0px]">
         <h2 className="text-xl md:text-2xl font-bold text-blue-900 mt-2">
           {book_name}
         </h2>

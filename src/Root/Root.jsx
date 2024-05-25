@@ -13,8 +13,11 @@ import MyBooks from "../pages/MyBooks/MyBooks";
 import UpdateBook from "../pages/UpdateBook/UpdateBook";
 import MySchedules from "../pages/MySchedules/MySchedules";
 import SameProvider from "../pages/SameProvider/SameProvider";
-import AdminRoute from "../AdminRoute/AdminRoute";
+import AdminRoute from "../PrivateRoute/AdminRoute";
 import AdminBooking from "../Components/AdminPanel/AdminBooking/AdminBooking";
+import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
+import AllBooksAdmin from "../Pages/Dashboard/AllBooks/AllBooksAdmin";
+import AllBookings from "../Pages/Dashboard/AllBookings/AllBookings";
 
 const Root = createBrowserRouter([
   {
@@ -52,7 +55,7 @@ const Root = createBrowserRouter([
           <PrivateRoute>
             <BookDetails />
           </PrivateRoute>
-        )
+        ),
       },
       {
         path: "/add-book",
@@ -76,7 +79,7 @@ const Root = createBrowserRouter([
           <PrivateRoute>
             <UpdateBook />
           </PrivateRoute>
-        )
+        ),
       },
       {
         path: "/my-schedules",
@@ -92,7 +95,7 @@ const Root = createBrowserRouter([
           <PrivateRoute>
             <SameProvider />
           </PrivateRoute>
-        )
+        ),
       },
       {
         path: "/admin-dashboard",
@@ -100,7 +103,21 @@ const Root = createBrowserRouter([
           <AdminRoute>
             <AdminBooking />
           </AdminRoute>
-        )
+        ),
+      },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <AdminDashboard />,
+    children: [
+      {
+        path: "/admin",
+        element: <AllBooksAdmin />,
+      },
+      {
+        path: "/admin/all-bookings",
+        element: <AllBookings></AllBookings>,
       },
     ],
   },

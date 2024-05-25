@@ -1,9 +1,9 @@
 import swal from "sweetalert";
-import useAxiosHook from "../../../useCustomHook/useAxiosHook";
+import useAxiosSecure from "../../../useCustomHook/useAxiosSecure";
 import toast from "react-hot-toast";
 
 const DeleteAllBookings = ({ setAdminBookings }) => {
-  const axiosSecure = useAxiosHook();
+  const axiosSecure = useAxiosSecure();
   const handleDeleteAllBookings = () => {
     swal({
       title: "Are you sure?",

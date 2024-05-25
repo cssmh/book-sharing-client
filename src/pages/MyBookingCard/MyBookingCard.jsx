@@ -3,12 +3,12 @@ import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import ReviewModal from "./ReviewModal";
-import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import useAxiosSecure from "../../useCustomHook/useAxiosSecure";
 import useAuth from "../../useCustomHook/useAuth";
 
 const MyBookingCard = ({ getBooking, refetch }) => {
   const { user } = useAuth();
-  const axiosSecure = useAxiosHook();
+  const axiosSecure = useAxiosSecure();
   const axiosNoToken = useAxiosPublic();
   let [isOpen, setIsOpen] = useState(false);
   function closeModal() {
@@ -90,10 +90,10 @@ const MyBookingCard = ({ getBooking, refetch }) => {
           <img
             src={book_image}
             onContextMenu={(e) => e.preventDefault()}
-            className="rounded-xl w-[60%] mx-auto my-2"
+            className="rounded-xl w-[38%] md:w-[50%] mx-auto my-2"
           />
         </figure>
-        <p className="text-2xl">{book_name}</p>
+        <p className="text-xl md:text-2xl">{book_name}</p>
         <div className="text-lg">
           <p className="text-xl">Provider Information</p>
           <p className="text-green-600">{book_provider_phone}</p>

@@ -1,9 +1,9 @@
 import swal from "sweetalert";
-import useAxiosHook from "../../../useCustomHook/useAxiosHook";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../../../useCustomHook/useAxiosSecure";
 
-const MakeBookingsPending = () => {
-  const axiosSecure = useAxiosHook();
+const MakeBookingsPending = ({ setStatus }) => {
+  const axiosSecure = useAxiosSecure();
   const handleMakeBookingsPending = () => {
     swal({
       title: "Are you sure?",
@@ -17,9 +17,12 @@ const MakeBookingsPending = () => {
           .put("/update-to-pending")
           .then((res) => {
             if (res.data?.modifiedCount > 0) {
+              setStatus("Pending");
               swal("all bookings are now pending!", {
                 icon: "success",
               });
+            } else {
+              swal("already pending");
             }
           })
           .catch((err) => toast.error(err));

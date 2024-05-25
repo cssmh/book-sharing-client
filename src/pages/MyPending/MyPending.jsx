@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { FallingLines } from "react-loader-spinner";
 import MyPendingCard from "../MyPendingCard/MyPendingCard";
 import useAuth from "../../useCustomHook/useAuth";
-import useAxiosHook from "../../useCustomHook/useAxiosHook";
+import useAxiosSecure from "../../useCustomHook/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 
 const MyPending = () => {
   const { user } = useAuth();
   const [completedBookIds, setCompletedBookIds] = useState([]);
-  const axiosSecure = useAxiosHook();
+  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
     axiosSecure.get(`/unavailable-ids?email=${user?.email}`).then((res) => {
