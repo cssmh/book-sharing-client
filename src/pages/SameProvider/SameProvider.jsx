@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
-import SameProviderCard from "../SameProviderCard/SameProviderCard";
 import { HashLoader } from "react-spinners";
+import SameProviderCard from "../SameProviderCard/SameProviderCard";
+import useAxiosPublic from "../../Shared/useCustomHook/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
 
 const SameProvider = () => {
   const { email } = useParams();

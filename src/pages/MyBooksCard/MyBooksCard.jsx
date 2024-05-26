@@ -1,11 +1,12 @@
-import swal from "sweetalert";
 import { Link } from "react-router-dom";
-import useAuth from "../../useCustomHook/useAuth";
-import useAxiosSecure from "../../useCustomHook/useAxiosSecure";
+import swal from "sweetalert";
+import useAuth from "../../Shared/useCustomHook/useAuth";
+import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
 
 const MyBooksCard = ({ getBook, refetch }) => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+
   const {
     _id,
     book_name,
@@ -27,10 +28,10 @@ const MyBooksCard = ({ getBook, refetch }) => {
         // main code
         axiosSecure.delete(`/book/${idx}/${user?.email}`).then((res) => {
           if (res.data?.deletedCount > 0) {
-            refetch();
             swal(`${name} Deleted!`, {
               icon: "success",
             });
+            refetch();
           }
         });
       }
@@ -47,7 +48,7 @@ const MyBooksCard = ({ getBook, refetch }) => {
           <img
             src={book_image}
             onContextMenu={(e) => e.preventDefault()}
-            className="rounded-xl w-[28%] md:w-[35%]"
+            className="rounded-xl w-[130px] md:w-[140px]"
           />
         </figure>
         <h2 className="text-xl md:text-2xl font-bold text-blue-900 px-4">
@@ -74,19 +75,19 @@ const MyBooksCard = ({ getBook, refetch }) => {
             </button>
           </Link>
           {book_status === "available" && (
-            <Link to={`/update-book/${_id}`}>
-              <button className="btn border-green-400 bg-base-100 hover:bg-green-400 text-green-400 hover:text-white">
-                Update
+            <>
+              <Link to={`/update-book/${_id}`}>
+                <button className="btn border-green-400 bg-base-100 hover:bg-green-400 text-green-400 hover:text-white">
+                  Update
+                </button>
+              </Link>
+              <button
+                onClick={() => handleDelete(_id, book_name)}
+                className="btn border-black bg-base-100 hover:bg-black text-black hover:text-white"
+              >
+                delete
               </button>
-            </Link>
-          )}
-          {book_status === "available" && (
-            <button
-              onClick={() => handleDelete(_id, book_name)}
-              className="btn border-black bg-base-100 hover:bg-black text-black hover:text-white"
-            >
-              delete
-            </button>
+            </>
           )}
         </div>
       </div>

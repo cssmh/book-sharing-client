@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { FallingLines } from "react-loader-spinner";
 import MyPendingCard from "../MyPendingCard/MyPendingCard";
-import useAuth from "../../useCustomHook/useAuth";
-import useAxiosSecure from "../../useCustomHook/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import useAuth from "../../Shared/useCustomHook/useAuth";
+import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
 
 const MyPending = () => {
   const { user } = useAuth();

@@ -4,8 +4,8 @@ import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import useAuth from "../../useCustomHook/useAuth";
 import ResetPasswordModal from "./ResetPasswordModal";
+import useAuth from "../../Shared/useCustomHook/useAuth";
 
 const Login = () => {
   let [isOpen, setIsOpen] = useState(false);

@@ -2,11 +2,13 @@ import { useState } from "react";
 import Lottie from "lottie-react";
 import loggieData from "../../assets/Logo.json";
 import { Link, NavLink } from "react-router-dom";
-import useAuth from "../../useCustomHook/useAuth";
+import useAuth from "../../Shared/useCustomHook/useAuth";
+import useMyCart from "../../Shared/useCustomHook/useMyCart";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [showProfileOptions, setShowProfileOptions] = useState(false);
+  const { myBookings } = useMyCart();
 
   const handleProfileClick = () => {
     setShowProfileOptions(!showProfileOptions);
@@ -110,14 +112,9 @@ const Navbar = () => {
             </li>
           )}
           {user?.email == "admin@admin.com" && (
-            <>
-              <li className="font-semibold text-base">
-                <NavLink to="/admin-dashboard">Admin</NavLink>
-              </li>
-              <li className="font-semibold text-base">
-                <NavLink to="/admin">Admin Dashboard</NavLink>
-              </li>
-            </>
+            <li className="font-semibold text-base">
+              <NavLink to="/admin-dashboard">Admin</NavLink>
+            </li>
           )}
           {user && (
             <li tabIndex={0}>
@@ -137,6 +134,39 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
+        {/* cart btn */}
+        {user && (
+          <div className="dropdown dropdown-end">
+            <Link to="/my-schedules">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle"
+              >
+                <div className="indicator">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                    />
+                  </svg>
+                  <span className="badge badge-sm indicator-item">
+                    {myBookings?.length}
+                  </span>
+                </div>
+              </div>
+            </Link>
+          </div>
+        )}
+        {/* cart btn */}
         <div className="flex flex-col items-center justify-center text-center font-semibold text-sm md:btn pointer-events-none mr-1 md:mr-0">
           {user ? (
             <>

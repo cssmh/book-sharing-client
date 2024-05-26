@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import MainLayout from "../MainLayout/MainLayout";
+import MainLayout from "../Shared/MainLayout/MainLayout";
 import ErrorPage from "../components/ErrorPage/ErrorPage";
 import Home from "../components/Home/Home";
 import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
-import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import PrivateRoute from "../Shared/PrivateRoute/PrivateRoute";
 import MyProfile from "../components/MyProfile/MyProfile";
 import AllBooks from "../Pages/AllBooks/AllBooks";
 import BookDetails from "../pages/BookDetails/BookDetails";
@@ -13,11 +13,11 @@ import MyBooks from "../pages/MyBooks/MyBooks";
 import UpdateBook from "../pages/UpdateBook/UpdateBook";
 import MySchedules from "../pages/MySchedules/MySchedules";
 import SameProvider from "../pages/SameProvider/SameProvider";
-import AdminRoute from "../PrivateRoute/AdminRoute";
-import AdminBooking from "../Components/AdminPanel/AdminBooking/AdminBooking";
-import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
-import AllBooksAdmin from "../Pages/Dashboard/AllBooks/AllBooksAdmin";
-import AllBookings from "../Pages/Dashboard/AllBookings/AllBookings";
+import AdminRoute from "../Shared/PrivateRoute/AdminRoute";
+import AdminDashboard from "../Dashboard/AdminDashboard/AdminDashboard";
+import AllBooksCols from "../Dashboard/AllBooksCols/AllBooksCols";
+import AllBookings from "../Dashboard/AllBookings/AllBookings";
+import BooksProviders from "../Dashboard/BooksProviders/BooksProviders";
 
 const Root = createBrowserRouter([
   {
@@ -97,27 +97,27 @@ const Root = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: "/admin-dashboard",
-        element: (
-          <AdminRoute>
-            <AdminBooking />
-          </AdminRoute>
-        ),
-      },
     ],
   },
   {
-    path: "/admin",
-    element: <AdminDashboard />,
+    path: "/admin-dashboard",
+    element: (
+      <AdminRoute>
+        <AdminDashboard />
+      </AdminRoute>
+    ),
     children: [
       {
-        path: "/admin",
-        element: <AllBooksAdmin />,
+        path: "/admin-dashboard",
+        element: <AllBooksCols />,
       },
       {
-        path: "/admin/all-bookings",
-        element: <AllBookings></AllBookings>,
+        path: "/admin-dashboard/all-bookings",
+        element: <AllBookings />,
+      },
+      {
+        path: "/admin-dashboard/books-provider",
+        element: <BooksProviders />,
       },
     ],
   },

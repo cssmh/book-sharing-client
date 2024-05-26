@@ -1,28 +1,9 @@
 import { FallingLines } from "react-loader-spinner";
-import useAxiosSecure from "../../useCustomHook/useAxiosSecure";
-import useAuth from "../../useCustomHook/useAuth";
 import MyBookingCard from "../MyBookingCard/MyBookingCard";
-import { useQuery } from "@tanstack/react-query";
+import useMyCart from "../../Shared/useCustomHook/useMyCart";
 
 const MyBookings = () => {
-  const { user } = useAuth();
-  const axiosSecure = useAxiosSecure();
-
-  const getMyBookings = async () => {
-    const res = await axiosSecure.get(`/my-bookings?email=${user?.email}`);
-    return res?.data;
-  };
-
-  const {
-    isLoading,
-    error,
-    data: myBookings,
-    refetch,
-  } = useQuery({
-    queryKey: ["myBookings", user?.email],
-    queryFn: getMyBookings,
-    enabled: !!user?.email, // Ensure the query runs only when the email is available
-  });
+  const { myBookings, error, refetch, isLoading } = useMyCart();
 
   if (isLoading) {
     return (

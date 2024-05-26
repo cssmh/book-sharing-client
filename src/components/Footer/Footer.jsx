@@ -9,7 +9,6 @@ const Footer = () => {
           <div className="lg:w-1/3">
             <Link
               rel="noopener noreferrer"
-              href="#"
               className="flex justify-center space-x-3 lg:justify-start"
             >
               <div className="flex items-center justify-center w-14 rounded-full dark:bg-violet-400">
@@ -25,24 +24,16 @@ const Footer = () => {
               <h3 className="uppercase dark:text-gray-50">Books</h3>
               <ul className="space-y-1">
                 <li>
-                  <a rel="noopener noreferrer" href="#">
-                    Features
-                  </a>
+                  <a rel="noopener noreferrer">Features</a>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="#">
-                    Integrations
-                  </a>
+                  <a rel="noopener noreferrer">Integrations</a>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="#">
-                    Pricing
-                  </a>
+                  <a rel="noopener noreferrer">Pricing</a>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="#">
-                    FAQ
-                  </a>
+                  <a rel="noopener noreferrer">FAQ</a>
                 </li>
               </ul>
             </div>
@@ -50,14 +41,10 @@ const Footer = () => {
               <h3 className="tracki uppercase dark:text-gray-50">Address</h3>
               <ul className="space-y-1">
                 <li>
-                  <a rel="noopener noreferrer" href="#">
-                    Tangail, Dhaka, Bangladesh
-                  </a>
+                  <a rel="noopener noreferrer">Tangail, Dhaka, Bangladesh</a>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="#">
-                    Terms of Service
-                  </a>
+                  <a rel="noopener noreferrer">Terms of Service</a>
                 </li>
               </ul>
             </div>
@@ -65,19 +52,13 @@ const Footer = () => {
               <h3 className="uppercase dark:text-gray-50">Contact Info</h3>
               <ul className="space-y-1">
                 <li>
-                  <a rel="noopener noreferrer" href="#">
-                    +880176761606*
-                  </a>
+                  <a rel="noopener noreferrer">+880176761606*</a>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="#">
-                    mominitmbstu@gmail.com
-                  </a>
+                  <a rel="noopener noreferrer">mominitmbstu@gmail.com</a>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="#">
-                    Guides
-                  </a>
+                  <a rel="noopener noreferrer">Guides</a>
                 </li>
               </ul>
             </div>
@@ -101,7 +82,6 @@ const Footer = () => {
                 </a>
                 <a
                   rel="noopener noreferrer"
-                  href="#"
                   title="Twitter"
                   className="flex items-center p-1"
                 >
@@ -115,7 +95,7 @@ const Footer = () => {
                 </a>
                 <a
                   rel="noopener noreferrer"
-                  href="#"
+                  href="http://instagram.com/tourist_offl"
                   title="Instagram"
                   className="flex items-center p-1"
                 >

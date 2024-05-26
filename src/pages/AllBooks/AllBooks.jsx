@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { HashLoader } from "react-spinners";
 import AllBooksCard from "../AllBooksCard/AllBooksCard";
-import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
-import useTotalProviderHook from "../../useCustomHook/useTotalProviderHook";
+import useAxiosPublic from "../../Shared/useCustomHook/useAxiosPublic";
+import useProviderHook from "../../Shared/useCustomHook/useProviderHook";
 
 const AllBooks = () => {
   let searchTerm;
@@ -14,7 +14,7 @@ const AllBooks = () => {
   const [limit, setLimit] = useState(9);
   const [isLoading, setIsLoading] = useState(true);
   const booksPerPageCount = Math.ceil(totalBooksCount / limit);
-  const { allBooks: totalBooksForSearch } = useTotalProviderHook();
+  const { allBooks: totalBooksForSearch } = useProviderHook();
 
   useEffect(() => {
     axiosNoToken.get(`/all-books?page=${page}&limit=${limit}`).then((res) => {

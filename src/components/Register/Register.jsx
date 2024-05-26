@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import useAuth from "../../useCustomHook/useAuth";
+import useAuth from "../../Shared/useCustomHook/useAuth";
 
 const Register = () => {
   const [view, setView] = useState(true);

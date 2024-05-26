@@ -2,7 +2,7 @@ import swal from "sweetalert";
 import Banner from "../../assets/notification.jpg";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
+import useAxiosPublic from "../../Shared/useCustomHook/useAxiosPublic";
 
 const BannerImg = {
   backgroundImage: `url(${Banner})`,
@@ -39,8 +39,8 @@ const GetNotified = () => {
 
     axiosNoToken.post("/email", { email }).then((res) => {
       if (res.data?.insertedId) {
-        refetch();
         swal("Thank you", `We will update you via ${email}`, "success");
+        refetch();
       }
     });
   };

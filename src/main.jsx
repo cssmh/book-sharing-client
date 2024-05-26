@@ -5,7 +5,7 @@ import "./index.css";
 import Root from "./Root/Root.jsx";
 import { RouterProvider } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import AuthProviders from "./AuthProviders/AuthProviders.jsx";
+import AuthProviders from "./Shared/AuthProviders/AuthProviders.jsx";
 import { HelmetProvider } from "react-helmet-async";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

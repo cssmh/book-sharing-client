@@ -2,15 +2,17 @@ import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
 import swal from "sweetalert";
 import toast from "react-hot-toast";
 import { useEffect, useRef, useState } from "react";
-import useAxiosSecure from "../../useCustomHook/useAxiosSecure";
-import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
-import useAuth from "../../useCustomHook/useAuth";
 import { useQuery } from "@tanstack/react-query";
+import useAuth from "../../Shared/useCustomHook/useAuth";
+import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
+import useAxiosPublic from "../../Shared/useCustomHook/useAxiosPublic";
+import useMyCart from "../../Shared/useCustomHook/useMyCart";
 
 const AddBooking = ({ getBookData }) => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const axiosNoToken = useAxiosPublic();
+  const { refetch: navCartRefetch } = useMyCart();
 
   const {
     _id,
@@ -116,10 +118,9 @@ const AddBooking = ({ getBookData }) => {
       .post("/add-booking", AddBookingData)
       .then((res) => {
         if (res.data?.insertedId) {
-          // Update allBookings state after successfully adding
-          // the booking to prevent already booked.
-          refetch();
           swal("Congratulations!", "Booking Complete", "success");
+          refetch();
+          navCartRefetch();
         }
       })
       .catch((err) => {

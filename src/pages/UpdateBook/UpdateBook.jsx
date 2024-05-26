@@ -5,20 +5,28 @@ import { HashLoader } from "react-spinners";
 import updateImage from "../../assets/Update.png";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import useAuth from "../../useCustomHook/useAuth";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../useCustomHook/useAxiosSecure";
-import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
+import useAuth from "../../Shared/useCustomHook/useAuth";
+import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
+import useAxiosPublic from "../../Shared/useCustomHook/useAxiosPublic";
+import useMyBooksHook from "../../Shared/useCustomHook/useMyBooksHook";
 
 const UpdateBook = () => {
   const { user } = useAuth();
   const { id } = useParams();
   const navigateTo = useNavigate();
-  const [matchFound, setMatchFound] = useState(null);
+  const [matchFound, setMatchFound] = useState([]);
   const axiosSecure = useAxiosSecure();
   const axiosNoToken = useAxiosPublic();
 
-  const { data: bookData, isLoading } = useQuery({
+  const url = `/my-books?email=${user?.email}`;
+  const { isLoading: loading, bookData: myBooks } = useMyBooksHook(url);
+
+  const {
+    data: bookData,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["bookData", id],
     queryFn: async () => {
       const res = await axiosNoToken.get(`book/${id}`);
@@ -27,34 +35,20 @@ const UpdateBook = () => {
   });
 
   useEffect(() => {
-    if (matchFound === false) {
+    const matching = myBooks.find((book) => book._id === id);
+    setMatchFound(matching);
+    if (!matchFound) {
       toast.error("Don't try to update other's data!");
       navigateTo("/");
     }
-  }, [matchFound, navigateTo]);
+  }, [matchFound, myBooks, id, navigateTo]);
 
-  useEffect(() => {
-    if (bookData && user) {
-      const url = `/my-books?email=${user?.email}`;
-      axiosNoToken.get(url).then((res) => {
-        const findMatching = res?.data.find(
-          (book) => book._id === bookData._id
-        );
-        setMatchFound(!!findMatching);
-      });
-    }
-  }, [axiosNoToken, bookData, user]);
-
-  if (isLoading) {
+  if (loading || isLoading) {
     return (
       <div className="flex justify-center mt-5">
         <HashLoader color="#9933FF" size={32} />
       </div>
     );
-  }
-
-  if (!bookData) {
-    return null;
   }
 
   const {
@@ -107,6 +101,7 @@ const UpdateBook = () => {
         console.log(res.data);
         if (res.data?.modifiedCount > 0) {
           swal("Good job!", "Book Info Updated", "success");
+          refetch();
           navigateTo(-1);
         }
       })

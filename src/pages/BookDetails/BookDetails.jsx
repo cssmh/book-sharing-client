@@ -2,12 +2,12 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import swal from "sweetalert";
 import { HashLoader } from "react-spinners";
 import { Helmet } from "react-helmet-async";
-import useAuth from "../../useCustomHook/useAuth";
 import AddBooking from "../AddBooking/AddBooking";
-import useAxiosSecure from "../../useCustomHook/useAxiosSecure";
-import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
-import useProviderHook from "../../useCustomHook/useProviderHook";
 import { useQuery } from "@tanstack/react-query";
+import useAuth from "../../Shared/useCustomHook/useAuth";
+import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
+import useAxiosPublic from "../../Shared/useCustomHook/useAxiosPublic";
+import useMyBooksHook from "../../Shared/useCustomHook/useMyBooksHook";
 
 const BookDetails = () => {
   const { user } = useAuth();
@@ -40,7 +40,7 @@ const BookDetails = () => {
   } = loadBookData;
 
   const url = `/my-books?email=${book_provider_email}`;
-  const { isLoading, bookData } = useProviderHook(url);
+  const { isLoading, bookData } = useMyBooksHook(url);
 
   const handleDeleteByAdmin = (idx, book) => {
     swal({
@@ -174,8 +174,8 @@ const BookDetails = () => {
                 {book_status === "available" &&
                   book_provider_email === user?.email && (
                     <Link to={`/update-book/${_id}`}>
-                      <button className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mt-1 mx-2 md:mx-0">
-                        Update {book_name}
+                      <button className="text-white bg-green-400 font-medium rounded-lg text-sm px-4 py-2 text-center me-2 mt-1 mx-2 md:mx-0">
+                        Update This Book
                       </button>
                     </Link>
                   )}
@@ -185,9 +185,9 @@ const BookDetails = () => {
                   user?.email == "admin@admin.com" && (
                     <button
                       onClick={() => handleDeleteByAdmin(_id, book_name)}
-                      className="text-white bg-gradient-to-r from-pink-500 via-pink-500 to-pink-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-2 md:mx-0"
+                      className="text-white bg-pink-500 font-medium rounded-lg text-sm px-4 py-2 text-center mx-2 md:mx-0"
                     >
-                      Delete {book_name}
+                      Delete This Book
                     </button>
                   )}
               </div>

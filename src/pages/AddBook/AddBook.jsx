@@ -1,30 +1,18 @@
 import swal from "sweetalert";
-import toast from "react-hot-toast";
 import { HashLoader } from "react-spinners";
+import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
+import useAuth from "../../Shared/useCustomHook/useAuth";
 import addBook from "../../assets/DataAdd.png";
-import useAuth from "../../useCustomHook/useAuth";
-import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../Shared/useCustomHook/useAxiosPublic";
+import useMyBooksHook from "../../Shared/useCustomHook/useMyBooksHook";
 
 const AddBook = () => {
   const { user } = useAuth();
   const axiosNoToken = useAxiosPublic();
 
-  const getMyAddedBooks = async () => {
-    const res = await axiosNoToken.get(`/my-books?email=${user?.email}`);
-    return res?.data;
-  };
-
-  const {
-    isLoading,
-    data: myAddedBooks,
-    refetch,
-  } = useQuery({
-    queryKey: ["myAddedBooks", user?.email],
-    queryFn: getMyAddedBooks,
-    enabled: !!user?.email,
-  });
+  const url = `/my-books?email=${user?.email}`;
+  const { isLoading, bookData: myAddedBooks, refetch } = useMyBooksHook(url);
 
   const handleAddBook = (e) => {
     e.preventDefault();
@@ -38,7 +26,6 @@ const AddBook = () => {
     if (isDuplicate) {
       return toast.error("You already added this Book!");
     }
-
     const get_image = form.book_image.value;
     const defaultImageUrl =
       "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/CoverSoon.png";
@@ -72,9 +59,9 @@ const AddBook = () => {
       .post("/book", BookInformation)
       .then((res) => {
         if (res.data?.insertedId) {
-          refetch();
           swal("Thank You!", `${book_name} Book added`, "success");
           form.reset();
+          refetch();
         }
       })
       .catch();

@@ -1,15 +1,18 @@
 import swal from "sweetalert";
-import useAxiosPublic from "../../useCustomHook/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import ReviewModal from "./ReviewModal";
-import useAxiosSecure from "../../useCustomHook/useAxiosSecure";
-import useAuth from "../../useCustomHook/useAuth";
+import useAuth from "../../Shared/useCustomHook/useAuth";
+import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
+import useAxiosPublic from "../../Shared/useCustomHook/useAxiosPublic";
+import useMyCart from "../../Shared/useCustomHook/useMyCart";
 
 const MyBookingCard = ({ getBooking, refetch }) => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const axiosNoToken = useAxiosPublic();
+  const { refetch: navCartRefetch } = useMyCart();
+
   let [isOpen, setIsOpen] = useState(false);
   function closeModal() {
     setIsOpen(false);
@@ -46,10 +49,11 @@ const MyBookingCard = ({ getBooking, refetch }) => {
       if (willDelete) {
         axiosNoToken.delete(`/booking/${idx}`).then((res) => {
           if (res.data?.deletedCount > 0) {
-            refetch();
             swal(`Booking on ${name} Deleted!`, {
               icon: "success",
             });
+            refetch();
+            navCartRefetch();
           }
         });
       }
