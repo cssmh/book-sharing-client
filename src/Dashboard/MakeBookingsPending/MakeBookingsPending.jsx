@@ -18,10 +18,10 @@ const MakeBookingsPending = ({ setStatus }) => {
           .then((res) => {
             console.log(res.data);
             if (res.data?.modifiedCount > 0) {
-              setStatus("Pending");
               swal("all bookings are now pending!", {
                 icon: "success",
               });
+              setStatus("Pending");
             } else {
               swal("Nothing changed");
             }
@@ -34,7 +34,7 @@ const MakeBookingsPending = ({ setStatus }) => {
   return (
     <button
       onClick={handleMakeBookingsPending}
-      className="bg-green-500 px-3 py-[6px] rounded-md text-white"
+      className="bg-green-400 px-3 py-[6px] rounded-md text-white"
     >
       Make all Bookings Pending
     </button>

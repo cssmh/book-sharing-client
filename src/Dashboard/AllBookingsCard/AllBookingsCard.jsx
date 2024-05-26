@@ -5,10 +5,10 @@ const AllBookingsCard = ({
   getIndex,
   getAllBooking,
   allBookStatus,
-  adminBookings,
-  setAdminBookings,
-  filterAdminBookings,
-  setFilterAdminBookings,
+  allBookings,
+  setAllBookings,
+  filterAllBookings,
+  setFilterAllBookings,
 }) => {
   const {
     _id,
@@ -35,17 +35,17 @@ const AllBookingsCard = ({
         // main code
         axiosNoToken.delete(`/booking/${idx}`).then((res) => {
           if (res.data?.deletedCount > 0) {
-            const remainingAdminBookings = adminBookings.filter(
-              (book) => book._id !== idx
-            );
-            setAdminBookings(remainingAdminBookings);
-            const remainingFilterAdminBookings = filterAdminBookings.filter(
-              (book) => book._id !== _id
-            );
-            setFilterAdminBookings(remainingFilterAdminBookings);
             swal("Booking Deleted!", {
               icon: "success",
             });
+            const remainingAllBookings = allBookings.filter(
+              (book) => book._id !== idx
+            );
+            setAllBookings(remainingAllBookings);
+            const remainingFilterBookings = filterAllBookings.filter(
+              (book) => book._id !== _id
+            );
+            setFilterAllBookings(remainingFilterBookings);
           }
         });
       }
@@ -90,14 +90,12 @@ const AllBookingsCard = ({
           <p>{completed_at}</p>
           <p className="text-blue-800">{user_email}</p>
           <p className="text-cyan-500 mb-1">{user_phone}</p>
-          {status !== "Completed" && (
-            <button
-              onClick={() => handleDeleteByAdmin(_id)}
-              className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-            >
-              Delete Booking
-            </button>
-          )}
+          <button
+            onClick={() => handleDeleteByAdmin(_id)}
+            className="text-white bg-pink-500 font-medium rounded-lg text-sm px-4 py-2 text-center mx-2 md:mx-0"
+          >
+            Delete Booking
+          </button>
         </div>
       </div>
     </div>

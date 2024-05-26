@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { HashLoader } from "react-spinners";
 import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
 import DeleteAllBookings from "../DeleteAllBookings/DeleteAllBookings";
 import MakeBookingsPending from "../MakeBookingsPending/MakeBookingsPending";
@@ -7,16 +8,16 @@ import AllBookingsCard from "../AllBookingsCard/AllBookingsCard";
 
 const AllBookings = () => {
   const axiosSecure = useAxiosSecure();
-  const [adminBookings, setAdminBookings] = useState([]);
-  const [filterAdminBookings, setFilterAdminBookings] = useState([]);
+  const [allBookings, setAllBookings] = useState([]);
+  const [filterAllBookings, setFilterAllBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [status, setStatus] = useState("");
   const [filterType, setFilterType] = useState("All");
 
   useEffect(() => {
     axiosSecure.get("/all-bookings")?.then((res) => {
-      setAdminBookings(res?.data);
-      setFilterAdminBookings(res?.data);
+      setAllBookings(res?.data);
+      setFilterAllBookings(res?.data);
       setIsLoading(false);
     });
   }, [axiosSecure]);
@@ -26,14 +27,23 @@ const AllBookings = () => {
     const filterType = e.target.value;
     setFilterType(filterType);
     if (filterType === "All") {
-      setFilterAdminBookings(adminBookings);
+      setFilterAllBookings(allBookings);
     } else {
-      const filterNow = adminBookings.filter(
+      const filterNow = allBookings.filter(
         (allType) => allType.status === filterType
       );
-      setFilterAdminBookings(filterNow);
+      setFilterAllBookings(filterNow);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center mt-5">
+        <HashLoader color="#00CC66" size={32} />
+      </div>
+    );
+  }
+
   return (
     <div>
       <h1 className="text-center text-xl mb-5">All Bookings</h1>
@@ -41,9 +51,7 @@ const AllBookings = () => {
         <p className="border border-green-500 px-3 py-[6px] rounded-md">
           Hello BookHaven Admin
         </p>
-        <DeleteAllBookings
-          setAdminBookings={setAdminBookings}
-        ></DeleteAllBookings>
+        <DeleteAllBookings setAllBookings={setAllBookings}></DeleteAllBookings>
         <MakeBookingsPending setStatus={setStatus}></MakeBookingsPending>
         <MakeBooksAvailable></MakeBooksAvailable>
         <select
@@ -58,28 +66,28 @@ const AllBookings = () => {
           <option value="Completed">Completed</option>
         </select>
       </div>
-      {adminBookings.length === 0 ? (
+      {allBookings.length === 0 ? (
         <p className="text-center text-xl md:text-2xl font-semibold text-red-600 mt-10">
           No Booking
         </p>
       ) : (
         <div className="max-w-[1180px] mx-2 lg:mx-auto">
-          {filterAdminBookings.length === 0 ? (
+          {filterAllBookings.length === 0 ? (
             <p className="text-center text-xl md:text-2xl font-semibold text-red-600 mt-10">
               No {filterType} Booking!
             </p>
           ) : (
             <div className="space-y-3">
-              {filterAdminBookings?.map((booking, index) => (
+              {filterAllBookings?.map((booking, index) => (
                 <AllBookingsCard
                   key={booking._id}
                   getIndex={index + 1}
                   getAllBooking={booking}
                   allBookStatus={status}
-                  adminBookings={adminBookings}
-                  setAdminBookings={setAdminBookings}
-                  filterAdminBookings={filterAdminBookings}
-                  setFilterAdminBookings={setFilterAdminBookings}
+                  allBookings={allBookings}
+                  setAllBookings={setAllBookings}
+                  filterAllBookings={filterAllBookings}
+                  setFilterAllBookings={setFilterAllBookings}
                 ></AllBookingsCard>
               ))}
             </div>

@@ -77,9 +77,9 @@ const MyBookingCard = ({ getBooking, refetch }) => {
       .patch(`/add-review/${book_id}`, { review, name })
       .then((res) => {
         if (res.data?.acknowledged) {
-          reviewRefetch();
-          setIsOpen(false);
           swal("Thank you!", "Review added", "success");
+          setIsOpen(false);
+          reviewRefetch();
         }
       });
   };

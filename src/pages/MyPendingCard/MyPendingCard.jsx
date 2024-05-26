@@ -37,8 +37,8 @@ const MyPendingCard = ({ getPending, completedBookIds, handleComplete }) => {
       })
       .then((res) => {
         if (res.data?.modifiedCount > 0) {
-          setMyPendingStatus(updatedPendingStatus);
           swal("Thank You!", `Updated to ${updatedPendingStatus}`, "success");
+          setMyPendingStatus(updatedPendingStatus);
         }
         axiosSecure
           .put(`/book-status/${book_id}/${provider_email}`, { bookStatus })

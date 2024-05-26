@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "./useAuth";
 import useAxiosSecure from "./useAxiosSecure";
+import { useEffect, useState } from "react";
 
 const useMyCart = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const [progress, setProgress] = useState([]);
 
   const {
     isLoading,
@@ -20,7 +22,16 @@ const useMyCart = () => {
     enabled: !!user?.email,
   });
 
-  return { myBookings, error, refetch, isLoading };
+  useEffect(() => {
+    if (myBookings) {
+      const checkProgress = myBookings.find(
+        (book) => book.status === "Progress"
+      );
+      setProgress(checkProgress);
+    }
+  }, [myBookings]);
+
+  return { myBookings, error, refetch, isLoading, progress };
 };
 
 export default useMyCart;
