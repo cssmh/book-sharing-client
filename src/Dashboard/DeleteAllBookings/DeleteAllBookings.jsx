@@ -2,7 +2,7 @@ import swal from "sweetalert";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
 
-const DeleteAllBookings = ({ setAllBookings }) => {
+const DeleteAllBookings = ({ refetch }) => {
   const axiosSecure = useAxiosSecure();
   const handleDeleteAllBookings = () => {
     swal({
@@ -20,7 +20,7 @@ const DeleteAllBookings = ({ setAllBookings }) => {
               swal("all bookings are deleted!", {
                 icon: "success",
               });
-              setAllBookings([]);
+              refetch();
             } else {
               swal("no bookings available");
             }
@@ -34,7 +34,7 @@ const DeleteAllBookings = ({ setAllBookings }) => {
     <div>
       <button
         onClick={handleDeleteAllBookings}
-        className="bg-green-400 px-3 py-[6px] rounded-md text-white"
+        className="bg-green-500 px-3 py-[6px] rounded-md text-white"
       >
         Delete All Bookings
       </button>

@@ -5,22 +5,32 @@ import DeleteAllBookings from "../DeleteAllBookings/DeleteAllBookings";
 import MakeBookingsPending from "../MakeBookingsPending/MakeBookingsPending";
 import MakeBooksAvailable from "../MakeBooksAvailable/MakeBooksAvailable";
 import AllBookingsCard from "../AllBookingsCard/AllBookingsCard";
+import { useQuery } from "@tanstack/react-query";
 
 const AllBookings = () => {
   const axiosSecure = useAxiosSecure();
   const [allBookings, setAllBookings] = useState([]);
   const [filterAllBookings, setFilterAllBookings] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [status, setStatus] = useState("");
   const [filterType, setFilterType] = useState("All");
 
+  const {
+    data: allBookingsData = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: "allBookings",
+    queryFn: async () => {
+      const res = await axiosSecure.get("/all-bookings");
+      return res?.data;
+    },
+    enabled: true,
+    // query will run immediately when the component mounts
+  });
+
   useEffect(() => {
-    axiosSecure.get("/all-bookings")?.then((res) => {
-      setAllBookings(res?.data);
-      setFilterAllBookings(res?.data);
-      setIsLoading(false);
-    });
-  }, [axiosSecure]);
+    setAllBookings(allBookingsData);
+    setFilterAllBookings(allBookingsData);
+  }, [allBookingsData]);
 
   // filter type
   const handleFilter = (e) => {
@@ -51,11 +61,11 @@ const AllBookings = () => {
         <p className="border border-green-500 px-3 py-[6px] rounded-md">
           Hello BookHaven Admin
         </p>
-        <DeleteAllBookings setAllBookings={setAllBookings}></DeleteAllBookings>
-        <MakeBookingsPending setStatus={setStatus}></MakeBookingsPending>
+        <DeleteAllBookings refetch={refetch}></DeleteAllBookings>
+        <MakeBookingsPending refetch={refetch}></MakeBookingsPending>
         <MakeBooksAvailable></MakeBooksAvailable>
         <select
-          className="input text-sm px-3 border-green-500 rounded-2xl focus:border-transparent"
+          className="input text-sm px-3 border-green-500 rounded-xl focus:border-transparent"
           style={{ outline: "none", height: "38px" }}
           defaultValue="All"
           onChange={(e) => handleFilter(e)}
@@ -83,11 +93,7 @@ const AllBookings = () => {
                   key={booking._id}
                   getIndex={index + 1}
                   getAllBooking={booking}
-                  allBookStatus={status}
-                  allBookings={allBookings}
-                  setAllBookings={setAllBookings}
-                  filterAllBookings={filterAllBookings}
-                  setFilterAllBookings={setFilterAllBookings}
+                  refetch={refetch}
                 ></AllBookingsCard>
               ))}
             </div>

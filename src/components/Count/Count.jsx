@@ -28,7 +28,7 @@ const Count = () => {
               Books
             </p>
             <p className="text-gray-500">
-              {inView && <CountUp end={allBooks?.length || 0} duration={4} />}
+              {inView && <CountUp end={allBooks?.length || 0} duration={3} />}
             </p>
           </div>
           <div>
@@ -40,7 +40,7 @@ const Count = () => {
               Providers
             </p>
             <p className="text-gray-500">
-              {inView && <CountUp end={uniqueEmails.length} duration={4} />}
+              {inView && <CountUp end={uniqueEmails.length} duration={3} />}
             </p>
           </div>
           <div>
@@ -57,7 +57,7 @@ const Count = () => {
                   end={
                     uniqueEmails.length == 0 ? 0 : uniqueEmails.length * 2 + 11
                   }
-                  duration={4}
+                  duration={3}
                 />
               )}
             </p>

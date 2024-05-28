@@ -1,37 +1,21 @@
-import { useQuery } from "@tanstack/react-query";
 import useAuth from "./useAuth";
 import useAxiosSecure from "./useAxiosSecure";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 const useMyCart = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const [progress, setProgress] = useState([]);
 
-  const {
-    isLoading,
-    error,
-    data: myBookings,
-    refetch,
-  } = useQuery({
-    queryKey: ["myBookings", user?.email],
+  const { data: allMyBookings = null, refetch } = useQuery({
+    queryKey: ["allMyBookings", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/my-bookings?email=${user?.email}`);
-      return res?.data;
+      return res.data;
     },
     enabled: !!user?.email,
   });
 
-  useEffect(() => {
-    if (myBookings) {
-      const checkProgress = myBookings.find(
-        (book) => book.status === "Progress"
-      );
-      setProgress(checkProgress);
-    }
-  }, [myBookings]);
-
-  return { myBookings, error, refetch, isLoading, progress };
+  return { allMyBookings, refetch };
 };
 
 export default useMyCart;

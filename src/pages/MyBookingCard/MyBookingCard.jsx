@@ -3,9 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import ReviewModal from "./ReviewModal";
 import useAuth from "../../Shared/useCustomHook/useAuth";
+import useMyCart from "../../Shared/useCustomHook/useMyCart";
 import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
 import useAxiosPublic from "../../Shared/useCustomHook/useAxiosPublic";
-import useMyCart from "../../Shared/useCustomHook/useMyCart";
 
 const MyBookingCard = ({ getBooking, refetch }) => {
   const { user } = useAuth();
@@ -47,7 +47,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        axiosNoToken.delete(`/booking/${idx}`).then((res) => {
+        axiosSecure.delete(`/booking/${idx}/${user?.email}`).then((res) => {
           if (res.data?.deletedCount > 0) {
             swal(`Booking on ${name} Deleted!`, {
               icon: "success",

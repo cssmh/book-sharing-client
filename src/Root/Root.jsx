@@ -18,6 +18,7 @@ import AdminDashboard from "../Dashboard/AdminDashboard/AdminDashboard";
 import AllBooksCols from "../Dashboard/AllBooksCols/AllBooksCols";
 import AllBookings from "../Dashboard/AllBookings/AllBookings";
 import BooksProviders from "../Dashboard/BooksProviders/BooksProviders";
+import NotifiedUser from "../Dashboard/NotifiedUser/NotifiedUser";
 
 const Root = createBrowserRouter([
   {
@@ -102,9 +103,11 @@ const Root = createBrowserRouter([
   {
     path: "/admin-dashboard",
     element: (
-      <AdminRoute>
-        <AdminDashboard />
-      </AdminRoute>
+      <PrivateRoute>
+        <AdminRoute>
+          <AdminDashboard />
+        </AdminRoute>
+      </PrivateRoute>
     ),
     children: [
       {
@@ -118,6 +121,10 @@ const Root = createBrowserRouter([
       {
         path: "/admin-dashboard/books-provider",
         element: <BooksProviders />,
+      },
+      {
+        path: "/admin-dashboard/user-new-book",
+        element: <NotifiedUser />,
       },
     ],
   },

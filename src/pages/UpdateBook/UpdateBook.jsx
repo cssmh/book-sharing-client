@@ -98,7 +98,6 @@ const UpdateBook = () => {
     axiosSecure
       .put(`/book/${_id}/${user?.email}`, updatedBookInfo)
       .then((res) => {
-        console.log(res.data);
         if (res.data?.modifiedCount > 0) {
           swal("Good job!", "Book Info Updated", "success");
           refetch();

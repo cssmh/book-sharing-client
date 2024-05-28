@@ -4,11 +4,15 @@ import MyPendingCard from "../MyPendingCard/MyPendingCard";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Shared/useCustomHook/useAuth";
 import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
+import useMyBooksHook from "../../Shared/useCustomHook/useMyBooksHook";
 
 const MyPending = () => {
   const { user } = useAuth();
   const [completedBookIds, setCompletedBookIds] = useState([]);
   const axiosSecure = useAxiosSecure();
+  const url = `/my-books?email=${user?.email}`;
+  const { isLoading: loading, bookData } = useMyBooksHook(url);
+  // to show a message only
 
   useEffect(() => {
     axiosSecure.get(`/unavailable-ids?email=${user?.email}`).then((res) => {
@@ -17,26 +21,24 @@ const MyPending = () => {
     });
   }, [user?.email, axiosSecure]);
 
-  const getMyPending = async () => {
-    const res = await axiosSecure.get(`/my-pending?email=${user?.email}`);
-    return res?.data;
-  };
-
   const {
     isLoading,
     error,
-    data: myPending,
+    data: allMyPending,
   } = useQuery({
-    queryKey: ["myPending", user?.email],
-    queryFn: getMyPending,
-    enabled: !!user?.email, // Ensure the query runs only when the email is available
+    queryKey: ["allMyPending", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/my-pending?email=${user?.email}`);
+      return res?.data;
+    },
+    enabled: !!user?.email,
   });
 
   const handleComplete = (bookId) => {
     setCompletedBookIds([...completedBookIds, bookId]);
   };
 
-  if (isLoading) {
+  if (loading || isLoading) {
     return (
       <div className="flex justify-center md:mt-[6px]">
         <FallingLines
@@ -59,7 +61,11 @@ const MyPending = () => {
 
   return (
     <div>
-      {myPending?.length == 0 ? (
+      {bookData.length == 0 ? (
+        <p className="text-center text-lg md:text-2xl my-2 md:my-4 font-semibold text-red-600 italic">
+          You have No added Books
+        </p>
+      ) : allMyPending?.length == 0 ? (
         <p className="text-center text-lg md:text-2xl my-2 md:my-4 font-semibold text-red-600 italic">
           No User Booked Your Books
         </p>
@@ -69,7 +75,7 @@ const MyPending = () => {
             User Booked Your Books
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-            {myPending.map((pending) => (
+            {allMyPending?.map((pending) => (
               <MyPendingCard
                 key={pending._id}
                 getPending={pending}

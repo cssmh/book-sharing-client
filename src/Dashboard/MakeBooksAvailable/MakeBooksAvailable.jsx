@@ -21,7 +21,7 @@ const MakeBooksAvailable = () => {
                 icon: "success",
               });
             } else {
-              swal("already available");
+              swal("Already available");
             }
           })
           .catch((err) => toast.error(err));
@@ -32,7 +32,7 @@ const MakeBooksAvailable = () => {
   return (
     <button
       onClick={handleMakeBooksAvailable}
-      className="bg-green-400 px-3 py-[6px] rounded-md text-white"
+      className="bg-green-500 px-3 py-[6px] rounded-md text-white"
     >
       Make all Books Available
     </button>

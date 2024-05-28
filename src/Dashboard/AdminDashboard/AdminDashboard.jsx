@@ -26,6 +26,11 @@ const AdminDashboard = () => {
                 Books Providers
               </button>
             </Link>
+            <Link to="/admin-dashboard/user-new-book">
+              <button className="btn btn-sm w-full md:w-auto">
+                Users for New Book
+              </button>
+            </Link>
           </div>
         </div>
         <div className="md:w-4/5">

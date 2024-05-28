@@ -1,15 +1,8 @@
 import swal from "sweetalert";
-import useAxiosPublic from "../../Shared/useCustomHook/useAxiosPublic";
+import useAuth from "../../Shared/useCustomHook/useAuth";
+import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
 
-const AllBookingsCard = ({
-  getIndex,
-  getAllBooking,
-  allBookStatus,
-  allBookings,
-  setAllBookings,
-  filterAllBookings,
-  setFilterAllBookings,
-}) => {
+const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
   const {
     _id,
     book_name,
@@ -22,7 +15,8 @@ const AllBookingsCard = ({
     completed_at,
   } = getAllBooking;
 
-  const axiosNoToken = useAxiosPublic();
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const handleDeleteByAdmin = (idx) => {
     swal({
       title: "Are you sure?",
@@ -33,19 +27,12 @@ const AllBookingsCard = ({
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axiosNoToken.delete(`/booking/${idx}`).then((res) => {
+        axiosSecure.delete(`/booking/${idx}/${user?.email}`).then((res) => {
           if (res.data?.deletedCount > 0) {
             swal("Booking Deleted!", {
               icon: "success",
             });
-            const remainingAllBookings = allBookings.filter(
-              (book) => book._id !== idx
-            );
-            setAllBookings(remainingAllBookings);
-            const remainingFilterBookings = filterAllBookings.filter(
-              (book) => book._id !== _id
-            );
-            setFilterAllBookings(remainingFilterBookings);
+            refetch();
           }
         });
       }
@@ -75,16 +62,14 @@ const AllBookingsCard = ({
             Status:{" "}
             <span
               className={
-                allBookStatus.length > 0
-                  ? "text-red-500"
-                  : status === "Pending"
+                status === "Pending"
                   ? "text-red-500"
                   : status === "Completed"
                   ? "text-green-500"
                   : "text-blue-500"
               }
             >
-              {allBookStatus.length > 0 ? allBookStatus : status}
+              {status}
             </span>
           </p>
           <p>{completed_at}</p>
