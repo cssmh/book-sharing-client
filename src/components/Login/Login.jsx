@@ -10,10 +10,9 @@ import useAuth from "../../Shared/useCustomHook/useAuth";
 const Login = () => {
   let [isOpen, setIsOpen] = useState(false);
   const [view, setView] = useState(true);
-  const { user, login, resetPassword, emailVerification, logOut } =
-    useAuth();
   const location = useLocation();
   const navigateTo = useNavigate();
+  const { user, login, resetPassword, emailVerification, logOut } = useAuth();
   function closeModal() {
     setIsOpen(false);
   }

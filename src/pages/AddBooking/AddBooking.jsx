@@ -12,7 +12,7 @@ const AddBooking = ({ getBookData }) => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const axiosNoToken = useAxiosPublic();
-  const { refetch: navCartRefetch } = useMyCart();
+  const { cartRefetch } = useMyCart();
 
   const {
     _id,
@@ -120,7 +120,7 @@ const AddBooking = ({ getBookData }) => {
         if (res.data?.insertedId) {
           swal("Congratulations!", "Booking Complete", "success");
           refetch();
-          navCartRefetch();
+          cartRefetch();
         }
       })
       .catch((err) => {

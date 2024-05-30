@@ -1,26 +1,9 @@
 import { FallingLines } from "react-loader-spinner";
 import MyBookingCard from "../MyBookingCard/MyBookingCard";
-import useAuth from "../../Shared/useCustomHook/useAuth";
-import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
+import useMyCart from "../../Shared/useCustomHook/useMyCart";
 
 const MyBookings = () => {
-  const { user } = useAuth();
-  const axiosSecure = useAxiosSecure();
-
-  const {
-    isLoading,
-    data: allMyBookings = null,
-    error,
-    refetch,
-  } = useQuery({
-    queryKey: ["allMyBookings", user?.email],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/my-bookings?email=${user?.email}`);
-      return res.data;
-    },
-    enabled: !!user?.email,
-  });
+  const { isLoading, myBookings, error, cartRefetch } = useMyCart();
 
   if (isLoading) {
     return (
@@ -45,7 +28,7 @@ const MyBookings = () => {
 
   return (
     <div>
-      {allMyBookings?.length === 0 ? (
+      {myBookings?.length === 0 ? (
         <p className="text-center text-lg md:text-2xl my-2 md:my-4 font-semibold text-red-600 italic">
           You have No Booking
         </p>
@@ -55,11 +38,11 @@ const MyBookings = () => {
             All Bookings made by you
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-            {allMyBookings?.map((booking) => (
+            {myBookings?.map((booking) => (
               <MyBookingCard
                 key={booking._id}
                 getBooking={booking}
-                refetch={refetch}
+                refetch={cartRefetch}
               ></MyBookingCard>
             ))}
           </div>

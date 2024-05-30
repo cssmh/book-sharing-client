@@ -1,5 +1,3 @@
-import React from "react";
-
 const AboutUs = () => {
   return (
     <div
@@ -14,16 +12,11 @@ const AboutUs = () => {
           of book lovers and avid readers of MBSTU students. With its
           user-friendly interface and extensive library of titles, BookHaven
           offers a unique space for users to discover, share, and discuss their
-          favorite books. At the core of BookHaven mission is the idea of
-          collaboration and connection through literature. Users can create
-          their personalized profiles, curate virtual bookshelves, and share
+          favorite books. Users can create their bookshelves, share,
           recommendations with friends and fellow members. The platform robust
           search and categorization features make it easy to explore a diverse
           range of genres, authors, and topics, ensuring that there is something
-          for every reader. One of the standout features of BookHaven is its
-          emphasis on community engagement. Users can join book clubs,
-          participate in discussion forums, and even organize local meetups with
-          other members who share their interests.
+          for every reader.
         </p>
       </div>
     </div>

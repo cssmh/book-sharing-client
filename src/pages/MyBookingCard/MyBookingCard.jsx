@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import ReviewModal from "./ReviewModal";
 import useAuth from "../../Shared/useCustomHook/useAuth";
-import useMyCart from "../../Shared/useCustomHook/useMyCart";
 import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
 import useAxiosPublic from "../../Shared/useCustomHook/useAxiosPublic";
 
@@ -11,7 +10,6 @@ const MyBookingCard = ({ getBooking, refetch }) => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const axiosNoToken = useAxiosPublic();
-  const { refetch: navCartRefetch } = useMyCart();
 
   let [isOpen, setIsOpen] = useState(false);
   function closeModal() {
@@ -53,7 +51,6 @@ const MyBookingCard = ({ getBooking, refetch }) => {
               icon: "success",
             });
             refetch();
-            navCartRefetch();
           }
         });
       }
