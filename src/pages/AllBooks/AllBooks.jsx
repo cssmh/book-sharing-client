@@ -42,7 +42,7 @@ const AllBooks = () => {
         </div>
       ) : (
         <div>
-          <div className="text-center my-6">
+          <div className="text-center my-4">
             <input
               type="text"
               name="name"
@@ -72,7 +72,7 @@ const AllBooks = () => {
             />
             {allBooks.length > 0 && (
               <div className="max-w-7xl mx-auto md:relative mt-4">
-                <h2 className="text-xl md:text-[28px] font-semibold italic text-center">
+                <h2 className="text-xl md:text-[26px] font-semibold italic text-center">
                   All Books Available for you
                 </h2>
               </div>

@@ -42,10 +42,8 @@ const AllBooksCols = () => {
     <div>
       <h1 className="text-center text-xl mb-5">All Books</h1>
       <p className="text-center text-lg md:text-2xl my-4 mx-5 md:mx-0">
-        Total{" "}
-          {allBooks?.length}{" "}
-        Books, Total {uniqueEmails?.length} Book Providers and Total{" "}
-        {allBookings?.length} Bookings
+        Total {allBooks?.length} Books, Total {uniqueEmails?.length} Book
+        Providers and Total {allBookings?.length} Bookings
       </p>
       <div className="overflow-x-auto">
         <table className="table max-w-7xl mx-auto">

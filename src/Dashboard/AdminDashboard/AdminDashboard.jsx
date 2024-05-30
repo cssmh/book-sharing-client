@@ -35,7 +35,7 @@ const AdminDashboard = () => {
         </div>
         <div className="md:w-4/5">
           <h1 className="ml-2 mt-2">Welcome Admin </h1>
-          <Outlet></Outlet>
+          <Outlet />
         </div>
       </div>
     </div>

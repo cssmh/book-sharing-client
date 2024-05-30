@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { FallingLines } from "react-loader-spinner";
 import MyPendingCard from "../MyPendingCard/MyPendingCard";
 import { useQuery } from "@tanstack/react-query";
@@ -8,23 +7,31 @@ import useMyBooksHook from "../../Shared/useCustomHook/useMyBooksHook";
 
 const MyPending = () => {
   const { user } = useAuth();
-  const [completedBookIds, setCompletedBookIds] = useState([]);
   const axiosSecure = useAxiosSecure();
   const url = `/my-books?email=${user?.email}`;
+  // to show "You have No added Books" message only
   const { isLoading: loading, bookData } = useMyBooksHook(url);
-  // to show a message only
 
-  useEffect(() => {
-    axiosSecure.get(`/unavailable-ids?email=${user?.email}`).then((res) => {
-      const bookIds = res?.data?.map((book) => book._id);
-      setCompletedBookIds(bookIds);
-    });
-  }, [user?.email, axiosSecure]);
+  const {
+    isLoading: idLoading,
+    data: unavailableIds = [],
+    refetch: refetchIds,
+  } = useQuery({
+    queryKey: ["unavailableIds", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `/unavailable-ids?email=${user?.email}`
+      );
+      return res.data?.map((book) => book._id);
+    },
+    enabled: !!user?.email,
+  });
 
   const {
     isLoading,
     error,
-    data: allMyPending,
+    data: allMyPending = [],
+    refetch,
   } = useQuery({
     queryKey: ["allMyPending", user?.email],
     queryFn: async () => {
@@ -34,11 +41,7 @@ const MyPending = () => {
     enabled: !!user?.email,
   });
 
-  const handleComplete = (bookId) => {
-    setCompletedBookIds([...completedBookIds, bookId]);
-  };
-
-  if (loading || isLoading) {
+  if (idLoading || loading || isLoading) {
     return (
       <div className="flex justify-center md:mt-[6px]">
         <FallingLines
@@ -79,8 +82,9 @@ const MyPending = () => {
               <MyPendingCard
                 key={pending._id}
                 getPending={pending}
-                completedBookIds={completedBookIds}
-                handleComplete={handleComplete}
+                unavailableIds={unavailableIds}
+                refetch={refetch}
+                refetchIds={refetchIds}
               ></MyPendingCard>
             ))}
           </div>

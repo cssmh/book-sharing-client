@@ -176,7 +176,7 @@ const BookDetails = () => {
                 </Link>
               )}
           </div>
-          {user?.email == "admin@admin.com" && (
+          {book_status === "available" && user?.email == "admin@admin.com" && (
             <button
               onClick={() => handleDeleteByAdmin(_id, book_name)}
               className="text-white bg-pink-500 font-medium rounded-lg text-sm px-4 py-2 text-center mx-2 md:mx-0"

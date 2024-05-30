@@ -12,16 +12,14 @@ const PopularBookCard = ({ getBook }) => {
   } = getBook;
 
   return (
-    <div className="card bg-base-100 shadow-xl py-4 md:hover:scale-105 transition-all duration-300">
-      <div data-aos="zoom-in" data-aos-duration="700" data-aos-offset="100">
-        <figure>
-          <img
-            src={book_image}
-            onContextMenu={(e) => e.preventDefault()}
-            className="rounded-xl w-[27%] md:w-[36%]"
-          />
-        </figure>
-      </div>
+    <div className="card bg-base-100 shadow-lg py-4 mb-4 h-[550px] border">
+      <figure>
+        <img
+          src={book_image}
+          onContextMenu={(e) => e.preventDefault()}
+          className="rounded-xl w-[27%] md:w-[36%]"
+        />
+      </figure>
       <div className="card-body items-center text-center p-0 px-3 gap-[0px]">
         <h2 className="text-xl md:text-2xl font-bold text-blue-900 mt-2">
           {book_name}

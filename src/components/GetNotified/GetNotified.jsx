@@ -62,7 +62,7 @@ const GetNotified = () => {
               name="email"
               required
               placeholder="Enter Your Email Here"
-              className="text-black rounded-lg w-4/5 mx-auto md:w-full border-green-500 block"
+              className="text-black rounded-lg w-4/5 mx-auto md:w-full focus:border-transparent block"
               style={{ outline: "none" }}
             />
             <button

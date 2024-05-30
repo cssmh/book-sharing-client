@@ -163,7 +163,7 @@ const Navbar = () => {
                     progress ? "bg-green-400 text-white" : ""
                   } badge badge-sm indicator-item`}
                 >
-                  {myBookings ? myBookings.length : 0}
+                  {myBookings.length || 0}
                 </span>
               </div>
             </div>

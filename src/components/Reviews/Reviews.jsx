@@ -10,12 +10,7 @@ const Reviews = () => {
         <p className="text-2xl md:text-[35px] font-semibold mx-2 md:mx-0">
           Hear from Happy <span className="text-green-400">Book Lovers</span>
         </p>
-        <p
-          data-aos="fade-up"
-          data-aos-anchor-placement="top-center"
-          data-aos-duration="1000"
-          className="text-gray-500 mt-1 font-semibold mx-4 md:mx-0"
-        >
+        <p className="text-gray-500 mt-1 font-semibold mx-4 md:mx-0">
           Discover the stories of satisfaction from our avid book lovers, as
           they share their experiences with our bookhaven.
         </p>
@@ -31,11 +26,7 @@ const Reviews = () => {
             by this website. I am committed to attention to detail and
             excellence, aiming for unparalleled quality.
           </p>
-          <div
-            data-aos="fade-up"
-            data-aos-duration="1000"
-            className="flex gap-2"
-          >
+          <div className="flex gap-2">
             <img
               src={Reviewer1}
               className="w-12 rounded-3xl"
@@ -57,11 +48,7 @@ const Reviews = () => {
             customer satisfaction is truly remarkable. I highly recommend their
             services.
           </p>
-          <div
-            data-aos="fade-up"
-            data-aos-duration="1000"
-            className="flex gap-2"
-          >
+          <div className="flex gap-2">
             <img
               src={Reviewer2}
               className="w-12 rounded-3xl"
@@ -83,11 +70,7 @@ const Reviews = () => {
             friendly. They made our project a huge success and exceeded our
             expectations
           </p>
-          <div
-            data-aos="fade-up"
-            data-aos-duration="1000"
-            className="flex gap-2"
-          >
+          <div className="flex gap-2">
             <img
               src={Reviewer3}
               className="w-12 rounded-3xl"
@@ -109,11 +92,7 @@ const Reviews = () => {
             consistently delivered top-notch solutions. They truly understand
             our business needs.
           </p>
-          <div
-            data-aos="fade-up"
-            data-aos-duration="1000"
-            className="flex gap-2"
-          >
+          <div className="flex gap-2">
             <img
               src={Reviewer4}
               className="w-12 rounded-3xl"

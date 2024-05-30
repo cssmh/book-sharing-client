@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Reader from "../../assets/Reader.png";
+
 const ShareMagic = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const text = `Sharing books allows ideas, stories, and knowledge to spread among
@@ -71,7 +72,7 @@ const ShareMagic = () => {
         >
           <img
             src={Reader}
-            className="w-1/2 md:w-[70%] mx-auto"
+            className="w-1/2 md:w-[85%] mx-auto"
             onContextMenu={(e) => e.preventDefault()}
           />
         </div>
