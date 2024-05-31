@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { HashLoader } from "react-spinners";
-import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import DeleteAllBookings from "../DeleteAllBookings/DeleteAllBookings";
 import MakeBookingsPending from "../MakeBookingsPending/MakeBookingsPending";
 import MakeBooksAvailable from "../MakeBooksAvailable/MakeBooksAvailable";
@@ -18,7 +18,7 @@ const AllBookings = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: "allBookings",
+    queryKey: ["allBookingsData"],
     queryFn: async () => {
       const res = await axiosSecure.get("/all-bookings");
       return res?.data;

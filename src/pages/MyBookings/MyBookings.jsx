@@ -1,9 +1,26 @@
 import { FallingLines } from "react-loader-spinner";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import MyBookingCard from "../MyBookingCard/MyBookingCard";
-import useMyCart from "../../Shared/useCustomHook/useMyCart";
+import { useQuery } from "@tanstack/react-query";
 
 const MyBookings = () => {
-  const { isLoading, myBookings, error, cartRefetch } = useMyCart();
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+
+  const {
+    isLoading,
+    data: myBookings = [],
+    error,
+    refetch,
+  } = useQuery({
+    queryKey: ["myBookings", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/my-bookings?email=${user?.email}`);
+      return res?.data;
+    },
+    enabled: !!user?.email,
+  });
 
   if (isLoading) {
     return (
@@ -42,7 +59,7 @@ const MyBookings = () => {
               <MyBookingCard
                 key={booking._id}
                 getBooking={booking}
-                refetch={cartRefetch}
+                refetch={refetch}
               ></MyBookingCard>
             ))}
           </div>

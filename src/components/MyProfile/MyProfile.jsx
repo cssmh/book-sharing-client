@@ -1,8 +1,8 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import useAuth from "../../Shared/useCustomHook/useAuth";
 import { Helmet } from "react-helmet-async";
-import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const MyProfile = () => {
   const { user, handleUpdateProfile } = useAuth();

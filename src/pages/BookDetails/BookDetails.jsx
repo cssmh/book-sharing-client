@@ -4,10 +4,10 @@ import { HashLoader } from "react-spinners";
 import { Helmet } from "react-helmet-async";
 import AddBooking from "../AddBooking/AddBooking";
 import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../Shared/useCustomHook/useAuth";
-import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
-import useAxiosPublic from "../../Shared/useCustomHook/useAxiosPublic";
-import useMyBooksHook from "../../Shared/useCustomHook/useMyBooksHook";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useMyBooks from "../../Hooks/useMyBooks";
 
 const BookDetails = () => {
   const { user } = useAuth();
@@ -40,7 +40,7 @@ const BookDetails = () => {
   } = loadBookData;
 
   const url = `/my-books?email=${book_provider_email}`;
-  const { isLoading, bookData } = useMyBooksHook(url);
+  const { isLoading, bookData } = useMyBooks(url);
 
   const handleDeleteByAdmin = (idx, book) => {
     swal({

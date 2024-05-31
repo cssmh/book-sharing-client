@@ -1,16 +1,16 @@
 import { FallingLines } from "react-loader-spinner";
 import MyPendingCard from "../MyPendingCard/MyPendingCard";
 import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../Shared/useCustomHook/useAuth";
-import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
-import useMyBooksHook from "../../Shared/useCustomHook/useMyBooksHook";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useMyBooks from "../../Hooks/useMyBooks";
 
 const MyPending = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const url = `/my-books?email=${user?.email}`;
   // to show "You have No added Books" message only
-  const { isLoading: loading, bookData } = useMyBooksHook(url);
+  const { isLoading: loading, bookData } = useMyBooks(url);
 
   const {
     isLoading: idLoading,

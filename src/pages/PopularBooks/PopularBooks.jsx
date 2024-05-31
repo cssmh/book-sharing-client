@@ -5,13 +5,15 @@ import { Autoplay, Pagination } from "swiper/modules";
 
 import { Link } from "react-router-dom";
 import SkeletonCard from "../SkeletonCard/SkeletonCard";
-import useAxiosPublic from "../../Shared/useCustomHook/useAxiosPublic";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import PopularBookCard from "../PopularBookCard/PopularBookCard";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 
 const PopularBooks = () => {
   const axiosNoToken = useAxiosPublic();
-
+  const [skeletonSize, setSkeletonSize] = useState(0);
+  
   const {
     isLoading,
     error,
@@ -19,15 +21,32 @@ const PopularBooks = () => {
   } = useQuery({
     queryKey: ["popularBooks"],
     queryFn: async () => {
-      const res = await axiosNoToken.get("/all-books?limit=7");
+      const res = await axiosNoToken.get("/all-books?limit=6");
       return res.data?.result;
     },
   });
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setSkeletonSize(1);
+      } else {
+        setSkeletonSize(3);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   if (isLoading) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto my-10">
-        {[...Array(3)].map((_, index) => (
+        {[...Array(skeletonSize)].map((_, index) => (
           <SkeletonCard key={index} />
         ))}
       </div>
@@ -36,7 +55,7 @@ const PopularBooks = () => {
 
   if (error) {
     return (
-      <div className="text-center text-xl md:text-2xl font-semibold text-red-600 italic mt-6">
+      <div className="text-center text-xl md:text-2xl font-semibold text-red-600 italic my-6">
         An error occurred while fetching popular books.
       </div>
     );
@@ -63,7 +82,6 @@ const PopularBooks = () => {
           className="mySwiper"
           slidesPerView={1}
           spaceBetween={10}
-          direction="rtl" // Set direction to right to left
           breakpoints={{
             480: {
               slidesPerView: 1,
@@ -77,11 +95,11 @@ const PopularBooks = () => {
             },
             1000: {
               slidesPerView: 2,
-              spaceBetween: 30,
+              spaceBetween: 20,
             },
             1200: {
               slidesPerView: 3,
-              spaceBetween: 30,
+              spaceBetween: 20,
             },
           }}
         >

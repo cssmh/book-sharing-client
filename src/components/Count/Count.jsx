@@ -1,11 +1,11 @@
 import React from "react";
 import pencil from "../../assets/pencil.jpg";
 import CountUp from "react-countup";
-import useProviderHook from "../../Shared/useCustomHook/useProviderHook";
 import { useInView } from "react-intersection-observer";
+import useBookProviders from "../../Hooks/useBookProviders";
 
 const Count = () => {
-  const { uniqueEmails, allBooks } = useProviderHook();
+  const { uniqueEmails, allBooks } = useBookProviders();
   const { ref, inView } = useInView({ triggerOnce: true });
 
   return (
@@ -40,7 +40,7 @@ const Count = () => {
               Providers
             </p>
             <p className="text-gray-500">
-              {inView && <CountUp end={uniqueEmails.length} duration={3} />}
+              {inView && <CountUp end={uniqueEmails?.length} duration={3} />}
             </p>
           </div>
           <div>

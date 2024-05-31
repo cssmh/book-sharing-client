@@ -1,18 +1,18 @@
 import swal from "sweetalert";
 import { HashLoader } from "react-spinners";
 import toast from "react-hot-toast";
+import useAuth from "../../Hooks/useAuth";
 import { Helmet } from "react-helmet-async";
-import useAuth from "../../Shared/useCustomHook/useAuth";
 import addBook from "../../assets/DataAdd.png";
-import useAxiosPublic from "../../Shared/useCustomHook/useAxiosPublic";
-import useMyBooksHook from "../../Shared/useCustomHook/useMyBooksHook";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useMyBooks from "../../Hooks/useMyBooks";
 
 const AddBook = () => {
   const { user } = useAuth();
   const axiosNoToken = useAxiosPublic();
 
   const url = `/my-books?email=${user?.email}`;
-  const { isLoading, bookData: myAddedBooks, refetch } = useMyBooksHook(url);
+  const { isLoading, bookData: myAddedBooks, refetch } = useMyBooks(url);
 
   const handleAddBook = (e) => {
     e.preventDefault();

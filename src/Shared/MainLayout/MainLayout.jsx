@@ -1,25 +1,30 @@
-// import { HashLoader } from "react-spinners";
-import { Outlet, useNavigation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
-import MainLoader from "./MainLoader";
+import BigLoader from "./BigLoader";
+import { useEffect, useState } from "react";
 
 const MainLayout = () => {
-  const navigation = useNavigation();
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+  }, []);
+
   return (
     <>
-      <Navbar />
-      <div className="min-h-[65vh] md:min-h-[70vh]">
-        {navigation.state === "loading" ? (
-          // <div className="flex justify-center mt-5">
-          //   <HashLoader color="#9933FF" size={32} />
-          // </div>
-          <MainLoader />
-        ) : (
-          <Outlet />
-        )}
-      </div>
-      <Footer />
+      {loading ? (
+        <BigLoader />
+      ) : (
+        <div>
+          <Navbar />
+          <div className="min-h-[65vh] md:min-h-[70vh]">
+            <Outlet />
+          </div>
+          <Footer />
+        </div>
+      )}
     </>
   );
 };

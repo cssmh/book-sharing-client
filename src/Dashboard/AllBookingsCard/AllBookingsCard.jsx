@@ -1,6 +1,6 @@
 import swal from "sweetalert";
-import useAuth from "../../Shared/useCustomHook/useAuth";
-import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
   const {

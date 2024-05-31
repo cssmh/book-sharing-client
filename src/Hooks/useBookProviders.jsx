@@ -1,7 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "./useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
-const useProviderHook = () => {
+const useBookProviders = () => {
   const axiosNoToken = useAxiosPublic();
 
   const { data: allBooks = [] } = useQuery({
@@ -50,6 +50,6 @@ const useProviderHook = () => {
   return { uniqueEmails, allBooks, booksByProvider };
 };
 
-export default useProviderHook;
+export default useBookProviders;
 
-// Used in Count, AllBooks, AllBooksCols, BooksProvider
+// Used in Count, AllBooksCols, BooksProvider

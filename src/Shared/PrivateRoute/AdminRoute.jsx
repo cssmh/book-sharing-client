@@ -1,6 +1,6 @@
+import useAuth from "../../Hooks/useAuth";
 import { Navigate } from "react-router-dom";
 import { HashLoader } from "react-spinners";
-import useAuth from "../useCustomHook/useAuth";
 
 const AdminRoute = ({ children }) => {
   const { user, loading } = useAuth();

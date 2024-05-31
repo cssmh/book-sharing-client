@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { useLocation, useNavigate } from "react-router-dom";
-import useAuth from "../../Shared/useCustomHook/useAuth";
+import useAuth from "../../Hooks/useAuth";
 
 const SocialLogin = () => {
   const navigateTo = useNavigate();

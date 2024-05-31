@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { HashLoader } from "react-spinners";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import SameProviderCard from "../SameProviderCard/SameProviderCard";
-import useAxiosPublic from "../../Shared/useCustomHook/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 
 const SameProvider = () => {

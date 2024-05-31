@@ -1,8 +1,8 @@
+import useAuth from "./useAuth";
 import useAxiosPublic from "./useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../Shared/useCustomHook/useAuth";
 
-const useMyBooksHook = (url) => {
+const useMyBooks = (url) => {
   const axiosNoToken = useAxiosPublic();
   const { user } = useAuth();
 
@@ -23,6 +23,6 @@ const useMyBooksHook = (url) => {
   return { isLoading, bookData, error, refetch };
 };
 
-export default useMyBooksHook;
+export default useMyBooks;
 
 // used in BookDetails, MyBooks, UpdateBook and AddBook

@@ -1,7 +1,7 @@
 import swal from "sweetalert";
 import { Link } from "react-router-dom";
-import useAuth from "../../Shared/useCustomHook/useAuth";
-import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const AllBooksRow = ({ getBooks, refetch }) => {
   const { user } = useAuth();

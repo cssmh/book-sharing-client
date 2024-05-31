@@ -1,8 +1,8 @@
 import swal from "sweetalert";
-import Banner from "../../assets/notification.jpg";
+import Banner from "../../assets/Notification.jpg";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../Shared/useCustomHook/useAxiosPublic";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const BannerImg = {
   backgroundImage: `url(${Banner})`,

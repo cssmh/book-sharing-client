@@ -2,13 +2,13 @@ import { useState } from "react";
 import Lottie from "lottie-react";
 import loggieData from "../../assets/Logo.json";
 import { Link, NavLink } from "react-router-dom";
-import useAuth from "../../Shared/useCustomHook/useAuth";
-import useMyCart from "../../Shared/useCustomHook/useMyCart";
+import useAuth from "../../Hooks/useAuth";
+import useMyCart from "../../Hooks/useMyCart";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [showProfileOptions, setShowProfileOptions] = useState(false);
-  const { myBookings, progress } = useMyCart();
+  const { bookings, progress } = useMyCart();
 
   const handleProfileClick = () => {
     setShowProfileOptions(!showProfileOptions);
@@ -40,7 +40,7 @@ const Navbar = () => {
   // console.log(greeting);
 
   return (
-    <div className="navbar bg-base-200 rounded-lg md:px-4">
+    <div className="navbar bg-base-200 rounded-lg md:px-4 py-0">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden px-2">
@@ -91,8 +91,8 @@ const Navbar = () => {
         </div>
         <Link to={"/"}>
           <div className="flex items-center gap-1">
-            <Lottie className="w-0 md:w-14" animationData={loggieData} />
-            <span className="md:ml-1 font-bold text-lg md:text-2xl">
+            <Lottie className="w-0 md:w-[52px]" animationData={loggieData} />
+            <span className="md:ml-1 font-bold text-[16px] md:text-[22px]">
               MBSTU BookHaven
             </span>
           </div>
@@ -163,7 +163,7 @@ const Navbar = () => {
                     progress ? "bg-green-400 text-white" : ""
                   } badge badge-sm indicator-item`}
                 >
-                  {myBookings.length || 0}
+                  {bookings.length || 0}
                 </span>
               </div>
             </div>
@@ -171,7 +171,7 @@ const Navbar = () => {
           </div>
         )}
         {/* cart btn */}
-        <div className="flex flex-col items-center justify-center text-center font-semibold text-sm md:btn pointer-events-none mr-1 md:mr-0">
+        <div className="flex flex-col items-center justify-center text-center font-semibold text-sm md:uppercase mx-[6px]">
           {user ? (
             <>
               <p>{greeting}</p>
@@ -188,7 +188,7 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar"
               onClick={handleProfileClick}
             >
-              <div className="w-[44px] md:w-12 rounded-full">
+              <div className="w-[44px] rounded-full">
                 <img src={user?.photoURL} alt={user?.displayName} />
               </div>
             </label>

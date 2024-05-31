@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import ResetPasswordModal from "./ResetPasswordModal";
-import useAuth from "../../Shared/useCustomHook/useAuth";
+import useAuth from "../../Hooks/useAuth";
 
 const Login = () => {
   let [isOpen, setIsOpen] = useState(false);

@@ -1,6 +1,6 @@
 import swal from "sweetalert";
 import toast from "react-hot-toast";
-import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const MakeBookingsPending = ({ refetch }) => {
   const axiosSecure = useAxiosSecure();

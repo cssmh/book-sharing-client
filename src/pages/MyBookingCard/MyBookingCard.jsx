@@ -2,14 +2,16 @@ import swal from "sweetalert";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import ReviewModal from "./ReviewModal";
-import useAuth from "../../Shared/useCustomHook/useAuth";
-import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
-import useAxiosPublic from "../../Shared/useCustomHook/useAxiosPublic";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useMyCart from "../../Hooks/useMyCart";
 
 const MyBookingCard = ({ getBooking, refetch }) => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const axiosNoToken = useAxiosPublic();
+  const { cartRefetch } = useMyCart();
 
   let [isOpen, setIsOpen] = useState(false);
   function closeModal() {
@@ -29,7 +31,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
   } = getBooking;
 
   const { data: bookData = [], refetch: reviewRefetch } = useQuery({
-    queryKey: ["bookData", book_id],
+    queryKey: ["getBookData", book_id],
     queryFn: async () => {
       const res = await axiosNoToken.get(`/book/${book_id}`);
       return res?.data;
@@ -51,6 +53,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
               icon: "success",
             });
             refetch();
+            cartRefetch();
           }
         });
       }

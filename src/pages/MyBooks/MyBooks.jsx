@@ -2,13 +2,13 @@ import { Helmet } from "react-helmet-async";
 import NoBook from "../../assets/NoBook.png";
 import MyBooksCard from "../MyBooksCard/MyBooksCard";
 import { FallingLines } from "react-loader-spinner";
-import useAuth from "../../Shared/useCustomHook/useAuth";
-import useMyBooksHook from "../../Shared/useCustomHook/useMyBooksHook";
+import useAuth from "../../Hooks/useAuth";
+import useMyBooks from "../../Hooks/useMyBooks";
 
 const MyBooks = () => {
   const { user } = useAuth();
   const url = `/my-books?email=${user?.email}`;
-  const { isLoading, bookData, error, refetch } = useMyBooksHook(url);
+  const { isLoading, bookData, error, refetch } = useMyBooks(url);
 
   if (isLoading) {
     return (

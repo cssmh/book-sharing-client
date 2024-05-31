@@ -3,10 +3,10 @@ import swal from "sweetalert";
 import toast from "react-hot-toast";
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../Shared/useCustomHook/useAuth";
-import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
-import useAxiosPublic from "../../Shared/useCustomHook/useAxiosPublic";
-import useMyCart from "../../Shared/useCustomHook/useMyCart";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useMyCart from "../../Hooks/useMyCart";
 
 const AddBooking = ({ getBookData }) => {
   const { user } = useAuth();

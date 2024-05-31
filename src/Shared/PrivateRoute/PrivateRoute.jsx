@@ -1,4 +1,4 @@
-import useAuth from "../useCustomHook/useAuth";
+import useAuth from "../../Hooks/useAuth";
 import { FallingLines } from "react-loader-spinner";
 import { Navigate, useLocation } from "react-router-dom";
 const PrivateRoute = ({ children }) => {

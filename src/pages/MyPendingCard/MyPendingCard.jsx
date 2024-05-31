@@ -1,7 +1,7 @@
 import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
   const {

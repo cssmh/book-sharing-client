@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import useProviderHook from "../../Shared/useCustomHook/useProviderHook";
+import useBookProviders from "../../Hooks/useBookProviders";
 
 const BooksProviders = () => {
-  const { booksByProvider } = useProviderHook();
+  const { booksByProvider } = useBookProviders();
   const providers = Object.entries(booksByProvider).map(
     ([email, count]) => ({
       email,

@@ -1,5 +1,5 @@
 import app from "../firebase/firebase.config";
-import useAxiosPublic from "../../Shared/useCustomHook/useAxiosPublic";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { createContext, useEffect, useState } from "react";
 import {
   GoogleAuthProvider,

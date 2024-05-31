@@ -6,10 +6,10 @@ import updateImage from "../../assets/Update.png";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../Shared/useCustomHook/useAuth";
-import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
-import useAxiosPublic from "../../Shared/useCustomHook/useAxiosPublic";
-import useMyBooksHook from "../../Shared/useCustomHook/useMyBooksHook";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useMyBooks from "../../Hooks/useMyBooks";
 
 const UpdateBook = () => {
   const { user } = useAuth();
@@ -20,7 +20,7 @@ const UpdateBook = () => {
   const axiosNoToken = useAxiosPublic();
 
   const url = `/my-books?email=${user?.email}`;
-  const { isLoading: loading, bookData: myBooks } = useMyBooksHook(url);
+  const { isLoading: loading, bookData: myBooks } = useMyBooks(url);
 
   const {
     data: bookData,

@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { HashLoader } from "react-spinners";
-import useAxiosPublic from "../../Shared/useCustomHook/useAxiosPublic";
 import AllBooksRow from "../AllBooksRow/AllBooksRow";
-import useAxiosSecure from "../../Shared/useCustomHook/useAxiosSecure";
-import useProviderHook from "../../Shared/useCustomHook/useProviderHook";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useBookProviders from "../../Hooks/useBookProviders";
 
 const AllBooksCols = () => {
   const axiosNoToken = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
-  const { uniqueEmails } = useProviderHook();
+  const { uniqueEmails } = useBookProviders();
 
   const {
     data: allBooks,
