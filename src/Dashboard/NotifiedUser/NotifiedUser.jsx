@@ -7,13 +7,6 @@ const NotifiedUser = () => {
   const axiosSecure = useAxiosSecure();
   const { isLoading, bookData: emails, refetch } = useMyBooks("/emails");
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center mt-5">
-        <HashLoader color="#00CC66" size={32} />
-      </div>
-    );
-  }
   const handleDelete = (idx) => {
     swal({
       title: "Are you sure?",
@@ -41,19 +34,25 @@ const NotifiedUser = () => {
       <h1 className="text-center text-xl mb-6">
         All Users To Get Notified for New Books
       </h1>
-      <div className="ml-4 space-y-1">
-        {emails.map((email, idx) => (
-          <div key={email._id}>
-            {idx + 1}.{" "}
-            <button
-              onClick={() => handleDelete(email._id)}
-              className="btn btn-sm rounded-lg px-3 btn-secondary"
-            >
-              {email.email}
-            </button>
-          </div>
-        ))}
-      </div>
+      {isLoading ? (
+        <div className="flex justify-center mt-5">
+          <HashLoader color="#00CC66" size={32} />
+        </div>
+      ) : (
+        <div className="ml-4 space-y-1">
+          {emails.map((email, idx) => (
+            <div key={email._id}>
+              {idx + 1}.{" "}
+              <button
+                onClick={() => handleDelete(email._id)}
+                className="btn btn-sm rounded-lg px-3 btn-secondary"
+              >
+                {email.email}
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

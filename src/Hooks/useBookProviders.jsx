@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 const useBookProviders = () => {
   const axiosNoToken = useAxiosPublic();
 
-  const { data: allBooks = [] } = useQuery({
+  const { data: allBooks = [], isLoading } = useQuery({
     queryKey: ["allBooksData"],
     queryFn: async () => {
       const res = await axiosNoToken.get("/all-books");
@@ -47,7 +47,7 @@ const useBookProviders = () => {
   const emails = allBooks?.map((book) => book.book_provider_email);
   const uniqueEmails = filterUniqueEmails(emails);
   const booksByProvider = countBooksByProvider(allBooks);
-  return { uniqueEmails, allBooks, booksByProvider };
+  return { isLoading, uniqueEmails, allBooks, booksByProvider };
 };
 
 export default useBookProviders;

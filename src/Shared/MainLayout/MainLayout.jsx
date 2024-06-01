@@ -5,11 +5,11 @@ import BigLoader from "./BigLoader";
 import { useEffect, useState } from "react";
 
 const MainLayout = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 1800);
   }, []);
 
   return (

@@ -21,7 +21,7 @@ const AllBooksCard = ({ getBook }) => {
           src={book_image}
           alt="book"
           onContextMenu={(e) => e.preventDefault()}
-          className="rounded-xl w-[27%] md:w-[36%]"
+          className="rounded-xl w-[27%] md:w-[33%]"
         />
       </figure>
       <div className="card-body items-center text-center p-0 px-3 gap-[0px]">

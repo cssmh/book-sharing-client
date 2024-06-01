@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { HashLoader } from "react-spinners";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import DeleteAllBookings from "../DeleteAllBookings/DeleteAllBookings";
@@ -9,50 +9,24 @@ import { useQuery } from "@tanstack/react-query";
 
 const AllBookings = () => {
   const axiosSecure = useAxiosSecure();
-  const [allBookings, setAllBookings] = useState([]);
-  const [filterAllBookings, setFilterAllBookings] = useState([]);
   const [filterType, setFilterType] = useState("All");
 
   const {
-    data: allBookingsData = [],
+    data: allBookings = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["allBookingsData"],
+    queryKey: ["allBookings", filterType],
     queryFn: async () => {
-      const res = await axiosSecure.get("/all-bookings");
+      const res = await axiosSecure.get(`/all-bookings?filter=${filterType}`);
+      console.log(res?.data);
       return res?.data;
     },
-    enabled: true,
-    // query will run immediately when the component mounts
   });
 
-  useEffect(() => {
-    setAllBookings(allBookingsData);
-    setFilterAllBookings(allBookingsData);
-  }, [allBookingsData]);
-
-  // filter type
   const handleFilter = (e) => {
-    const filterType = e.target.value;
-    setFilterType(filterType);
-    if (filterType === "All") {
-      setFilterAllBookings(allBookings);
-    } else {
-      const filterNow = allBookings.filter(
-        (allType) => allType.status === filterType
-      );
-      setFilterAllBookings(filterNow);
-    }
+    setFilterType(e.target.value);
   };
-
-  if (isLoading) {
-    return (
-      <div className="flex justify-center mt-5">
-        <HashLoader color="#00CC66" size={32} />
-      </div>
-    );
-  }
 
   return (
     <div>
@@ -76,19 +50,23 @@ const AllBookings = () => {
           <option value="Completed">Completed</option>
         </select>
       </div>
-      {allBookings.length === 0 ? (
+      {isLoading ? (
+        <div className="flex justify-center mt-5">
+          <HashLoader color="#00CC66" size={32} />
+        </div>
+      ) : allBookings?.length === 0 ? (
         <p className="text-center text-xl md:text-2xl font-semibold text-red-600 mt-10">
-          No Booking
+          No {filterType !== "All" && filterType} Booking
         </p>
       ) : (
         <div className="max-w-[1180px] mx-2 lg:mx-auto">
-          {filterAllBookings.length === 0 ? (
+          {allBookings?.length === 0 ? (
             <p className="text-center text-xl md:text-2xl font-semibold text-red-600 mt-10">
               No {filterType} Booking!
             </p>
           ) : (
             <div className="space-y-3">
-              {filterAllBookings?.map((booking, index) => (
+              {allBookings?.map((booking, index) => (
                 <AllBookingsCard
                   key={booking._id}
                   getIndex={index + 1}

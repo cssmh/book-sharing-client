@@ -22,7 +22,7 @@
 10. Users can add, delete, and update books. When adding a book, there is regex validation for a valid phone number, ensuring only valid Bangladeshi phone numbers are accepted.
 11. On the 'My Added Books' page, users can view the books they have added. For each book, they have the option to view details, update information, or delete the book. However, if a book has been taken by someone and is therefore unavailable, only the 'Details' button will be displayed.
 12. When a user updates their profile photo and name, these changes will automatically reflect across all their book data, including the provider's name and photo.
-13. User react-countup and react-intersection-observer package in Count component to count the number everytime it scroll down.
+13. Used react-countup and react-intersection-observer package in Count component to count the number everytime it scroll down.
 14. Duplicate book entries are not allowed, and clicking multiple times at once will not result in adding multiple book purchase requests.
 15. Users cannot collect their own books. Each book can only be collected by a user once.
 16. The book details page includes various conditions, such as only allowing the owner to update the book and displaying a "More Books of That User" button if the user has more than one book. The purchase button is hidden from the owner on the book details page.

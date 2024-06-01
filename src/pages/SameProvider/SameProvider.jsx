@@ -1,12 +1,12 @@
 import { useParams } from "react-router-dom";
-import { HashLoader } from "react-spinners";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import SameProviderCard from "../SameProviderCard/SameProviderCard";
 import { useQuery } from "@tanstack/react-query";
+import SkeletonCard from "../SkeletonCard/SkeletonCard";
 
 const SameProvider = () => {
   const { email } = useParams();
-  const axiosNoToken = useAxiosPublic()
+  const axiosNoToken = useAxiosPublic();
 
   const { data: loadSameProvider, isLoading } = useQuery({
     queryKey: ["loadSameProvider", email],
@@ -23,8 +23,10 @@ const SameProvider = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center mt-5">
-        <HashLoader color="#9933FF" size={32} />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto my-10">
+        {[...Array(3)].map((_, index) => (
+          <SkeletonCard key={index} />
+        ))}
       </div>
     );
   }

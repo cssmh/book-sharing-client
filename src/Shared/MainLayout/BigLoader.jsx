@@ -1,4 +1,4 @@
-import Loader from "../../assets/Loader.gif";
+import Loader from "../../assets/BigLoader.gif";
 
 const BigLoader = () => {
   return (

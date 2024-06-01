@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { HashLoader } from "react-spinners";
 import AllBooksCard from "../AllBooksCard/AllBooksCard";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import SkeletonCard from "../SkeletonCard/SkeletonCard";
 
 const AllBooks = () => {
   const axiosNoToken = useAxiosPublic();
@@ -60,8 +60,10 @@ const AllBooks = () => {
         />
       </div>
       {isLoading ? (
-        <div className="flex justify-center mt-5">
-          <HashLoader color="#9933FF" size={32} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto my-10">
+          {[...Array(3)].map((_, index) => (
+            <SkeletonCard key={index} />
+          ))}
         </div>
       ) : (
         <div>
