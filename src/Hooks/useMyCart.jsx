@@ -11,9 +11,7 @@ const useMyCart = () => {
   const { data: bookings = [], refetch: cartRefetch } = useQuery({
     queryKey: ["bookings", user?.email],
     queryFn: async () => {
-      const res = await axiosNoToken.get(`/my-bookings?email=${user?.email}`, {
-        withCredentials: true,
-      });
+      const res = await axiosNoToken.get(`/my-bookings?email=${user?.email}`, { withCredentials: true });
       return res?.data;
     },
     enabled: !!user?.email,
