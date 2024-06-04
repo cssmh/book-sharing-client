@@ -1,5 +1,5 @@
 import swal from "sweetalert";
-import Banner from "../../assets/Notification.jpg";
+import Banner from "../../assets/Notified.jpg";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
@@ -66,8 +66,6 @@ const GetNotified = () => {
               style={{ outline: "none" }}
             />
             <button
-              data-aos="fade-up"
-              data-aos-duration="1000"
               className="mt-3 px-4 py-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-green-400 rounded-lg hover:bg-blue-400 focus:outline-none sm:mx-2"
             >
               Notify Me

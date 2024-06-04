@@ -1,4 +1,3 @@
-import React from "react";
 import pencil from "../../assets/pencil.jpg";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";

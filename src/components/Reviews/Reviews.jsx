@@ -99,7 +99,7 @@ const Reviews = () => {
               onContextMenu={(e) => e.preventDefault()}
             />
             <div>
-              <p className="font-semibold">Mr. Tourist</p>
+              <p className="font-semibold">Mr. Sol0 Tourist</p>
               <p className="text-gray-500">Best Provider & Reader</p>
             </div>
           </div>

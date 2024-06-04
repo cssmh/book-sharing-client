@@ -10,7 +10,7 @@ const MainLayout = () => {
   const axiosNoToken = useAxiosPublic();
   const [loading, setLoading] = useState(true);
   const [msg, setMsg] = useState(false);
-  
+
   const { isLoading, data = null } = useQuery({
     queryKey: ["status"],
     queryFn: async () => {
@@ -48,7 +48,7 @@ const MainLayout = () => {
   return (
     <div>
       <Navbar />
-      <div className="min-h-[65vh] md:min-h-[70vh]">
+      <div className="min-h-[calc(100vh-493px)] md:min-h-[calc(100vh-337px)] lg:min-h-[calc(100vh-337px)]">
         <Outlet />
       </div>
       <Footer />
