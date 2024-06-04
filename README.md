@@ -61,3 +61,49 @@ MBSTU BookHaven is a comprehensive platform for book sharing, enabling users to 
    - JWT for secure authorization.
    - React CountUp and Intersection Observer for dynamic counting.
    - Booking status management and duplicate booking prevention.
+
+## Packages Used
+
+### Dependencies
+
+- @emotion/react
+- @emotion/styled
+- @headlessui/react
+- @material-tailwind/react
+- @mui/material
+- @mui/styled-engine-sc
+- @tanstack/react-query
+- aos
+- axios
+- firebase
+- flowbite-react
+- lottie-react
+- match-sorter
+- postcss
+- react
+- react-countup
+- react-dom
+- react-helmet-async
+- react-hot-toast
+- react-icons
+- react-intersection-observer
+- react-loader-spinner
+- react-router-dom
+- react-spinners
+- sort-by
+- sweetalert
+- swiper
+
+### Dev Dependencies
+
+- @types/react
+- @types/react-dom
+- @vitejs/plugin-react
+- autoprefixer
+- daisyui
+- eslint
+- eslint-plugin-react
+- eslint-plugin-react-hooks
+- eslint-plugin-react-refresh
+- tailwindcss
+- vite
