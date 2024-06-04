@@ -204,7 +204,7 @@ const UpdateBook = () => {
           ></textarea>
         </div>
         <div className="form-control mt-6">
-          <button className="btn border-green-400 hover:border-green-400 bg-base-100 hover:bg-green-400 text-green-400 hover:text-white">
+          <button className="btn btn-primary text-white">
             Update Book Details
           </button>
         </div>

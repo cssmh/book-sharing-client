@@ -242,7 +242,7 @@ const AddBooking = ({ getBookData }) => {
               ></textarea>
             </div>
             <div className="form-control mt-5">
-              <button className="btn btn-outline border-none bg-green-400 hover:bg-green-400 text-white">
+              <button className="btn btn-primary text-white">
                 Add Booking
               </button>
             </div>

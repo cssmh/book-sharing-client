@@ -1,6 +1,6 @@
 import Reviewer1 from "../../assets/Reviewer1.png";
 import Reviewer2 from "../../assets/Reviewer2.jpg";
-import Reviewer3 from "../../assets/Reviewer3.jpeg";
+import Reviewer3 from "../../assets/Reviewer3.webp";
 import Reviewer4 from "../../assets/Reviewer4.jpeg";
 
 const Reviews = () => {

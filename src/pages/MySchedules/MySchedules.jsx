@@ -39,8 +39,8 @@ const MySchedules = () => {
           My Pending
         </button>
       </div>
-      {activeSchedule === "MyBookings" && <MyBookings></MyBookings>}
-      {activeSchedule === "MyPending" && <MyPending></MyPending>}
+      {activeSchedule === "MyBookings" && <MyBookings />}
+      {activeSchedule === "MyPending" && <MyPending />}
     </div>
   );
 };

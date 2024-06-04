@@ -70,8 +70,6 @@ const PopularBooks = () => {
       </div>
       <div>
         <Swiper
-          // data-aos="fade-up"
-          // data-aos-delay="600"
           speed={1000}
           grabCursor={true}
           autoplay={{
@@ -104,7 +102,7 @@ const PopularBooks = () => {
           }}
         >
           {popularBooks?.map((book) => (
-            <SwiperSlide key={book._id} style={{ minWidth: "300px" }}>
+            <SwiperSlide key={book._id}>
               <PopularBookCard getBook={book} />
             </SwiperSlide>
           ))}

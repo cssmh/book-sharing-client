@@ -5,13 +5,11 @@ import ReviewModal from "./ReviewModal";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import useMyCart from "../../Hooks/useMyCart";
 
 const MyBookingCard = ({ getBooking, refetch }) => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const axiosNoToken = useAxiosPublic();
-  const { cartRefetch } = useMyCart();
 
   let [isOpen, setIsOpen] = useState(false);
   function closeModal() {
@@ -53,7 +51,6 @@ const MyBookingCard = ({ getBooking, refetch }) => {
               icon: "success",
             });
             refetch();
-            cartRefetch();
           }
         });
       }
@@ -133,7 +130,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
           <button
             type="button"
             onClick={() => setIsOpen(true)}
-            className="text-white bg-green-400 font-medium rounded-lg text-sm px-5 py-2.5"
+            className="bg-primary py-2 rounded-xl text-white mt-1"
           >
             Add a Review
           </button>

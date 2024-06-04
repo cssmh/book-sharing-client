@@ -3,11 +3,17 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import EditModal from "./EditModal";
 
 const MyProfile = () => {
   const { user, handleUpdateProfile } = useAuth();
   const axiosSecure = useAxiosSecure();
   const { photoURL, email, displayName, metadata, reloadUserInfo } = user;
+
+  let [isOpen, setIsOpen] = useState(false);
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   // account created and last login
   const date = new Date(parseInt(metadata.createdAt, 10));
@@ -44,12 +50,13 @@ const MyProfile = () => {
       .then(() => {
         setDp(photo);
         setName(name);
-        toast.success("update success");
         axiosSecure
           .put(`/my-all-books/${user?.email}`, updateMyAllBookInfo)
           .then((res) => {
             if (res.data?.modifiedCount > 0) {
+              setIsOpen(false);
               toast.success("Book information updated");
+              toast.success("update success");
             }
           });
       })
@@ -61,7 +68,7 @@ const MyProfile = () => {
       <Helmet>
         <title>BookHaven | My Profile</title>
       </Helmet>
-      <div className="flex flex-col-reverse md:flex-row items-center gap-5 mt-6">
+      <div className="flex flex-col md:flex-row items-center h-[76vh] md:gap-5">
         <div className="w-1/2">
           <img src={dp} className="rounded-lg lg:w-60 ml-auto px-3 lg:px-0" />
         </div>
@@ -70,48 +77,22 @@ const MyProfile = () => {
           <p>{email}</p>
           <p>Account Created: {accountCreated}</p>
           <p>Last Login: {lastLogin}</p>
+          <button
+            type="button"
+            onClick={() => setIsOpen(true)}
+            className="rounded-lg py-1 mx-auto btn-primary w-32 text-white"
+          >
+            Update Profile
+          </button>
         </div>
       </div>
-      <form onSubmit={handleUpdate} className="card-body pb-0">
-        <p className="md:text-3xl font-semibold text-center">
-          Update Profile info
-        </p>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Your Name</span>
-          </label>
-          <input
-            type="text"
-            defaultValue={name}
-            name="name"
-            className="input input-bordered text-gray-500"
-            required
-          />
-        </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Photo URL</span>
-          </label>
-          <input
-            type="text"
-            name="photo"
-            defaultValue={
-              dp ===
-              "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/default.jpg"
-                ? ""
-                : dp
-            }
-            className="input input-bordered text-gray-500"
-          />
-        </div>
-        <div className="form-control mt-6">
-          <input
-            className="btn bg-green-400 hover:bg-green-400 text-white"
-            type="submit"
-            value="Update Info"
-          />
-        </div>
-      </form>
+      <EditModal
+        closeModal={closeModal}
+        isOpen={isOpen}
+        dp={dp}
+        name={name}
+        handleUpdate={handleUpdate}
+      ></EditModal>
     </div>
   );
 };

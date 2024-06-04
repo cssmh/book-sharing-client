@@ -27,7 +27,7 @@ const ReviewModal = ({ closeModal, book_name, isOpen, handleAddReview }) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-medium text-center leading-6 text-gray-900"
@@ -36,21 +36,18 @@ const ReviewModal = ({ closeModal, book_name, isOpen, handleAddReview }) => {
                 </Dialog.Title>
                 <form onSubmit={handleAddReview}>
                   <div>
-                    <label htmlFor="text" className="block mb-2 text-sm">
+                    <label htmlFor="text" className="mb-2 text-sm">
                       Your review
                     </label>
                     <textarea
                       name="review"
-                      rows="5"
+                      rows="8"
                       required
                       placeholder="Share your thoughts about your experience getting and reading this book..."
-                      className="w-full sm:w-3/4 md:w-full rounded-sm border-gray-300 focus:border-transparent"
+                      className="w-full text-sm sm:w-3/4 md:w-full rounded-lg border-gray-300 focus:border-transparent"
                     ></textarea>
                   </div>
-                  <button
-                    type="submit"
-                    className="w-full p-2 mt-2 text-center font-medium text-white transition duration-200 rounded shadow-md bg-green-400"
-                  >
+                  <button className="w-full bg-teal-200 py-2 rounded-2xl text-white mt-1">
                     Submit
                   </button>
                 </form>

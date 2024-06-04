@@ -70,14 +70,14 @@ const MyBooksCard = ({ getBook, refetch }) => {
       <div className="pb-5">
         <div className="space-x-1">
           <Link to={`/book/${_id}`}>
-            <button className="btn border-green-400 hover:border-green-400 bg-yellow-50 hover:bg-green-400 text-green-400 hover:text-white">
+            <button className="btn border-primary hover:border-primary bg-yellow-50 hover:bg-primary text-primary hover:text-white">
               Details
             </button>
           </Link>
           {book_status === "available" && (
             <>
               <Link to={`/update-book/${_id}`}>
-                <button className="btn border-green-400 bg-base-100 hover:bg-green-400 text-green-400 hover:text-white">
+                <button className="btn border-primary bg-base-100 hover:bg-primary text-primary hover:text-white">
                   Update
                 </button>
               </Link>

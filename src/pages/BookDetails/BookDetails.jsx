@@ -170,7 +170,7 @@ const BookDetails = () => {
             {book_status === "available" &&
               book_provider_email === user?.email && (
                 <Link to={`/update-book/${_id}`}>
-                  <button className="text-white bg-green-400 font-medium rounded-lg text-sm px-4 py-2 text-center me-2 mt-1 mx-2 md:mx-0">
+                  <button className="text-white bg-primary  font-medium rounded-lg text-sm px-4 py-2 text-center me-2 mt-1 mx-2 md:mx-0">
                     Update This Book
                   </button>
                 </Link>

@@ -55,7 +55,7 @@ const Count = () => {
               {inView && (
                 <CountUp
                   end={
-                    uniqueEmails.length == 0 ? 0 : uniqueEmails.length * 2 + 61
+                    uniqueEmails.length == 0 ? 0 : uniqueEmails.length * 9 + 24
                   }
                   duration={3}
                 />
