@@ -1,4 +1,4 @@
-# MBSTU BookHaven
+# MBSTU BookHaven <img alt="" src="https://raw.githubusercontent.com/cssmh/book-sharing-client/main/src/assets/Favicon.png" width="450" height="70" style="max-width: 100%;">
 
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
@@ -14,12 +14,8 @@
 
 - [Description](#description)
 - [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Packages Used](#packages-used)
-- [How to Contribute](#how-to-contribute)
-- [License](#license)
 - [Credits](#credits)
+- [Packages Used](#packages-used)
 
 ## Description
 
@@ -62,27 +58,21 @@ MBSTU BookHaven is a comprehensive platform for book sharing, enabling users to 
    - React CountUp and Intersection Observer for dynamic counting.
    - Booking status management and duplicate booking prevention.
 
+## Credits
+
+This project was created by [Md. Momin Hossain](https://github.com/cssmh).
+
 ## Packages Used
 
 ### Dependencies
 
-- @emotion/react
-- @emotion/styled
-- @headlessui/react
-- @material-tailwind/react
-- @mui/material
-- @mui/styled-engine-sc
 - @tanstack/react-query
 - aos
 - axios
 - firebase
 - flowbite-react
 - lottie-react
-- match-sorter
-- postcss
-- react
 - react-countup
-- react-dom
 - react-helmet-async
 - react-hot-toast
 - react-icons
@@ -90,20 +80,12 @@ MBSTU BookHaven is a comprehensive platform for book sharing, enabling users to 
 - react-loader-spinner
 - react-router-dom
 - react-spinners
-- sort-by
 - sweetalert
 - swiper
 
 ### Dev Dependencies
 
-- @types/react
 - @types/react-dom
-- @vitejs/plugin-react
-- autoprefixer
 - daisyui
-- eslint
-- eslint-plugin-react
-- eslint-plugin-react-hooks
-- eslint-plugin-react-refresh
 - tailwindcss
 - vite
