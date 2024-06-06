@@ -181,7 +181,7 @@ const Navbar = () => {
           </div>
         )}
         {/* cart btn */}
-        <div className="flex flex-col items-center justify-center text-center font-semibold text-sm md:uppercase mx-[6px]">
+        <div className="flex flex-col items-center justify-center text-center font-semibold text-sm md:uppercase mx-[7px]">
           {user ? (
             <>
               <p>{greeting}</p>
