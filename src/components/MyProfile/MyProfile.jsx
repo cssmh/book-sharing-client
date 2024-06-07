@@ -4,11 +4,14 @@ import { Helmet } from "react-helmet-async";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import EditModal from "./EditModal";
+import useMyBooks from "../../Hooks/useMyBooks";
 
 const MyProfile = () => {
   const { user, handleUpdateProfile } = useAuth();
   const axiosSecure = useAxiosSecure();
   const { photoURL, email, displayName, metadata, reloadUserInfo } = user;
+  const url = `/my-books?email=${user?.email}`;
+  const { bookData } = useMyBooks(url);
 
   let [isOpen, setIsOpen] = useState(false);
   function closeModal() {
@@ -41,7 +44,7 @@ const MyProfile = () => {
       "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/default.jpg";
     const photo = get_image.trim() !== "" ? get_image : defaultImageUrl;
 
-    const updateMyAllBookInfo = {
+    const updateMyAllBooksInfo = {
       name,
       photo,
     };
@@ -50,15 +53,17 @@ const MyProfile = () => {
       .then(() => {
         setDp(photo);
         setName(name);
-        axiosSecure
-          .put(`/my-all-books/${user?.email}`, updateMyAllBookInfo)
-          .then((res) => {
-            if (res.data?.modifiedCount > 0) {
-              setIsOpen(false);
-              toast.success("Book information updated");
-              toast.success("update success");
-            }
-          });
+        if (bookData?.length > 0) {
+          axiosSecure
+            .put(`/my-all-books/${user?.email}`, updateMyAllBooksInfo)
+            .then((res) => {
+              if (res.data?.modifiedCount > 0) {
+                toast.success("Book information updated");
+              }
+            });
+        }
+        toast.success("update success");
+        setIsOpen(false);
       })
       .catch((err) => toast.error(err.message));
   };

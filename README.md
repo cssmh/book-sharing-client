@@ -62,7 +62,7 @@ MBSTU BookHaven is a comprehensive platform for book sharing, enabling users to 
    - JWT for secure authorization.
    - React CountUp and Intersection Observer for dynamic counting.
    - Booking status management and duplicate booking prevention.
-   - Provider marks a booking as 'Completed'; other bookings for the same book will be disabled.
+   - Provider marks a booking as 'Completed' other bookings for the same book will be disabled.
 
 ## Packages Used
 

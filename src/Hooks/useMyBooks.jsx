@@ -17,7 +17,8 @@ const useMyBooks = (url) => {
       const res = await axiosNoToken.get(url);
       return res?.data;
     },
-    enabled: !!user?.email, // Ensure the query runs only when the email is available
+    enabled: !!user?.email, 
+    // Ensure the query runs only when the email is available
   });
 
   return { isLoading, bookData, error, refetch };
@@ -25,4 +26,4 @@ const useMyBooks = (url) => {
 
 export default useMyBooks;
 
-// used in BookDetails, MyBooks, UpdateBook and AddBook
+// used in BookDetails, MyBooks, UpdateBook, AddBook and MyProfile

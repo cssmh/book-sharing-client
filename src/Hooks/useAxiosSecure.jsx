@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
-  baseURL: "https://book-sharing-server.vercel.app",
+  baseURL: import.meta.env.VITE_server_URL,
   withCredentials: true,
 });
 
@@ -19,7 +19,10 @@ const useAxiosSecure = () => {
       },
       (error) => {
         // console.log("error in interceptor", error.response);
-        if (error.response.status === 401 || error.response.status === 403) {
+        if (
+          error.response &&
+          (error.response?.status === 401 || error.response?.status === 403)
+        ) {
           swal(
             "Your Session has expired",
             "Please log in again to continue",

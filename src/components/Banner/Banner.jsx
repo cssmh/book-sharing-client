@@ -29,7 +29,7 @@ const Banner = () => {
             data-aos-duration="900"
             className="px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white capitalize bg-green-400 rounded-md hover:bg-green-400/90 lg:mx-0 lg:w-auto focus:outline-none transition duration-300 flex gap-1 aos-init"
           >
-            <span>Start sharing now</span>
+            Start sharing now
             <span>
               <svg
                 stroke="currentColor"
