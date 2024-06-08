@@ -63,31 +63,32 @@ MBSTU BookHaven is a comprehensive platform for book sharing, enabling users to 
    - React CountUp and Intersection Observer for dynamic counting.
    - Booking status management and duplicate booking prevention.
    - Provider marks a booking as 'Completed' other bookings for the same book will be disabled.
+   - Implement pagination to seamlessly integrate with search, maintaining accurate page count and limiting results per page.
 
 ## Packages Used
 
 ### Dependencies
 
-- @tanstack/react-query
-- aos
-- axios
-- firebase
-- flowbite-react
-- lottie-react
-- react-countup
-- react-helmet-async
-- react-hot-toast
-- react-icons
-- react-intersection-observer
-- react-loader-spinner
-- react-router-dom
-- react-spinners
-- sweetalert
-- swiper
+- [@tanstack/react-query](https://www.npmjs.com/package/@tanstack/react-query)
+- [aos](https://www.npmjs.com/package/aos)
+- [axios](https://www.npmjs.com/package/axios)
+- [firebase](https://www.npmjs.com/package/firebase)
+- [flowbite-react](https://www.npmjs.com/package/flowbite-react)
+- [lottie-react](https://www.npmjs.com/package/lottie-react)
+- [react-countup](https://www.npmjs.com/package/react-countup)
+- [react-helmet-async](https://www.npmjs.com/package/react-helmet-async)
+- [react-hot-toast](https://www.npmjs.com/package/react-hot-toast)
+- [react-icons](https://www.npmjs.com/package/react-icons)
+- [react-intersection-observer](https://www.npmjs.com/package/react-intersection-observer)
+- [react-loader-spinner](https://www.npmjs.com/package/react-loader-spinner)
+- [react-router-dom](https://www.npmjs.com/package/react-router-dom)
+- [react-spinners](https://www.npmjs.com/package/react-spinners)
+- [sweetalert](https://www.npmjs.com/package/sweetalert)
+- [swiper](https://www.npmjs.com/package/swiper)
 
 ### Dev Dependencies
 
-- @types/react-dom
-- daisyui
-- tailwindcss
-- vite
+- [@types/react-dom](https://www.npmjs.com/package/@types/react-dom)
+- [daisyui](https://daisyui.com/docs/install)
+- [tailwindcss](https://tailwindcss.com/docs/guides/vite)
+- [vite](https://www.npmjs.com/package/vite)

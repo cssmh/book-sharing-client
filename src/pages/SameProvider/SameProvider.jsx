@@ -1,15 +1,15 @@
 import { useParams } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import SameProviderCard from "../SameProviderCard/SameProviderCard";
 import { useQuery } from "@tanstack/react-query";
 import SkeletonCard from "../SkeletonCard/SkeletonCard";
+import AllBooksCard from "../AllBooksCard/AllBooksCard";
 
 const SameProvider = () => {
   const { email } = useParams();
   const axiosNoToken = useAxiosPublic();
 
-  const { data: loadSameProvider, isLoading } = useQuery({
-    queryKey: ["loadSameProvider", email],
+  const { data: sameProvider, isLoading } = useQuery({
+    queryKey: ["sameProvider", email],
     queryFn: async () => {
       const res = await axiosNoToken.get(`my-books?email=${email}`);
       return res?.data;
@@ -17,7 +17,7 @@ const SameProvider = () => {
   });
 
   const bookText =
-    loadSameProvider?.length === 1 || loadSameProvider?.length === 0
+    sameProvider?.length === 1 || sameProvider?.length === 0
       ? "Book"
       : "Books";
 
@@ -34,11 +34,12 @@ const SameProvider = () => {
   return (
     <div>
       <p className="my-4 text-center font-semibold text-2xl">
-        Total {loadSameProvider?.length} {bookText}
+        Total {sameProvider?.length} {bookText}
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-        {loadSameProvider?.map((book) => (
-          <SameProviderCard key={book._id} getBooks={book}></SameProviderCard>
+        {/* used AllBooksCard because of same data */}
+        {sameProvider?.map((book) => (
+          <AllBooksCard key={book._id} getBook={book}></AllBooksCard>
         ))}
       </div>
     </div>

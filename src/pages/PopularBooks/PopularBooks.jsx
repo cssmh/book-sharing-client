@@ -9,11 +9,17 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import PopularBookCard from "../PopularBookCard/PopularBookCard";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import useResLimit from "../../Hooks/useResLimit";
 
 const PopularBooks = () => {
   const axiosNoToken = useAxiosPublic();
-  const [skeletonSize, setSkeletonSize] = useState(0);
-  
+  const isMobile = useResLimit("(max-width: 767px)");
+  const [skeletonSize, setSkeletonSize] = useState(isMobile ? 1 : 3);
+
+  useEffect(() => {
+    setSkeletonSize(isMobile ? 1 : 3);
+  }, [isMobile]);
+
   const {
     isLoading,
     error,
@@ -25,23 +31,6 @@ const PopularBooks = () => {
       return res.data?.result;
     },
   });
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 640) {
-        setSkeletonSize(1);
-      } else {
-        setSkeletonSize(3);
-      }
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   if (isLoading) {
     return (

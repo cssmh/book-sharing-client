@@ -4,8 +4,10 @@ import AllBooksRow from "../AllBooksRow/AllBooksRow";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useBookProviders from "../../Hooks/useBookProviders";
+import useAuth from "../../Hooks/useAuth";
 
 const AllBooksCols = () => {
+  const { user } = useAuth();
   const axiosNoToken = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
   const { uniqueEmails } = useBookProviders();
@@ -20,6 +22,7 @@ const AllBooksCols = () => {
       const res = await axiosNoToken.get("/all-books");
       return res.data?.result;
     },
+    enabled: !!user,
   });
 
   const { data: allBookings, isLoading: bookingLoading } = useQuery({

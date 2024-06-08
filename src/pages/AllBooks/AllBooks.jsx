@@ -2,15 +2,21 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import AllBooksCard from "../AllBooksCard/AllBooksCard";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
 import SkeletonCard from "../SkeletonCard/SkeletonCard";
+import { useQuery } from "@tanstack/react-query";
+import useResLimit from "../../Hooks/useResLimit";
 
 const AllBooks = () => {
   const axiosNoToken = useAxiosPublic();
   const [searchTerm, setSearchTerm] = useState("");
-  const [totalBooksCount, setTotalBooksCount] = useState(0);
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(9);
+  const isMobile = useResLimit("(max-width: 767px)");
+  const [limit, setLimit] = useState(isMobile ? 6 : 9);
+
+  useEffect(() => {
+    setLimit(isMobile ? 6 : 9);
+    setPage(1);
+  }, [isMobile]);
 
   const url = `/all-books?page=${page}&limit=${limit}&search=${searchTerm}`;
   const { data = [], isLoading } = useQuery({
@@ -21,16 +27,6 @@ const AllBooks = () => {
     },
   });
 
-  useEffect(() => {
-    if (searchTerm) {
-      setTotalBooksCount(data?.result?.length);
-    } else {
-      setTotalBooksCount(data?.totalBooks);
-    }
-  }, [searchTerm, data?.result?.length, data?.totalBooks]);
-
-  const booksPerPageCount = Math.ceil(totalBooksCount / limit) || 0;
-
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
     setPage(1);
@@ -39,8 +35,9 @@ const AllBooks = () => {
   const handlePrevious = () => {
     if (page > 1) setPage(page - 1);
   };
+
   const handleNext = () => {
-    if (page < booksPerPageCount) setPage(page + 1);
+    if (page < data?.totalPages) setPage(page + 1);
   };
 
   return (
@@ -53,10 +50,10 @@ const AllBooks = () => {
           id="search"
           type="text"
           name="name"
+          onChange={handleSearch}
           placeholder="Search for Books or Authors"
           className="input input-bordered rounded-3xl min-w-[75%] md:min-w-[320px] border-red-500"
           style={{ outline: "none" }}
-          onChange={handleSearch}
         />
       </div>
       {isLoading ? (
@@ -94,9 +91,9 @@ const AllBooks = () => {
                     Previous
                   </button>
                   <div className="flex flex-wrap m-0 justify-center md:justify-start">
-                    {Array(booksPerPageCount)
+                    {Array(data?.totalPages)
                       .fill(0)
-                      .map((getPage, idx) => {
+                      .map((_, idx) => {
                         const pageNumber = idx + 1;
                         return (
                           <button
@@ -126,7 +123,7 @@ const AllBooks = () => {
                       setLimit(parseInt(e.target.value));
                       setPage(1);
                     }}
-                    defaultValue={limit}
+                    value={limit}
                     className="input input-bordered border-green-400 text-green-500 outline-none"
                   >
                     <option value="3">3</option>
