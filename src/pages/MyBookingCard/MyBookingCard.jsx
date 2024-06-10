@@ -1,4 +1,4 @@
-import Swal from "sweetalert2";
+import swal from "sweetalert";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import ReviewModal from "./ReviewModal";
@@ -37,20 +37,17 @@ const MyBookingCard = ({ getBooking, refetch }) => {
   });
 
   const handleBookingDelete = (idx, name) => {
-    Swal.fire({
+    swal({
       title: "Are you sure?",
       text: "Once deleted, it can't be recovered!",
       icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
         axiosSecure.delete(`/booking/${idx}/${user?.email}`).then((res) => {
           if (res.data?.deletedCount > 0) {
-            Swal.fire({
-              text: `Booking on ${name} Deleted!`,
+            swal(`Booking on ${name} Deleted!`, {
               icon: "success",
             });
             refetch();
@@ -77,7 +74,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
       .patch(`/add-review/${book_id}`, { review, name })
       .then((res) => {
         if (res.data?.acknowledged) {
-          Swal.fire({
+          swal({
             title: "Thank You",
             text: "Your review has been added.",
             icon: "success",

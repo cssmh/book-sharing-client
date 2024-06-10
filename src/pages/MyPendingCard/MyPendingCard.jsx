@@ -1,7 +1,7 @@
-import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import swal from "sweetalert";
 
 const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
   const {
@@ -35,7 +35,7 @@ const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
       })
       .then((res) => {
         if (res.data?.modifiedCount > 0) {
-          Swal.fire({
+          swal({
             title: "Thank You!",
             text: `Updated to ${updatedPendingStatus}`,
             icon: "success",

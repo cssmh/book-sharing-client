@@ -1,4 +1,4 @@
-import Swal from "sweetalert2";
+import swal from "sweetalert";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import { HashLoader } from "react-spinners";
@@ -99,7 +99,12 @@ const UpdateBook = () => {
       .put(`/book/${_id}/${user?.email}`, updatedBookInfo)
       .then((res) => {
         if (res.data?.modifiedCount > 0) {
-          Swal.fire("Good job!", "Book Info Updated", "success");
+          swal({
+            title: "Good job!",
+            text: "Book Info Updated",
+            icon: "success",
+            timer: 2000,
+          });
           refetch();
           navigateTo(-1);
         }

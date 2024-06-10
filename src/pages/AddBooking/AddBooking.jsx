@@ -1,4 +1,4 @@
-import Swal from "sweetalert2";
+import swal from "sweetalert";
 import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
 import toast from "react-hot-toast";
 import { useEffect, useRef, useState } from "react";
@@ -118,7 +118,7 @@ const AddBooking = ({ getBookData }) => {
       .post("/add-booking", AddBookingData)
       .then((res) => {
         if (res.data?.insertedId) {
-          Swal.fire({
+          swal({
             title: "Congratulations",
             text: "Booking Complete",
             icon: "success",

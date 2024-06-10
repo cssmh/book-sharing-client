@@ -1,32 +1,27 @@
 import toast from "react-hot-toast";
-import Swal from "sweetalert2";
+import swal from "sweetalert";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const MakeBooksAvailable = () => {
   const axiosSecure = useAxiosSecure();
   const handleMakeBooksAvailable = () => {
-    Swal.fire({
+    swal({
       title: "Are you sure?",
       text: "You're making all books available",
       icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, do it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
         axiosSecure
           .put("/available-all-books")
           .then((res) => {
             if (res.data?.modifiedCount > 0) {
-              Swal.fire({
-                text: "all books are now available",
+              swal("all books are now available", {
                 icon: "success",
               });
             } else {
-              Swal.fire({
-                text: "already available",
-              });
+              swal("Already available");
             }
           })
           .catch((err) => toast.error(err));

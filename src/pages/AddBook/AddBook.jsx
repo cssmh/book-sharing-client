@@ -1,4 +1,4 @@
-import Swal from "sweetalert2";
+import swal from "sweetalert";
 import { HashLoader } from "react-spinners";
 import toast from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
@@ -59,7 +59,7 @@ const AddBook = () => {
       .post("/book", BookInformation)
       .then((res) => {
         if (res.data?.insertedId) {
-          Swal.fire({
+          swal({
             title: "Thank You!",
             text: `${book_name} added`,
             icon: "success",

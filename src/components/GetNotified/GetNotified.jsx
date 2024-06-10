@@ -1,4 +1,4 @@
-import Swal from "sweetalert2";
+import swal from "sweetalert";
 import Banner from "../../assets/Notified.jpg";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
@@ -39,7 +39,7 @@ const GetNotified = () => {
 
     axiosNoToken.post("/email", { email }).then((res) => {
       if (res.data?.insertedId) {
-        Swal.fire({
+        swal({
           title: "Thank you",
           text: `We will update you via ${email}`,
           icon: "success",

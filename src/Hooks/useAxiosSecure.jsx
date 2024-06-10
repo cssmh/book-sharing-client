@@ -1,5 +1,5 @@
 import axios from "axios";
-import Swal from "sweetalert2";
+import swal from "sweetalert";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
@@ -23,7 +23,7 @@ const useAxiosSecure = () => {
           error.response &&
           (error.response?.status === 401 || error.response?.status === 403)
         ) {
-          Swal.fire(
+          swal(
             "Your Session has expired",
             "Please log in again to continue",
             "warning"

@@ -1,4 +1,4 @@
-import Swal from "sweetalert2";
+import swal from "sweetalert";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import { Helmet } from "react-helmet-async";
@@ -47,29 +47,26 @@ const BookDetails = () => {
   const { isLoading, bookData } = useMyBooks(url);
 
   const handleDeleteByAdmin = (idx, book) => {
-    Swal.fire({
+    swal({
       title: "Are you sure?",
       text: "Once deleted, it can't be recovered!",
       icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        // main code
         axiosSecure.delete(`/book/${idx}/${user?.email}`).then((res) => {
           if (res.data?.deletedCount > 0) {
-            Swal.fire({
-              text: `${book} Deleted!`,
+            swal(`${book} Deleted!`, {
               icon: "success",
             });
-            refetch();
-            navigateTo(-1);
           }
+          navigateTo(-1);
         });
       }
     });
-  };
+  }
 
   if (isLoading || bookDataLoading) {
     return (
