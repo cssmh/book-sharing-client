@@ -1,4 +1,4 @@
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 import { HashLoader } from "react-spinners";
 import toast from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
@@ -59,7 +59,12 @@ const AddBook = () => {
       .post("/book", BookInformation)
       .then((res) => {
         if (res.data?.insertedId) {
-          swal("Thank You!", `${book_name} Book added`, "success");
+          Swal.fire({
+            title: "Thank You!",
+            text: `${book_name} added`,
+            icon: "success",
+            timer: 2000,
+          });
           form.reset();
           refetch();
         }
@@ -78,8 +83,8 @@ const AddBook = () => {
         </div>
       ) : (
         <>
-          <div className="flex flex-col md:flex-row justify-center items-center gap-3 mt-6 px-1 md:px-0">
-            <div className="w-2/3 md:w-1/3">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-3 mt-3 px-1 md:px-0">
+            <div className="w-2/3 md:w-[31%]">
               <img
                 className="md:w-[65%] mx-auto"
                 src={addBook}

@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
 import banner from "../../assets/Banner.jpeg";
+import useAuth from "../../Hooks/useAuth";
+import useMyBooks from "../../Hooks/useMyBooks";
 
 const Banner = () => {
+  const { user } = useAuth();
+  const url = `/my-books?email=${user?.email}`;
+  const { isLoading, bookData } = useMyBooks(url);
+  
   return (
     <div className="px-6 pt-10 lg:pt-24 mx-auto text-center dark:bg-gray-950">
       <div className="max-w-4xl mx-auto flex flex-col justify-center items-center">
@@ -30,7 +36,7 @@ const Banner = () => {
             className="px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white capitalize bg-green-400 rounded-md hover:bg-green-400/90 lg:mx-0 lg:w-auto focus:outline-none transition duration-300 flex gap-1 aos-init"
           >
             Start sharing now
-            <span>
+            {isLoading ? (
               <svg
                 stroke="currentColor"
                 fill="none"
@@ -45,10 +51,32 @@ const Banner = () => {
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                  d="M12 11V7a4 4 0 00-8 0v4M5 11h14v12H5V11z"
                 ></path>
               </svg>
-            </span>
+            ) : (
+              bookData && (
+                <span>
+                  <svg
+                    stroke="currentColor"
+                    fill="none"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    className="text-lg"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                    ></path>
+                  </svg>
+                </span>
+              )
+            )}
           </button>
         </Link>
         <p

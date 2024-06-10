@@ -1,28 +1,33 @@
-import swal from "sweetalert";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const DeleteAllBookings = ({ refetch }) => {
   const axiosSecure = useAxiosSecure();
   const handleDeleteAllBookings = () => {
-    swal({
+    Swal.fire({
       title: "Are you sure?",
       text: "You're deleting all bookings",
       icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
         axiosSecure
           .delete("/all-bookings")
           .then((res) => {
-            if (res.data.deletedCount > 0) {
-              swal("all bookings are deleted!", {
+            if (res.data?.deletedCount > 0) {
+              Swal.fire({
+                text: "all bookings are deleted!",
                 icon: "success",
               });
               refetch();
             } else {
-              swal("no bookings available");
+              Swal.fire({
+                text: "no bookings available",
+              });
             }
           })
           .catch((err) => toast.error(err));

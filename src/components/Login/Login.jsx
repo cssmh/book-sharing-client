@@ -2,6 +2,7 @@ import toast from "react-hot-toast";
 import SocialLogin from "./SocialLogin";
 import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
+import { LiaSpinnerSolid } from "react-icons/lia";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import ResetPasswordModal from "./ResetPasswordModal";
@@ -12,7 +13,8 @@ const Login = () => {
   const [view, setView] = useState(true);
   const location = useLocation();
   const navigateTo = useNavigate();
-  const { user, login, resetPassword, emailVerification, logOut } = useAuth();
+  const { user, login, resetPassword, emailVerification, logOut, loading } =
+    useAuth();
   function closeModal() {
     setIsOpen(false);
   }
@@ -86,7 +88,7 @@ const Login = () => {
       <Helmet>
         <title>BookHaven | Login</title>
       </Helmet>
-      <h2 className="text-3xl font-bold italic text-center">Please Login</h2>
+      <h2 className="text-3xl font-bold text-center">Please Login</h2>
       <form onSubmit={handleLogin} className=" md:w-3/4 lg:w-1/2 mx-auto">
         <div className="form-control">
           <label className="label">
@@ -131,7 +133,11 @@ const Login = () => {
         </div>
         <div className="form-control mt-6">
           <button className="btn border-green-400 hover:border-green-400 bg-base-100 hover:bg-green-400 text-green-400 hover:text-white">
-            Login
+            {loading ? (
+              <LiaSpinnerSolid className="animate-spin text-lg" />
+            ) : (
+              "Login"
+            )}
           </button>
         </div>
       </form>

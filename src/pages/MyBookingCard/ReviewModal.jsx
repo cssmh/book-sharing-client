@@ -27,27 +27,32 @@ const ReviewModal = ({ closeModal, book_name, isOpen, handleAddReview }) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-medium text-center leading-6 text-gray-900"
                 >
                   {book_name} Book Review
                 </Dialog.Title>
-                <form onSubmit={handleAddReview}>
+                <form onSubmit={handleAddReview} className="mt-4">
                   <div>
-                    <label htmlFor="text" className="mb-2 text-sm">
-                      Your review
+                    <label htmlFor="review" className="sr-only">
+                      Review
                     </label>
                     <textarea
+                      id="review"
                       name="review"
                       rows="8"
                       required
-                      placeholder="Share your thoughts about your experience getting and reading this book..."
-                      className="w-full text-sm sm:w-3/4 md:w-full rounded-lg border-gray-300 focus:border-transparent"
+                      placeholder="Share your experience..."
+                      className="text-sm w-full rounded-lg border border-gray-300 mt-3 p-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+                      aria-label="Share your experience"
                     ></textarea>
                   </div>
-                  <button className="w-full bg-teal-200 py-2 rounded-2xl text-white mt-1">
+                  <button
+                    type="submit"
+                    className="w-full bg-primary py-2 rounded-2xl text-white mt-4 hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary-dark focus:ring-opacity-75"
+                  >
                     Submit
                   </button>
                 </form>

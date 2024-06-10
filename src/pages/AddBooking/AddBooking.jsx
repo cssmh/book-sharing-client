@@ -1,5 +1,5 @@
+import Swal from "sweetalert2";
 import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
-// import swal from "sweetalert";
 import toast from "react-hot-toast";
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -7,7 +7,6 @@ import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useMyCart from "../../Hooks/useMyCart";
-import Swal from "sweetalert2";
 
 const AddBooking = ({ getBookData }) => {
   const { user } = useAuth();
@@ -120,10 +119,10 @@ const AddBooking = ({ getBookData }) => {
       .then((res) => {
         if (res.data?.insertedId) {
           Swal.fire({
+            title: "Congratulations",
+            text: "Booking Complete",
             icon: "success",
-            title: "Booking Complete",
-            showConfirmButton: false,
-            timer: 1500
+            timer: 2000,
           });
           refetch();
           cartRefetch();

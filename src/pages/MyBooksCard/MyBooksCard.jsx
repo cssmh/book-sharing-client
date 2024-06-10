@@ -1,5 +1,5 @@
-import swal from "sweetalert";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
@@ -17,18 +17,20 @@ const MyBooksCard = ({ getBook, refetch }) => {
   } = getBook;
 
   const handleDelete = (idx, name) => {
-    swal({
+    Swal.fire({
       title: "Are you sure?",
       text: "Once deleted, it can't be recovered!",
       icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        // main code
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
         axiosSecure.delete(`/book/${idx}/${user?.email}`).then((res) => {
           if (res.data?.deletedCount > 0) {
-            swal(`${name} Deleted!`, {
+            Swal.fire({
+              text: `${name} Deleted!`,
               icon: "success",
             });
             refetch();

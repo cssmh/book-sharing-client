@@ -1,5 +1,5 @@
+import Swal from "sweetalert2";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import swal from "sweetalert";
 import { HashLoader } from "react-spinners";
 import { Helmet } from "react-helmet-async";
 import AddBooking from "../AddBooking/AddBooking";
@@ -16,7 +16,11 @@ const BookDetails = () => {
   const axiosSecure = useAxiosSecure();
   const axiosNoToken = useAxiosPublic();
 
-  const { data: loadBookData = [], isLoading: bookDataLoading } = useQuery({
+  const {
+    data: loadBookData = [],
+    isLoading: bookDataLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["loadBookData", id],
     queryFn: async () => {
       const res = await axiosNoToken.get(`/book/${id}`);
@@ -43,22 +47,25 @@ const BookDetails = () => {
   const { isLoading, bookData } = useMyBooks(url);
 
   const handleDeleteByAdmin = (idx, book) => {
-    swal({
+    Swal.fire({
       title: "Are you sure?",
       text: "Once deleted, it can't be recovered!",
       icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        // main code
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
         axiosSecure.delete(`/book/${idx}/${user?.email}`).then((res) => {
           if (res.data?.deletedCount > 0) {
-            swal(`${book} Deleted!`, {
+            Swal.fire({
+              text: `${book} Deleted!`,
               icon: "success",
             });
+            refetch();
+            navigateTo(-1);
           }
-          navigateTo(-1);
         });
       }
     });
@@ -78,7 +85,7 @@ const BookDetails = () => {
         <title>{book_name}</title>
       </Helmet>
       <div className="card max-w-xl mx-auto bg-amber-100 shadow-xl p-6 my-6">
-        <h2 className="text-center font-bold text-3xl italic text-blue-800">
+        <h2 className="text-center font-bold text-3xl text-blue-800">
           Book Provider Information
         </h2>
         <figure className="px-10 pt-5">

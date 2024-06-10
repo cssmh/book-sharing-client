@@ -1,4 +1,4 @@
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import { HashLoader } from "react-spinners";
@@ -99,7 +99,7 @@ const UpdateBook = () => {
       .put(`/book/${_id}/${user?.email}`, updatedBookInfo)
       .then((res) => {
         if (res.data?.modifiedCount > 0) {
-          swal("Good job!", "Book Info Updated", "success");
+          Swal.fire("Good job!", "Book Info Updated", "success");
           refetch();
           navigateTo(-1);
         }
@@ -112,8 +112,8 @@ const UpdateBook = () => {
       <Helmet>
         <title>Update {book_name}</title>
       </Helmet>
-      <div className="flex flex-col md:flex-row justify-center items-center gap-3 mt-6 px-1 md:px-0">
-        <div className="w-2/3 md:w-1/3">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-3 mt-3 px-1 md:px-0">
+        <div className="w-2/3 md:w-[31%]">
           <img
             src={updateImage}
             className="md:w-[55%] mx-auto"

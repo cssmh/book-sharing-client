@@ -2,10 +2,21 @@ import pencil from "../../assets/pencil.jpg";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import useBookProviders from "../../Hooks/useBookProviders";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const Count = () => {
+  const axiosNoToken = useAxiosPublic();
   const { uniqueEmails, allBooks } = useBookProviders();
   const { ref, inView } = useInView({ triggerOnce: true });
+
+  const { data: totalBookings } = useQuery({
+    queryKey: ["totalBookings"],
+    queryFn: async () => {
+      const res = await axiosNoToken.get("/total-bookings");
+      return res.data?.result;
+    },
+  });
 
   return (
     <div
@@ -50,19 +61,10 @@ const Count = () => {
               data-aos-duration="1000"
               className="text-blue-500"
             >
-              Readers
+              Bookings
             </p>
             <p className="text-gray-500">
-              {inView && (
-                <CountUp
-                  end={
-                    uniqueEmails?.length === 0
-                      ? 0
-                      : (allBooks?.length + uniqueEmails?.length) * 4
-                  }
-                  duration={3}
-                />
-              )}
+              {inView && <CountUp end={totalBookings || 0} duration={3} />}
             </p>
           </div>
         </div>

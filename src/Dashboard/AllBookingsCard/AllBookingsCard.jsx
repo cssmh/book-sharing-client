@@ -1,5 +1,5 @@
-import swal from "sweetalert";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
@@ -18,18 +18,20 @@ const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const handleDeleteByAdmin = (idx) => {
-    swal({
+    Swal.fire({
       title: "Are you sure?",
       text: "Once deleted, it can't be recovered!",
       icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        // main code
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
         axiosSecure.delete(`/booking/${idx}/${user?.email}`).then((res) => {
           if (res.data?.deletedCount > 0) {
-            swal("Booking Deleted!", {
+            Swal.fire({
+              text: "Booking Deleted!",
               icon: "success",
             });
             refetch();

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
+import { LiaSpinnerSolid } from "react-icons/lia";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
@@ -13,8 +14,14 @@ const Register = () => {
   const [passError, setPassError] = useState("");
   const [passSuccess, setPassSuccess] = useState("");
   const [confirmPassError, setConfirmPassError] = useState("");
-  const { user, createUser, handleUpdateProfile, emailVerification, logOut } =
-    useAuth();
+  const {
+    user,
+    createUser,
+    handleUpdateProfile,
+    emailVerification,
+    logOut,
+    loading,
+  } = useAuth();
   const navigateTo = useNavigate();
   const location = useLocation();
 
@@ -67,7 +74,7 @@ const Register = () => {
     const password = e.target.value;
     setPassword(password);
     validatePassword(password);
-    validateConfirmPassword(confirmPassword); 
+    validateConfirmPassword(confirmPassword);
     // Re-validate confirm password when main password changes
   };
 
@@ -117,7 +124,7 @@ const Register = () => {
       <Helmet>
         <title>BookHaven | Register</title>
       </Helmet>
-      <h2 className="text-3xl font-bold italic text-center">Please Register</h2>
+      <h2 className="text-3xl font-bold text-center">Please Register</h2>
       <form onSubmit={handleRegister} className="md:w-3/4 lg:w-1/2 mx-auto">
         <div className="form-control">
           <label className="label">
@@ -209,7 +216,11 @@ const Register = () => {
         </div>
         <div className="form-control mt-5">
           <button className="btn border-green-400 hover:border-green-400 bg-base-100 hover:bg-green-400 text-green-400 hover:text-white">
-            Register
+            {loading ? (
+              <LiaSpinnerSolid className="animate-spin text-lg" />
+            ) : (
+              "Register"
+            )}
           </button>
         </div>
       </form>

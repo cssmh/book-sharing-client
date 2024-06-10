@@ -1,4 +1,4 @@
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 import Banner from "../../assets/Notified.jpg";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
@@ -39,7 +39,12 @@ const GetNotified = () => {
 
     axiosNoToken.post("/email", { email }).then((res) => {
       if (res.data?.insertedId) {
-        swal("Thank you", `We will update you via ${email}`, "success");
+        Swal.fire({
+          title: "Thank you",
+          text: `We will update you via ${email}`,
+          icon: "success",
+          timer: 2000,
+        });
         refetch();
       }
     });
@@ -65,9 +70,7 @@ const GetNotified = () => {
               className="text-black rounded-lg w-4/5 mx-auto md:w-full focus:border-transparent block"
               style={{ outline: "none" }}
             />
-            <button
-              className="mt-3 px-4 py-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-green-400 rounded-lg hover:bg-blue-400 focus:outline-none sm:mx-2"
-            >
+            <button className="mt-3 px-4 py-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-green-400 rounded-lg hover:bg-blue-400 focus:outline-none sm:mx-2">
               Notify Me
             </button>
           </form>

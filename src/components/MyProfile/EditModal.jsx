@@ -32,26 +32,30 @@ const EditModal = ({ closeModal, isOpen, dp, name, handleUpdate }) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <DialogPanel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 pb- text-left align-middle shadow-xl transition-all">
-                <form onSubmit={handleUpdate} className="card-body py-0 px-1">
+              <DialogPanel className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Title className="text-lg font-medium text-center leading-6 text-gray-900 mb-1">
+                  Edit Your Profile
+                </Dialog.Title>
+                <form onSubmit={handleUpdate}>
                   <div className="form-control">
-                    <label className="label">
+                    <label htmlFor="name" className="label pt-0">
                       <span className="label-text">Your Name</span>
                     </label>
                     <input
+                      id="name"
                       type="text"
                       defaultValue={name}
                       name="name"
                       required
-                      className="input input-bordered rounded-2xl text-gray-500 focus:border-transparent"
-                      style={{ outline: "none" }}
+                      className="input input-bordered rounded-2xl text-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent w-full p-2"
                     />
                   </div>
-                  <div className="form-control">
-                    <label className="label">
+                  <div className="form-control mt-4">
+                    <label htmlFor="photo" className="label">
                       <span className="label-text">Photo URL</span>
                     </label>
                     <input
+                      id="photo"
                       type="text"
                       name="photo"
                       required
@@ -61,11 +65,13 @@ const EditModal = ({ closeModal, isOpen, dp, name, handleUpdate }) => {
                           ? ""
                           : dp
                       }
-                      className="input input-bordered rounded-2xl text-gray-500 focus:border-transparent"
-                      style={{ outline: "none" }}
+                      className="input input-bordered rounded-2xl text-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent w-full p-2"
                     />
                   </div>
-                  <button className="w-full bg-primary py-[10px] rounded-2xl text-white mt-2">
+                  <button
+                    type="submit"
+                    className="w-full bg-primary py-2 rounded-2xl text-white mt-6 mb-2 hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary-dark focus:ring-opacity-75"
+                  >
                     Update
                   </button>
                 </form>

@@ -36,7 +36,6 @@
     "react-router-dom": "^6.18.0",
     "react-spinners": "^0.13.8",
     "sort-by": "^0.0.2",
-    "sweetalert": "^2.1.2",
     "sweetalert2": "^11.11.1",
     "swiper": "^11.1.3"
   },

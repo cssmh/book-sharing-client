@@ -19,7 +19,6 @@ const AllBookings = () => {
     queryKey: ["allBookings", filterType],
     queryFn: async () => {
       const res = await axiosSecure.get(`/all-bookings?filter=${filterType}`);
-      console.log(res?.data);
       return res?.data;
     },
   });
