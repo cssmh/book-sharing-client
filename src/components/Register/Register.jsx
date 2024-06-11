@@ -106,13 +106,15 @@ const Register = () => {
             )
           );
         });
-        navigateTo(location?.state ? location.state : "/");
+        navigateTo(location?.state || "/");
         // Introduce a 2-second delay before showing the toast error
-        setTimeout(() => {
-          toast.error("Sorry! Email verification Required");
-          logOut().then().catch();
-          navigateTo("/login");
-        }, 2000);
+        if (!user?.emailVerified) {
+          setTimeout(() => {
+            toast.error("Sorry! Email verification Required");
+            logOut().then().catch();
+            navigateTo("/login");
+          }, 2000);
+        }
       })
       .catch((err) => {
         toast.error(err.message);

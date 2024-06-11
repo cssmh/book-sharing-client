@@ -29,6 +29,7 @@ const AllBooksRow = ({ getBooks, refetch }) => {
           if (res.data?.deletedCount > 0) {
             swal(`${book} Deleted!`, {
               icon: "success",
+              timer: 2000,
             });
             refetch();
           }

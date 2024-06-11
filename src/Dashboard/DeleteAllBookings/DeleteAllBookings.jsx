@@ -19,10 +19,13 @@ const DeleteAllBookings = ({ refetch }) => {
             if (res.data.deletedCount > 0) {
               swal("all bookings are deleted!", {
                 icon: "success",
+                timer: 2000,
               });
               refetch();
             } else {
-              swal("no bookings available");
+              swal("no bookings available", {
+                timer: 2000,
+              });
             }
           })
           .catch((err) => toast.error(err));

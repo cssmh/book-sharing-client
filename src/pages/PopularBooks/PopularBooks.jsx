@@ -52,51 +52,52 @@ const PopularBooks = () => {
 
   return (
     <div>
-      <div data-aos="zoom-in" data-aos-delay="100" data-aos-offset="100">
-        <h3 className="text-center my-5 md:my-8 font-bold text-2xl md:text-3xl italic border-b-2 pb-3 max-w-md mx-auto border-blue-700">
-          Our Popular Books
-        </h3>
-      </div>
-      <div>
-        <Swiper
-          speed={1000}
-          grabCursor={true}
-          autoplay={{
-            delay: 1500,
-            disableOnInteraction: false,
-          }}
-          modules={[Pagination, Autoplay]}
-          className="mySwiper"
-          slidesPerView={1}
-          spaceBetween={10}
-          breakpoints={{
-            480: {
-              slidesPerView: 1,
-              // 1 slide visible on small screens
-              // / 480, 768, 1000 and 1200
-              spaceBetween: 20,
-            },
-            768: {
-              slidesPerView: 2,
-              spaceBetween: 20,
-            },
-            1000: {
-              slidesPerView: 2,
-              spaceBetween: 20,
-            },
-            1200: {
-              slidesPerView: 3,
-              spaceBetween: 20,
-            },
-          }}
-        >
-          {popularBooks?.map((book) => (
-            <SwiperSlide key={book._id}>
-              <PopularBookCard getBook={book} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+      <h1
+        data-aos="zoom-in"
+        data-aos-delay="100"
+        data-aos-offset="100"
+        className="text-center my-5 md:my-8 font-bold text-2xl md:text-3xl italic border-b-2 pb-3 max-w-md mx-auto border-blue-700"
+      >
+        Our Popular Books
+      </h1>
+      <Swiper
+        speed={1000}
+        grabCursor={true}
+        autoplay={{
+          delay: 1500,
+          disableOnInteraction: false,
+        }}
+        modules={[Pagination, Autoplay]}
+        className="mySwiper"
+        slidesPerView={1}
+        spaceBetween={10}
+        breakpoints={{
+          480: {
+            slidesPerView: 1,
+            // 1 slide visible on small screens
+            // / 480, 768, 1000 and 1200
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          1000: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          1200: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+        }}
+      >
+        {popularBooks?.map((book) => (
+          <SwiperSlide key={book._id}>
+            <PopularBookCard getBook={book} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
       <div className="flex justify-center my-7">
         <Link to="/all-books">
           <button className="text-white bg-gradient-to-r from-green-400 via-green-400 to-green-500 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">

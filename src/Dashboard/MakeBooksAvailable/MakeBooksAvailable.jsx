@@ -19,9 +19,12 @@ const MakeBooksAvailable = () => {
             if (res.data?.modifiedCount > 0) {
               swal("all books are now available", {
                 icon: "success",
+                timer: 2000,
               });
             } else {
-              swal("Already available");
+              swal("Already available", {
+                timer: 2000,
+              });
             }
           })
           .catch((err) => toast.error(err));

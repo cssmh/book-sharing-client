@@ -19,6 +19,7 @@ import AllBooksCols from "../Dashboard/AllBooksCols/AllBooksCols";
 import AllBookings from "../Dashboard/AllBookings/AllBookings";
 import BooksProviders from "../Dashboard/BooksProviders/BooksProviders";
 import NotifiedUser from "../Dashboard/NotifiedUser/NotifiedUser";
+import UserAnalytics from "../Components/UserAnalytics/UserAnalytics";
 
 const Root = createBrowserRouter([
   {
@@ -43,6 +44,14 @@ const Root = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyProfile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "//user-analytics",
+        element: (
+          <PrivateRoute>
+            <UserAnalytics />
           </PrivateRoute>
         ),
       },

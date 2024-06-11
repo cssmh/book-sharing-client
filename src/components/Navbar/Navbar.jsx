@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import Lottie from "lottie-react";
 import loggieData from "../../assets/Logo.json";
 import { Link, NavLink } from "react-router-dom";
+import { LiaSpinnerSolid } from "react-icons/lia";
 import useAuth from "../../Hooks/useAuth";
 import useMyCart from "../../Hooks/useMyCart";
+import { FaArrowRightToBracket } from "react-icons/fa6";
 
 const Navbar = () => {
-  const { user, logOut } = useAuth();
+  const { user, logOut, loading } = useAuth();
   const [showProfileOptions, setShowProfileOptions] = useState(false);
   const { isLoading, myBookings } = useMyCart();
   const [progress, setProgress] = useState(null);
@@ -181,7 +183,7 @@ const Navbar = () => {
           </div>
         )}
         {/* cart btn */}
-        <div className="flex flex-col items-center justify-center text-center font-semibold text-sm md:uppercase mx-[7px]">
+        <div className="flex flex-col items-center justify-center text-center font-semibold text-sm md:uppercase mx-[8px]">
           {user ? (
             <>
               <p>{greeting}</p>
@@ -208,12 +210,12 @@ const Navbar = () => {
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
               >
                 <li>
-                  <p className="btn pointer-events-none btn-sm btn-ghost">
-                    {user?.displayName?.length > 16
-                      ? user.displayName.slice(0, 17)
-                      : user.displayName}
-                  </p>
                   <button className="btn btn-sm btn-ghost">
+                    <Link to={"/user-analytics"}>User Analytics</Link>
+                  </button>
+                </li>
+                <li>
+                  <button className="btn btn-sm btn-ghost bg-primary text-white">
                     <Link to={"/my-profile"}>View Profile</Link>
                   </button>
                 </li>
@@ -222,7 +224,7 @@ const Navbar = () => {
                     className="btn btn-sm btn-ghost"
                     onClick={handleLogout}
                   >
-                    Logout
+                    Logout <FaArrowRightToBracket />
                   </button>
                 </li>
               </ul>
@@ -231,7 +233,11 @@ const Navbar = () => {
         ) : (
           <Link to="/login">
             <button className="btn btn-sm border border-green-400 hover:border-green-400 hover:bg-green-400 hover:text-white">
-              Login
+              {loading ? (
+                <LiaSpinnerSolid className="animate-spin text-xl" />
+              ) : (
+                "Login"
+              )}
             </button>
           </Link>
         )}

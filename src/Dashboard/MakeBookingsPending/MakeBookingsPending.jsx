@@ -19,10 +19,13 @@ const MakeBookingsPending = ({ refetch }) => {
             if (res.data?.modifiedCount > 0) {
               swal("all bookings are now pending!", {
                 icon: "success",
+                timer: 2000,
               });
               refetch();
             } else {
-              swal("Nothing changed");
+              swal("Nothing changed", {
+                timer: 2000,
+              });
             }
           })
           .catch((err) => toast.error(err));

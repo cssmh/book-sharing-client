@@ -31,6 +31,7 @@ const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
           if (res.data?.deletedCount > 0) {
             swal("Booking Deleted!", {
               icon: "success",
+              timer: 2000,
             });
             refetch();
           }

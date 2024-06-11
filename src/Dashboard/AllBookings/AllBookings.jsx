@@ -29,7 +29,7 @@ const AllBookings = () => {
 
   return (
     <div>
-      <h1 className="text-center text-xl mb-5">All Bookings</h1>
+      <h1 className="text-center text-xl mb-5">All Bookings ({allBookings.length})</h1>
       <div className="flex flex-col md:flex-row justify-end items-center gap-[5px] mb-3">
         <p className="border border-green-500 px-3 py-[6px] rounded-md">
           Hello BookHaven Admin

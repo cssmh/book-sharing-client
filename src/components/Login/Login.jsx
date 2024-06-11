@@ -42,7 +42,7 @@ const Login = () => {
       login(email, password)
         .then(() => {
           toast.success("logged in success");
-          navigateTo(location?.state ? location.state : "/");
+          navigateTo(location?.state || "/", { replace: true });
         })
         .catch(() => toast.error("Incorrect Password. Please try again"));
     } else {
@@ -61,13 +61,13 @@ const Login = () => {
             // No way login if not verified end
           } else {
             toast.success("logged in success");
-            navigateTo(location?.state ? location.state : "/");
+            navigateTo(location?.state || "/", { replace: true });
           }
         })
         .catch(() => toast.error("Invalid user password. Try again"));
     }
   };
-
+  
   const handleForgotPassword = (e) => {
     e.preventDefault();
     const form = e.target;

@@ -60,6 +60,7 @@ const BookDetails = () => {
           if (res.data?.deletedCount > 0) {
             swal(`${book} Deleted!`, {
               icon: "success",
+              timer: 2000,
             });
           }
           navigateTo(-1);

@@ -1,19 +1,14 @@
-import { FallingLines } from "react-loader-spinner";
 import MyBookingCard from "../MyBookingCard/MyBookingCard";
 import useMyCart from "../../Hooks/useMyCart";
+import SmallSpinner from "../../Components/SmallSpinner/SmallSpinner";
 
 const MyBookings = () => {
   const { isLoading, myBookings, error, cartRefetch } = useMyCart();
 
   if (isLoading) {
     return (
-      <div className="flex justify-center md:mt-[6px]">
-        <FallingLines
-          color="#9933FF"
-          width="55"
-          visible={true}
-          ariaLabel="falling-circles-loading"
-        />
+      <div className="md:mt-[6px]">
+        <SmallSpinner />
       </div>
     );
   }

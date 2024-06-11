@@ -1,9 +1,9 @@
 import { Helmet } from "react-helmet-async";
 import NoBook from "../../assets/NoBook.png";
 import MyBooksCard from "../MyBooksCard/MyBooksCard";
-import { FallingLines } from "react-loader-spinner";
 import useAuth from "../../Hooks/useAuth";
 import useMyBooks from "../../Hooks/useMyBooks";
+import SmallSpinner from "../../Components/SmallSpinner/SmallSpinner";
 
 const MyBooks = () => {
   const { user } = useAuth();
@@ -11,16 +11,7 @@ const MyBooks = () => {
   const { isLoading, bookData, error, refetch } = useMyBooks(url);
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center">
-        <FallingLines
-          color="#9933FF"
-          width="55"
-          visible={true}
-          ariaLabel="falling-circles-loading"
-        />
-      </div>
-    );
+    return <SmallSpinner />;
   }
 
   if (error) {

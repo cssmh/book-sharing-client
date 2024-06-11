@@ -39,7 +39,7 @@ const Reviews = () => {
           </div>
         </div>
         <div
-          data-aos="zoom-in-up"
+          data-aos="fade-up"
           data-aos-duration="1000"
           className="shadow-xl p-6 rounded-lg mx-2 md:mx-0"
         >
@@ -83,7 +83,7 @@ const Reviews = () => {
           </div>
         </div>
         <div
-          data-aos="zoom-in-up"
+          data-aos="fade-up"
           data-aos-duration="1000"
           className="shadow-xl p-6 rounded-lg mx-2 md:mx-0"
         >

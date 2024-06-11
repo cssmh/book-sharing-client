@@ -19,7 +19,7 @@ const NotifiedUser = () => {
         // main code
         axiosSecure.delete(`/email/${idx}`).then((res) => {
           if (res.data?.deletedCount > 0) {
-            swal({ text: "Email Deleted!", icon: "success" });
+            swal({ text: "Email Deleted!", icon: "success", timer: 2000 });
             refetch();
           }
         });
@@ -41,6 +41,7 @@ const NotifiedUser = () => {
             swal({
               text: "All Emails Deleted!",
               icon: "success",
+              timer: 2000,
             });
             refetch();
           }

@@ -49,6 +49,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
           if (res.data?.deletedCount > 0) {
             swal(`Booking on ${name} Deleted!`, {
               icon: "success",
+              timer: 2000,
             });
             refetch();
           }

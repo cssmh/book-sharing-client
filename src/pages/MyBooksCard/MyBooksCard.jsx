@@ -30,6 +30,7 @@ const MyBooksCard = ({ getBook, refetch }) => {
           if (res.data?.deletedCount > 0) {
             swal(`${name} Deleted!`, {
               icon: "success",
+              timer: 2000,
             });
             refetch();
           }

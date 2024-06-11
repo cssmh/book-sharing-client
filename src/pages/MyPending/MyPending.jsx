@@ -1,9 +1,9 @@
-import { FallingLines } from "react-loader-spinner";
 import MyPendingCard from "../MyPendingCard/MyPendingCard";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useMyBooks from "../../Hooks/useMyBooks";
+import SmallSpinner from "../../Components/SmallSpinner/SmallSpinner";
 
 const MyPending = () => {
   const { user } = useAuth();
@@ -43,13 +43,8 @@ const MyPending = () => {
 
   if (idLoading || loading || isLoading) {
     return (
-      <div className="flex justify-center md:mt-[6px]">
-        <FallingLines
-          color="#9933FF"
-          width="55"
-          visible={true}
-          ariaLabel="falling-circles-loading"
-        />
+      <div className="md:mt-[6px]">
+        <SmallSpinner />
       </div>
     );
   }
