@@ -1,10 +1,10 @@
+import { useEffect, useState } from "react";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import BigLoader from "./BigLoader";
 import { Outlet } from "react-router-dom";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import Navbar from "../../components/Navbar/Navbar";
-import Footer from "../../components/Footer/Footer";
-import { useEffect, useState } from "react";
+import Navbar from "../../Components/Navbar";
+import Footer from "../../Components/Footer";
 
 const MainLayout = () => {
   const axiosNoToken = useAxiosPublic();

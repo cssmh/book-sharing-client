@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useMyBooks from "../../Hooks/useMyBooks";
-import SmallSpinner from "../../Components/SmallSpinner/SmallSpinner";
+import SmallSpinner from "../../Components/SmallSpinner";
 
 const MyPending = () => {
   const { user } = useAuth();

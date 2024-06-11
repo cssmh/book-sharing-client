@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../Shared/MainLayout/MainLayout";
-import ErrorPage from "../components/ErrorPage/ErrorPage";
-import Home from "../components/Home/Home";
+import ErrorPage from "../components/ErrorPage";
+import Home from "../components/Home";
 import Login from "../components/Login/Login";
-import Register from "../components/Register/Register";
+import Register from "../components/Register";
 import PrivateRoute from "../Shared/PrivateRoute/PrivateRoute";
 import MyProfile from "../components/MyProfile/MyProfile";
 import AllBooks from "../Pages/AllBooks/AllBooks";
@@ -14,12 +14,12 @@ import UpdateBook from "../pages/UpdateBook/UpdateBook";
 import MySchedules from "../pages/MySchedules/MySchedules";
 import SameProvider from "../pages/SameProvider/SameProvider";
 import AdminRoute from "../Shared/PrivateRoute/AdminRoute";
-import AdminDashboard from "../Dashboard/AdminDashboard/AdminDashboard";
-import AllBooksCols from "../Dashboard/AllBooksCols/AllBooksCols";
-import AllBookings from "../Dashboard/AllBookings/AllBookings";
-import BooksProviders from "../Dashboard/BooksProviders/BooksProviders";
-import NotifiedUser from "../Dashboard/NotifiedUser/NotifiedUser";
-import UserAnalytics from "../Components/UserAnalytics/UserAnalytics";
+import AdminDashboard from "../Dashboard/AdminDashboard";
+import AllBooksCols from "../Dashboard/AllBooksCols";
+import AllBookings from "../Dashboard/AllBookings";
+import BooksProviders from "../Dashboard/BooksProviders";
+import NotifyUser from "../Dashboard/NotifyUser";
+import UserAnalytics from "../Components/UserAnalytics";
 
 const Root = createBrowserRouter([
   {
@@ -133,7 +133,7 @@ const Root = createBrowserRouter([
       },
       {
         path: "/admin-dashboard/user-new-book",
-        element: <NotifiedUser />,
+        element: <NotifyUser />,
       },
     ],
   },

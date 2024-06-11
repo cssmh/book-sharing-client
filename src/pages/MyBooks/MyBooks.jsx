@@ -3,7 +3,7 @@ import NoBook from "../../assets/NoBook.png";
 import MyBooksCard from "../MyBooksCard/MyBooksCard";
 import useAuth from "../../Hooks/useAuth";
 import useMyBooks from "../../Hooks/useMyBooks";
-import SmallSpinner from "../../Components/SmallSpinner/SmallSpinner";
+import SmallSpinner from "../../Components/SmallSpinner";
 
 const MyBooks = () => {
   const { user } = useAuth();

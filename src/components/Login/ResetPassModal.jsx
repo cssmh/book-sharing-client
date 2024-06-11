@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
-const ResetPasswordModal = ({ closeModal, isOpen, handleForgotPassword }) => {
+const ResetPassModal = ({ closeModal, isOpen, handleForgotPassword }) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -66,4 +66,4 @@ const ResetPasswordModal = ({ closeModal, isOpen, handleForgotPassword }) => {
   );
 };
 
-export default ResetPasswordModal;
+export default ResetPassModal;

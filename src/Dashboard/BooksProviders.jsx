@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import useBookProviders from "../../Hooks/useBookProviders";
+import useBookProviders from "../Hooks/useBookProviders";
 import { HashLoader } from "react-spinners";
 
 const BooksProviders = () => {

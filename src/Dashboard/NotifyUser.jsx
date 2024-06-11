@@ -1,9 +1,9 @@
 import { HashLoader } from "react-spinners";
 import swal from "sweetalert";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useMyBooks from "../../Hooks/useMyBooks";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
+import useMyBooks from "../Hooks/useMyBooks";
 
-const NotifiedUser = () => {
+const NotifyUser = () => {
   const axiosSecure = useAxiosSecure();
   const { isLoading, bookData: emails, refetch } = useMyBooks("/emails");
 
@@ -88,4 +88,4 @@ const NotifiedUser = () => {
   );
 };
 
-export default NotifiedUser;
+export default NotifyUser;

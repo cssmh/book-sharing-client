@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import swal from "sweetalert";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const MakeBooksAvailable = () => {
   const axiosSecure = useAxiosSecure();

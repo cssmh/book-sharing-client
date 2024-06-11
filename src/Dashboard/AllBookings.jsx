@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { HashLoader } from "react-spinners";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import DeleteAllBookings from "../DeleteAllBookings/DeleteAllBookings";
-import MakeBookingsPending from "../MakeBookingsPending/MakeBookingsPending";
-import MakeBooksAvailable from "../MakeBooksAvailable/MakeBooksAvailable";
-import AllBookingsCard from "../AllBookingsCard/AllBookingsCard";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
+import AllBookingsCard from "./AllBookingsCard";
 import { useQuery } from "@tanstack/react-query";
+import DeleteAllBookings from "./DeleteAllBookings";
+import MakeBookingsPending from "./MakeBookingsPending";
+import MakeBooksAvailable from "./MakeBooksAvailable";
 
 const AllBookings = () => {
   const axiosSecure = useAxiosSecure();

@@ -1,29 +1,29 @@
 import toast from "react-hot-toast";
 import swal from "sweetalert";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
-const DeleteAllBookings = ({ refetch }) => {
+const MakeBookingsPending = ({ refetch }) => {
   const axiosSecure = useAxiosSecure();
-  const handleDeleteAllBookings = () => {
+  const handleMakeBookingsPending = () => {
     swal({
       title: "Are you sure?",
-      text: "You're deleting all bookings",
+      text: "You're making all bookings pending!",
       icon: "warning",
       buttons: true,
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
         axiosSecure
-          .delete("/all-bookings")
+          .put("/update-to-pending")
           .then((res) => {
-            if (res.data.deletedCount > 0) {
-              swal("all bookings are deleted!", {
+            if (res.data?.modifiedCount > 0) {
+              swal("all bookings are now pending!", {
                 icon: "success",
                 timer: 2000,
               });
               refetch();
             } else {
-              swal("no bookings available", {
+              swal("Nothing changed", {
                 timer: 2000,
               });
             }
@@ -34,15 +34,13 @@ const DeleteAllBookings = ({ refetch }) => {
   };
 
   return (
-    <div>
-      <button
-        onClick={handleDeleteAllBookings}
-        className="bg-green-500 px-3 py-[6px] rounded-md text-white"
-      >
-        Delete All Bookings
-      </button>
-    </div>
+    <button
+      onClick={handleMakeBookingsPending}
+      className="bg-green-500 px-3 py-[6px] rounded-md text-white"
+    >
+      Make all Bookings Pending
+    </button>
   );
 };
 
-export default DeleteAllBookings;
+export default MakeBookingsPending;

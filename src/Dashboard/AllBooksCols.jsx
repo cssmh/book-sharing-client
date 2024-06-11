@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { HashLoader } from "react-spinners";
-import AllBooksRow from "../AllBooksRow/AllBooksRow";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useBookProviders from "../../Hooks/useBookProviders";
-import useAuth from "../../Hooks/useAuth";
+import AllBooksRow from "./AllBooksRow";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
+import useBookProviders from "../Hooks/useBookProviders";
+import useAuth from "../Hooks/useAuth";
 
 const AllBooksCols = () => {
   const { user } = useAuth();

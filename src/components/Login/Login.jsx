@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { LiaSpinnerSolid } from "react-icons/lia";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import ResetPasswordModal from "./ResetPasswordModal";
+import ResetPassModal from "./ResetPassModal";
 import useAuth from "../../Hooks/useAuth";
 
 const Login = () => {
@@ -152,11 +152,11 @@ const Login = () => {
         </Link>
       </div>
       <SocialLogin></SocialLogin>
-      <ResetPasswordModal
+      <ResetPassModal
         closeModal={closeModal}
         isOpen={isOpen}
         handleForgotPassword={handleForgotPassword}
-      ></ResetPasswordModal>
+      ></ResetPassModal>
     </div>
   );
 };
