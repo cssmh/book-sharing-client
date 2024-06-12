@@ -27,7 +27,7 @@ const PopularBooks = () => {
   } = useQuery({
     queryKey: ["popularBooks"],
     queryFn: async () => {
-      const res = await axiosNoToken.get("/all-books?page=5&limit=6");
+      const res = await axiosNoToken.get("/all-books?limit=6");
       return res.data?.result;
     },
   });

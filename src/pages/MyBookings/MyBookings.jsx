@@ -1,6 +1,6 @@
 import MyBookingCard from "../MyBookingCard/MyBookingCard";
 import useMyCart from "../../Hooks/useMyCart";
-import SmallSpinner from "../../Components/SmallSpinner";
+import SmallSpinner from "../../Components/AllLoader/SmallSpinner";
 
 const MyBookings = () => {
   const { isLoading, myBookings, error, cartRefetch } = useMyCart();

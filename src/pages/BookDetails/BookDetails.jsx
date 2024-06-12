@@ -1,6 +1,5 @@
 import swal from "sweetalert";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { HashLoader } from "react-spinners";
 import { Helmet } from "react-helmet-async";
 import AddBooking from "../AddBooking/AddBooking";
 import { useQuery } from "@tanstack/react-query";
@@ -8,6 +7,7 @@ import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useMyBooks from "../../Hooks/useMyBooks";
+import SmallLoader from "../../Components/AllLoader/SmallLoader";
 
 const BookDetails = () => {
   const { user } = useAuth();
@@ -16,11 +16,7 @@ const BookDetails = () => {
   const axiosSecure = useAxiosSecure();
   const axiosNoToken = useAxiosPublic();
 
-  const {
-    data: loadBookData = [],
-    isLoading: bookDataLoading,
-    refetch,
-  } = useQuery({
+  const { data: loadBookData = [], isLoading: bookDataLoading } = useQuery({
     queryKey: ["loadBookData", id],
     queryFn: async () => {
       const res = await axiosNoToken.get(`/book/${id}`);
@@ -67,13 +63,11 @@ const BookDetails = () => {
         });
       }
     });
-  }
+  };
 
   if (isLoading || bookDataLoading) {
     return (
-      <div className="flex justify-center mt-5">
-        <HashLoader color="#9933FF" size={32} />
-      </div>
+      <SmallLoader />
     );
   }
 

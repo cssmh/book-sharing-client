@@ -1,7 +1,6 @@
 import swal from "sweetalert";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
-import { HashLoader } from "react-spinners";
 import updateImage from "../../assets/Update.png";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -10,6 +9,7 @@ import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useMyBooks from "../../Hooks/useMyBooks";
+import SmallLoader from "../../Components/AllLoader/SmallLoader";
 
 const UpdateBook = () => {
   const { user } = useAuth();
@@ -45,9 +45,7 @@ const UpdateBook = () => {
 
   if (loading || isLoading) {
     return (
-      <div className="flex justify-center mt-5">
-        <HashLoader color="#9933FF" size={32} />
-      </div>
+      <SmallLoader />
     );
   }
 

@@ -1,11 +1,11 @@
 import swal from "sweetalert";
-import { HashLoader } from "react-spinners";
 import toast from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 import addBook from "../../assets/DataAdd.png";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useMyBooks from "../../Hooks/useMyBooks";
+import SmallLoader from "../../Components/AllLoader/SmallLoader";
 
 const AddBook = () => {
   const { user } = useAuth();
@@ -78,9 +78,7 @@ const AddBook = () => {
         <title>BookHaven | Add-Book</title>
       </Helmet>
       {isLoading ? (
-        <div className="flex justify-center my-5">
-          <HashLoader color="#9933FF" size={32} />
-        </div>
+        <SmallLoader />
       ) : (
         <>
           <div className="flex flex-col md:flex-row justify-center items-center gap-3 mt-3 px-1 md:px-0">

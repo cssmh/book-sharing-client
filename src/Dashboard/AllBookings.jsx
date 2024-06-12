@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { HashLoader } from "react-spinners";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import AllBookingsCard from "./AllBookingsCard";
 import { useQuery } from "@tanstack/react-query";
 import DeleteAllBookings from "./DeleteAllBookings";
 import MakeBookingsPending from "./MakeBookingsPending";
 import MakeBooksAvailable from "./MakeBooksAvailable";
+import SmallLoader from "../Components/AllLoader/SmallLoader";
 
 const AllBookings = () => {
   const axiosSecure = useAxiosSecure();
@@ -29,7 +29,9 @@ const AllBookings = () => {
 
   return (
     <div>
-      <h1 className="text-center text-xl mb-5">All Bookings ({allBookings.length})</h1>
+      <h1 className="text-center text-xl mb-5">
+        All Bookings ({allBookings.length})
+      </h1>
       <div className="flex flex-col md:flex-row justify-end items-center gap-[5px] mb-3">
         <p className="border border-green-500 px-3 py-[6px] rounded-md">
           Hello BookHaven Admin
@@ -50,9 +52,7 @@ const AllBookings = () => {
         </select>
       </div>
       {isLoading ? (
-        <div className="flex justify-center mt-5">
-          <HashLoader color="#00CC66" size={32} />
-        </div>
+        <SmallLoader />
       ) : allBookings?.length === 0 ? (
         <p className="text-center text-xl md:text-2xl font-semibold text-red-600 mt-10">
           No {filterType !== "All" && filterType} Booking

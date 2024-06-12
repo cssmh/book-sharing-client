@@ -6,7 +6,7 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 
-const EditModal = ({ closeModal, isOpen, dp, name, handleUpdate }) => {
+const EditModal = ({ closeModal, isOpen, photoURL, displayName, handleUpdate }) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -44,7 +44,7 @@ const EditModal = ({ closeModal, isOpen, dp, name, handleUpdate }) => {
                     <input
                       id="name"
                       type="text"
-                      defaultValue={name}
+                      defaultValue={displayName}
                       name="name"
                       required
                       className="input input-bordered rounded-2xl text-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent w-full p-2"
@@ -58,12 +58,11 @@ const EditModal = ({ closeModal, isOpen, dp, name, handleUpdate }) => {
                       id="photo"
                       type="text"
                       name="photo"
-                      required
                       defaultValue={
-                        dp ===
+                        photoURL ===
                         "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/default.jpg"
                           ? ""
-                          : dp
+                          : photoURL
                       }
                       className="input input-bordered rounded-2xl text-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent w-full p-2"
                     />

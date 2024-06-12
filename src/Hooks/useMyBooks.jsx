@@ -26,4 +26,4 @@ const useMyBooks = (url) => {
 
 export default useMyBooks;
 
-// used in BookDetails, MyBooks, UpdateBook, AddBook and MyProfile
+// used in BookDetails, MyBooks, UpdateBook, AddBook, MyPending, Banner, NotifyUser and MyProfile

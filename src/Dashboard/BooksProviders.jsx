@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import useBookProviders from "../Hooks/useBookProviders";
-import { HashLoader } from "react-spinners";
+import SmallLoader from "../Components/AllLoader/SmallLoader";
 
 const BooksProviders = () => {
   const { booksByProvider, isLoading } = useBookProviders();
@@ -15,9 +15,7 @@ const BooksProviders = () => {
         All Books Providers ({providers.length || 0})
       </h1>
       {isLoading ? (
-        <div className="flex justify-center mt-5">
-          <HashLoader color="#00CC66" size={32} />
-        </div>
+        <SmallLoader />
       ) : (
         <div className="max-w-[1180px] mx-2 md:mx-auto grid md:grid-cols-3 py-3 border border-green-400 rounded-lg mb-3 px-10 md:px-0 md:text-center">
           {providers?.map((provider, idx) => (

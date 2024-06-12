@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { HashLoader } from "react-spinners";
 import AllBooksRow from "./AllBooksRow";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useBookProviders from "../Hooks/useBookProviders";
 import useAuth from "../Hooks/useAuth";
+import SmallLoader from "../Components/AllLoader/SmallLoader";
 
 const AllBooksCols = () => {
   const { user } = useAuth();
@@ -41,9 +41,7 @@ const AllBooksCols = () => {
         Book Providers and Total {allBookings?.length || 0} Bookings
       </p>
       {isLoading || bookingLoading ? (
-        <div className="flex justify-center mt-5">
-          <HashLoader color="#00CC66" size={32} />
-        </div>
+        <SmallLoader />
       ) : (
         <div className="overflow-x-auto">
           <table className="table max-w-7xl mx-auto">

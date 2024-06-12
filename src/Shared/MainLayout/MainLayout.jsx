@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
-import BigLoader from "./BigLoader";
+import BigLoader from "../../Components/AllLoader/BigLoader";
 import { Outlet } from "react-router-dom";
 import Navbar from "../../Components/Navbar";
 import Footer from "../../Components/Footer";

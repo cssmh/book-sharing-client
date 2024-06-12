@@ -1,7 +1,7 @@
-import { HashLoader } from "react-spinners";
 import swal from "sweetalert";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useMyBooks from "../Hooks/useMyBooks";
+import SmallLoader from "../Components/AllLoader/SmallLoader";
 
 const NotifyUser = () => {
   const axiosSecure = useAxiosSecure();
@@ -56,9 +56,7 @@ const NotifyUser = () => {
         All Users To Get Notified for New Books
       </h1>
       {isLoading ? (
-        <div className="flex justify-center mt-5">
-          <HashLoader color="#00CC66" size={32} />
-        </div>
+        <SmallLoader />
       ) : (
         <div>
           <div className="flex justify-center">
