@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const Count = () => {
   const axiosNoToken = useAxiosPublic();
-  const { uniqueEmails, allBooks } = useBookProviders();
+  const { bookProviders, allBooks } = useBookProviders();
   const { ref, inView } = useInView({ triggerOnce: true });
 
   const { data: totalBookings } = useQuery({
@@ -51,7 +51,7 @@ const Count = () => {
             </p>
             <p className="text-gray-500">
               {inView && (
-                <CountUp end={uniqueEmails?.length || 0} duration={3} />
+                <CountUp end={bookProviders?.length || 0} duration={3} />
               )}
             </p>
           </div>

@@ -153,7 +153,10 @@ const Navbar = () => {
               <div
                 tabIndex={0}
                 role="button"
-                className="btn btn-ghost btn-circle"
+                className={`${
+                  progress && "animate-bounce"
+                } btn btn-ghost btn-circle`}
+                style={{ animationIterationCount: progress ? "4" : "initial" }}
               >
                 <div className="indicator">
                   <svg
@@ -217,11 +220,11 @@ const Navbar = () => {
                   </li>
                 </Link>
                 <Link to={"/my-profile"}>
-                <li>
-                  <button className="btn btn-sm btn-ghost">
-                    View Profile
-                  </button>
-                </li>
+                  <li>
+                    <button className="btn btn-sm btn-ghost">
+                      View Profile
+                    </button>
+                  </li>
                 </Link>
                 <li>
                   <button

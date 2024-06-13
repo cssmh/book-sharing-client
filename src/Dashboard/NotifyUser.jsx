@@ -60,15 +60,17 @@ const NotifyUser = () => {
       ) : (
         <div>
           <div className="flex justify-center">
-            <button
-              onClick={handleDeleteAll}
-              className="btn btn-sm rounded-lg px-3 btn-secondary"
-            >
-              Delete all
-            </button>
+            {emails?.length > 1 && (
+              <button
+                onClick={handleDeleteAll}
+                className="btn btn-sm rounded-lg px-3 btn-secondary"
+              >
+                Delete all
+              </button>
+            )}
           </div>
           <div className="ml-4 space-y-1">
-            {emails.map((email, idx) => (
+            {emails?.map((email, idx) => (
               <div key={email._id}>
                 {idx + 1}.{" "}
                 <button

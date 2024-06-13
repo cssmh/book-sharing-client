@@ -52,10 +52,10 @@ const Footer = () => {
               <h3 className="uppercase dark:text-gray-50">Contact Info</h3>
               <ul className="space-y-1">
                 <li>
-                  <a rel="noopener noreferrer">+880176761606*</a>
+                  <a rel="noopener noreferrer">+8801767616067</a>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer">mominitmbstu@gmail.com</a>
+                  <a rel="noopener noreferrer">bookhaven@mail.com</a>
                 </li>
                 <li>
                   <a rel="noopener noreferrer">Guides</a>

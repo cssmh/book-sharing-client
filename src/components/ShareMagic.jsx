@@ -20,8 +20,8 @@ const ShareMagic = () => {
     <div className="my-12 max-w-[1220px] mx-auto">
       <p
         data-aos="fade-up"
+        data-aos-duration="700"
         data-aos-anchor-placement="top-center"
-        data-aos-duration="1000"
         className="font-semibold text-center lg:text-left mb-2 lg:mb-0"
       >
         THE MAGIC OF SHARING
@@ -39,8 +39,8 @@ const ShareMagic = () => {
           <p className="text-gray-500 mx-2 lg:mx-0 mb-1 md:hidden">
             {expanded ? text : `${text.slice(0, 300)}...`}
           </p>
-          <button 
-            onClick={() => setExpanded(!expanded)} 
+          <button
+            onClick={() => setExpanded(!expanded)}
             className="md:hidden text-blue-500"
             aria-expanded={expanded}
             aria-controls="text-content"
@@ -50,8 +50,8 @@ const ShareMagic = () => {
         </div>
         <div
           data-aos="fade-up"
+          data-aos-duration="700"
           data-aos-anchor-placement="top-center"
-          data-aos-duration="1000"
           className="lg:w-1/4 mx-auto mt-6 lg:mt-0"
         >
           <img

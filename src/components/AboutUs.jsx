@@ -1,8 +1,8 @@
 const AboutUs = () => {
   return (
     <div
-      data-aos="zoom-in-up"
-      data-aos-duration="1200"
+      data-aos="zoom-out-up"
+      data-aos-duration="600"
       className="mb-6 text-center space-y-2 max-w-7xl mx-auto"
     >
       <div className="px-4 md:px-9">

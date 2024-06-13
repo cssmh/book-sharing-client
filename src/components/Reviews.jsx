@@ -6,7 +6,11 @@ import Reviewer4 from "../assets/Reviewer4.jpeg";
 const Reviews = () => {
   return (
     <div className="max-w-[1220px] mx-auto flex flex-col lg:flex-row justify-center items-center gap-4 my-12">
-      <div className="lg:w-2/5 text-center lg:text-left space-y-1 md:space-y-2">
+      <div
+        data-aos="fade-up"
+        data-aos-duration="500"
+        className="lg:w-2/5 text-center lg:text-left space-y-1 md:space-y-2"
+      >
         <p className="text-2xl md:text-[35px] font-semibold mx-2 md:mx-0">
           Hear from Happy <span className="text-green-400">Book Lovers</span>
         </p>
@@ -18,7 +22,7 @@ const Reviews = () => {
       <div className="lg:w-3/5 grid md:grid-cols-2 gap-4 md:mx-2 lg:mx-0">
         <div
           data-aos="zoom-in-up"
-          data-aos-duration="1000"
+          data-aos-duration="700"
           className="shadow-xl p-6 rounded-lg mx-2 md:mx-0"
         >
           <p className="font-medium text-gray-500 pb-2 hover:scale-105 transition-all duration-300 mb-[6px]">
@@ -39,8 +43,8 @@ const Reviews = () => {
           </div>
         </div>
         <div
-          data-aos="fade-up"
-          data-aos-duration="1000"
+          data-aos="zoom-in-up"
+          data-aos-duration="700"
           className="shadow-xl p-6 rounded-lg mx-2 md:mx-0"
         >
           <p className="font-medium text-gray-500 pb-2 hover:scale-105 transition-all duration-300 mb-[6px]">
@@ -62,7 +66,7 @@ const Reviews = () => {
         </div>
         <div
           data-aos="zoom-in-up"
-          data-aos-duration="1000"
+          data-aos-duration="700"
           className="shadow-xl p-6 rounded-lg mx-2 md:mx-0"
         >
           <p className="font-medium text-gray-500 pb-2 hover:scale-105 transition-all duration-300 mb-[6px]">
@@ -83,8 +87,8 @@ const Reviews = () => {
           </div>
         </div>
         <div
-          data-aos="fade-up"
-          data-aos-duration="1000"
+          data-aos="zoom-in-up"
+          data-aos-duration="700"
           className="shadow-xl p-6 rounded-lg mx-2 md:mx-0"
         >
           <p className="font-medium text-gray-500 pb-2 hover:scale-105 transition-all duration-300 mb-[6px]">

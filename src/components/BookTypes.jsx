@@ -17,7 +17,8 @@ const BookTypes = () => {
     { name: "Academic", icon: <BookOpen size={24} /> },
     { name: "Research Thesis", icon: <Monitor size={24} /> },
     { name: "Job Related", icon: <Briefcase size={24} /> },
-    { name: "Fiction Book", icon: <Clipboard size={24} /> },
+    { name: "Fiction Non-Fiction", icon: <Clipboard size={24} /> },
+    { name: "Anthologies", icon: <Layers size={24} /> }, 
   ];
 
   return (
@@ -43,18 +44,18 @@ const BookTypes = () => {
             spaceBetween: 20,
           },
           1000: {
-            slidesPerView: 2,
+            slidesPerView: 3,
             spaceBetween: 20,
           },
           1200: {
-            slidesPerView: 3,
+            slidesPerView: 4,
             spaceBetween: 20,
           },
         }}
       >
         {bookTypes.map((book, idx) => (
           <SwiperSlide key={idx}>
-            <div className="mb-10 flex flex-col items-center justify-center h-full p-4 bg-gray-200 rounded-lg">
+            <div className="mb-10 flex flex-col items-center justify-center h-full p-4 bg-gray-100 rounded-lg">
               {book.icon}
               <p className="text-center mt-2 text-xl">{book.name}</p>
             </div>

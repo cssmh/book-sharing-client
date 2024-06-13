@@ -10,7 +10,7 @@ const AllBooksCols = () => {
   const { user } = useAuth();
   const axiosNoToken = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
-  const { uniqueEmails } = useBookProviders();
+  const { bookProviders } = useBookProviders();
 
   const {
     data: allBooks,
@@ -37,7 +37,7 @@ const AllBooksCols = () => {
     <div>
       <h1 className="text-center text-xl mb-5">All Books</h1>
       <p className="text-center text-lg md:text-2xl my-4 mx-5 md:mx-0">
-        Total {allBooks?.length || 0} Books, Total {uniqueEmails?.length || 0}{" "}
+        Total {allBooks?.length || 0} Books, Total {bookProviders?.length || 0}{" "}
         Book Providers and Total {allBookings?.length || 0} Bookings
       </p>
       {isLoading || bookingLoading ? (
