@@ -9,7 +9,7 @@ const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
     book_id,
     book_name,
     book_image,
-    book_provider_email,
+    provider_email,
     user_email,
     user_phone,
     user_date,
@@ -117,7 +117,7 @@ const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
         <select
           defaultValue={status}
           onChange={(e) =>
-            handleUpdateStatus(e, _id, book_id, book_provider_email)
+            handleUpdateStatus(e, _id, book_id, provider_email)
           }
           className="border border-blue-500 focus:border-transparent rounded-2xl"
           // Disable if completed or if this book_id is completed

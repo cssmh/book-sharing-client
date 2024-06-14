@@ -1,10 +1,6 @@
 const AboutUs = () => {
   return (
-    <div
-      data-aos="zoom-out-up"
-      data-aos-duration="600"
-      className="mb-6 text-center space-y-2 max-w-7xl mx-auto"
-    >
+    <div className="mb-6 text-center space-y-2 max-w-7xl mx-auto">
       <div className="px-4 md:px-9">
         <p className="text-3xl font-semibold text-center mb-5">About US</p>
         <p className="text-gray-500 hover:scale-105 transition-all duration-300">

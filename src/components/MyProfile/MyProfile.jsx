@@ -62,7 +62,7 @@ const MyProfile = () => {
       <Helmet>
         <title>BookHaven | My Profile</title>
       </Helmet>
-      <div className="flex flex-col md:flex-row items-center h-[76vh] md:gap-5">
+      <div className="flex flex-col md:flex-row items-center justify-center md:justify-normal h-[80vh] md:gap-5">
         <div className="w-1/2">
           <img
             src={photoURL}

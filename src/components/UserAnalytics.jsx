@@ -17,7 +17,22 @@ const UserAnalytics = () => {
     enabled: !!user?.email,
   });
 
-  if (isLoading) return <SmallLoader />;
+  const { isLoading: loading, data: monthlyStats } = useQuery({
+    queryKey: ["monthlyStats", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `/monthly-stats?email=${user?.email}`
+      );
+      return res?.data;
+    },
+    enabled: !!user?.email,
+  });
+
+  if (isLoading || loading) return <SmallLoader />;
+
+  if (!userAnalytics || !monthlyStats) {
+    return <p className="text-red-400 text-center my-6">Error fetching data</p>;
+  }
 
   const {
     totalBooks,
@@ -37,20 +52,44 @@ const UserAnalytics = () => {
     ["Average Booking", (myBookings / totalBooking) * 100],
   ];
 
-  const options = {
-    title: "User Analytics",
-  };
+  const bookData = [
+    ["Month", "Books"],
+    ...monthlyStats.map((stat) => [stat?.month, stat?.count]),
+  ];
 
   return (
-    <div>
-      <div className="md:min-h-[63vh]">
-        <Chart
-          chartType="PieChart"
-          data={data}
-          options={options}
-          width={"100%"}
-          height={"400px"}
-        />
+    <div className="max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-14 mb-6">
+        <div className="bg-white p-4 shadow rounded-lg">
+          <h2 className="text-lg font-semibold mb-3">User Analytics</h2>
+          <Chart
+            chartType="PieChart"
+            data={data}
+            options={{
+              pieHole: 0.4,
+            }}
+            width={"100%"}
+            height={"300px"}
+          />
+        </div>
+        <div className="bg-white p-4 shadow rounded-lg">
+          <h2 className="text-lg font-semibold mb-3">Books by Month</h2>
+          {monthlyStats.length > 0 ? (
+            <Chart
+              chartType="ColumnChart"
+              data={bookData}
+              options={{
+                hAxis: { title: "Month" },
+                vAxis: { title: "Books", format: "0" },
+                legend: "none",
+              }}
+              width={"100%"}
+              height={"300px"}
+            />
+          ) : (
+            <p>You have no added any books!</p>
+          )}
+        </div>
       </div>
       <p className="text-center space-x-4 px-3 md:px-0">
         <span className="text-green-400">Books ({myBooks})</span>{" "}

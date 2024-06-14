@@ -4,12 +4,11 @@ import { Helmet } from "react-helmet-async";
 import updateImage from "../../assets/Update.png";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useMyBooks from "../../Hooks/useMyBooks";
 import SmallLoader from "../../Components/AllLoader/SmallLoader";
+import useQueryPublic from "../../Hooks/useQueryPublic";
 
 const UpdateBook = () => {
   const { user } = useAuth();
@@ -17,7 +16,6 @@ const UpdateBook = () => {
   const navigateTo = useNavigate();
   const [matchFound, setMatchFound] = useState([]);
   const axiosSecure = useAxiosSecure();
-  const axiosNoToken = useAxiosPublic();
 
   const url = `/my-books?email=${user?.email}`;
   const { isLoading: loading, bookData: myBooks } = useMyBooks(url);
@@ -26,13 +24,7 @@ const UpdateBook = () => {
     data: bookData,
     isLoading,
     refetch,
-  } = useQuery({
-    queryKey: ["bookData", id],
-    queryFn: async () => {
-      const res = await axiosNoToken.get(`book/${id}`);
-      return res?.data;
-    },
-  });
+  } = useQueryPublic(["bookData", id], `book/${id}`);
 
   useEffect(() => {
     const matching = myBooks.find((book) => book._id === id);
@@ -44,16 +36,14 @@ const UpdateBook = () => {
   }, [matchFound, myBooks, id, navigateTo]);
 
   if (loading || isLoading) {
-    return (
-      <SmallLoader />
-    );
+    return <SmallLoader />;
   }
 
   const {
     _id,
     book_name,
     book_image,
-    book_provider_phone,
+    provider_phone,
     description,
     provider_location,
   } = bookData;
@@ -77,18 +67,18 @@ const UpdateBook = () => {
       "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/CoverSoon.png";
     const book_image =
       get_book_image.trim() !== "" ? get_book_image : defaultBookImageUrl;
-    const book_provider_phone = form.book_provider_phone.value;
+    const provider_phone = form.provider_phone.value;
     const provider_location = form.provider_location.value;
     const description = form.description.value;
 
-    if (!/^(\+?8801|01)(\d{9})$/.test(book_provider_phone)) {
+    if (!/^(\+?8801|01)(\d{9})$/.test(provider_phone)) {
       return toast.error("Enter a valid phone number!");
     }
 
     const updatedBookInfo = {
       book_name,
       book_image,
-      book_provider_phone,
+      provider_phone,
       provider_location,
       description,
     };
@@ -187,8 +177,8 @@ const UpdateBook = () => {
             <input
               type="text"
               required
-              name="book_provider_phone"
-              defaultValue={book_provider_phone}
+              name="provider_phone"
+              defaultValue={provider_phone}
               className="input input-bordered focus:border-transparent"
               style={{ outline: "none" }}
             />

@@ -23,7 +23,7 @@ const MyBooks = () => {
   }
 
   return (
-    <div>
+    <div className="mb-4">
       <Helmet>
         <title>BookHaven | My-Books</title>
       </Helmet>

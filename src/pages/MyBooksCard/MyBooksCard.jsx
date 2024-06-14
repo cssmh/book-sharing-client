@@ -11,7 +11,7 @@ const MyBooksCard = ({ getBook, refetch }) => {
     _id,
     book_name,
     book_image,
-    book_provider_phone,
+    provider_phone,
     book_status,
     provider_location,
   } = getBook;
@@ -55,7 +55,7 @@ const MyBooksCard = ({ getBook, refetch }) => {
         <h2 className="text-xl md:text-2xl font-bold text-blue-900 px-4">
           {book_name}
         </h2>
-        <p className="text-lg">Phone: {book_provider_phone}</p>
+        <p className="text-lg">Phone: {provider_phone}</p>
         <p className="text-lg">Location: {provider_location}</p>
         <p>
           Book Status:{" "}

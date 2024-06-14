@@ -10,7 +10,7 @@ const AllBooksRow = ({ getBooks, refetch }) => {
     _id,
     book_name,
     book_image,
-    book_provider_name,
+    provider_name,
     provider_location,
     book_status,
   } = getBooks;
@@ -72,7 +72,7 @@ const AllBooksRow = ({ getBooks, refetch }) => {
         <p>{book_name}</p>
       </td>
       <td>
-        <p>{book_provider_name}</p>
+        <p>{provider_name}</p>
       </td>
       <td>{provider_location}</td>
       <td>

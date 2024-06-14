@@ -7,19 +7,20 @@ import Register from "../components/Register";
 import PrivateRoute from "../Shared/PrivateRoute/PrivateRoute";
 import MyProfile from "../components/MyProfile/MyProfile";
 import AllBooks from "../Pages/AllBooks/AllBooks";
-import BookDetails from "../pages/BookDetails/BookDetails";
+import BookDetails from "../Pages/BookDetails/BookDetails";
 import AddBook from "../pages/AddBook/AddBook";
 import MyBooks from "../pages/MyBooks/MyBooks";
 import UpdateBook from "../pages/UpdateBook/UpdateBook";
 import MySchedules from "../pages/MySchedules/MySchedules";
 import SameProvider from "../pages/SameProvider/SameProvider";
 import AdminRoute from "../Shared/PrivateRoute/AdminRoute";
-import AdminDashboard from "../Dashboard/AdminDashboard";
+import AdminLayout from "../Dashboard/AdminLayout";
 import AllBooksCols from "../Dashboard/AllBooksCols";
 import AllBookings from "../Dashboard/AllBookings";
 import BooksProviders from "../Dashboard/BooksProviders";
-import NotifyUser from "../Dashboard/NotifyUser";
+import UserToUpdate from "../Dashboard/UserToUpdate";
 import UserAnalytics from "../Components/UserAnalytics";
+import DashHome from "../Dashboard/DashHome";
 
 const Root = createBrowserRouter([
   {
@@ -48,7 +49,7 @@ const Root = createBrowserRouter([
         ),
       },
       {
-        path: "//user-analytics",
+        path: "/user-analytics",
         element: (
           <PrivateRoute>
             <UserAnalytics />
@@ -113,12 +114,16 @@ const Root = createBrowserRouter([
     path: "/admin-dashboard",
     element: (
       <AdminRoute>
-        <AdminDashboard />
+        <AdminLayout />
       </AdminRoute>
     ),
     children: [
       {
         path: "/admin-dashboard",
+        element: <DashHome />,
+      },
+      {
+        path: "/admin-dashboard/all-books",
         element: <AllBooksCols />,
       },
       {
@@ -126,12 +131,12 @@ const Root = createBrowserRouter([
         element: <AllBookings />,
       },
       {
-        path: "/admin-dashboard/books-provider",
+        path: "/admin-dashboard/books-providers",
         element: <BooksProviders />,
       },
       {
-        path: "/admin-dashboard/user-new-book",
-        element: <NotifyUser />,
+        path: "/admin-dashboard/user-to-update",
+        element: <UserToUpdate />,
       },
     ],
   },

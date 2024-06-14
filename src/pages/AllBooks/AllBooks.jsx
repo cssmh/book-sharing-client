@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import AllBooksCard from "../AllBooksCard/AllBooksCard";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import SkeletonCard from "../SkeletonCard/SkeletonCard";
-import { useQuery } from "@tanstack/react-query";
 import useResLimit from "../../Hooks/useResLimit";
+import useQueryPublic from "../../Hooks/useQueryPublic";
 
 const AllBooks = () => {
-  const axiosNoToken = useAxiosPublic();
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
   const isMobile = useResLimit("(max-width: 767px)");
@@ -19,13 +17,10 @@ const AllBooks = () => {
   }, [isMobile]);
 
   const url = `/all-books?page=${page}&limit=${limit}&search=${searchTerm}`;
-  const { data = [], isLoading } = useQuery({
-    queryKey: ["allBooksData", page, limit, searchTerm],
-    queryFn: async () => {
-      const res = await axiosNoToken.get(url);
-      return res?.data;
-    },
-  });
+  const { data = [], isLoading } = useQueryPublic(
+    ["allBooksData", page, limit, searchTerm],
+    url
+  );
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -81,7 +76,7 @@ const AllBooks = () => {
             </div>
           )}
           {data?.result?.length > 0 && (
-            <div className="flex justify-center">
+            <div className="flex justify-center mb-6">
               <div className="flex flex-col md:flex-row justify-center mt-8">
                 <div className="join">
                   <button

@@ -2,44 +2,41 @@ import swal from "sweetalert";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import AddBooking from "../AddBooking/AddBooking";
-import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useMyBooks from "../../Hooks/useMyBooks";
 import SmallLoader from "../../Components/AllLoader/SmallLoader";
+import useQueryPublic from "../../Hooks/useQueryPublic";
 
 const BookDetails = () => {
   const { user } = useAuth();
   const navigateTo = useNavigate();
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
-  const axiosNoToken = useAxiosPublic();
 
-  const { data: loadBookData = [], isLoading: bookDataLoading } = useQuery({
-    queryKey: ["loadBookData", id],
-    queryFn: async () => {
-      const res = await axiosNoToken.get(`/book/${id}`);
-      return res?.data;
-    },
-  });
+  const {
+    data: loadBookData = [],
+    isLoading: bookDataLoading,
+    refetch,
+  } = useQueryPublic(["loadBookData", id], `/book/${id}`);
 
   const {
     _id,
     book_name,
     book_image,
-    book_provider_name,
-    book_provider_email,
-    book_provider_image,
-    book_provider_phone,
+    provider_name,
+    provider_email,
+    provider_image,
+    provider_phone,
     provider_location,
     description,
+    added_time,
     book_status,
     user_name,
     user_review,
   } = loadBookData;
 
-  const url = `/my-books?email=${book_provider_email}`;
+  const url = `/my-books?email=${provider_email}`;
   const { isLoading, bookData } = useMyBooks(url);
 
   const handleDeleteByAdmin = (idx, book) => {
@@ -58,17 +55,16 @@ const BookDetails = () => {
               icon: "success",
               timer: 2000,
             });
+            refetch();
+            navigateTo(-1);
           }
-          navigateTo(-1);
         });
       }
     });
   };
 
   if (isLoading || bookDataLoading) {
-    return (
-      <SmallLoader />
-    );
+    return <SmallLoader />;
   }
 
   return (
@@ -83,28 +79,28 @@ const BookDetails = () => {
         <figure className="px-10 pt-5">
           <img
             className="rounded-lg w-24 md:w-28"
-            src={book_provider_image}
+            src={provider_image}
             onContextMenu={(e) => e.preventDefault()}
             alt="no image"
           />
         </figure>
         <div className="card-body items-center text-center p-4 pb-0">
           <h2 className="card-title text-xl text-orange-500 font-bold">
-            Name : {book_provider_name}
+            Name : {provider_name}
           </h2>
-          <p className="text-lg font-medium">Email: {book_provider_email}</p>
+          <p className="text-lg font-medium">Email: {provider_email}</p>
           <p className="text-lg font-medium">
             Location: <span className="text-blue-500">{provider_location}</span>
           </p>
           <p className="text-lg font-medium">
-            Phone: <span className="text-green-500">{book_provider_phone}</span>
+            Phone: <span className="text-green-500">{provider_phone}</span>
           </p>
         </div>
         <div className="flex justify-center mt-2">
-          {bookData?.length > 1 && book_provider_email !== user?.email && (
-            <Link to={`/provider/${book_provider_email}`}>
+          {bookData?.length > 1 && provider_email !== user?.email && (
+            <Link to={`/provider/${provider_email}`}>
               <button className="btn btn-sm rounded-lg btn-success text-white mt-1">
-                More Books Of {book_provider_name}
+                More Books Of {provider_name}
               </button>
             </Link>
           )}
@@ -124,12 +120,13 @@ const BookDetails = () => {
           <h2 className="text-2xl font-bold text-blue-900 lg:w-[90%] mx-3 md:mx-0">
             {book_name}
           </h2>
+          <p>{added_time}</p>
           <div className="mx-4 lg:mx-0 md:w-[80%] lg:w-[90%] md:mx-auto">
-            {description.length < 720 ? (
+            {description.length < 640 ? (
               description
             ) : (
               <>
-                {description.slice(0, 720)}
+                {description.slice(0, 640)}
                 <button
                   className="btn btn-sm rounded-lg"
                   onClick={() =>
@@ -153,27 +150,23 @@ const BookDetails = () => {
               </>
             )}
           </div>
-          {book_provider_email !== user?.email &&
-            book_status === "available" && (
-              <AddBooking getBookData={loadBookData}></AddBooking>
-            )}
-          {book_provider_email === user?.email &&
-            book_status === "Unavailable" && (
-              <p className="text-green-600">You shared this book.</p>
-            )}
-          {book_provider_email !== user?.email &&
-            book_status === "Unavailable" && (
-              <p className="text-lg text-red-600">Unavailable to Collect..</p>
-            )}
+          {provider_email !== user?.email && book_status === "available" && (
+            <AddBooking getBookData={loadBookData}></AddBooking>
+          )}
+          {provider_email === user?.email && book_status === "Unavailable" && (
+            <p className="text-green-600">You shared this book.</p>
+          )}
+          {provider_email !== user?.email && book_status === "Unavailable" && (
+            <p className="text-lg text-red-600">Unavailable to Collect..</p>
+          )}
           <div>
-            {book_status === "available" &&
-              book_provider_email === user?.email && (
-                <Link to={`/update-book/${_id}`}>
-                  <button className="text-white bg-primary  font-medium rounded-lg text-sm px-4 py-2 text-center me-2 mt-1 mx-2 md:mx-0">
-                    Update This Book
-                  </button>
-                </Link>
-              )}
+            {book_status === "available" && provider_email === user?.email && (
+              <Link to={`/update-book/${_id}`}>
+                <button className="text-white bg-primary  font-medium rounded-lg text-sm px-4 py-2 text-center me-2 mt-1 mx-2 md:mx-0">
+                  Update This Book
+                </button>
+              </Link>
+            )}
           </div>
           {book_status === "available" && user?.email == "admin@admin.com" && (
             <button

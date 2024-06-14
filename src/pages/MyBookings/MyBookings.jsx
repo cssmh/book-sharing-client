@@ -32,7 +32,7 @@ const MyBookings = () => {
           <h2 className="text-center text-lg md:text-2xl my-2 md:my-4 font-semibold italic">
             All Bookings made by you
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto mb-8">
             {myBookings?.map((booking) => (
               <MyBookingCard
                 key={booking._id}

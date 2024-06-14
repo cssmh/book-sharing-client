@@ -10,48 +10,63 @@ import SmallLoader from "../../Components/AllLoader/SmallLoader";
 const AddBook = () => {
   const { user } = useAuth();
   const axiosNoToken = useAxiosPublic();
-
   const url = `/my-books?email=${user?.email}`;
   const { isLoading, bookData: myAddedBooks, refetch } = useMyBooks(url);
+
+  // Create a new Date object for today's date
+  let today = new Date();
+
+  // Define the months array for formatting
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  let month = months[today.getMonth()];
+  let day = today.getDate();
+  let year = today.getFullYear();
+  let todaysDate = `${month} ${day}, ${year}`;
 
   const handleAddBook = (e) => {
     e.preventDefault();
     const form = e.target;
     const book_name = form.book_name.value;
-
-    // Check for duplicate book name
-    const isDuplicate = myAddedBooks?.find(
-      (myBook) => myBook.book_name === book_name
-    );
-    if (isDuplicate) {
-      return toast.error("You already added this Book!");
-    }
-    const get_image = form.book_image.value;
-    const defaultImageUrl =
+    const book_image =
+      form.book_image.value.trim() ||
       "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/CoverSoon.png";
-
-    const book_image = get_image.trim() !== "" ? get_image : defaultImageUrl;
-    const book_provider_name = form.book_provider_name.value;
-    const book_provider_email = form.book_provider_email.value;
-    const book_provider_image = user?.photoURL;
-    const book_provider_phone = form.book_provider_phone.value;
+    const provider_name = form.provider_name.value;
+    const provider_email = form.provider_email.value;
+    const provider_image = user?.photoURL;
+    const provider_phone = form.provider_phone.value;
     const provider_location = form.provider_location.value;
     const description = form.description.value;
+    const added_time = todaysDate;
     const book_status = "available";
 
-    if (!/^(\+?8801|01)(\d{9})$/.test(book_provider_phone)) {
+    if (!/^(\+?8801|01)(\d{9})$/.test(provider_phone)) {
       return toast.error("Enter a valid phone number!");
     }
 
     const BookInformation = {
       book_name,
       book_image,
-      book_provider_name,
-      book_provider_email,
-      book_provider_image,
-      book_provider_phone,
+      provider_name,
+      provider_email,
+      provider_image,
+      provider_phone,
       provider_location,
       description,
+      added_time,
       book_status,
     };
 
@@ -69,11 +84,14 @@ const AddBook = () => {
           refetch();
         }
       })
-      .catch();
+      .catch((error) => {
+        toast.error("Failed to add the book. Please try again.");
+        console.error(error);
+      });
   };
 
   return (
-    <div>
+    <div className="mb-8">
       <Helmet>
         <title>BookHaven | Add-Book</title>
       </Helmet>
@@ -87,6 +105,7 @@ const AddBook = () => {
                 className="md:w-[65%] mx-auto"
                 src={addBook}
                 onContextMenu={(e) => e.preventDefault()}
+                alt="Add Book"
               />
             </div>
             <div className="text-center md:w-2/2">
@@ -94,10 +113,9 @@ const AddBook = () => {
                 Add Book to the <span className="text-green-400">Database</span>
               </h1>
               <p className="text-gray-500 mt-2 mx-2 md:mx-0">
-                Enter Book details and click Add Book button to add Book{" "}
-                <br></br>
-                to the database. Must add your location <br></br> and your Valid
-                Phone number
+                Enter Book details and click Add Book button to add Book <br />
+                to the database. Must add your location <br />
+                and your Valid Phone number
               </p>
             </div>
           </div>
@@ -134,7 +152,7 @@ const AddBook = () => {
                 </label>
                 <input
                   type="text"
-                  name="book_provider_name"
+                  name="provider_name"
                   readOnly
                   defaultValue={user?.displayName}
                   className="input input-bordered focus:border-transparent"
@@ -148,7 +166,7 @@ const AddBook = () => {
                 <input
                   type="email"
                   readOnly
-                  name="book_provider_email"
+                  name="provider_email"
                   defaultValue={user?.email}
                   className="input input-bordered focus:border-transparent"
                   style={{ outline: "none" }}
@@ -176,7 +194,7 @@ const AddBook = () => {
                   type="text"
                   required
                   defaultValue={"+880"}
-                  name="book_provider_phone"
+                  name="provider_phone"
                   className="input input-bordered focus:border-transparent"
                   style={{ outline: "none" }}
                 />

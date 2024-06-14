@@ -1,29 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import AllBooksRow from "./AllBooksRow";
-import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useBookProviders from "../Hooks/useBookProviders";
-import useAuth from "../Hooks/useAuth";
 import SmallLoader from "../Components/AllLoader/SmallLoader";
+import useQueryPublic from "../Hooks/useQueryPublic";
 
 const AllBooksCols = () => {
-  const { user } = useAuth();
-  const axiosNoToken = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
-  const { bookProviders } = useBookProviders();
+  const { totalBooks } = useBookProviders();
 
   const {
+    isLoading,
     data: allBooks,
     refetch,
-    isLoading,
-  } = useQuery({
-    queryKey: ["allBooks"],
-    queryFn: async () => {
-      const res = await axiosNoToken.get("/all-books");
-      return res.data?.result;
-    },
-    enabled: !!user,
-  });
+  } = useQueryPublic(["allBooks"], "/all-books");
 
   const { data: allBookings, isLoading: bookingLoading } = useQuery({
     queryKey: ["allBookings"],
@@ -35,9 +25,8 @@ const AllBooksCols = () => {
 
   return (
     <div>
-      <h1 className="text-center text-xl mb-5">All Books</h1>
-      <p className="text-center text-lg md:text-2xl my-4 mx-5 md:mx-0">
-        Total {allBooks?.length || 0} Books, Total {bookProviders?.length || 0}{" "}
+      <p className="text-center text-xl md:text-2xl my-4 mx-5 md:mx-0">
+        Total {allBooks?.length || 0} Books, Total {totalBooks || 0}{" "}
         Book Providers and Total {allBookings?.length || 0} Bookings
       </p>
       {isLoading || bookingLoading ? (
@@ -64,7 +53,7 @@ const AllBooksCols = () => {
               </tr>
             </thead>
             <tbody>
-              {allBooks?.map((books) => (
+              {allBooks?.result?.map((books) => (
                 <AllBooksRow
                   key={books._id}
                   getBooks={books}

@@ -4,9 +4,9 @@ const PopularBookCard = ({ getBook }) => {
     _id,
     book_name,
     book_image,
-    book_provider_image,
-    book_provider_name,
-    book_provider_phone,
+    provider_image,
+    provider_name,
+    provider_phone,
     provider_location,
     description,
   } = getBook;
@@ -29,14 +29,14 @@ const PopularBookCard = ({ getBook }) => {
           <div className="avatar">
             <div className="w-12 rounded-full ring ring-primary">
               <img
-                src={book_provider_image}
+                src={provider_image}
                 onContextMenu={(e) => e.preventDefault()}
               />
             </div>
           </div>
-          <h2 className="font-bold text-lg">{book_provider_name}</h2>
+          <h2 className="font-bold text-lg">{provider_name}</h2>
         </div>
-        <p className="text-lg text-green-500">Phone: {book_provider_phone}</p>
+        <p className="text-lg text-green-500">Phone: {provider_phone}</p>
         <p className="text-lg">Location: {provider_location}</p>
         <div className="card-actions mt-2">
           <Link to={`/book/${_id}`}>

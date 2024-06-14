@@ -2,26 +2,22 @@ import pencil from "../assets/pencil.jpg";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import useBookProviders from "../Hooks/useBookProviders";
-import useAxiosPublic from "../Hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
+import useQueryPublic from "../Hooks/useQueryPublic";
 
 const Count = () => {
-  const axiosNoToken = useAxiosPublic();
-  const { bookProviders, allBooks } = useBookProviders();
+  const { isLoading, bookProviders, totalBooks } = useBookProviders();
   const { ref, inView } = useInView({ triggerOnce: true });
 
-  const { data: totalBookings } = useQuery({
-    queryKey: ["totalBookings"],
-    queryFn: async () => {
-      const res = await axiosNoToken.get("/total-bookings");
-      return res.data?.result;
-    },
-  });
+  const { isLoading: bookingLoading, data: totalBookings } = useQueryPublic(
+    ["totalBookings"],
+    "/total-bookings"
+  );
+  const loading = isLoading || bookingLoading;
 
   return (
     <div
       ref={ref}
-      className="hero min-h-[30vh]"
+      className="hero min-h-[30vh] mb-4"
       style={{
         backgroundImage: `url(${pencil})`,
       }}
@@ -37,8 +33,8 @@ const Count = () => {
             >
               Books
             </p>
-            <p className="text-gray-500">
-              {inView && <CountUp end={allBooks?.length || 0} duration={3} />}
+            <p className={`${loading && "animate-pulse"} text-gray-500`}>
+              {inView && <CountUp end={totalBooks || 0} duration={3} />}
             </p>
           </div>
           <div>
@@ -49,7 +45,7 @@ const Count = () => {
             >
               Providers
             </p>
-            <p className="text-gray-500">
+            <p className={`${loading && "animate-pulse"} text-gray-500`}>
               {inView && (
                 <CountUp end={bookProviders?.length || 0} duration={3} />
               )}
@@ -63,8 +59,10 @@ const Count = () => {
             >
               Bookings
             </p>
-            <p className="text-gray-500">
-              {inView && <CountUp end={totalBookings || 0} duration={3} />}
+            <p className={`${loading && "animate-pulse"} text-gray-500`}>
+              {inView && (
+                <CountUp end={totalBookings?.result || 0} duration={3} />
+              )}
             </p>
           </div>
         </div>

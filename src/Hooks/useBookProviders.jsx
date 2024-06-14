@@ -4,11 +4,11 @@ import { useQuery } from "@tanstack/react-query";
 const useBookProviders = () => {
   const axiosNoToken = useAxiosPublic();
 
-  const { data: allBooks = [], isLoading } = useQuery({
-    queryKey: ["allBooksData"],
+  const { data: totalBooks, isLoading } = useQuery({
+    queryKey: ["totalBooks"],
     queryFn: async () => {
       const res = await axiosNoToken.get("/all-books");
-      return res.data?.result;
+      return res.data.totalBooks;
     },
   });
 
@@ -19,7 +19,7 @@ const useBookProviders = () => {
       return res?.data;
     },
   });
-  return { isLoading, providerLoading, bookProviders, allBooks };
+  return { isLoading, totalBooks, providerLoading, bookProviders };
 };
 
 export default useBookProviders;

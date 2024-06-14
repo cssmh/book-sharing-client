@@ -7,8 +7,8 @@ const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
     _id,
     book_name,
     book_image,
-    book_provider_email,
-    book_provider_phone,
+    provider_email,
+    provider_phone,
     user_email,
     user_phone,
     status,
@@ -52,9 +52,9 @@ const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
             onContextMenu={(e) => e.preventDefault()}
           />
           <p className="text-[22px] font-bold text-cyan-500">{book_name}</p>
-          <p className="text-lg">{book_provider_email}</p>
+          <p className="text-lg">{provider_email}</p>
           <p className="text-lg text-green-500 mb-2 md:mb-0">
-            {book_provider_phone}
+            {provider_phone}
           </p>
         </div>
         <div className="flex-1 text-center md:text-lg border-t-2 md:border-t-0 pt-2 md:pt-0 text-lg">

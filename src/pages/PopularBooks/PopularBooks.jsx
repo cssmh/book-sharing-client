@@ -5,14 +5,12 @@ import { Autoplay, Pagination } from "swiper/modules";
 
 import { Link } from "react-router-dom";
 import SkeletonCard from "../SkeletonCard/SkeletonCard";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import PopularBookCard from "../PopularBookCard/PopularBookCard";
-import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import useResLimit from "../../Hooks/useResLimit";
+import useQueryPublic from "../../Hooks/useQueryPublic";
 
 const PopularBooks = () => {
-  const axiosNoToken = useAxiosPublic();
   const isMobile = useResLimit("(max-width: 767px)");
   const [skeletonSize, setSkeletonSize] = useState(isMobile ? 1 : 3);
 
@@ -24,13 +22,7 @@ const PopularBooks = () => {
     isLoading,
     error,
     data: popularBooks,
-  } = useQuery({
-    queryKey: ["popularBooks"],
-    queryFn: async () => {
-      const res = await axiosNoToken.get("/all-books?limit=6");
-      return res.data?.result;
-    },
-  });
+  } = useQueryPublic(["popularBooks"], "/all-books?limit=6");
 
   if (isLoading) {
     return (
@@ -92,7 +84,7 @@ const PopularBooks = () => {
           },
         }}
       >
-        {popularBooks?.map((book) => (
+        {popularBooks?.result?.map((book) => (
           <SwiperSlide key={book._id}>
             <PopularBookCard getBook={book} />
           </SwiperSlide>

@@ -1,15 +1,13 @@
 import swal from "sweetalert";
-import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import ReviewModal from "./ReviewModal";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useQueryPublic from "../../Hooks/useQueryPublic";
 
 const MyBookingCard = ({ getBooking, refetch }) => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const axiosNoToken = useAxiosPublic();
 
   let [isOpen, setIsOpen] = useState(false);
   function closeModal() {
@@ -21,20 +19,17 @@ const MyBookingCard = ({ getBooking, refetch }) => {
     book_id,
     book_name,
     book_image,
-    book_provider_email,
-    book_provider_phone,
+    provider_email,
+    provider_phone,
     user_date,
     status,
     completed_at,
   } = getBooking;
 
-  const { data: bookData = [], refetch: reviewRefetch } = useQuery({
-    queryKey: ["getBookData", book_id],
-    queryFn: async () => {
-      const res = await axiosNoToken.get(`/book/${book_id}`);
-      return res?.data;
-    },
-  });
+  const { data: bookData = [], refetch: reviewRefetch } = useQueryPublic(
+    ["getBookData", book_id],
+    `/book/${book_id}`
+  );
 
   const handleBookingDelete = (idx, name) => {
     swal({
@@ -57,14 +52,8 @@ const MyBookingCard = ({ getBooking, refetch }) => {
       }
     });
   };
-
-  const { data: available = "" } = useQuery({
-    queryKey: ["available", book_id],
-    queryFn: async () => {
-      const res = await axiosNoToken.get(`/book/${book_id}`);
-      return res?.data?.book_status;
-    },
-  });
+  
+  const { data } = useQueryPublic(["available", book_id], `/book/${book_id}`);
 
   const handleAddReview = (e) => {
     e.preventDefault();
@@ -103,9 +92,9 @@ const MyBookingCard = ({ getBooking, refetch }) => {
         <p className="text-xl md:text-2xl">{book_name}</p>
         <div className="text-lg">
           <p className="text-xl">Provider Information</p>
-          <p className="text-green-600">{book_provider_phone}</p>
-          <p className="text-purple-800">{book_provider_email}</p>
-          {available === "Unavailable" && status !== "Completed" ? (
+          <p className="text-green-600">{provider_phone}</p>
+          <p className="text-purple-800">{provider_email}</p>
+          {data?.book_status === "Unavailable" && status !== "Completed" ? (
             <p className="text-red-700">Sorry, taken by someone else!</p>
           ) : (
             <p>

@@ -18,8 +18,8 @@ const AddBooking = ({ getBookData }) => {
     _id,
     book_image,
     book_name,
-    book_provider_email,
-    book_provider_phone,
+    provider_email,
+    provider_phone,
   } = getBookData;
 
   const [open, setOpen] = useState(false);
@@ -88,7 +88,7 @@ const AddBooking = ({ getBookData }) => {
     const form = e.target;
     const book_id = _id;
     const book_name = form.book_name.value;
-    const book_provider_email = form.book_provider_email.value;
+    const provider_email = form.provider_email.value;
     const user_email = user?.email;
     const user_date = form.user_date.value;
     const user_location = form.user_location.value;
@@ -104,8 +104,8 @@ const AddBooking = ({ getBookData }) => {
       book_id,
       book_name,
       book_image,
-      book_provider_email,
-      book_provider_phone,
+      provider_email,
+      provider_phone,
       user_email,
       user_phone,
       user_location,
@@ -187,8 +187,8 @@ const AddBooking = ({ getBookData }) => {
                 <input
                   type="email"
                   readOnly
-                  name="book_provider_email"
-                  defaultValue={book_provider_email}
+                  name="provider_email"
+                  defaultValue={provider_email}
                   className="input input-bordered focus:border-transparent"
                   style={{ outline: "none" }}
                 />

@@ -3,7 +3,7 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useMyBooks from "../Hooks/useMyBooks";
 import SmallLoader from "../Components/AllLoader/SmallLoader";
 
-const NotifyUser = () => {
+const UserToUpdate = () => {
   const axiosSecure = useAxiosSecure();
   const { isLoading, bookData: emails, refetch } = useMyBooks("/emails");
 
@@ -52,7 +52,7 @@ const NotifyUser = () => {
 
   return (
     <div>
-      <h1 className="text-center text-xl mb-6">
+      <h1 className="text-center text-xl mb-6 mt-2 md:mt-0">
         All Users To Get Notified for New Books
       </h1>
       {isLoading ? (
@@ -88,4 +88,4 @@ const NotifyUser = () => {
   );
 };
 
-export default NotifyUser;
+export default UserToUpdate;

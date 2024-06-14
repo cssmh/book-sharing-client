@@ -1,25 +1,17 @@
 import { useParams } from "react-router-dom";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
 import SkeletonCard from "../SkeletonCard/SkeletonCard";
 import AllBooksCard from "../AllBooksCard/AllBooksCard";
+import useQueryPublic from "../../Hooks/useQueryPublic";
 
 const SameProvider = () => {
   const { email } = useParams();
-  const axiosNoToken = useAxiosPublic();
-
-  const { data: sameProvider, isLoading } = useQuery({
-    queryKey: ["sameProvider", email],
-    queryFn: async () => {
-      const res = await axiosNoToken.get(`my-books?email=${email}`);
-      return res?.data;
-    },
-  });
+  const { data: sameProvider, isLoading } = useQueryPublic(
+    ["sameProvider", email],
+    `my-books?email=${email}`
+  );
 
   const bookText =
-    sameProvider?.length === 1 || sameProvider?.length === 0
-      ? "Book"
-      : "Books";
+    sameProvider?.length === 1 || sameProvider?.length === 0 ? "Book" : "Books";
 
   if (isLoading) {
     return (

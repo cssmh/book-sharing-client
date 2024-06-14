@@ -1,23 +1,14 @@
 import { useEffect, useState } from "react";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
 import BigLoader from "../../Components/AllLoader/BigLoader";
 import { Outlet } from "react-router-dom";
+import useQueryPublic from "../../Hooks/useQueryPublic";
 import Navbar from "../../Components/Navbar";
 import Footer from "../../Components/Footer";
 
 const MainLayout = () => {
-  const axiosNoToken = useAxiosPublic();
   const [loading, setLoading] = useState(true);
   const [msg, setMsg] = useState(false);
-
-  const { isLoading, data = null } = useQuery({
-    queryKey: ["status"],
-    queryFn: async () => {
-      const res = await axiosNoToken.get("/");
-      return res?.data;
-    },
-  });
+  const { isLoading, data = null } = useQueryPublic(["status"], "/");
 
   useEffect(() => {
     const loadTimeout = setTimeout(() => {

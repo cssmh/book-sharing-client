@@ -204,7 +204,7 @@ const Navbar = () => {
               onClick={handleProfileClick}
             >
               <div className="w-[44px] rounded-full">
-                <img src={user?.photoURL} alt={user?.displayName} />
+                <img src={user?.photoURL} alt="no dp" />
               </div>
             </label>
             {showProfileOptions && (

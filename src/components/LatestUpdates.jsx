@@ -1,8 +1,8 @@
+import React from "react";
 import swal from "sweetalert";
 import Banner from "../assets/Notified.jpg";
-import toast from "react-hot-toast";
-import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+import useQueryPublic from "../Hooks/useQueryPublic";
 
 const BannerImg = {
   backgroundImage: `url(${Banner})`,
@@ -13,31 +13,37 @@ const BannerImg = {
   width: "100%",
 };
 
-const emailCheck = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/;
+const emailCheck = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
 const LatestUpdates = () => {
   const axiosNoToken = useAxiosPublic();
+  const { data, refetch } = useQueryPublic(["userEmails"], "/emails");
+  const existingEmails = data?.map((user) => user?.email);
 
-  const { data: userEmails, refetch } = useQuery({
-    queryKey: ["userEmails"],
-    queryFn: async () => {
-      const res = await axiosNoToken.get("/emails");
-      return res.data?.map((user) => user?.email);
-    },
-  });
-
-  const handleSubmitEmail = (e) => {
+  const handleSubmitEmail = async (e) => {
     e.preventDefault();
     const email = e.target.email.value.trim();
 
     if (!emailCheck.test(email)) {
-      return toast.error("Enter a valid email!");
+      return swal({
+        title: "Sorry",
+        text: "Enter a valid email!",
+        icon: "error",
+        timer: 2000,
+      });
     }
 
-    if (userEmails.includes(email)) {
-      return toast.error("This email has already been submitted!");
+    if (existingEmails?.includes(email)) {
+      return swal({
+        title: "Sorry",
+        text: "This email has already been submitted!",
+        icon: "error",
+        timer: 2000,
+      });
     }
 
-    axiosNoToken.post("/email", { email }).then((res) => {
+    try {
+      const res = await axiosNoToken.post("/email", { email });
       if (res.data?.insertedId) {
         swal({
           title: "Thank you",
@@ -47,7 +53,14 @@ const LatestUpdates = () => {
         });
         refetch();
       }
-    });
+    } catch (error) {
+      swal({
+        title: "Error",
+        text: "An error occurred. Please try again later.",
+        icon: "error",
+        timer: 2000,
+      });
+    }
   };
 
   return (
