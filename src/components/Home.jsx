@@ -7,7 +7,7 @@ import LatestUpdates from "./LatestUpdates";
 import Reviews from "./Reviews";
 import Count from "./Count/";
 import BookTypes from "./BookTypes/";
-import Support from "./Support";
+import SupportScroll from "./SupportScroll";
 
 const Home = () => {
   return (
@@ -23,7 +23,7 @@ const Home = () => {
       <LatestUpdates />
       <Reviews />
       <Count />
-      <Support />
+      <SupportScroll />
     </div>
   );
 };

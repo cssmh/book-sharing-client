@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Lottie from "lottie-react";
 import loggieData from "../assets/Logo.json";
 import { Link, NavLink } from "react-router-dom";
@@ -9,9 +9,14 @@ import { FaArrowRightToBracket } from "react-icons/fa6";
 
 const Navbar = () => {
   const { user, logOut, loading } = useAuth();
-  const [showProfileOptions, setShowProfileOptions] = useState(false);
   const { isLoading, myBookings } = useMyCart();
   const [progress, setProgress] = useState(null);
+  const [userDropdownVisible, setUserDropdownVisible] = useState(false);
+  const userRef = useRef(null);
+
+  const handleLogout = () => {
+    logOut().then().catch();
+  };
 
   useEffect(() => {
     if (!isLoading && myBookings?.length > 0) {
@@ -21,14 +26,6 @@ const Navbar = () => {
       setProgress(findProgress);
     }
   }, [isLoading, myBookings]);
-
-  const handleProfileClick = () => {
-    setShowProfileOptions(!showProfileOptions);
-  };
-
-  const handleLogout = () => {
-    logOut().then().catch();
-  };
 
   const date = new Date();
   const currentTime = date.getHours();
@@ -50,6 +47,20 @@ const Navbar = () => {
     greeting = "Working late?";
   }
   // console.log(greeting);
+
+  // Handle click outside the dropdown
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (userRef.current && !userRef.current.contains(event.target)) {
+        setUserDropdownVisible(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="navbar bg-base-200 rounded-lg md:px-4 py-0">
@@ -197,17 +208,17 @@ const Navbar = () => {
           )}
         </div>
         {user?.email ? (
-          <div className="dropdown dropdown-end">
+          <div ref={userRef} className="dropdown dropdown-end">
             <label
               tabIndex={0}
               className="btn btn-ghost btn-circle avatar"
-              onClick={handleProfileClick}
+              onClick={() => setUserDropdownVisible((prev) => !prev)}
             >
               <div className="w-[44px] rounded-full">
                 <img src={user?.photoURL} alt="no dp" />
               </div>
             </label>
-            {showProfileOptions && (
+            {userDropdownVisible && (
               <ul
                 tabIndex={0}
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"

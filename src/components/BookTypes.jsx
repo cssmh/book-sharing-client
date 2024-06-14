@@ -13,16 +13,16 @@ import {
 
 const BookTypes = () => {
   const bookTypes = [
-    { name: "TextBooks", icon: <Book size={24} /> },
-    { name: "Academic", icon: <BookOpen size={24} /> },
-    { name: "Research Thesis", icon: <Monitor size={24} /> },
-    { name: "Job Related", icon: <Briefcase size={24} /> },
-    { name: "Fiction Non-Fiction", icon: <Clipboard size={24} /> },
-    { name: "Anthologies", icon: <Layers size={24} /> }, 
+    { name: "TextBooks", icon: <Book size={23} /> },
+    { name: "Academic", icon: <BookOpen size={23} /> },
+    { name: "Research Thesis", icon: <Monitor size={23} /> },
+    { name: "Job Related", icon: <Briefcase size={23} /> },
+    { name: "Fiction Non-Fiction", icon: <Clipboard size={23} /> },
+    { name: "Anthologies", icon: <Layers size={23} /> },
   ];
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-[1220px] mx-auto">
       <Swiper
         speed={200}
         grabCursor={true}
@@ -55,9 +55,9 @@ const BookTypes = () => {
       >
         {bookTypes.map((book, idx) => (
           <SwiperSlide key={idx}>
-            <div className="mb-10 flex flex-col items-center justify-center h-full p-4 bg-gray-100 rounded-lg">
+            <div className="mb-10 flex items-center text-xl justify-center gap-2 p-5 text-gray-500 rounded-lg">
               {book.icon}
-              <p className="text-center mt-2 text-xl">{book.name}</p>
+              {book.name}
             </div>
           </SwiperSlide>
         ))}

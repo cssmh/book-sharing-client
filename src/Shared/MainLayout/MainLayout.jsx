@@ -31,7 +31,11 @@ const MainLayout = () => {
     return (
       <>
         <BigLoader />{" "}
-        {msg && <p className="pl-2">Trying to connect to the server......</p>}
+        {msg && (
+          <p className="fixed bottom-4 left-4">
+            Trying to connect to the server......
+          </p>
+        )}
       </>
     );
   }

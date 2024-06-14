@@ -76,10 +76,10 @@ const Sidebar = () => {
                   <span className="mx-4 font-medium">Books Providers</span>
                 </button>
               </Link>
-              <Link to="/admin-dashboard/user-to-update">
+              <Link to="/admin-dashboard/users-to-update">
                 <button className="flex items-center w-full px-4 py-2 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform">
                   <FcSettings className="w-5 h-5" />
-                  <span className="mx-4 font-medium">Users for New Books</span>
+                  <span className="mx-4 font-medium">Users to Update</span>
                 </button>
               </Link>
             </nav>

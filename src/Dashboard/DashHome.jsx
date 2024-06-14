@@ -6,7 +6,7 @@ const DashHome = () => {
   const { providerLoading, bookProviders } = useBookProviders();
   const { isLoading, data: allMonthlyStats } = useQueryPublic(["allMonthlyStats"], "/monthly-stats");
 
-  if (providerLoading || isLoading) return <p>loading...</p>;
+  if (providerLoading || isLoading) return <p>Loading....</p>;
 
   const bookData = [
     ["Users", "Books"],

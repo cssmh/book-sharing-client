@@ -135,7 +135,7 @@ const Root = createBrowserRouter([
         element: <BooksProviders />,
       },
       {
-        path: "/admin-dashboard/user-to-update",
+        path: "/admin-dashboard/users-to-update",
         element: <UserToUpdate />,
       },
     ],

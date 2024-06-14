@@ -14,13 +14,8 @@ const AddBooking = ({ getBookData }) => {
   const axiosNoToken = useAxiosPublic();
   const { cartRefetch } = useMyCart();
 
-  const {
-    _id,
-    book_image,
-    book_name,
-    provider_email,
-    provider_phone,
-  } = getBookData;
+  const { _id, book_image, book_name, provider_email, provider_phone } =
+    getBookData;
 
   const [open, setOpen] = useState(false);
   const [matchFound, setMatchFound] = useState([]);
@@ -64,7 +59,11 @@ const AddBooking = ({ getBookData }) => {
 
   const handlePopUp = () => {
     if (matchFound.length > 0) {
-      return toast.error("You already booked this!");
+      return swal({
+        text: "You already booked this!",
+        icon: "error",
+        timer: 2000,
+      });
     }
     setOpen(true);
   };

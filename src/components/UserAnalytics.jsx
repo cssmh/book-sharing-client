@@ -65,9 +65,6 @@ const UserAnalytics = () => {
           <Chart
             chartType="PieChart"
             data={data}
-            options={{
-              pieHole: 0.4,
-            }}
             width={"100%"}
             height={"300px"}
           />
@@ -87,7 +84,7 @@ const UserAnalytics = () => {
               height={"300px"}
             />
           ) : (
-            <p>You have no added any books!</p>
+            <p>You have no added books!</p>
           )}
         </div>
       </div>
