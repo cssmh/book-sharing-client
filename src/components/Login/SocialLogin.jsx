@@ -21,10 +21,14 @@ const SocialLogin = () => {
 
   return (
     <>
-      <div className="divider max-w-2xl mx-auto italic">continue with</div>
+      <div className="divider max-w-2xl mx-auto italic">or</div>
       <div className="flex justify-around">
-        <button onClick={handleSocialLogin} className="btn ">
-          <FcGoogle className="text-2xl"></FcGoogle>
+        <button
+          className="flex items-center gap-2 bg-green-100 px-4 py-2 rounded-lg"
+          onClick={handleSocialLogin}
+        >
+          <FcGoogle className="text-2xl"></FcGoogle>{" "}
+          <span>Continue with Google</span>
         </button>
       </div>
     </>

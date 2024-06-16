@@ -122,7 +122,7 @@ const Register = () => {
   };
 
   return (
-    <div data-aos="zoom-in" className="bg-green-50 p-5 rounded-lg mx-2 md:mx-0">
+    <div data-aos="zoom-in" className="bg-green-50 p-3 rounded-lg mx-2 md:mx-0">
       <Helmet>
         <title>BookHaven | Register</title>
       </Helmet>

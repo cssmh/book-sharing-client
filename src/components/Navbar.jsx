@@ -1,21 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 import Lottie from "lottie-react";
+import toast from "react-hot-toast";
 import loggieData from "../assets/Logo.json";
 import { Link, NavLink } from "react-router-dom";
-import { LiaSpinnerSolid } from "react-icons/lia";
 import useAuth from "../Hooks/useAuth";
-import useMyCart from "../Hooks/useMyCart";
 import { FaArrowRightToBracket } from "react-icons/fa6";
+import useMyCart from "../Hooks/useMyCart";
 
 const Navbar = () => {
-  const { user, logOut, loading } = useAuth();
+  const { user, logOut } = useAuth();
   const { isLoading, myBookings } = useMyCart();
-  const [progress, setProgress] = useState(null);
+  const [myProgress, setMyProgress] = useState(null);
   const [userDropdownVisible, setUserDropdownVisible] = useState(false);
   const userRef = useRef(null);
 
   const handleLogout = () => {
-    logOut().then().catch();
+    logOut().then(toast.success("logout successful..")).catch();
   };
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const Navbar = () => {
       const findProgress = myBookings.find(
         (booking) => booking.status === "Progress"
       );
-      setProgress(findProgress);
+      setMyProgress(findProgress);
     }
   }, [isLoading, myBookings]);
 
@@ -165,9 +165,11 @@ const Navbar = () => {
                 tabIndex={0}
                 role="button"
                 className={`${
-                  progress && "animate-bounce"
+                  myProgress && "animate-bounce"
                 } btn btn-ghost btn-circle`}
-                style={{ animationIterationCount: progress ? "4" : "initial" }}
+                style={{
+                  animationIterationCount: myProgress ? "4" : "initial",
+                }}
               >
                 <div className="indicator">
                   <svg
@@ -186,7 +188,7 @@ const Navbar = () => {
                   </svg>
                   <span
                     className={`${
-                      progress ? "bg-green-400 text-white" : ""
+                      myProgress ? "bg-green-400 text-white" : ""
                     } badge badge-sm indicator-item`}
                   >
                     {(!isLoading && myBookings.length) || 0}
@@ -198,14 +200,8 @@ const Navbar = () => {
         )}
         {/* cart btn */}
         <div className="flex flex-col items-center justify-center text-center font-semibold text-sm md:uppercase mx-[8px]">
-          {user ? (
-            <>
-              <p>{greeting}</p>
-              <p>{user?.displayName}</p>
-            </>
-          ) : (
-            <p>{greeting}</p>
-          )}
+          <p>{greeting}</p>
+          {user && <p>{user?.displayName}</p>}
         </div>
         {user?.email ? (
           <div ref={userRef} className="dropdown dropdown-end">
@@ -215,7 +211,7 @@ const Navbar = () => {
               onClick={() => setUserDropdownVisible((prev) => !prev)}
             >
               <div className="w-[44px] rounded-full">
-                <img src={user?.photoURL} alt="no dp" />
+                <img src={user?.photoURL} alt="User avatar" />
               </div>
             </label>
             {userDropdownVisible && (
@@ -223,14 +219,14 @@ const Navbar = () => {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
               >
-                <Link to={"/user-analytics"}>
+                <Link to="/user-analytics">
                   <li>
                     <button className="btn btn-sm btn-ghost">
                       User Analytics
                     </button>
                   </li>
                 </Link>
-                <Link to={"/my-profile"}>
+                <Link to="/my-profile">
                   <li>
                     <button className="btn btn-sm btn-ghost">
                       View Profile
@@ -251,11 +247,7 @@ const Navbar = () => {
         ) : (
           <Link to="/login">
             <button className="btn btn-sm border border-green-400 hover:border-green-400 hover:bg-green-400 hover:text-white">
-              {loading ? (
-                <LiaSpinnerSolid className="animate-spin text-xl" />
-              ) : (
-                "Login"
-              )}
+              Login
             </button>
           </Link>
         )}

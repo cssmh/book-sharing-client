@@ -84,7 +84,7 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-green-50 p-7 md:p-10 rounded-lg">
+    <div className="bg-green-50 p-7 md:p-9 rounded-lg">
       <Helmet>
         <title>BookHaven | Login</title>
       </Helmet>
@@ -96,9 +96,9 @@ const Login = () => {
           </label>
           <input
             type="email"
-            required
             name="email"
             placeholder="Enter Email"
+            required
             className="input input-bordered border-green-500 focus:border-transparent"
             style={{ outline: "none" }}
           />
@@ -109,9 +109,9 @@ const Login = () => {
           </label>
           <input
             type={view ? "password" : "text"}
-            required
             name="password"
             placeholder="Password"
+            required
             className="input input-bordered border-green-500 focus:border-transparent"
             style={{ outline: "none" }}
           />
@@ -125,13 +125,13 @@ const Login = () => {
             <a
               onClick={() => setIsOpen(true)}
               type="button"
-              className="label-text-alt link link-hover"
+              className="label-text-alt link link-hover text-sm"
             >
               Forgot password?
             </a>
           </label>
         </div>
-        <div className="form-control mt-6">
+        <div className="form-control mt-4">
           <button className="btn border-green-400 hover:border-green-400 bg-base-100 hover:bg-green-400 text-green-400 hover:text-white">
             {loading ? (
               <LiaSpinnerSolid className="animate-spin text-lg" />
