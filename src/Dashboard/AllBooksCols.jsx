@@ -7,7 +7,7 @@ import useQueryPublic from "../Hooks/useQueryPublic";
 
 const AllBooksCols = () => {
   const axiosSecure = useAxiosSecure();
-  const { totalBooks } = useBookProviders();
+  const { totalBooks, bookProviders } = useBookProviders();
 
   const {
     isLoading,
@@ -26,8 +26,8 @@ const AllBooksCols = () => {
   return (
     <div>
       <p className="text-center text-xl md:text-2xl my-4 mx-5 md:mx-0">
-        Total {allBooks?.length || 0} Books, Total {totalBooks || 0}{" "}
-        Book Providers and Total {allBookings?.length || 0} Bookings
+        Total {totalBooks || 0} Books, Total {bookProviders?.length || 0} Book
+        Providers and Total {allBookings?.length || 0} Bookings
       </p>
       {isLoading || bookingLoading ? (
         <SmallLoader />

@@ -29,7 +29,7 @@ const AllBookings = () => {
 
   return (
     <div>
-      <h1 className="text-center text-xl mb-5 mt-2 md:mt-0">
+      <h1 className="text-center text-xl mb-3 mt-2 md:mt-0">
         All Bookings ({allBookings.length})
       </h1>
       <div className="flex flex-col md:flex-row justify-end items-center gap-[5px] mb-3">

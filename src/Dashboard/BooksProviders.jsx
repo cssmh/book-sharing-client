@@ -7,7 +7,7 @@ const BooksProviders = () => {
 
   return (
     <div>
-      <h1 className="text-center text-xl mb-5 mt-2 md:mt-0">
+      <h1 className="text-center text-xl mb-3 mt-2 md:mt-0">
         All Books Providers ({(!providerLoading && bookProviders?.length) || 0})
       </h1>
       {providerLoading ? (

@@ -24,7 +24,7 @@ const SameProvider = () => {
   }
 
   return (
-    <div>
+    <div className="mb-8">
       <p className="my-4 text-center font-semibold text-2xl">
         Total {sameProvider?.length} {bookText}
       </p>
