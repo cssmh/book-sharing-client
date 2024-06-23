@@ -59,7 +59,7 @@ const UserAnalytics = () => {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-14 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:mt-14 mb-6">
         <div className="bg-white p-4 shadow rounded-lg">
           <h2 className="text-lg font-semibold mb-3">User Analytics</h2>
           <Chart
@@ -88,7 +88,7 @@ const UserAnalytics = () => {
           )}
         </div>
       </div>
-      <p className="text-center space-x-4 px-3 md:px-0">
+      <p className="text-center space-x-4 px-3 md:px-0 mb-8">
         <span className="text-green-400">Books ({myBooks})</span>{" "}
         <span className="text-blue-600">Bookings ({myBookings})</span>{" "}
         <span className="text-violet-600">Progress ({myProgress})</span>{" "}

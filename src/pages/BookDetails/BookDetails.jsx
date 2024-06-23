@@ -72,7 +72,7 @@ const BookDetails = () => {
       <Helmet>
         <title>{book_name}</title>
       </Helmet>
-      <div className="card max-w-xl mx-auto bg-amber-100 shadow-xl p-6 my-6">
+      <div className="card max-w-xl mx-auto bg-amber-100 shadow-xl p-6 my-2 md:my-6">
         <h2 className="text-center font-bold text-3xl text-blue-800">
           Book Provider Information
         </h2>
