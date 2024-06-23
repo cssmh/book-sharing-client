@@ -1,4 +1,5 @@
-# MBSTU BookHaven ### (Student Book Sharing Web)
+# MBSTU BookHaven 
+### (Student Book Sharing Web)
 
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
