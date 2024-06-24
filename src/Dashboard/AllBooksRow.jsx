@@ -39,8 +39,8 @@ const AllBooksRow = ({ getBooks, refetch }) => {
   };
 
   return (
-    <tr>
-      <th>
+    <tr className="border-b border-gray-200 hover:bg-gray-100">
+      <th className="py-3 px-4">
         <div className="flex gap-4 items-center">
           <button
             onClick={() => handleDeleteByAdmin(_id, book_name)}
@@ -62,20 +62,20 @@ const AllBooksRow = ({ getBooks, refetch }) => {
             </svg>
           </button>
           <div className="avatar">
-            <div className="mask w-16 rounded-sm">
+            <div className="mask w-16 h-16 rounded-sm">
               <img src={book_image} alt="no image" />
             </div>
           </div>
         </div>
       </th>
-      <td>
+      <td className="py-3 px-4">
         <p>{book_name}</p>
       </td>
-      <td>
+      <td className="py-3 px-4">
         <p>{provider_name}</p>
       </td>
-      <td>{provider_location}</td>
-      <td>
+      <td className="py-3 px-4">{provider_location}</td>
+      <td className="py-3 px-4">
         <p
           className={
             book_status === "available" ? "text-green-400" : "text-red-400"
@@ -84,9 +84,9 @@ const AllBooksRow = ({ getBooks, refetch }) => {
           {book_status}
         </p>
       </td>
-      <td>
+      <td className="py-3 px-4">
         <Link to={`/book/${_id}`}>
-          <button className="rounded-md p-1 bg-green-400 text-white">
+          <button className="rounded-md p-2 bg-green-400 text-white">
             Details
           </button>
         </Link>

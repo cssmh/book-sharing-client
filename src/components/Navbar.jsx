@@ -188,7 +188,7 @@ const Navbar = () => {
                   </svg>
                   <span
                     className={`${
-                      myProgress ? "bg-green-400 text-white" : ""
+                      myProgress && "bg-green-400 text-white"
                     } badge badge-sm indicator-item`}
                   >
                     {(!isLoading && myBookings.length) || 0}

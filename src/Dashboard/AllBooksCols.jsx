@@ -35,21 +35,21 @@ const AllBooksCols = () => {
         <div className="overflow-x-auto">
           <table className="table max-w-7xl mx-auto">
             <thead>
-              <tr>
-                <th className="bg-yellow-400 text-white rounded-md">
+              <tr className="border-b-2 border-gray-300">
+                <th className="bg-yellow-400 text-white rounded-tl-md py-2 px-4">
                   Book Image
                 </th>
-                <th className="bg-yellow-400 text-white rounded-md">
+                <th className="bg-yellow-400 text-white py-2 px-4">
                   Book Name
                 </th>
-                <th className="bg-yellow-400 text-white rounded-md">
+                <th className="bg-yellow-400 text-white py-2 px-4">
                   Provider Name
                 </th>
-                <th className="bg-yellow-400 text-white rounded-md">
-                  Location
+                <th className="bg-yellow-400 text-white py-2 px-4">Location</th>
+                <th className="bg-yellow-400 text-white py-2 px-4">Status</th>
+                <th className="bg-yellow-400 text-white rounded-tr-md py-2 px-4">
+                  Details
                 </th>
-                <th className="bg-yellow-400 text-white rounded-md">Status</th>
-                <th className="bg-yellow-400 text-white rounded-md">Details</th>
               </tr>
             </thead>
             <tbody>
@@ -58,7 +58,7 @@ const AllBooksCols = () => {
                   key={books._id}
                   getBooks={books}
                   refetch={refetch}
-                ></AllBooksRow>
+                />
               ))}
             </tbody>
           </table>
