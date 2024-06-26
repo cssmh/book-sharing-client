@@ -15,10 +15,37 @@ const BookDetails = () => {
   const axiosSecure = useAxiosSecure();
 
   const {
-    data: loadBookData = [],
+    data: loadBookData = {},
     isLoading: bookDataLoading,
     refetch,
   } = useQueryPublic(["loadBookData", id], `/book/${id}`);
+
+  const url = `/my-books?email=${loadBookData?.provider_email}`;
+  const { isLoading, bookData } = useMyBooks(url);
+
+  const handleDeleteByAdmin = (idx, book) => {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, it can't be recovered!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        axiosSecure.delete(`/book/${idx}/${user?.email}`).then((res) => {
+          if (res.data?.deletedCount > 0) {
+            swal(`${book} Deleted!`, { icon: "success", timer: 2000 });
+            refetch();
+            navigateTo(-1);
+          }
+        });
+      }
+    });
+  };
+
+  if (isLoading || bookDataLoading) {
+    return <SmallLoader />;
+  }
 
   const {
     _id,
@@ -35,37 +62,6 @@ const BookDetails = () => {
     user_name,
     user_review,
   } = loadBookData;
-
-  const url = `/my-books?email=${provider_email}`;
-  const { isLoading, bookData } = useMyBooks(url);
-
-  const handleDeleteByAdmin = (idx, book) => {
-    swal({
-      title: "Are you sure?",
-      text: "Once deleted, it can't be recovered!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        // main code
-        axiosSecure.delete(`/book/${idx}/${user?.email}`).then((res) => {
-          if (res.data?.deletedCount > 0) {
-            swal(`${book} Deleted!`, {
-              icon: "success",
-              timer: 2000,
-            });
-            refetch();
-            navigateTo(-1);
-          }
-        });
-      }
-    });
-  };
-
-  if (isLoading || bookDataLoading) {
-    return <SmallLoader />;
-  }
 
   return (
     <div>
@@ -96,15 +92,15 @@ const BookDetails = () => {
             Phone: <span className="text-green-500">{provider_phone}</span>
           </p>
         </div>
-        <div className="flex justify-center mt-2">
-          {bookData?.length > 1 && provider_email !== user?.email && (
+        {bookData?.length > 1 && provider_email !== user?.email && (
+          <div className="flex justify-center mt-2">
             <Link to={`/provider/${provider_email}`}>
               <button className="btn btn-sm rounded-lg btn-success text-white mt-1">
                 More Books Of {provider_name}
               </button>
             </Link>
-          )}
-        </div>
+          </div>
+        )}
       </div>
       <div className="max-w-[1200px] mx-auto flex flex-col lg:flex-row justify-center items-center gap-3 lg:gap-7 py-8">
         <div className="flex-1">
@@ -151,7 +147,7 @@ const BookDetails = () => {
             )}
           </div>
           {provider_email !== user?.email && book_status === "available" && (
-            <AddBooking getBookData={loadBookData}></AddBooking>
+            <AddBooking getBookData={loadBookData} />
           )}
           {provider_email === user?.email && book_status === "Unavailable" && (
             <p className="text-green-600">You shared this book.</p>
@@ -159,16 +155,14 @@ const BookDetails = () => {
           {provider_email !== user?.email && book_status === "Unavailable" && (
             <p className="text-lg text-red-600">Unavailable to Collect..</p>
           )}
-          <div>
-            {book_status === "available" && provider_email === user?.email && (
-              <Link to={`/update-book/${_id}`}>
-                <button className="text-white bg-primary  font-medium rounded-lg text-sm px-4 py-2 text-center me-2 mt-1 mx-2 md:mx-0">
-                  Update This Book
-                </button>
-              </Link>
-            )}
-          </div>
-          {book_status === "available" && user?.email == "admin@admin.com" && (
+          {book_status === "available" && provider_email === user?.email && (
+            <Link to={`/update-book/${_id}`}>
+              <button className="text-white bg-primary font-medium rounded-lg text-sm px-4 py-2 text-center me-2 mt-1 mx-2 md:mx-0">
+                Update This Book
+              </button>
+            </Link>
+          )}
+          {book_status === "available" && user?.email === "admin@admin.com" && (
             <button
               onClick={() => handleDeleteByAdmin(_id, book_name)}
               className="text-white bg-pink-500 font-medium rounded-lg text-sm px-4 py-2 text-center mx-2 md:mx-0"
@@ -179,7 +173,7 @@ const BookDetails = () => {
         </div>
       </div>
       {user_review && (
-        <div className="max-w-[1200px] mx-4 lg:mx-auto">
+        <div className="max-w-[1200px] mx-4 lg:mx-auto mb-8">
           <div className="flex gap-2 items-center relative">
             <p className="bg-green-400 px-3 py-2 text-white rounded-md mb-2 relative group">
               Collector Review
