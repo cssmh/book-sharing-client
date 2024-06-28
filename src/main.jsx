@@ -9,6 +9,7 @@ import AuthProviders from "./Shared/AuthProviders/AuthProviders.jsx";
 import { HelmetProvider } from "react-helmet-async";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Internet from "./Components/Internet.jsx";
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </AuthProviders>
       </HelmetProvider>
     </QueryClientProvider>
+    <Internet />
     <Toaster position="bottom-center" reverseOrder={false} />
   </React.StrictMode>
 );

@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const useMyBooks = (url) => {
   const axiosNoToken = useAxiosPublic();
-  const { user } = useAuth();
+  const { loading, user } = useAuth();
 
   const {
     data: bookData = [],
@@ -12,12 +12,12 @@ const useMyBooks = (url) => {
     error,
     refetch,
   } = useQuery({
+    enabled: !loading && !!user?.email,
     queryKey: ["myBooks", url],
     queryFn: async () => {
       const res = await axiosNoToken.get(url);
       return res?.data;
     },
-    enabled: !!user?.email, 
     // Ensure the query runs only when the email is available
   });
 

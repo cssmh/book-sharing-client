@@ -6,29 +6,27 @@ import SmallLoader from "./AllLoader/SmallLoader";
 
 const UserAnalytics = () => {
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
+  const { loading, user } = useAuth();
 
   const { isLoading, data: userAnalytics } = useQuery({
+    enabled: !loading && !!user?.email,
     queryKey: ["userAnalytics", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/user-analytics?email=${user?.email}`);
       return res?.data;
     },
-    enabled: !!user?.email,
   });
 
-  const { isLoading: loading, data: monthlyStats } = useQuery({
+  const { isLoading: statLoading, data: monthlyStats } = useQuery({
+    enabled: !loading && !!user?.email,
     queryKey: ["monthlyStats", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(
-        `/monthly-stats?email=${user?.email}`
-      );
+      const res = await axiosSecure.get(`/monthly-stats?email=${user?.email}`);
       return res?.data;
     },
-    enabled: !!user?.email,
   });
 
-  if (isLoading || loading) return <SmallLoader />;
+  if (isLoading || statLoading) return <SmallLoader />;
 
   if (!userAnalytics || !monthlyStats) {
     return <p className="text-red-400 text-center my-6">Error fetching data</p>;

@@ -6,17 +6,18 @@ import useMyBooks from "../../Hooks/useMyBooks";
 import SmallSpinner from "../../Components/AllLoader/SmallSpinner";
 
 const MyPending = () => {
-  const { user } = useAuth();
+  const { loading, user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const url = `/my-books?email=${user?.email}`;
   // to show "You have No added Books" message only
-  const { isLoading: loading, bookData } = useMyBooks(url);
+  const { isLoading: myBooksLoading, bookData } = useMyBooks(url);
 
   const {
     isLoading: idLoading,
     data: unavailableIds = [],
     refetch: refetchIds,
   } = useQuery({
+    enabled: !loading && !!user?.email,
     queryKey: ["unavailableIds", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(
@@ -24,7 +25,6 @@ const MyPending = () => {
       );
       return res.data?.map((book) => book._id);
     },
-    enabled: !!user?.email,
   });
 
   const {
@@ -33,15 +33,15 @@ const MyPending = () => {
     data: allMyPending = [],
     refetch,
   } = useQuery({
+    enabled: !loading && !!user?.email,
     queryKey: ["allMyPending", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/my-pending?email=${user?.email}`);
       return res?.data;
     },
-    enabled: !!user?.email,
   });
 
-  if (idLoading || loading || isLoading) {
+  if (idLoading || myBooksLoading || isLoading) {
     return (
       <div className="md:mt-[6px]">
         <SmallSpinner />

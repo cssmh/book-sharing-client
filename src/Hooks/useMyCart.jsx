@@ -3,7 +3,7 @@ import useAxiosPublic from "./useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 
 const useMyCart = () => {
-  const { user } = useAuth();
+  const { loading, user } = useAuth();
   const axiosNoToken = useAxiosPublic();
 
   const {
@@ -12,6 +12,7 @@ const useMyCart = () => {
     error,
     refetch: cartRefetch,
   } = useQuery({
+    enabled: !loading && !!user?.email,
     queryKey: ["myBookings", user?.email],
     queryFn: async () => {
       const res = await axiosNoToken.get(`/my-bookings?email=${user?.email}`, {
@@ -19,7 +20,6 @@ const useMyCart = () => {
       });
       return res?.data;
     },
-    enabled: !!user?.email,
   });
 
   return {
