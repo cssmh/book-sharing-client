@@ -25,7 +25,7 @@ const Internet = () => {
 
   return (
     showMessage && (
-      <div className="z-10 fixed -bottom-2 left-0 p-5">
+      <div className="z-10 fixed -bottom-1 left-0 p-5">
         {isOnline ? (
           <p className="flex items-center gap-1 text-green-400">
             <FiWifi />

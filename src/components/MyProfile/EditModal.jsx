@@ -44,13 +44,13 @@ const EditModal = ({ closeModal, isOpen, photoURL, displayName, handleUpdate }) 
                     <input
                       id="name"
                       type="text"
-                      defaultValue={displayName}
                       name="name"
                       required
-                      className="input input-bordered rounded-2xl text-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent w-full p-2"
+                      defaultValue={displayName}
+                      className="text-sm w-full rounded-xl border border-gray-300 p-[9px] focus:border-transparent"
                     />
                   </div>
-                  <div className="form-control mt-4">
+                  <div className="form-control mt-1">
                     <label htmlFor="photo" className="label">
                       <span className="label-text">Photo URL</span>
                     </label>
@@ -58,18 +58,18 @@ const EditModal = ({ closeModal, isOpen, photoURL, displayName, handleUpdate }) 
                       id="photo"
                       type="text"
                       name="photo"
+                      className="text-sm w-full rounded-xl border border-gray-300 p-[9px] focus:border-transparent"
                       defaultValue={
                         photoURL ===
                         "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/default.jpg"
                           ? ""
                           : photoURL
                       }
-                      className="input input-bordered rounded-2xl text-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent w-full p-2"
                     />
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-primary py-2 rounded-2xl text-white mt-6 mb-2 hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary-dark focus:ring-opacity-75"
+                    className="w-full bg-primary py-[9px] rounded-2xl text-white mt-5 mb-2 hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary-dark focus:ring-opacity-75"
                   >
                     Update
                   </button>

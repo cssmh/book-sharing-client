@@ -8,12 +8,12 @@ import useAuth from "../Hooks/useAuth";
 
 const Register = () => {
   const [view, setView] = useState(true);
-  const [viewConfirmPass, setViewConfirmPass] = useState(true);
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [passError, setPassError] = useState("");
   const [passSuccess, setPassSuccess] = useState("");
-  const [confirmPassError, setConfirmPassError] = useState("");
+  const navigateTo = useNavigate();
+  const location = useLocation();
+
   const {
     user,
     createUser,
@@ -22,11 +22,8 @@ const Register = () => {
     logOut,
     loading,
   } = useAuth();
-  const navigateTo = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
-    // If user is already logged in, will redirect to home page
     if (
       user?.emailVerified ||
       user?.email === "kona@mail.com" ||
@@ -54,46 +51,23 @@ const Register = () => {
     }
   };
 
-  // Confirm password validation function
-  const validateConfirmPassword = (confirmPassword) => {
-    if (confirmPassword === "") {
-      setConfirmPassError("");
-    } else if (password === "") {
-      setConfirmPassError("Insert your password first");
-    } else if (confirmPassword !== password) {
-      setConfirmPassError("Passwords do not match");
-    } else {
-      setConfirmPassError("");
-      if (!passError && confirmPassword === password) {
-        setPassSuccess("✔️ Good job! Passwords match and are strong");
-      }
-    }
-  };
-
   const handlePasswordChange = (e) => {
     const password = e.target.value;
     setPassword(password);
     validatePassword(password);
-    validateConfirmPassword(confirmPassword);
-    // Re-validate confirm password when main password changes
-  };
-
-  const handleConfirmPasswordChange = (e) => {
-    const confirmPassword = e.target.value;
-    setConfirmPassword(confirmPassword);
-    validateConfirmPassword(confirmPassword);
   };
 
   const handleRegister = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const name = form.get("name");
-    const get_image = form.get("photo");
-    const defaultImageUrl =
+    const image = form.get("photo");
+    const defaultImage =
       "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/default.jpg";
-    const photo = get_image.trim() !== "" ? get_image : defaultImageUrl;
+    const photo = image || defaultImage;
     const email = form.get("email");
-    if (passError || confirmPassError) {
+
+    if (passError) {
       return;
     }
 
@@ -106,14 +80,12 @@ const Register = () => {
             )
           );
         });
-        navigateTo(location?.state || "/");
-        // Introduce a 2-second delay before showing the toast error
         if (!user?.emailVerified) {
-          setTimeout(() => {
-            toast.error("Sorry! Email verification Required");
-            logOut().then().catch();
-            navigateTo("/login");
-          }, 2000);
+          logOut().then().catch();
+          toast.error("Sorry! Email verification Required");
+          navigateTo("/validation");
+        } else {
+          navigateTo(location?.state || "/");
         }
       })
       .catch((err) => {
@@ -122,14 +94,14 @@ const Register = () => {
   };
 
   return (
-    <div data-aos="zoom-in" className="bg-green-50 p-3 rounded-lg mx-2 md:mx-0">
+    <div data-aos="zoom-in" className="bg-green-50 p-4 rounded-lg mx-2 md:mx-0">
       <Helmet>
         <title>BookHaven | Register</title>
       </Helmet>
       <h2 className="text-3xl font-bold text-center">Please Register</h2>
       <form onSubmit={handleRegister} className="md:w-3/4 lg:w-1/2 mx-auto">
         <div className="form-control">
-          <label className="label">
+          <label className="label pt-0">
             <span className="label-text font-semibold">Name</span>
           </label>
           <input
@@ -166,7 +138,7 @@ const Register = () => {
             style={{ outline: "none" }}
           />
         </div>
-        <div className="form-control relative">
+        <div className="relative form-control">
           <label className="label">
             <span className="label-text font-semibold">Password</span>
           </label>
@@ -193,29 +165,6 @@ const Register = () => {
             {passError.length > 0 ? passError : passSuccess}
           </span>
         </div>
-        <div className="form-control relative">
-          <label className="label">
-            <span className="label-text font-semibold">Confirm Password</span>
-          </label>
-          <input
-            type={viewConfirmPass ? "password" : "text"}
-            required
-            onChange={handleConfirmPasswordChange}
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            className="input input-bordered border-green-500 focus:border-transparent"
-            style={{ outline: "none" }}
-          />
-          <span
-            className="absolute top-[51px] right-4 cursor-pointer"
-            onClick={() => setViewConfirmPass(!viewConfirmPass)}
-          >
-            {viewConfirmPass ? <FaRegEyeSlash /> : <FaRegEye />}
-          </span>
-          <span className="text-red-500 text-[16px] font-normal mt-1 ml-3">
-            {confirmPassError}
-          </span>
-        </div>
         <div className="form-control mt-5">
           <button className="btn border-green-400 hover:border-green-400 bg-base-100 hover:bg-green-400 text-green-400 hover:text-white">
             {loading ? (
@@ -226,7 +175,7 @@ const Register = () => {
           </button>
         </div>
       </form>
-      <div className="text-center mt-4">
+      <div className="text-center mt-3">
         Already have an account?{" "}
         <Link className="text-green-400 font-bold" to="/login">
           Login

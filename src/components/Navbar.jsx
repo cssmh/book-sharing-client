@@ -15,7 +15,7 @@ const Navbar = () => {
   const userRef = useRef(null);
 
   const handleLogout = () => {
-    logOut().then(toast.success("logout successful..")).catch();
+    logOut().then().catch();
   };
 
   useEffect(() => {

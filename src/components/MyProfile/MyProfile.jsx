@@ -5,11 +5,13 @@ import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import EditModal from "./EditModal";
 import useMyBooks from "../../Hooks/useMyBooks";
+import ChangePassModal from "./ChangePassModal";
 
 const MyProfile = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isPassOpen, setIsPassOpen] = useState(false);
   const axiosSecure = useAxiosSecure();
-  const { user, handleUpdateProfile } = useAuth();
+  const { user, handleUpdateProfile, changePassword } = useAuth();
   const { photoURL, email, displayName, metadata, reloadUserInfo } = user;
 
   const url = `/my-books?email=${user?.email}`;
@@ -22,11 +24,9 @@ const MyProfile = () => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
-
-    const get_image = form.photo.value;
     const defaultImageUrl =
       "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/default.jpg";
-    const photo = get_image.trim() !== "" ? get_image : defaultImageUrl;
+    const photo = form.photo.value || defaultImageUrl;
 
     if (name === displayName && photo === photoURL) {
       toast.error("You didn't change anything.");
@@ -57,37 +57,80 @@ const MyProfile = () => {
       .catch((err) => toast.error(err.message));
   };
 
+  const handleChangePass = (e) => {
+    e.preventDefault();
+    const newPassword = e.target.password.value;
+    changePassword(newPassword)
+      .then(() => toast.success("Password changed successfully"))
+      .catch((err) => toast.error(err.message));
+  };
+
   return (
-    <div>
+    <div className="flex items-center justify-center min-h-[78vh] p-4">
       <Helmet>
         <title>BookHaven | My Profile</title>
       </Helmet>
-      <div className="flex flex-col md:flex-row items-center justify-center md:justify-normal h-[80vh] md:gap-5">
-        <div className="w-1/2">
+      <div className="bg-white shadow-lg rounded-2xl w-full sm:w-3/4 md:w-1/2 mx-auto">
+        <div className="flex flex-col items-center justify-center p-4">
           <img
             src={photoURL}
-            className="rounded-lg lg:w-52 ml-auto px-3 lg:px-0"
+            className="mx-auto object-cover rounded-full h-24 w-24 mb-2"
+            alt="dp"
           />
-        </div>
-        <div className="flex flex-col items-center md:items-start w-full max-w-md">
-          <p className="text-lg font-semibold mb-2">Hi, {displayName}</p>
-          <p className="text-sm text-gray-600 mb-2">{email}</p>
-          <p className="text-sm text-gray-600 mb-2">
-            Account Created:{" "}
-            {new Date(parseInt(metadata.createdAt, 10)).toLocaleString()}
+          <p className="p-2 px-4 text-xs text-white bg-pink-500 rounded-full">
+            {email}
           </p>
-          <p className="text-sm text-gray-600 mb-4">
-            Last Login:{" "}
-            {new Date(
-              parseInt(reloadUserInfo.lastLoginAt, 10)
-            ).toLocaleString()}
+          <p className="mt-2 text-xl font-medium text-gray-800">
+            User Id: {user?.uid}
           </p>
-          <button
-            onClick={() => setIsOpen(true)}
-            className="bg-primary text-white px-3 py-[5px] rounded-lg"
-          >
-            Edit Profile
-          </button>
+          <div className="w-full p-2 mt-4 rounded-lg">
+            <div className="flex flex-wrap items-center justify-between text-sm text-gray-600">
+              <div>
+                <p className="flex flex-col w-full sm:w-auto">
+                  Name
+                  <span className="font-bold text-black">
+                    {user.displayName}
+                  </span>
+                </p>
+                <p className="flex flex-col w-full sm:w-auto">
+                  Account Created:
+                  <span className="font-bold text-black">
+                    {new Date(
+                      parseInt(metadata.createdAt, 10)
+                    ).toLocaleString()}
+                  </span>
+                </p>
+              </div>
+              <div>
+                <p className="flex flex-col w-full sm:w-auto">
+                  Email
+                  <span className="font-bold text-black">{user.email}</span>
+                </p>
+                <p className="flex flex-col w-full sm:w-auto">
+                  Last Login:
+                  <span className="font-bold text-black">
+                    {new Date(
+                      parseInt(reloadUserInfo.lastLoginAt, 10)
+                    ).toLocaleString()}
+                  </span>
+                </p>
+              </div>
+              <div className="w-full sm:w-auto">
+                <button
+                  onClick={() => setIsOpen(true)}
+                  className="bg-green-500 px-10 py-1 rounded-lg text-white cursor-pointer block mb-1"
+                >
+                  Update Profile
+                </button>
+                <button
+                  onClick={() => setIsPassOpen(true)}
+                  className="bg-pink-500 px-[30px] py-1 rounded-lg text-white cursor-pointer"
+                >
+                  Change Password
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <EditModal
@@ -96,7 +139,12 @@ const MyProfile = () => {
         photoURL={newPhoto}
         displayName={newName}
         handleUpdate={handleUpdate}
-      ></EditModal>
+      />
+      <ChangePassModal
+        closeModal={() => setIsPassOpen(false)}
+        isPassOpen={isPassOpen}
+        handleChangePass={handleChangePass}
+      />
     </div>
   );
 };

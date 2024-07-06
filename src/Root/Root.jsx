@@ -21,6 +21,7 @@ import BooksProviders from "../Dashboard/BooksProviders";
 import UserToUpdate from "../Dashboard/UserToUpdate";
 import UserAnalytics from "../Components/UserAnalytics";
 import DashHome from "../Dashboard/DashHome";
+import Validation from "../Components/Validation";
 
 const Root = createBrowserRouter([
   {
@@ -139,6 +140,10 @@ const Root = createBrowserRouter([
         element: <UserToUpdate />,
       },
     ],
+  },
+  {
+    path: "/validation",
+    element: <Validation />,
   },
 ]);
 

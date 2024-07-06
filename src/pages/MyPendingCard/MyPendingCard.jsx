@@ -82,9 +82,6 @@ const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
   }, []);
   // Set today's date and time for completed booking end
 
-  // Check if this book_id is completed
-  const isCompleted = unavailableIds?.includes(book_id);
-
   return (
     <div
       data-aos="zoom-in"
@@ -116,12 +113,10 @@ const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
       <div className="text-center mt-1">
         <select
           defaultValue={status}
-          onChange={(e) =>
-            handleUpdateStatus(e, _id, book_id, provider_email)
-          }
+          onChange={(e) => handleUpdateStatus(e, _id, book_id, provider_email)}
           className="border border-blue-500 focus:border-transparent rounded-2xl"
           // Disable if completed or if this book_id is completed
-          disabled={status === "Completed" || isCompleted}
+          disabled={status === "Completed" || unavailableIds?.includes(book_id)}
         >
           <option value="Pending">Pending</option>
           <option value="Progress">Progress</option>
