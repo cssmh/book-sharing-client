@@ -80,21 +80,21 @@ const MyBookingCard = ({ getBooking, refetch }) => {
   return (
     <div
       data-aos="zoom-in"
-      className="bg-base-100 shadow-xl rounded-xl px-14 pt-2 md:pt-3 py-6 flex flex-col"
+      className="bg-base-100 shadow-xl rounded-xl px-5 pt-2 md:pt-3 py-6 flex flex-col"
     >
       <div className="flex-grow pb-1">
         <figure>
           <img
             src={book_image}
             onContextMenu={(e) => e.preventDefault()}
-            className="rounded-xl w-[38%] md:w-[50%] mx-auto my-2"
+            className="rounded-xl w-[25%] md:w-[30%] mx-auto my-2"
           />
         </figure>
         <Link to={`/book/${book_id}`}>
-          <p className="text-xl md:text-2xl">{book_name}</p>
+          <p className="text-xl">{book_name}</p>
         </Link>
         <div className="text-lg">
-          <p className="text-xl">Provider Information</p>
+          <p>Provider Information</p>
           <p className="text-green-600">{provider_phone}</p>
           <p className="text-purple-800">{provider_email}</p>
           {data?.book_status === "Unavailable" && status !== "Completed" ? (
@@ -137,7 +137,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
         <div className="mt-2 card-actions justify-center">
           <button
             onClick={() => handleBookingDelete(_id, book_name)}
-            className="btn border-black bg-base-100 hover:bg-black text-black hover:text-white"
+            className="border border-gray-300 px-2 py-1 rounded-xl bg-base-100 hover:bg-black text-black hover:text-white"
           >
             Delete Booking
           </button>

@@ -49,18 +49,16 @@ const MyBooksCard = ({ getBook, refetch }) => {
           <img
             src={book_image}
             onContextMenu={(e) => e.preventDefault()}
-            className="rounded-xl w-[130px] md:w-[140px]"
+            className="rounded-xl w-[100px] h-[130px]"
           />
         </figure>
-        <h2 className="text-xl md:text-2xl font-bold text-blue-900 px-4">
-          {book_name}
-        </h2>
-        <p className="text-lg">Phone: {provider_phone}</p>
-        <p className="text-lg">Location: {provider_location}</p>
+        <h2 className="md:text-lg font-bold text-blue-900 px-4">{book_name}</h2>
+        <p className="text-base">Phone: {provider_phone}</p>
+        <p className="text-base">Location: {provider_location}</p>
         <p>
           Book Status:{" "}
           <span
-            className={`text-lg ${
+            className={`text-base ${
               book_status === "available" ? "text-green-500" : "text-red-500"
             }`}
           >

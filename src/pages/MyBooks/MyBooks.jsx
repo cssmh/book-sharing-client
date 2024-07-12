@@ -29,21 +29,23 @@ const MyBooks = () => {
       </Helmet>
       {bookData.length === 0 ? (
         <div>
-          <p className="text-center text-xl md:text-2xl font-semibold text-red-600 italic mt-6">
+          <p className="text-center text-xl md:text-[22px] font-semibold text-red-600 mt-2 italic">
             No Book Added By You
           </p>
-          <img
-            src={NoBook}
-            className="mx-auto"
-            onContextMenu={(e) => e.preventDefault()}
-          />
+          <p className="flex flex-col items-center justify-center min-h-[76vh]">
+            <img
+              src={NoBook}
+              className="mx-auto mt-4"
+              onContextMenu={(e) => e.preventDefault()}
+            />
+          </p>
         </div>
       ) : (
         <>
-          <h2 className="text-xl md:text-2xl font-bold mt-5 mb-3 md:mb-5 text-center italic">
+          <h2 className="text-[21px] font-bold text-center italic mt-2 md:mt-0">
             All Books Added By You
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
             {bookData?.map((book) => (
               <MyBooksCard
                 key={book._id}

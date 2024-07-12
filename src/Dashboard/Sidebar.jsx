@@ -3,13 +3,21 @@ import { Link } from "react-router-dom";
 import { GrLogout } from "react-icons/gr";
 import { FcSettings } from "react-icons/fc";
 import { AiOutlineBars } from "react-icons/ai";
-import { FaHome, FaBook, FaClipboardList, FaUsers } from "react-icons/fa";
+import {
+  FaHome,
+  FaBook,
+  FaClipboardList,
+  FaUsers,
+  FaAddressBook,
+  FaRegCalendarAlt,
+} from "react-icons/fa";
 import logo from "../assets/Favicon.png";
 import useAuth from "../Hooks/useAuth";
 
 const Sidebar = () => {
   const [isActive, setActive] = useState(false);
-  const { logOut } = useAuth();
+  const { user, logOut } = useAuth();
+  const admin = user?.email === "admin@admin.com";
 
   const handleLogout = () => {
     logOut().then().catch();
@@ -26,7 +34,7 @@ const Sidebar = () => {
         <div>
           <div className="block cursor-pointer px-5 py-2 font-bold">
             <Link to="/">
-              <img src={logo} className="w-12" />
+              <img src={logo} className="w-12" alt="Logo" />
             </Link>
           </div>
         </div>
@@ -46,42 +54,62 @@ const Sidebar = () => {
         <div>
           <Link to="/" className="hidden md:block">
             <div className="w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center bg-rose-100 mx-auto">
-              <img src={logo} className="h-14" />
+              <img src={logo} className="h-14" alt="Logo" />
             </div>
           </Link>
           {/* Nav Items */}
           <div className="flex flex-col justify-between flex-1 mt-6">
             <nav className="space-y-2">
-              <Link to="/admin-dashboard">
+              <Link to="/dashboard">
                 <button className="flex items-center w-full px-4 py-2 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform">
                   <FaHome className="w-5 h-5" />
                   <span className="mx-4 font-medium">Dashboard</span>
                 </button>
               </Link>
-              <Link to="/admin-dashboard/all-books">
-                <button className="flex items-center w-full px-4 py-2 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform">
-                  <FaBook className="w-5 h-5" />
-                  <span className="mx-4 font-medium">All Books</span>
-                </button>
-              </Link>
-              <Link to="/admin-dashboard/all-bookings">
-                <button className="flex items-center w-full px-4 py-2 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform">
-                  <FaClipboardList className="w-5 h-5" />
-                  <span className="mx-4 font-medium">All Bookings</span>
-                </button>
-              </Link>
-              <Link to="/admin-dashboard/books-providers">
-                <button className="flex items-center w-full px-4 py-2 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform">
-                  <FaUsers className="w-5 h-5" />
-                  <span className="mx-4 font-medium">Books Providers</span>
-                </button>
-              </Link>
-              <Link to="/admin-dashboard/users-to-update">
-                <button className="flex items-center w-full px-4 py-2 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform">
-                  <FcSettings className="w-5 h-5" />
-                  <span className="mx-4 font-medium">Users to Update</span>
-                </button>
-              </Link>
+              {user && (
+                <>
+                  <Link to="/dashboard/my-books">
+                    <button className="flex items-center w-full px-4 py-2 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform">
+                      <FaAddressBook  className="w-5 h-5" />
+                      <span className="mx-4 font-medium">My Books</span>
+                    </button>
+                  </Link>
+                  <Link to="/dashboard/my-schedules">
+                    <button className="flex items-center w-full px-4 py-2 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform">
+                      <FaRegCalendarAlt  className="w-5 h-5" />
+                      <span className="mx-4 font-medium">My Schedule</span>
+                    </button>
+                  </Link>
+                </>
+              )}
+              {admin && (
+                <>
+                  <Link to="/dashboard/all-books">
+                    <button className="flex items-center w-full px-4 py-2 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform">
+                      <FaBook className="w-5 h-5" />
+                      <span className="mx-4 font-medium">All Books</span>
+                    </button>
+                  </Link>
+                  <Link to="/dashboard/all-bookings">
+                    <button className="flex items-center w-full px-4 py-2 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform">
+                      <FaClipboardList className="w-5 h-5" />
+                      <span className="mx-4 font-medium">All Bookings</span>
+                    </button>
+                  </Link>
+                  <Link to="/dashboard/books-providers">
+                    <button className="flex items-center w-full px-4 py-2 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform">
+                      <FaUsers className="w-5 h-5" />
+                      <span className="mx-4 font-medium">Books Providers</span>
+                    </button>
+                  </Link>
+                  <Link to="/dashboard/users-to-update">
+                    <button className="flex items-center w-full px-4 py-2 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform">
+                      <FcSettings className="w-5 h-5" />
+                      <span className="mx-4 font-medium">Users to Update</span>
+                    </button>
+                  </Link>
+                </>
+              )}
             </nav>
           </div>
         </div>

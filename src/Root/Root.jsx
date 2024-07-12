@@ -13,13 +13,11 @@ import MyBooks from "../pages/MyBooks/MyBooks";
 import UpdateBook from "../pages/UpdateBook/UpdateBook";
 import MySchedules from "../pages/MySchedules/MySchedules";
 import SameProvider from "../pages/SameProvider/SameProvider";
-import AdminRoute from "../Shared/PrivateRoute/AdminRoute";
-import AdminLayout from "../Dashboard/AdminLayout";
+import DashLayout from "../Dashboard/DashLayout";
 import AllBooksCols from "../Dashboard/AllBooksCols";
 import AllBookings from "../Dashboard/AllBookings";
 import BooksProviders from "../Dashboard/BooksProviders";
 import UserToUpdate from "../Dashboard/UserToUpdate";
-import UserAnalytics from "../Components/UserAnalytics";
 import DashHome from "../Dashboard/DashHome";
 
 const Root = createBrowserRouter([
@@ -49,14 +47,6 @@ const Root = createBrowserRouter([
         ),
       },
       {
-        path: "/user-analytics",
-        element: (
-          <PrivateRoute>
-            <UserAnalytics />
-          </PrivateRoute>
-        ),
-      },
-      {
         path: "/all-books",
         element: <AllBooks />,
       },
@@ -77,26 +67,10 @@ const Root = createBrowserRouter([
         ),
       },
       {
-        path: "/my-books",
-        element: (
-          <PrivateRoute>
-            <MyBooks />
-          </PrivateRoute>
-        ),
-      },
-      {
         path: "/update-book/:id",
         element: (
           <PrivateRoute>
             <UpdateBook />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/my-schedules",
-        element: (
-          <PrivateRoute>
-            <MySchedules />
           </PrivateRoute>
         ),
       },
@@ -108,35 +82,51 @@ const Root = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-    ],
-  },
-  {
-    path: "/admin-dashboard",
-    element: (
-      <AdminRoute>
-        <AdminLayout />
-      </AdminRoute>
-    ),
-    children: [
       {
-        path: "/admin-dashboard",
-        element: <DashHome />,
-      },
-      {
-        path: "/admin-dashboard/all-books",
-        element: <AllBooksCols />,
-      },
-      {
-        path: "/admin-dashboard/all-bookings",
-        element: <AllBookings />,
-      },
-      {
-        path: "/admin-dashboard/books-providers",
-        element: <BooksProviders />,
-      },
-      {
-        path: "/admin-dashboard/users-to-update",
-        element: <UserToUpdate />,
+        path: "/dashboard",
+        element: (
+          <PrivateRoute>
+            <DashLayout />
+          </PrivateRoute>
+        ),
+        children: [
+          {
+            path: "/dashboard",
+            element: <DashHome />,
+          },
+          {
+            path: "/dashboard/all-books",
+            element: <AllBooksCols />,
+          },
+          {
+            path: "/dashboard/my-books",
+            element: (
+              <PrivateRoute>
+                <MyBooks />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "/dashboard/my-schedules",
+            element: (
+              <PrivateRoute>
+                <MySchedules />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "/dashboard/all-bookings",
+            element: <AllBookings />,
+          },
+          {
+            path: "/dashboard/books-providers",
+            element: <BooksProviders />,
+          },
+          {
+            path: "/dashboard/users-to-update",
+            element: <UserToUpdate />,
+          },
+        ],
       },
     ],
   },

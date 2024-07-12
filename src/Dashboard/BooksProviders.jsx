@@ -1,12 +1,16 @@
 import { Link } from "react-router-dom";
 import useBookProviders from "../Hooks/useBookProviders";
 import SmallLoader from "../Components/AllLoader/SmallLoader";
+import { Helmet } from "react-helmet-async";
 
 const BooksProviders = () => {
   const { providerLoading, bookProviders } = useBookProviders();
 
   return (
     <div>
+      <Helmet>
+        <title>BookHaven | Books Providers</title>
+      </Helmet>
       <h1 className="text-center text-xl mb-3 mt-2 md:mt-0">
         All Books Providers ({(!providerLoading && bookProviders?.length) || 0})
       </h1>

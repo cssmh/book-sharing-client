@@ -2,15 +2,16 @@ import { useQuery } from "@tanstack/react-query";
 import { Chart } from "react-google-charts";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useAuth from "../Hooks/useAuth";
-import SmallLoader from "./AllLoader/SmallLoader";
+import SmallLoader from "../Components/AllLoader/SmallLoader";
 
-const UserAnalytics = () => {
+const UserDashboard = () => {
   const axiosSecure = useAxiosSecure();
   const { loading, user } = useAuth();
+  const admin = user?.email === "admin@admin.com";
 
-  const { isLoading, data: userAnalytics } = useQuery({
+  const { isLoading, data: UserDashboard } = useQuery({
     enabled: !loading && !!user?.email,
-    queryKey: ["userAnalytics", user?.email],
+    queryKey: ["UserDashboard", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/user-analytics?email=${user?.email}`);
       return res?.data;
@@ -28,7 +29,7 @@ const UserAnalytics = () => {
 
   if (isLoading || statLoading) return <SmallLoader />;
 
-  if (!userAnalytics || !monthlyStats) {
+  if (!UserDashboard || !monthlyStats) {
     return <p className="text-red-400 text-center my-6">Error fetching data</p>;
   }
 
@@ -39,7 +40,7 @@ const UserAnalytics = () => {
     myBookings,
     myProgress,
     myCompleted,
-  } = userAnalytics;
+  } = UserDashboard;
 
   const data = [
     ["Task", "Percentage"],
@@ -56,8 +57,13 @@ const UserAnalytics = () => {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:mt-14 mb-6">
+    <div className="max-w-6xl mx-auto p-5">
+      {!admin && (
+        <h1 className="text-2xl font-bold mb-5">
+          Hello and Welcome, {user?.displayName}
+        </h1>
+      )}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:my-5">
         <div className="bg-white p-4 shadow rounded-lg">
           <h2 className="text-lg font-semibold mb-3">User Analytics</h2>
           <Chart
@@ -96,4 +102,4 @@ const UserAnalytics = () => {
   );
 };
 
-export default UserAnalytics;
+export default UserDashboard;

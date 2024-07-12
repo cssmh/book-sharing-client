@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import BigLoader from "../../Components/AllLoader/BigLoader";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../../Components/Navbar";
 import Footer from "../../Components/Footer";
 
@@ -14,15 +14,18 @@ const MainLayout = () => {
     }, 1800);
   }, []);
 
-  if (loading) return <BigLoader />;
+  const loc = useLocation();
+  const noHeaderFooter = loc?.pathname?.startsWith("/dashboard");
+
+  // if (loading) return <BigLoader />;
 
   return (
     <div>
-      <Navbar />
+      {!noHeaderFooter && <Navbar />}
       <div className="min-h-[65vh] md:min-h-[70vh]">
         <Outlet />
       </div>
-      <Footer />
+      {!noHeaderFooter && <Footer />}
     </div>
   );
 };

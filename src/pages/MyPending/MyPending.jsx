@@ -60,19 +60,19 @@ const MyPending = () => {
   return (
     <div>
       {bookData.length == 0 ? (
-        <p className="text-center text-lg md:text-2xl my-2 md:my-4 font-semibold text-red-600 italic">
+        <p className="text-center text-xl my-2 font-semibold text-red-600 italic">
           You have No added Books
         </p>
       ) : allMyPending?.length == 0 ? (
-        <p className="text-center text-lg md:text-2xl my-2 md:my-4 font-semibold text-red-600 italic">
+        <p className="text-center text-xl my-2 font-semibold text-red-600 italic">
           No User Booked Your Books
         </p>
       ) : (
         <>
-          <h2 className="text-center text-lg md:text-2xl my-2 md:my-4 font-semibold italic">
+          <h2 className="text-center text-xl my-2 font-semibold italic">
             User Booked Your Books
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 gap-3 mb-5">
             {allMyPending?.map((pending) => (
               <MyPendingCard
                 key={pending._id}

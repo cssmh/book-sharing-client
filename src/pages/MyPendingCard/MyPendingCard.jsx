@@ -80,23 +80,22 @@ const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
     const dateTime = `${formattedDate}, ${formattedTime}`;
     setTodayDateTime(dateTime);
   }, []);
-  // Set today's date and time for completed booking end
 
   return (
     <div
-      data-aos="zoom-in"
-      className="bg-base-100 shadow-xl rounded-xl pt-2 md:pt-3 py-6 flex flex-col"
+      // data-aos="zoom-in"
+      className="bg-base-100 shadow-xl rounded-xl pt-2 md:pt-3 py-5 flex flex-col"
     >
-      <div className="flex-grow mb-2 text-lg w-[73%] mx-auto">
+      <div className="flex-grow mb-2 text-lg px-4">
         <figure>
           <img
             src={book_image}
             onContextMenu={(e) => e.preventDefault()}
-            className="rounded-xl w-[38%] md:w-[50%] mx-auto my-2"
+            className="rounded-xl w-[25%] md:w-[30%] mx-auto my-2"
           />
         </figure>
-        <h2 className="text-xl md:text-2xl">{book_name}</h2>
-        <h1 className="text-xl">Collector Info: </h1>
+        <h2 className="text-lg">{book_name}</h2>
+        <h1>Collector Info: </h1>
         <p className="text-green-600">{user_phone}</p>
         <p className="text-purple-800">{user_email}</p>
         {user_message.length > 0 && <p>Message: {user_message}</p>}
@@ -115,7 +114,6 @@ const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
           defaultValue={status}
           onChange={(e) => handleUpdateStatus(e, _id, book_id, provider_email)}
           className="border border-blue-500 focus:border-transparent rounded-2xl"
-          // Disable if completed or if this book_id is completed
           disabled={status === "Completed" || unavailableIds?.includes(book_id)}
         >
           <option value="Pending">Pending</option>

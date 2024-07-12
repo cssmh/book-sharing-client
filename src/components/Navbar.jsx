@@ -133,24 +133,9 @@ const Navbar = () => {
               <NavLink to="/add-book">Add Book</NavLink>
             </li>
           )}
-          {user?.email == "admin@admin.com" && (
+          {user?.email && (
             <li className="font-semibold text-base">
-              <NavLink to="/admin-dashboard">Admin</NavLink>
-            </li>
-          )}
-          {user && (
-            <li tabIndex={0}>
-              <details>
-                <summary className="font-semibold text-base">Dashboard</summary>
-                <ul className="p-2 menu menu-sm dropdown-content z-[1]">
-                  <li className="font-semibold text-base">
-                    <NavLink to="/my-books">My-Books</NavLink>
-                  </li>
-                  <li className="font-semibold text-base">
-                    <NavLink to="/my-schedules">My-Schedule</NavLink>
-                  </li>
-                </ul>
-              </details>
+              <NavLink to="/dashboard">Dashboard</NavLink>
             </li>
           )}
         </ul>
@@ -159,7 +144,7 @@ const Navbar = () => {
         {/* cart btn */}
         {user && (
           <div className="hidden md:block">
-            <Link to="/my-schedules">
+            <Link to="/dashboard/my-schedules">
               <div
                 tabIndex={0}
                 role="button"
@@ -198,7 +183,7 @@ const Navbar = () => {
           </div>
         )}
         {/* cart btn */}
-        <div className="flex flex-col items-center justify-center text-center font-semibold text-sm mx-[8px]">
+        <div className="flex flex-col items-center justify-center text-center font-semibold text-sm mx-[8px] uppercase">
           <p>{greeting}</p>
           {user && <p>{user?.displayName}</p>}
         </div>

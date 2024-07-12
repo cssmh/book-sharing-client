@@ -2,6 +2,7 @@ import swal from "sweetalert";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useMyBooks from "../Hooks/useMyBooks";
 import SmallLoader from "../Components/AllLoader/SmallLoader";
+import { Helmet } from "react-helmet-async";
 
 const UserToUpdate = () => {
   const axiosSecure = useAxiosSecure();
@@ -52,6 +53,9 @@ const UserToUpdate = () => {
 
   return (
     <div>
+    <Helmet>
+      <title>BookHaven | User To Update</title>
+    </Helmet>
       <h1 className="text-center text-xl mb-6 mt-2 md:mt-0">
         All Users To Get Notified for New Books
       </h1>

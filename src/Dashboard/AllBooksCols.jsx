@@ -4,6 +4,7 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useBookProviders from "../Hooks/useBookProviders";
 import SmallLoader from "../Components/AllLoader/SmallLoader";
 import useQueryPublic from "../Hooks/useQueryPublic";
+import { Helmet } from "react-helmet-async";
 
 const AllBooksCols = () => {
   const axiosSecure = useAxiosSecure();
@@ -25,7 +26,10 @@ const AllBooksCols = () => {
 
   return (
     <div>
-      <p className="text-center text-xl md:text-2xl my-4 mx-5 md:mx-0">
+      <Helmet>
+        <title>BookHaven | All Books</title>
+      </Helmet>
+      <p className="text-center md:text-[22px] my-4 mx-5 md:mx-0">
         Total {totalBooks || 0} Books, Total {bookProviders?.length || 0} Book
         Providers and Total {allBookings?.length || 0} Bookings
       </p>

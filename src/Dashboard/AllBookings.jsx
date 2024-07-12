@@ -6,6 +6,7 @@ import DeleteAllBookings from "./DeleteAllBookings";
 import MakeBookingsPending from "./MakeBookingsPending";
 import MakeBooksAvailable from "./MakeBooksAvailable";
 import SmallLoader from "../Components/AllLoader/SmallLoader";
+import { Helmet } from "react-helmet-async";
 
 const AllBookings = () => {
   const axiosSecure = useAxiosSecure();
@@ -29,6 +30,9 @@ const AllBookings = () => {
 
   return (
     <div>
+    <Helmet>
+      <title>BookHaven | All Bookings</title>
+    </Helmet>
       <h1 className="text-center text-xl mb-3 mt-2 md:mt-0">
         All Bookings ({allBookings.length})
       </h1>
