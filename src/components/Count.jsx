@@ -26,25 +26,13 @@ const Count = () => {
       <div className="hero-content text-center text-neutral-content">
         <div className="grid grid-cols-1 md:grid-cols-3 text-4xl gap-8 lg:gap-52">
           <div>
-            <p
-              data-aos="flip-left"
-              data-aos-duration="1000"
-              className="text-red-500"
-            >
-              Books
-            </p>
+            <p className="text-red-500">Books</p>
             <p className={`${loading && "animate-pulse"} text-gray-500`}>
               {inView && <CountUp end={totalBooks || 0} duration={3} />}
             </p>
           </div>
           <div>
-            <p
-              data-aos="flip-up"
-              data-aos-duration="1000"
-              className="text-green-500"
-            >
-              Providers
-            </p>
+            <p className="text-green-500">Providers</p>
             <p className={`${loading && "animate-pulse"} text-gray-500`}>
               {inView && (
                 <CountUp end={bookProviders?.length || 0} duration={3} />
@@ -52,13 +40,7 @@ const Count = () => {
             </p>
           </div>
           <div>
-            <p
-              data-aos="flip-right"
-              data-aos-duration="1000"
-              className="text-blue-500"
-            >
-              Bookings
-            </p>
+            <p className="text-blue-500">Bookings</p>
             <p className={`${loading && "animate-pulse"} text-gray-500`}>
               {inView && (
                 <CountUp end={totalBookings?.result || 0} duration={3} />

@@ -18,8 +18,8 @@ const Home = () => {
       <Banner />
       <PopularBooks />
       <AboutUs />
-      <ShareMagic />
       <BookTypes />
+      <ShareMagic />
       <LatestUpdates />
       <Reviews />
       <Count />

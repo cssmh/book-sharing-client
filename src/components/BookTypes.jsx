@@ -13,16 +13,16 @@ import {
 
 const BookTypes = () => {
   const bookTypes = [
-    { name: "TextBooks", icon: <Book size={23} /> },
-    { name: "Academic", icon: <BookOpen size={23} /> },
-    { name: "Research Thesis", icon: <Monitor size={23} /> },
-    { name: "Job Related", icon: <Briefcase size={23} /> },
-    { name: "Fiction Non-Fiction", icon: <Clipboard size={23} /> },
-    { name: "Anthologies", icon: <Layers size={23} /> },
+    { name: "TextBooks", icon: <Book size={23} color="#FF5733" /> },
+    { name: "Academic", icon: <BookOpen size={23} color="#33FF57" /> },
+    { name: "Research Thesis", icon: <Monitor size={23} color="#3357FF" /> },
+    { name: "Job Related", icon: <Briefcase size={23} color="#F39C12" /> },
+    { name: "Fic Non-Fiction", icon: <Clipboard size={23} color="#8E44AD" /> },
+    { name: "Anthologies", icon: <Layers size={23} color="#E74C3C" /> },
   ];
 
   return (
-    <div className="max-w-[1220px] mx-auto">
+    <div className="max-w-7xl mx-2 md:mx-auto">
       <Swiper
         speed={200}
         grabCursor={true}
@@ -55,9 +55,9 @@ const BookTypes = () => {
       >
         {bookTypes.map((book, idx) => (
           <SwiperSlide key={idx}>
-            <div className="mb-10 flex items-center text-xl justify-center gap-2 p-5 text-gray-500 rounded-lg">
+            <div className="mb-8 flex items-center text-xl justify-center gap-2 p-5 rounded-lg bg-white shadow-lg transform transition-transform hover:scale-105 hover:shadow-xl">
               {book.icon}
-              {book.name}
+              <span className="font-semibold">{book.name}</span>
             </div>
           </SwiperSlide>
         ))}

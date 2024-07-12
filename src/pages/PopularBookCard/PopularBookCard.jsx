@@ -12,7 +12,7 @@ const PopularBookCard = ({ getBook }) => {
   } = getBook;
 
   return (
-    <div className="relative card bg-base-100 shadow-lg py-5 mb-4 h-[460px] border">
+    <div className="relative card bg-base-100 shadow-lg py-5 mb-4 h-[460px] border group">
       <figure>
         <img
           src={book_image}
@@ -23,7 +23,7 @@ const PopularBookCard = ({ getBook }) => {
       <div className="absolute top-2 left-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs font-bold px-2 py-1 rounded">
           Popular
         </div>
-      <div className="card-body items-center text-center p-0 px-3 gap-[0px]">
+      <div className="group-hover:scale-105 group-hover:transition-all group-hover:duration-300 card-body items-center text-center p-0 px-3 gap-[0px]">
         <h2 className="text-blue-900 text-xl md:text-[21px] font-bold mt-2 px-2">
           {book_name}
         </h2>

@@ -65,7 +65,7 @@ const LatestUpdates = () => {
 
   return (
     <div
-      className="text-white rounded-lg max-w-[1300px] mx-auto"
+      className="text-white rounded-lg max-w-[1300px] mx-auto mt-5"
       style={BannerImg}
     >
       <div className="backdrop-blur-sm px-16 py-20 rounded-2xl">

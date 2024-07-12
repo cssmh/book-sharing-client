@@ -7,8 +7,10 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useMyBooks from "../../Hooks/useMyBooks";
 import SmallLoader from "../../Components/AllLoader/SmallLoader";
 import useQueryPublic from "../../Hooks/useQueryPublic";
+import { useState } from "react";
 
 const BookDetails = () => {
+  const [desc, setDesc] = useState(true);
   const { user } = useAuth();
   const navigateTo = useNavigate();
   const { id } = useParams();
@@ -66,37 +68,33 @@ const BookDetails = () => {
   return (
     <div>
       <Helmet>
-        <title>{book_name}</title>
+        <title>BookHaven | {book_name}</title>
       </Helmet>
-      <div className="card max-w-xl mx-auto bg-amber-100 shadow-xl p-6 my-2 md:my-6">
-        <h2 className="text-center font-bold text-3xl text-blue-800">
+      <div className="card max-w-xl mx-auto bg-gradient-to-r from-yellow-100 to-amber-100 shadow-xl p-6 mt-2 md:mt-4">
+        <h2 className="text-center font-bold text-xl md:text-[22px] text-blue-800 italic">
           Book Provider Information
         </h2>
-        <figure className="px-10 pt-5">
+        <figure className="flex justify-center my-2">
           <img
-            className="rounded-lg w-24 md:w-28"
+            className="rounded-full w-24 shadow-xl"
             src={provider_image}
             onContextMenu={(e) => e.preventDefault()}
-            alt="no image"
+            alt="Provider"
           />
         </figure>
-        <div className="card-body items-center text-center p-4 pb-0">
-          <h2 className="card-title text-xl text-orange-500 font-bold">
-            Name : {provider_name}
-          </h2>
-          <p className="text-lg font-medium">Email: {provider_email}</p>
+        <div className="text-center text-lg">
+          <h3 className="text-orange-500 font-bold">{provider_name}</h3>
+          <p className="text-gray-700">Email: {provider_email}</p>
+          <p className="text-green-500">Phone:{provider_phone}</p>
           <p className="text-lg font-medium">
             Location: <span className="text-blue-500">{provider_location}</span>
           </p>
-          <p className="text-lg font-medium">
-            Phone: <span className="text-green-500">{provider_phone}</span>
-          </p>
         </div>
         {bookData?.length > 1 && provider_email !== user?.email && (
-          <div className="flex justify-center mt-2">
+          <div className="text-center mt-4">
             <Link to={`/provider/${provider_email}`}>
-              <button className="btn btn-sm rounded-lg btn-success text-white mt-1">
-                More Books Of {provider_name}
+              <button className="btn btn-sm rounded-full btn-success text-white">
+                More Books of {provider_name}
               </button>
             </Link>
           </div>
@@ -108,44 +106,17 @@ const BookDetails = () => {
             <img
               src={book_image}
               onContextMenu={(e) => e.preventDefault()}
-              className="rounded-xl w-[170px] lg:w-[263px] mx-auto lg:mx-0 lg:ml-auto"
+              className="rounded-xl w-[140px] lg:w-[250px] mx-auto lg:mx-0 lg:ml-auto"
             />
           </figure>
         </div>
         <div className="flex-1 space-y-1 text-center lg:text-left">
-          <h2 className="text-2xl font-bold text-blue-900 lg:w-[90%] mx-3 md:mx-0">
+          <h2 className="text-[21px] font-bold text-blue-900 lg:w-[80%] mx-3 md:mx-0">
             {book_name}
           </h2>
-          <p>{added_time}</p>
-          <div className="mx-4 lg:mx-0 md:w-[80%] lg:w-[90%] md:mx-auto">
-            {description.length < 640 ? (
-              description
-            ) : (
-              <>
-                {description.slice(0, 640)}
-                <button
-                  className="btn btn-sm rounded-lg"
-                  onClick={() =>
-                    document.getElementById("my_modal_4").showModal()
-                  }
-                >
-                  Read more...
-                </button>
-                <dialog id="my_modal_4" className="modal">
-                  <div className="modal-box w-11/12 max-w-5xl">
-                    <div className="modal-action mt-0">
-                      <form method="dialog">
-                        <button className="btn btn-primary text-white btn-sm rounded-lg">
-                          close
-                        </button>
-                      </form>
-                    </div>
-                    <p className="py-1">{description}</p>
-                  </div>
-                </dialog>
-              </>
-            )}
-          </div>
+          <p className="font-semibold">
+            Added: <span className="text-blue-600">{added_time}</span>
+          </p>
           {provider_email !== user?.email && book_status === "available" && (
             <AddBooking getBookData={loadBookData} />
           )}
@@ -155,36 +126,53 @@ const BookDetails = () => {
           {provider_email !== user?.email && book_status === "Unavailable" && (
             <p className="text-lg text-red-600">Unavailable to Collect..</p>
           )}
-          {book_status === "available" && provider_email === user?.email && (
-            <Link to={`/update-book/${_id}`}>
-              <button className="text-white bg-primary font-medium rounded-lg text-sm px-4 py-2 text-center me-2 mt-1 mx-2 md:mx-0">
-                Update This Book
-              </button>
-            </Link>
-          )}
-          {book_status === "available" && user?.email === "admin@admin.com" && (
+          <p>
+            {book_status === "available" && provider_email === user?.email && (
+              <Link to={`/update-book/${_id}`}>
+                <button className="text-white bg-primary font-medium rounded-lg text-sm px-4 py-2 text-center me-2 mt-1 mx-2 md:mx-0">
+                  Update This Book
+                </button>
+              </Link>
+            )}
+          </p>
+          <p>
+            {book_status === "available" &&
+              user?.email === "admin@admin.com" && (
+                <button
+                  onClick={() => handleDeleteByAdmin(_id, book_name)}
+                  className="text-white bg-pink-500 font-medium rounded-lg text-sm px-4 py-2 text-center mx-2 md:mx-0"
+                >
+                  Delete This Book
+                </button>
+              )}
+          </p>
+        </div>
+      </div>
+      <div className="max-w-[1200px] mx-4 lg:mx-auto mb-8">
+        <div className="flex gap-1">
+          <button
+            onClick={() => setDesc(true)}
+            className="bg-blue-500 px-3 py-2 text-white rounded-md mb-2"
+          >
+            Description
+          </button>
+          {user_review && (
             <button
-              onClick={() => handleDeleteByAdmin(_id, book_name)}
-              className="text-white bg-pink-500 font-medium rounded-lg text-sm px-4 py-2 text-center mx-2 md:mx-0"
+              onClick={() => setDesc(false)}
+              className="bg-green-500 px-3 py-2 text-white rounded-md mb-2"
             >
-              Delete This Book
+              Collector Review
             </button>
           )}
         </div>
+        {desc ? (
+          <p>{description}</p>
+        ) : (
+          <p>
+            <span className="font-semibold">{user_name}</span> - {user_review}
+          </p>
+        )}
       </div>
-      {user_review && (
-        <div className="max-w-[1200px] mx-4 lg:mx-auto mb-8">
-          <div className="flex gap-2 items-center relative">
-            <p className="bg-green-400 px-3 py-2 text-white rounded-md mb-2 relative group">
-              Collector Review
-              <span className="absolute left-0 top-full mt-1 min-w-max bg-black text-white text-center rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                {user_name}
-              </span>
-            </p>
-          </div>
-          <p>{user_review}</p>
-        </div>
-      )}
     </div>
   );
 };

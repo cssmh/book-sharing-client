@@ -13,7 +13,7 @@ const AllBooksCard = ({ getBook }) => {
   } = getBook;
 
   return (
-    <div className="relative card bg-base-100 shadow-xl py-6">
+    <div className="relative card bg-base-100 shadow-xl py-6 group">
       <figure>
         <img
           data-aos="zoom-in"
@@ -32,7 +32,7 @@ const AllBooksCard = ({ getBook }) => {
       >
         {book_status === "available" ? "available" : "Unavailable"}
       </div>
-      <div className="card-body items-center text-center p-0 px-3 gap-[0px]">
+      <div className="group-hover:scale-105 group-hover:transition-all group-hover:duration-300 card-body items-center text-center p-0 px-3 gap-[0px]">
         <h2 className="text-blue-900 text-xl md:text-[21px] font-bold mt-2 px-2">
           {book_name}
         </h2>
