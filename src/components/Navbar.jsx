@@ -191,25 +191,19 @@ const Navbar = () => {
           <div ref={userRef} className="dropdown dropdown-end">
             <label
               tabIndex={0}
-              className="btn btn-ghost btn-circle avatar"
               onClick={() => setUserDropdownVisible((prev) => !prev)}
             >
-              <div className="w-[40px] rounded-full">
-                <img src={user?.photoURL} alt="User avatar" />
-              </div>
+              <img
+                src={user?.photoURL}
+                className="w-10 rounded-full"
+                alt="User avatar"
+              />
             </label>
             {userDropdownVisible && (
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-44"
               >
-                <Link to="/user-analytics">
-                  <li>
-                    <button className="btn btn-sm btn-ghost">
-                      User Analytics
-                    </button>
-                  </li>
-                </Link>
                 <Link to="/my-profile">
                   <li>
                     <button className="btn btn-sm btn-ghost">

@@ -2,7 +2,7 @@ import { FallingLines } from "react-loader-spinner";
 
 const SmallSpinner = () => {
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center mt-5">
       <FallingLines
         color="#9933FF"
         width="55"

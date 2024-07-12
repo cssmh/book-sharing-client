@@ -19,6 +19,7 @@ import AllBookings from "../Dashboard/AllBookings";
 import BooksProviders from "../Dashboard/BooksProviders";
 import UserToUpdate from "../Dashboard/UserToUpdate";
 import DashHome from "../Dashboard/DashHome";
+import AdminRoute from "../Shared/PrivateRoute/AdminRoute";
 
 const Root = createBrowserRouter([
   {
@@ -95,36 +96,44 @@ const Root = createBrowserRouter([
             element: <DashHome />,
           },
           {
-            path: "/dashboard/all-books",
-            element: <AllBooksCols />,
-          },
-          {
             path: "/dashboard/my-books",
-            element: (
-              <PrivateRoute>
-                <MyBooks />
-              </PrivateRoute>
-            ),
+            element: <MyBooks />,
           },
           {
             path: "/dashboard/my-schedules",
+            element: <MySchedules />,
+          },
+          {
+            path: "/dashboard/all-books",
             element: (
-              <PrivateRoute>
-                <MySchedules />
-              </PrivateRoute>
+              <AdminRoute>
+                <AllBooksCols />
+              </AdminRoute>
             ),
           },
           {
             path: "/dashboard/all-bookings",
-            element: <AllBookings />,
+            element: (
+              <AdminRoute>
+                <AllBookings />
+              </AdminRoute>
+            ),
           },
           {
             path: "/dashboard/books-providers",
-            element: <BooksProviders />,
+            element: (
+              <AdminRoute>
+                <BooksProviders />
+              </AdminRoute>
+            ),
           },
           {
             path: "/dashboard/users-to-update",
-            element: <UserToUpdate />,
+            element: (
+              <AdminRoute>
+                <UserToUpdate />
+              </AdminRoute>
+            ),
           },
         ],
       },

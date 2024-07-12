@@ -23,11 +23,6 @@ const Sidebar = () => {
     logOut().then().catch();
   };
 
-  // Sidebar Responsive Handler
-  const handleToggle = () => {
-    setActive(!isActive);
-  };
-
   return (
     <>
       <div className="bg-base-200 text-gray-800 flex justify-between md:hidden">
@@ -39,7 +34,7 @@ const Sidebar = () => {
           </div>
         </div>
         <button
-          onClick={handleToggle}
+          onClick={() => setActive(!isActive)}
           className="mobile-menu-button p-4 focus:outline-none focus:bg-gray-200"
         >
           <AiOutlineBars className="h-6 w-5" />
@@ -70,13 +65,13 @@ const Sidebar = () => {
                 <>
                   <Link to="/dashboard/my-books">
                     <button className="flex items-center w-full px-4 py-2 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform">
-                      <FaAddressBook  className="w-5 h-5" />
+                      <FaAddressBook className="w-5 h-5" />
                       <span className="mx-4 font-medium">My Books</span>
                     </button>
                   </Link>
                   <Link to="/dashboard/my-schedules">
                     <button className="flex items-center w-full px-4 py-2 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform">
-                      <FaRegCalendarAlt  className="w-5 h-5" />
+                      <FaRegCalendarAlt className="w-5 h-5" />
                       <span className="mx-4 font-medium">My Schedule</span>
                     </button>
                   </Link>

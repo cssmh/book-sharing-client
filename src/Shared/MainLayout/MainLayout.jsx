@@ -17,7 +17,7 @@ const MainLayout = () => {
   const loc = useLocation();
   const noHeaderFooter = loc?.pathname?.startsWith("/dashboard");
 
-  // if (loading) return <BigLoader />;
+  if (loading) return <BigLoader />;
 
   return (
     <div>

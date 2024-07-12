@@ -59,7 +59,7 @@ const MyBooksCard = ({ getBook, refetch }) => {
           Book Status:{" "}
           <span
             className={`text-base ${
-              book_status === "available" ? "text-green-500" : "text-red-500"
+              book_status === "available" ? "text-green-500" : "text-red-600"
             }`}
           >
             {book_status}
@@ -69,20 +69,20 @@ const MyBooksCard = ({ getBook, refetch }) => {
       <div className="pb-5">
         <div className="space-x-1">
           <Link to={`/book/${_id}`}>
-            <button className="btn border-primary hover:border-primary bg-yellow-50 hover:bg-primary text-primary hover:text-white">
+            <button className="text-primary border border-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out rounded-3xl text-sm px-4 py-2.5 text-center font-bold uppercase">
               Details
             </button>
           </Link>
           {book_status === "available" && (
             <>
               <Link to={`/update-book/${_id}`}>
-                <button className="btn border-primary bg-base-100 hover:bg-primary text-primary hover:text-white">
+                <button className="text-primary border border-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out rounded-3xl text-sm px-4 py-2.5 text-center font-bold uppercase">
                   Update
                 </button>
               </Link>
               <button
                 onClick={() => handleDelete(_id, book_name)}
-                className="btn border-black bg-base-100 hover:bg-black text-black hover:text-white"
+                className="border border-black font-bold hover:bg-black hover:text-white transition duration-300 ease-in-out rounded-3xl text-sm px-4 py-2.5 text-center uppercase"
               >
                 delete
               </button>
