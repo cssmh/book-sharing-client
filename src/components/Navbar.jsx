@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import Lottie from "lottie-react";
-import toast from "react-hot-toast";
 import loggieData from "../assets/Logo.json";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
@@ -63,7 +62,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="navbar bg-base-200 rounded-lg md:px-4 py-0">
+    <div className="navbar min-h-[59px] bg-base-200 rounded-lg md:px-4 py-0">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden px-2">
@@ -115,7 +114,7 @@ const Navbar = () => {
         <Link to={"/"}>
           <div className="flex items-center gap-1">
             <Lottie className="w-0 md:w-[52px]" animationData={loggieData} />
-            <span className="md:ml-1 font-bold text-[16px] md:text-[22px]">
+            <span className="md:ml-1 font-bold text-[17px] md:text-[21px]">
               MBSTU BookHaven
             </span>
           </div>
@@ -199,7 +198,7 @@ const Navbar = () => {
           </div>
         )}
         {/* cart btn */}
-        <div className="flex flex-col items-center justify-center text-center font-semibold text-sm md:uppercase mx-[8px]">
+        <div className="flex flex-col items-center justify-center text-center font-semibold text-sm mx-[8px]">
           <p>{greeting}</p>
           {user && <p>{user?.displayName}</p>}
         </div>
@@ -210,7 +209,7 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar"
               onClick={() => setUserDropdownVisible((prev) => !prev)}
             >
-              <div className="w-[44px] rounded-full">
+              <div className="w-[40px] rounded-full">
                 <img src={user?.photoURL} alt="User avatar" />
               </div>
             </label>

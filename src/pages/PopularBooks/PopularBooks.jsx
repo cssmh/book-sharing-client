@@ -48,7 +48,7 @@ const PopularBooks = () => {
         data-aos="zoom-in"
         data-aos-delay="100"
         data-aos-offset="100"
-        className="text-center my-5 md:my-8 font-bold text-2xl md:text-3xl italic border-b-2 pb-3 max-w-md mx-auto border-blue-700"
+        className="text-center my-5 md:my-8 font-bold text-xl md:text-2xl italic border-b-2 pb-3 max-w-md mx-auto border-blue-700"
       >
         Our Popular Books
       </h1>
@@ -66,8 +66,6 @@ const PopularBooks = () => {
         breakpoints={{
           480: {
             slidesPerView: 1,
-            // 1 slide visible on small screens
-            // / 480, 768, 1000 and 1200
             spaceBetween: 20,
           },
           768: {

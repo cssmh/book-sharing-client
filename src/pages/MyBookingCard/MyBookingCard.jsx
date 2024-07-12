@@ -4,6 +4,7 @@ import ReviewModal from "./ReviewModal";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useQueryPublic from "../../Hooks/useQueryPublic";
+import { Link } from "react-router-dom";
 
 const MyBookingCard = ({ getBooking, refetch }) => {
   const { user } = useAuth();
@@ -52,7 +53,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
       }
     });
   };
-  
+
   const { data } = useQueryPublic(["available", book_id], `/book/${book_id}`);
 
   const handleAddReview = (e) => {
@@ -89,7 +90,9 @@ const MyBookingCard = ({ getBooking, refetch }) => {
             className="rounded-xl w-[38%] md:w-[50%] mx-auto my-2"
           />
         </figure>
-        <p className="text-xl md:text-2xl">{book_name}</p>
+        <Link to={`/book/${book_id}`}>
+          <p className="text-xl md:text-2xl">{book_name}</p>
+        </Link>
         <div className="text-lg">
           <p className="text-xl">Provider Information</p>
           <p className="text-green-600">{provider_phone}</p>

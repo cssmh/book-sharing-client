@@ -3,10 +3,10 @@ import banner from "../assets/Banner.jpeg";
 
 const Banner = () => {
   return (
-    <div className="px-6 pt-10 lg:pt-24 mx-auto text-center dark:bg-gray-950">
+    <div className="px-6 pt-10 lg:pt-20 mx-auto text-center dark:bg-gray-950">
       <div className="max-w-4xl mx-auto flex flex-col justify-center items-center">
         <h1
-          className="w-full bg-gradient-to-r from-green-300 via-blue-500 to-blue-500 bg-clip-text text-transparent sm:text-5xl text-3xl font-bold lg:text-6xl aos-init"
+          className="w-full bg-gradient-to-r from-green-300 via-blue-500 to-blue-500 bg-clip-text text-transparent text-3xl font-semibold md:text-5xl aos-init"
           data-aos="fade-up"
           data-aos-easing="ease-in"
           data-aos-duration="900"
@@ -55,7 +55,7 @@ const Banner = () => {
           data-aos="fade-up"
           data-aos-easing="ease-in"
           data-aos-duration="900"
-          className="mt-3 font-medium text-gray-600 text-sm dark:text-gray-400 aos-init"
+          className="mt-2 font-medium text-gray-600 text-sm dark:text-gray-400 aos-init"
         >
           Have a good day!
         </p>
@@ -67,7 +67,7 @@ const Banner = () => {
         className="flex justify-center mt-10 aos-init"
       >
         <img
-          className="object-cover w-full lg:h-96 rounded-xl lg:w-4/5"
+          className="object-cover w-full lg:h-96 rounded-xl lg:w-3/4"
           src={banner}
           onContextMenu={(e) => e.preventDefault()}
         />

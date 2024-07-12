@@ -11,7 +11,7 @@ const AddBook = () => {
   const { user } = useAuth();
   const axiosNoToken = useAxiosPublic();
   const url = `/my-books?email=${user?.email}`;
-  const { isLoading, bookData: myAddedBooks, refetch } = useMyBooks(url);
+  const { isLoading, bookData: myBooks, refetch } = useMyBooks(url);
 
   // Create a new Date object for today's date
   let today = new Date();
@@ -41,6 +41,12 @@ const AddBook = () => {
     e.preventDefault();
     const form = e.target;
     const book_name = form.book_name.value;
+
+    const duplicate = myBooks?.find((myBook) => myBook.book_name === book_name);
+    if (duplicate) {
+      return toast.error("You already added this Book!");
+    }
+
     const book_image =
       form.book_image.value.trim() ||
       "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/CoverSoon.png";

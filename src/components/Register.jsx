@@ -83,7 +83,7 @@ const Register = () => {
         if (!user?.emailVerified) {
           logOut().then().catch();
           toast.error("Sorry! Email verification Required");
-          navigateTo("/validation");
+          navigateTo("/login");
         } else {
           navigateTo(location?.state || "/");
         }
