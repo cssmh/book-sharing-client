@@ -52,7 +52,7 @@ const ResetPassModal = ({ closeModal, isOpen, handleForgotPassword }) => {
                   </div>
                   <button
                     type="submit"
-                    className="w-full p-3 mt-5 bg-primary py-2 rounded-2xl text-white"
+                    className="mt-4 group w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-400"
                   >
                     Submit
                   </button>

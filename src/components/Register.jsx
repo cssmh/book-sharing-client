@@ -5,7 +5,6 @@ import { LiaSpinnerSolid } from "react-icons/lia";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
-import BgLogin from "../assets/loginBg.jpg";
 
 const Register = () => {
   const [view, setView] = useState(true);
@@ -89,23 +88,23 @@ const Register = () => {
   };
 
   return (
-    <div
-      style={{ backgroundImage: `url(${BgLogin})` }}
-      className="min-h-screen flex"
-    >
+    <div className="min-h-screen flex bg-base-200">
       <div className="flex-1 flex items-center justify-center p-6 lg:p-12">
-        <div className="border max-w-[420px] w-full p-6 rounded-lg shadow-2xl">
+        <div
+          data-aos="zoom-in"
+          className="border max-w-[400px] w-full p-6 rounded-lg shadow-2xl"
+        >
           <Helmet>
             <title>BookHaven | Register</title>
           </Helmet>
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-6">
+          <h2 className="text-3xl font-bold text-center mb-5">
             Create your account
           </h2>
           <form onSubmit={handleRegister}>
-            <div className="mb-4">
+            <div className="mb-3">
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-600 mb-1"
               >
                 Name
               </label>
@@ -118,10 +117,10 @@ const Register = () => {
                 placeholder="Name"
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-3">
               <label
                 htmlFor="photo"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-600 mb-1"
               >
                 Photo URL
               </label>
@@ -133,10 +132,10 @@ const Register = () => {
                 placeholder="Photo URL"
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-3">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-600 mb-1"
               >
                 Email address
               </label>
@@ -149,10 +148,10 @@ const Register = () => {
                 placeholder="Email address"
               />
             </div>
-            <div className="relative mb-4">
+            <div className="relative">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-600 mb-1"
               >
                 Password
               </label>
@@ -197,10 +196,7 @@ const Register = () => {
           <div className="mt-5 text-center">
             <p className="text-sm">
               Already have an account?{" "}
-              <Link
-                to="/login"
-                className="text-green-400 font-semibold"
-              >
+              <Link to="/login" className="text-green-400 font-semibold">
                 Sign In
               </Link>
             </p>

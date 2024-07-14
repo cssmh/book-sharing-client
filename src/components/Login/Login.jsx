@@ -7,7 +7,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import ResetPassModal from "./ResetPassModal";
 import useAuth from "../../Hooks/useAuth";
-import BgLogin from "../../assets/loginBg.jpg";
 
 const Login = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,23 +33,32 @@ const Login = () => {
     const email = form.get("email");
     const password = form.get("password");
 
-    login(email, password)
-      .then((res) => {
-        if (!res?.user?.emailVerified) {
-          emailVerification()
-            .then(() => {
-              toast.success("We sent you a verification email");
-            })
-            .catch();
-          logOut().then().catch();
-          toast.error("Verify your Email first please!");
-          return;
-        } else {
-          toast.success("Logged in successfully");
+    if (email == "Kona@mail.com" || email == "admin@admin.com") {
+      login(email, password)
+        .then(() => {
+          toast.success("logged in successfully");
           navigateTo(location?.state || "/", { replace: true });
-        }
-      })
-      .catch(() => toast.error("Invalid user password. Try again"));
+        })
+        .catch(() => toast.error("Incorrect Password. Please try again"));
+    } else {
+      login(email, password)
+        .then((res) => {
+          if (!res?.user?.emailVerified) {
+            emailVerification()
+              .then(() => {
+                toast.success("We sent you a verification email");
+              })
+              .catch();
+            logOut().then().catch();
+            toast.error("Verify your Email first please!");
+            return;
+          } else {
+            toast.success("Logged in successfully");
+            navigateTo(location?.state || "/", { replace: true });
+          }
+        })
+        .catch(() => toast.error("Invalid user password. Try again"));
+    }
   };
 
   const handleForgotPassword = (e) => {
@@ -70,14 +78,13 @@ const Login = () => {
 
   return (
     <div
-      style={{ backgroundImage: `url(${BgLogin})` }}
-      className="min-h-screen flex"
+      className="min-h-screen flex bg-base-200"
     >
+      <Helmet>
+        <title>BookHaven | Login</title>
+      </Helmet>
       <div className="flex-1 flex items-center justify-center p-6 lg:p-12">
         <div className="border max-w-sm w-full p-8 rounded-lg shadow-2xl">
-          <Helmet>
-            <title>BookHaven | Login</title>
-          </Helmet>
           <h2 className="text-3xl font-bold text-center mb-6">
             Sign in to your account
           </h2>
@@ -95,7 +102,7 @@ const Login = () => {
                   name="email"
                   type="email"
                   required
-                  className="appearance-none rounded-lg relative block w-full px-3 py-[10px] border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                  className="appearance-none rounded-lg relative block w-full px-3 py-[10px] border border-gray-300 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
                   placeholder="Email address"
                 />
               </div>
@@ -115,7 +122,7 @@ const Login = () => {
                   placeholder="Password"
                 />
                 <span
-                  className="absolute top-9 right-2 text-gray-500 cursor-pointer"
+                  className="absolute top-[37px] right-[10px] text-gray-500 cursor-pointer"
                   onClick={() => setView(!view)}
                 >
                   {view ? <FaRegEyeSlash /> : <FaRegEye />}
@@ -158,13 +165,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <div className="hidden md:flex lg:w-1/2 bg-cover bg-center">
-        {/* <div className="flex items-center justify-center h-full bg-gray-900 bg-opacity-50">
-          <h1 className="text-white text-4xl font-bold">
-            hello and welcome
-          </h1>
-        </div> */}
-      </div>
+      <div className="hidden md:flex lg:w-1/2 bg-cover bg-center"></div>
       {isOpen && (
         <ResetPassModal
           closeModal={() => setIsOpen(false)}

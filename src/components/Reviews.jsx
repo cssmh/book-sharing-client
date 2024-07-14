@@ -1,8 +1,3 @@
-import Reviewer1 from "../assets/Reviewer1.png";
-import Reviewer2 from "../assets/Reviewer2.jpg";
-import Reviewer3 from "../assets/Reviewer3.webp";
-import Reviewer4 from "../assets/Reviewer4.jpeg";
-
 const Reviews = () => {
   return (
     <div className="max-w-[1220px] mx-auto flex flex-col lg:flex-row justify-center items-center gap-4 my-12">
@@ -32,7 +27,7 @@ const Reviews = () => {
           </p>
           <div className="flex gap-2">
             <img
-              src={Reviewer1}
+              src="https://lh3.googleusercontent.com/a/ACg8ocKK0Zmiiw579ElRkNruYKcz5zPBQltI5ZNFwLgQv5x1142MveY=s288-c-no"
               className="w-12 rounded-3xl"
               onContextMenu={(e) => e.preventDefault()}
             />
@@ -54,7 +49,7 @@ const Reviews = () => {
           </p>
           <div className="flex gap-2">
             <img
-              src={Reviewer2}
+              src="https://i.ibb.co/QKd2Kss/kona.jpg"
               className="w-12 rounded-3xl"
               onContextMenu={(e) => e.preventDefault()}
             />
@@ -76,7 +71,7 @@ const Reviews = () => {
           </p>
           <div className="flex gap-2">
             <img
-              src={Reviewer3}
+              src="https://i.ibb.co/MR7wGzK/Reviewer3.webp"
               className="w-12 rounded-3xl"
               onContextMenu={(e) => e.preventDefault()}
             />
@@ -98,7 +93,7 @@ const Reviews = () => {
           </p>
           <div className="flex gap-2">
             <img
-              src={Reviewer4}
+              src="https://lh3.googleusercontent.com/a/ACg8ocLoLEY-xqWOBY3CVJQ39IxgeH5Pmj1EqnbRJF1ynWiV6_iwx3uvDA=s288-c-no"
               className="w-12 rounded-3xl"
               onContextMenu={(e) => e.preventDefault()}
             />
