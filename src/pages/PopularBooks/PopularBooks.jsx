@@ -88,7 +88,7 @@ const PopularBooks = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="flex justify-center my-7">
+      <div className="flex justify-center my-6">
         <Link to="/all-books">
           <button className="text-green-500 border border-green-500 hover:bg-green-500 hover:text-white transition duration-300 ease-in-out font-medium rounded-3xl text-sm px-5 py-2.5 text-center">
             Show all Books

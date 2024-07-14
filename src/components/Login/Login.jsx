@@ -49,7 +49,7 @@ const Login = () => {
       login(email, password)
         .then((res) => {
           // No way login if not verified
-          if (!res.user.emailVerified) {
+          if (!res?.user?.emailVerified) {
             emailVerification()
               .then(() => {
                 toast.success("We sent you a verification email");

@@ -20,7 +20,7 @@ const PopularBookCard = ({ getBook }) => {
           className="rounded-xl w-[20%] md:w-[25%]"
         />
       </figure>
-      <div className="absolute top-2 left-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs font-bold px-2 py-1 rounded">
+      <div className="absolute top-2 left-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs font-bold px-2 py-1 rounded">
           Popular
         </div>
       <div className="group-hover:scale-105 group-hover:transition-all group-hover:duration-300 card-body items-center text-center p-0 px-3 gap-[0px]">

@@ -1,10 +1,12 @@
 import useAuth from "../Hooks/useAuth";
 import swal from "sweetalert";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
   const {
     _id,
+    book_id,
     book_name,
     book_image,
     provider_email,
@@ -26,7 +28,6 @@ const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        // main code
         axiosSecure.delete(`/booking/${idx}/${user?.email}`).then((res) => {
           if (res.data?.deletedCount > 0) {
             swal("Booking Deleted!", {
@@ -51,9 +52,13 @@ const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
             alt="no image"
             onContextMenu={(e) => e.preventDefault()}
           />
-          <p className="text-[22px] font-bold text-cyan-500">{book_name}</p>
-          <p className="text-lg">{provider_email}</p>
-          <p className="text-lg text-green-500 mb-2 md:mb-0">
+          <Link to={`/book/${book_id}`}>
+            <p className="text-blue-900 text-xl md:text-[21px] font-bold mt-2 px-2">
+              {book_name}
+            </p>
+          </Link>
+          <p className="text-lg text-gray-500">{provider_email}</p>
+          <p className="text-lg text-green-500 font-semibold mb-2 md:mb-0">
             {provider_phone}
           </p>
         </div>
@@ -74,7 +79,7 @@ const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
             </span>
           </p>
           <p>{completed_at}</p>
-          <p className="text-blue-800">{user_email}</p>
+          <p className="text-lg text-gray-500">{user_email}</p>
           <p className="text-cyan-500 mb-1">{user_phone}</p>
           <button
             onClick={() => handleDeleteByAdmin(_id)}

@@ -1,65 +1,43 @@
-import { useState } from "react";
 import Reader from "../assets/Reader.png";
 
 const ShareMagic = () => {
-  const [expanded, setExpanded] = useState(false);
-  const text = `Sharing books allows ideas, stories, and knowledge to spread among
-  individuals, communities, and cultures. It facilitates the transfer
-  of information and promotes learning. Books reflect diverse
-  perspectives, experiences, and cultures. Sharing books enables
-  people to understand and appreciate different backgrounds, fostering
-  cultural exchange and empathy. Access to books is essential for
-  developing literacy skills. By sharing books, especially with those
-  who have limited access, we can promote literacy and empower
-  individuals to engage with written material effectively. Sharing
-  books can create connections and spark discussions among readers. It
-  brings people together to share their thoughts, interpretations, and
-  experiences, fostering social bonds and a sense of community.`;
-
   return (
-    <div className="my-12 max-w-[1220px] mx-auto">
-      <p
-        data-aos="fade-up"
-        data-aos-duration="700"
-        data-aos-anchor-placement="top-center"
-        className="font-semibold text-center lg:text-left mb-2 lg:mb-0"
-      >
-        THE MAGIC OF SHARING
-      </p>
-      <div className="flex flex-col lg:flex-row">
-        <div className="lg:w-3/4 text-center lg:text-right lg:mr-5 px-3">
-          <p className="text-3xl md:text-5xl text-orange-500 mb-5">
-            Building Communities
-            <br />
-            Through Books
-          </p>
-          <p className="text-gray-500 mx-2 lg:mx-0 mb-1 hidden md:block">
-            {text}
-          </p>
-          <p className="text-gray-500 mx-2 lg:mx-0 mb-1 md:hidden">
-            {expanded ? text : `${text.slice(0, 300)}...`}
-          </p>
-          <button
-            onClick={() => setExpanded(!expanded)}
-            className="md:hidden text-blue-500"
-            aria-expanded={expanded}
-            aria-controls="text-content"
-          >
-            {expanded ? "Read Less" : "Read More"}
-          </button>
-        </div>
-        <div
-          data-aos="fade-up"
-          data-aos-duration="700"
-          data-aos-anchor-placement="top-center"
-          className="lg:w-1/4 mx-auto mt-6 lg:mt-0"
-        >
+    <div className="max-w-5xl mx-auto pt-5 pb-7">
+      <h2 className="text-2xl lg:text-3xl font-bold text-center mb-6 text-gray-800">
+        The Magic of Sharing
+      </h2>
+      <div className="flex flex-col lg:flex-row justify-between items-center">
+        <div className="w-1/2 md:w-[250px] mx-auto mb-3 md:mb-0">
           <img
             src={Reader}
             alt="Person reading a book"
-            className="w-1/2 md:w-[85%] mx-auto"
-            onContextMenu={(e) => e.preventDefault()}
+            className="w-full lg:max-w-md rounded-lg shadow-xl"
           />
+        </div>
+        <div className="lg:w-1/2 lg:pr-4">
+          <h3
+            data-aos="zoom-in-up"
+            data-aos-duration="800"
+            className="text-xl lg:text-2xl font-semibold text-orange-500 mb-4 text-center lg:text-left"
+          >
+            Building Communities Through Books
+          </h3>
+          <p
+            data-aos="zoom-in-up"
+            data-aos-duration="1100"
+            className="text-gray-700 mx-6 md:mx-0"
+          >
+            Sharing books allows ideas, stories, and knowledge to spread among
+            individuals, communities, and cultures. It facilitates the transfer
+            of information and promotes learning. Books reflect diverse
+            perspectives, experiences, and cultures. Sharing books enables
+            people to understand and appreciate different backgrounds, fostering
+            cultural exchange and empathy. Access to books is essential for
+            developing literacy skills. By sharing books, especially with those
+            who have limited access, we can promote literacy and empower
+            individuals to engage with written material effectively. Sharing
+            books can create connections and spark discussions among readers.
+          </p>
         </div>
       </div>
     </div>
