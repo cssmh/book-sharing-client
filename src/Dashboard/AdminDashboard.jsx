@@ -1,6 +1,7 @@
 import { Chart } from "react-google-charts";
 import useBookProviders from "../Hooks/useBookProviders";
 import useQueryPublic from "../Hooks/useQueryPublic";
+import ChartSkeleton from "../Components/AllLoader/ChartSkeleton";
 
 const AdminDashboard = () => {
   const { providerLoading, bookProviders } = useBookProviders();
@@ -23,7 +24,7 @@ const AdminDashboard = () => {
       []),
   ];
 
-  if (providerLoading || isLoading) return <p>Loading....</p>;
+  if (providerLoading || isLoading) return <ChartSkeleton />;
 
   return (
     <div className="p-5">

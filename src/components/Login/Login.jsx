@@ -77,9 +77,7 @@ const Login = () => {
   };
 
   return (
-    <div
-      className="min-h-screen flex bg-base-200"
-    >
+    <div className="min-h-screen flex bg-base-200">
       <Helmet>
         <title>BookHaven | Login</title>
       </Helmet>
@@ -160,9 +158,7 @@ const Login = () => {
               </Link>
             </p>
           </div>
-          <div className="mt-6 text-center">
-            <SocialLogin />
-          </div>
+          <SocialLogin />
         </div>
       </div>
       <div className="hidden md:flex lg:w-1/2 bg-cover bg-center"></div>

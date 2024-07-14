@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Chart } from "react-google-charts";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useAuth from "../Hooks/useAuth";
-import SmallLoader from "../Components/AllLoader/SmallLoader";
+import ChartSkeleton from "../Components/AllLoader/ChartSkeleton";
 
 const UserDashboard = () => {
   const axiosSecure = useAxiosSecure();
@@ -27,11 +27,7 @@ const UserDashboard = () => {
     },
   });
 
-  if (isLoading || statLoading) return <SmallLoader />;
-
-  if (!UserDashboard || !monthlyStats) {
-    return <p className="text-red-400 text-center my-6">Error fetching data</p>;
-  }
+  if (isLoading || statLoading) return <ChartSkeleton />;
 
   const {
     totalBooks,
