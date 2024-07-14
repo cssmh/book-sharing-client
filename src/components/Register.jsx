@@ -13,7 +13,6 @@ const Register = () => {
   const [passSuccess, setPassSuccess] = useState("");
   const navigateTo = useNavigate();
   const location = useLocation();
-
   const {
     user,
     createUser,
@@ -34,7 +33,6 @@ const Register = () => {
     }
   }, [user?.emailVerified, user?.email, navigateTo]);
 
-  // Password validation function
   const validatePassword = (password) => {
     if (password === "") {
       setPassError("");
@@ -80,13 +78,9 @@ const Register = () => {
             )
           );
         });
-        if (!user?.emailVerified) {
-          logOut().then().catch();
-          toast.error("Sorry! Email verification Required");
-          navigateTo("/login");
-        } else {
-          navigateTo(location?.state || "/");
-        }
+        logOut().then().catch();
+        toast.error("Sorry! Email verification Required");
+        navigateTo("/login");
       })
       .catch((err) => {
         toast.error(err.message);
@@ -94,92 +88,122 @@ const Register = () => {
   };
 
   return (
-    <div data-aos="zoom-in" className="bg-green-50 p-4 rounded-lg mx-2 md:mx-0">
+    <div
+      // data-aos="zoom-in"
+      className="min-h-screen flex items-center justify-center bg-gray-100 py-10 px-4 sm:px-6 lg:px-8"
+    >
       <Helmet>
         <title>BookHaven | Register</title>
       </Helmet>
-      <h2 className="text-3xl font-bold text-center">Please Register</h2>
-      <form onSubmit={handleRegister} className="md:w-3/4 lg:w-1/2 mx-auto">
-        <div className="form-control">
-          <label className="label pt-0">
-            <span className="label-text font-semibold">Name</span>
-          </label>
-          <input
-            type="text"
-            required
-            name="name"
-            placeholder="Name"
-            className="input input-bordered border-green-500 focus:border-transparent"
-            style={{ outline: "none" }}
-          />
+      <div className="max-w-md w-full bg-white px-7 py-6 rounded-lg shadow-lg">
+        <h2 className="text-3xl font-bold text-center text-gray-900 mb-6">
+          Create your account
+        </h2>
+        <form onSubmit={handleRegister}>
+          <div className="mb-4">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Name
+            </label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              className="appearance-none rounded-lg relative block w-full px-3 py-[10px] border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              placeholder="Name"
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="photo"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Photo URL
+            </label>
+            <input
+              id="photo"
+              name="photo"
+              type="text"
+              className="appearance-none rounded-lg relative block w-full px-3 py-[10px] border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              placeholder="Photo URL"
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Email address
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              className="appearance-none rounded-lg relative block w-full px-3 py-[10px] border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              placeholder="Email address"
+            />
+          </div>
+          <div className="relative">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Password
+            </label>
+            <input
+              id="password"
+              name="password"
+              type={view ? "password" : "text"}
+              required
+              onChange={handlePasswordChange}
+              className="appearance-none rounded-md relative block w-full px-3 py-[10px] border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              placeholder="Password"
+            />
+            <span
+              className="absolute top-9 right-2 text-gray-500 cursor-pointer"
+              onClick={() => setView(!view)}
+            >
+              {view ? <FaRegEyeSlash /> : <FaRegEye />}
+            </span>
+            <div className="min-h-[1.5rem] mb-[6px] mt-[2px]">
+              <span
+                className={`${
+                  passError.length > 0 ? "text-red-500" : "text-green-500"
+                } text-[15px] font-normal mt-4`}
+              >
+                <p>{passError.length > 0 ? passError : passSuccess}</p>
+              </span>
+            </div>
+          </div>
+          <div>
+            <button
+              type="submit"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-400"
+            >
+              {loading ? (
+                <LiaSpinnerSolid className="animate-spin text-xl" />
+              ) : (
+                "Register"
+              )}
+            </button>
+          </div>
+        </form>
+
+        <div className="mt-5 text-center">
+          <p className="text-sm text-gray-600">
+            Already have an account?{" "}
+            <Link
+              to="/login"
+              className="font-medium text-green-600 hover:text-green-500"
+            >
+              Login
+            </Link>
+          </p>
         </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text font-semibold">Photo URL</span>
-          </label>
-          <input
-            type="text"
-            name="photo"
-            placeholder="Photo URL"
-            className="input input-bordered border-green-500 focus:border-transparent"
-            style={{ outline: "none" }}
-          />
-        </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text font-semibold">Email</span>
-          </label>
-          <input
-            type="email"
-            required
-            name="email"
-            placeholder="Email"
-            className="input input-bordered border-green-500 focus:border-transparent"
-            style={{ outline: "none" }}
-          />
-        </div>
-        <div className="relative form-control">
-          <label className="label">
-            <span className="label-text font-semibold">Password</span>
-          </label>
-          <input
-            type={view ? "password" : "text"}
-            required
-            onChange={handlePasswordChange}
-            name="password"
-            placeholder="Password"
-            className="input input-bordered border-green-500 focus:border-transparent"
-            style={{ outline: "none" }}
-          />
-          <span
-            className="absolute top-[51px] right-4 cursor-pointer"
-            onClick={() => setView(!view)}
-          >
-            {view ? <FaRegEyeSlash /> : <FaRegEye />}
-          </span>
-          <span
-            className={`${
-              passError.length > 0 ? "text-red-500" : "text-green-500"
-            } text-[16px] font-normal mt-1 ml-3`}
-          >
-            {passError.length > 0 ? passError : passSuccess}
-          </span>
-        </div>
-        <div className="form-control mt-5">
-          <button className="btn border-green-400 hover:border-green-400 bg-base-100 hover:bg-green-400 text-green-400 hover:text-white">
-            {loading ? (
-              <LiaSpinnerSolid className="animate-spin text-lg" />
-            ) : (
-              "Register"
-            )}
-          </button>
-        </div>
-      </form>
-      <div className="text-center mt-3">
-        Already have an account?{" "}
-        <Link className="text-green-400 font-bold" to="/login">
-          Login
-        </Link>
       </div>
     </div>
   );
