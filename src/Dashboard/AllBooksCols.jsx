@@ -5,6 +5,7 @@ import useBookProviders from "../Hooks/useBookProviders";
 import SmallLoader from "../Components/AllLoader/SmallLoader";
 import useQueryPublic from "../Hooks/useQueryPublic";
 import { Helmet } from "react-helmet-async";
+import BooksColsSkeleton from "../Components/AllLoader/BooksColsSkeleton";
 
 const AllBooksCols = () => {
   const axiosSecure = useAxiosSecure();
@@ -34,7 +35,7 @@ const AllBooksCols = () => {
         Providers and Total {allBookings?.length || 0} Bookings
       </p>
       {isLoading || bookingLoading ? (
-        <SmallLoader />
+        <BooksColsSkeleton />
       ) : (
         <div className="overflow-x-auto">
           <table className="table max-w-7xl mx-auto">

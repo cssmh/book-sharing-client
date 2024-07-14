@@ -7,6 +7,7 @@ import MakeBookingsPending from "./MakeBookingsPending";
 import MakeBooksAvailable from "./MakeBooksAvailable";
 import SmallLoader from "../Components/AllLoader/SmallLoader";
 import { Helmet } from "react-helmet-async";
+import MyBookSkeleton from "../Components/AllLoader/MyBookSkeleton";
 
 const AllBookings = () => {
   const axiosSecure = useAxiosSecure();
@@ -56,7 +57,11 @@ const AllBookings = () => {
         </select>
       </div>
       {isLoading ? (
-        <SmallLoader />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {[...Array(3)].map((_, index) => (
+          <MyBookSkeleton key={index} />
+        ))}
+      </div>
       ) : allBookings?.length === 0 ? (
         <p className="text-center text-xl md:text-2xl font-semibold text-red-600 mt-10">
           No {filterType !== "All" && filterType} Booking

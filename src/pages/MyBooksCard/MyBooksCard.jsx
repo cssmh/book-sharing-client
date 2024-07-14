@@ -25,7 +25,6 @@ const MyBooksCard = ({ getBook, refetch }) => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        // main code
         axiosSecure.delete(`/book/${idx}/${user?.email}`).then((res) => {
           if (res.data?.deletedCount > 0) {
             swal(`${name} Deleted!`, {

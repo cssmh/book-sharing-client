@@ -4,6 +4,7 @@ import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useMyBooks from "../../Hooks/useMyBooks";
 import SmallSpinner from "../../Components/AllLoader/SmallSpinner";
+import MyBookSkeleton from "../../Components/AllLoader/MyBookSkeleton";
 
 const MyPending = () => {
   const { loading, user } = useAuth();
@@ -43,8 +44,10 @@ const MyPending = () => {
 
   if (idLoading || myBooksLoading || isLoading) {
     return (
-      <div className="md:mt-[6px]">
-        <SmallSpinner />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+        {[...Array(3)].map((_, index) => (
+          <MyBookSkeleton key={index} />
+        ))}
       </div>
     );
   }
