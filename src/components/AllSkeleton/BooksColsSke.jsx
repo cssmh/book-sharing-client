@@ -1,4 +1,4 @@
-const BooksColsSkeleton = () => {
+const BooksColsSke = () => {
   return (
     <div className="overflow-x-auto">
       <table className="table max-w-7xl mx-auto">
@@ -45,4 +45,4 @@ const BooksColsSkeleton = () => {
   );
 };
 
-export default BooksColsSkeleton;
+export default BooksColsSke;

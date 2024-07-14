@@ -1,4 +1,4 @@
-const BookDetailSkeleton = () => {
+const BookDetailSke = () => {
   return (
     <div className="animate-pulse">
       <div className="card max-w-xl mx-auto shadow-xl p-6 mt-2 md:mt-4">
@@ -39,4 +39,4 @@ const BookDetailSkeleton = () => {
   );
 };
 
-export default BookDetailSkeleton;
+export default BookDetailSke;

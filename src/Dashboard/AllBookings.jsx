@@ -6,7 +6,7 @@ import DeleteAllBookings from "./DeleteAllBookings";
 import MakeBookingsPending from "./MakeBookingsPending";
 import MakeBooksAvailable from "./MakeBooksAvailable";
 import { Helmet } from "react-helmet-async";
-import BookingsSkeleton from "../Components/AllSkeleton/BookingsSkeleton";
+import BookingsSke from "../Components/AllSkeleton/BookingsSke";
 
 const AllBookings = () => {
   const axiosSecure = useAxiosSecure();
@@ -58,7 +58,7 @@ const AllBookings = () => {
       {isLoading ? (
         <div className="space-y-6">
           {[...Array(2)].map((_, index) => (
-            <BookingsSkeleton key={index} />
+            <BookingsSke key={index} />
           ))}
         </div>
       ) : allBookings?.length === 0 ? (

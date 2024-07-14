@@ -1,6 +1,6 @@
 import MyBookingCard from "../MyBookingCard/MyBookingCard";
 import useMyCart from "../../Hooks/useMyCart";
-import MyBookSkeleton from "../../Components/AllSkeleton/MyBookSkeleton";
+import MyBookSke from "../../Components/AllSkeleton/MyBookSke";
 
 const MyBookings = () => {
   const { isLoading, myBookings, error, cartRefetch } = useMyCart();
@@ -9,7 +9,7 @@ const MyBookings = () => {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
         {[...Array(3)].map((_, index) => (
-          <MyBookSkeleton key={index} />
+          <MyBookSke key={index} />
         ))}
       </div>
     )

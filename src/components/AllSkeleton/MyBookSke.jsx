@@ -1,4 +1,4 @@
-const MyBookSkeleton = () => {
+const MyBookSke = () => {
   return (
     <div className="card bg-base-100 shadow-xl flex flex-col items-center text-center space-y-2 mb-5 animate-pulse">
       <div className="flex-grow">
@@ -21,4 +21,4 @@ const MyBookSkeleton = () => {
   );
 };
 
-export default MyBookSkeleton;
+export default MyBookSke;

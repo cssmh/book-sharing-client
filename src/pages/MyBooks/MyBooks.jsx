@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import MyBooksCard from "../MyBooksCard/MyBooksCard";
 import useAuth from "../../Hooks/useAuth";
 import useMyBooks from "../../Hooks/useMyBooks";
-import MyBookSkeleton from "../../Components/AllSkeleton/MyBookSkeleton";
+import MyBookSke from "../../Components/AllSkeleton/MyBookSke";
 
 const MyBooks = () => {
   const { user } = useAuth();
@@ -13,7 +13,7 @@ const MyBooks = () => {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
         {[...Array(3)].map((_, index) => (
-          <MyBookSkeleton key={index} />
+          <MyBookSke key={index} />
         ))}
       </div>
     );

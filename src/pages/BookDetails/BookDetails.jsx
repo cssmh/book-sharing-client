@@ -1,13 +1,13 @@
+import { useState } from "react";
 import swal from "sweetalert";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import BookDetailSkeleton from "../../Components/AllSkeleton/BookDetailSke";
 import AddBooking from "../AddBooking/AddBooking";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useMyBooks from "../../Hooks/useMyBooks";
 import useQueryPublic from "../../Hooks/useQueryPublic";
-import { useState } from "react";
-import BookDetailSkeleton from "../../Components/AllSkeleton/BookDetailSkeleton";
 
 const BookDetails = () => {
   const [desc, setDesc] = useState(true);

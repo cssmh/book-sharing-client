@@ -1,4 +1,4 @@
-const BookingsSkeleton = () => {
+const BookingsSke = () => {
   const skeletonClass = "h-6 bg-gray-300 rounded-md animate-pulse mx-auto";
   const smallSkeletonClass = "h-5 bg-gray-300 rounded-md animate-pulse mx-auto";
   const imageClass =
@@ -27,4 +27,4 @@ const BookingsSkeleton = () => {
   );
 };
 
-export default BookingsSkeleton;
+export default BookingsSke;
