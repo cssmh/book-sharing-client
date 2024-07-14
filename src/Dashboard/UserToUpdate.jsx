@@ -1,7 +1,6 @@
 import swal from "sweetalert";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useMyBooks from "../Hooks/useMyBooks";
-import SmallLoader from "../Components/AllLoader/SmallLoader";
 import { Helmet } from "react-helmet-async";
 
 const UserToUpdate = () => {

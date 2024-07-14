@@ -3,22 +3,28 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
 import {
-  Book,
-  Layers,
-  BookOpen,
-  Monitor,
-  Briefcase,
-  Clipboard,
-} from "react-feather";
+  MdBook,
+  MdSchool,
+  MdAssignment,
+  MdWork,
+  MdLibraryBooks,
+  MdFolder,
+} from "react-icons/md";
 
 const BookTypes = () => {
   const bookTypes = [
-    { name: "TextBooks", icon: <Book size={23} color="#FF5733" /> },
-    { name: "Academic", icon: <BookOpen size={23} color="#33FF57" /> },
-    { name: "Research Thesis", icon: <Monitor size={23} color="#3357FF" /> },
-    { name: "Job Related", icon: <Briefcase size={23} color="#F39C12" /> },
-    { name: "Fic Non-Fiction", icon: <Clipboard size={23} color="#8E44AD" /> },
-    { name: "Anthologies", icon: <Layers size={23} color="#E74C3C" /> },
+    { name: "TextBooks", icon: <MdBook size={23} color="#FF5733" /> },
+    { name: "Academic", icon: <MdSchool size={23} color="#33FF57" /> },
+    {
+      name: "Research Thesis",
+      icon: <MdAssignment size={23} color="#3357FF" />,
+    },
+    { name: "Job Related", icon: <MdWork size={23} color="#F39C12" /> },
+    {
+      name: "Fic Non-Fiction",
+      icon: <MdLibraryBooks size={23} color="#8E44AD" />,
+    },
+    { name: "Anthologies", icon: <MdFolder size={23} color="#E74C3C" /> },
   ];
 
   return (

@@ -7,7 +7,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useMyBooks from "../../Hooks/useMyBooks";
-import SmallLoader from "../../Components/AllLoader/SmallLoader";
 import useQueryPublic from "../../Hooks/useQueryPublic";
 
 const UpdateBook = () => {
@@ -35,9 +34,7 @@ const UpdateBook = () => {
     }
   }, [matchFound, myBooks, id, navigateTo]);
 
-  if (loading || isLoading) {
-    return <SmallLoader />;
-  }
+  if (loading || isLoading) return <p className="px-2">loading...</p>;
 
   const {
     _id,

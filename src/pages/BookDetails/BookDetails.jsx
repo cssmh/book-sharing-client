@@ -5,9 +5,9 @@ import AddBooking from "../AddBooking/AddBooking";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useMyBooks from "../../Hooks/useMyBooks";
-import SmallLoader from "../../Components/AllLoader/SmallLoader";
 import useQueryPublic from "../../Hooks/useQueryPublic";
 import { useState } from "react";
+import BookDetailSkeleton from "../../Components/AllLoader/BookDetailSkeleton";
 
 const BookDetails = () => {
   const [desc, setDesc] = useState(true);
@@ -45,9 +45,7 @@ const BookDetails = () => {
     });
   };
 
-  if (isLoading || bookDataLoading) {
-    return <SmallLoader />;
-  }
+  if (isLoading || bookDataLoading) return <BookDetailSkeleton />;
 
   const {
     _id,

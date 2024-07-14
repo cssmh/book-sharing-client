@@ -5,7 +5,6 @@ import { Helmet } from "react-helmet-async";
 import addBook from "../../assets/DataAdd.png";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useMyBooks from "../../Hooks/useMyBooks";
-import SmallLoader from "../../Components/AllLoader/SmallLoader";
 
 const AddBook = () => {
   const { user } = useAuth();
@@ -102,7 +101,7 @@ const AddBook = () => {
         <title>BookHaven | Add-Book</title>
       </Helmet>
       {isLoading ? (
-        <SmallLoader />
+        <p className="px-2">loading...</p>
       ) : (
         <>
           <div className="flex flex-col md:flex-row justify-center items-center gap-3 mt-3 px-1 md:px-0">

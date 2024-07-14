@@ -80,12 +80,9 @@ MBSTU BookHaven is a comprehensive platform for book sharing, enabling users to 
 - [react-helmet-async](https://www.npmjs.com/package/react-helmet-async)
 - [react-hot-toast](https://www.npmjs.com/package/react-hot-toast)
 - [react-icons](https://www.npmjs.com/package/react-icons)
-- [react-feather](https://www.npmjs.com/package/react-feather)
 - [react-google-charts](https://www.react-google-charts.com/)
 - [react-intersection-observer](https://www.npmjs.com/package/react-intersection-observer)
-- [react-loader-spinner](https://www.npmjs.com/package/react-loader-spinner)
 - [react-router-dom](https://www.npmjs.com/package/react-router-dom)
-- [react-spinners](https://www.npmjs.com/package/react-spinners)
 - [sweetalert](https://www.npmjs.com/package/sweetalert)
 - [swiper](https://www.npmjs.com/package/swiper)
 

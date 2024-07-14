@@ -5,9 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import DeleteAllBookings from "./DeleteAllBookings";
 import MakeBookingsPending from "./MakeBookingsPending";
 import MakeBooksAvailable from "./MakeBooksAvailable";
-import SmallLoader from "../Components/AllLoader/SmallLoader";
 import { Helmet } from "react-helmet-async";
-import MyBookSkeleton from "../Components/AllLoader/MyBookSkeleton";
 import BookingsSkeleton from "../Components/AllLoader/BookingsSkeleton";
 
 const AllBookings = () => {

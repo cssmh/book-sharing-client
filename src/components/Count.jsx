@@ -1,22 +1,38 @@
+import { useEffect, useState } from "react";
 import pencil from "../assets/pencil.jpg";
 import CountUp from "react-countup";
-import { useInView } from "react-intersection-observer";
 import useBookProviders from "../Hooks/useBookProviders";
 import useQueryPublic from "../Hooks/useQueryPublic";
 
 const Count = () => {
   const { isLoading, bookProviders, totalBooks } = useBookProviders();
-  const { ref, inView } = useInView({ triggerOnce: true });
-
   const { isLoading: bookingLoading, data: totalBookings } = useQueryPublic(
     ["totalBookings"],
     "/total-bookings"
   );
   const loading = isLoading || bookingLoading;
 
+  const [inView, setInView] = useState(false);
+
+  const checkInView = () => {
+    const bounding = document
+      .getElementById("count-section")
+      .getBoundingClientRect();
+    if (bounding.top < window.innerHeight && bounding.bottom >= 0) {
+      setInView(true);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", checkInView);
+    return () => {
+      window.removeEventListener("scroll", checkInView);
+    };
+  }, []);
+
   return (
     <div
-      ref={ref}
+      id="count-section"
       className="hero min-h-[30vh] mb-4"
       style={{
         backgroundImage: `url(${pencil})`,

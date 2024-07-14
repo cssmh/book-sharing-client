@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import AllBooksRow from "./AllBooksRow";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useBookProviders from "../Hooks/useBookProviders";
-import SmallLoader from "../Components/AllLoader/SmallLoader";
 import useQueryPublic from "../Hooks/useQueryPublic";
 import { Helmet } from "react-helmet-async";
 import BooksColsSkeleton from "../Components/AllLoader/BooksColsSkeleton";

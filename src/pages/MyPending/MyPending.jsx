@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useMyBooks from "../../Hooks/useMyBooks";
-import SmallSpinner from "../../Components/AllLoader/SmallSpinner";
 import MyBookSkeleton from "../../Components/AllLoader/MyBookSkeleton";
 
 const MyPending = () => {
