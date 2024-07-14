@@ -1,5 +1,4 @@
 import { Helmet } from "react-helmet-async";
-import NoBook from "../../assets/NoBook.png";
 import MyBooksCard from "../MyBooksCard/MyBooksCard";
 import useAuth from "../../Hooks/useAuth";
 import useMyBooks from "../../Hooks/useMyBooks";
@@ -31,13 +30,6 @@ const MyBooks = () => {
         <div>
           <p className="text-center text-xl md:text-[22px] font-semibold text-red-600 mt-2 italic">
             No Book Added By You
-          </p>
-          <p className="flex flex-col items-center justify-center min-h-[76vh]">
-            <img
-              src={NoBook}
-              className="mx-auto mt-4"
-              onContextMenu={(e) => e.preventDefault()}
-            />
           </p>
         </div>
       ) : (

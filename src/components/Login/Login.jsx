@@ -7,6 +7,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import ResetPassModal from "./ResetPassModal";
 import useAuth from "../../Hooks/useAuth";
+import BgLogin from "../../assets/loginBg.jpg";
 
 const Login = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,34 +34,23 @@ const Login = () => {
     const email = form.get("email");
     const password = form.get("password");
 
-    if (email === "Kona@mail.com" || email === "admin@admin.com") {
-      login(email, password)
-        .then(() => {
+    login(email, password)
+      .then((res) => {
+        if (!res?.user?.emailVerified) {
+          emailVerification()
+            .then(() => {
+              toast.success("We sent you a verification email");
+            })
+            .catch();
+          logOut().then().catch();
+          toast.error("Verify your Email first please!");
+          return;
+        } else {
           toast.success("Logged in successfully");
           navigateTo(location?.state || "/", { replace: true });
-        })
-        .catch(() => toast.error("Incorrect Password. Please try again"));
-    } else {
-      login(email, password)
-        .then((res) => {
-          // No way login if not verified
-          if (!res?.user?.emailVerified) {
-            emailVerification()
-              .then(() => {
-                toast.success("We sent you a verification email");
-              })
-              .catch();
-            logOut().then().catch();
-            toast.error("Verify your Email first please!");
-            return;
-            // No way login if not verified end
-          } else {
-            toast.success("Logged in successfully");
-            navigateTo(location?.state || "/", { replace: true });
-          }
-        })
-        .catch(() => toast.error("Invalid user password. Try again"));
-    }
+        }
+      })
+      .catch(() => toast.error("Invalid user password. Try again"));
   };
 
   const handleForgotPassword = (e) => {
@@ -79,96 +69,102 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-      <Helmet>
-        <title>BookHaven | Login</title>
-      </Helmet>
-      <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg">
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-6">
-          Sign in to your account
-        </h2>
-        <form onSubmit={handleLogin}>
-          <div className="rounded-md shadow-sm">
-            <div className="mb-4">
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Email address
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                className="appearance-none rounded-lg relative block w-full px-3 py-[10px] border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                placeholder="Email address"
-              />
+    <div
+      style={{ backgroundImage: `url(${BgLogin})` }}
+      className="min-h-screen flex"
+    >
+      <div className="flex-1 flex items-center justify-center p-6 lg:p-12">
+        <div className="border max-w-sm w-full p-8 rounded-lg shadow-2xl">
+          <Helmet>
+            <title>BookHaven | Login</title>
+          </Helmet>
+          <h2 className="text-3xl font-bold text-center mb-6">
+            Sign in to your account
+          </h2>
+          <form onSubmit={handleLogin}>
+            <div className="rounded-md shadow-sm">
+              <div className="mb-4">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium mb-1"
+                >
+                  Email address
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  className="appearance-none rounded-lg relative block w-full px-3 py-[10px] border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                  placeholder="Email address"
+                />
+              </div>
+              <div className="mb-4 relative">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium mb-1"
+                >
+                  Password
+                </label>
+                <input
+                  id="password"
+                  name="password"
+                  type={view ? "password" : "text"}
+                  required
+                  className="appearance-none rounded-md relative block w-full px-3 py-[10px] border border-gray-300 placeholder-gray-500 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                  placeholder="Password"
+                />
+                <span
+                  className="absolute top-9 right-2 text-gray-500 cursor-pointer"
+                  onClick={() => setView(!view)}
+                >
+                  {view ? <FaRegEyeSlash /> : <FaRegEye />}
+                </span>
+              </div>
             </div>
-            <div className="mb-4 relative">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type={view ? "password" : "text"}
-                required
-                className="appearance-none rounded-md relative block w-full px-3 py-[10px] border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                placeholder="Password"
-              />
-              <span
-                className="absolute top-9 right-2 text-gray-500 cursor-pointer"
-                onClick={() => setView(!view)}
-              >
-                {view ? <FaRegEyeSlash /> : <FaRegEye />}
-              </span>
+            <div className="flex items-center justify-between mb-2">
+              <div className="text-sm">
+                <a
+                  onClick={() => setIsOpen(true)}
+                  className="font-medium cursor-pointer text-gray-500"
+                >
+                  Forgot your password?
+                </a>
+              </div>
             </div>
-          </div>
-          <div className="flex items-center justify-between mb-2">
-            <div className="text-sm">
-              <a
-                onClick={() => setIsOpen(true)}
-                className="font-medium text-green-500 cursor-pointer"
+            <div>
+              <button
+                type="submit"
+                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-400"
               >
-                Forgot your password?
-              </a>
+                {loading ? (
+                  <LiaSpinnerSolid className="animate-spin text-xl" />
+                ) : (
+                  "Sign In"
+                )}
+              </button>
             </div>
+          </form>
+          <div className="mt-6 text-center">
+            <p className="text-sm">
+              Don&apos;t have an account?{" "}
+              <Link to="/register" className="text-green-400 font-semibold">
+                Sign Up
+              </Link>
+            </p>
           </div>
-          <div>
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-400"
-            >
-              {loading ? (
-                <LiaSpinnerSolid className="animate-spin text-xl" />
-              ) : (
-                "Login"
-              )}
-            </button>
+          <div className="mt-6 text-center">
+            <SocialLogin />
           </div>
-        </form>
-
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600">
-            Don&apos;t have an account?{" "}
-            <Link
-              to="/register"
-              className="font-medium text-green-600 hover:text-green-500"
-            >
-              Register
-            </Link>
-          </p>
-        </div>
-
-        <div className="mt-6 text-center">
-          <SocialLogin />
         </div>
       </div>
-
+      <div className="hidden md:flex lg:w-1/2 bg-cover bg-center">
+        {/* <div className="flex items-center justify-center h-full bg-gray-900 bg-opacity-50">
+          <h1 className="text-white text-4xl font-bold">
+            hello and welcome
+          </h1>
+        </div> */}
+      </div>
       {isOpen && (
         <ResetPassModal
           closeModal={() => setIsOpen(false)}

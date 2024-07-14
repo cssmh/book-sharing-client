@@ -6,8 +6,8 @@ import useAuth from "../../Hooks/useAuth";
 const SocialLogin = () => {
   const navigateTo = useNavigate();
   const location = useLocation();
-
   const { googleLogin } = useAuth();
+  
   const handleSocialLogin = () => {
     googleLogin()
       .then(() => {
@@ -24,7 +24,7 @@ const SocialLogin = () => {
       <div className="divider max-w-2xl mx-auto italic">or</div>
       <div className="flex justify-around">
         <button
-          className="flex items-center gap-2 bg-green-100 px-4 py-2 rounded-lg"
+          className="flex items-center gap-2 bg-green-200 text-black px-4 py-2 rounded-lg"
           onClick={handleSocialLogin}
         >
           <FcGoogle className="text-2xl"></FcGoogle>{" "}
