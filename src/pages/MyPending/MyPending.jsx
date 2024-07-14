@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useMyBooks from "../../Hooks/useMyBooks";
-import MyBookSkeleton from "../../Components/AllLoader/MyBookSkeleton";
+import MyBookSkeleton from "../../Components/AllSkeleton/MyBookSkeleton";
 
 const MyPending = () => {
   const { loading, user } = useAuth();

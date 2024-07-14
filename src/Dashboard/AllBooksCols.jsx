@@ -4,7 +4,7 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useBookProviders from "../Hooks/useBookProviders";
 import useQueryPublic from "../Hooks/useQueryPublic";
 import { Helmet } from "react-helmet-async";
-import BooksColsSkeleton from "../Components/AllLoader/BooksColsSkeleton";
+import BooksColsSkeleton from "../Components/AllSkeleton/BooksColsSkeleton";
 
 const AllBooksCols = () => {
   const axiosSecure = useAxiosSecure();

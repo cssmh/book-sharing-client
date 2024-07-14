@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import AllBooksCard from "../AllBooksCard/AllBooksCard";
 import useResLimit from "../../Hooks/useResLimit";
 import useQueryPublic from "../../Hooks/useQueryPublic";
-import SkeletonCard from "../SkeletonCard/SkeletonCard";
+import SkeletonCard from "../../Components/AllSkeleton/SkeletonCard";
 
 const AllBooks = () => {
   const [searchTerm, setSearchTerm] = useState("");

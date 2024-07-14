@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet-async";
 import addBook from "../../assets/DataAdd.png";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useMyBooks from "../../Hooks/useMyBooks";
+import BigLoader from "../../Components/BigLoader";
 
 const AddBook = () => {
   const { user } = useAuth();
@@ -47,7 +48,7 @@ const AddBook = () => {
     }
 
     const book_image =
-      form.book_image.value.trim() ||
+      form.book_image.value ||
       "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/CoverSoon.png";
     const provider_name = form.provider_name.value;
     const provider_email = form.provider_email.value;
@@ -101,7 +102,7 @@ const AddBook = () => {
         <title>BookHaven | Add-Book</title>
       </Helmet>
       {isLoading ? (
-        <p className="px-2">loading...</p>
+        <BigLoader />
       ) : (
         <>
           <div className="flex flex-col md:flex-row justify-center items-center gap-3 mt-3 px-1 md:px-0">

@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import SkeletonCard from "../SkeletonCard/SkeletonCard";
+import SkeletonCard from "../../Components/AllSkeleton/SkeletonCard";
 import AllBooksCard from "../AllBooksCard/AllBooksCard";
 import useQueryPublic from "../../Hooks/useQueryPublic";
 

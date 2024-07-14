@@ -1,6 +1,6 @@
 import MyBookingCard from "../MyBookingCard/MyBookingCard";
 import useMyCart from "../../Hooks/useMyCart";
-import MyBookSkeleton from "../../Components/AllLoader/MyBookSkeleton";
+import MyBookSkeleton from "../../Components/AllSkeleton/MyBookSkeleton";
 
 const MyBookings = () => {
   const { isLoading, myBookings, error, cartRefetch } = useMyCart();

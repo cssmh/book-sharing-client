@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Chart } from "react-google-charts";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useAuth from "../Hooks/useAuth";
-import ChartSkeleton from "../Components/AllLoader/ChartSkeleton";
+import ChartSkeleton from "../Components/AllSkeleton/ChartSkeleton";
 
 const UserDashboard = () => {
   const axiosSecure = useAxiosSecure();

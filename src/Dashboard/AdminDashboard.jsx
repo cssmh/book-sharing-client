@@ -1,7 +1,7 @@
 import { Chart } from "react-google-charts";
 import useBookProviders from "../Hooks/useBookProviders";
 import useQueryPublic from "../Hooks/useQueryPublic";
-import ChartSkeleton from "../Components/AllLoader/ChartSkeleton";
+import ChartSkeleton from "../Components/AllSkeleton/ChartSkeleton";
 
 const AdminDashboard = () => {
   const { providerLoading, bookProviders } = useBookProviders();

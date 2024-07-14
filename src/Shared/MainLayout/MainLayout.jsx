@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import BigLoader from "../../Components/AllLoader/BigLoader";
+import BigLoader from "../../Components/BigLoader";
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../../Components/Navbar";
 import Footer from "../../Components/Footer";

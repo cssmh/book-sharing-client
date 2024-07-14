@@ -8,6 +8,7 @@ import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useMyBooks from "../../Hooks/useMyBooks";
 import useQueryPublic from "../../Hooks/useQueryPublic";
+import BigLoader from "../../Components/BigLoader";
 
 const UpdateBook = () => {
   const { user } = useAuth();
@@ -34,7 +35,7 @@ const UpdateBook = () => {
     }
   }, [matchFound, myBooks, id, navigateTo]);
 
-  if (loading || isLoading) return <p className="px-2">loading...</p>;
+  if (loading || isLoading) return <BigLoader />;
 
   const {
     _id,

@@ -4,7 +4,7 @@ import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
 
 import { Link } from "react-router-dom";
-import SkeletonCard from "../SkeletonCard/SkeletonCard";
+import SkeletonCard from "../../Components/AllSkeleton/SkeletonCard";
 import PopularBookCard from "../PopularBookCard/PopularBookCard";
 import { useEffect, useState } from "react";
 import useResLimit from "../../Hooks/useResLimit";

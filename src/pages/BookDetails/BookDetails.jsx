@@ -7,7 +7,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useMyBooks from "../../Hooks/useMyBooks";
 import useQueryPublic from "../../Hooks/useQueryPublic";
 import { useState } from "react";
-import BookDetailSkeleton from "../../Components/AllLoader/BookDetailSkeleton";
+import BookDetailSkeleton from "../../Components/AllSkeleton/BookDetailSkeleton";
 
 const BookDetails = () => {
   const [desc, setDesc] = useState(true);

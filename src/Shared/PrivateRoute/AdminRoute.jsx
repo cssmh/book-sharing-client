@@ -1,6 +1,6 @@
 import useAuth from "../../Hooks/useAuth";
 import { Navigate } from "react-router-dom";
-import BigLoader from "../../Components/AllLoader/BigLoader";
+import BigLoader from "../../Components/BigLoader";
 
 const AdminRoute = ({ children }) => {
   const { user, loading } = useAuth();

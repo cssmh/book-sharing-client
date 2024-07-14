@@ -6,7 +6,7 @@ import DeleteAllBookings from "./DeleteAllBookings";
 import MakeBookingsPending from "./MakeBookingsPending";
 import MakeBooksAvailable from "./MakeBooksAvailable";
 import { Helmet } from "react-helmet-async";
-import BookingsSkeleton from "../Components/AllLoader/BookingsSkeleton";
+import BookingsSkeleton from "../Components/AllSkeleton/BookingsSkeleton";
 
 const AllBookings = () => {
   const axiosSecure = useAxiosSecure();

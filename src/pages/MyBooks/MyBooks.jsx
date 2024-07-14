@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import MyBooksCard from "../MyBooksCard/MyBooksCard";
 import useAuth from "../../Hooks/useAuth";
 import useMyBooks from "../../Hooks/useMyBooks";
-import MyBookSkeleton from "../../Components/AllLoader/MyBookSkeleton";
+import MyBookSkeleton from "../../Components/AllSkeleton/MyBookSkeleton";
 
 const MyBooks = () => {
   const { user } = useAuth();
