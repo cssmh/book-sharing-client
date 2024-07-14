@@ -8,6 +8,7 @@ import MakeBooksAvailable from "./MakeBooksAvailable";
 import SmallLoader from "../Components/AllLoader/SmallLoader";
 import { Helmet } from "react-helmet-async";
 import MyBookSkeleton from "../Components/AllLoader/MyBookSkeleton";
+import BookingsSkeleton from "../Components/AllLoader/BookingsSkeleton";
 
 const AllBookings = () => {
   const axiosSecure = useAxiosSecure();
@@ -31,9 +32,9 @@ const AllBookings = () => {
 
   return (
     <div>
-    <Helmet>
-      <title>BookHaven | All Bookings</title>
-    </Helmet>
+      <Helmet>
+        <title>BookHaven | All Bookings</title>
+      </Helmet>
       <h1 className="text-center text-xl mb-3 mt-2 md:mt-0">
         All Bookings ({allBookings.length})
       </h1>
@@ -57,11 +58,11 @@ const AllBookings = () => {
         </select>
       </div>
       {isLoading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {[...Array(3)].map((_, index) => (
-          <MyBookSkeleton key={index} />
-        ))}
-      </div>
+        <div className="space-y-6">
+          {[...Array(2)].map((_, index) => (
+            <BookingsSkeleton key={index} />
+          ))}
+        </div>
       ) : allBookings?.length === 0 ? (
         <p className="text-center text-xl md:text-2xl font-semibold text-red-600 mt-10">
           No {filterType !== "All" && filterType} Booking

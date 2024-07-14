@@ -53,14 +53,21 @@ const UserToUpdate = () => {
 
   return (
     <div>
-    <Helmet>
-      <title>BookHaven | User To Update</title>
-    </Helmet>
+      <Helmet>
+        <title>BookHaven | User To Update</title>
+      </Helmet>
       <h1 className="text-center text-xl mb-6 mt-2 md:mt-0">
         All Users To Get Notified for New Books
       </h1>
       {isLoading ? (
-        <SmallLoader />
+        <div className="ml-4 space-y-2">
+          {Array.from({ length: 5 }).map((_, idx) => (
+            <div key={idx} className="flex items-center animate-pulse">
+              <span className="bg-gray-300 h-6 w-8 rounded mr-2"></span>
+              <button className="w-full mr-4 md:w-1/2 bg-gray-300 h-7 rounded-lg px-4"></button>
+            </div>
+          ))}
+        </div>
       ) : (
         <div>
           <div className="flex justify-center">

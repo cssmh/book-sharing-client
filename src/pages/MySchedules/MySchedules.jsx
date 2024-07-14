@@ -18,7 +18,7 @@ const MySchedules = () => {
       <Helmet>
         <title>BookHaven | My-Schedule</title>
       </Helmet>
-      <div className="bg-rose-100 flex justify-center gap-2 md:gap-2 mt-4 md:mt-3">
+      <div className="bg-gray-100 flex justify-center gap-2 md:gap-2 mt-4 md:mt-3">
         <button
           onClick={showBooking}
           className={`rounded-xl ${
