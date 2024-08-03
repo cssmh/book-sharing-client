@@ -20,7 +20,7 @@ const MainLayout = () => {
     loc?.pathname?.startsWith("/login") ||
     loc?.pathname?.startsWith("/register");
 
-  if (loading) return <BigLoader />;
+  // if (loading) return <BigLoader />;
 
   return (
     <div>

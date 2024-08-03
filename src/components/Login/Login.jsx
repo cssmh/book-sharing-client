@@ -2,7 +2,7 @@ import toast from "react-hot-toast";
 import SocialLogin from "./SocialLogin";
 import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
-import { LiaSpinnerSolid } from "react-icons/lia";
+import { TbFidgetSpinner } from 'react-icons/tb';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import ResetPassModal from "./ResetPassModal";
@@ -11,6 +11,7 @@ import useAuth from "../../Hooks/useAuth";
 const Login = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [view, setView] = useState(true);
+  const [pass, setPass] = useState(false);
   const location = useLocation();
   const navigateTo = useNavigate();
   const { user, login, resetPassword, emailVerification, logOut, loading } =
@@ -76,8 +77,18 @@ const Login = () => {
     }
   };
 
+  const handleChangePass = (e) => {
+    if (e.target.value.length > 0) {
+      setPass(true);
+    } else {
+      setPass(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen flex bg-base-200">
+    <div
+      className="min-h-screen flex bg-base-200"
+    >
       <Helmet>
         <title>BookHaven | Login</title>
       </Helmet>
@@ -116,15 +127,18 @@ const Login = () => {
                   name="password"
                   type={view ? "password" : "text"}
                   required
+                  onChange={handleChangePass}
                   className="appearance-none rounded-md relative block w-full px-3 py-[10px] border border-gray-300 placeholder-gray-500 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
                   placeholder="Password"
                 />
-                <span
-                  className="absolute top-[37px] right-[10px] text-gray-500 cursor-pointer"
-                  onClick={() => setView(!view)}
-                >
-                  {view ? <FaRegEyeSlash /> : <FaRegEye />}
-                </span>
+                {pass && (
+                  <span
+                    className="absolute top-[37px] right-[10px] text-gray-500 cursor-pointer"
+                    onClick={() => setView(!view)}
+                  >
+                    {view ? <FaRegEyeSlash /> : <FaRegEye />}
+                  </span>
+                )}
               </div>
             </div>
             <div className="flex items-center justify-between mb-2">
@@ -143,7 +157,7 @@ const Login = () => {
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-400"
               >
                 {loading ? (
-                  <LiaSpinnerSolid className="animate-spin text-xl" />
+                  <TbFidgetSpinner className="animate-spin text-xl" />
                 ) : (
                   "Sign In"
                 )}

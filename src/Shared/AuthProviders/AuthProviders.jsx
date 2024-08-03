@@ -68,19 +68,20 @@ const AuthProviders = ({ children }) => {
       setUser(currentUser);
       const getEmail = currentUser?.email || user?.email;
       const emailToSend = { email: getEmail };
-      setLoading(false);
       if (getEmail) {
         await axiosNoToken
           .post("/jwt", emailToSend, {
             withCredentials: true,
           })
           .then((res) => console.log("login token response", res.data));
+        setLoading(false);
       } else {
         await axiosNoToken
           .post("/logout", emailToSend, {
             withCredentials: true,
           })
           .then((res) => console.log("logout token response", res.data));
+        setLoading(false);
       }
     });
     return () => {

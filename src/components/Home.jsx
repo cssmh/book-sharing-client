@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <div>
       <Helmet>
-        <title>BookHaven | Home</title>
+        <title>BookHaven | Student Book Sharing Web</title>
       </Helmet>
       <Banner />
       <PopularBooks />

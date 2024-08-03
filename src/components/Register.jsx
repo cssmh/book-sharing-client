@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
-import { LiaSpinnerSolid } from "react-icons/lia";
+import { TbFidgetSpinner } from 'react-icons/tb';
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
@@ -9,6 +9,7 @@ import useAuth from "../Hooks/useAuth";
 const Register = () => {
   const [view, setView] = useState(true);
   const [password, setPassword] = useState("");
+  const [pass, setPass] = useState(false);
   const [passError, setPassError] = useState("");
   const [passSuccess, setPassSuccess] = useState("");
   const navigateTo = useNavigate();
@@ -53,6 +54,11 @@ const Register = () => {
     const password = e.target.value;
     setPassword(password);
     validatePassword(password);
+    if (password.length > 0) {
+      setPass(true);
+    } else {
+      setPass(false);
+    }
   };
 
   const handleRegister = (e) => {
@@ -164,12 +170,14 @@ const Register = () => {
                 className="appearance-none rounded-md relative block w-full px-3 py-[10px] border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
                 placeholder="Password"
               />
-              <span
-                className="absolute top-9 right-2 text-gray-500 cursor-pointer"
-                onClick={() => setView(!view)}
-              >
-                {view ? <FaRegEyeSlash /> : <FaRegEye />}
-              </span>
+              {pass && (
+                <span
+                  className="absolute top-9 right-2 text-gray-500 cursor-pointer"
+                  onClick={() => setView(!view)}
+                >
+                  {view ? <FaRegEyeSlash /> : <FaRegEye />}
+                </span>
+              )}
               <div className="min-h-[1.5rem] mb-[6px] mt-[2px]">
                 <span
                   className={`${
@@ -186,7 +194,7 @@ const Register = () => {
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-400"
               >
                 {loading ? (
-                  <LiaSpinnerSolid className="animate-spin text-xl" />
+                  <TbFidgetSpinner className="animate-spin text-xl" />
                 ) : (
                   "Register"
                 )}

@@ -9,7 +9,7 @@ const ErrorPage = () => {
       <div className="mt-8">
         <Link
           to="/"
-          className="px-4 py-2 text-white bg-blue-500 rounded transition duration-300"
+          className="px-4 py-2 text-white bg-green-500 rounded transition duration-300"
         >
           Go Back Home
         </Link>
