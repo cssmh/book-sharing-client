@@ -1,7 +1,7 @@
 import swal from "sweetalert";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
-import updateImage from "../../assets/Update.png";
+import updateImage from "../../assets/DocUpdate.png";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";

@@ -3,8 +3,6 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import AllBookingsCard from "./AllBookingsCard";
 import { useQuery } from "@tanstack/react-query";
 import DeleteAllBookings from "./DeleteAllBookings";
-import MakeBookingsPending from "./MakeBookingsPending";
-import MakeBooksAvailable from "./MakeBooksAvailable";
 import { Helmet } from "react-helmet-async";
 import BookingsSke from "../Components/AllSkeleton/BookingsSke";
 
@@ -33,19 +31,14 @@ const AllBookings = () => {
       <Helmet>
         <title>BookHaven | All Bookings</title>
       </Helmet>
-      <h1 className="text-center text-xl mb-3 mt-2 md:mt-0">
+      <h1 className="text-center font-semibold text-xl mb-3 mt-2 md:mt-0">
         All Bookings ({allBookings.length})
       </h1>
-      <div className="flex flex-col md:flex-row justify-end items-center gap-[5px] mb-3">
-        <p className="border border-green-500 px-3 py-[6px] rounded-md">
-          Hello BookHaven Admin
-        </p>
+      <div className="flex flex-col md:flex-row justify-between items-center gap-[5px] mb-2">
         <DeleteAllBookings refetch={refetch}></DeleteAllBookings>
-        <MakeBookingsPending refetch={refetch}></MakeBookingsPending>
-        <MakeBooksAvailable></MakeBooksAvailable>
         <select
           className="input text-sm px-3 border-green-500 rounded-xl focus:border-transparent"
-          style={{ outline: "none", height: "38px" }}
+          style={{ outline: "none", height: "36px" }}
           defaultValue="All"
           onChange={(e) => handleFilter(e)}
         >

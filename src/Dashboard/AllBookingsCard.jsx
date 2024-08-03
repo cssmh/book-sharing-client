@@ -48,12 +48,12 @@ const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
         <div className="flex-1 text-center">
           <img
             src={book_image}
-            className="rounded-xl w-[120px] md:w-[130px] mx-auto mb-1"
+            className="rounded-xl w-[85px] mx-auto mb-1"
             alt="no image"
             onContextMenu={(e) => e.preventDefault()}
           />
           <Link to={`/book/${book_id}`}>
-            <p className="text-blue-900 text-xl md:text-[21px] font-bold mt-2 px-2">
+            <p className="text-blue-900 text-lg font-bold mt-2 px-2">
               {book_name}
             </p>
           </Link>
@@ -63,7 +63,7 @@ const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
           </p>
         </div>
         <div className="flex-1 text-center md:text-lg border-t-2 md:border-t-0 pt-2 md:pt-0 text-lg">
-          <p>Collector</p>
+          <p>Collector Info</p>
           <p className="text-lg">
             Status:{" "}
             <span
@@ -78,12 +78,12 @@ const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
               {status}
             </span>
           </p>
-          <p>{completed_at}</p>
-          <p className="text-lg text-gray-500">{user_email}</p>
-          <p className="text-cyan-500 mb-1">{user_phone}</p>
+          {completed_at && <p>com {completed_at}</p>}
+          <p className="text-gray-500">{user_email}</p>
+          <p className="text-cyan-500 mb-1 text-base">{user_phone}</p>
           <button
             onClick={() => handleDeleteByAdmin(_id)}
-            className="text-white bg-pink-500 font-medium rounded-lg text-sm px-4 py-2 text-center mx-2 md:mx-0"
+            className="text-white bg-red-500 font-medium rounded-lg text-sm px-4 py-2 text-center mx-2 md:mx-0"
           >
             Delete Booking
           </button>

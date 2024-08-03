@@ -10,7 +10,7 @@ const BooksProviders = () => {
       <Helmet>
         <title>BookHaven | Books Providers</title>
       </Helmet>
-      <h1 className="text-center text-xl mb-3 mt-2 md:mt-0">
+      <h1 className="text-center font-semibold text-xl mb-3 mt-2 md:mt-0">
         All Books Providers ({(!providerLoading && bookProviders?.length) || 0})
       </h1>
       {providerLoading ? (
