@@ -86,15 +86,15 @@ const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
       data-aos="zoom-in"
       className="bg-base-100 shadow-lg border rounded-xl pt-2 md:pt-3 py-5 flex flex-col"
     >
-      <div className="flex-grow mb-2 text-lg px-4">
+      <div className="flex-grow mb-2 text-lg px-4 text-center">
         <figure>
           <img
             src={book_image}
             onContextMenu={(e) => e.preventDefault()}
-            className="rounded-xl w-[25%] md:w-[30%] mx-auto my-2"
+            className="rounded-xl w-[100px] h-[130px] mx-auto object-cover my-2"
           />
         </figure>
-        <h2 className="text-lg">{book_name}</h2>
+        <h2 className="text-lg font-bold text-blue-900">{book_name}</h2>
         <h1>Collector Info: </h1>
         <p className="text-green-600">{user_phone}</p>
         <p className="text-purple-800">{user_email}</p>

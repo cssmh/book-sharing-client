@@ -56,7 +56,7 @@ const MyBooks = () => {
           <p className="bg-primary px-3 py-[5px] mx-3 rounded-md text-white flex justify-between">
             All Books Added By You ({bookData?.length})
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 py-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-4 py-2">
             {bookData.map((book) => (
               <MyBooksCard key={book._id} getBook={book} refetch={refetch} />
             ))}

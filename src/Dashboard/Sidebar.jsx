@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { GrLogout } from "react-icons/gr";
 import { FcSettings } from "react-icons/fc";
+import logo from "../assets/Favicon.png";
+import useAuth from "../Hooks/useAuth";
 import { AiOutlineBars } from "react-icons/ai";
 import {
   FaHome,
@@ -11,11 +13,11 @@ import {
   FaAddressBook,
   FaRegCalendarAlt,
 } from "react-icons/fa";
-import logo from "../assets/Favicon.png";
-import useAuth from "../Hooks/useAuth";
 
 const Sidebar = () => {
   const [isActive, setActive] = useState(false);
+  const sidebarRef = useRef(null);
+  const buttonRef = useRef(null);
   const { user, logOut } = useAuth();
   const admin = user?.email === "admin@admin.com";
   const location = useLocation();
@@ -30,6 +32,25 @@ const Sidebar = () => {
       currentPath === path && "bg-gray-300"
     }`;
 
+  // Close sidebar when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target) &&
+        !buttonRef.current.contains(event.target) &&
+        isActive
+      ) {
+        setActive(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isActive]);
+
   return (
     <>
       <div className="bg-base-200 text-gray-800 flex justify-between md:hidden">
@@ -41,6 +62,7 @@ const Sidebar = () => {
           </div>
         </div>
         <button
+          ref={buttonRef}
           onClick={() => setActive(!isActive)}
           className="mobile-menu-button p-4 focus:outline-none focus:bg-gray-200"
         >
@@ -49,8 +71,9 @@ const Sidebar = () => {
       </div>
       {/* Sidebar */}
       <div
+        ref={sidebarRef}
         className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
-          isActive && "-translate-x-full"
+          isActive ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0 transition duration-200 ease-in-out`}
       >
         <div>

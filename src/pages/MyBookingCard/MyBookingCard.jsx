@@ -1,20 +1,15 @@
-import swal from "sweetalert";
 import { useState } from "react";
-import ReviewModal from "./ReviewModal";
+import { Link } from "react-router-dom";
+import swal from "sweetalert";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useQueryPublic from "../../Hooks/useQueryPublic";
-import { Link } from "react-router-dom";
+import ReviewModal from "./ReviewModal";
 
 const MyBookingCard = ({ getBooking, refetch }) => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-
-  let [isOpen, setIsOpen] = useState(false);
-  function closeModal() {
-    setIsOpen(false);
-  }
-
+  const [isOpen, setIsOpen] = useState(false);
   const {
     _id,
     book_id,
@@ -32,7 +27,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
     `/book/${book_id}`
   );
 
-  const handleBookingDelete = (idx, name) => {
+  const handleBookingDelete = () => {
     swal({
       title: "Are you sure?",
       text: "Once deleted, it can't be recovered!",
@@ -41,20 +36,15 @@ const MyBookingCard = ({ getBooking, refetch }) => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        axiosSecure.delete(`/booking/${idx}/${user?.email}`).then((res) => {
+        axiosSecure.delete(`/booking/${_id}/${user?.email}`).then((res) => {
           if (res.data?.deletedCount > 0) {
-            swal(`Booking on ${name} Deleted!`, {
-              icon: "success",
-              timer: 2000,
-            });
+            swal("Booking Deleted!", { icon: "success", timer: 2000 });
             refetch();
           }
         });
       }
     });
   };
-
-  const { data } = useQueryPublic(["available", book_id], `/book/${book_id}`);
 
   const handleAddReview = (e) => {
     e.preventDefault();
@@ -65,9 +55,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
       .patch(`/add-review/${book_id}`, { review, name })
       .then((res) => {
         if (res.data?.acknowledged) {
-          swal({
-            title: "Thank You",
-            text: "Your review has been added.",
+          swal("Thank You", "Your review has been added.", {
             icon: "success",
             timer: 2000,
           });
@@ -78,77 +66,63 @@ const MyBookingCard = ({ getBooking, refetch }) => {
   };
 
   return (
-    <div
-      data-aos="zoom-in"
-      className="bg-base-100 shadow-lg border rounded-xl px-5 pt-2 md:pt-3 py-6 flex flex-col"
-    >
-      <div className="flex-grow pb-1">
-        <figure>
-          <img
-            src={book_image}
-            onContextMenu={(e) => e.preventDefault()}
-            className="rounded-xl w-[25%] md:w-[30%] mx-auto my-2"
-          />
-        </figure>
+    <div className="bg-base-100 shadow-lg border rounded-xl p-4 flex flex-col items-center space-y-3">
+      <figure className="w-full flex justify-center">
+        <img
+          src={book_image}
+          alt={book_name}
+          onContextMenu={(e) => e.preventDefault()}
+          className="rounded-xl w-[100px] h-[130px] object-cover"
+        />
+      </figure>
+      <div className="text-center">
         <Link to={`/book/${book_id}`}>
-          <p className="text-xl">{book_name}</p>
+          <h2 className="text-xl font-bold text-blue-900">{book_name}</h2>
         </Link>
-        <div className="text-lg">
-          <p>Provider Information</p>
-          <p className="text-green-600">{provider_phone}</p>
-          <p className="text-purple-800">{provider_email}</p>
-          {data?.book_status === "Unavailable" && status !== "Completed" ? (
-            <p className="text-red-700">Sorry, taken by someone else!</p>
-          ) : (
-            <p>
-              Status:{" "}
-              <span
-                className={
-                  status === "Pending"
-                    ? "text-red-500"
-                    : status === "Completed"
-                    ? "text-green-500"
-                    : "text-blue-500"
-                }
-              >
-                {status}
-              </span>
-            </p>
-          )}
-          <p>Booked: {user_date}</p>
-          {completed_at && (
-            <p>
-              Completed: <span className="text-cyan-500">{completed_at}</span>
-            </p>
-          )}
-        </div>
+        <p className="text-lg mt-1">Provider Info:</p>
+        <p className="text-green-600">{provider_phone}</p>
+        <p className="text-purple-800">{provider_email}</p>
+        <p
+          className={`text-base ${
+            status === "Pending"
+              ? "text-red-500"
+              : status === "Completed"
+              ? "text-green-500"
+              : "text-blue-500"
+          }`}
+        >
+          Status: {status}
+        </p>
+        <p className="text-base">Booked: {user_date}</p>
+        {completed_at && (
+          <p className="text-cyan-500">Completed: {completed_at}</p>
+        )}
       </div>
-      {status === "Completed" ? (
-        !bookData?.user_review && (
+      <div className="flex gap-2 mt-2">
+        {status === "Completed" && !bookData?.user_review && (
           <button
             type="button"
             onClick={() => setIsOpen(true)}
-            className="bg-primary py-2 rounded-xl text-white mt-1"
+            className="bg-primary text-white py-2 px-4 rounded-md"
           >
             Add a Review
           </button>
-        )
-      ) : (
-        <div className="mt-2 card-actions justify-center">
+        )}
+        {status !== "Completed" && (
           <button
-            onClick={() => handleBookingDelete(_id, book_name)}
-            className="border border-gray-300 px-2 py-1 rounded-lg bg-base-100 hover:bg-black text-black hover:text-white"
+            onClick={handleBookingDelete}
+            className="bg-red-500 text-white py-[5px] px-3 rounded-md"
           >
             Delete Booking
           </button>
-        </div>
-      )}
+        )}
+      </div>
       <ReviewModal
-        closeModal={closeModal}
+        closeModal={() => setIsOpen(false)}
         book_name={book_name}
         isOpen={isOpen}
         handleAddReview={handleAddReview}
-      ></ReviewModal>
+      />
     </div>
   );
 };
