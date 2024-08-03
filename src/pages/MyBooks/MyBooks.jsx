@@ -39,10 +39,16 @@ const MyBooks = () => {
         </div>
       ) : (
         <>
-          <h2 className="bg-rose-100 text-[21px] font-bold text-center italic my-2 md:mt-0">
+          {/* <h2 className="bg-rose-100 text-[21px] font-bold text-center italic my-2 md:mt-0">
             All Books Added By You
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+          </h2> */}
+          <h1 className="bg-primary px-3 py-[5px] mx-3 rounded-md text-white">
+            All Books Added By You ({bookData?.length || 0})
+          </h1>
+          {/* <p className="bg-green-500 px-3 py-[6px] rounded-md text-white">
+            Make all Bookings Pending
+          </p> */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 py-2">
             {bookData?.map((book) => (
               <MyBooksCard
                 key={book._id}

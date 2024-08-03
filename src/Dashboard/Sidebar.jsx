@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { GrLogout } from "react-icons/gr";
 import { FcSettings } from "react-icons/fc";
 import { AiOutlineBars } from "react-icons/ai";
@@ -18,10 +18,17 @@ const Sidebar = () => {
   const [isActive, setActive] = useState(false);
   const { user, logOut } = useAuth();
   const admin = user?.email === "admin@admin.com";
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   const handleLogout = () => {
     logOut().then().catch();
   };
+
+  const linkClasses = (path) =>
+    `flex items-center w-full px-4 py-2 text-gray-600 transition-colors duration-300 transform ${
+      currentPath === path && "bg-gray-300"
+    }`;
 
   return (
     <>
@@ -56,7 +63,7 @@ const Sidebar = () => {
           <div className="flex flex-col justify-between flex-1 mt-6">
             <nav className="space-y-2">
               <Link to="/dashboard">
-                <button className="flex items-center w-full px-4 py-2 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform">
+                <button className={linkClasses("/dashboard")}>
                   <FaHome className="w-5 h-5" />
                   <span className="mx-4 font-medium">Dashboard</span>
                 </button>
@@ -64,13 +71,13 @@ const Sidebar = () => {
               {user && (
                 <>
                   <Link to="/dashboard/my-books">
-                    <button className="flex items-center w-full px-4 py-2 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform">
+                    <button className={linkClasses("/dashboard/my-books")}>
                       <FaAddressBook className="w-5 h-5" />
                       <span className="mx-4 font-medium">My Books</span>
                     </button>
                   </Link>
                   <Link to="/dashboard/my-schedules">
-                    <button className="flex items-center w-full px-4 py-2 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform">
+                    <button className={linkClasses("/dashboard/my-schedules")}>
                       <FaRegCalendarAlt className="w-5 h-5" />
                       <span className="mx-4 font-medium">My Schedule</span>
                     </button>
@@ -80,25 +87,29 @@ const Sidebar = () => {
               {admin && (
                 <>
                   <Link to="/dashboard/all-books">
-                    <button className="flex items-center w-full px-4 py-2 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform">
+                    <button className={linkClasses("/dashboard/all-books")}>
                       <FaBook className="w-5 h-5" />
                       <span className="mx-4 font-medium">All Books</span>
                     </button>
                   </Link>
                   <Link to="/dashboard/all-bookings">
-                    <button className="flex items-center w-full px-4 py-2 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform">
+                    <button className={linkClasses("/dashboard/all-bookings")}>
                       <FaClipboardList className="w-5 h-5" />
                       <span className="mx-4 font-medium">All Bookings</span>
                     </button>
                   </Link>
                   <Link to="/dashboard/books-providers">
-                    <button className="flex items-center w-full px-4 py-2 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform">
+                    <button
+                      className={linkClasses("/dashboard/books-providers")}
+                    >
                       <FaUsers className="w-5 h-5" />
                       <span className="mx-4 font-medium">Books Providers</span>
                     </button>
                   </Link>
                   <Link to="/dashboard/users-to-update">
-                    <button className="flex items-center w-full px-4 py-2 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform">
+                    <button
+                      className={linkClasses("/dashboard/users-to-update")}
+                    >
                       <FcSettings className="w-5 h-5" />
                       <span className="mx-4 font-medium">Users to Update</span>
                     </button>

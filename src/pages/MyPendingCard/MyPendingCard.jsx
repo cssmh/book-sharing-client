@@ -83,7 +83,7 @@ const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
 
   return (
     <div
-      // data-aos="zoom-in"
+      data-aos="zoom-in"
       className="bg-base-100 shadow-xl rounded-xl pt-2 md:pt-3 py-5 flex flex-col"
     >
       <div className="flex-grow mb-2 text-lg px-4">
@@ -113,7 +113,7 @@ const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
         <select
           defaultValue={status}
           onChange={(e) => handleUpdateStatus(e, _id, book_id, provider_email)}
-          className="border border-blue-500 focus:border-transparent rounded-2xl"
+          className="border py-[6px] border-blue-500 focus:border-transparent rounded-xl"
           disabled={status === "Completed" || unavailableIds?.includes(book_id)}
         >
           <option value="Pending">Pending</option>

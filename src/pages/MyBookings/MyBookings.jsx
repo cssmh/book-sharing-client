@@ -12,7 +12,7 @@ const MyBookings = () => {
           <MyBookSke key={index} />
         ))}
       </div>
-    )
+    );
   }
 
   if (error) {
@@ -31,10 +31,13 @@ const MyBookings = () => {
         </p>
       ) : (
         <>
-          <h2 className="text-center text-xl my-2 font-semibold italic">
+          <h1 className="bg-primary px-3 py-[5px] mx-3 rounded-md text-white">
+            All Bookings made by you ({myBookings?.length || 0})
+          </h1>
+          {/* <h2 className="text-center text-xl my-2 font-semibold italic">
             All Bookings made by you
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 px-4 mb-8">
+          </h2> */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-4 mt-2 mb-8">
             {myBookings?.map((booking) => (
               <MyBookingCard
                 key={booking._id}

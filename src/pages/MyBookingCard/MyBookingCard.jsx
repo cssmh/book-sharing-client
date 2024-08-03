@@ -137,7 +137,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
         <div className="mt-2 card-actions justify-center">
           <button
             onClick={() => handleBookingDelete(_id, book_name)}
-            className="border border-gray-300 px-2 py-1 rounded-xl bg-base-100 hover:bg-black text-black hover:text-white"
+            className="border border-gray-300 px-2 py-1 rounded-lg bg-base-100 hover:bg-black text-black hover:text-white"
           >
             Delete Booking
           </button>

@@ -71,10 +71,13 @@ const MyPending = () => {
         </p>
       ) : (
         <>
-          <h2 className="text-center text-xl my-2 font-semibold italic">
+          {/* <h2 className="text-center text-xl my-2 font-semibold italic">
             User Booked Your Books
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 gap-3 mb-5">
+          </h2> */}
+          <h1 className="bg-primary px-3 py-[5px] mx-3 rounded-md text-white">
+            User Booked Your Books ({allMyPending?.length || 0})
+          </h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 gap-4 mt-1 mb-5">
             {allMyPending?.map((pending) => (
               <MyPendingCard
                 key={pending._id}
