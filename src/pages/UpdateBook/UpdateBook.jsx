@@ -8,7 +8,7 @@ import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useMyBooks from "../../Hooks/useMyBooks";
 import useQueryPublic from "../../Hooks/useQueryPublic";
-import BigLoader from "../../Components/BigLoader";
+import { ScaleLoader } from "react-spinners";
 
 const UpdateBook = () => {
   const { user } = useAuth();
@@ -35,7 +35,12 @@ const UpdateBook = () => {
     }
   }, [matchFound, myBooks, id, navigateTo]);
 
-  if (loading || isLoading) return <BigLoader />;
+  if (loading || isLoading)
+    return (
+      <div className="h-[70vh] flex flex-col justify-center items-center">
+        <ScaleLoader size={100} color="red" />
+      </div>
+    );
 
   const {
     _id,

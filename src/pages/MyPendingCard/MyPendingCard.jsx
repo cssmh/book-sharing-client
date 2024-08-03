@@ -84,7 +84,7 @@ const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
   return (
     <div
       data-aos="zoom-in"
-      className="bg-base-100 shadow-xl rounded-xl pt-2 md:pt-3 py-5 flex flex-col"
+      className="bg-base-100 shadow-lg border rounded-xl pt-2 md:pt-3 py-5 flex flex-col"
     >
       <div className="flex-grow mb-2 text-lg px-4">
         <figure>

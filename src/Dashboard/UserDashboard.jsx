@@ -53,15 +53,15 @@ const UserDashboard = () => {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto p-5">
+    <div className="max-w-6xl mx-auto px-5">
       {!admin && (
-        <h1 className="text-2xl font-bold mb-5">
+        <h1 className="text-xl md:text-2xl font-bold mt-3 md:mt-0 mb-5">
           Hello and Welcome, {user?.displayName}
         </h1>
       )}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:my-5">
         <div className="bg-white p-4 shadow rounded-lg">
-          <h2 className="text-lg font-semibold mb-3">User Analytics</h2>
+          <h2 className="text-lg font-semibold mb-3">Your Analytics</h2>
           <Chart
             chartType="PieChart"
             data={data}
@@ -88,7 +88,7 @@ const UserDashboard = () => {
           )}
         </div>
       </div>
-      <p className="text-center space-x-4 px-3 md:px-0 mb-8">
+      <p className="text-center space-x-4 px-3 md:px-0 mb-8 mt-5 md:mt-0">
         <span className="text-green-400">Books ({myBooks})</span>{" "}
         <span className="text-blue-600">Bookings ({myBookings})</span>{" "}
         <span className="text-violet-600">Progress ({myProgress})</span>{" "}

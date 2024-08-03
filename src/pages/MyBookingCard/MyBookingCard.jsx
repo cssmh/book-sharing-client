@@ -80,7 +80,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
   return (
     <div
       data-aos="zoom-in"
-      className="bg-base-100 shadow-xl rounded-xl px-5 pt-2 md:pt-3 py-6 flex flex-col"
+      className="bg-base-100 shadow-lg border rounded-xl px-5 pt-2 md:pt-3 py-6 flex flex-col"
     >
       <div className="flex-grow pb-1">
         <figure>
