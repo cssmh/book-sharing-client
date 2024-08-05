@@ -4,10 +4,9 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useAuth from "../Hooks/useAuth";
 import ChartSkeleton from "../Components/AllSkeleton/ChartSkeleton";
 
-const UserDashboard = () => {
+const UserAnalytics = () => {
   const axiosSecure = useAxiosSecure();
   const { loading, user } = useAuth();
-  const admin = user?.email === "admin@admin.com";
 
   const { isLoading, data: UserDashboard } = useQuery({
     enabled: !loading && !!user?.email,
@@ -53,12 +52,10 @@ const UserDashboard = () => {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto px-5">
-      {!admin && (
-        <h1 className="text-xl md:text-2xl font-bold mt-3 md:mt-0 mb-5">
-          Hello and Welcome, {user?.displayName}
-        </h1>
-      )}
+    <div className="max-w-6xl mx-auto px-5 mt-6">
+      <h1 className="text-xl md:text-2xl font-bold mt-3 md:mt-0 mb-5">
+        Hello and Welcome, {user?.displayName}
+      </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:my-5">
         <div className="bg-white p-4 shadow rounded-lg">
           <h2 className="text-lg font-semibold mb-3">Your Analytics</h2>
@@ -98,4 +95,4 @@ const UserDashboard = () => {
   );
 };
 
-export default UserDashboard;
+export default UserAnalytics;

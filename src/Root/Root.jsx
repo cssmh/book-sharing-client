@@ -20,6 +20,7 @@ import BooksProviders from "../Dashboard/BooksProviders";
 import UserToUpdate from "../Dashboard/UserToUpdate";
 import DashHome from "../Dashboard/DashHome";
 import AdminRoute from "../Shared/PrivateRoute/AdminRoute";
+import UserAnalytics from "../Components/UserAnalytics";
 
 const Root = createBrowserRouter([
   {
@@ -44,6 +45,14 @@ const Root = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyProfile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/user-analytics",
+        element: (
+          <PrivateRoute>
+            <UserAnalytics />
           </PrivateRoute>
         ),
       },
@@ -85,11 +94,19 @@ const Root = createBrowserRouter([
       },
       {
         path: "/my-books",
-        element: <MyBooks />,
+        element: (
+          <PrivateRoute>
+            <MyBooks />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-schedules",
-        element: <MySchedules />,
+        element: (
+          <PrivateRoute>
+            <MySchedules />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard",

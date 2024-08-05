@@ -40,8 +40,8 @@ const MyBooks = () => {
         <title>BookHaven | My Books</title>
       </Helmet>
       {bookData?.length === 0 ? (
-        <div className="flex flex-col justify-center items-center min-h-[82vh] my-2 md:mt-0 text-red-600 italic">
-          <p className="text-[21px] font-semibold text-center">
+        <div className="flex flex-col justify-center items-center min-h-[73vh] my-2 md:mt-0 text-red-600">
+          <p className="text-[21px] font-semibold text-center italic">
             No Book Added By You
           </p>
           <Link

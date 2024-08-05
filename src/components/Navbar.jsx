@@ -212,6 +212,13 @@ const Navbar = () => {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-44"
               >
+                <Link to="/user-analytics">
+                  <li>
+                    <button className="btn btn-sm btn-ghost">
+                      User Analytics
+                    </button>
+                  </li>
+                </Link>
                 <Link to="/my-profile">
                   <li>
                     <button className="btn btn-sm btn-ghost">
