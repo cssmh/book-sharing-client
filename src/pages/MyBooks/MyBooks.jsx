@@ -3,8 +3,6 @@ import MyBooksCard from "../MyBooksCard/MyBooksCard";
 import useAuth from "../../Hooks/useAuth";
 import useMyBooks from "../../Hooks/useMyBooks";
 import MyBookSke from "../../Components/AllSkeleton/MyBookSke";
-import { FaPlus } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
 const MyBooks = () => {
   const { user } = useAuth();
@@ -40,16 +38,10 @@ const MyBooks = () => {
         <title>BookHaven | My Books</title>
       </Helmet>
       {bookData?.length === 0 ? (
-        <div className="flex flex-col justify-center items-center min-h-[72vh] my-2 md:mt-0 text-red-600">
+        <div className="flex flex-col justify-center items-center min-h-[70vh] my-2 md:mt-0 text-red-600">
           <p className="text-[21px] font-semibold text-center italic">
             No Book Added By You
           </p>
-          <Link
-            to="/add-book"
-            className="mt-1 px-4 py-1 bg-green-400 text-white rounded-md flex items-center gap-2"
-          >
-            <FaPlus /> Add a New Book
-          </Link>
         </div>
       ) : (
         <div>

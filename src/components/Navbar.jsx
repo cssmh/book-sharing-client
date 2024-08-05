@@ -13,7 +13,13 @@ const Navbar = () => {
   const [userDropdownVisible, setUserDropdownVisible] = useState(false);
   const admin = user?.email === "admin@admin.com";
   const userRef = useRef(null);
+
   const location = useLocation();
+  const getLinkClasses = (path) => {
+    return location.pathname === path
+      ? "bg-green-500 text-white"
+      : "bg-transparent hover:bg-gray-200";
+  };
 
   const handleLogout = () => {
     logOut().then().catch();
@@ -84,57 +90,59 @@ const Navbar = () => {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 space-y-1"
           >
             <Link
               to="/"
-              className={`font-semibold text-base flex items-center ${
-                location.pathname === "/" && "text-green-500"
+              className={`font-semibold flex items-center ${
+                location.pathname === "/" ? "text-green-500" : ""
               }`}
             >
               Home
             </Link>
             <Link
               to="/all-books"
-              className={`font-semibold text-base flex items-center ${
-                location.pathname === "/all-books" && "text-green-500"
+              className={`font-semibold flex items-center ${
+                location.pathname === "/all-books" ? "text-green-500" : ""
               }`}
             >
               All Books
             </Link>
             {user && (
-              <ul>
+              <>
                 <Link
                   to="/add-book"
-                  className={`font-semibold text-base flex items-center ${
-                    location.pathname === "/add-book" && "text-green-500"
+                  className={`font-semibold flex items-center ${
+                    location.pathname === "/add-book" ? "text-green-500" : ""
                   }`}
                 >
                   Add Book
                 </Link>
                 <Link
                   to="/my-books"
-                  className={`font-semibold text-base flex items-center ${
-                    location.pathname === "/my-books" && "text-green-500"
+                  className={`font-semibold flex items-center ${
+                    location.pathname === "/my-books" ? "text-green-500" : ""
                   }`}
                 >
                   My Books
                 </Link>
                 <Link
                   to="/my-schedules"
-                  className={`font-semibold text-base flex items-center ${
-                    location.pathname === "/my-schedules" && "text-green-500"
+                  className={`font-semibold flex items-center ${
+                    location.pathname === "/my-schedules"
+                      ? "text-green-500"
+                      : ""
                   }`}
                 >
                   My Schedule
                 </Link>
-              </ul>
+              </>
             )}
             {admin && (
               <Link
                 to="/dashboard"
-                className={`font-semibold text-base flex items-center ${
-                  location.pathname === "/dashboard" && "text-green-500"
+                className={`font-semibold flex items-center ${
+                  location.pathname === "/dashboard" ? "text-green-500" : ""
                 }`}
               >
                 Dashboard
@@ -152,20 +160,20 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 space-x-6">
+        <ul className="menu menu-horizontal px-1 space-x-3">
           <Link
             to="/"
-            className={`font-semibold text-base flex items-center ${
-              location.pathname === "/" && "text-green-500"
-            }`}
+            className={`font-semibold text-base flex items-center px-2 py-1 rounded-xl ${getLinkClasses(
+              "/"
+            )}`}
           >
             Home
           </Link>
           <Link
             to="/all-books"
-            className={`font-semibold text-base flex items-center ${
-              location.pathname === "/all-books" && "text-green-500"
-            }`}
+            className={`font-semibold text-base flex items-center px-2 py-1 rounded-xl ${getLinkClasses(
+              "/all-books"
+            )}`}
           >
             All Books
           </Link>
@@ -173,25 +181,25 @@ const Navbar = () => {
             <>
               <Link
                 to="/add-book"
-                className={`font-semibold text-base flex items-center ${
-                  location.pathname === "/add-book" && "text-green-500"
-                }`}
+                className={`font-semibold text-base flex items-center px-2 py-1  rounded-xl ${getLinkClasses(
+                  "/add-book"
+                )}`}
               >
                 Add Book
               </Link>
               <Link
                 to="/my-books"
-                className={`font-semibold text-base flex items-center ${
-                  location.pathname === "/my-books" && "text-green-500"
-                }`}
+                className={`font-semibold text-base flex items-center px-2 py-1  rounded-2xl ${getLinkClasses(
+                  "/my-books"
+                )}`}
               >
                 My Books
               </Link>
               <Link
                 to="/my-schedules"
-                className={`font-semibold text-base flex items-center ${
-                  location.pathname === "/my-schedules" && "text-green-500"
-                }`}
+                className={`font-semibold text-base flex items-center px-2 py-1 rounded-xl ${getLinkClasses(
+                  "/my-schedules"
+                )}`}
               >
                 My Schedule
               </Link>
@@ -200,9 +208,9 @@ const Navbar = () => {
           {admin && (
             <Link
               to="/dashboard"
-              className={`font-semibold text-base flex items-center ${
-                location.pathname === "/dashboard" && "text-green-500"
-              }`}
+              className={`font-semibold text-base flex items-center px-2 py-1 rounded-xl ${getLinkClasses(
+                "/dashboard"
+              )}`}
             >
               Dashboard
             </Link>
@@ -210,7 +218,6 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        {/* cart btn */}
         {user && (
           <div className="hidden md:block">
             <Link to="/my-schedules">
@@ -218,7 +225,7 @@ const Navbar = () => {
                 tabIndex={0}
                 role="button"
                 className={`${
-                  myProgress && "animate-bounce"
+                  myProgress ? "animate-bounce" : ""
                 } btn btn-ghost btn-circle`}
                 style={{
                   animationIterationCount: myProgress ? "4" : "initial",
@@ -241,7 +248,7 @@ const Navbar = () => {
                   </svg>
                   <span
                     className={`${
-                      myProgress && "bg-green-400 text-white"
+                      myProgress ? "bg-green-400 text-white" : ""
                     } badge badge-sm indicator-item`}
                   >
                     {(!isLoading && myBookings.length) || 0}
@@ -251,10 +258,9 @@ const Navbar = () => {
             </Link>
           </div>
         )}
-        {/* cart btn */}
         <div className="flex flex-col items-center justify-center text-center font-semibold text-sm mx-[8px] uppercase">
           <p>{greeting}</p>
-          {user && <p>{user?.displayName}</p>}
+          {user && <p>{user.displayName}</p>}
         </div>
         {user?.email ? (
           <div ref={userRef} className="dropdown dropdown-end">
@@ -263,7 +269,7 @@ const Navbar = () => {
               onClick={() => setUserDropdownVisible((prev) => !prev)}
             >
               <img
-                src={user?.photoURL}
+                src={user.photoURL}
                 className="w-10 rounded-full"
                 alt="User avatar"
               />
@@ -273,20 +279,16 @@ const Navbar = () => {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-44"
               >
-                <Link to="/user-analytics">
-                  <li>
-                    <button className="btn btn-sm btn-ghost">
-                      User Analytics
-                    </button>
-                  </li>
-                </Link>
-                <Link to="/my-profile">
-                  <li>
-                    <button className="btn btn-sm btn-ghost">
-                      View Profile
-                    </button>
-                  </li>
-                </Link>
+                <li>
+                  <Link to="/user-analytics" className="btn btn-sm btn-ghost">
+                    User Analytics
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/my-profile" className="btn btn-sm btn-ghost">
+                    View Profile
+                  </Link>
+                </li>
                 <li>
                   <button
                     className="btn btn-sm btn-ghost"

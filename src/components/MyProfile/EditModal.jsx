@@ -69,7 +69,7 @@ const EditModal = ({ closeModal, isOpen, photoURL, displayName, handleUpdate }) 
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-primary py-[9px] rounded-2xl text-white mt-5 mb-2 hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary-dark focus:ring-opacity-75"
+                    className="w-full bg-blue-500 py-[9px] rounded-2xl text-white mt-5 mb-2 hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary-dark focus:ring-opacity-75"
                   >
                     Update
                   </button>

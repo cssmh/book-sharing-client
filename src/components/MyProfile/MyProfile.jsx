@@ -6,6 +6,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import EditModal from "./EditModal";
 import useMyBooks from "../../Hooks/useMyBooks";
 import ChangePassModal from "./ChangePassModal";
+import { FaEdit, FaKey } from "react-icons/fa";
 
 const MyProfile = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,70 +67,55 @@ const MyProfile = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[78vh] p-4">
+    <div className="bg-gray-100 flex items-center justify-center p-7">
       <Helmet>
         <title>BookHaven | My Profile</title>
       </Helmet>
-      <div className="bg-white shadow-lg rounded-2xl w-full sm:w-3/4 md:w-1/2 mx-auto">
-        <div className="flex flex-col items-center justify-center p-4">
+      <div className="bg-white shadow-lg rounded-lg overflow-hidden w-full max-w-lg mx-auto">
+        <div className="bg-green-400 p-6 flex items-center justify-center">
           <img
             src={photoURL}
-            className="mx-auto object-cover rounded-full h-24 w-24 mb-2"
-            alt="dp"
+            className="rounded-full h-32 w-32 border-4 border-white"
+            alt="Profile"
           />
-          <p className="p-2 px-4 text-xs text-white bg-pink-500 rounded-full">
-            {email}
-          </p>
-          <p className="mt-2 text-xl font-medium text-gray-800">
-            User Id: {user?.uid}
-          </p>
-          <div className="w-full p-2 mt-4 rounded-lg">
-            <div className="flex flex-wrap items-center justify-between text-sm text-gray-600">
-              <div>
-                <p className="flex flex-col w-full sm:w-auto">
-                  Name
-                  <span className="font-bold text-black">
-                    {user.displayName}
-                  </span>
-                </p>
-                <p className="flex flex-col w-full sm:w-auto">
-                  Account Created:
-                  <span className="font-bold text-black">
-                    {new Date(
-                      parseInt(metadata.createdAt, 10)
-                    ).toLocaleString()}
-                  </span>
-                </p>
-              </div>
-              <div>
-                <p className="flex flex-col w-full sm:w-auto">
-                  Email
-                  <span className="font-bold text-black">{user.email}</span>
-                </p>
-                <p className="flex flex-col w-full sm:w-auto">
-                  Last Login:
-                  <span className="font-bold text-black">
-                    {new Date(
-                      parseInt(reloadUserInfo.lastLoginAt, 10)
-                    ).toLocaleString()}
-                  </span>
-                </p>
-              </div>
-              <div className="w-full sm:w-auto">
-                <button
-                  onClick={() => setIsOpen(true)}
-                  className="bg-green-500 px-10 py-1 rounded-lg text-white cursor-pointer block mb-1"
-                >
-                  Update Profile
-                </button>
-                <button
-                  onClick={() => setIsPassOpen(true)}
-                  className="bg-pink-500 px-[30px] py-1 rounded-lg text-white cursor-pointer"
-                >
-                  Change Password
-                </button>
-              </div>
+        </div>
+        <div className="p-6">
+          <div className="text-center">
+            <p className="text-lg font-semibold text-gray-700">
+              {user.displayName}
+            </p>
+            <p className="text-sm text-gray-500">{email}</p>
+            <p className="text-sm text-gray-500 mt-1">User ID: {user?.uid}</p>
+          </div>
+          <div className="mt-6 space-y-4">
+            <div className="flex justify-between text-sm text-gray-600">
+              <p className="font-medium">Account Created</p>
+              <p className="text-gray-900">
+                {new Date(parseInt(metadata.createdAt, 10)).toLocaleString()}
+              </p>
             </div>
+            <div className="flex justify-between text-sm text-gray-600">
+              <p className="font-medium">Last Login</p>
+              <p className="text-gray-900">
+                {new Date(
+                  parseInt(reloadUserInfo.lastLoginAt, 10)
+                ).toLocaleString()}
+              </p>
+            </div>
+          </div>
+          <div className="mt-6 flex space-x-4 justify-center">
+            <button
+              onClick={() => setIsOpen(true)}
+              className="flex items-center bg-blue-500 text-white px-3 py-[6px] rounded-lg hover:bg-blue-600 transition duration-300"
+            >
+              <FaEdit className="mr-2" /> Update Profile
+            </button>
+            <button
+              onClick={() => setIsPassOpen(true)}
+              className="flex items-center bg-indigo-500 text-white px-3 py-[6px] rounded-lg hover:bg-indigo-600 transition duration-300"
+            >
+              <FaKey className="mr-2" /> Change Password
+            </button>
           </div>
         </div>
       </div>
