@@ -66,7 +66,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
   };
 
   return (
-    <div className="bg-base-100 shadow-lg border rounded-xl p-4 flex flex-col items-center space-y-3">
+    <div className="group bg-base-100 shadow-xl rounded-xl p-4 flex flex-col items-center space-y-3">
       <figure className="w-full flex justify-center">
         <img
           src={book_image}
@@ -75,13 +75,14 @@ const MyBookingCard = ({ getBooking, refetch }) => {
           className="rounded-xl w-[100px] h-[130px] object-cover"
         />
       </figure>
-      <div className="text-center px-2">
+      <div className="text-center px-2 group-hover:scale-105 group-hover:transition-all group-hover:duration-300">
         <Link to={`/book/${book_id}`}>
           <h2 className="text-xl font-bold text-blue-900">{book_name}</h2>
         </Link>
         <p className="text-lg mt-1">Provider Info:</p>
         <p className="text-green-600">{provider_phone}</p>
         <p className="text-purple-800">{provider_email}</p>
+        <p>Booked: {user_date}</p>
         <p
           className={`text-base ${
             status === "Pending"
@@ -93,7 +94,6 @@ const MyBookingCard = ({ getBooking, refetch }) => {
         >
           Status: {status}
         </p>
-        <p className="text-base">Booked: {user_date}</p>
         {completed_at && (
           <p className="text-cyan-500">Completed: {completed_at}</p>
         )}
@@ -111,7 +111,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
         {status !== "Completed" && (
           <button
             onClick={handleBookingDelete}
-            className="bg-red-500 text-white py-1 px-3 rounded-md"
+            className="bg-red-500 text-white py-1 px-3 rounded-xl"
           >
             Delete Booking
           </button>

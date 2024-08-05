@@ -75,7 +75,7 @@ const MyPending = () => {
             <span className="italic">User Booked Your Books</span> (
             {allMyPending?.length || 0})
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 gap-4 mt-3 mb-5 md:mx-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 gap-4 mt-3 mb-5 md:mx-5">
             {allMyPending?.map((pending) => (
               <MyPendingCard
                 key={pending._id}

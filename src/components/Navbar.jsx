@@ -152,7 +152,7 @@ const Navbar = () => {
         {/* cart btn */}
         {user && (
           <div className="hidden md:block">
-            <Link to="/dashboard/my-schedules">
+            <Link to="/my-schedules">
               <div
                 tabIndex={0}
                 role="button"

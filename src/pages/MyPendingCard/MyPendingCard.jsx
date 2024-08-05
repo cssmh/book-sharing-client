@@ -84,7 +84,7 @@ const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
   return (
     <div
       data-aos="zoom-in"
-      className="bg-base-100 shadow-lg border rounded-xl pt-2 md:pt-3 py-5 flex flex-col"
+      className="group bg-base-100 shadow-xl rounded-xl pt-2 md:pt-3 py-5 flex flex-col"
     >
       <div className="flex-grow mb-2 text-lg px-2 text-center">
         <figure>
@@ -94,18 +94,20 @@ const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
             className="rounded-xl w-[100px] h-[130px] mx-auto object-cover my-2"
           />
         </figure>
-        <h2 className="text-xl font-bold text-blue-900">{book_name}</h2>
-        <h1>Collector Info: </h1>
-        <p className="text-green-600">{user_phone}</p>
-        <p className="text-purple-800">{user_email}</p>
-        {user_message.length > 0 && <p>Message: {user_message}</p>}
-        <p>Booked: {user_date}</p>
-        {status === "Completed" && (
-          <p>
-            Completed: <span className="text-cyan-500">{completed_at}</span>
-          </p>
-        )}
-        <p className="text-blue-500">Location: {user_location}</p>
+        <div className="group-hover:scale-105 group-hover:transition-all group-hover:duration-300">
+          <h2 className="text-xl font-bold text-blue-900">{book_name}</h2>
+          <h1>Collector Info: </h1>
+          <p className="text-green-600">{user_phone}</p>
+          <p className="text-purple-800">{user_email}</p>
+          {user_message.length > 0 && <p>Message: {user_message}</p>}
+          <p>Booked: {user_date}</p>
+          {status === "Completed" && (
+            <p>
+              Completed: <span className="text-cyan-500">{completed_at}</span>
+            </p>
+          )}
+          <p className="text-blue-500">Location: {user_location}</p>
+        </div>
       </div>
       <div className="text-center mt-1">
         <select

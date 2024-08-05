@@ -39,44 +39,57 @@ const MyBooksCard = ({ getBook, refetch }) => {
   };
 
   return (
-    <div className="card bg-white shadow-md border border-gray-200 rounded-lg flex flex-col items-center text-center space-y-4 p-4 mb-5 transition-transform transform hover:scale-105">
-      <figure className="mb-2">
-        <img
-          src={book_image}
-          alt={book_name}
-          onContextMenu={(e) => e.preventDefault()}
-          className="rounded-md w-24 h-32 object-cover"
-        />
-      </figure>
-      <div className="flex flex-col space-y-2">
-        <h2 className="text-lg font-semibold text-gray-900">{book_name}</h2>
-        <p className="text-sm text-gray-600">Provider Phone: {provider_phone}</p>
-        <p className="text-sm text-gray-600">Location: {provider_location}</p>
-        <p className={`text-sm font-medium ${book_status === "available" ? "text-green-600" : "text-red-600"}`}>
-          Book Status: {book_status}
-        </p>
-      </div>
-      <div className="flex space-x-2">
-        <Link to={`/book/${_id}`}>
-          <button className="bg-primary text-white hover:bg-primary-dark transition duration-300 ease-in-out rounded-md text-sm px-4 py-2">
-            Details
-          </button>
-        </Link>
-        {book_status === "available" && (
-          <>
-            <Link to={`/update-book/${_id}`}>
-              <button className="bg-yellow-500 text-white hover:bg-yellow-600 transition duration-300 ease-in-out rounded-md text-sm px-4 py-2">
-                Update
-              </button>
-            </Link>
-            <button
-              onClick={() => handleDelete(_id, book_name)}
-              className="bg-red-500 text-white hover:bg-red-600 transition duration-300 ease-in-out rounded-md text-sm px-4 py-2"
+    <div
+      data-aos="zoom-in"
+      className="group card bg-base-100 shadow-xl flex flex-col items-center text-center space-y-2 mb-5"
+    >
+      <div className="flex-grow">
+        <figure className="pt-4 mb-2">
+          <img
+            src={book_image}
+            onContextMenu={(e) => e.preventDefault()}
+            className="rounded-xl w-[100px] h-[130px]"
+          />
+        </figure>
+        <div className="space-y-1 group-hover:scale-105 group-hover:transition-all group-hover:duration-300">
+          <h2 className="text-xl font-bold text-blue-900 px-4">{book_name}</h2>
+          <p className="text-base">Phone: {provider_phone}</p>
+          <p className="text-base">Location: {provider_location}</p>
+          <p>
+            Book Status:{" "}
+            <span
+              className={`text-base ${
+                book_status === "available" ? "text-green-500" : "text-red-600"
+              }`}
             >
-              Delete
+              {book_status}
+            </span>
+          </p>
+        </div>
+      </div>
+      <div className="pb-5">
+        <div className="space-x-1">
+          <Link to={`/book/${_id}`}>
+            <button className="text-primary border border-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out rounded-3xl text-sm px-4 py-2.5 text-center font-bold uppercase">
+              Details
             </button>
-          </>
-        )}
+          </Link>
+          {book_status === "available" && (
+            <>
+              <Link to={`/update-book/${_id}`}>
+                <button className="text-primary border border-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out rounded-3xl text-sm px-4 py-2.5 text-center font-bold uppercase">
+                  Update
+                </button>
+              </Link>
+              <button
+                onClick={() => handleDelete(_id, book_name)}
+                className="border border-black font-bold hover:bg-black hover:text-white transition duration-300 ease-in-out rounded-3xl text-sm px-4 py-2.5 text-center uppercase"
+              >
+                delete
+              </button>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
