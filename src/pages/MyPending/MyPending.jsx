@@ -43,7 +43,7 @@ const MyPending = () => {
 
   if (idLoading || myBooksLoading || isLoading) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4 md:mx-4">
         {[...Array(3)].map((_, index) => (
           <MyBookSke key={index} />
         ))}
@@ -61,23 +61,21 @@ const MyPending = () => {
 
   return (
     <div>
-      {bookData.length == 0 ? (
+      {bookData.length === 0 ? (
         <p className="text-center text-xl my-2 font-semibold text-red-600 italic">
           You have No added Books
         </p>
-      ) : allMyPending?.length == 0 ? (
+      ) : allMyPending?.length === 0 ? (
         <p className="text-center text-xl my-2 font-semibold text-red-600 italic">
           No User Booked Your Books
         </p>
       ) : (
         <>
-          {/* <h2 className="text-center text-xl my-2 font-semibold italic">
-            User Booked Your Books
-          </h2> */}
-          <h1 className="bg-primary px-3 py-[5px] mx-3 rounded-md text-white">
-            User Booked Your Books ({allMyPending?.length || 0})
-          </h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 gap-4 mt-1 mb-5">
+          <h2 className="text-center text-xl my-2 font-semibold">
+            <span className="italic">User Booked Your Books</span> (
+            {allMyPending?.length || 0})
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 gap-4 mt-3 mb-5 md:mx-4">
             {allMyPending?.map((pending) => (
               <MyPendingCard
                 key={pending._id}

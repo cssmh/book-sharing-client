@@ -28,6 +28,7 @@ const DashHome = () => {
   ];
 
   if (providerLoading || isLoading) return <ChartSkeleton />;
+
   return (
     <div>
       {admin && (

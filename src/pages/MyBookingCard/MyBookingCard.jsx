@@ -75,7 +75,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
           className="rounded-xl w-[100px] h-[130px] object-cover"
         />
       </figure>
-      <div className="text-center">
+      <div className="text-center px-2">
         <Link to={`/book/${book_id}`}>
           <h2 className="text-xl font-bold text-blue-900">{book_name}</h2>
         </Link>
@@ -103,7 +103,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
           <button
             type="button"
             onClick={() => setIsOpen(true)}
-            className="bg-primary text-white py-2 px-4 rounded-md"
+            className="bg-primary text-white py-1 px-3 rounded-md"
           >
             Add a Review
           </button>
@@ -111,7 +111,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
         {status !== "Completed" && (
           <button
             onClick={handleBookingDelete}
-            className="bg-red-500 text-white py-[5px] px-3 rounded-md"
+            className="bg-red-500 text-white py-1 px-3 rounded-md"
           >
             Delete Booking
           </button>
