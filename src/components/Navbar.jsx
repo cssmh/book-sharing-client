@@ -12,6 +12,7 @@ const Navbar = () => {
   const [myProgress, setMyProgress] = useState(null);
   const [userDropdownVisible, setUserDropdownVisible] = useState(false);
   const userRef = useRef(null);
+  const admin = user?.email === "admin@admin.com";
 
   const handleLogout = () => {
     logOut().then().catch();
@@ -90,23 +91,23 @@ const Navbar = () => {
             <li className="font-semibold text-base">
               <NavLink to="/all-books">All Books</NavLink>
             </li>
-            {user?.email == "admin@admin.com" && (
-              <li className="font-semibold text-base">
-                <NavLink to="/admin-dashboard">Admin Dashboard</NavLink>
-              </li>
-            )}
             {user && (
               <ul>
                 <li className="font-semibold text-base">
                   <NavLink to="/add-book">Add Book</NavLink>
                 </li>
                 <li className="font-semibold text-base">
-                  <NavLink to="/my-books">My-Books</NavLink>
+                  <NavLink to="/my-books">My Books</NavLink>
                 </li>
                 <li className="font-semibold text-base">
-                  <NavLink to="/my-schedules">My-Schedule</NavLink>
+                  <NavLink to="/my-schedules">My Schedule</NavLink>
                 </li>
               </ul>
+            )}
+            {admin && (
+              <li className="font-semibold text-base">
+                <NavLink to="/dashboard">Dashboard</NavLink>
+              </li>
             )}
           </ul>
         </div>
@@ -127,12 +128,20 @@ const Navbar = () => {
           <li className="font-semibold text-base">
             <NavLink to="/all-books">All Books</NavLink>
           </li>
-          {user?.email && (
-            <li className="font-semibold text-base">
-              <NavLink to="/add-book">Add Book</NavLink>
-            </li>
+          {user && (
+            <>
+              <li className="font-semibold text-base">
+                <NavLink to="/add-book">Add Book</NavLink>
+              </li>
+              <li className="font-semibold text-base">
+                <NavLink to="/my-books">My Books</NavLink>
+              </li>
+              <li className="font-semibold text-base">
+                <NavLink to="/my-schedules">My Schedule</NavLink>
+              </li>
+            </>
           )}
-          {user?.email && (
+          {admin && (
             <li className="font-semibold text-base">
               <NavLink to="/dashboard">Dashboard</NavLink>
             </li>

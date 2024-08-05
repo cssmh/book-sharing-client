@@ -84,24 +84,26 @@ const Root = createBrowserRouter([
         ),
       },
       {
+        path: "/my-books",
+        element: <MyBooks />,
+      },
+      {
+        path: "/my-schedules",
+        element: <MySchedules />,
+      },
+      {
         path: "/dashboard",
         element: (
           <PrivateRoute>
-            <DashLayout />
+            <AdminRoute>
+              <DashLayout />
+            </AdminRoute>
           </PrivateRoute>
         ),
         children: [
           {
             path: "/dashboard",
             element: <DashHome />,
-          },
-          {
-            path: "/dashboard/my-books",
-            element: <MyBooks />,
-          },
-          {
-            path: "/dashboard/my-schedules",
-            element: <MySchedules />,
           },
           {
             path: "/dashboard/all-books",

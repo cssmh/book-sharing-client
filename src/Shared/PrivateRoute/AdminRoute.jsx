@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import { ScaleLoader } from "react-spinners";
 const AdminRoute = ({ children }) => {
   const { user, loading } = useAuth();
+  const admin = user?.email === "admin@admin.com";
 
   if (loading)
     return (
@@ -10,7 +11,7 @@ const AdminRoute = ({ children }) => {
         <ScaleLoader size={100} color="red" />
       </div>
     );
-  if (user?.email === "admin@admin.com") return children;
+  if (admin) return children;
 
   return <Navigate to="/"></Navigate>;
 };

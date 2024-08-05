@@ -5,14 +5,7 @@ import { FcSettings } from "react-icons/fc";
 import logo from "../assets/Favicon.png";
 import useAuth from "../Hooks/useAuth";
 import { AiOutlineBars } from "react-icons/ai";
-import {
-  FaHome,
-  FaBook,
-  FaClipboardList,
-  FaUsers,
-  FaAddressBook,
-  FaRegCalendarAlt,
-} from "react-icons/fa";
+import { FaHome, FaBook, FaClipboardList, FaUsers } from "react-icons/fa";
 
 const Sidebar = () => {
   const [isActive, setActive] = useState(false);
@@ -91,22 +84,6 @@ const Sidebar = () => {
                   <span className="mx-4 font-medium">Dashboard</span>
                 </button>
               </Link>
-              {user && (
-                <>
-                  <Link to="/dashboard/my-books">
-                    <button className={linkClasses("/dashboard/my-books")}>
-                      <FaAddressBook className="w-5 h-5" />
-                      <span className="mx-4 font-medium">My Books</span>
-                    </button>
-                  </Link>
-                  <Link to="/dashboard/my-schedules">
-                    <button className={linkClasses("/dashboard/my-schedules")}>
-                      <FaRegCalendarAlt className="w-5 h-5" />
-                      <span className="mx-4 font-medium">My Schedule</span>
-                    </button>
-                  </Link>
-                </>
-              )}
               {admin && (
                 <>
                   <Link to="/dashboard/all-books">
