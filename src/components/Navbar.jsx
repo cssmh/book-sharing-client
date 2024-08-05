@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Lottie from "lottie-react";
-import loggieData from "../assets/Logo.json";
-import { Link, NavLink } from "react-router-dom";
+import lottieLogo from "../assets/Logo.json";
 import useAuth from "../Hooks/useAuth";
 import { FaArrowRightToBracket } from "react-icons/fa6";
 import useMyCart from "../Hooks/useMyCart";
@@ -11,8 +11,9 @@ const Navbar = () => {
   const { isLoading, myBookings } = useMyCart();
   const [myProgress, setMyProgress] = useState(null);
   const [userDropdownVisible, setUserDropdownVisible] = useState(false);
-  const userRef = useRef(null);
   const admin = user?.email === "admin@admin.com";
+  const userRef = useRef(null);
+  const location = useLocation();
 
   const handleLogout = () => {
     logOut().then().catch();
@@ -85,35 +86,65 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li className="font-semibold text-base">
-              <NavLink to="/">Home</NavLink>
-            </li>
-            <li className="font-semibold text-base">
-              <NavLink to="/all-books">All Books</NavLink>
-            </li>
+            <Link
+              to="/"
+              className={`font-semibold text-base flex items-center ${
+                location.pathname === "/" && "text-green-500"
+              }`}
+            >
+              Home
+            </Link>
+            <Link
+              to="/all-books"
+              className={`font-semibold text-base flex items-center ${
+                location.pathname === "/all-books" && "text-green-500"
+              }`}
+            >
+              All Books
+            </Link>
             {user && (
               <ul>
-                <li className="font-semibold text-base">
-                  <NavLink to="/add-book">Add Book</NavLink>
-                </li>
-                <li className="font-semibold text-base">
-                  <NavLink to="/my-books">My Books</NavLink>
-                </li>
-                <li className="font-semibold text-base">
-                  <NavLink to="/my-schedules">My Schedule</NavLink>
-                </li>
+                <Link
+                  to="/add-book"
+                  className={`font-semibold text-base flex items-center ${
+                    location.pathname === "/add-book" && "text-green-500"
+                  }`}
+                >
+                  Add Book
+                </Link>
+                <Link
+                  to="/my-books"
+                  className={`font-semibold text-base flex items-center ${
+                    location.pathname === "/my-books" && "text-green-500"
+                  }`}
+                >
+                  My Books
+                </Link>
+                <Link
+                  to="/my-schedules"
+                  className={`font-semibold text-base flex items-center ${
+                    location.pathname === "/my-schedules" && "text-green-500"
+                  }`}
+                >
+                  My Schedule
+                </Link>
               </ul>
             )}
             {admin && (
-              <li className="font-semibold text-base">
-                <NavLink to="/dashboard">Dashboard</NavLink>
-              </li>
+              <Link
+                to="/dashboard"
+                className={`font-semibold text-base flex items-center ${
+                  location.pathname === "/dashboard" && "text-green-500"
+                }`}
+              >
+                Dashboard
+              </Link>
             )}
           </ul>
         </div>
         <Link to={"/"}>
           <div className="flex items-center gap-1">
-            <Lottie className="w-0 md:w-[52px]" animationData={loggieData} />
+            <Lottie className="w-0 md:w-[52px]" animationData={lottieLogo} />
             <span className="md:ml-1 font-bold text-[17px] md:text-[21px]">
               MBSTU BookHaven
             </span>
@@ -121,30 +152,60 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          <li className="font-semibold text-base">
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li className="font-semibold text-base">
-            <NavLink to="/all-books">All Books</NavLink>
-          </li>
+        <ul className="menu menu-horizontal px-1 space-x-6">
+          <Link
+            to="/"
+            className={`font-semibold text-base flex items-center ${
+              location.pathname === "/" && "text-green-500"
+            }`}
+          >
+            Home
+          </Link>
+          <Link
+            to="/all-books"
+            className={`font-semibold text-base flex items-center ${
+              location.pathname === "/all-books" && "text-green-500"
+            }`}
+          >
+            All Books
+          </Link>
           {user && (
             <>
-              <li className="font-semibold text-base">
-                <NavLink to="/add-book">Add Book</NavLink>
-              </li>
-              <li className="font-semibold text-base">
-                <NavLink to="/my-books">My Books</NavLink>
-              </li>
-              <li className="font-semibold text-base">
-                <NavLink to="/my-schedules">My Schedule</NavLink>
-              </li>
+              <Link
+                to="/add-book"
+                className={`font-semibold text-base flex items-center ${
+                  location.pathname === "/add-book" && "text-green-500"
+                }`}
+              >
+                Add Book
+              </Link>
+              <Link
+                to="/my-books"
+                className={`font-semibold text-base flex items-center ${
+                  location.pathname === "/my-books" && "text-green-500"
+                }`}
+              >
+                My Books
+              </Link>
+              <Link
+                to="/my-schedules"
+                className={`font-semibold text-base flex items-center ${
+                  location.pathname === "/my-schedules" && "text-green-500"
+                }`}
+              >
+                My Schedule
+              </Link>
             </>
           )}
           {admin && (
-            <li className="font-semibold text-base">
-              <NavLink to="/dashboard">Dashboard</NavLink>
-            </li>
+            <Link
+              to="/dashboard"
+              className={`font-semibold text-base flex items-center ${
+                location.pathname === "/dashboard" && "text-green-500"
+              }`}
+            >
+              Dashboard
+            </Link>
           )}
         </ul>
       </div>

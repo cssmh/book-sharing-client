@@ -18,14 +18,14 @@ const MySchedules = () => {
       <Helmet>
         <title>BookHaven | My-Schedule</title>
       </Helmet>
-      <div className="flex justify-center gap-2 md:gap-2 mt-[18px]">
+      <div className="flex justify-center gap-2 md:gap-2 mt-5">
         <button
           onClick={showBooking}
           className={`rounded-3xl ${
             activeSchedule === "MyBookings"
               ? "bg-primary text-white"
               : "bg-gray-300"
-          } px-[18px] py-[10px] text-sm`}
+          } px-[18px] py-[10px] text-[15px]`}
         >
           My Booking
         </button>
@@ -35,7 +35,7 @@ const MySchedules = () => {
             activeSchedule === "MyPending"
               ? "bg-primary text-white"
               : "bg-gray-300"
-          } px-[18px] py-[10px] text-sm`}
+          } px-[18px] py-[10px] text-[15px]`}
         >
           My Pending
         </button>

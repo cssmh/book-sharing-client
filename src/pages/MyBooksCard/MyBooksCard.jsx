@@ -70,22 +70,22 @@ const MyBooksCard = ({ getBook, refetch }) => {
       <div className="pb-5">
         <div className="space-x-1">
           <Link to={`/book/${_id}`}>
-            <button className="text-primary border border-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out rounded-3xl text-sm px-4 py-2.5 text-center font-bold uppercase">
+            <button className="bg-primary text-white py-1 px-3 rounded-xl">
               Details
             </button>
           </Link>
           {book_status === "available" && (
             <>
               <Link to={`/update-book/${_id}`}>
-                <button className="text-primary border border-primary hover:bg-primary hover:text-white transition duration-300 ease-in-out rounded-3xl text-sm px-4 py-2.5 text-center font-bold uppercase">
+                <button className="bg-green-400 text-white py-1 px-3 rounded-xl">
                   Update
                 </button>
               </Link>
               <button
                 onClick={() => handleDelete(_id, book_name)}
-                className="border border-black font-bold hover:bg-black hover:text-white transition duration-300 ease-in-out rounded-3xl text-sm px-4 py-2.5 text-center uppercase"
+                className="bg-red-500 text-white py-1 px-3 rounded-xl"
               >
-                delete
+                Delete
               </button>
             </>
           )}
