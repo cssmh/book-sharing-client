@@ -112,7 +112,7 @@ const BookDetails = () => {
           <h2 className="text-[21px] font-bold text-blue-900 lg:w-[80%] mx-3 md:mx-0">
             {book_name}
           </h2>
-          <p className="font-semibold">
+          <p>
             Added: <span className="text-blue-600">{added_time}</span>
           </p>
           {provider_email !== user?.email && book_status === "available" && (

@@ -7,8 +7,10 @@ const PrivateRoute = ({ children }) => {
 
   if (loading)
     return (
-      <div className="h-[92vh] flex flex-col justify-center items-center">
-        <ScaleLoader size={100} color="red" />
+      <div className="relative h-[80vh] flex items-center justify-center">
+        <div className="absolute -top-7 inset-0 flex items-center justify-center">
+          <ScaleLoader size={100} color="red" />
+        </div>
       </div>
     );
   if (user) return children;

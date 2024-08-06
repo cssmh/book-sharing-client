@@ -7,6 +7,7 @@ import EditModal from "./EditModal";
 import useMyBooks from "../../Hooks/useMyBooks";
 import ChangePassModal from "./ChangePassModal";
 import { FaEdit, FaKey } from "react-icons/fa";
+import BGBlue from "../../assets/Notified.jpg";
 
 const MyProfile = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -72,7 +73,14 @@ const MyProfile = () => {
         <title>BookHaven | My Profile</title>
       </Helmet>
       <div className="bg-white shadow-lg rounded-lg overflow-hidden w-full max-w-lg mx-auto">
-        <div className="bg-green-400 p-6 flex items-center justify-center">
+        <div
+          className="p-6 flex items-center justify-center"
+          style={{
+            backgroundImage: `url(${BGBlue})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
           <img
             src={photoURL}
             className="rounded-full h-32 w-32 border-4 border-white"

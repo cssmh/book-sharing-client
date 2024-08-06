@@ -66,44 +66,50 @@ const MyBookingCard = ({ getBooking, refetch }) => {
   };
 
   return (
-    <div className="group bg-base-100 shadow-xl rounded-xl p-4 flex flex-col items-center space-y-3">
-      <figure className="w-full flex justify-center">
-        <img
-          src={book_image}
-          alt={book_name}
-          onContextMenu={(e) => e.preventDefault()}
-          className="rounded-xl w-[100px] h-[130px] object-cover"
-        />
-      </figure>
-      <div className="text-center px-2 group-hover:scale-105 group-hover:transition-all group-hover:duration-300">
-        <Link to={`/book/${book_id}`}>
-          <h2 className="text-xl font-bold text-blue-900">{book_name}</h2>
-        </Link>
-        <p className="text-lg mt-1">Provider Info:</p>
-        <p className="text-green-600">{provider_phone}</p>
-        <p className="text-purple-800">{provider_email}</p>
-        <p>Booked: {user_date}</p>
-        <p
-          className={`text-base ${
-            status === "Pending"
-              ? "text-red-500"
-              : status === "Completed"
-              ? "text-green-500"
-              : "text-blue-500"
-          }`}
-        >
-          Status: {status}
-        </p>
-        {completed_at && (
-          <p className="text-cyan-500">Completed: {completed_at}</p>
-        )}
+    <div className="group bg-white shadow-lg rounded-xl p-5 flex flex-col items-center space-y-3">
+      <div className="flex-grow">
+        <figure className="w-full flex justify-center">
+          <img
+            src={book_image}
+            alt={book_name}
+            onContextMenu={(e) => e.preventDefault()}
+            className="rounded-lg w-[100px] h-[130px] object-cover"
+          />
+        </figure>
+        <div className="text-center px-4 group-hover:scale-105 group-hover:transition-transform group-hover:duration-300">
+          <Link to={`/book/${book_id}`}>
+            <h2 className="text-lg font-semibold text-gray-800 mt-2">
+              {book_name}
+            </h2>
+          </Link>
+          <p className="text-lg font-medium text-gray-700">Provider Info:</p>
+          <p className="text-sm text-green-600">{provider_phone}</p>
+          <p className="text-sm">{provider_email}</p>
+          <p className="text-sm text-gray-600 mt-2">Booked: {user_date}</p>
+          <p
+            className={`text-sm mt-1 ${
+              status === "Pending"
+                ? "text-red-500"
+                : status === "Completed"
+                ? "text-green-500"
+                : "text-blue-500"
+            }`}
+          >
+            Status: {status}
+          </p>
+          {completed_at && (
+            <p className="text-sm text-cyan-500 mt-1">
+              <span className="font-medium">Completed:</span> {completed_at}
+            </p>
+          )}
+        </div>
       </div>
-      <div className="flex gap-2 mt-2">
+      <div className="flex gap-3 mt-3">
         {status === "Completed" && !bookData?.user_review && (
           <button
             type="button"
             onClick={() => setIsOpen(true)}
-            className="bg-primary text-white py-1 px-3 rounded-md"
+            className="bg-blue-600 text-white py-1 px-3 rounded-md shadow-sm"
           >
             Add a Review
           </button>
@@ -111,7 +117,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
         {status !== "Completed" && (
           <button
             onClick={handleBookingDelete}
-            className="bg-red-500 text-white py-1 px-3 rounded-xl"
+            className="bg-red-500 text-white py-[6px] px-3 rounded-lg shadow-sm"
           >
             Delete Booking
           </button>

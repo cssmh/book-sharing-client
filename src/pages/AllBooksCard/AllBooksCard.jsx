@@ -13,7 +13,7 @@ const AllBooksCard = ({ getBook }) => {
   } = getBook;
 
   return (
-    <div className="relative card bg-base-100 shadow-xl py-6 group">
+    <div className="relative card shadow-xl py-6 group">
       <figure>
         <img
           data-aos="zoom-in"

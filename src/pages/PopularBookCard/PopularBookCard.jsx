@@ -12,7 +12,7 @@ const PopularBookCard = ({ getBook }) => {
   } = getBook;
 
   return (
-    <div className="relative card bg-base-100 shadow-lg py-5 mb-4 h-[460px] border group">
+    <div className="relative card shadow-lg py-5 mb-4 h-[460px] border group">
       <figure>
         <img
           src={book_image}

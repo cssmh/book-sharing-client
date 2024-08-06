@@ -84,36 +84,48 @@ const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
   return (
     <div
       data-aos="zoom-in"
-      className="group bg-base-100 shadow-xl rounded-xl pt-2 md:pt-3 py-5 flex flex-col"
+      className="group bg-white shadow-xl rounded-lg p-4 flex flex-col space-y-4"
     >
-      <div className="flex-grow mb-2 text-lg px-2 text-center">
+      <div className="flex flex-col items-center text-center space-y-2">
         <figure>
           <img
             src={book_image}
             onContextMenu={(e) => e.preventDefault()}
-            className="rounded-xl w-[100px] h-[130px] mx-auto object-cover my-2"
+            className="rounded-lg w-[90px] h-[120px] object-cover"
           />
         </figure>
-        <div className="group-hover:scale-105 group-hover:transition-all group-hover:duration-300">
-          <h2 className="text-xl font-bold text-blue-900">{book_name}</h2>
-          <h1>Collector Info: </h1>
-          <p className="text-green-600">{user_phone}</p>
-          <p className="text-purple-800">{user_email}</p>
-          {user_message.length > 0 && <p>Message: {user_message}</p>}
-          <p>Booked: {user_date}</p>
-          {status === "Completed" && (
-            <p>
-              Completed: <span className="text-cyan-500">{completed_at}</span>
-            </p>
-          )}
-          <p className="text-blue-500">Location: {user_location}</p>
-        </div>
+        <h2 className="text-lg font-semibold text-gray-800">{book_name}</h2>
       </div>
-      <div className="text-center mt-1">
+      <div className="flex flex-col space-y-2">
+        <h3 className="text-sm font-medium text-gray-700">Collector Info</h3>
+        <p className="text-sm text-gray-600">Phone: {user_phone}</p>
+        <p className="text-sm text-gray-600">Email: {user_email}</p>
+        {user_message.length > 0 && (
+          <div className="bg-gray-100 rounded-md p-3 border border-gray-200">
+            <h4 className="text-sm font-medium text-gray-700 text-left">
+              Message
+            </h4>
+            <p className="text-sm text-gray-600 text-left">{user_message}</p>
+          </div>
+        )}
+        <p className="text-sm text-gray-600">
+          <span className="font-medium">Booked:</span> {user_date}
+        </p>
+        {status === "Completed" && (
+          <p className="text-sm text-gray-600">
+            <span className="font-medium">Completed:</span>{" "}
+            <span className="text-cyan-500">{completed_at}</span>
+          </p>
+        )}
+        <p className="text-sm text-gray-600">
+          <span className="font-medium">Location:</span> {user_location}
+        </p>
+      </div>
+      <div className="text-center">
         <select
           defaultValue={status}
           onChange={(e) => handleUpdateStatus(e, _id, book_id, provider_email)}
-          className="border py-[6px] border-blue-500 focus:border-transparent rounded-xl"
+          className="border py-2 px-3 border-gray-300 rounded-md text-sm focus:outline-none"
           disabled={status === "Completed" || unavailableIds?.includes(book_id)}
         >
           <option value="Pending">Pending</option>

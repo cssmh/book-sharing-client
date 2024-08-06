@@ -17,8 +17,8 @@ const Navbar = () => {
   const location = useLocation();
   const getLinkClasses = (path) => {
     return location.pathname === path
-      ? "bg-green-500 text-white"
-      : "bg-transparent hover:bg-gray-200";
+      ? "text-green-600"
+      : "hover:text-green-600";
   };
 
   const handleLogout = () => {
@@ -69,7 +69,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="navbar min-h-[59px] bg-base-200 rounded-lg md:px-4 py-0">
+    <div className="navbar min-h-[58px] bg-base-100 rounded-lg md:px-4 py-0">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden px-2">
@@ -160,10 +160,10 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 space-x-3">
+        <ul className="menu menu-horizontal px-1 space-x-4">
           <Link
             to="/"
-            className={`font-semibold text-base flex items-center px-2 py-1 rounded-xl ${getLinkClasses(
+            className={`text-base font-semibold flex items-center p-2 ${getLinkClasses(
               "/"
             )}`}
           >
@@ -171,7 +171,7 @@ const Navbar = () => {
           </Link>
           <Link
             to="/all-books"
-            className={`font-semibold text-base flex items-center px-2 py-1 rounded-xl ${getLinkClasses(
+            className={`text-base font-semibold flex items-center p-2 ${getLinkClasses(
               "/all-books"
             )}`}
           >
@@ -181,7 +181,7 @@ const Navbar = () => {
             <>
               <Link
                 to="/add-book"
-                className={`font-semibold text-base flex items-center px-2 py-1  rounded-xl ${getLinkClasses(
+                className={`text-base font-semibold flex items-center p-2 ${getLinkClasses(
                   "/add-book"
                 )}`}
               >
@@ -189,7 +189,7 @@ const Navbar = () => {
               </Link>
               <Link
                 to="/my-books"
-                className={`font-semibold text-base flex items-center px-2 py-1  rounded-2xl ${getLinkClasses(
+                className={`text-base font-semibold flex items-center p-2 ${getLinkClasses(
                   "/my-books"
                 )}`}
               >
@@ -197,7 +197,7 @@ const Navbar = () => {
               </Link>
               <Link
                 to="/my-schedules"
-                className={`font-semibold text-base flex items-center px-2 py-1 rounded-xl ${getLinkClasses(
+                className={`text-base font-semibold flex items-center p-2 ${getLinkClasses(
                   "/my-schedules"
                 )}`}
               >
@@ -208,7 +208,7 @@ const Navbar = () => {
           {admin && (
             <Link
               to="/dashboard"
-              className={`font-semibold text-base flex items-center px-2 py-1 rounded-xl ${getLinkClasses(
+              className={`text-base font-semibold flex items-center p-2 ${getLinkClasses(
                 "/dashboard"
               )}`}
             >
@@ -258,7 +258,7 @@ const Navbar = () => {
             </Link>
           </div>
         )}
-        <div className="flex flex-col items-center justify-center text-center font-semibold text-sm mx-[8px] uppercase">
+        <div className="flex flex-col items-center justify-center font-semibold text-center text-sm mx-[8px] uppercase">
           <p>{greeting}</p>
           {user && <p>{user.displayName}</p>}
         </div>

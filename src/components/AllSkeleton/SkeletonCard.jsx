@@ -2,7 +2,7 @@ const SkeletonCard = () => {
   return (
     <div className="card bg-base-100 shadow-xl py-6 group mx-2 md:mx-0">
       <figure className="animate-pulse">
-        <div className="bg-gray-300 rounded-xl w-[20%] md:w-[25%] h-40"></div>
+        <div className="bg-gray-300 rounded-xl w-[20%] md:w-[25%] h-38"></div>
       </figure>
       <div className="group-hover:scale-105 group-hover:transition-all group-hover:duration-300 card-body items-center text-center p-0 px-3 gap-[0px]">
         <h2 className="bg-gray-300 h-6 w-3/4 md:w-1/2 mx-auto rounded-md mt-2"></h2>

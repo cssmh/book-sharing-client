@@ -32,7 +32,7 @@ const AllBookings = () => {
         <title>BookHaven | All Bookings</title>
       </Helmet>
       <h1 className="text-center font-semibold text-xl mb-3 mt-2 md:mt-0">
-        All Bookings ({allBookings.length})
+        {filterType} Bookings ({allBookings.length})
       </h1>
       <div className="flex flex-col md:flex-row justify-between items-center gap-[5px] mb-2">
         <DeleteAllBookings refetch={refetch}></DeleteAllBookings>

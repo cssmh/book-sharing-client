@@ -41,14 +41,14 @@ const MyBooksCard = ({ getBook, refetch }) => {
   return (
     <div
       data-aos="zoom-in"
-      className="group card bg-base-100 shadow-xl flex flex-col items-center text-center space-y-2 mb-5"
+      className="group card shadow-xl flex flex-col items-center text-center space-y-2 mb-5"
     >
       <div className="flex-grow">
         <figure className="pt-4 mb-2">
           <img
             src={book_image}
             onContextMenu={(e) => e.preventDefault()}
-            className="rounded-xl w-[100px] h-[130px]"
+            className="rounded-xl w-[100px] h-[135px]"
           />
         </figure>
         <div className="space-y-1 group-hover:scale-105 group-hover:transition-all group-hover:duration-300">
