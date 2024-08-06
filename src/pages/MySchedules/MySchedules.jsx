@@ -9,34 +9,33 @@ const MySchedules = () => {
   const showBooking = () => {
     setActiveSchedule("MyBookings");
   };
-
   const showPending = () => {
     setActiveSchedule("MyPending");
   };
 
   return (
-    <div className="p-4 md:p-6 max-w-4xl mx-auto">
+    <div>
       <Helmet>
         <title>BookHaven | My-Schedule</title>
       </Helmet>
-      <div className="flex justify-center gap-4 mb-6">
+      <div className="flex justify-center gap-2 md:gap-2 mt-5">
         <button
           onClick={showBooking}
-          className={`flex-1 text-center rounded-lg py-2 px-4 text-lg font-semibold transition-colors ${
+          className={`rounded-3xl ${
             activeSchedule === "MyBookings"
-              ? "bg-blue-500 text-white"
-              : "bg-gray-200 text-gray-800"
-          }`}
+              ? "bg-primary text-white"
+              : "bg-gray-200"
+          } px-24 py-[10px] text-[15px]`}
         >
-          My Bookings
+          My Booking
         </button>
         <button
           onClick={showPending}
-          className={`flex-1 text-center rounded-lg py-2 px-4 text-lg font-semibold transition-colors ${
+          className={`rounded-3xl ${
             activeSchedule === "MyPending"
-              ? "bg-blue-500 text-white"
-              : "bg-gray-200 text-gray-800"
-          }`}
+              ? "bg-primary text-white"
+              : "bg-gray-200"
+          } px-24 py-[10px] text-[15px]`}
         >
           My Pending
         </button>

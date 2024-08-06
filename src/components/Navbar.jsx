@@ -8,7 +8,7 @@ import useMyCart from "../Hooks/useMyCart";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
-  const { isLoading, myBookings } = useMyCart();
+  const { myBookings } = useMyCart();
   const [myProgress, setMyProgress] = useState(null);
   const [userDropdownVisible, setUserDropdownVisible] = useState(false);
   const admin = user?.email === "admin@admin.com";
@@ -26,13 +26,13 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    if (!isLoading && myBookings?.length > 0) {
+    if (myBookings?.length > 0) {
       const findProgress = myBookings.find(
         (booking) => booking.status === "Progress"
       );
       setMyProgress(findProgress);
     }
-  }, [isLoading, myBookings]);
+  }, [myBookings]);
 
   const date = new Date();
   const currentTime = date.getHours();
@@ -251,7 +251,7 @@ const Navbar = () => {
                       myProgress ? "bg-green-400 text-white" : ""
                     } badge badge-sm indicator-item`}
                   >
-                    {(!isLoading && myBookings.length) || 0}
+                    {myBookings?.length || 0}
                   </span>
                 </div>
               </div>

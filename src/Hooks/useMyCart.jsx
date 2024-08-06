@@ -12,7 +12,6 @@ const useMyCart = () => {
     error,
     refetch: cartRefetch,
   } = useQuery({
-    enabled: !loading && !!user?.email,
     queryKey: ["myBookings", user?.email],
     queryFn: async () => {
       const res = await axiosNoToken.get(`/my-bookings?email=${user?.email}`, {
@@ -20,6 +19,7 @@ const useMyCart = () => {
       });
       return res?.data;
     },
+    enabled: !loading && !!user?.email,
   });
 
   return {
