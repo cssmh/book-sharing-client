@@ -36,7 +36,7 @@ const AllBooksCard = ({ getBook }) => {
         <h2 className="text-blue-900 text-xl md:text-[21px] font-bold mt-2 px-2">
           {book_name}
         </h2>
-        <p className="px-5 mb-1">{description?.slice(0, 90)}...</p>
+        <p className="px-5 my-1">{description?.slice(0, 87)}...</p>
         <div className="flex items-center gap-3 mb-3 border border-red-400 rounded-full px-3 py-2 bg-red-100 shadow-md">
           <div className="avatar">
             <div className="w-12 rounded-full ring ring-primary">

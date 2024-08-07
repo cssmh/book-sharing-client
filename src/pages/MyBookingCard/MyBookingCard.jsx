@@ -78,7 +78,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
         </figure>
         <div className="text-center px-4 group-hover:scale-105 group-hover:transition-transform group-hover:duration-300">
           <Link to={`/book/${book_id}`}>
-            <h2 className="text-lg font-semibold text-gray-800 mt-2">
+            <h2 className="text-lg font-semibold text-blue-900 mt-2">
               {book_name}
             </h2>
           </Link>
@@ -117,7 +117,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
         {status !== "Completed" && (
           <button
             onClick={handleBookingDelete}
-            className="bg-red-500 text-white py-[6px] px-3 rounded-lg shadow-sm"
+            className="bg-red-500 text-white py-[6px] px-3 rounded-xl shadow-sm"
           >
             Delete Booking
           </button>

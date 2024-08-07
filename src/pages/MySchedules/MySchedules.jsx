@@ -22,20 +22,16 @@ const MySchedules = () => {
         <button
           onClick={showBooking}
           className={`rounded-3xl ${
-            activeSchedule === "MyBookings"
-              ? "bg-primary text-white"
-              : "bg-gray-200"
-          } px-24 py-[10px] text-[15px]`}
+            activeSchedule === "MyBookings" && "text-green-500"
+          } bg-gray-100 px-14 py-[10px] text-[15px]`}
         >
           My Booking
         </button>
         <button
           onClick={showPending}
           className={`rounded-3xl ${
-            activeSchedule === "MyPending"
-              ? "bg-primary text-white"
-              : "bg-gray-200"
-          } px-24 py-[10px] text-[15px]`}
+            activeSchedule === "MyPending" && "text-green-500"
+          } bg-gray-100 px-14 py-[10px] text-[15px]`}
         >
           My Pending
         </button>

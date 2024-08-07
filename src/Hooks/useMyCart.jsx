@@ -8,7 +8,7 @@ const useMyCart = () => {
 
   const {
     isLoading,
-    data: myBookings = [],
+    data = [],
     error,
     refetch: cartRefetch,
   } = useQuery({
@@ -21,10 +21,13 @@ const useMyCart = () => {
     },
     enabled: !loading && !!user?.email,
   });
+  const myBookings = data?.result;
+  const totalCart = data?.totalCart;
 
   return {
     isLoading,
     myBookings,
+    totalCart,
     error,
     cartRefetch,
   };

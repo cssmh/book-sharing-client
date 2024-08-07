@@ -27,7 +27,6 @@ MBSTU BookHaven is a comprehensive platform for book sharing, enabling users to 
    - Sign up with name, photo URL, email, and password.
    - Login with email or Google account.
    - Email verification required for new users.
-   - Password matching and validation during registration.
 
 2. **Navigation and Accessibility:**
 

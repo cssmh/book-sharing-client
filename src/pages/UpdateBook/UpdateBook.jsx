@@ -14,7 +14,7 @@ const UpdateBook = () => {
   const { user } = useAuth();
   const { id } = useParams();
   const navigateTo = useNavigate();
-  const [matchFound, setMatchFound] = useState([]);
+  const [matchFound, setMatchFound] = useState(null);
   const axiosSecure = useAxiosSecure();
 
   const url = `/my-books?email=${user?.email}`;
@@ -27,13 +27,19 @@ const UpdateBook = () => {
   } = useQueryPublic(["bookData", id], `book/${id}`);
 
   useEffect(() => {
-    const matching = myBooks.find((book) => book._id === id);
-    setMatchFound(matching);
-    if (!matchFound) {
-      toast.error("Don't try to update other's data!");
-      navigateTo("/");
-    }
-  }, [matchFound, myBooks, id, navigateTo]);
+    const checkMatching = async () => {
+      if (!loading && myBooks) {
+        const matching = myBooks.find((book) => book._id === id);
+        setMatchFound(matching);
+        if (!matching) {
+          toast.error("Don't try to update other's data!");
+          navigateTo("/");
+        }
+      }
+    };
+
+    checkMatching();
+  }, [loading, myBooks, id, navigateTo]);
 
   if (loading || isLoading)
     return (

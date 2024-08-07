@@ -41,7 +41,7 @@ const MyBooksCard = ({ getBook, refetch }) => {
   return (
     <div
       data-aos="zoom-in"
-      className="group card shadow-xl flex flex-col items-center text-center space-y-2 mb-5"
+      className="group card shadow-xl flex flex-col items-center text-center space-y-3 mb-5"
     >
       <div className="flex-grow">
         <figure className="pt-4 mb-2">

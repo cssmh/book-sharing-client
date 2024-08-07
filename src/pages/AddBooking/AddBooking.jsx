@@ -33,10 +33,12 @@ const AddBooking = ({ getBookData }) => {
 
   // Check if the selected book is already booked
   useEffect(() => {
-    const matching = allBookings?.filter((myBooked) =>
-      book_name.includes(myBooked?.book_name)
-    );
-    setMatchFound(matching);
+    if (allBookings?.length > 0) {
+      const matching = allBookings.filter((myBooked) =>
+        book_name.includes(myBooked.book_name)
+      );
+      setMatchFound(matching);
+    }
   }, [allBookings, book_name]);
 
   // Set today's date and time as default
