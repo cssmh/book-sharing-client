@@ -111,7 +111,7 @@ const Login = () => {
                   name="email"
                   type="email"
                   required
-                  className="appearance-none rounded-xl relative block w-full px-3 py-[10px] border border-gray-300 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                  className="appearance-none rounded-lg relative block w-full px-3 py-[10px] border border-gray-300 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
                   placeholder="Email address"
                 />
               </div>
@@ -128,7 +128,7 @@ const Login = () => {
                   type={view ? "password" : "text"}
                   required
                   onChange={handleChangePass}
-                  className="appearance-none rounded-xl relative block w-full px-3 py-[10px] border border-gray-300 placeholder-gray-500 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                  className="appearance-none rounded-lg relative block w-full px-3 py-[10px] border border-gray-300 placeholder-gray-500 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
                   placeholder="Password"
                 />
                 {pass && (
