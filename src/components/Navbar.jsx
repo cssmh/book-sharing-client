@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Lottie from "lottie-react";
 import lottieLogo from "../assets/Logo.json";
+import defaultAvatar from "../assets/default.jpg";
 import useAuth from "../Hooks/useAuth";
 import { FaArrowRightToBracket } from "react-icons/fa6";
 import useMyCart from "../Hooks/useMyCart";
@@ -269,9 +270,9 @@ const Navbar = () => {
               onClick={() => setUserDropdownVisible((prev) => !prev)}
             >
               <img
-                src={user.photoURL}
+                src={user.photoURL || defaultAvatar}
                 className="w-10 rounded-full"
-                alt="User avatar"
+                alt="ava"
               />
             </label>
             {userDropdownVisible && (

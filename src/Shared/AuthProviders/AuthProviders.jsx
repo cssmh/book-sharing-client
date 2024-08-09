@@ -68,7 +68,6 @@ const AuthProviders = ({ children }) => {
       setUser(currentUser);
       const getEmail = currentUser?.email || user?.email;
       const emailToSend = { email: getEmail };
-      setLoading(false);
       if (getEmail) {
         await axiosNoToken
           .post("/jwt", emailToSend, {
@@ -82,6 +81,7 @@ const AuthProviders = ({ children }) => {
           })
           .then((res) => console.log("logout token response", res.data));
       }
+      setLoading(false);
     });
     return () => {
       unSubscribe();

@@ -1,10 +1,10 @@
 import useAuth from "./useAuth";
-import useAxiosPublic from "./useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "./useAxiosSecure";
 
 const useMyCart = () => {
   const { loading, user } = useAuth();
-  const axiosNoToken = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   const {
     isLoading,
@@ -14,9 +14,7 @@ const useMyCart = () => {
   } = useQuery({
     queryKey: ["myBookings", user?.email],
     queryFn: async () => {
-      const res = await axiosNoToken.get(`/my-bookings?email=${user?.email}`, {
-        withCredentials: true,
-      });
+      const res = await axiosSecure.get(`/my-bookings?email=${user?.email}`);
       return res?.data;
     },
     enabled: !loading && !!user?.email,
