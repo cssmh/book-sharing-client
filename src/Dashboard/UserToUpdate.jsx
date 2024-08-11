@@ -55,7 +55,7 @@ const UserToUpdate = () => {
       <Helmet>
         <title>BookHaven | User To Update</title>
       </Helmet>
-      <h1 className="text-center font-semibold text-xl mb-6 mt-2 md:mt-0">
+      <h1 className="text-center font-semibold text-xl mb-3 mt-2 md:mt-0">
         All Users To Get Notified for New Books
       </h1>
       {isLoading ? (
@@ -79,7 +79,7 @@ const UserToUpdate = () => {
               </button>
             )}
           </div>
-          <div className="ml-4 space-y-1">
+          <div className="ml-4 space-y-1 mt-4">
             {emails?.map((email, idx) => (
               <div key={email._id}>
                 {idx + 1}.{" "}

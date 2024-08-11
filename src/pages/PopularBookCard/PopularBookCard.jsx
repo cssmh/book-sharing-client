@@ -17,17 +17,17 @@ const PopularBookCard = ({ getBook }) => {
         <img
           src={book_image}
           onContextMenu={(e) => e.preventDefault()}
-          className="rounded-xl w-[20%] md:w-[25%]"
+          className="rounded-xl w-[27%] md:w-[25%]"
         />
       </figure>
       <div className="absolute top-2 left-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs font-bold px-2 py-1 rounded">
         Popular
       </div>
       <div className="group-hover:scale-105 group-hover:transition-all group-hover:duration-300 card-body items-center text-center p-0 px-3 gap-[0px]">
-        <h2 className="text-blue-900 text-lg font-bold mt-2 px-2">
+        <h2 className="text-blue-900 text-xl font-bold mt-2 px-2">
           {book_name}
         </h2>
-        <p className="px-3">{description.slice(0, 85)}...</p>
+        <p className="md:px-3">{description.slice(0, 80)}...</p>
         <div className="flex items-center gap-3 mb-3 border border-red-400 rounded-full px-3 py-2 bg-red-100 shadow-md">
           <div className="avatar">
             <div className="w-12 rounded-full ring ring-primary">

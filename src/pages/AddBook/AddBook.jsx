@@ -110,7 +110,7 @@ const AddBook = () => {
           <div className="flex flex-col md:flex-row justify-center items-center gap-3 mt-3 px-1 md:px-0">
             <div className="w-2/3 md:w-[31%]">
               <img
-                className="md:w-[65%] mx-auto"
+                className="w-[65%] mx-auto"
                 src={addBook}
                 onContextMenu={(e) => e.preventDefault()}
                 alt="Add Book"

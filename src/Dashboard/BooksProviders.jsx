@@ -14,7 +14,7 @@ const BooksProviders = () => {
         All Books Providers ({(!providerLoading && bookProviders?.length) || 0})
       </h1>
       {providerLoading ? (
-        <div className="max-w-[1180px] mx-2 md:mx-auto grid md:grid-cols-3 py-3 border border-green-400 rounded-lg mb-3 px-10 md:px-0 md:text-center">
+        <div className="max-w-[1180px] mx-2 md:mx-auto grid md:grid-cols-3 py-3 border border-green-400 rounded-lg mb-3 px-4 md:px-0 md:text-center">
           {Array.from({ length: 3 }).map((_, idx) => (
             <div key={idx} className="animate-pulse mb-4">
               <p className="bg-gray-300 h-6 w-3/4 mx-auto rounded"></p>
@@ -25,7 +25,7 @@ const BooksProviders = () => {
           ))}
         </div>
       ) : (
-        <div className="max-w-[1180px] mx-2 md:mx-auto grid md:grid-cols-3 py-3 border border-green-400 rounded-lg mb-3 px-10 md:px-0 md:text-center">
+        <div className="max-w-[1180px] mx-2 md:mx-auto grid md:grid-cols-3 py-3 border border-green-400 rounded-lg mb-3 px-4 md:px-0 md:text-center">
           {bookProviders?.map((provider, idx) => (
             <p key={idx}>
               {provider.email}:{" "}

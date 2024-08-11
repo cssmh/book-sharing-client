@@ -68,7 +68,7 @@ const MyProfile = () => {
   };
 
   return (
-    <div className="bg-gray-100 flex items-center justify-center p-7">
+    <div className="bg-gray-100 flex items-center justify-center p-3 md:p-7">
       <Helmet>
         <title>BookHaven | My Profile</title>
       </Helmet>
@@ -114,15 +114,15 @@ const MyProfile = () => {
           <div className="mt-6 flex space-x-4 justify-center">
             <button
               onClick={() => setIsOpen(true)}
-              className="flex items-center bg-blue-500 text-white px-3 py-[6px] rounded-lg hover:bg-blue-600 transition duration-300"
+              className="flex items-center bg-blue-500 text-white px-1 md:px-3 py-[6px] rounded-lg hover:bg-blue-600 transition duration-300"
             >
-              <FaEdit className="mr-2" /> Update Profile
+              <FaEdit className="md:mr-2" /> Update Profile
             </button>
             <button
               onClick={() => setIsPassOpen(true)}
-              className="flex items-center bg-indigo-500 text-white px-3 py-[6px] rounded-lg hover:bg-indigo-600 transition duration-300"
+              className="flex items-center bg-indigo-500 text-white px-1 md:px-3 py-[6px] rounded-lg hover:bg-indigo-600 transition duration-300"
             >
-              <FaKey className="mr-2" /> Change Password
+              <FaKey className="md:mr-2" /> Change Password
             </button>
           </div>
         </div>

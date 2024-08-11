@@ -261,7 +261,11 @@ const Navbar = () => {
         )}
         <div className="flex flex-col items-center justify-center font-semibold text-center text-sm mx-[8px] uppercase">
           <p>{greeting}</p>
-          {user && <p>{user.displayName}</p>}
+          {user && (
+            <p className="max-w-[100px] truncate md:max-w-none md:whitespace-normal">
+              {user.displayName}
+            </p>
+          )}
         </div>
         {user?.email ? (
           <div ref={userRef} className="dropdown dropdown-end">

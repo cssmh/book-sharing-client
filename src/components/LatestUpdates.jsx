@@ -68,7 +68,7 @@ const LatestUpdates = () => {
       className="text-white rounded-lg max-w-[1300px] mx-auto mt-5"
       style={BannerImg}
     >
-      <div className="backdrop-blur-sm px-16 py-20 rounded-2xl">
+      <div className="backdrop-blur-sm px-5 md:px-16 py-12 md:py-20 rounded-xl">
         <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
           <h1 className="w-full md:w-[60%] text-2xl md:text-4xl font-semibold text-center md:text-left">
             Subscribe to our Bookhaven for the latest book updates
