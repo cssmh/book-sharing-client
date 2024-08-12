@@ -9,7 +9,7 @@ const MyBooks = () => {
   const url = `/my-books?email=${user?.email}`;
   const { isLoading, bookData, error, refetch } = useMyBooks(url);
 
-  if (!isLoading)
+  if (isLoading)
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-6 p-1 md:p-4 mt-2 md:mx-5">
         {[...Array(3)].map((_, index) => (

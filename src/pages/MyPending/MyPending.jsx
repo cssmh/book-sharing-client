@@ -43,7 +43,7 @@ const MyPending = () => {
 
   if (idLoading || myBooksLoading || isLoading) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-6 p-2 md:p-4 md:mx-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-6 p-2 md:p-4 md:mx-4">
         {[...Array(3)].map((_, index) => (
           <MyBookSke key={index} />
         ))}

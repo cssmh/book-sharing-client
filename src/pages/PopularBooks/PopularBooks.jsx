@@ -43,7 +43,7 @@ const PopularBooks = () => {
   }
 
   return (
-    <div className="max-w-[1220px] mx-1 md:mx-auto">
+    <div className="max-w-[1250px] mx-1 md:mx-auto">
       <h1
         data-aos="zoom-in"
         data-aos-delay="100"

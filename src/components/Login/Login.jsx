@@ -2,16 +2,18 @@ import toast from "react-hot-toast";
 import SocialLogin from "./SocialLogin";
 import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
-import { TbFidgetSpinner } from 'react-icons/tb';
+import { TbFidgetSpinner } from "react-icons/tb";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import ResetPassModal from "./ResetPassModal";
 import useAuth from "../../Hooks/useAuth";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const Login = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [view, setView] = useState(true);
   const [pass, setPass] = useState(false);
+  const axiosSecure = useAxiosSecure();
   const location = useLocation();
   const navigateTo = useNavigate();
   const { user, login, resetPassword, emailVerification, logOut, loading } =
@@ -36,14 +38,24 @@ const Login = () => {
 
     if (email == "Kona@mail.com" || email == "admin@admin.com") {
       login(email, password)
-        .then(() => {
+        .then(async (res) => {
+          const userData = {
+            name: res?.user?.displayName,
+            email: res?.user?.email.toLowerCase(),
+          };
+          await axiosSecure.put("/add-user", userData);
           toast.success("logged in successfully");
           navigateTo(location?.state || "/", { replace: true });
         })
         .catch(() => toast.error("Incorrect Password. Please try again"));
     } else {
       login(email, password)
-        .then((res) => {
+        .then(async (res) => {
+          const userData = {
+            name: res?.user?.displayName,
+            email: res?.user?.email.toLowerCase(),
+          };
+          await axiosSecure.put("/add-user", userData);
           if (!res?.user?.emailVerified) {
             emailVerification()
               .then(() => {
@@ -86,9 +98,7 @@ const Login = () => {
   };
 
   return (
-    <div
-      className="min-h-screen flex bg-base-200"
-    >
+    <div className="min-h-screen flex bg-base-200">
       <Helmet>
         <title>BookHaven | Login</title>
       </Helmet>

@@ -221,7 +221,9 @@ const AddBook = () => {
               ></textarea>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary rounded-2xl mx-2 md:mx-0 text-white">Add Book</button>
+              <button className="btn btn-primary rounded-2xl mx-2 md:mx-0 text-white">
+                Add Book
+              </button>
             </div>
           </form>
         </>

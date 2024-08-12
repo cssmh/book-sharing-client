@@ -2,15 +2,22 @@ import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const SocialLogin = () => {
   const navigateTo = useNavigate();
   const location = useLocation();
+  const axiosSecure = useAxiosSecure();
   const { googleLogin } = useAuth();
-  
+
   const handleSocialLogin = () => {
     googleLogin()
-      .then(() => {
+      .then(async (res) => {
+        const userData = {
+          name: res?.user?.displayName,
+          email: res?.user?.email.toLowerCase(),
+        };
+        await axiosSecure.put("/add-user", userData);
         toast.success("User logged in success");
         navigateTo(location?.state ? location.state : "/");
       })

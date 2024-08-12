@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
-import { TbFidgetSpinner } from 'react-icons/tb';
+import { TbFidgetSpinner } from "react-icons/tb";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const Register = () => {
   const [view, setView] = useState(true);
@@ -13,7 +14,7 @@ const Register = () => {
   const [passError, setPassError] = useState("");
   const [passSuccess, setPassSuccess] = useState("");
   const navigateTo = useNavigate();
-  const location = useLocation();
+  const axiosSecure = useAxiosSecure();
   const {
     user,
     createUser,
@@ -71,22 +72,31 @@ const Register = () => {
     const photo = image || defaultImage;
     const email = form.get("email");
 
-    if (passError) {
-      return;
-    }
+    if (passError) return;
 
     createUser(email, password)
-      .then(() => {
-        handleUpdateProfile(name, photo).then(() => {
-          emailVerification().then(() =>
-            toast.success(
-              "Register success! Check your inbox for a verification email!"
-            )
-          );
-        });
-        logOut().then().catch();
-        toast.error("Sorry! Email verification Required");
-        navigateTo("/login");
+      .then(async (res) => {
+        const userData = {
+          name: name,
+          email: email.toLowerCase(),
+        };
+        await axiosSecure.put("/add-user", userData);
+
+        // Ensure the user is authenticated before calling emailVerification
+        if (res.user) {
+          handleUpdateProfile(name, photo).then(() => {
+            emailVerification().then(() =>
+              toast.success(
+                "Register success! Check your inbox for a verification email!"
+              )
+            );
+          });
+          logOut().then().catch();
+          toast.error("Sorry! Email verification Required");
+          navigateTo("/login");
+        } else {
+          toast.error("User creation failed. Please try again.");
+        }
       })
       .catch((err) => {
         toast.error(err.message);
