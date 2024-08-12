@@ -96,7 +96,7 @@ const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
         </figure>
         <h2 className="text-lg font-semibold text-blue-900">{book_name}</h2>
       </div>
-      <div className="flex flex-col space-y-2">
+      <div className="flex flex-col space-y-2 px-2 md:px-0">
         <h3 className="text-sm font-medium text-gray-700">Collector Info</h3>
         <p className="text-sm text-gray-600">Phone: {user_phone}</p>
         <p className="text-sm text-gray-600">Email: {user_email}</p>

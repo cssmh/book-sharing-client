@@ -35,7 +35,7 @@ const MyBookings = () => {
             <span className="italic">All Bookings made by you</span> (
             {myBookings?.length || 0})
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 px-4 mt-3 mb-8 md:mx-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 px-2 md:px-4 mt-3 mb-8 md:mx-4">
             {myBookings?.map((booking) => (
               <MyBookingCard
                 key={booking._id}

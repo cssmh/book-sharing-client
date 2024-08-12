@@ -16,7 +16,7 @@ const MainLayout = () => {
 
   const loc = useLocation();
   const noHeaderFooter =
-    loc?.pathname?.startsWith("/dashboard") ||
+    loc?.pathname?.startsWith("/admin-dashboard") ||
     loc?.pathname?.startsWith("/login") ||
     loc?.pathname?.startsWith("/register");
 

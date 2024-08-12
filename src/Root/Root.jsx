@@ -109,7 +109,7 @@ const Root = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard",
+        path: "/admin-dashboard",
         element: (
           <PrivateRoute>
             <AdminRoute>
@@ -119,11 +119,11 @@ const Root = createBrowserRouter([
         ),
         children: [
           {
-            path: "/dashboard",
+            path: "/admin-dashboard",
             element: <DashHome />,
           },
           {
-            path: "/dashboard/all-books",
+            path: "/admin-dashboard/all-books",
             element: (
               <AdminRoute>
                 <AllBooksCols />
@@ -131,7 +131,7 @@ const Root = createBrowserRouter([
             ),
           },
           {
-            path: "/dashboard/all-bookings",
+            path: "/admin-dashboard/all-bookings",
             element: (
               <AdminRoute>
                 <AllBookings />
@@ -139,7 +139,7 @@ const Root = createBrowserRouter([
             ),
           },
           {
-            path: "/dashboard/books-providers",
+            path: "/admin-dashboard/books-providers",
             element: (
               <AdminRoute>
                 <BooksProviders />
@@ -147,7 +147,7 @@ const Root = createBrowserRouter([
             ),
           },
           {
-            path: "/dashboard/users-to-update",
+            path: "/admin-dashboard/users-to-update",
             element: (
               <AdminRoute>
                 <UserToUpdate />

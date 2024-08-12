@@ -129,7 +129,7 @@ const AddBook = () => {
           </div>
           <form onSubmit={handleAddBook} className="max-w-6xl mx-auto">
             <div className="flex flex-col md:flex-row gap-3">
-              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+              <div className="form-control md:w-1/2 mx-2 lg:mx-0">
                 <label className="label">
                   <span className="label-text">Book Name</span>
                 </label>
@@ -141,7 +141,7 @@ const AddBook = () => {
                   style={{ outline: "none" }}
                 />
               </div>
-              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+              <div className="form-control md:w-1/2 mx-2 lg:mx-0">
                 <label className="label">
                   <span className="label-text">Book Image Url</span>
                 </label>
@@ -154,7 +154,7 @@ const AddBook = () => {
               </div>
             </div>
             <div className="flex flex-col md:flex-row gap-3">
-              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+              <div className="form-control md:w-1/2 mx-2 lg:mx-0">
                 <label className="label">
                   <span className="label-text">Your Name</span>
                 </label>
@@ -167,7 +167,7 @@ const AddBook = () => {
                   style={{ outline: "none" }}
                 />
               </div>
-              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+              <div className="form-control md:w-1/2 mx-2 lg:mx-0">
                 <label className="label">
                   <span className="label-text">Your Email</span>
                 </label>
@@ -182,7 +182,7 @@ const AddBook = () => {
               </div>
             </div>
             <div className="flex flex-col md:flex-row gap-3">
-              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+              <div className="form-control md:w-1/2 mx-2 lg:mx-0">
                 <label className="label">
                   <span className="label-text">Location</span>
                 </label>
@@ -194,7 +194,7 @@ const AddBook = () => {
                   style={{ outline: "none" }}
                 />
               </div>
-              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+              <div className="form-control md:w-1/2 mx-2 lg:mx-0">
                 <label className="label">
                   <span className="label-text">Phone Number</span>
                 </label>
@@ -208,7 +208,7 @@ const AddBook = () => {
                 />
               </div>
             </div>
-            <div className="form-control mx-3 lg:mx-0">
+            <div className="form-control mx-2 lg:mx-0">
               <label className="label">
                 <span className="label-text">Description</span>
               </label>
@@ -221,7 +221,7 @@ const AddBook = () => {
               ></textarea>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary text-white">Add Book</button>
+              <button className="btn btn-primary rounded-2xl mx-2 md:mx-0 text-white">Add Book</button>
             </div>
           </form>
         </>

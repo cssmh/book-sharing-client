@@ -9,9 +9,9 @@ const MyBooks = () => {
   const url = `/my-books?email=${user?.email}`;
   const { isLoading, bookData, error, refetch } = useMyBooks(url);
 
-  if (isLoading)
+  if (!isLoading)
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4 mt-2 md:mx-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-6 p-1 md:p-4 mt-2 md:mx-5">
         {[...Array(3)].map((_, index) => (
           <MyBookSke key={index} />
         ))}
@@ -49,7 +49,7 @@ const MyBooks = () => {
             <span className="italic">All Books Added By You</span> (
             {bookData?.length})
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-4 py-2 md:mx-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-1 md:px-4 py-2 md:mx-5">
             {bookData.map((book) => (
               <MyBooksCard key={book._id} getBook={book} refetch={refetch} />
             ))}

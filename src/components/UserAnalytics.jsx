@@ -51,20 +51,27 @@ const UserAnalytics = () => {
     ...monthlyStats.map((stat) => [stat?.month, stat?.count]),
   ];
 
+  const isDataEmpty =
+    data.every((item) => item[1] === 0) || myBooks === 0 || myBookings === 0;
+
   return (
-    <div className="max-w-6xl mx-auto px-5 mt-6">
-      <h1 className="text-xl md:text-2xl font-bold mt-3 md:mt-0 mb-5">
+    <div className="max-w-6xl mx-auto px-1 md:px-5 mt-6">
+      <h1 className="text-xl md:text-2xl font-bold mt-3 mx-2 md:mx-0 md:mt-0 mb-1 md:mb-5">
         Hello and Welcome, {user?.displayName}
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:my-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-3 md:my-5">
         <div className="bg-white p-4 shadow rounded-lg">
           <h2 className="text-lg font-semibold mb-3">Your Analytics</h2>
-          <Chart
-            chartType="PieChart"
-            data={data}
-            width={"100%"}
-            height={"300px"}
-          />
+          {!isDataEmpty ? (
+            <Chart
+              chartType="PieChart"
+              data={data}
+              width={"100%"}
+              height={"300px"}
+            />
+          ) : (
+            <p>No data available to display in the chart!</p>
+          )}
         </div>
         <div className="bg-white p-4 shadow rounded-lg">
           <h2 className="text-lg font-semibold mb-3">Books by Month</h2>

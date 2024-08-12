@@ -1,12 +1,9 @@
-import useAuth from "../Hooks/useAuth";
 import { Chart } from "react-google-charts";
 import useBookProviders from "../Hooks/useBookProviders";
 import useQueryPublic from "../Hooks/useQueryPublic";
 import ChartSkeleton from "../Components/AllSkeleton/ChartSkeleton";
 
 const DashHome = () => {
-  const { user } = useAuth();
-  const admin = user?.email === "admin@admin.com";
   const { providerLoading, bookProviders } = useBookProviders();
   const { isLoading, data: allMonthlyStats } = useQueryPublic(
     ["allMonthlyStats"],
@@ -30,9 +27,9 @@ const DashHome = () => {
   if (providerLoading || isLoading) return <ChartSkeleton />;
 
   return (
-    <div className="p-5">
-      <h1 className="text-2xl font-bold mb-5">Hello and Welcome, Admin</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+    <div className="p-1 md:p-4">
+      <h1 className="text-2xl font-bold mb-5 mx-2 md:mx-0">Hello and Welcome, Admin</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-3">
         <div className="bg-white p-4 shadow rounded-lg">
           <h2 className="text-lg font-semibold mb-3">Books by Users</h2>
           <Chart

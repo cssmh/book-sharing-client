@@ -17,7 +17,7 @@ const PopularBookCard = ({ getBook }) => {
         <img
           src={book_image}
           onContextMenu={(e) => e.preventDefault()}
-          className="rounded-xl w-[27%] md:w-[25%]"
+          className="rounded-lg w-[27%] md:w-[25%]"
         />
       </figure>
       <div className="absolute top-2 left-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs font-bold px-2 py-1 rounded">

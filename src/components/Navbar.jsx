@@ -141,9 +141,9 @@ const Navbar = () => {
             )}
             {admin && (
               <Link
-                to="/dashboard"
+                to="/admin-dashboard"
                 className={`font-semibold flex items-center ${
-                  location.pathname === "/dashboard" ? "text-green-500" : ""
+                  location.pathname === "/admin-dashboard" ? "text-green-500" : ""
                 }`}
               >
                 Dashboard
@@ -208,9 +208,9 @@ const Navbar = () => {
           )}
           {admin && (
             <Link
-              to="/dashboard"
+              to="/admin-dashboard"
               className={`text-base font-semibold flex items-center p-2 ${getLinkClasses(
-                "/dashboard"
+                "/admin-dashboard"
               )}`}
             >
               Dashboard

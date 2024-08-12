@@ -65,7 +65,7 @@ const Sidebar = () => {
       {/* Sidebar */}
       <div
         ref={sidebarRef}
-        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-[215px] space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
+        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-[215px] md:w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
           isActive ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0 transition duration-200 ease-in-out`}
       >
@@ -78,40 +78,40 @@ const Sidebar = () => {
           {/* Nav Items */}
           <div className="flex flex-col justify-between flex-1 mt-6">
             <nav className="space-y-2">
-              <Link to="/dashboard">
-                <button className={linkClasses("/dashboard")}>
+              <Link to="/admin-dashboard">
+                <button className={linkClasses("/admin-dashboard")}>
                   <FaHome className="w-5 h-5" />
-                  <span className="mx-3 font-medium">Dashboard</span>
+                  <span className="mx-3 md:mx-4 font-medium">Dashboard</span>
                 </button>
               </Link>
               {admin && (
                 <>
-                  <Link to="/dashboard/all-books">
-                    <button className={linkClasses("/dashboard/all-books")}>
+                  <Link to="/admin-dashboard/all-books">
+                    <button className={linkClasses("/admin-dashboard/all-books")}>
                       <FaBook className="w-5 h-5" />
-                      <span className="mx-3 font-medium">All Books</span>
+                      <span className="mx-3 md:mx-4 font-medium">All Books</span>
                     </button>
                   </Link>
-                  <Link to="/dashboard/all-bookings">
-                    <button className={linkClasses("/dashboard/all-bookings")}>
+                  <Link to="/admin-dashboard/all-bookings">
+                    <button className={linkClasses("/admin-dashboard/all-bookings")}>
                       <FaClipboardList className="w-5 h-5" />
-                      <span className="mx-3 font-medium">All Bookings</span>
+                      <span className="mx-3 md:mx-4 font-medium">All Bookings</span>
                     </button>
                   </Link>
-                  <Link to="/dashboard/books-providers">
+                  <Link to="/admin-dashboard/books-providers">
                     <button
-                      className={linkClasses("/dashboard/books-providers")}
+                      className={linkClasses("/admin-dashboard/books-providers")}
                     >
                       <FaUsers className="w-5 h-5" />
-                      <span className="mx-3 font-medium">Books Providers</span>
+                      <span className="mx-3 md:mx-4 font-medium">Books Providers</span>
                     </button>
                   </Link>
-                  <Link to="/dashboard/users-to-update">
+                  <Link to="/admin-dashboard/users-to-update">
                     <button
-                      className={linkClasses("/dashboard/users-to-update")}
+                      className={linkClasses("/admin-dashboard/users-to-update")}
                     >
                       <FcSettings className="w-5 h-5" />
-                      <span className="mx-3 font-medium">Users to Update</span>
+                      <span className="mx-3 md:mx-4 font-medium">Users to Update</span>
                     </button>
                   </Link>
                 </>
@@ -126,7 +126,7 @@ const Sidebar = () => {
             className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform"
           >
             <GrLogout className="w-5 h-5" />
-            <span className="mx-3 font-medium">Logout</span>
+            <span className="mx-3 md:mx-4 font-medium">Logout</span>
           </button>
         </div>
       </div>
