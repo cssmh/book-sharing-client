@@ -25,10 +25,12 @@ const Login = () => {
       user?.email === "kona@mail.com" ||
       user?.email === "admin@admin.com"
     ) {
-      toast.success("You are already logged in");
-      navigateTo("/");
+      if (location?.pathname === "/login") {
+        toast.success("You are already logged in");
+        navigateTo("/");
+      }
     }
-  }, [user?.emailVerified, user?.email, navigateTo]);
+  }, [user?.emailVerified, user?.email, location?.pathname, navigateTo]);
 
   const handleLogin = (e) => {
     e.preventDefault();

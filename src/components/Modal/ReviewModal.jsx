@@ -14,7 +14,7 @@ const ReviewModal = ({ closeModal, book_name, isOpen, handleAddReview }) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black/25" />
+          <div className="fixed inset-0 bg-black bg-opacity-25" />
         </Transition.Child>
         <div className="fixed inset-0 overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4 text-center">
@@ -27,15 +27,15 @@ const ReviewModal = ({ closeModal, book_name, isOpen, handleAddReview }) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-xl bg-white p-6 text-left align-middle shadow-lg transition-all">
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium text-center leading-6 text-gray-900"
+                  className="text-lg font-semibold text-gray-900 mb-4 text-center"
                 >
                   {book_name} Book Review
                 </Dialog.Title>
                 <form onSubmit={handleAddReview} className="mt-4">
-                  <div>
+                  <div className="mb-4">
                     <label htmlFor="review" className="sr-only">
                       Review
                     </label>
@@ -45,13 +45,13 @@ const ReviewModal = ({ closeModal, book_name, isOpen, handleAddReview }) => {
                       rows="8"
                       required
                       placeholder="Share your experience..."
-                      className="text-sm w-full rounded-lg border border-gray-300 mt-3 p-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+                      className="text-sm w-full rounded-lg border border-gray-300 p-2 focus:border-transparent focus:ring-2 focus:ring-green-500"
                       aria-label="Share your experience"
                     ></textarea>
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-primary py-2 rounded-2xl text-white mt-4 hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary-dark focus:ring-opacity-75"
+                    className="w-full bg-green-600 py-2 rounded-lg text-white mt-4 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
                   >
                     Submit
                   </button>

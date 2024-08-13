@@ -78,7 +78,7 @@ const UserToUpdate = () => {
             {emails?.map((email, idx) => (
               <li
                 key={email._id}
-                className="flex items-center justify-between p-4 border border-gray-300 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+                className="flex items-center justify-between p-4 border border-gray-300 rounded-lg shadow-md transition-shadow duration-300"
               >
                 <span className="text-gray-800">{`${idx + 1}. ${
                   email.email

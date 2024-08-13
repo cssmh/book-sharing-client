@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 
@@ -13,6 +13,7 @@ const Register = () => {
   const [pass, setPass] = useState(false);
   const [passError, setPassError] = useState("");
   const [passSuccess, setPassSuccess] = useState("");
+  const location = useLocation();
   const navigateTo = useNavigate();
   const axiosSecure = useAxiosSecure();
   const {
@@ -30,10 +31,12 @@ const Register = () => {
       user?.email === "kona@mail.com" ||
       user?.email === "admin@admin.com"
     ) {
-      toast.success("You are already logged in");
-      navigateTo("/");
+      if (location?.pathname === "/register") {
+        toast.success("You are already logged in");
+        navigateTo("/");
+      }
     }
-  }, [user?.emailVerified, user?.email, navigateTo]);
+  }, [user?.emailVerified, user?.email, location?.pathname, navigateTo]);
 
   const validatePassword = (password) => {
     if (password === "") {

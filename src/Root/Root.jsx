@@ -5,7 +5,7 @@ import Home from "../components/Home";
 import Login from "../components/Login/Login";
 import Register from "../components/Register";
 import PrivateRoute from "../Shared/PrivateRoute/PrivateRoute";
-import MyProfile from "../components/MyProfile/MyProfile";
+import MyProfile from "../components/MyProfile";
 import AllBooks from "../Pages/AllBooks/AllBooks";
 import BookDetails from "../Pages/BookDetails/BookDetails";
 import AddBook from "../pages/AddBook/AddBook";
@@ -14,7 +14,7 @@ import UpdateBook from "../pages/UpdateBook/UpdateBook";
 import MySchedules from "../pages/MySchedules/MySchedules";
 import SameProvider from "../pages/SameProvider/SameProvider";
 import DashLayout from "../Dashboard/DashLayout";
-import AllBooksCols from "../Dashboard/AllBooksCols";
+import AdminBooks from "../Dashboard/AdminBooks";
 import AllBookings from "../Dashboard/AllBookings";
 import BooksProviders from "../Dashboard/BooksProviders";
 import UserToUpdate from "../Dashboard/UserToUpdate";
@@ -125,7 +125,7 @@ const Root = createBrowserRouter([
             path: "/admin-dashboard/all-books",
             element: (
               <AdminRoute>
-                <AllBooksCols />
+                <AdminBooks />
               </AdminRoute>
             ),
           },

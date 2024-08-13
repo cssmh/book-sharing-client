@@ -14,7 +14,7 @@ const ResetPassModal = ({ closeModal, isOpen, handleForgotPassword }) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black/25" />
+          <div className="fixed inset-0 bg-black bg-opacity-25" />
         </Transition.Child>
         <div className="fixed inset-0 overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4 text-center">
@@ -27,16 +27,16 @@ const ResetPassModal = ({ closeModal, isOpen, handleForgotPassword }) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-xl bg-white p-6 text-left align-middle shadow-lg transition-all">
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium text-center leading-6 text-gray-900"
+                  className="text-lg font-semibold text-gray-900 mb-4 text-center"
                 >
                   Password Reset
                 </Dialog.Title>
                 <form onSubmit={handleForgotPassword}>
-                  <div>
-                    <label htmlFor="email" className="block mb-2 text-sm">
+                  <div className="mb-2">
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                       Email address
                     </label>
                     <input
@@ -45,14 +45,13 @@ const ResetPassModal = ({ closeModal, isOpen, handleForgotPassword }) => {
                       id="email"
                       required
                       placeholder="Enter Your Email Here"
-                      className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900 focus:border-transparent"
+                      className="w-full px-3 py-2 border rounded-lg border-gray-300 bg-gray-100 text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                       data-temp-mail-org="0"
-                      style={{ outline: "none" }}
                     />
                   </div>
                   <button
                     type="submit"
-                    className="mt-4 group w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-400"
+                    className="w-full py-2 px-4 bg-green-400 text-white rounded-lg mt-4 focus:outline-none focus:ring-2 focus:ring-green-500"
                   >
                     Submit
                   </button>

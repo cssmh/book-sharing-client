@@ -8,10 +8,12 @@ import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useMyBooks from "../../Hooks/useMyBooks";
 import useQueryPublic from "../../Hooks/useQueryPublic";
+import useAdmin from "../../Hooks/useAdmin";
 
 const BookDetails = () => {
   const [desc, setDesc] = useState(true);
   const { user } = useAuth();
+  const { isAdmin } = useAdmin();
   const navigateTo = useNavigate();
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
@@ -34,13 +36,15 @@ const BookDetails = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        axiosSecure.delete(`/book/${idx}/${user?.email}`).then((res) => {
-          if (res.data?.deletedCount > 0) {
-            swal(`${book} Deleted!`, { icon: "success", timer: 2000 });
-            refetch();
-            navigateTo(-1);
-          }
-        });
+        axiosSecure
+          .delete(`/book/${idx}/${loadBookData?.provider_email}`)
+          .then((res) => {
+            if (res.data?.deletedCount > 0) {
+              swal(`${book} Deleted!`, { icon: "success", timer: 2000 });
+              refetch();
+              navigateTo(-1);
+            }
+          });
       }
     });
   };
@@ -134,15 +138,14 @@ const BookDetails = () => {
             )}
           </p>
           <p>
-            {book_status === "available" &&
-              user?.email === "admin@admin.com" && (
-                <button
-                  onClick={() => handleDeleteByAdmin(_id, book_name)}
-                  className="text-white bg-pink-500 font-medium rounded-lg text-sm px-4 py-2 text-center mx-2 md:mx-0"
-                >
-                  Delete This Book
-                </button>
-              )}
+            {book_status === "available" && isAdmin && (
+              <button
+                onClick={() => handleDeleteByAdmin(_id, book_name)}
+                className="text-white bg-pink-500 font-medium rounded-lg text-sm px-4 py-2 text-center mx-2 md:mx-0"
+              >
+                Delete This Book
+              </button>
+            )}
           </p>
         </div>
       </div>

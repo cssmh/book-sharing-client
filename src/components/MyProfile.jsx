@@ -5,7 +5,7 @@ import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useMyBooks from "../Hooks/useMyBooks";
 import { FaEdit, FaKey } from "react-icons/fa";
-import BGBlue from "../../assets/Notified.jpg";
+import BGBlue from "../assets/Notified.jpg";
 import EditProfileModal from "./Modal/EditProfileModal";
 import ChangePassModal from "./Modal/ChangePassModal";
 

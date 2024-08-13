@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import AllBooksRow from "./AllBooksRow";
+import AdminBooksRow from "./AdminBooksRow";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useBookProviders from "../Hooks/useBookProviders";
 import useQueryPublic from "../Hooks/useQueryPublic";
 import { Helmet } from "react-helmet-async";
-import BooksColsSke from "../Components/AllSkeleton/BooksColsSke";
+import AdminBooksSke from "../Components/AllSkeleton/AdminBooksSke";
 
-const AllBooksCols = () => {
+const AdminBooks = () => {
   const axiosSecure = useAxiosSecure();
   const { totalBooks, bookProviders } = useBookProviders();
 
@@ -34,7 +34,7 @@ const AllBooksCols = () => {
         Providers, and Total {allBookings?.length || 0} Bookings
       </h1>
       {isLoading || bookingLoading ? (
-        <BooksColsSke />
+        <AdminBooksSke />
       ) : (
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white divide-y divide-gray-200">
@@ -50,7 +50,7 @@ const AllBooksCols = () => {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {allBooks?.result?.map((book) => (
-                <AllBooksRow key={book._id} getBooks={book} refetch={refetch} />
+                <AdminBooksRow key={book._id} getBooks={book} refetch={refetch} />
               ))}
             </tbody>
           </table>
@@ -60,4 +60,4 @@ const AllBooksCols = () => {
   );
 };
 
-export default AllBooksCols;
+export default AdminBooks;

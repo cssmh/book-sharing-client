@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
-import swal from "sweetalert";
-import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import swal from "sweetalert";
 
-const AllBooksRow = ({ getBooks, refetch }) => {
-  const { user } = useAuth();
+const AdminBooksRow = ({ getBooks, refetch }) => {
   const axiosSecure = useAxiosSecure();
   const {
     _id,
@@ -13,6 +11,7 @@ const AllBooksRow = ({ getBooks, refetch }) => {
     provider_name,
     provider_location,
     book_status,
+    provider_email,
   } = getBooks;
 
   const handleDeleteByAdmin = (idx, book) => {
@@ -25,7 +24,7 @@ const AllBooksRow = ({ getBooks, refetch }) => {
     }).then((willDelete) => {
       if (willDelete) {
         // main code
-        axiosSecure.delete(`/book/${idx}/${user?.email}`).then((res) => {
+        axiosSecure.delete(`/book/${idx}/${provider_email}`).then((res) => {
           if (res.data?.deletedCount > 0) {
             swal(`${book} Deleted!`, {
               icon: "success",
@@ -95,4 +94,4 @@ const AllBooksRow = ({ getBooks, refetch }) => {
   );
 };
 
-export default AllBooksRow;
+export default AdminBooksRow;

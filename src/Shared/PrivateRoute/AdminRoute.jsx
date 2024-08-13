@@ -1,11 +1,10 @@
-import useAuth from "../../Hooks/useAuth";
 import { Navigate } from "react-router-dom";
 import { ScaleLoader } from "react-spinners";
+import useAdmin from "../../Hooks/useAdmin";
 const AdminRoute = ({ children }) => {
-  const { user, loading } = useAuth();
-  const admin = user?.email === "admin@admin.com";
+  const { isAdmin, isLoading } = useAdmin();
 
-  if (loading)
+  if (isLoading)
     return (
       <div className="relative h-screen flex items-center justify-center">
         <div className="absolute -top-7 inset-0 flex items-center justify-center">
@@ -13,7 +12,7 @@ const AdminRoute = ({ children }) => {
         </div>
       </div>
     );
-  if (admin) return children;
+  if (isAdmin) return children;
 
   return <Navigate to="/"></Navigate>;
 };

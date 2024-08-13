@@ -6,13 +6,15 @@ import defaultAvatar from "../assets/default.jpg";
 import useAuth from "../Hooks/useAuth";
 import { FaArrowRightToBracket } from "react-icons/fa6";
 import useMyCart from "../Hooks/useMyCart";
+import useAdmin from "../Hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  const { isAdmin } = useAdmin();
+  console.log(isAdmin);
   const { totalCart, myBookings } = useMyCart();
   const [myProgress, setMyProgress] = useState(null);
   const [userDropdownVisible, setUserDropdownVisible] = useState(false);
-  const admin = user?.email === "admin@admin.com";
   const userRef = useRef(null);
 
   const location = useLocation();
@@ -139,7 +141,7 @@ const Navbar = () => {
                 </Link>
               </>
             )}
-            {admin && (
+            {isAdmin && (
               <Link
                 to="/admin-dashboard"
                 className={`font-semibold flex items-center ${
@@ -206,7 +208,7 @@ const Navbar = () => {
               </Link>
             </>
           )}
-          {admin && (
+          {isAdmin && (
             <Link
               to="/admin-dashboard"
               className={`text-base font-semibold flex items-center px-[10px] py-1 rounded-full ${getLinkClasses(
