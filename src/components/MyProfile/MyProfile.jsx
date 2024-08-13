@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import EditModal from "./EditModal";
+import EditProfileModal from "./EditProfileModal";
 import useMyBooks from "../../Hooks/useMyBooks";
 import ChangePassModal from "./ChangePassModal";
 import { FaEdit, FaKey } from "react-icons/fa";
@@ -127,7 +127,7 @@ const MyProfile = () => {
           </div>
         </div>
       </div>
-      <EditModal
+      <EditProfileModal
         closeModal={() => setIsOpen(false)}
         isOpen={isOpen}
         photoURL={newPhoto}

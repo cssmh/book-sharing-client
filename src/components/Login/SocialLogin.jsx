@@ -16,6 +16,7 @@ const SocialLogin = () => {
         const userData = {
           name: res?.user?.displayName,
           email: res?.user?.email.toLowerCase(),
+          role: "User",
         };
         await axiosSecure.put("/add-user", userData);
         toast.success("User logged in success");

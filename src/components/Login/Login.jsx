@@ -42,6 +42,7 @@ const Login = () => {
           const userData = {
             name: res?.user?.displayName,
             email: res?.user?.email.toLowerCase(),
+            role: "User",
           };
           const response = await axiosSecure.put("/add-user", userData);
           console.log(response.data);
@@ -55,6 +56,7 @@ const Login = () => {
           const userData = {
             name: res?.user?.displayName,
             email: res?.user?.email.toLowerCase(),
+            role: "User",
           };
           await axiosSecure.put("/add-user", userData);
           if (!res?.user?.emailVerified) {

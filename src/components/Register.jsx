@@ -79,6 +79,7 @@ const Register = () => {
         const userData = {
           name: name,
           email: email.toLowerCase(),
+          role: "User",
         };
         await axiosSecure.put("/add-user", userData);
         // Ensure the user is authenticated before calling emailVerification

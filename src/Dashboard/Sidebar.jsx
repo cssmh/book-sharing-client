@@ -2,10 +2,12 @@ import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { GrLogout } from "react-icons/gr";
 import { FcSettings } from "react-icons/fc";
+import { FaUsersGear } from "react-icons/fa6";
+import { MdLibraryBooks } from "react-icons/md";
+import { AiOutlineBars } from "react-icons/ai";
+import { FaHome, FaBook, FaClipboardList } from "react-icons/fa";
 import logo from "../assets/Favicon.png";
 import useAuth from "../Hooks/useAuth";
-import { AiOutlineBars } from "react-icons/ai";
-import { FaHome, FaBook, FaClipboardList, FaUsers } from "react-icons/fa";
 
 const Sidebar = () => {
   const [isActive, setActive] = useState(false);
@@ -16,13 +18,21 @@ const Sidebar = () => {
   const currentPath = location.pathname;
 
   const handleLogout = () => {
-    logOut().then().catch();
+    logOut().catch(() => {});
   };
 
-  const linkClasses = (path) =>
-    `flex items-center w-full px-4 py-2 text-gray-600 transition-colors duration-300 transform ${
-      currentPath === path && "bg-gray-300"
-    }`;
+  const SidebarLink = ({ to, icon, label, currentPath }) => (
+    <Link to={to}>
+      <button
+        className={`flex items-center w-full px-4 py-2 text-gray-600 transition-colors duration-300 transform ${
+          currentPath === to ? "bg-gray-300" : ""
+        }`}
+      >
+        {icon}
+        <span className="mx-3 md:mx-4 font-medium">{label}</span>
+      </button>
+    </Link>
+  );
 
   // Close sidebar when clicking outside
   useEffect(() => {
@@ -46,13 +56,9 @@ const Sidebar = () => {
   return (
     <>
       <div className="bg-base-200 text-gray-800 flex justify-between md:hidden">
-        <div>
-          <div className="block cursor-pointer px-5 py-2 font-bold">
-            <Link to="/">
-              <img src={logo} className="w-12" alt="Logo" />
-            </Link>
-          </div>
-        </div>
+        <Link to="/" className="block cursor-pointer px-5 py-2 font-bold">
+          <img src={logo} className="w-12" alt="Logo" />
+        </Link>
         <button
           ref={buttonRef}
           onClick={() => setActive(!isActive)}
@@ -61,6 +67,7 @@ const Sidebar = () => {
           <AiOutlineBars className="h-6 w-7" />
         </button>
       </div>
+
       {/* Sidebar */}
       <div
         ref={sidebarRef}
@@ -74,60 +81,48 @@ const Sidebar = () => {
               <img src={logo} className="h-14" alt="Logo" />
             </div>
           </Link>
+
           {/* Nav Items */}
-          <div className="flex flex-col justify-between flex-1 mt-6">
-            <nav className="space-y-2">
-              <Link to="/admin-dashboard">
-                <button className={linkClasses("/admin-dashboard")}>
-                  <FaHome className="w-5 h-5" />
-                  <span className="mx-3 md:mx-4 font-medium">Dashboard</span>
-                </button>
-              </Link>
-              <Link to="/admin-dashboard/all-books">
-                <button className={linkClasses("/admin-dashboard/all-books")}>
-                  <FaBook className="w-5 h-5" />
-                  <span className="mx-3 md:mx-4 font-medium">All Books</span>
-                </button>
-              </Link>
-              <Link to="/admin-dashboard/all-bookings">
-                <button
-                  className={linkClasses("/admin-dashboard/all-bookings")}
-                >
-                  <FaClipboardList className="w-5 h-5" />
-                  <span className="mx-3 md:mx-4 font-medium">All Bookings</span>
-                </button>
-              </Link>
-              <Link to="/admin-dashboard/all-users">
-                <button
-                  className={linkClasses("/admin-dashboard/all-users")}
-                >
-                  <FaClipboardList className="w-5 h-5" />
-                  <span className="mx-3 md:mx-4 font-medium">All Users</span>
-                </button>
-              </Link>
-              <Link to="/admin-dashboard/books-providers">
-                <button
-                  className={linkClasses("/admin-dashboard/books-providers")}
-                >
-                  <FaUsers className="w-5 h-5" />
-                  <span className="mx-3 md:mx-4 font-medium">
-                    Books Providers
-                  </span>
-                </button>
-              </Link>
-              <Link to="/admin-dashboard/users-to-update">
-                <button
-                  className={linkClasses("/admin-dashboard/users-to-update")}
-                >
-                  <FcSettings className="w-5 h-5" />
-                  <span className="mx-3 md:mx-4 font-medium">
-                    Users to Update
-                  </span>
-                </button>
-              </Link>
-            </nav>
-          </div>
+          <nav className="space-y-2 mt-6">
+            <SidebarLink
+              to="/admin-dashboard"
+              icon={<FaHome />}
+              label="Dashboard"
+              currentPath={currentPath}
+            />
+            <SidebarLink
+              to="/admin-dashboard/all-books"
+              icon={<FaBook />}
+              label="All Books"
+              currentPath={currentPath}
+            />
+            <SidebarLink
+              to="/admin-dashboard/all-bookings"
+              icon={<FaClipboardList />}
+              label="All Bookings"
+              currentPath={currentPath}
+            />
+            <SidebarLink
+              to="/admin-dashboard/all-users"
+              icon={<FaUsersGear />}
+              label="All Users"
+              currentPath={currentPath}
+            />
+            <SidebarLink
+              to="/admin-dashboard/books-providers"
+              icon={<MdLibraryBooks />}
+              label="Books Providers"
+              currentPath={currentPath}
+            />
+            <SidebarLink
+              to="/admin-dashboard/users-to-update"
+              icon={<FcSettings />}
+              label="Users to Update"
+              currentPath={currentPath}
+            />
+          </nav>
         </div>
+
         <div>
           <hr />
           <button

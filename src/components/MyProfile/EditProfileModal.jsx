@@ -6,7 +6,7 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 
-const EditModal = ({ closeModal, isOpen, photoURL, displayName, handleUpdate }) => {
+const EditProfileModal = ({ closeModal, isOpen, photoURL, displayName, handleUpdate }) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -83,4 +83,4 @@ const EditModal = ({ closeModal, isOpen, photoURL, displayName, handleUpdate }) 
   );
 };
 
-export default EditModal;
+export default EditProfileModal;
