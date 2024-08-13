@@ -36,17 +36,17 @@ const UserDataRow = ({ user, refetch }) => {
           className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
             user.role === "guest"
               ? "bg-green-100 text-green-500"
-              : "bg-red-100 text-red-600"
+              : "bg-orange-100 text-red-600"
           }`}
         >
           {user?.role.toUpperCase() || "Unavailable"}
         </span>
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium ">
         <button
           onClick={() => setIsOpen(true)}
-          className="inline-flex items-center px-3 py-1.5 text-base font-medium rounded-md text-white bg-green-600 transform active:translate-y-0.5 transition-transform duration-150 ease-in-out"
->
+          className="inline-flex items-center px-2.5 py-1.5 text-base font-medium rounded-lg text-white bg-green-600 transform active:translate-y-0.5 transition-transform duration-150 ease-in-out"
+        >
           Update Role
         </button>
         <UpdateUserModal

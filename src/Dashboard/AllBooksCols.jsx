@@ -29,40 +29,28 @@ const AllBooksCols = () => {
       <Helmet>
         <title>BookHaven | All Books</title>
       </Helmet>
-      <p className="text-center md:text-[22px] my-3 mx-5 md:mx-0">
+      <h1 className="text-lg text-center font-bold mt-2 mb-3">
         Total {totalBooks || 0} Books, Total {bookProviders?.length || 0} Book
-        Providers and Total {allBookings?.length || 0} Bookings
-      </p>
+        Providers, and Total {allBookings?.length || 0} Bookings
+      </h1>
       {isLoading || bookingLoading ? (
         <BooksColsSke />
       ) : (
         <div className="overflow-x-auto">
-          <table className="table max-w-7xl mx-auto">
-            <thead>
-              <tr className="border-b-2 border-gray-300">
-                <th className="bg-yellow-400 text-white rounded-tl-md py-2 px-4">
-                  Book Image
-                </th>
-                <th className="bg-yellow-400 text-white py-2 px-4">
-                  Book Name
-                </th>
-                <th className="bg-yellow-400 text-white py-2 px-4">
-                  Provider Name
-                </th>
-                <th className="bg-yellow-400 text-white py-2 px-4">Location</th>
-                <th className="bg-yellow-400 text-white py-2 px-4">Status</th>
-                <th className="bg-yellow-400 text-white rounded-tr-md py-2 px-4">
-                  Details
-                </th>
+          <table className="min-w-full bg-white divide-y divide-gray-200">
+            <thead className="bg-gray-800 text-white">
+              <tr>
+                <th className="py-3 px-4 text-left text-sm">Book Image</th>
+                <th className="py-3 px-4 text-left text-sm">Book Name</th>
+                <th className="py-3 px-4 text-left text-sm">Provider Name</th>
+                <th className="py-3 px-4 text-left text-sm">Location</th>
+                <th className="py-3 px-4 text-left text-sm">Status</th>
+                <th className="py-3 px-4 text-left text-sm">Details</th>
               </tr>
             </thead>
-            <tbody>
-              {allBooks?.result?.map((books) => (
-                <AllBooksRow
-                  key={books._id}
-                  getBooks={books}
-                  refetch={refetch}
-                />
+            <tbody className="bg-white divide-y divide-gray-200">
+              {allBooks?.result?.map((book) => (
+                <AllBooksRow key={book._id} getBooks={book} refetch={refetch} />
               ))}
             </tbody>
           </table>

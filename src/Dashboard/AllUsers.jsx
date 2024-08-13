@@ -44,10 +44,10 @@ const AllUsers = () => {
               <th className="px-5 py-2 text-left text-xs font-medium uppercase tracking-wider">
                 User Added
               </th>
-              <th className="px-5 py-2 text-left text-xs font-medium uppercase tracking-wider">
+              <th className="px-7 py-2 text-left text-xs font-medium uppercase tracking-wider">
                 Role
               </th>
-              <th className="px-5 py-2 text-left text-xs font-medium uppercase tracking-wider">
+              <th className="px-5 py-2 text-center text-xs font-medium uppercase tracking-wider">
                 Action
               </th>
             </tr>

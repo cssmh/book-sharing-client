@@ -2,6 +2,7 @@ import swal from "sweetalert";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useMyBooks from "../Hooks/useMyBooks";
 import { Helmet } from "react-helmet-async";
+import { ScaleLoader } from "react-spinners";
 
 const UserToUpdate = () => {
   const axiosSecure = useAxiosSecure();
@@ -16,7 +17,6 @@ const UserToUpdate = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        // main code
         axiosSecure.delete(`/email/${idx}`).then((res) => {
           if (res.data?.deletedCount > 0) {
             swal({ text: "Email Deleted!", icon: "success", timer: 2000 });
@@ -51,47 +51,45 @@ const UserToUpdate = () => {
   };
 
   return (
-    <div>
+    <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-6">
       <Helmet>
         <title>BookHaven | User To Update</title>
       </Helmet>
-      <h1 className="text-center font-semibold text-xl mb-3 mt-2 md:mt-0">
-        All Users To Get Notified for New Books
+      <h1 className="text-2xl font-semibold text-center mb-6">
+        Users to Get Notified for New Books
       </h1>
       {isLoading ? (
-        <div className="ml-4 space-y-2">
-          {Array.from({ length: 5 }).map((_, idx) => (
-            <div key={idx} className="flex items-center animate-pulse">
-              <span className="bg-gray-300 h-6 w-8 rounded mr-2"></span>
-              <button className="w-full mr-4 md:w-1/2 bg-gray-300 h-7 rounded-lg px-4"></button>
-            </div>
-          ))}
+        <div className="flex justify-center items-center min-h-[60vh]">
+          <ScaleLoader size={100} color="#4F46E5" />
         </div>
       ) : (
         <div>
-          <div className="flex justify-center">
-            {emails?.length > 1 && (
+          {emails?.length > 0 && (
+            <div className="flex justify-center mb-6">
               <button
                 onClick={handleDeleteAll}
-                className="btn btn-sm rounded-lg px-3 btn-secondary"
+                className="bg-red-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-red-600 transition-colors duration-300"
               >
-                Delete all
+                Delete All
               </button>
-            )}
-          </div>
-          <div className="ml-4 space-y-1 mt-4">
+            </div>
+          )}
+          <ul className="space-y-4">
             {emails?.map((email, idx) => (
-              <div key={email._id}>
-                {idx + 1}.{" "}
+              <li
+                key={email._id}
+                className="flex items-center justify-between p-4 bg-gray-100 border border-gray-300 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+              >
+                <span className="text-gray-800">{`${idx + 1}. ${email.email}`}</span>
                 <button
                   onClick={() => handleDelete(email._id)}
-                  className="btn btn-sm rounded-lg px-3 btn-secondary"
+                  className="bg-red-500 text-white py-1 px-3 rounded-lg shadow-md hover:bg-red-600 transition-colors duration-300"
                 >
-                  {email.email}
+                  Delete
                 </button>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       )}
     </div>

@@ -62,20 +62,20 @@ const AllBooksRow = ({ getBooks, refetch }) => {
             </svg>
           </button>
           <div className="avatar">
-            <div className="mask w-16 h-16 rounded-sm">
+            <div className="mask w-16 rounded-sm">
               <img src={book_image} alt="no image" />
             </div>
           </div>
         </div>
       </th>
-      <td className="py-3 px-4">
+      <td className="text-sm py-3 px-4">
         <p>{book_name}</p>
       </td>
-      <td className="py-3 px-4">
+      <td className="text-sm py-3 px-4">
         <p>{provider_name}</p>
       </td>
-      <td className="py-3 px-4">{provider_location}</td>
-      <td className="py-3 px-4">
+      <td className="text-sm py-3 px-4">{provider_location}</td>
+      <td className="text-sm py-3 px-4">
         <p
           className={
             book_status === "available" ? "text-green-400" : "text-red-400"
@@ -86,7 +86,7 @@ const AllBooksRow = ({ getBooks, refetch }) => {
       </td>
       <td className="py-3 px-4">
         <Link to={`/book/${_id}`}>
-          <button className="rounded-md p-2 bg-green-400 text-white">
+          <button className="rounded-md text-sm  px-2 py-1 bg-green-600 text-white">
             Details
           </button>
         </Link>
