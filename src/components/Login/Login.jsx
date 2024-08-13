@@ -25,12 +25,9 @@ const Login = () => {
       user?.email === "kona@mail.com" ||
       user?.email === "admin@admin.com"
     ) {
-      if (location?.pathname === "/login") {
-        toast.success("You are already logged in");
-        navigateTo("/");
-      }
+      navigateTo("/");
     }
-  }, [user?.emailVerified, user?.email, location?.pathname, navigateTo]);
+  }, [user?.emailVerified, user?.email, navigateTo]);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -44,10 +41,9 @@ const Login = () => {
           const userData = {
             name: res?.user?.displayName,
             email: res?.user?.email.toLowerCase(),
-            role: "User",
+            role: "user",
           };
-          const response = await axiosSecure.put("/add-user", userData);
-          console.log(response.data);
+          await axiosSecure.put("/add-user", userData);
           toast.success("logged in successfully");
           navigateTo(location?.state || "/", { replace: true });
         })
@@ -58,7 +54,7 @@ const Login = () => {
           const userData = {
             name: res?.user?.displayName,
             email: res?.user?.email.toLowerCase(),
-            role: "User",
+            role: "user",
           };
           await axiosSecure.put("/add-user", userData);
           if (!res?.user?.emailVerified) {

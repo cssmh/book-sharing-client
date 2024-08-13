@@ -4,7 +4,7 @@ import AllBookingsCard from "./AllBookingsCard";
 import { useQuery } from "@tanstack/react-query";
 import DeleteAllBookings from "./DeleteAllBookings";
 import { Helmet } from "react-helmet-async";
-import BookingsSke from "../Components/AllSkeleton/BookingsSke";
+import SmallLoader from "../Components/SmallLoader";
 
 const AllBookings = () => {
   const axiosSecure = useAxiosSecure();
@@ -25,6 +25,8 @@ const AllBookings = () => {
   const handleFilter = (e) => {
     setFilterType(e.target.value);
   };
+
+  if (isLoading) return <SmallLoader />;
 
   return (
     <div>
@@ -48,13 +50,7 @@ const AllBookings = () => {
           <option value="Completed">Completed</option>
         </select>
       </div>
-      {isLoading ? (
-        <div className="space-y-6">
-          {[...Array(2)].map((_, index) => (
-            <BookingsSke key={index} />
-          ))}
-        </div>
-      ) : allBookings?.length === 0 ? (
+      {allBookings?.length === 0 ? (
         <p className="text-center text-xl md:text-2xl font-semibold text-red-600 mt-10">
           No {filterType !== "All" && filterType} Booking
         </p>

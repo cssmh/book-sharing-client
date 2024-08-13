@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import UserDataRow from "./UserDataRow";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
-import SmallLoader from "../Components/SmallLoader";
+import SmallLoader from "../Components/SmallLoader"
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -18,7 +18,7 @@ const AllUsers = () => {
     },
   });
 
-  if (isLoading) return <SmallLoader />;
+  if (isLoading) <SmallLoader />;
 
   return (
     <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg px-4 py-3">

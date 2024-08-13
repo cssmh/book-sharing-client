@@ -1,6 +1,5 @@
 import { Chart } from "react-google-charts";
 import useBookProviders from "../Hooks/useBookProviders";
-import useQueryPublic from "../Hooks/useQueryPublic";
 import ChartSkeleton from "../Components/AllSkeleton/ChartSkeleton";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../Hooks/useAxiosSecure";

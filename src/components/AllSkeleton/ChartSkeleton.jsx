@@ -1,6 +1,6 @@
 const ChartSkeleton = () => {
   return (
-    <div className="mx-5 mt-5">
+    <div className="mx-5 mt-7">
       <h1 className="text-2xl font-bold mb-5 animate-pulse bg-gray-200 rounded h-8 w-3/4"></h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:my-5">
         <div className="bg-white p-4 shadow rounded-lg">

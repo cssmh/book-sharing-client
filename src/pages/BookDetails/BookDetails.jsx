@@ -2,13 +2,13 @@ import { useState } from "react";
 import swal from "sweetalert";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import BookDetailSkeleton from "../../Components/AllSkeleton/BookDetailSke";
 import AddBooking from "../AddBooking/AddBooking";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useMyBooks from "../../Hooks/useMyBooks";
 import useQueryPublic from "../../Hooks/useQueryPublic";
 import useAdmin from "../../Hooks/useAdmin";
+import SmallLoader from "../../Components/SmallLoader";
 
 const BookDetails = () => {
   const [desc, setDesc] = useState(true);
@@ -47,7 +47,7 @@ const BookDetails = () => {
     });
   };
 
-  if (isLoading || bookDataLoading) return <BookDetailSkeleton />;
+  if (isLoading || bookDataLoading) return <SmallLoader />;
 
   const {
     _id,

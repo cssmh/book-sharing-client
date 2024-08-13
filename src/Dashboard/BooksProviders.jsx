@@ -30,9 +30,9 @@ const BooksProviders = () => {
           {bookProviders?.map((provider, idx) => (
             <div
               key={idx}
-              className="bg-gray-100 border border-gray-300 rounded-lg p-5 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300"
+              className="bg-gray-100 border border-gray-300 rounded-lg p-2 md:p-5 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300"
             >
-              <p className="text-gray-800 text-lg font-medium mb-4">
+              <p className="text-gray-800 text-lg font-medium md:mb-2">
                 {provider.email}
               </p>
               <Link

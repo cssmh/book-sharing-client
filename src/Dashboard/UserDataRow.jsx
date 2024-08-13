@@ -4,24 +4,30 @@ import toast from "react-hot-toast";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useAuth from "../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
-import SmallLoader from "../Components/SmallLoader";
+import { useNavigate } from "react-router-dom";
 
 const UserDataRow = ({ user, refetch }) => {
   const { loading, user: userAuth } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [isOpen, setIsOpen] = useState(false);
-  const { data: totalAdmin, isLoading } = useQuery({
+  const navigate = useNavigate();
+
+  const {
+    data: totalAdmin = 0,
+    isLoading,
+    refetch: totalAdRefetch,
+  } = useQuery({
     queryKey: ["totalAdmin"],
     queryFn: async () => {
       const res = await axiosSecure.get("/total-admin");
-      return res?.data?.totalAdmin;
+      return res?.data?.totalAdmin || 0;
     },
   });
-  console.log(totalAdmin);
 
-  const handleModal = (role) => {
+  const handleModal = async (role) => {
     const msg =
       "You cannot downgrade your own role to 'guest' as you are the only admin.";
+
     if (
       userAuth?.email === user?.email &&
       role === "guest" &&
@@ -32,19 +38,45 @@ const UserDataRow = ({ user, refetch }) => {
       return;
     }
 
-    axiosSecure
-      .patch(`/user-update/${user?.email}`, { role })
-      .then((res) => {
-        if (res.data.modifiedCount > 0) {
-          toast.success(`${user?.name} updated to ${role}`);
-          refetch();
+    try {
+      const res = await axiosSecure.patch(`/user-update/${user?.email}`, {
+        role,
+      });
+      if (res?.data?.modifiedCount > 0) {
+        toast.success(`updated to ${role}`);
+        refetch();
+        totalAdRefetch();
+        if (userAuth?.email === user?.email && role === "guest") {
+          navigate("/");
         }
-      })
-      .catch((err) => console.log(err));
-    setIsOpen(false);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsOpen(false);
+    }
   };
 
-  if (loading || isLoading) return <SmallLoader />;
+  if (loading || isLoading)
+    return (
+      <tr>
+        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+          <div className="w-24 h-4 bg-gray-200 animate-pulse rounded"></div>
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          <div className="w-32 h-4 bg-gray-200 animate-pulse rounded"></div>
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          <div className="w-24 h-4 bg-gray-200 animate-pulse rounded"></div>
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap text-sm">
+          <div className="w-20 h-4 bg-gray-200 animate-pulse rounded"></div>
+        </td>
+        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+          <div className="w-32 h-6 bg-gray-200 animate-pulse rounded"></div>
+        </td>
+      </tr>
+    );
 
   return (
     <tr>

@@ -31,10 +31,7 @@ const Register = () => {
       user?.email === "kona@mail.com" ||
       user?.email === "admin@admin.com"
     ) {
-      if (location?.pathname === "/register") {
-        toast.success("You are already logged in");
-        navigateTo("/");
-      }
+      navigateTo("/");
     }
   }, [user?.emailVerified, user?.email, location?.pathname, navigateTo]);
 
@@ -82,7 +79,7 @@ const Register = () => {
         const userData = {
           name: name,
           email: email.toLowerCase(),
-          role: "User",
+          role: "user",
         };
         await axiosSecure.put("/add-user", userData);
         // Ensure the user is authenticated before calling emailVerification

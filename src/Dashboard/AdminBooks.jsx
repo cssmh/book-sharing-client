@@ -4,7 +4,7 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useBookProviders from "../Hooks/useBookProviders";
 import useQueryPublic from "../Hooks/useQueryPublic";
 import { Helmet } from "react-helmet-async";
-import AdminBooksSke from "../Components/AllSkeleton/AdminBooksSke";
+import SmallLoader from "../Components/SmallLoader";
 
 const AdminBooks = () => {
   const axiosSecure = useAxiosSecure();
@@ -24,6 +24,8 @@ const AdminBooks = () => {
     },
   });
 
+  if (isLoading || bookingLoading) return <SmallLoader />;
+
   return (
     <div>
       <Helmet>
@@ -33,29 +35,25 @@ const AdminBooks = () => {
         Total {totalBooks || 0} Books, Total {bookProviders?.length || 0} Book
         Providers, and Total {allBookings?.length || 0} Bookings
       </h1>
-      {isLoading || bookingLoading ? (
-        <AdminBooksSke />
-      ) : (
-        <div className="overflow-x-auto">
-          <table className="min-w-full bg-white divide-y divide-gray-200">
-            <thead className="bg-gray-800 text-white">
-              <tr>
-                <th className="py-2 px-4 text-left text-sm">Book Image</th>
-                <th className="py-2 px-4 text-left text-sm">Book Name</th>
-                <th className="py-2 px-4 text-left text-sm">Provider Name</th>
-                <th className="py-2 px-4 text-left text-sm">Location</th>
-                <th className="py-2 px-4 text-left text-sm">Status</th>
-                <th className="py-2 px-4 text-left text-sm">Details</th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {allBooks?.result?.map((book) => (
-                <AdminBooksRow key={book._id} getBooks={book} refetch={refetch} />
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white divide-y divide-gray-200">
+          <thead className="bg-gray-800 text-white">
+            <tr>
+              <th className="py-2 px-4 text-left text-sm">Book Image</th>
+              <th className="py-2 px-4 text-left text-sm">Book Name</th>
+              <th className="py-2 px-4 text-left text-sm">Provider Name</th>
+              <th className="py-2 px-4 text-left text-sm">Location</th>
+              <th className="py-2 px-4 text-left text-sm">Status</th>
+              <th className="py-2 px-4 text-left text-sm">Details</th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {allBooks?.result?.map((book) => (
+              <AdminBooksRow key={book._id} getBooks={book} refetch={refetch} />
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

@@ -45,8 +45,8 @@ const MyBooks = () => {
         </div>
       ) : (
         <div>
-          <p className="text-center text-[21px] mt-4 mb-2 font-semibold">
-            <span className="italic">All Books Added By You</span> (
+          <p className="bg-gray-800 text-white md:px-7 py-2 md:py-4 md:flex flex-col md:flex-row justify-between items-center relative text-center text-[21px] mb-2 font-semibold">
+            <span>All Books Added By You</span> (
             {bookData?.length})
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-1 md:px-4 py-2 md:mx-5">
