@@ -7,7 +7,7 @@ const AdminRoute = ({ children }) => {
 
   if (loading)
     return (
-      <div className="relative h-[80vh] flex items-center justify-center">
+      <div className="relative h-screen flex items-center justify-center">
         <div className="absolute -top-7 inset-0 flex items-center justify-center">
           <ScaleLoader size={100} color="red" />
         </div>

@@ -1,44 +1,60 @@
+import { useState } from "react";
+import UpdateUserModal from "../Components/Modal/UpdateUserModal";
+import toast from "react-hot-toast";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
+
 const UserDataRow = ({ user, refetch }) => {
+  const axiosSecure = useAxiosSecure();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleModal = (role) => {
+    axiosSecure
+      .patch(`/user-update/${user?.email}`, { role })
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          toast.success(`Updated to ${role}`);
+          refetch();
+        }
+      })
+      .catch((err) => console.log(err));
+    setIsOpen(false);
+  };
+
   return (
     <tr>
-      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <p className="text-gray-900 whitespace-no-wrap">{user?.email}</p>
+      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+        {user?.email}
       </td>
-      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <p className="text-gray-900 whitespace-no-wrap">{user?.role}</p>
+      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+        {user?.name}
       </td>
-      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        {/* {user?.status ? (
-            <p
-              className={`${
-                user.status === 'Verified' ? 'text-green-500' : 'text-yellow-500'
-              } whitespace-no-wrap`}
-            >
-              {user.status}
-            </p>
-          ) : (
-            <p className='text-red-500 whitespace-no-wrap'>Unavailable</p>
-          )} */}
+      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+        {new Date(user?.timestamp).toLocaleDateString()}
       </td>
-
-      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <button
-          // onClick={() => setIsOpen(true)}
-          className="relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
+      <td className="px-6 py-4 whitespace-nowrap text-sm">
+        <span
+          className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
+            user.role === "guest"
+              ? "bg-green-100 text-green-500"
+              : "bg-red-100 text-red-600"
+          }`}
         >
-          <span
-            aria-hidden="true"
-            className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
-          ></span>
-          <span className="relative">Update Role</span>
+          {user?.role.toUpperCase() || "Unavailable"}
+        </span>
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+        <button
+          onClick={() => setIsOpen(true)}
+          className="inline-flex items-center px-3 py-1.5 text-base font-medium rounded-md text-white bg-green-600 transform active:translate-y-0.5 transition-transform duration-150 ease-in-out"
+>
+          Update Role
         </button>
-        {/* Update User Modal */}
-        {/* <UpdateUserModal
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-            modalHandler={modalHandler}
-            user={user}
-          /> */}
+        <UpdateUserModal
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          handleModal={handleModal}
+          user={user}
+        />
       </td>
     </tr>
   );

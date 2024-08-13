@@ -26,58 +26,38 @@ const AllUsers = () => {
     );
 
   return (
-    <div>
-      <div className="container mx-auto px-4 sm:px-8">
-        <Helmet>
-          <title>Manage Users</title>
-        </Helmet>
-        <div className="py-5">
-            <p className="text-center font-semibold">All Users {data?.length}</p>
-          <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-            <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
-              <table className="min-w-full leading-normal">
-                <thead>
-                  <tr>
-                    <th
-                      scope="col"
-                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-                    >
-                      Email
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-                    >
-                      Role
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-                    >
-                      Status
-                    </th>
-
-                    <th
-                      scope="col"
-                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-                    >
-                      Action
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data?.map((user) => (
-                    <UserDataRow
-                      key={user?._id}
-                      user={user}
-                      refetch={refetch}
-                    />
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+    <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg px-4 py-3">
+      <Helmet>
+        <title>BookHaven | Manage Users</title>
+      </Helmet>
+      <h1 className="text-xl font-bold mb-4">All Users ({data?.length})</h1>
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white divide-y divide-gray-200">
+          <thead className="bg-gray-800 text-white">
+            <tr>
+              <th className="px-5 py-3 text-left text-xs font-medium uppercase tracking-wider">
+                Email
+              </th>
+              <th className="px-5 py-2 text-left text-xs font-medium uppercase tracking-wider">
+                Name
+              </th>
+              <th className="px-5 py-2 text-left text-xs font-medium uppercase tracking-wider">
+                User Added
+              </th>
+              <th className="px-5 py-2 text-left text-xs font-medium uppercase tracking-wider">
+                Role
+              </th>
+              <th className="px-5 py-2 text-left text-xs font-medium uppercase tracking-wider">
+                Action
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {data?.map((user) => (
+              <UserDataRow key={user._id} user={user} refetch={refetch} />
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

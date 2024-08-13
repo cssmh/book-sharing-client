@@ -112,11 +112,9 @@ const Root = createBrowserRouter([
       {
         path: "/admin-dashboard",
         element: (
-          <PrivateRoute>
-            <AdminRoute>
-              <DashLayout />
-            </AdminRoute>
-          </PrivateRoute>
+          <AdminRoute>
+            <DashLayout />
+          </AdminRoute>
         ),
         children: [
           {
