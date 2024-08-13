@@ -7,7 +7,7 @@ const MyBookings = () => {
 
   if (isLoading) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-6 p-4 md:mx-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-6 p-3 md:mx-5">
         {[...Array(3)].map((_, index) => (
           <MyBookSke key={index} />
         ))}
@@ -27,15 +27,15 @@ const MyBookings = () => {
     <div>
       {myBookings?.length === 0 ? (
         <p className="text-center text-xl my-2 font-semibold text-red-600 italic">
-          You have No Booking
+          You have no bookings.
         </p>
       ) : (
         <>
           <h2 className="text-center text-xl my-2 font-semibold">
-            <span className="italic">All Bookings made by you</span> (
+            <span className="italic">Your Bookings</span> (
             {myBookings?.length || 0})
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 px-2 md:px-4 mt-3 mb-8 md:mx-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 px-2 md:px-4 mb-8 md:mx-4">
             {myBookings?.map((booking) => (
               <MyBookingCard
                 key={booking._id}

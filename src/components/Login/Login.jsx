@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import ResetPassModal from "./ResetPassModal";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import ResetPassModal from "../Modal/ResetPassModal";
 
 const Login = () => {
   const [isOpen, setIsOpen] = useState(false);

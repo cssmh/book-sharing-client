@@ -4,7 +4,7 @@ import swal from "sweetalert";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useQueryPublic from "../../Hooks/useQueryPublic";
-import ReviewModal from "./ReviewModal";
+import ReviewModal from "../../Components/Modal/ReviewModal";
 
 const MyBookingCard = ({ getBooking, refetch }) => {
   const { user } = useAuth();

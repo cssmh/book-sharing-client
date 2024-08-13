@@ -40,12 +40,12 @@ const AllBooksCols = () => {
           <table className="min-w-full bg-white divide-y divide-gray-200">
             <thead className="bg-gray-800 text-white">
               <tr>
-                <th className="py-3 px-4 text-left text-sm">Book Image</th>
-                <th className="py-3 px-4 text-left text-sm">Book Name</th>
-                <th className="py-3 px-4 text-left text-sm">Provider Name</th>
-                <th className="py-3 px-4 text-left text-sm">Location</th>
-                <th className="py-3 px-4 text-left text-sm">Status</th>
-                <th className="py-3 px-4 text-left text-sm">Details</th>
+                <th className="py-2 px-4 text-left text-sm">Book Image</th>
+                <th className="py-2 px-4 text-left text-sm">Book Name</th>
+                <th className="py-2 px-4 text-left text-sm">Provider Name</th>
+                <th className="py-2 px-4 text-left text-sm">Location</th>
+                <th className="py-2 px-4 text-left text-sm">Status</th>
+                <th className="py-2 px-4 text-left text-sm">Details</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">

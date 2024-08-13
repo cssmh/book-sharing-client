@@ -63,16 +63,16 @@ const MyPending = () => {
     <div>
       {bookData.length === 0 ? (
         <p className="text-center text-xl my-2 font-semibold text-red-600 italic">
-          You have No added Books
+          You have no added books.
         </p>
       ) : allMyPending?.length === 0 ? (
         <p className="text-center text-xl my-2 font-semibold text-red-600 italic">
-          No User Booked Your Books
+          No user has booked your books.
         </p>
       ) : (
         <>
           <h2 className="text-center text-xl my-2 font-semibold">
-            <span className="italic">User Booked Your Books</span> (
+            <span className="italic">Pending Bookings</span> (
             {allMyPending?.length || 0})
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-2 md:px-4 gap-4 mt-3 mb-5 md:mx-5">
