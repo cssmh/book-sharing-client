@@ -81,17 +81,18 @@ const Register = () => {
           email: email.toLowerCase(),
         };
         await axiosSecure.put("/add-user", userData);
-
         // Ensure the user is authenticated before calling emailVerification
-        if (res.user) {
-          handleUpdateProfile(name, photo).then(() => {
+        if (res?.user) {
+          await handleUpdateProfile(name, photo).then(() => {
             emailVerification().then(() =>
               toast.success(
                 "Register success! Check your inbox for a verification email!"
               )
             );
           });
-          logOut().then().catch();
+          if (!res?.user?.emailVerified) {
+            logOut().then().catch();
+          }
           toast.error("Sorry! Email verification Required");
           navigateTo("/login");
         } else {
@@ -192,7 +193,7 @@ const Register = () => {
                 <span
                   className={`${
                     passError.length > 0 ? "text-red-600" : "text-green-600"
-                  } text-[15px] font-normal mt-4`}
+                  } text-sm font-normal mt-4`}
                 >
                   <p>{passError.length > 0 ? passError : passSuccess}</p>
                 </span>

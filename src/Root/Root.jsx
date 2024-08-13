@@ -21,6 +21,7 @@ import UserToUpdate from "../Dashboard/UserToUpdate";
 import DashHome from "../Dashboard/DashHome";
 import AdminRoute from "../Shared/PrivateRoute/AdminRoute";
 import UserAnalytics from "../Components/UserAnalytics";
+import AllUsers from "../Dashboard/AllUsers";
 
 const Root = createBrowserRouter([
   {
@@ -135,6 +136,14 @@ const Root = createBrowserRouter([
             element: (
               <AdminRoute>
                 <AllBookings />
+              </AdminRoute>
+            ),
+          },
+          {
+            path: "/admin-dashboard/all-users",
+            element: (
+              <AdminRoute>
+                <AllUsers />
               </AdminRoute>
             ),
           },

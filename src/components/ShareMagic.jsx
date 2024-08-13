@@ -17,7 +17,6 @@ const ShareMagic = () => {
         <div className="lg:w-1/2 lg:pr-4">
           <h3
             data-aos="zoom-in-up"
-            data-aos-duration="800"
             className="text-xl lg:text-2xl font-semibold text-orange-500 mb-4 text-center lg:text-left"
           >
             Building Communities Through Books

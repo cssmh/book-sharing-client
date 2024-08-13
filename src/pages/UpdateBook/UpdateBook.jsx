@@ -119,7 +119,7 @@ const UpdateBook = () => {
           />
         </div>
         <div className="text-center md:w-2/2">
-          <h1 className="text-2xl md:text-3xl font-bold mx-2 md:mx-0">
+          <h1 className="text-2xl md:text-2xl font-bold mx-2 md:mx-0">
             Update <span className="text-green-400">{book_name}</span>
           </h1>
           <p className="text-gray-500 mt-2 mx-2 md:mx-0">

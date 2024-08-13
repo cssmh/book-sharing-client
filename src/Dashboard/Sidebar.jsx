@@ -11,8 +11,7 @@ const Sidebar = () => {
   const [isActive, setActive] = useState(false);
   const sidebarRef = useRef(null);
   const buttonRef = useRef(null);
-  const { user, logOut } = useAuth();
-  const admin = user?.email === "admin@admin.com";
+  const { logOut } = useAuth();
   const location = useLocation();
   const currentPath = location.pathname;
 
@@ -84,38 +83,48 @@ const Sidebar = () => {
                   <span className="mx-3 md:mx-4 font-medium">Dashboard</span>
                 </button>
               </Link>
-              {admin && (
-                <>
-                  <Link to="/admin-dashboard/all-books">
-                    <button className={linkClasses("/admin-dashboard/all-books")}>
-                      <FaBook className="w-5 h-5" />
-                      <span className="mx-3 md:mx-4 font-medium">All Books</span>
-                    </button>
-                  </Link>
-                  <Link to="/admin-dashboard/all-bookings">
-                    <button className={linkClasses("/admin-dashboard/all-bookings")}>
-                      <FaClipboardList className="w-5 h-5" />
-                      <span className="mx-3 md:mx-4 font-medium">All Bookings</span>
-                    </button>
-                  </Link>
-                  <Link to="/admin-dashboard/books-providers">
-                    <button
-                      className={linkClasses("/admin-dashboard/books-providers")}
-                    >
-                      <FaUsers className="w-5 h-5" />
-                      <span className="mx-3 md:mx-4 font-medium">Books Providers</span>
-                    </button>
-                  </Link>
-                  <Link to="/admin-dashboard/users-to-update">
-                    <button
-                      className={linkClasses("/admin-dashboard/users-to-update")}
-                    >
-                      <FcSettings className="w-5 h-5" />
-                      <span className="mx-3 md:mx-4 font-medium">Users to Update</span>
-                    </button>
-                  </Link>
-                </>
-              )}
+              <Link to="/admin-dashboard/all-books">
+                <button className={linkClasses("/admin-dashboard/all-books")}>
+                  <FaBook className="w-5 h-5" />
+                  <span className="mx-3 md:mx-4 font-medium">All Books</span>
+                </button>
+              </Link>
+              <Link to="/admin-dashboard/all-bookings">
+                <button
+                  className={linkClasses("/admin-dashboard/all-bookings")}
+                >
+                  <FaClipboardList className="w-5 h-5" />
+                  <span className="mx-3 md:mx-4 font-medium">All Bookings</span>
+                </button>
+              </Link>
+              <Link to="/admin-dashboard/all-users">
+                <button
+                  className={linkClasses("/admin-dashboard/all-users")}
+                >
+                  <FaClipboardList className="w-5 h-5" />
+                  <span className="mx-3 md:mx-4 font-medium">All Users</span>
+                </button>
+              </Link>
+              <Link to="/admin-dashboard/books-providers">
+                <button
+                  className={linkClasses("/admin-dashboard/books-providers")}
+                >
+                  <FaUsers className="w-5 h-5" />
+                  <span className="mx-3 md:mx-4 font-medium">
+                    Books Providers
+                  </span>
+                </button>
+              </Link>
+              <Link to="/admin-dashboard/users-to-update">
+                <button
+                  className={linkClasses("/admin-dashboard/users-to-update")}
+                >
+                  <FcSettings className="w-5 h-5" />
+                  <span className="mx-3 md:mx-4 font-medium">
+                    Users to Update
+                  </span>
+                </button>
+              </Link>
             </nav>
           </div>
         </div>

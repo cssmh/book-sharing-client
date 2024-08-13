@@ -43,7 +43,8 @@ const Login = () => {
             name: res?.user?.displayName,
             email: res?.user?.email.toLowerCase(),
           };
-          await axiosSecure.put("/add-user", userData);
+          const response = await axiosSecure.put("/add-user", userData);
+          console.log(response.data);
           toast.success("logged in successfully");
           navigateTo(location?.state || "/", { replace: true });
         })
