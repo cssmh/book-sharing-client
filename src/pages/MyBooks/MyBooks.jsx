@@ -45,7 +45,7 @@ const MyBooks = () => {
         </div>
       ) : (
         <div>
-          <p className="text-center text-[21px] mt-3 mb-1 font-semibold">
+          <p className="text-center text-[21px] mt-4 mb-2 font-semibold">
             <span className="italic">All Books Added By You</span> (
             {bookData?.length})
           </p>

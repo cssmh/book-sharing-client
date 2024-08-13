@@ -86,7 +86,7 @@ const AllBooksRow = ({ getBooks, refetch }) => {
       </td>
       <td className="py-3 px-4">
         <Link to={`/book/${_id}`}>
-          <button className="rounded-md text-sm  px-2 py-1 bg-green-600 text-white">
+          <button className="rounded-md text-sm  px-2 py-1 bg-green-600 text-white transform active:translate-y-0.5 transition-transform duration-150 ease-in-out">
             Details
           </button>
         </Link>

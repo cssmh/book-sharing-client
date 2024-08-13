@@ -51,12 +51,12 @@ const UserToUpdate = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-6">
+    <div className="max-w-6xl mx-auto py-2">
       <Helmet>
         <title>BookHaven | User To Update</title>
       </Helmet>
-      <h1 className="text-2xl font-semibold text-center mb-6">
-        Users to Get Notified for New Books
+      <h1 className="text-xl font-semibold text-center mb-2">
+        Users to Get Notified for New Books ({emails?.length})
       </h1>
       {isLoading ? (
         <div className="flex justify-center items-center min-h-[60vh]">
@@ -65,25 +65,27 @@ const UserToUpdate = () => {
       ) : (
         <div>
           {emails?.length > 0 && (
-            <div className="flex justify-center mb-6">
+            <div className="flex justify-center mb-3">
               <button
                 onClick={handleDeleteAll}
-                className="bg-red-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-red-600 transition-colors duration-300"
+                className="bg-red-500 text-white py-2 px-4 rounded-lg shadow-md transition-colors duration-300 transform active:translate-y-0.5 ease-in-out"
               >
                 Delete All
               </button>
             </div>
           )}
-          <ul className="space-y-4">
+          <ul className="space-y-3">
             {emails?.map((email, idx) => (
               <li
                 key={email._id}
-                className="flex items-center justify-between p-4 bg-gray-100 border border-gray-300 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+                className="flex items-center justify-between p-4 border border-gray-300 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
               >
-                <span className="text-gray-800">{`${idx + 1}. ${email.email}`}</span>
+                <span className="text-gray-800">{`${idx + 1}. ${
+                  email.email
+                }`}</span>
                 <button
                   onClick={() => handleDelete(email._id)}
-                  className="bg-red-500 text-white py-1 px-3 rounded-lg shadow-md hover:bg-red-600 transition-colors duration-300"
+                  className="bg-red-500 text-white py-1 px-3 rounded-lg shadow-md hover:bg-red-600 transform active:translate-y-0.5 transition-transform duration-150 ease-in-out"
                 >
                   Delete
                 </button>

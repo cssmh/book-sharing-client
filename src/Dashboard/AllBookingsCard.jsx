@@ -19,7 +19,8 @@ const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
 
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const handleDeleteByAdmin = (idx) => {
+
+  const handleDeleteByAdmin = (id) => {
     swal({
       title: "Are you sure?",
       text: "Once deleted, it can't be recovered!",
@@ -28,7 +29,7 @@ const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        axiosSecure.delete(`/booking/${idx}/${user?.email}`).then((res) => {
+        axiosSecure.delete(`/booking/${id}/${user?.email}`).then((res) => {
           if (res.data?.deletedCount > 0) {
             swal("Booking Deleted!", {
               icon: "success",
@@ -42,52 +43,45 @@ const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
   };
 
   return (
-    <div>
-      <div className="flex flex-col md:flex-row justify-center items-center border border-green-500 p-4 rounded-lg">
-        <p className="mb-1 md:mb-0">{getIndex}.</p>
-        <div className="flex-1 text-center">
-          <img
-            src={book_image}
-            className="rounded-xl w-[85px] mx-auto mb-1"
-            alt="no image"
-            onContextMenu={(e) => e.preventDefault()}
-          />
-          <Link to={`/book/${book_id}`}>
-            <p className="text-blue-900 text-lg font-bold mt-2 px-2">
-              {book_name}
-            </p>
-          </Link>
-          <p className="text-lg text-gray-500">{provider_email}</p>
-          <p className="text-lg text-green-500 font-semibold mb-2 md:mb-0">
-            {provider_phone}
-          </p>
-        </div>
-        <div className="flex-1 text-center md:text-lg border-t-2 md:border-t-0 pt-2 md:pt-0 text-lg">
-          <p>Collector Info</p>
-          <p className="text-lg">
-            Status:{" "}
-            <span
-              className={
-                status === "Pending"
-                  ? "text-red-500"
-                  : status === "Completed"
-                  ? "text-green-500"
-                  : "text-blue-500"
-              }
-            >
-              {status}
-            </span>
-          </p>
-          {completed_at && <p>com {completed_at}</p>}
-          <p className="text-gray-500">{user_email}</p>
-          <p className="text-cyan-500 mb-1 text-base">{user_phone}</p>
-          <button
-            onClick={() => handleDeleteByAdmin(_id)}
-            className="text-white bg-red-500 font-medium rounded-lg text-sm px-4 py-2 text-center mx-2 md:mx-0"
+    <div className="bg-white border border-gray-200 rounded-lg shadow-md p-4 flex flex-col md:flex-row items-center md:items-start gap-4">
+      <p className="text-lg font-medium">{getIndex}.</p>
+      <div className="flex-1 text-center">
+        <img
+          src={book_image}
+          className="rounded-lg w-24 h-[105px] object-cover mx-auto"
+          alt={book_name}
+        />
+        <Link to={`/book/${book_id}`}>
+          <p className="text-blue-900 text-lg font-semibold mt-2">{book_name}</p>
+        </Link>
+        <p className="text-gray-700">{provider_email}</p>
+        <p className="text-green-600 font-semibold">{provider_phone}</p>
+      </div>
+      <div className="flex-1 text-center border-t border-gray-300 pt-4 md:pt-0 md:border-t-0 md:border-l md:pl-4">
+        <p className="text-lg font-semibold mb-2">Collector Info</p>
+        <p>
+          Status:{" "}
+          <span
+            className={
+              status === "Pending"
+                ? "text-red-500"
+                : status === "Completed"
+                ? "text-green-500"
+                : "text-blue-500"
+            }
           >
-            Delete Booking
-          </button>
-        </div>
+            {status}
+          </span>
+        </p>
+        {completed_at && <p className="text-gray-600">Completed At: {completed_at}</p>}
+        <p className="text-gray-600">{user_email}</p>
+        <p className="text-cyan-600">{user_phone}</p>
+        <button
+          onClick={() => handleDeleteByAdmin(_id)}
+          className="mt-2 bg-red-500 text-white rounded-lg px-4 py-2 text-sm font-medium hover:bg-red-600 transform active:translate-y-0.5 transition-transform duration-150 ease-in-out"
+        >
+          Delete Booking
+        </button>
       </div>
     </div>
   );

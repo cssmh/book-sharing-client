@@ -37,7 +37,7 @@ const DeleteAllBookings = ({ refetch }) => {
     <div>
       <button
         onClick={handleDeleteAllBookings}
-        className="bg-red-500 text-white py-[5px] px-3 rounded-md"
+        className="bg-red-500 text-white py-[5px] px-3 rounded-md transform active:translate-y-0.5 transition-transform duration-150 ease-in-out"
       >
         Delete All Bookings
       </button>

@@ -29,7 +29,7 @@ const AllBooksCols = () => {
       <Helmet>
         <title>BookHaven | All Books</title>
       </Helmet>
-      <h1 className="text-lg text-center font-bold mt-2 mb-3">
+      <h1 className="text-xl text-center font-bold mt-2 mb-3 mx-3 md:mx-0">
         Total {totalBooks || 0} Books, Total {bookProviders?.length || 0} Book
         Providers, and Total {allBookings?.length || 0} Bookings
       </h1>

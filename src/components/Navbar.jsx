@@ -18,8 +18,8 @@ const Navbar = () => {
   const location = useLocation();
   const getLinkClasses = (path) => {
     return location.pathname === path
-      ? "text-green-600"
-      : "hover:text-green-600";
+      ? "bg-green-400 text-white"
+      : "";
   };
 
   const handleLogout = () => {
@@ -161,10 +161,10 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 space-x-4">
+        <ul className="menu menu-horizontal px-1 space-x-1">
           <Link
             to="/"
-            className={`text-base font-semibold flex items-center p-2 ${getLinkClasses(
+            className={`text-base font-semibold flex items-center px-[10px] py-1 rounded-full ${getLinkClasses(
               "/"
             )}`}
           >
@@ -172,7 +172,7 @@ const Navbar = () => {
           </Link>
           <Link
             to="/all-books"
-            className={`text-base font-semibold flex items-center p-2 ${getLinkClasses(
+            className={`text-base font-semibold flex items-center px-[10px] py-1 rounded-full ${getLinkClasses(
               "/all-books"
             )}`}
           >
@@ -182,7 +182,7 @@ const Navbar = () => {
             <>
               <Link
                 to="/add-book"
-                className={`text-base font-semibold flex items-center p-2 ${getLinkClasses(
+                className={`text-base font-semibold flex items-center px-[10px] py-1 rounded-full ${getLinkClasses(
                   "/add-book"
                 )}`}
               >
@@ -190,7 +190,7 @@ const Navbar = () => {
               </Link>
               <Link
                 to="/my-books"
-                className={`text-base font-semibold flex items-center p-2 ${getLinkClasses(
+                className={`text-base font-semibold flex items-center px-[10px] py-1 rounded-full ${getLinkClasses(
                   "/my-books"
                 )}`}
               >
@@ -198,7 +198,7 @@ const Navbar = () => {
               </Link>
               <Link
                 to="/my-schedules"
-                className={`text-base font-semibold flex items-center p-2 ${getLinkClasses(
+                className={`text-base font-semibold flex items-center px-[10px] py-1 rounded-full ${getLinkClasses(
                   "/my-schedules"
                 )}`}
               >
@@ -209,7 +209,7 @@ const Navbar = () => {
           {admin && (
             <Link
               to="/admin-dashboard"
-              className={`text-base font-semibold flex items-center p-2 ${getLinkClasses(
+              className={`text-base font-semibold flex items-center px-[10px] py-1 rounded-full ${getLinkClasses(
                 "/admin-dashboard"
               )}`}
             >
