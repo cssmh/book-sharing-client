@@ -2,23 +2,49 @@ import { useState } from "react";
 import UpdateUserModal from "../Components/Modal/UpdateUserModal";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import useAuth from "../Hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import SmallLoader from "../Components/SmallLoader";
 
 const UserDataRow = ({ user, refetch }) => {
+  const { loading, user: userAuth } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [isOpen, setIsOpen] = useState(false);
+  const { data: totalAdmin, isLoading } = useQuery({
+    queryKey: ["totalAdmin"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/total-admin");
+      return res?.data?.totalAdmin;
+    },
+  });
+  console.log(totalAdmin);
 
   const handleModal = (role) => {
+    const msg =
+      "You cannot downgrade your own role to 'guest' as you are the only admin.";
+    if (
+      userAuth?.email === user?.email &&
+      role === "guest" &&
+      totalAdmin <= 1
+    ) {
+      toast.error(msg);
+      setIsOpen(false);
+      return;
+    }
+
     axiosSecure
       .patch(`/user-update/${user?.email}`, { role })
       .then((res) => {
         if (res.data.modifiedCount > 0) {
-          toast.success(`Updated to ${role}`);
+          toast.success(`${user?.name} updated to ${role}`);
           refetch();
         }
       })
       .catch((err) => console.log(err));
     setIsOpen(false);
   };
+
+  if (loading || isLoading) return <SmallLoader />;
 
   return (
     <tr>
@@ -42,7 +68,7 @@ const UserDataRow = ({ user, refetch }) => {
           {user?.role.toUpperCase() || "Unavailable"}
         </span>
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium ">
+      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
         <button
           onClick={() => setIsOpen(true)}
           className="inline-flex items-center px-2.5 py-1.5 text-base font-medium rounded-lg text-white bg-green-600 transform active:translate-y-0.5 transition-transform duration-150 ease-in-out"

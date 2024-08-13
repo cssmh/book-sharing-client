@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import UserDataRow from "./UserDataRow";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
-import { ScaleLoader } from "react-spinners";
+import SmallLoader from "../Components/SmallLoader";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -18,12 +18,7 @@ const AllUsers = () => {
     },
   });
 
-  if (isLoading)
-    return (
-      <div className="h-[70vh] flex flex-col justify-center items-center">
-        <ScaleLoader size={100} color="red" />
-      </div>
-    );
+  if (isLoading) return <SmallLoader />;
 
   return (
     <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg px-4 py-3">

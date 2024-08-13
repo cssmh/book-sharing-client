@@ -35,7 +35,7 @@ const ChangePassModal = ({ isPassOpen, closeModal, handleChangePass }) => {
                   New Password
                 </Dialog.Title>
                 <form onSubmit={handleChangePass}>
-                  <div className="relative mb-4">
+                  <div className="relative mb-1">
                     <input
                       id="password"
                       name="password"
@@ -57,7 +57,7 @@ const ChangePassModal = ({ isPassOpen, closeModal, handleChangePass }) => {
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-green-600 py-2 rounded-lg text-white mt-4 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full bg-green-500 py-2 rounded-lg text-white mt-4 focus:outline-none focus:ring-2 focus:ring-green-500"
                   >
                     Update
                   </button>

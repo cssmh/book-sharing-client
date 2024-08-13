@@ -16,7 +16,6 @@ const roles = ["guest", "admin"];
 
 const UpdateUserModal = ({ setIsOpen, isOpen, handleModal, user }) => {
   const [selected, setSelected] = useState(user.role);
-
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog
@@ -110,17 +109,17 @@ const UpdateUserModal = ({ setIsOpen, isOpen, handleModal, user }) => {
                 <div className="flex justify-between gap-4">
                   <button
                     type="button"
-                    className="inline-flex items-center px-3 py-1.5 text-base font-medium rounded-md text-white bg-green-600"
-                    onClick={() => handleModal(selected)}
-                  >
-                    Update
-                  </button>
-                  <button
-                    type="button"
                     className="inline-flex items-center px-3 py-1.5 text-base font-medium rounded-md text-gray-700 bg-gray-200"
                     onClick={() => setIsOpen(false)}
                   >
                     Cancel
+                  </button>
+                  <button
+                    type="button"
+                    className="inline-flex items-center px-3 py-1.5 text-base font-medium rounded-md text-white bg-green-600"
+                    onClick={() => handleModal(selected)}
+                  >
+                    Update
                   </button>
                 </div>
               </DialogPanel>

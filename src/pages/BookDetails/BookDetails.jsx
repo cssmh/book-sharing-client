@@ -36,15 +36,13 @@ const BookDetails = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        axiosSecure
-          .delete(`/book/${idx}/${loadBookData?.provider_email}`)
-          .then((res) => {
-            if (res.data?.deletedCount > 0) {
-              swal(`${book} Deleted!`, { icon: "success", timer: 2000 });
-              refetch();
-              navigateTo(-1);
-            }
-          });
+        axiosSecure.delete(`/book/${idx}/${user?.email}`).then((res) => {
+          if (res.data?.deletedCount > 0) {
+            swal(`${book} Deleted!`, { icon: "success", timer: 2000 });
+            refetch();
+            navigateTo(-1);
+          }
+        });
       }
     });
   };

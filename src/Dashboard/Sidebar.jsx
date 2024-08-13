@@ -77,7 +77,7 @@ const Sidebar = () => {
       >
         <div>
           <Link to="/" className="hidden md:block">
-            <div className="w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center bg-rose-100 mx-auto">
+            <div className="w-full hidden md:flex px-4 py-1 shadow-lg rounded-lg justify-center items-center bg-rose-100 mx-auto">
               <img src={logo} className="h-14" alt="Logo" />
             </div>
           </Link>

@@ -36,7 +36,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        axiosSecure.delete(`/booking/${_id}/${user?.email}`).then((res) => {
+        axiosSecure.delete(`/booking/${_id}/${provider_email}`).then((res) => {
           if (res.data?.deletedCount > 0) {
             swal("Booking Deleted!", { icon: "success", timer: 2000 });
             refetch();

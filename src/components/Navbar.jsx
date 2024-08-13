@@ -11,7 +11,6 @@ import useAdmin from "../Hooks/useAdmin";
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const { isAdmin } = useAdmin();
-  console.log(isAdmin);
   const { totalCart, myBookings } = useMyCart();
   const [myProgress, setMyProgress] = useState(null);
   const [userDropdownVisible, setUserDropdownVisible] = useState(false);

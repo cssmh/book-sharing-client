@@ -1,12 +1,22 @@
 import swal from "sweetalert";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
-import useMyBooks from "../Hooks/useMyBooks";
 import { Helmet } from "react-helmet-async";
-import { ScaleLoader } from "react-spinners";
+import SmallLoader from "../Components/SmallLoader";
+import { useQuery } from "@tanstack/react-query";
 
 const UserToUpdate = () => {
   const axiosSecure = useAxiosSecure();
-  const { isLoading, bookData: emails, refetch } = useMyBooks("/emails");
+  const {
+    data: emails = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["emails"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/emails");
+      return res?.data;
+    },
+  });
 
   const handleDelete = (idx) => {
     swal({
@@ -59,9 +69,7 @@ const UserToUpdate = () => {
         Users to Get Notified for New Books ({emails?.length})
       </h1>
       {isLoading ? (
-        <div className="flex justify-center items-center min-h-[60vh]">
-          <ScaleLoader size={100} color="#4F46E5" />
-        </div>
+        <SmallLoader />
       ) : (
         <div>
           {emails?.length > 0 && (

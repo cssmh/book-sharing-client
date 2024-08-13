@@ -4,11 +4,11 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import updateImage from "../../assets/DocUpdate.png";
 import { useNavigate, useParams } from "react-router-dom";
-import { ScaleLoader } from "react-spinners";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useMyBooks from "../../Hooks/useMyBooks";
 import useQueryPublic from "../../Hooks/useQueryPublic";
+import SmallLoader from "../../Components/SmallLoader";
 
 const UpdateBook = () => {
   const { user } = useAuth();
@@ -39,12 +39,7 @@ const UpdateBook = () => {
     checkMatching();
   }, [loading, myBooks, id, navigateTo]);
 
-  if (loading || isLoading)
-    return (
-      <div className="h-[70vh] flex flex-col justify-center items-center">
-        <ScaleLoader size={100} color="red" />
-      </div>
-    );
+  if (loading || isLoading) return <SmallLoader />;
 
   const {
     _id,

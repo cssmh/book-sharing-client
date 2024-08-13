@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
-import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const MyBooksCard = ({ getBook, refetch }) => {
-  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
   const {
@@ -12,6 +10,7 @@ const MyBooksCard = ({ getBook, refetch }) => {
     book_name,
     book_image,
     provider_phone,
+    provider_email,
     book_status,
     provider_location,
   } = getBook;
@@ -25,7 +24,7 @@ const MyBooksCard = ({ getBook, refetch }) => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        axiosSecure.delete(`/book/${idx}/${user?.email}`).then((res) => {
+        axiosSecure.delete(`/book/${idx}/${provider_email}`).then((res) => {
           if (res.data?.deletedCount > 0) {
             swal(`${name} Deleted!`, {
               icon: "success",
