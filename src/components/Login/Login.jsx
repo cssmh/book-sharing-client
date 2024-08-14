@@ -41,7 +41,7 @@ const Login = () => {
           const userData = {
             name: res?.user?.displayName,
             email: res?.user?.email.toLowerCase(),
-            role: "user",
+            role: "guest",
           };
           await axiosSecure.put("/add-user", userData);
           toast.success("logged in successfully");
@@ -54,7 +54,7 @@ const Login = () => {
           const userData = {
             name: res?.user?.displayName,
             email: res?.user?.email.toLowerCase(),
-            role: "user",
+            role: "guest",
           };
           await axiosSecure.put("/add-user", userData);
           if (!res?.user?.emailVerified) {

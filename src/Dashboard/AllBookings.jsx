@@ -4,7 +4,7 @@ import AllBookingsCard from "./AllBookingsCard";
 import { useQuery } from "@tanstack/react-query";
 import DeleteAllBookings from "./DeleteAllBookings";
 import { Helmet } from "react-helmet-async";
-import SmallLoader from "../Components/SmallLoader";
+import { ScaleLoader } from "react-spinners";
 
 const AllBookings = () => {
   const axiosSecure = useAxiosSecure();
@@ -25,8 +25,6 @@ const AllBookings = () => {
   const handleFilter = (e) => {
     setFilterType(e.target.value);
   };
-
-  if (isLoading) return <SmallLoader />;
 
   return (
     <div>
@@ -50,7 +48,11 @@ const AllBookings = () => {
           <option value="Completed">Completed</option>
         </select>
       </div>
-      {allBookings?.length === 0 ? (
+      {isLoading ? (
+        <div className="h-[72vh] flex justify-center items-center">
+          <ScaleLoader size={100} color="red" />
+        </div>
+      ) : allBookings?.length === 0 ? (
         <p className="text-center text-xl md:text-2xl font-semibold text-red-600 mt-10">
           No {filterType !== "All" && filterType} Booking
         </p>

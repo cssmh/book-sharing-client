@@ -65,41 +65,45 @@ const UserToUpdate = () => {
       <Helmet>
         <title>BookHaven | User To Update</title>
       </Helmet>
-      <h1 className="text-xl font-semibold text-center mb-2">
+      <h1 className="text-xl font-semibold text-center mb-3">
         Users to Get Notified for New Books ({emails?.length})
       </h1>
       {isLoading ? (
         <SmallLoader />
       ) : (
-        <div>
+        <div className="space-y-6">
           {emails?.length > 0 && (
-            <div className="flex justify-center mb-3">
+            <div className="flex justify-center mb-2">
               <button
                 onClick={handleDeleteAll}
-                className="bg-red-500 text-white py-2 px-4 rounded-lg shadow-md transition-colors duration-300 transform active:translate-y-0.5 ease-in-out"
+                className="bg-red-500 text-white py-1.5 px-4 rounded-lg shadow-md transition-colors duration-300 transform active:translate-y-0.5 ease-in-out"
               >
                 Delete All
               </button>
             </div>
           )}
-          <ul className="space-y-3">
+          <div className="flex flex-wrap justify-between">
             {emails?.map((email, idx) => (
-              <li
+              <div
                 key={email._id}
-                className="flex items-center justify-between p-4 border border-gray-300 rounded-lg shadow-md transition-shadow duration-300"
+                className={`w-full md:w-[49%] p-4 mb-4 bg-base-200 rounded-lg shadow-md transition-shadow duration-300 ${
+                  idx % 2 === 0 ? "mr-auto" : "ml-auto"
+                }`}
               >
-                <span className="text-gray-800">{`${idx + 1}. ${
-                  email.email
-                }`}</span>
-                <button
-                  onClick={() => handleDelete(email._id)}
-                  className="bg-red-500 text-white py-1 px-3 rounded-lg shadow-md hover:bg-red-600 transform active:translate-y-0.5 transition-transform duration-150 ease-in-out"
-                >
-                  Delete
-                </button>
-              </li>
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-800">{`${idx + 1}. ${
+                    email.email
+                  }`}</span>
+                  <button
+                    onClick={() => handleDelete(email._id)}
+                    className="bg-red-500 text-white py-1 px-3 rounded-lg shadow-md hover:bg-red-600 transform active:translate-y-0.5 transition-transform duration-150 ease-in-out"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       )}
     </div>

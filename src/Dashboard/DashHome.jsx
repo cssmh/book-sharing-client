@@ -1,8 +1,8 @@
 import { Chart } from "react-google-charts";
 import useBookProviders from "../Hooks/useBookProviders";
-import ChartSkeleton from "../Components/AllSkeleton/ChartSkeleton";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import ChartSkeleton from "../Components/AllSkeleton/ChartSkeleton";
 
 const DashHome = () => {
   const axiosSecure = useAxiosSecure();
@@ -19,14 +19,14 @@ const DashHome = () => {
   const bookData = [
     ["Users", "Books"],
     ...((bookProviders &&
-      bookProviders.map((stat) => [stat?.email, stat?.count])) ||
+      bookProviders.map((stat) => [stat?.email, Number(stat?.count)])) ||
       []),
   ];
 
   const bookingData = [
     ["Month", "Books"],
     ...((allMonthlyStats &&
-      allMonthlyStats?.map((stat) => [stat?.month, stat?.count])) ||
+      allMonthlyStats?.map((stat) => [stat?.month, Number(stat?.count)])) ||
       []),
   ];
 

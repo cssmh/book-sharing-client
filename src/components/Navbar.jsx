@@ -18,9 +18,7 @@ const Navbar = () => {
 
   const location = useLocation();
   const getLinkClasses = (path) => {
-    return location.pathname === path
-      ? "bg-green-400 text-white"
-      : "";
+    return location.pathname === path ? "bg-green-400 text-white" : "";
   };
 
   const handleLogout = () => {
@@ -144,7 +142,9 @@ const Navbar = () => {
               <Link
                 to="/admin-dashboard"
                 className={`font-semibold flex items-center ${
-                  location.pathname === "/admin-dashboard" ? "text-green-500" : ""
+                  location.pathname === "/admin-dashboard"
+                    ? "text-green-500"
+                    : ""
                 }`}
               >
                 Dashboard
@@ -221,52 +221,46 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         {user && (
-          <div className="hidden md:block">
-            <Link to="/my-schedules">
-              <div
-                tabIndex={0}
-                role="button"
-                className={`${
-                  myProgress ? "animate-bounce" : ""
-                } btn btn-ghost btn-circle`}
-                style={{
-                  animationIterationCount: myProgress ? "4" : "initial",
-                }}
-              >
-                <div className="indicator">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
-                  </svg>
-                  <span
-                    className={`${
-                      myProgress ? "bg-green-400 text-white" : ""
-                    } badge badge-sm indicator-item`}
-                  >
-                    {totalCart || 0}
-                  </span>
-                </div>
+          <Link to="/my-schedules">
+            <div
+              tabIndex={0}
+              role="button"
+              className={`${
+                myProgress ? "animate-bounce" : ""
+              } btn btn-ghost btn-circle`}
+              style={{
+                animationIterationCount: myProgress ? "4" : "initial",
+              }}
+            >
+              <div className="indicator">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                  />
+                </svg>
+                <span
+                  className={`${
+                    myProgress ? "bg-green-400 text-white" : ""
+                  } badge badge-sm indicator-item`}
+                >
+                  {totalCart || 0}
+                </span>
               </div>
-            </Link>
-          </div>
+            </div>
+          </Link>
         )}
-        <div className="flex flex-col items-center justify-center font-semibold text-center text-sm mx-[8px] uppercase">
-          <p>{greeting}</p>
-          {user && (
-            <p className="max-w-[100px] truncate md:max-w-none md:whitespace-normal">
-              {user.displayName}
-            </p>
-          )}
+        <div className="flex flex-col items-center justify-center font-semibold text-center text-sm mr-2 md:mx-2">
+          <p className="uppercase">{greeting}</p>
+          {user && <p className="hidden md:block">{user.displayName}</p>}
         </div>
         {user?.email ? (
           <div ref={userRef} className="dropdown dropdown-end">
@@ -283,26 +277,30 @@ const Navbar = () => {
             {userDropdownVisible && (
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-44"
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-40"
               >
-                <li>
-                  <Link to="/user-analytics" className="btn btn-sm btn-ghost">
-                    User Analytics
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/my-profile" className="btn btn-sm btn-ghost">
-                    View Profile
-                  </Link>
-                </li>
-                <li>
-                  <button
-                    className="btn btn-sm btn-ghost"
-                    onClick={handleLogout}
-                  >
-                    Logout <FaArrowRightToBracket />
-                  </button>
-                </li>
+                <Link
+                  to="/user-analytics"
+                  className={`text-base font-semibold flex justify-center items-center px-[10px] py-[3px] rounded-xl ${getLinkClasses(
+                    "/user-analytics"
+                  )}`}
+                >
+                  User Analytics
+                </Link>
+                <Link
+                  to="/my-profile"
+                  className={`text-base font-semibold flex justify-center items-center px-[10px] py-[3px] rounded-xl ${getLinkClasses(
+                    "/my-profile"
+                  )}`}
+                >
+                  View Profile
+                </Link>
+                <button
+                  className="text-base font-semibold flex justify-center items-center px-[10px] py-1 rounded-full gap-1"
+                  onClick={handleLogout}
+                >
+                  Logout <FaArrowRightToBracket />
+                </button>
               </ul>
             )}
           </div>

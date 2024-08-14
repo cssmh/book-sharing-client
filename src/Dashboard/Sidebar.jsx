@@ -13,7 +13,7 @@ const Sidebar = () => {
   const [isActive, setActive] = useState(false);
   const sidebarRef = useRef(null);
   const buttonRef = useRef(null);
-  const { logOut } = useAuth();
+  const { user, logOut } = useAuth();
   const location = useLocation();
   const currentPath = location.pathname;
 
@@ -54,7 +54,7 @@ const Sidebar = () => {
   }, [isActive]);
 
   return (
-    <>
+    <div>
       <div className="bg-base-200 text-gray-800 flex justify-between md:hidden">
         <Link to="/" className="block cursor-pointer px-5 py-2 font-bold">
           <img src={logo} className="w-12" alt="Logo" />
@@ -67,7 +67,6 @@ const Sidebar = () => {
           <AiOutlineBars className="h-6 w-7" />
         </button>
       </div>
-
       {/* Sidebar */}
       <div
         ref={sidebarRef}
@@ -81,9 +80,14 @@ const Sidebar = () => {
               <img src={logo} className="h-14" alt="Logo" />
             </div>
           </Link>
-
+          {/* User Info */}
+          {user && (
+            <div className="flex items-center px-4 my-4 text-gray-600">
+              <span className="font-medium">Hi, {user?.displayName || "User"}</span>
+            </div>
+          )}
           {/* Nav Items */}
-          <nav className="space-y-2 mt-6">
+          <nav className="space-y-2 ">
             <SidebarLink
               to="/admin-dashboard"
               icon={<FaHome />}
@@ -122,7 +126,6 @@ const Sidebar = () => {
             />
           </nav>
         </div>
-
         <div>
           <hr />
           <button
@@ -134,7 +137,7 @@ const Sidebar = () => {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
