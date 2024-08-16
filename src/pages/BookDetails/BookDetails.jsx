@@ -92,10 +92,11 @@ const BookDetails = () => {
         </div>
         {bookData?.length > 1 && provider_email !== user?.email && (
           <div className="text-center mt-4">
-            <Link to={`/provider/${provider_email}`}>
-              <button className="btn btn-sm rounded-full btn-success text-white">
-                More Books of {provider_name}
-              </button>
+            <Link
+              className="btn btn-sm rounded-full btn-success text-white"
+              to={`/provider/${provider_email}`}
+            >
+              More Books of {provider_name}
             </Link>
           </div>
         )}

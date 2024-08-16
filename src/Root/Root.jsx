@@ -12,7 +12,6 @@ import AddBook from "../pages/AddBook/AddBook";
 import MyBooks from "../pages/MyBooks/MyBooks";
 import UpdateBook from "../pages/UpdateBook/UpdateBook";
 import MySchedules from "../pages/MySchedules/MySchedules";
-import SameProvider from "../pages/SameProvider/SameProvider";
 import DashLayout from "../Dashboard/DashLayout";
 import AdminBooks from "../Dashboard/AdminBooks";
 import AllBookings from "../Dashboard/AllBookings";
@@ -22,6 +21,7 @@ import DashHome from "../Dashboard/DashHome";
 import AdminRoute from "../Shared/PrivateRoute/AdminRoute";
 import UserAnalytics from "../Components/UserAnalytics";
 import AllUsers from "../Dashboard/AllUsers";
+import ProviderBooks from "../Pages/ProviderBooks/ProviderBooks";
 
 const Root = createBrowserRouter([
   {
@@ -89,7 +89,7 @@ const Root = createBrowserRouter([
         path: "/provider/:email",
         element: (
           <PrivateRoute>
-            <SameProvider />
+            <ProviderBooks />
           </PrivateRoute>
         ),
       },

@@ -150,8 +150,8 @@ const AddBooking = ({ getBookData }) => {
         </DialogActions>
         <DialogContent>
           <form onSubmit={handleAddBooking} className="md:w-[65%] mx-auto">
-            <div className="flex flex-col md:flex-row gap-3">
-              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+            <div className="flex flex-col md:flex-row gap-1 md:gap-3">
+              <div className="form-control md:w-1/2">
                 <label className="label">
                   <span className="label-text">Book Name</span>
                 </label>
@@ -164,7 +164,7 @@ const AddBooking = ({ getBookData }) => {
                   style={{ outline: "none" }}
                 />
               </div>
-              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+              <div className="form-control md:w-1/2">
                 <label className="label">
                   <span className="label-text">
                     Booking Date & Time (Today)
@@ -180,8 +180,8 @@ const AddBooking = ({ getBookData }) => {
                 />
               </div>
             </div>
-            <div className="flex flex-col md:flex-row gap-3">
-              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+            <div className="flex flex-col md:flex-row gap-1 md:gap-3">
+              <div className="form-control md:w-1/2">
                 <label className="label">
                   <span className="label-text">Book Provider Email</span>
                 </label>
@@ -194,7 +194,7 @@ const AddBooking = ({ getBookData }) => {
                   style={{ outline: "none" }}
                 />
               </div>
-              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+              <div className="form-control md:w-1/2">
                 <label className="label">
                   <span className="label-text">Your Email</span>
                 </label>
@@ -207,8 +207,8 @@ const AddBooking = ({ getBookData }) => {
                 />
               </div>
             </div>
-            <div className="flex flex-col md:flex-row gap-3">
-              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+            <div className="flex flex-col md:flex-row gap-1 md:gap-3">
+              <div className="form-control md:w-1/2">
                 <label className="label">
                   <span className="label-text">Your Phone Number</span>
                 </label>
@@ -221,7 +221,7 @@ const AddBooking = ({ getBookData }) => {
                   style={{ outline: "none" }}
                 />
               </div>
-              <div className="form-control md:w-1/2 mx-3 lg:mx-0">
+              <div className="form-control md:w-1/2">
                 <label className="label">
                   <span className="label-text">Your Location</span>
                 </label>
@@ -234,7 +234,7 @@ const AddBooking = ({ getBookData }) => {
                 />
               </div>
             </div>
-            <div className="form-control mx-3 lg:mx-0">
+            <div className="form-control">
               <label className="label">
                 <span className="label-text">
                   Any Message for Book Provider?
