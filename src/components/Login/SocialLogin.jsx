@@ -10,21 +10,29 @@ const SocialLogin = () => {
   const axiosSecure = useAxiosSecure();
   const { googleLogin } = useAuth();
 
-  const handleSocialLogin = () => {
-    googleLogin()
-      .then(async (res) => {
-        const userData = {
-          name: res?.user?.displayName,
-          email: res?.user?.email.toLowerCase(),
-          role: "guest",
-        };
+  const handleSocialLogin = async () => {
+    try {
+      const res = await googleLogin();
+      const userData = {
+        name: res?.user?.displayName,
+        email: res?.user?.email.toLowerCase(),
+        role: "guest",
+      };
+
+      try {
         await axiosSecure.put("/add-user", userData);
-        toast.success("User logged in success");
-        navigateTo(location?.state ? location.state : "/");
-      })
-      .catch((err) => {
-        toast.error(err.message);
-      });
+        toast.success("User logged in successfully");
+        navigateTo(location?.state || "/");
+      } catch (apiError) {
+        toast.error(
+          `Failed to add user: ${
+            apiError.response?.data?.message || apiError.message
+          }`
+        );
+      }
+    } catch (err) {
+      toast.error(`Login failed: ${err.message}`);
+    }
   };
 
   return (

@@ -21,7 +21,6 @@ import DashHome from "../Dashboard/DashHome";
 import AdminRoute from "../Shared/PrivateRoute/AdminRoute";
 import UserAnalytics from "../Components/UserAnalytics";
 import AllUsers from "../Dashboard/AllUsers";
-import ProviderBooks from "../Pages/ProviderBooks/ProviderBooks";
 
 const Root = createBrowserRouter([
   {
@@ -82,14 +81,6 @@ const Root = createBrowserRouter([
         element: (
           <PrivateRoute>
             <UpdateBook />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/provider/:email",
-        element: (
-          <PrivateRoute>
-            <ProviderBooks />
           </PrivateRoute>
         ),
       },

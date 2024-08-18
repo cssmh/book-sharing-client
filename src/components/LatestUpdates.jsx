@@ -1,4 +1,3 @@
-import React from "react";
 import swal from "sweetalert";
 import Banner from "../assets/Notified.jpg";
 import useAxiosPublic from "../Hooks/useAxiosPublic";

@@ -15,6 +15,6 @@ const useQueryPublic = (key, url) => {
 
 export default useQueryPublic;
 
-// used in DashHome, Count, AllBooksCols, AllBooks, MyBookingCard,
+// used in Count, AllBooksCols, AllBooks, MyBookingCard,
 // latestUpdates, DashHome, BookDetails, MyBookingCard, PopularBooks,
 // SameProviders, UpdateBook, MainLayout

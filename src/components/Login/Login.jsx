@@ -13,11 +13,11 @@ const Login = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [view, setView] = useState(true);
   const [pass, setPass] = useState(false);
+  const [loading, setLoading] = useState(false);
   const axiosSecure = useAxiosSecure();
   const location = useLocation();
   const navigateTo = useNavigate();
-  const { user, login, resetPassword, emailVerification, logOut, loading } =
-    useAuth();
+  const { user, login, resetPassword, emailVerification, logOut } = useAuth();
 
   useEffect(() => {
     if (
@@ -30,12 +30,13 @@ const Login = () => {
   }, [user?.emailVerified, user?.email, navigateTo]);
 
   const handleLogin = (e) => {
+    setLoading(true);
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const email = form.get("email");
     const password = form.get("password");
 
-    if (email == "Kona@mail.com" || email == "admin@admin.com") {
+    if (email === "Kona@mail.com" || email === "admin@admin.com") {
       login(email, password)
         .then(async (res) => {
           const userData = {
@@ -44,10 +45,11 @@ const Login = () => {
             role: "guest",
           };
           await axiosSecure.put("/add-user", userData);
-          toast.success("logged in successfully");
+          toast.success("Logged in successfully");
           navigateTo(location?.state || "/", { replace: true });
         })
-        .catch(() => toast.error("Incorrect Password. Please try again"));
+        .catch(() => toast.error("Incorrect Password. Please try again"))
+        .finally(() => setLoading(false));
     } else {
       login(email, password)
         .then(async (res) => {
@@ -71,7 +73,8 @@ const Login = () => {
             navigateTo(location?.state || "/", { replace: true });
           }
         })
-        .catch(() => toast.error("Invalid user password. Try again"));
+        .catch(() => toast.error("Invalid user password. Try again"))
+        .finally(() => setLoading(false));
     }
   };
 

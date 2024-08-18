@@ -90,16 +90,6 @@ const BookDetails = () => {
             Location: <span className="text-blue-500">{provider_location}</span>
           </p>
         </div>
-        {bookData?.length > 1 && provider_email !== user?.email && (
-          <div className="text-center mt-4">
-            <Link
-              className="btn btn-sm rounded-full btn-success text-white"
-              to={`/provider/${provider_email}`}
-            >
-              More Books of {provider_name}
-            </Link>
-          </div>
-        )}
       </div>
       <div className="max-w-[1200px] mx-auto flex flex-col lg:flex-row justify-center items-center gap-3 lg:gap-7 py-8">
         <div className="flex-1">
@@ -148,7 +138,7 @@ const BookDetails = () => {
           </p>
         </div>
       </div>
-      <div className="max-w-[1200px] mx-4 lg:mx-auto mb-8">
+      <div className="max-w-[1200px] mx-4 lg:mx-auto mb-4">
         <div className="flex gap-1">
           <button
             onClick={() => setDesc(true)}
@@ -173,6 +163,43 @@ const BookDetails = () => {
           </p>
         )}
       </div>
+      {bookData?.length > 1 && provider_email !== user?.email && (
+        <div className="max-w-[1200px] mx-4 lg:mx-auto mb-10">
+          <h2 className="text-2xl font-bold text-blue-900 mb-7">
+            More Books by {provider_name}
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+            {bookData
+              .filter((book) => book._id !== _id)
+              .map((book) => (
+                <div
+                  key={book._id}
+                  className="card bg-white shadow-md rounded-lg overflow-hidden"
+                >
+                  <img
+                    src={book.book_image}
+                    alt={book.book_name}
+                    className="w-24 h-32 mx-auto rounded-lg"
+                  />
+                  <div className="p-4">
+                    <h3 className="text-lg font-semibold text-blue-900">{book.book_name}</h3>
+                    <p className="text-gray-600">
+                      {book.description.length > 100
+                        ? `${book.description.slice(0, 100)}...`
+                        : book.description}
+                    </p>
+                    <Link
+                      to={`/book/${book._id}`}
+                      className="mt-2 btn btn-sm rounded-full btn-success text-white"
+                    >
+                      View Details
+                    </Link>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

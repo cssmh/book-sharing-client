@@ -1,3 +1,4 @@
+import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
@@ -94,7 +95,10 @@ const Register = () => {
           if (!res?.user?.emailVerified) {
             logOut().then().catch();
           }
-          toast.error("Sorry! Email verification Required");
+          swal("Sorry! Email verification Required", {
+            icon: "error",
+            timer: 2000,
+          });
           navigateTo("/login");
         } else {
           toast.error("User creation failed. Please try again.");

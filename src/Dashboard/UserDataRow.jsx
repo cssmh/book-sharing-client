@@ -3,6 +3,7 @@ import UpdateUserModal from "../Components/Modal/UpdateUserModal";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useAuth from "../Hooks/useAuth";
+import swal from "sweetalert";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
@@ -43,7 +44,10 @@ const UserDataRow = ({ user, refetch }) => {
         role,
       });
       if (res?.data?.modifiedCount > 0) {
-        toast.success(`updated to ${role}`);
+        swal(`updated to ${role}`, {
+          icon: "success",
+          timer: 2000,
+        });
         refetch();
         totalAdRefetch();
         if (userAuth?.email === user?.email && role === "guest") {
