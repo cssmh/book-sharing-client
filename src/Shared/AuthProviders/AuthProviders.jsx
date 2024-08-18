@@ -14,6 +14,7 @@ import {
   updatePassword,
   updateProfile,
 } from "firebase/auth";
+import { clearCookie } from "../../Api/auth";
 
 export const AuthContext = createContext(null);
 const googleProvider = new GoogleAuthProvider();
@@ -39,10 +40,10 @@ const AuthProviders = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const handleUpdateProfile = (name, photo) => {
+  const handleUpdateProfile = (name, image) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
-      photoURL: photo,
+      photoURL: image,
     });
   };
 
@@ -58,29 +59,14 @@ const AuthProviders = ({ children }) => {
     return sendEmailVerification(auth.currentUser);
   };
 
-  const logOut = () => {
+  const logOut = async () => {
+    await clearCookie();
     return signOut(auth);
   };
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      // console.log("user in ", currentUser);
       setUser(currentUser);
-      const getEmail = currentUser?.email || user?.email;
-      const emailToSend = { email: getEmail };
-      if (getEmail) {
-        await axiosNoToken
-          .post("/jwt", emailToSend, {
-            withCredentials: true,
-          })
-          .then((res) => console.log("login token response", res.data));
-      } else {
-        await axiosNoToken
-          .post("/logout", emailToSend, {
-            withCredentials: true,
-          })
-          .then((res) => console.log("logout token response", res.data));
-      }
       setLoading(false);
     });
     return () => {

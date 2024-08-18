@@ -46,8 +46,8 @@ const AllBooks = () => {
           type="text"
           name="name"
           onChange={handleSearch}
-          placeholder="Search for Books or Authors"
-          className="input h-[44px] input-bordered rounded-3xl min-w-[75%] md:min-w-[320px] border-red-500"
+          placeholder="Search for Books or Authors or Locations"
+          className="input h-[44px] input-bordered rounded-3xl min-w-[75%] md:min-w-[330px] border-red-500"
           style={{ outline: "none" }}
         />
       </div>

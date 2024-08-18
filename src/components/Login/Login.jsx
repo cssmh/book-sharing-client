@@ -6,15 +6,14 @@ import { TbFidgetSpinner } from "react-icons/tb";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import ResetPassModal from "../Modal/ResetPassModal";
+import { saveUser, setToken } from "../../Api/auth";
 
 const Login = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [view, setView] = useState(true);
   const [pass, setPass] = useState(false);
   const [loading, setLoading] = useState(false);
-  const axiosSecure = useAxiosSecure();
   const location = useLocation();
   const navigateTo = useNavigate();
   const { user, login, resetPassword, emailVerification, logOut } = useAuth();
@@ -29,52 +28,39 @@ const Login = () => {
     }
   }, [user?.emailVerified, user?.email, navigateTo]);
 
-  const handleLogin = (e) => {
-    setLoading(true);
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const form = new FormData(e.currentTarget);
     const email = form.get("email");
     const password = form.get("password");
 
-    if (email === "Kona@mail.com" || email === "admin@admin.com") {
-      login(email, password)
-        .then(async (res) => {
-          const userData = {
-            name: res?.user?.displayName,
-            email: res?.user?.email.toLowerCase(),
-            role: "guest",
-          };
-          await axiosSecure.put("/add-user", userData);
-          toast.success("Logged in successfully");
-          navigateTo(location?.state || "/", { replace: true });
-        })
-        .catch(() => toast.error("Incorrect Password. Please try again"))
-        .finally(() => setLoading(false));
-    } else {
-      login(email, password)
-        .then(async (res) => {
-          const userData = {
-            name: res?.user?.displayName,
-            email: res?.user?.email.toLowerCase(),
-            role: "guest",
-          };
-          await axiosSecure.put("/add-user", userData);
-          if (!res?.user?.emailVerified) {
-            emailVerification()
-              .then(() => {
-                toast.success("We sent you a verification email");
-              })
-              .catch();
-            logOut().then().catch();
-            toast.error("Verify your Email first please!");
-            return;
-          } else {
-            toast.success("Logged in successfully");
-            navigateTo(location?.state || "/", { replace: true });
-          }
-        })
-        .catch(() => toast.error("Invalid user password. Try again"))
-        .finally(() => setLoading(false));
+    try {
+      let res;
+      // Special case for specific emails
+      if (email === "Kona@mail.com" || email === "admin@admin.com") {
+        res = await login(email, password);
+      } else {
+        res = await login(email, password);
+
+        if (!res?.user?.emailVerified) {
+          await emailVerification();
+          toast.success("We sent you a verification email");
+          await logOut();
+          toast.error("Verify your Email first, please!");
+          return;
+        }
+      }
+
+      // Common success actions
+      await setToken(res.user?.email);
+      await saveUser(res?.user);
+      toast.success("Logged in successfully");
+      navigateTo(location?.state || "/", { replace: true });
+    } catch (error) {
+      toast.error("Invalid user password. Try again");
+    } finally {
+      setLoading(false);
     }
   };
 

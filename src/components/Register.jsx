@@ -6,17 +6,16 @@ import { TbFidgetSpinner } from "react-icons/tb";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { saveUser } from "../Api/auth";
 
 const Register = () => {
   const [view, setView] = useState(true);
   const [password, setPassword] = useState("");
-  const [pass, setPass] = useState(false);
+  const [isPasswordEntered, setIsPasswordEntered] = useState(false);
   const [passError, setPassError] = useState("");
   const [passSuccess, setPassSuccess] = useState("");
   const location = useLocation();
   const navigateTo = useNavigate();
-  const axiosSecure = useAxiosSecure();
   const {
     user,
     createUser,
@@ -53,60 +52,53 @@ const Register = () => {
   };
 
   const handlePasswordChange = (e) => {
-    const password = e.target.value;
-    setPassword(password);
-    validatePassword(password);
-    if (password.length > 0) {
-      setPass(true);
-    } else {
-      setPass(false);
-    }
+    const passwordValue = e.target.value;
+    setPassword(passwordValue);
+    validatePassword(passwordValue);
+    setIsPasswordEntered(passwordValue.length > 0);
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const name = form.get("name");
-    const image = form.get("photo");
-    const defaultImage =
+    const image =
+      form.get("photo") ||
       "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/default.jpg";
-    const photo = image || defaultImage;
     const email = form.get("email");
+    const password = form.get("password");
 
     if (passError) return;
 
-    createUser(email, password)
-      .then(async (res) => {
-        const userData = {
-          name: name,
-          email: email.toLowerCase(),
-          role: "guest",
-        };
-        await axiosSecure.put("/add-user", userData);
-        // Ensure the user is authenticated before calling emailVerification
-        if (res?.user) {
-          await handleUpdateProfile(name, photo).then(() => {
-            emailVerification().then(() =>
-              toast.success(
-                "Register success! Check your inbox for a verification email!"
-              )
-            );
-          });
-          if (!res?.user?.emailVerified) {
-            logOut().then().catch();
+    try {
+      const res = await createUser(email, password);
+      if (res?.user) {
+        await saveUser(res.user);
+        try {
+          await handleUpdateProfile(name, image);
+          await emailVerification();
+          toast.success(
+            "Register success! Check your inbox for a verification email!"
+          );
+
+          if (!res.user.emailVerified) {
+            await logOut();
+            swal("Sorry! Email verification required", {
+              icon: "error",
+              timer: 2000,
+            });
           }
-          swal("Sorry! Email verification Required", {
-            icon: "error",
-            timer: 2000,
-          });
+
           navigateTo("/login");
-        } else {
-          toast.error("User creation failed. Please try again.");
+        } catch (profileError) {
+          toast.error("Profile update failed. Please try again.");
         }
-      })
-      .catch((err) => {
-        toast.error(err.message);
-      });
+      } else {
+        toast.error("User creation failed. Please try again.");
+      }
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 
   return (
@@ -182,11 +174,12 @@ const Register = () => {
                 name="password"
                 type={view ? "password" : "text"}
                 required
+                value={password}
                 onChange={handlePasswordChange}
                 className="appearance-none rounded-md relative block w-full px-3 py-[10px] border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
                 placeholder="Password"
               />
-              {pass && (
+              {isPasswordEntered && (
                 <span
                   className="absolute top-9 right-2 text-gray-500 cursor-pointer"
                   onClick={() => setView(!view)}
@@ -197,10 +190,10 @@ const Register = () => {
               <div className="min-h-[1.5rem] mb-[6px] mt-[2px]">
                 <span
                   className={`${
-                    passError.length > 0 ? "text-red-600" : "text-green-600"
+                    passError ? "text-red-600" : "text-green-600"
                   } text-sm font-normal mt-4`}
                 >
-                  <p>{passError.length > 0 ? passError : passSuccess}</p>
+                  <p>{passError || passSuccess}</p>
                 </span>
               </div>
             </div>

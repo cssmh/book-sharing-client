@@ -2,25 +2,19 @@ import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { saveUser, setToken } from "../../Api/auth";
 
 const SocialLogin = () => {
   const navigateTo = useNavigate();
   const location = useLocation();
-  const axiosSecure = useAxiosSecure();
   const { googleLogin } = useAuth();
 
   const handleSocialLogin = async () => {
     try {
       const res = await googleLogin();
-      const userData = {
-        name: res?.user?.displayName,
-        email: res?.user?.email.toLowerCase(),
-        role: "guest",
-      };
-
+      await setToken(res.user?.email);
       try {
-        await axiosSecure.put("/add-user", userData);
+        await saveUser(res?.user);
         toast.success("User logged in successfully");
         navigateTo(location?.state || "/");
       } catch (apiError) {
