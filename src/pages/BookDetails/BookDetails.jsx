@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet-async";
 import AddBooking from "../AddBooking/AddBooking";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useMyBooks from "../../Hooks/useMyBooks";
+import useProvBooks from "../../Hooks/useProvBooks";
 import useQueryPublic from "../../Hooks/useQueryPublic";
 import useAdmin from "../../Hooks/useAdmin";
 import SmallLoader from "../../Components/SmallLoader";
@@ -24,8 +24,8 @@ const BookDetails = () => {
     refetch,
   } = useQueryPublic(["loadBookData", id], `/book/${id}`);
 
-  const url = `/my-books?email=${loadBookData?.provider_email}`;
-  const { isLoading, bookData } = useMyBooks(url);
+  const url = `/providers-books?email=${loadBookData?.provider_email}`;
+  const { isLoading, bookData } = useProvBooks(url);
 
   const handleDeleteByAdmin = (idx, book) => {
     swal({
@@ -174,23 +174,23 @@ const BookDetails = () => {
               .map((book) => (
                 <div
                   key={book._id}
-                  className="card bg-white shadow-md rounded-lg overflow-hidden"
+                  className="card flex flex-col bg-white shadow-md rounded-lg overflow-hidden"
                 >
-                  <img
-                    src={book.book_image}
-                    alt={book.book_name}
-                    className="w-24 h-32 mx-auto rounded-lg"
-                  />
-                  <div className="p-4">
-                    <h3 className="text-lg font-semibold text-blue-900">{book.book_name}</h3>
-                    <p className="text-gray-600">
-                      {book.description.length > 100
-                        ? `${book.description.slice(0, 100)}...`
-                        : book.description}
-                    </p>
+                  <div className="flex-grow px-4 py-2">
+                    <img
+                      src={book.book_image}
+                      alt={book.book_name}
+                      className="w-24 h-32 mx-auto rounded-lg"
+                    />
+                    <h3 className="text-lg font-semibold text-blue-900">
+                      {book.book_name}
+                    </h3>
+                    <p className="text-gray-600 truncate">{book.description}</p>
+                  </div>
+                  <div className="px-3 pb-3">
                     <Link
                       to={`/book/${book._id}`}
-                      className="mt-2 btn btn-sm rounded-full btn-success text-white"
+                      className="btn btn-sm rounded-full btn-success text-white"
                     >
                       View Details
                     </Link>

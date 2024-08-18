@@ -6,7 +6,7 @@ import updateImage from "../../assets/DocUpdate.png";
 import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useMyBooks from "../../Hooks/useMyBooks";
+import useProvBooks from "../../Hooks/useProvBooks";
 import useQueryPublic from "../../Hooks/useQueryPublic";
 import SmallLoader from "../../Components/SmallLoader";
 
@@ -16,8 +16,8 @@ const UpdateBook = () => {
   const navigateTo = useNavigate();
   const axiosSecure = useAxiosSecure();
 
-  const url = `/my-books?email=${user?.email}`;
-  const { isLoading: loading, bookData: myBooks } = useMyBooks(url);
+  const url = `/providers-books?email=${user?.email}`;
+  const { isLoading: loading, bookData: myBooks } = useProvBooks(url);
 
   const {
     data: bookData,

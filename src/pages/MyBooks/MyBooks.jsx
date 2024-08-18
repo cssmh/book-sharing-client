@@ -1,13 +1,13 @@
 import { Helmet } from "react-helmet-async";
 import MyBooksCard from "../MyBooksCard/MyBooksCard";
 import useAuth from "../../Hooks/useAuth";
-import useMyBooks from "../../Hooks/useMyBooks";
+import useProvBooks from "../../Hooks/useProvBooks";
 import MyBookSke from "../../Components/AllSkeleton/MyBookSke";
 
 const MyBooks = () => {
   const { user } = useAuth();
-  const url = `/my-books?email=${user?.email}`;
-  const { isLoading, bookData, error, refetch } = useMyBooks(url);
+  const url = `/providers-books?email=${user?.email}`;
+  const { isLoading, bookData, error, refetch } = useProvBooks(url);
 
   if (isLoading)
     return (

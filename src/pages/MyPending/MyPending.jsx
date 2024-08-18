@@ -2,15 +2,15 @@ import MyPendingCard from "../MyPendingCard/MyPendingCard";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useMyBooks from "../../Hooks/useMyBooks";
+import useProvBooks from "../../Hooks/useProvBooks";
 import MyBookSke from "../../Components/AllSkeleton/MyBookSke";
 
 const MyPending = () => {
   const { loading, user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const url = `/my-books?email=${user?.email}`;
+  const url = `/providers-books?email=${user?.email}`;
   // to show "You have No added Books" message only
-  const { isLoading: myBooksLoading, bookData } = useMyBooks(url);
+  const { isLoading: myBooksLoading, bookData } = useProvBooks(url);
 
   const {
     isLoading: idLoading,

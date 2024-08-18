@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
-import useMyBooks from "../Hooks/useMyBooks";
+import useProvBooks from "../Hooks/useProvBooks";
 import { FaEdit, FaKey } from "react-icons/fa";
 import BGBlue from "../assets/Notified.jpg";
 import EditProfileModal from "./Modal/EditProfileModal";
@@ -16,8 +16,8 @@ const MyProfile = () => {
   const { user, handleUpdateProfile, changePassword } = useAuth();
   const { photoURL, email, displayName, metadata, reloadUserInfo } = user;
 
-  const url = `/my-books?email=${user?.email}`;
-  const { bookData } = useMyBooks(url);
+  const url = `/providers-books?email=${user?.email}`;
+  const { bookData } = useProvBooks(url);
 
   const [newName, setNewName] = useState(displayName);
   const [newPhoto, setNewPhoto] = useState(photoURL);
