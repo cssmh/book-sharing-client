@@ -13,7 +13,7 @@ const useMyBooks = (url) => {
     refetch,
   } = useQuery({
     enabled: !loading && !!user?.email,
-    queryKey: ["myBooks", url],
+    queryKey: ["ProvBooks", url],
     queryFn: async () => {
       const res = await axiosNoToken.get(url);
       return res?.data;

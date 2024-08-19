@@ -1,22 +1,19 @@
-import useAxiosPublic from "./useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import { getAllBooks, getBookProviders } from "../Api/books";
 
 const useBookProviders = () => {
-  const axiosNoToken = useAxiosPublic();
-
-  const { data: totalBooks, isLoading } = useQuery({
+  const { data: totalBooks = 0, isLoading } = useQuery({
     queryKey: ["totalBooks"],
     queryFn: async () => {
-      const res = await axiosNoToken.get("/all-books");
-      return res.data.totalBooks;
+      const res = await getAllBooks();
+      return res.totalBooks.totalBooks;
     },
   });
 
   const { data: bookProviders = [], isLoading: providerLoading } = useQuery({
     queryKey: ["bookProviders"],
     queryFn: async () => {
-      const res = await axiosNoToken.get("/book-providers");
-      return res?.data;
+      return getBookProviders();
     },
   });
   return { isLoading, totalBooks, providerLoading, bookProviders };

@@ -18,13 +18,21 @@ export const userLogout = async () => {
   return await signOut(auth);
 };
 
+// Get token from server
+export const setToken = async (email) => {
+  const { data } = await axiosSecure.post("/jwt", { email });
+  // console.log("login user", data);
+  return data;
+};
+
+// Clear token from browser
 export const clearCookie = async () => {
   const { data } = await axiosSecure.get("/logout");
   return data;
 };
 
-export const setToken = async (email) => {
-  const { data } = await axiosSecure.post("/jwt", { email });
-  // console.log("login user", data);
+// Get user role
+export const getRole = async (email) => {
+  const { data } = await axiosSecure(`/role/${email}`);
   return data;
 };

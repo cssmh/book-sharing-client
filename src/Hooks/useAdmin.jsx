@@ -1,16 +1,14 @@
 import useAuth from "./useAuth";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "./useAxiosSecure";
+import { getRole } from "../Api/auth";
 
 const useAdmin = () => {
   const { loading, user } = useAuth();
-  const axiosSecure = useAxiosSecure();
 
   const { data: role = " ", isLoading: roleLoading } = useQuery({
     queryKey: ["role", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/role/${user?.email}`);
-      return res?.data;
+      return getRole(user?.email);
     },
     enabled: !loading && !!user?.email,
   });

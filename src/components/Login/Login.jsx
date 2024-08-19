@@ -64,18 +64,22 @@ const Login = () => {
     }
   };
 
-  const handleForgotPassword = (e) => {
+  const handleForgotPassword = async (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      toast.error("Please provide a valid email address");
-      return;
-    } else {
-      resetPassword(email)
-        .then(() => toast.success("Reset email sent to your mail."))
-        .catch((err) => toast.error(err.message));
+
+    try {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        toast.error("Please provide a valid email address");
+        return;
+      }
+
+      await resetPassword(email);
+      toast.success("Reset email sent to your mail.");
       setIsOpen(false);
+    } catch (err) {
+      toast.error(err.message);
     }
   };
 
