@@ -10,7 +10,6 @@ export const saveUser = async (user) => {
     role: "guest",
   };
   const { data } = await axiosSecure.put("/add-user", currentUser);
-
   return data;
 };
 

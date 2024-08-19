@@ -18,6 +18,7 @@ const useAxiosSecure = () => {
         return res;
       },
       (error) => {
+        console.log("old interceptor", error);
         // console.log("error in interceptor", error.response);
         if (
           error.response &&

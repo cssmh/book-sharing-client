@@ -9,6 +9,7 @@ const axiosSecure = axios.create({
 axiosSecure.interceptors.response.use(
   (response) => response,
   async (error) => {
+    console.log("new interceptor", error);
     if (error.response.status === 401 || error.response.status === 403) {
       await clearCookie();
       toast.error("Your Session has expired! Please log in again to continue");

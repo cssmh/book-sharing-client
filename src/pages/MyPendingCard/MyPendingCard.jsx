@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import swal from "sweetalert";
+import {
+  addTimeBooking,
+  updateBookingStatus,
+  updateBookStatus,
+} from "../../Api/bookings";
 
 const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
   const {
@@ -19,49 +22,33 @@ const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
     completed_at,
   } = getPending;
 
-  const axiosSecure = useAxiosSecure();
   const [todayDateTime, setTodayDateTime] = useState("");
 
-  const handleUpdateStatus = (e, idx, book_id, provider_email) => {
+  const handleUpdateStatus = async (e, idx, book_id, provider_email) => {
     const updatedPendingStatus = e.target.value;
     const bookStatus =
       updatedPendingStatus === "Pending" || updatedPendingStatus === "Progress"
         ? "available"
         : "Unavailable";
 
-    axiosSecure
-      .put(`/booking-status/${idx}/${provider_email}`, {
-        updatedPendingStatus,
-      })
-      .then((res) => {
-        if (res.data?.modifiedCount > 0) {
-          swal({
-            title: "Thank You!",
-            text: `Updated to ${updatedPendingStatus}`,
-            icon: "success",
-            timer: 2000,
-          });
-          refetch();
-        }
-        axiosSecure
-          .put(`/book-status/${book_id}/${provider_email}`, { bookStatus })
-          .then()
-          .catch((err) => {
-            toast.error(err);
-          });
-        if (updatedPendingStatus === "Completed") {
-          axiosSecure
-            .put(`/add-time/${idx}/${provider_email}`, { todayDateTime })
-            .then(() => {
-              refetch();
-              refetchIds();
-            })
-            .catch();
-        }
-      })
-      .catch((err) => {
-        toast.error(err);
+    const res = await updateBookingStatus(
+      idx,
+      provider_email,
+      updatedPendingStatus
+    );
+    if (res.modifiedCount > 0) {
+      swal({
+        title: "Thank You!",
+        text: `Updated to ${updatedPendingStatus}`,
+        icon: "success",
+        timer: 2000,
       });
+      refetch();
+    }
+    await updateBookStatus(book_id, provider_email, bookStatus);
+    if (updatedPendingStatus === "Completed") {
+      await addTimeBooking(idx, provider_email, todayDateTime);
+    }
   };
 
   // Set today's date and time for completed booking

@@ -4,13 +4,12 @@ import toast from "react-hot-toast";
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useMyCart from "../../Hooks/useMyCart";
+import { getBookings } from "../../Api/bookings";
 
 const AddBooking = ({ getBookData }) => {
   const { user } = useAuth();
-  const axiosSecure = useAxiosSecure();
   const axiosNoToken = useAxiosPublic();
   const { cartRefetch } = useMyCart();
 
@@ -26,8 +25,7 @@ const AddBooking = ({ getBookData }) => {
   const { data: allBookings = [], refetch } = useQuery({
     queryKey: ["bookings", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/my-bookings?email=${user?.email}`);
-      return res?.data;
+      return getBookings(user?.email)
     },
   });
 

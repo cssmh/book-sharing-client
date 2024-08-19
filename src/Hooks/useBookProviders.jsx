@@ -2,11 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import { getAllBooks, getBookProviders } from "../Api/books";
 
 const useBookProviders = () => {
-  const { data: totalBooks = 0, isLoading } = useQuery({
+  const { data: totalBooks, isLoading } = useQuery({
     queryKey: ["totalBooks"],
     queryFn: async () => {
       const res = await getAllBooks();
-      return res.totalBooks.totalBooks;
+      return res.totalBooks?.totalBooks || 0;
     },
   });
 
