@@ -266,11 +266,12 @@ const Navbar = () => {
           <div ref={userRef} className="dropdown dropdown-end">
             <label
               tabIndex={0}
+              className="cursor-pointer flex items-center"
               onClick={() => setUserDropdownVisible((prev) => !prev)}
             >
               <img
                 src={user.photoURL || defaultAvatar}
-                className="w-10 rounded-full"
+                className="w-10 rounded-full hover:shadow-lg transition-shadow duration-300 ease-in-out"
                 alt="ava"
               />
             </label>
@@ -296,7 +297,7 @@ const Navbar = () => {
                   View Profile
                 </Link>
                 <button
-                  className="text-base font-semibold flex justify-center items-center px-[10px] py-1 rounded-full gap-1"
+                  className="text-base hover:bg-gray-100 font-semibold flex justify-center items-center px-[10px] py-1 rounded-full gap-1 transform active:translate-y-0.5 transition-transform duration-150 ease-in-out"
                   onClick={handleLogout}
                 >
                   Logout <FaArrowRightToBracket />

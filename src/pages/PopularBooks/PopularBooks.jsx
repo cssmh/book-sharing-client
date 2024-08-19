@@ -8,7 +8,7 @@ import SkeletonCard from "../../Components/AllSkeleton/SkeletonCard";
 import PopularBookCard from "../PopularBookCard/PopularBookCard";
 import { useEffect, useState } from "react";
 import useResLimit from "../../Hooks/useResLimit";
-import useQueryPublic from "../../Hooks/useQueryPublic";
+import useDataQuery from "../../Hooks/useDataQuery";
 
 const PopularBooks = () => {
   const isMobile = useResLimit("(max-width: 767px)");
@@ -22,7 +22,7 @@ const PopularBooks = () => {
     isLoading,
     error,
     data: popularBooks,
-  } = useQueryPublic(["popularBooks"], "/all-books?limit=6");
+  } = useDataQuery(["popularBooks"], "/all-books?limit=6");
 
   if (isLoading) {
     return (

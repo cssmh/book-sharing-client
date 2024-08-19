@@ -6,9 +6,9 @@ import updateImage from "../../assets/DocUpdate.png";
 import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useProvBooks from "../../Hooks/useProvBooks";
 import useQueryPublic from "../../Hooks/useQueryPublic";
 import SmallLoader from "../../Components/SmallLoader";
+import useDataQuery from "../../Hooks/useDataQuery";
 
 const UpdateBook = () => {
   const { user } = useAuth();
@@ -17,7 +17,10 @@ const UpdateBook = () => {
   const axiosSecure = useAxiosSecure();
 
   const url = `/providers-books?email=${user?.email}`;
-  const { isLoading: loading, bookData: myBooks } = useProvBooks(url);
+  const { isLoading: loading, data: myBooks = [] } = useDataQuery(
+    ["myBooks"],
+    url
+  );
 
   const {
     data: bookData,

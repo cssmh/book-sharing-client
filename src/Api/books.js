@@ -1,8 +1,13 @@
 import axiosSecure from ".";
 
+export const postBook = async (BookInformation) => {
+  const { data } = await axiosSecure.post("/book", BookInformation);
+  return data;
+};
+
 // get all books
-export const getAllBooks = async (page, limit, searchTerm) => {
-  const url = `/all-books?page=${page}&limit=${limit}&search=${searchTerm}`;
+export const getAllBooks = async (page = 1, limit = 1) => {
+  const url = `/all-books?page=${page}&limit=${limit}`;
   const { data } = await axiosSecure(url);
   return data;
 };
@@ -19,5 +24,11 @@ export const getUnavailableIds = async (email) => {
 
 export const getEmails = async () => {
   const { data } = await axiosSecure("/emails");
+  return data;
+};
+
+// post email
+export const postEmail = async (email) => {
+  const { data } = await axiosSecure.post("/email", { email });
   return data;
 };

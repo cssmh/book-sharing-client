@@ -5,11 +5,10 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useBookProviders from "../Hooks/useBookProviders";
 import { Helmet } from "react-helmet-async";
 import SmallLoader from "../Components/SmallLoader";
-import useAxiosPublic from "../Hooks/useAxiosPublic";
+import { getAllBooks } from "../Api/books";
 
 const AdminBooks = () => {
   const axiosSecure = useAxiosSecure();
-  const axiosNoToken = useAxiosPublic();
   const { totalBooks, bookProviders } = useBookProviders();
   const [limit, setLimit] = useState(6);
 
@@ -19,10 +18,7 @@ const AdminBooks = () => {
     refetch,
   } = useQuery({
     queryKey: ["allBookings", limit],
-    queryFn: async () => {
-      const res = await axiosNoToken.get(`/all-books?limit=${limit}`);
-      return res?.data;
-    },
+    queryFn:  () => getAllBooks(undefined, limit),
     keepPreviousData: true, // Ensure old data is kept
   });
 

@@ -3,11 +3,11 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
-import useProvBooks from "../Hooks/useProvBooks";
 import { FaEdit, FaKey } from "react-icons/fa";
 import BGBlue from "../assets/Notified.jpg";
 import EditProfileModal from "./Modal/EditProfileModal";
 import ChangePassModal from "./Modal/ChangePassModal";
+import useDataQuery from "../Hooks/useDataQuery";
 
 const MyProfile = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +17,7 @@ const MyProfile = () => {
   const { photoURL, email, displayName, metadata, reloadUserInfo } = user;
 
   const url = `/providers-books?email=${user?.email}`;
-  const { bookData } = useProvBooks(url);
+  const { data: bookData = [] } = useDataQuery(["myBooks"], url);
 
   const [newName, setNewName] = useState(displayName);
   const [newPhoto, setNewPhoto] = useState(photoURL);

@@ -1,13 +1,18 @@
 import { Helmet } from "react-helmet-async";
 import MyBooksCard from "../MyBooksCard/MyBooksCard";
 import useAuth from "../../Hooks/useAuth";
-import useProvBooks from "../../Hooks/useProvBooks";
 import MyBookSke from "../../Components/AllSkeleton/MyBookSke";
+import useDataQuery from "../../Hooks/useDataQuery";
 
 const MyBooks = () => {
   const { user } = useAuth();
   const url = `/providers-books?email=${user?.email}`;
-  const { isLoading, bookData, error, refetch } = useProvBooks(url);
+  const {
+    isLoading,
+    data: bookData = [],
+    error,
+    refetch,
+  } = useDataQuery(["myBooks"], url);
 
   if (isLoading)
     return (
@@ -46,8 +51,7 @@ const MyBooks = () => {
       ) : (
         <div>
           <p className="bg-gray-800 text-white md:px-7 py-2 md:py-4 md:flex flex-col md:flex-row justify-between items-center relative text-center text-[21px] mb-2 font-semibold">
-            <span>All Books Added By You</span> (
-            {bookData?.length})
+            <span>All Books Added By You</span> ({bookData?.length})
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-1 md:px-4 py-2 md:mx-5">
             {bookData.map((book) => (

@@ -10,6 +10,7 @@ const Count = () => {
     ["totalBookings"],
     "/total-bookings"
   );
+
   const loading = isLoading || bookingLoading;
 
   const [inView, setInView] = useState(false);

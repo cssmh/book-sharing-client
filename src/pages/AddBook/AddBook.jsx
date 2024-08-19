@@ -4,14 +4,19 @@ import useAuth from "../../Hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 import addBook from "../../assets/DataAdd.png";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import useProvBooks from "../../Hooks/useProvBooks";
 import SmallLoader from "../../Components/SmallLoader";
+import useDataQuery from "../../Hooks/useDataQuery";
+import { postBook } from "../../Api/books";
 
 const AddBook = () => {
   const { user } = useAuth();
   const axiosNoToken = useAxiosPublic();
   const url = `/providers-books?email=${user?.email}`;
-  const { isLoading, bookData: myBooks, refetch } = useProvBooks(url);
+  const {
+    isLoading,
+    data: myBooks = [],
+    refetch,
+  } = useDataQuery(["myBooks"], url);
 
   // Create a new Date object for today's date
   let today = new Date();
@@ -37,7 +42,7 @@ const AddBook = () => {
   let year = today.getFullYear();
   let todaysDate = `${month} ${day}, ${year}`;
 
-  const handleAddBook = (e) => {
+  const handleAddBook = async (e) => {
     e.preventDefault();
     const form = e.target;
     const book_name = form.book_name.value;
@@ -76,24 +81,21 @@ const AddBook = () => {
       book_status,
     };
 
-    axiosNoToken
-      .post("/book", BookInformation)
-      .then((res) => {
-        if (res.data?.insertedId) {
-          swal({
-            title: "Thank You!",
-            text: `${book_name} added`,
-            icon: "success",
-            timer: 2000,
-          });
-          form.reset();
-          refetch();
-        }
-      })
-      .catch((error) => {
-        toast.error("Failed to add the book. Please try again.");
-        console.error(error);
-      });
+    try {
+      const res = await postBook(BookInformation);
+      if (res?.insertedId) {
+        swal({
+          title: "Thank You!",
+          text: `${book_name} added`,
+          icon: "success",
+          timer: 2000,
+        });
+        form.reset();
+        refetch();
+      }
+    } catch (error) {
+      toast.error("Failed to add the book. Please try again.");
+    }
   };
 
   if (isLoading) return <SmallLoader />;

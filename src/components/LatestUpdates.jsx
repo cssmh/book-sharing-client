@@ -1,7 +1,7 @@
 import swal from "sweetalert";
 import Banner from "../assets/Notified.jpg";
-import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useQueryPublic from "../Hooks/useQueryPublic";
+import { postEmail } from "../Api/books";
 
 const BannerImg = {
   backgroundImage: `url(${Banner})`,
@@ -15,7 +15,6 @@ const BannerImg = {
 const emailCheck = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
 const LatestUpdates = () => {
-  const axiosNoToken = useAxiosPublic();
   const { data, refetch } = useQueryPublic(["userEmails"], "/emails");
   const existingEmails = data?.map((user) => user?.email);
 
@@ -42,8 +41,8 @@ const LatestUpdates = () => {
     }
 
     try {
-      const res = await axiosNoToken.post("/email", { email });
-      if (res.data?.insertedId) {
+      const res = await postEmail(email);
+      if (res?.insertedId) {
         swal({
           title: "Thank you",
           text: `We will update you via ${email}`,

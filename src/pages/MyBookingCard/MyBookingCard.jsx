@@ -108,7 +108,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
           <button
             type="button"
             onClick={() => setIsOpen(true)}
-            className="bg-blue-600 text-white py-1 px-3 rounded-md shadow-sm"
+            className="bg-primary outline-none text-white py-1 px-3 rounded-md shadow-sm"
           >
             Add a Review
           </button>

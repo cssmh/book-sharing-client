@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import AllBooksCard from "../AllBooksCard/AllBooksCard";
 import useResLimit from "../../Hooks/useResLimit";
-import useQueryPublic from "../../Hooks/useQueryPublic";
 import SkeletonCard from "../../Components/AllSkeleton/SkeletonCard";
+import useDataQuery from "../../Hooks/useDataQuery";
 
 const AllBooks = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -17,7 +17,7 @@ const AllBooks = () => {
   }, [isMobile]);
 
   const url = `/all-books?page=${page}&limit=${limit}&search=${searchTerm}`;
-  const { data = [], isLoading } = useQueryPublic(
+  const { data = [], isLoading } = useDataQuery(
     ["allBooksData", page, limit, searchTerm],
     url
   );

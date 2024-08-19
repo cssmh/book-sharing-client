@@ -27,31 +27,29 @@ const ReviewModal = ({ closeModal, book_name, isOpen, handleAddReview }) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-xl bg-white p-6 text-left align-middle shadow-lg transition-all">
+              <Dialog.Panel className="w-full max-w-xl transform overflow-hidden rounded-xl bg-white p-6 text-left align-middle shadow-lg transition-all">
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-semibold text-gray-900 mb-4 text-center"
                 >
                   {book_name} Book Review
                 </Dialog.Title>
-                <form onSubmit={handleAddReview} className="mt-4">
-                  <div className="mb-4">
-                    <label htmlFor="review" className="sr-only">
-                      Review
-                    </label>
-                    <textarea
-                      id="review"
-                      name="review"
-                      rows="8"
-                      required
-                      placeholder="Share your experience..."
-                      className="text-sm w-full rounded-lg border border-gray-300 p-2 focus:border-transparent focus:ring-2 focus:ring-green-500"
-                      aria-label="Share your experience"
-                    ></textarea>
-                  </div>
+                <form onSubmit={handleAddReview} className="mt-3">
+                  <label htmlFor="review" className="sr-only">
+                    Review
+                  </label>
+                  <textarea
+                    id="review"
+                    name="review"
+                    rows="7"
+                    required
+                    placeholder="Share your experience..."
+                    className="text-sm w-full rounded-lg border border-gray-300 p-2 focus:border-transparent focus:ring-2 focus:ring-green-500"
+                    aria-label="Share your experience"
+                  ></textarea>
                   <button
                     type="submit"
-                    className="w-full bg-green-600 py-2 rounded-lg text-white mt-4 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full bg-green-400 py-2 rounded-xl text-white mt-4 focus:outline-none focus:ring-2 focus:ring-green-500"
                   >
                     Submit
                   </button>

@@ -4,12 +4,11 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import AddBooking from "../AddBooking/AddBooking";
 import useAuth from "../../Hooks/useAuth";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useProvBooks from "../../Hooks/useProvBooks";
 import useQueryPublic from "../../Hooks/useQueryPublic";
 import useAdmin from "../../Hooks/useAdmin";
 import SmallLoader from "../../Components/SmallLoader";
 import { deleteBook } from "../../Api/Delete";
+import useDataQuery from "../../Hooks/useDataQuery";
 
 const BookDetails = () => {
   const [desc, setDesc] = useState(true);
@@ -17,7 +16,6 @@ const BookDetails = () => {
   const { isAdmin } = useAdmin();
   const navigateTo = useNavigate();
   const { id } = useParams();
-  const axiosSecure = useAxiosSecure();
 
   const {
     data: loadBookData = {},
@@ -26,7 +24,7 @@ const BookDetails = () => {
   } = useQueryPublic(["loadBookData", id], `/book/${id}`);
 
   const url = `/providers-books?email=${loadBookData?.provider_email}`;
-  const { isLoading, bookData } = useProvBooks(url);
+  const { isLoading, data: bookData = [] } = useDataQuery(["myBooks"], url);
 
   const handleDeleteByAdmin = async (idx, book) => {
     const willDelete = await swal({

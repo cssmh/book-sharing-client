@@ -52,6 +52,7 @@ const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
 
         if (updatedPendingStatus === "Completed") {
           await addTimeBooking(idx, provider_email, todayDateTime);
+          refetch();
           refetchIds();
         }
       } else {
