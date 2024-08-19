@@ -7,9 +7,7 @@ const useAdmin = () => {
 
   const { data: role = " ", isLoading: roleLoading } = useQuery({
     queryKey: ["role", user?.email],
-    queryFn: async () => {
-      return getRole(user?.email);
-    },
+    queryFn: () => getRole(user?.email),
     enabled: !loading && !!user?.email,
   });
   const isLoading = loading || roleLoading;

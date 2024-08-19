@@ -5,6 +5,11 @@ export const getBookings = async (email) => {
   return data;
 };
 
+export const getPending = async (email) => {
+  const { data } = await axiosSecure(`/my-pending?email=${email}`);
+  return data;
+};
+
 // for myPendingCard
 export const updateBookingStatus = async (id, email, updatedPendingStatus) => {
   const { data } = await axiosSecure.put(`/booking-status/${id}/${email}`, {

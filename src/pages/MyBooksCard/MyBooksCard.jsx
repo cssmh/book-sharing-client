@@ -1,10 +1,8 @@
-import { Link } from "react-router-dom";
 import swal from "sweetalert";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
+import { deleteBook } from "../../Api/Delete";
 
 const MyBooksCard = ({ getBook, refetch }) => {
-  const axiosSecure = useAxiosSecure();
-
   const {
     _id,
     book_name,
@@ -15,26 +13,24 @@ const MyBooksCard = ({ getBook, refetch }) => {
     provider_location,
   } = getBook;
 
-  const handleDelete = (idx, name) => {
-    swal({
+  const handleDelete = async (idx, name) => {
+    const willDelete = await swal({
       title: "Are you sure?",
       text: "Once deleted, it can't be recovered!",
       icon: "warning",
       buttons: true,
       dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        axiosSecure.delete(`/book/${idx}/${provider_email}`).then((res) => {
-          if (res.data?.deletedCount > 0) {
-            swal(`${name} Deleted!`, {
-              icon: "success",
-              timer: 2000,
-            });
-            refetch();
-          }
-        });
-      }
     });
+    if (willDelete) {
+      const res = await deleteBook(idx, provider_email);
+      if (res.deletedCount > 0) {
+        swal(`${name} Deleted!`, {
+          icon: "success",
+          timer: 2000,
+        });
+        refetch();
+      }
+    }
   };
 
   return (

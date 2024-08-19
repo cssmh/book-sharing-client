@@ -1,36 +1,34 @@
-import toast from "react-hot-toast";
 import swal from "sweetalert";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { deleteAllBookings } from "../Api/Delete";
 
 const DeleteAllBookings = ({ refetch }) => {
-  const axiosSecure = useAxiosSecure();
-  const handleDeleteAllBookings = () => {
-    swal({
+  const handleDeleteAllBookings = async () => {
+    const willDelete = await swal({
       title: "Are you sure?",
-      text: "You're deleting all bookings",
+      text: "Once deleted, it can't be recovered!",
       icon: "warning",
       buttons: true,
       dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        axiosSecure
-          .delete("/all-bookings")
-          .then((res) => {
-            if (res.data.deletedCount > 0) {
-              swal("all bookings are deleted!", {
-                icon: "success",
-                timer: 2000,
-              });
-              refetch();
-            } else {
-              swal("no bookings available", {
-                timer: 2000,
-              });
-            }
-          })
-          .catch((err) => toast.error(err));
-      }
     });
+
+    if (willDelete) {
+      try {
+        const res = await deleteAllBookings();
+        if (res.deletedCount > 0) {
+          swal("All bookings are deleted!", {
+            icon: "success",
+            timer: 2000,
+          });
+          refetch();
+        } else {
+          swal("No bookings available", {
+            timer: 2000,
+          });
+        }
+      } catch (error) {
+        swal("Error deleting bookings", { icon: "error" });
+      }
+    }
   };
 
   return (

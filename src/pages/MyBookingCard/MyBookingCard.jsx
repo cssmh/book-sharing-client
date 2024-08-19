@@ -5,6 +5,7 @@ import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useQueryPublic from "../../Hooks/useQueryPublic";
 import ReviewModal from "../../Components/Modal/ReviewModal";
+import { deleteBooking } from "../../Api/Delete";
 
 const MyBookingCard = ({ getBooking, refetch }) => {
   const { user } = useAuth();
@@ -27,23 +28,21 @@ const MyBookingCard = ({ getBooking, refetch }) => {
     `/book/${book_id}`
   );
 
-  const handleBookingDelete = () => {
-    swal({
+  const handleBookingDelete = async () => {
+    const willDelete = await swal({
       title: "Are you sure?",
       text: "Once deleted, it can't be recovered!",
       icon: "warning",
       buttons: true,
       dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        axiosSecure.delete(`/booking/${_id}/${provider_email}`).then((res) => {
-          if (res.data?.deletedCount > 0) {
-            swal("Booking Deleted!", { icon: "success", timer: 2000 });
-            refetch();
-          }
-        });
-      }
     });
+    if (willDelete) {
+      const res = await deleteBooking(_id, user?.email);
+      if (res.deletedCount > 0) {
+        swal("Booking Deleted!", { icon: "success", timer: 2000 });
+        refetch();
+      }
+    }
   };
 
   const handleAddReview = (e) => {

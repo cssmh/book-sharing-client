@@ -1,13 +1,13 @@
 import MyPendingCard from "../MyPendingCard/MyPendingCard";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useProvBooks from "../../Hooks/useProvBooks";
 import MyBookSke from "../../Components/AllSkeleton/MyBookSke";
+import { getUnavailableIds } from "../../Api/books";
+import { getPending } from "../../Api/bookings";
 
 const MyPending = () => {
   const { loading, user } = useAuth();
-  const axiosSecure = useAxiosSecure();
   const url = `/providers-books?email=${user?.email}`;
   // to show "You have No added Books" message only
   const { isLoading: myBooksLoading, bookData } = useProvBooks(url);
@@ -19,12 +19,7 @@ const MyPending = () => {
   } = useQuery({
     enabled: !loading && !!user?.email,
     queryKey: ["unavailableIds", user?.email],
-    queryFn: async () => {
-      const res = await axiosSecure.get(
-        `/unavailable-ids?email=${user?.email}`
-      );
-      return res.data?.map((book) => book._id);
-    },
+    queryFn: () => getUnavailableIds(user?.email),
   });
 
   const {
@@ -34,11 +29,8 @@ const MyPending = () => {
     refetch,
   } = useQuery({
     enabled: !loading && !!user?.email,
-    queryKey: ["allMyPending", user?.email],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/my-pending?email=${user?.email}`);
-      return res?.data;
-    },
+    queryKey: ["myPending", user?.email],
+    queryFn: () => getPending(user?.email),
   });
 
   if (idLoading || myBooksLoading || isLoading) {
@@ -53,7 +45,7 @@ const MyPending = () => {
 
   if (error) {
     return (
-      <div className="text-center text-lg md:text-2xl my-2 md:my-4 font-semibold text-red-600 italic">
+      <div className="text-center text-lg md:text-xl my-2 font-semibold text-red-600 italic">
         An error occurred while fetching your Pending.
       </div>
     );

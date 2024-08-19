@@ -28,23 +28,22 @@ const BookDetails = () => {
   const url = `/providers-books?email=${loadBookData?.provider_email}`;
   const { isLoading, bookData } = useProvBooks(url);
 
-  const handleDeleteByAdmin = (idx, book) => {
-    swal({
+  const handleDeleteByAdmin = async (idx, book) => {
+    const willDelete = await swal({
       title: "Are you sure?",
       text: "Once deleted, it can't be recovered!",
       icon: "warning",
       buttons: true,
       dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        const res = deleteBook(idx, user?.email);
-        if (res.deletedCount > 0) {
-          swal(`${book} Deleted!`, { icon: "success", timer: 2000 });
-          refetch();
-          navigateTo(-1);
-        }
-      }
     });
+    if (willDelete) {
+      const res = await deleteBook(idx, user?.email);
+      if (res.deletedCount > 0) {
+        swal(`${book} Deleted!`, { icon: "success", timer: 2000 });
+        refetch();
+        navigateTo(-1);
+      }
+    }
   };
 
   if (isLoading || bookDataLoading) return <SmallLoader />;

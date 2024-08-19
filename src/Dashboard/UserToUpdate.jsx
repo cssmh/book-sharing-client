@@ -1,63 +1,56 @@
 import swal from "sweetalert";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet-async";
 import SmallLoader from "../Components/SmallLoader";
 import { useQuery } from "@tanstack/react-query";
+import { deleteAllEmails, deleteEmail } from "../Api/Delete";
+import { getEmails } from "../Api/books";
 
 const UserToUpdate = () => {
-  const axiosSecure = useAxiosSecure();
   const {
     data: emails = [],
     isLoading,
     refetch,
   } = useQuery({
     queryKey: ["emails"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/emails");
-      return res?.data;
-    },
+    queryFn: () => getEmails(),
   });
 
-  const handleDelete = (idx) => {
-    swal({
+  const handleDelete = async (idx) => {
+    const willDelete = await swal({
       title: "Are you sure?",
       text: "Once deleted, it can't be recovered!",
       icon: "warning",
       buttons: true,
       dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        axiosSecure.delete(`/email/${idx}`).then((res) => {
-          if (res.data?.deletedCount > 0) {
-            swal({ text: "Email Deleted!", icon: "success", timer: 2000 });
-            refetch();
-          }
-        });
-      }
     });
+    if (willDelete) {
+      const res = await deleteEmail(idx);
+      if (res.deletedCount > 0) {
+        swal({ text: "Email Deleted!", icon: "success", timer: 2000 });
+        refetch();
+      }
+    }
   };
 
-  const handleDeleteAll = () => {
-    swal({
+  const handleDeleteAll = async () => {
+    const willDelete = await swal({
       title: "Are you sure?",
       text: "Once deleted, it can't be recovered!",
       icon: "warning",
       buttons: true,
       dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        axiosSecure.delete(`/email/all`).then((res) => {
-          if (res.data?.deletedCount > 0) {
-            swal({
-              text: "All Emails Deleted!",
-              icon: "success",
-              timer: 2000,
-            });
-            refetch();
-          }
-        });
-      }
     });
+    if (willDelete) {
+      const res = await deleteAllEmails();
+      if (res.deletedCount > 0) {
+        swal({
+          text: "All Emails Deleted!",
+          icon: "success",
+          timer: 2000,
+        });
+        refetch();
+      }
+    }
   };
 
   return (

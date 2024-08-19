@@ -5,6 +5,7 @@ import {
   updateBookingStatus,
   updateBookStatus,
 } from "../../Api/bookings";
+import toast from "react-hot-toast";
 
 const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
   const {
@@ -31,23 +32,33 @@ const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
         ? "available"
         : "Unavailable";
 
-    const res = await updateBookingStatus(
-      idx,
-      provider_email,
-      updatedPendingStatus
-    );
-    if (res.modifiedCount > 0) {
-      swal({
-        title: "Thank You!",
-        text: `Updated to ${updatedPendingStatus}`,
-        icon: "success",
-        timer: 2000,
-      });
-      refetch();
-    }
-    await updateBookStatus(book_id, provider_email, bookStatus);
-    if (updatedPendingStatus === "Completed") {
-      await addTimeBooking(idx, provider_email, todayDateTime);
+    try {
+      const res = await updateBookingStatus(
+        idx,
+        provider_email,
+        updatedPendingStatus
+      );
+
+      if (res.modifiedCount > 0) {
+        swal({
+          title: "Thank You!",
+          text: `Updated to ${updatedPendingStatus}`,
+          icon: "success",
+          timer: 2000,
+        });
+        refetch();
+
+        await updateBookStatus(book_id, provider_email, bookStatus);
+
+        if (updatedPendingStatus === "Completed") {
+          await addTimeBooking(idx, provider_email, todayDateTime);
+          refetchIds();
+        }
+      } else {
+        toast.error("Failed to update booking status.");
+      }
+    } catch (error) {
+      toast.error(error.message);
     }
   };
 

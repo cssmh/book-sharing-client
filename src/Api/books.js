@@ -11,3 +11,13 @@ export const getBookProviders = async () => {
   const { data } = await axiosSecure("/book-providers");
   return data;
 };
+
+export const getUnavailableIds = async (email) => {
+  const { data } = await axiosSecure(`/unavailable-ids?email=${email}`);
+  return data;
+};
+
+export const getEmails = async () => {
+  const { data } = await axiosSecure("/emails");
+  return data;
+};

@@ -7,7 +7,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 import ResetPassModal from "../Modal/ResetPassModal";
-import { saveUser, setToken } from "../../Api/auth";
+import { saveUser } from "../../Api/auth";
 
 const Login = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,7 +53,6 @@ const Login = () => {
       }
 
       // Common success actions
-      await setToken(res.user?.email);
       await saveUser(res?.user);
       toast.success("Logged in successfully");
       navigateTo(location?.state || "/", { replace: true });

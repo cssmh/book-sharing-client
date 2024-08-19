@@ -14,7 +14,7 @@ import {
   updatePassword,
   updateProfile,
 } from "firebase/auth";
-import { clearCookie } from "../../Api/auth";
+import { clearCookie, setToken } from "../../Api/auth";
 
 export const AuthContext = createContext(null);
 const googleProvider = new GoogleAuthProvider();
@@ -66,9 +66,22 @@ const AuthProviders = ({ children }) => {
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      setUser(currentUser);
-      setLoading(false);
+      try {
+        setUser(currentUser);
+        const userEmail = currentUser?.email || user?.email;
+
+        if (userEmail) {
+          await setToken(userEmail);
+        } else {
+          await clearCookie();
+        }
+      } catch (error) {
+        console.log("Error during state change", error);
+      } finally {
+        setLoading(false);
+      }
     });
+
     return () => {
       unSubscribe();
     };

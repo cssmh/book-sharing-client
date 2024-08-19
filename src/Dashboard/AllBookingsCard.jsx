@@ -1,9 +1,10 @@
-import useAuth from "../Hooks/useAuth";
 import swal from "sweetalert";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
+import useAuth from "../Hooks/useAuth";
 import { Link } from "react-router-dom";
+import { deleteBooking } from "../Api/Delete";
 
 const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
+  const { user } = useAuth();
   const {
     _id,
     book_id,
@@ -17,29 +18,24 @@ const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
     completed_at,
   } = getAllBooking;
 
-  const { user } = useAuth();
-  const axiosSecure = useAxiosSecure();
-
-  const handleDeleteByAdmin = (id) => {
-    swal({
+  const handleDeleteByAdmin = async (id) => {
+    const willDelete = await swal({
       title: "Are you sure?",
       text: "Once deleted, it can't be recovered!",
       icon: "warning",
       buttons: true,
       dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        axiosSecure.delete(`/booking/${id}/${user?.email}`).then((res) => {
-          if (res.data?.deletedCount > 0) {
-            swal("Booking Deleted!", {
-              icon: "success",
-              timer: 2000,
-            });
-            refetch();
-          }
-        });
-      }
     });
+    if (willDelete) {
+      const res = await deleteBooking(id, user?.email);
+      if (res.deletedCount > 0) {
+        swal("Booking Deleted!", {
+          icon: "success",
+          timer: 2000,
+        });
+        refetch();
+      }
+    }
   };
 
   return (
@@ -52,7 +48,9 @@ const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
           alt={book_name}
         />
         <Link to={`/book/${book_id}`}>
-          <p className="text-blue-900 text-lg font-semibold mt-2">{book_name}</p>
+          <p className="text-blue-900 text-lg font-semibold mt-2">
+            {book_name}
+          </p>
         </Link>
         <p className="text-gray-700">{provider_email}</p>
         <p className="text-green-600 font-semibold">{provider_phone}</p>
@@ -73,7 +71,9 @@ const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
             {status}
           </span>
         </p>
-        {completed_at && <p className="text-gray-600">Completed At: {completed_at}</p>}
+        {completed_at && (
+          <p className="text-gray-600">Completed At: {completed_at}</p>
+        )}
         <p className="text-gray-600">{user_email}</p>
         <p className="text-cyan-600">{user_phone}</p>
         <button
