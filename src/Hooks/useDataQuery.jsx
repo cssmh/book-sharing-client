@@ -1,4 +1,4 @@
-import { getData } from "../Api/utils";
+import { getData } from "../Api/books";
 import { useQuery } from "@tanstack/react-query";
 
 const useDataQuery = (key, url) => {

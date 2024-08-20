@@ -3,18 +3,16 @@ import swal from "sweetalert";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import updateImage from "../../assets/DocUpdate.png";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useQueryPublic from "../../Hooks/useQueryPublic";
 import SmallLoader from "../../Components/SmallLoader";
 import useDataQuery from "../../Hooks/useDataQuery";
+import { updateBook } from "../../Api/books";
 
 const UpdateBook = () => {
   const { user } = useAuth();
-  const { id } = useParams();
+  const bookData = useLoaderData();
   const navigateTo = useNavigate();
-  const axiosSecure = useAxiosSecure();
 
   const url = `/providers-books?email=${user?.email}`;
   const { isLoading: loading, data: myBooks = [] } = useDataQuery(
@@ -22,16 +20,10 @@ const UpdateBook = () => {
     url
   );
 
-  const {
-    data: bookData,
-    isLoading,
-    refetch,
-  } = useQueryPublic(["bookData", id], `book/${id}`);
-
   useEffect(() => {
     const checkMatching = async () => {
-      if (!loading && myBooks) {
-        const matching = myBooks.find((book) => book._id === id);
+      if (!loading && myBooks && bookData) {
+        const matching = myBooks.find((book) => book._id === bookData?._id);
         if (!matching) {
           toast.error("Don't try to update other's data!");
           navigateTo("/");
@@ -40,9 +32,9 @@ const UpdateBook = () => {
     };
 
     checkMatching();
-  }, [loading, myBooks, id, navigateTo]);
+  }, [loading, myBooks, bookData, navigateTo]);
 
-  if (loading || isLoading) return <SmallLoader />;
+  if (loading) return <SmallLoader />;
 
   const {
     _id,
@@ -63,7 +55,7 @@ const UpdateBook = () => {
   }
   const rows = rowsValue;
 
-  const handleUpdate = (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
     const form = e.target;
     const book_name = form.book_name.value;
@@ -86,21 +78,20 @@ const UpdateBook = () => {
       description,
     };
 
-    axiosSecure
-      .put(`/book/${_id}/${user?.email}`, updatedBookInfo)
-      .then((res) => {
-        if (res.data?.modifiedCount > 0) {
-          swal({
-            title: "Good job!",
-            text: "Book Info Updated",
-            icon: "success",
-            timer: 2000,
-          });
-          refetch();
-          navigateTo(-1);
-        }
-      })
-      .catch((err) => console.log(err));
+    try {
+      const res = await updateBook(_id, user?.email, updatedBookInfo);
+      if (res?.modifiedCount > 0) {
+        swal({
+          title: "Good job!",
+          text: "Book Info Updated",
+          icon: "success",
+          timer: 2000,
+        });
+        navigateTo(-1);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

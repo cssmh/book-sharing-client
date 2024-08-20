@@ -6,7 +6,7 @@ import ChartSkeleton from "../Components/AllSkeleton/ChartSkeleton";
 
 const DashHome = () => {
   const axiosSecure = useAxiosSecure();
-  const { providerLoading, bookProviders } = useBookProviders();
+  const { loading, bookProviders } = useBookProviders();
 
   const { data: allMonthlyStats = [], isLoading } = useQuery({
     queryKey: ["allMonthlyStats"],
@@ -30,7 +30,7 @@ const DashHome = () => {
       []),
   ];
 
-  if (providerLoading || isLoading) return <ChartSkeleton />;
+  if (loading || isLoading) return <ChartSkeleton />;
 
   return (
     <div className="p-1 md:p-2">

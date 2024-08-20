@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import pencil from "../assets/pencil.jpg";
 import CountUp from "react-countup";
 import useBookProviders from "../Hooks/useBookProviders";
-import useQueryPublic from "../Hooks/useQueryPublic";
+import useDataQuery from "../Hooks/useDataQuery";
 
 const Count = () => {
   const { isLoading, bookProviders, totalBooks } = useBookProviders();
-  const { isLoading: bookingLoading, data: totalBookings } = useQueryPublic(
+  const { isLoading: bookingLoading, data: totalBookings } = useDataQuery(
     ["totalBookings"],
     "/total-bookings"
   );

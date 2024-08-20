@@ -1,10 +1,9 @@
 import { useState } from "react";
 import swal from "sweetalert";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import AddBooking from "../AddBooking/AddBooking";
 import useAuth from "../../Hooks/useAuth";
-import useQueryPublic from "../../Hooks/useQueryPublic";
 import useAdmin from "../../Hooks/useAdmin";
 import SmallLoader from "../../Components/SmallLoader";
 import { deleteBook } from "../../Api/Delete";
@@ -15,14 +14,8 @@ const BookDetails = () => {
   const { user } = useAuth();
   const { isAdmin } = useAdmin();
   const navigateTo = useNavigate();
-  const { id } = useParams();
-
-  const {
-    data: loadBookData = {},
-    isLoading: bookDataLoading,
-    refetch,
-  } = useQueryPublic(["loadBookData", id], `/book/${id}`);
-
+  const loadBookData = useLoaderData()
+  
   const url = `/providers-books?email=${loadBookData?.provider_email}`;
   const { isLoading, data: bookData = [] } = useDataQuery(["myBooks"], url);
 
@@ -38,13 +31,12 @@ const BookDetails = () => {
       const res = await deleteBook(idx, user?.email);
       if (res.deletedCount > 0) {
         swal(`${book} Deleted!`, { icon: "success", timer: 2000 });
-        refetch();
         navigateTo(-1);
       }
     }
   };
 
-  if (isLoading || bookDataLoading) return <SmallLoader />;
+  if (isLoading) return <SmallLoader />;
 
   const {
     _id,

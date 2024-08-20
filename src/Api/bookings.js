@@ -1,5 +1,10 @@
 import axiosSecure from ".";
 
+export const addBooking = async (AddBookingData) => {
+  const { data } = await axiosSecure.post("/add-booking", AddBookingData);
+  return data;
+};
+
 export const getBookings = async (email) => {
   const { data } = await axiosSecure(`/my-bookings?email=${email}`);
   return data;

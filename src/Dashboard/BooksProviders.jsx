@@ -3,7 +3,7 @@ import useBookProviders from "../Hooks/useBookProviders";
 import { Helmet } from "react-helmet-async";
 
 const BooksProviders = () => {
-  const { providerLoading, bookProviders } = useBookProviders();
+  const { loading, bookProviders } = useBookProviders();
 
   return (
     <div className="max-w-6xl mx-auto rounded-lg px-6 py-3">
@@ -11,9 +11,9 @@ const BooksProviders = () => {
         <title>BookHaven | Books Providers</title>
       </Helmet>
       <h1 className="text-xl font-semibold text-center mb-4">
-        All Books Providers ({(!providerLoading && bookProviders?.length) || 0})
+        All Books Providers ({(!loading && bookProviders?.length) || 0})
       </h1>
-      {providerLoading ? (
+      {loading ? (
         <div className="flex flex-wrap gap-4 justify-center">
           {Array.from({ length: 3 }).map((_, idx) => (
             <div

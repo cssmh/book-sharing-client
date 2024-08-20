@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useMyCart from "../../Hooks/useMyCart";
-import { getBookings } from "../../Api/bookings";
+import { addBooking, getBookings } from "../../Api/bookings";
 
 const AddBooking = ({ getBookData }) => {
   const { user } = useAuth();
@@ -25,7 +25,7 @@ const AddBooking = ({ getBookData }) => {
   const { data: allBookings = [], refetch } = useQuery({
     queryKey: ["bookings", user?.email],
     queryFn: async () => {
-      return getBookings(user?.email)
+      return getBookings(user?.email);
     },
   });
 
@@ -72,7 +72,7 @@ const AddBooking = ({ getBookData }) => {
     setOpen(false);
   };
 
-  const handleAddBooking = (e) => {
+  const handleAddBooking = async (e) => {
     e.preventDefault();
     // Prevent multiple submissions clicking
     if (isSubmitting) return;
@@ -113,26 +113,23 @@ const AddBooking = ({ getBookData }) => {
       status,
     };
 
-    axiosNoToken
-      .post("/add-booking", AddBookingData)
-      .then((res) => {
-        if (res.data?.insertedId) {
-          swal({
-            title: "Congratulations",
-            text: "Booking Complete",
-            icon: "success",
-            timer: 2000,
-          });
-          refetch();
-          cartRefetch();
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-      .finally(() => {
-        setOpen(false);
-      });
+    try {
+      const res = await addBooking(AddBookingData);
+      if (res?.insertedId) {
+        swal({
+          title: "Congratulations",
+          text: "Booking Complete",
+          icon: "success",
+          timer: 2000,
+        });
+        refetch();
+        cartRefetch();
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setOpen(false);
+    }
   };
 
   return (

@@ -21,6 +21,7 @@ import DashHome from "../Dashboard/DashHome";
 import AdminRoute from "../Shared/PrivateRoute/AdminRoute";
 import UserAnalytics from "../Components/UserAnalytics";
 import AllUsers from "../Dashboard/AllUsers";
+import { getBook } from "../Api/books";
 
 const Root = createBrowserRouter([
   {
@@ -67,6 +68,7 @@ const Root = createBrowserRouter([
             <BookDetails />
           </PrivateRoute>
         ),
+        loader: ({ params }) => getBook(params.id),
       },
       {
         path: "/add-book",
@@ -83,6 +85,7 @@ const Root = createBrowserRouter([
             <UpdateBook />
           </PrivateRoute>
         ),
+        loader: ({ params }) => getBook(params.id),
       },
       {
         path: "/my-books",

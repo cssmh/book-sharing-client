@@ -2,17 +2,16 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import useAuth from "../Hooks/useAuth";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { FaEdit, FaKey } from "react-icons/fa";
 import BGBlue from "../assets/Notified.jpg";
 import EditProfileModal from "./Modal/EditProfileModal";
 import ChangePassModal from "./Modal/ChangePassModal";
 import useDataQuery from "../Hooks/useDataQuery";
+import { updateAllBooks } from "../Api/books";
 
 const MyProfile = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isPassOpen, setIsPassOpen] = useState(false);
-  const axiosSecure = useAxiosSecure();
   const { user, handleUpdateProfile, changePassword } = useAuth();
   const { photoURL, email, displayName, metadata, reloadUserInfo } = user;
 
@@ -41,15 +40,12 @@ const MyProfile = () => {
     };
 
     handleUpdateProfile(name, photo)
-      .then(() => {
+      .then(async () => {
         if (bookData?.length > 0) {
-          axiosSecure
-            .put(`/my-all-books/${user?.email}`, updateMyAllBooksInfo)
-            .then((res) => {
-              if (res.data?.modifiedCount > 0) {
-                toast.success("Book information updated");
-              }
-            });
+          const res = await updateAllBooks(user?.email, updateMyAllBooksInfo);
+          if (res?.modifiedCount > 0) {
+            toast.success("Book information updated");
+          }
         }
         toast.success("Update successful");
         setNewName(name);
@@ -59,10 +55,10 @@ const MyProfile = () => {
       .catch((err) => toast.error(err.message));
   };
 
-  const handleChangePass = (e) => {
+  const handleChangePass = async (e) => {
     e.preventDefault();
     const newPassword = e.target.password.value;
-    changePassword(newPassword)
+    await changePassword(newPassword)
       .then(() => toast.success("Password changed successfully"))
       .catch((err) => toast.error(err.message));
   };
