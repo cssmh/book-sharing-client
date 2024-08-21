@@ -1,32 +1,22 @@
-import { useQuery } from "@tanstack/react-query";
 import { Chart } from "react-google-charts";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useAuth from "../Hooks/useAuth";
 import ChartSkeleton from "../Components/AllSkeleton/ChartSkeleton";
+import useDataQuery from "../Hooks/useDataQuery";
 
 const UserAnalytics = () => {
-  const axiosSecure = useAxiosSecure();
   const { loading, user } = useAuth();
 
-  const { isLoading, data: UserDashboard } = useQuery({
-    enabled: !loading && !!user?.email,
-    queryKey: ["UserDashboard", user?.email],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/user-analytics?email=${user?.email}`);
-      return res?.data;
-    },
-  });
+  const { isLoading, data: UserDashboard } = useDataQuery(
+    ["UserDashboard", user?.email],
+    `/user-analytics?email=${user?.email}`
+  );
 
-  const { isLoading: statLoading, data: monthlyStats } = useQuery({
-    enabled: !loading && !!user?.email,
-    queryKey: ["monthlyStats", user?.email],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/monthly-stats?email=${user?.email}`);
-      return res?.data;
-    },
-  });
+  const { isLoading: statLoading, data: monthlyStats } = useDataQuery(
+    ["monthlyStats", user?.email],
+    `/monthly-stats?email=${user?.email}`
+  );
 
-  if (isLoading || statLoading) return <ChartSkeleton />;
+  if (loading || isLoading || statLoading) return <ChartSkeleton />;
 
   const {
     totalBooks,

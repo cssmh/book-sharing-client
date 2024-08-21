@@ -4,7 +4,7 @@ import { getBookings } from "../Api/bookings";
 
 const useMyCart = () => {
   const { loading, user } = useAuth();
-
+  
   const {
     isLoading,
     data = [],
@@ -12,9 +12,7 @@ const useMyCart = () => {
     refetch: cartRefetch,
   } = useQuery({
     queryKey: ["myBookings", user?.email],
-    queryFn: async () => {
-      return getBookings(user?.email);
-    },
+    queryFn: () => getBookings(user?.email),
     enabled: !loading && !!user?.email,
   });
   const myBookings = data?.result;

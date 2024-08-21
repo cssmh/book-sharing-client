@@ -1,5 +1,4 @@
 import app from "../firebase/firebase.config";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { createContext, useEffect, useState } from "react";
 import {
   GoogleAuthProvider,
@@ -21,7 +20,6 @@ const googleProvider = new GoogleAuthProvider();
 const auth = getAuth(app);
 
 const AuthProviders = ({ children }) => {
-  const axiosNoToken = useAxiosPublic();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -85,7 +83,7 @@ const AuthProviders = ({ children }) => {
     return () => {
       unSubscribe();
     };
-  }, [user?.email, axiosNoToken]);
+  }, [user?.email]);
 
   const authInfo = {
     user,

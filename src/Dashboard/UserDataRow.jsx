@@ -1,29 +1,25 @@
-import { useState } from "react";
-import UpdateUserModal from "../Components/Modal/UpdateUserModal";
-import toast from "react-hot-toast";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
-import useAuth from "../Hooks/useAuth";
 import swal from "sweetalert";
-import { useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import { useState } from "react";
+import { updateRole } from "../Api/auth";
+import useAuth from "../Hooks/useAuth";
+import UpdateUserModal from "../Components/Modal/UpdateUserModal";
 import { useNavigate } from "react-router-dom";
+import useDataQuery from "../Hooks/useDataQuery";
+import { deleteUser } from "../Api/delete";
+import { FaTrashAlt } from "react-icons/fa";
 
 const UserDataRow = ({ user, refetch }) => {
   const { loading, user: userAuth } = useAuth();
-  const axiosSecure = useAxiosSecure();
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
   const {
-    data: totalAdmin = 0,
+    data = 0,
     isLoading,
     refetch: totalAdRefetch,
-  } = useQuery({
-    queryKey: ["totalAdmin"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/total-admin");
-      return res?.data?.totalAdmin || 0;
-    },
-  });
+  } = useDataQuery(["totalAdmin"], "/total-admin");
+  const totalAdmin = data?.totalAdmin || 0;
 
   const handleModal = async (role) => {
     const msg =
@@ -40,11 +36,9 @@ const UserDataRow = ({ user, refetch }) => {
     }
 
     try {
-      const res = await axiosSecure.patch(`/user-update/${user?.email}`, {
-        role,
-      });
-      if (res?.data?.modifiedCount > 0) {
-        swal(`updated to ${role}`, {
+      const res = await updateRole(user?.email, role);
+      if (res?.modifiedCount > 0) {
+        swal(`Updated to ${role}`, {
           icon: "success",
           timer: 2000,
         });
@@ -58,6 +52,31 @@ const UserDataRow = ({ user, refetch }) => {
       console.log(err);
     } finally {
       setIsOpen(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    const confirmDelete = await swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this user!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    });
+
+    if (confirmDelete) {
+      try {
+        const res = await deleteUser(id);
+        if (res?.deletedCount > 0) {
+          swal("Deleted!", {
+            icon: "success",
+            timer: 2000,
+          });
+          refetch();
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
@@ -76,7 +95,10 @@ const UserDataRow = ({ user, refetch }) => {
         <td className="px-6 py-4 whitespace-nowrap text-sm">
           <div className="w-20 h-4 bg-gray-200 animate-pulse rounded"></div>
         </td>
-        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+        <td className="px-4 py-4 whitespace-nowrap text-center text-sm font-medium">
+          <div className="w-8 h-8 bg-gray-200 animate-pulse rounded-full"></div>
+        </td>
+        <td className="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
           <div className="w-32 h-6 bg-gray-200 animate-pulse rounded"></div>
         </td>
       </tr>
@@ -84,14 +106,14 @@ const UserDataRow = ({ user, refetch }) => {
 
   return (
     <tr>
-      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+      <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
         {user?.email}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
         {user?.name}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-        {new Date(user?.timestamp).toLocaleDateString()}
+        {new Date(user?.timestamp).toLocaleDateString("en-GB")}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm">
         <span
@@ -104,10 +126,18 @@ const UserDataRow = ({ user, refetch }) => {
           {user?.role.toUpperCase() || "Unavailable"}
         </span>
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+      <td className="pr-4 text-center py-4 whitespace-nowrap text-gray-500">
+        <button
+          onClick={() => handleDelete(user._id)}
+          className="inline-flex items-center px-2 py-1 text-red-500 hover:text-red-700 transition-colors duration-200"
+        >
+          <FaTrashAlt />
+        </button>
+      </td>
+      <td className="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
         <button
           onClick={() => setIsOpen(true)}
-          className="inline-flex items-center px-2.5 py-1.5 text-base font-medium rounded-lg text-white bg-green-600 transform active:translate-y-0.5 transition-transform duration-150 ease-in-out"
+          className="inline-flex items-center px-2 py-1 text-base font-medium rounded-lg text-white bg-green-500 transform active:translate-y-0.5 transition-transform duration-150 ease-in-out"
         >
           Update Role
         </button>

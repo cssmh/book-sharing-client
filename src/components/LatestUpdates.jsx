@@ -1,7 +1,7 @@
 import swal from "sweetalert";
 import Banner from "../assets/Notified.jpg";
-import useQueryPublic from "../Hooks/useQueryPublic";
 import { postEmail } from "../Api/books";
+import useDataQuery from "../Hooks/useDataQuery";
 
 const BannerImg = {
   backgroundImage: `url(${Banner})`,
@@ -15,7 +15,7 @@ const BannerImg = {
 const emailCheck = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
 const LatestUpdates = () => {
-  const { data, refetch } = useQueryPublic(["userEmails"], "/emails");
+  const { data, refetch } = useDataQuery(["userEmails"], "/emails");
   const existingEmails = data?.map((user) => user?.email);
 
   const handleSubmitEmail = async (e) => {

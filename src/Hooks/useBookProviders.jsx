@@ -19,9 +19,3 @@ const useBookProviders = () => {
 };
 
 export default useBookProviders;
-
-// const { data: allBooksData, isLoading: isBooksLoading } = useQuery({
-//   queryKey: ["AllBooksCount"],
-//   queryFn: () => getAllBooks(),
-//   select: (data) => data.totalBooks
-// });

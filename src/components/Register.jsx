@@ -11,19 +11,14 @@ import { saveUser } from "../Api/auth";
 const Register = () => {
   const [view, setView] = useState(true);
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const [isPasswordEntered, setIsPasswordEntered] = useState(false);
   const [passError, setPassError] = useState("");
   const [passSuccess, setPassSuccess] = useState("");
   const location = useLocation();
   const navigateTo = useNavigate();
-  const {
-    user,
-    createUser,
-    handleUpdateProfile,
-    emailVerification,
-    logOut,
-    loading,
-  } = useAuth();
+  const { user, createUser, handleUpdateProfile, emailVerification, logOut } =
+    useAuth();
 
   useEffect(() => {
     if (
@@ -60,6 +55,7 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const form = new FormData(e.currentTarget);
     const name = form.get("name");
     const image =
@@ -83,13 +79,10 @@ const Register = () => {
 
           if (!res.user.emailVerified) {
             await logOut();
-            swal("Sorry! Email verification required", {
-              icon: "error",
-              timer: 2000,
-            });
+            navigateTo("/login");
+          } else {
+            navigateTo("/");
           }
-
-          navigateTo("/login");
         } catch (profileError) {
           toast.error("Profile update failed. Please try again.");
         }
@@ -98,6 +91,8 @@ const Register = () => {
       }
     } catch (err) {
       toast.error(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 

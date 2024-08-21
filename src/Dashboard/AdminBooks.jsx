@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import AdminBooksRow from "./AdminBooksRow";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useBookProviders from "../Hooks/useBookProviders";
 import { Helmet } from "react-helmet-async";
 import SmallLoader from "../Components/SmallLoader";
 import { getAllBooks } from "../Api/books";
+import useDataQuery from "../Hooks/useDataQuery";
 
 const AdminBooks = () => {
-  const axiosSecure = useAxiosSecure();
   const { totalBooks, bookProviders } = useBookProviders();
   const [limit, setLimit] = useState(6);
 
@@ -19,17 +18,13 @@ const AdminBooks = () => {
   } = useQuery({
     queryKey: ["allBookings", limit],
     queryFn:  () => getAllBooks(undefined, limit),
-    keepPreviousData: true, // Ensure old data is kept
-  });
-
-  const { data: allBookings, isLoading: bookingLoading } = useQuery({
-    queryKey: ["allBookings"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/all-bookings");
-      return res?.data;
-    },
     keepPreviousData: true,
   });
+
+  const { data: allBookings, isLoading: bookingLoading } = useDataQuery(
+    ["allBookings"],
+    "/all-bookings"
+  );
 
   const handleShowMore = () => {
     if (allBooks?.totalBooks === limit) {

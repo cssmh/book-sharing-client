@@ -37,3 +37,11 @@ export const addTimeBooking = async (id, email, todayDateTime) => {
   return data;
 };
 // for myPendingCard end
+
+export const addReview = async (id, review, name) => {
+  const { data } = await axiosSecure.patch(`/add-review/${id}`, {
+    review,
+    name,
+  });
+  return data;
+};

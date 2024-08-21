@@ -1,20 +1,15 @@
 import { Chart } from "react-google-charts";
 import useBookProviders from "../Hooks/useBookProviders";
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
 import ChartSkeleton from "../Components/AllSkeleton/ChartSkeleton";
+import useDataQuery from "../Hooks/useDataQuery";
 
 const DashHome = () => {
-  const axiosSecure = useAxiosSecure();
   const { loading, bookProviders } = useBookProviders();
 
-  const { data: allMonthlyStats = [], isLoading } = useQuery({
-    queryKey: ["allMonthlyStats"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/monthly-stats");
-      return res?.data;
-    },
-  });
+  const { data: allMonthlyStats = [], isLoading } = useDataQuery(
+    ["allMonthlyStats"],
+    "/monthly-stats"
+  );
 
   const bookData = [
     ["Users", "Books"],

@@ -35,3 +35,9 @@ export const getRole = async (email) => {
   const { data } = await axiosSecure(`/role/${email}`);
   return data;
 };
+
+// update role
+export const updateRole = async (email, role) => {
+  const { data } = await axiosSecure.patch(`/user-update/${email}`, { role });
+  return data;
+};

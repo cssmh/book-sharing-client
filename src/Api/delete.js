@@ -24,3 +24,8 @@ export const deleteAllEmails = async () => {
   const { data } = await axiosSecure.delete("/email/all");
   return data;
 };
+
+export const deleteUser = async (id) => {
+  const { data } = await axiosSecure.delete(`/user/${id}`);
+  return data;
+};

@@ -36,28 +36,26 @@ const Login = () => {
     const password = form.get("password");
 
     try {
-      let res;
-      // Special case for specific emails
-      if (email === "Kona@mail.com" || email === "admin@admin.com") {
-        res = await login(email, password);
-      } else {
-        res = await login(email, password);
-
-        if (!res?.user?.emailVerified) {
+      const res = await login(email, password);
+      if (res?.user) {
+        if (
+          res.user.emailVerified ||
+          email === "Kona@mail.com" ||
+          email === "admin@admin.com"
+        ) {
+          await saveUser(res.user);
+          toast.success("Logged in successfully");
+          navigateTo(location?.state || "/", { replace: true });
+        } else {
           await emailVerification();
           toast.success("We sent you a verification email");
           await logOut();
           toast.error("Verify your Email first, please!");
-          return;
         }
       }
-
-      // Common success actions
-      await saveUser(res?.user);
-      toast.success("Logged in successfully");
-      navigateTo(location?.state || "/", { replace: true });
     } catch (error) {
-      toast.error("Invalid user password. Try again");
+      toast.error("An error occurred during login. Please try again.");
+      console.error(error);
     } finally {
       setLoading(false);
     }

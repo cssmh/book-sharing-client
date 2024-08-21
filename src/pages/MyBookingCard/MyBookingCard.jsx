@@ -2,14 +2,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import useAuth from "../../Hooks/useAuth";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useQueryPublic from "../../Hooks/useQueryPublic";
 import ReviewModal from "../../Components/Modal/ReviewModal";
 import { deleteBooking } from "../../Api/Delete";
+import { addReview } from "../../Api/bookings";
+import useDataQuery from "../../Hooks/useDataQuery";
 
 const MyBookingCard = ({ getBooking, refetch }) => {
   const { user } = useAuth();
-  const axiosSecure = useAxiosSecure();
   const [isOpen, setIsOpen] = useState(false);
   const {
     _id,
@@ -23,11 +22,11 @@ const MyBookingCard = ({ getBooking, refetch }) => {
     completed_at,
   } = getBooking;
 
-  const { data: bookData = [], refetch: reviewRefetch } = useQueryPublic(
+  const { data: bookData = [], refetch: reviewRefetch } = useDataQuery(
     ["getBookData", book_id],
     `/book/${book_id}`
   );
-
+  
   const handleBookingDelete = async () => {
     const willDelete = await swal({
       title: "Are you sure?",
@@ -45,23 +44,19 @@ const MyBookingCard = ({ getBooking, refetch }) => {
     }
   };
 
-  const handleAddReview = (e) => {
+  const handleAddReview = async (e) => {
     e.preventDefault();
-    const form = e.target;
-    const review = form.review.value;
+    const review = e.target.review.value;
     const name = user?.displayName;
-    axiosSecure
-      .patch(`/add-review/${book_id}`, { review, name })
-      .then((res) => {
-        if (res.data?.acknowledged) {
-          swal("Thank You", "Your review has been added.", {
-            icon: "success",
-            timer: 2000,
-          });
-          setIsOpen(false);
-          reviewRefetch();
-        }
+    const res = await addReview(book_id, review, name);
+    if (res?.acknowledged) {
+      swal("Thank You", "Your review has been added.", {
+        icon: "success",
+        timer: 2000,
       });
+      setIsOpen(false);
+      reviewRefetch();
+    }
   };
 
   return (

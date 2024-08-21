@@ -1,26 +1,21 @@
 import { useState } from "react";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
 import AllBookingsCard from "./AllBookingsCard";
-import { useQuery } from "@tanstack/react-query";
 import DeleteAllBookings from "./DeleteAllBookings";
 import { Helmet } from "react-helmet-async";
 import { ScaleLoader } from "react-spinners";
+import useDataQuery from "../Hooks/useDataQuery";
 
 const AllBookings = () => {
-  const axiosSecure = useAxiosSecure();
   const [filterType, setFilterType] = useState("All");
 
   const {
     data: allBookings = [],
     isLoading,
     refetch,
-  } = useQuery({
-    queryKey: ["allBookings", filterType],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/all-bookings?filter=${filterType}`);
-      return res?.data;
-    },
-  });
+  } = useDataQuery(
+    ["allBookings", filterType],
+    `/all-bookings?filter=${filterType}`
+  );
 
   const handleFilter = (e) => {
     setFilterType(e.target.value);

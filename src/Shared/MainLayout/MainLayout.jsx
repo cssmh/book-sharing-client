@@ -11,7 +11,7 @@ const MainLayout = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 1800);
+    }, 1700);
   }, []);
 
   const loc = useLocation();
@@ -20,7 +20,7 @@ const MainLayout = () => {
     loc?.pathname?.startsWith("/login") ||
     loc?.pathname?.startsWith("/register");
 
-  // if (loading) return <BigLoader />;
+  if (loading) return <BigLoader />;
 
   return (
     <div>

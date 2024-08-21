@@ -4,13 +4,11 @@ import toast from "react-hot-toast";
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useMyCart from "../../Hooks/useMyCart";
 import { addBooking, getBookings } from "../../Api/bookings";
 
 const AddBooking = ({ getBookData }) => {
   const { user } = useAuth();
-  const axiosNoToken = useAxiosPublic();
   const { cartRefetch } = useMyCart();
 
   const { _id, book_image, book_name, provider_email, provider_phone } =

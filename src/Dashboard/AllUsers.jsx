@@ -1,22 +1,14 @@
 import { Helmet } from "react-helmet-async";
 import UserDataRow from "./UserDataRow";
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
-import SmallLoader from "../Components/SmallLoader"
+import SmallLoader from "../Components/SmallLoader";
+import useDataQuery from "../Hooks/useDataQuery";
 
 const AllUsers = () => {
-  const axiosSecure = useAxiosSecure();
   const {
     data = [],
     isLoading,
     refetch,
-  } = useQuery({
-    queryKey: ["allUsers"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/users");
-      return res?.data;
-    },
-  });
+  } = useDataQuery(["allUsers"], "/users");
 
   if (isLoading) <SmallLoader />;
 
@@ -41,6 +33,9 @@ const AllUsers = () => {
               </th>
               <th className="px-7 py-2 text-left text-xs font-medium uppercase tracking-wider">
                 Role
+              </th>
+              <th className="px-7 py-2 text-left text-xs font-medium uppercase tracking-wider">
+                Delete
               </th>
               <th className="px-5 py-2 text-center text-xs font-medium uppercase tracking-wider">
                 Action

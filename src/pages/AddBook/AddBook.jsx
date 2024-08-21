@@ -3,14 +3,12 @@ import toast from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 import addBook from "../../assets/DataAdd.png";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import SmallLoader from "../../Components/SmallLoader";
 import useDataQuery from "../../Hooks/useDataQuery";
 import { postBook } from "../../Api/books";
 
 const AddBook = () => {
   const { user } = useAuth();
-  const axiosNoToken = useAxiosPublic();
   const url = `/providers-books?email=${user?.email}`;
   const {
     isLoading,
