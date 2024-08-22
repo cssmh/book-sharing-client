@@ -55,7 +55,16 @@ const UserDataRow = ({ user, refetch }) => {
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id, role) => {
+    if (role === "admin") {
+      swal({
+        title: "Action not allowed!",
+        text: "Downgrade to a regular user before deletion?",
+        icon: "warning",
+      });
+      setIsOpen(true);
+      return;
+    }
     const confirmDelete = await swal({
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this user!",
@@ -118,7 +127,7 @@ const UserDataRow = ({ user, refetch }) => {
       <td className="px-6 py-4 whitespace-nowrap text-sm">
         <span
           className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
-            user.role === "guest"
+            user?.role === "guest"
               ? "bg-green-100 text-green-500"
               : "bg-orange-100 text-red-600"
           }`}
@@ -128,7 +137,7 @@ const UserDataRow = ({ user, refetch }) => {
       </td>
       <td className="pr-4 text-center py-4 whitespace-nowrap text-gray-500">
         <button
-          onClick={() => handleDelete(user._id)}
+          onClick={() => handleDelete(user._id, user?.role)}
           className="inline-flex items-center px-2 py-1 text-red-500 hover:text-red-700 transition-colors duration-200"
         >
           <FaTrashAlt />

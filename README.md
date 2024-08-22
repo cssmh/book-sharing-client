@@ -73,6 +73,7 @@ MBSTU BookHaven is a comprehensive platform for book sharing, enabling users to 
 8. **New Feature: User Admin Panel**
    - Users can now be upgraded to admin.
    - Admins cannot downgrade their own role to 'guest' if they are the only admin left.
+   - Admins can delete user, but can't delete admin.
 
 ## Packages Used
 
