@@ -1,7 +1,7 @@
-import { Helmet } from "react-helmet-async";
 import UserDataRow from "./UserDataRow";
 import SmallLoader from "../Components/SmallLoader";
 import useDataQuery from "../Hooks/useDataQuery";
+import HavenHelmet from "../Components/HavenHelmet";
 
 const AllUsers = () => {
   const {
@@ -14,9 +14,7 @@ const AllUsers = () => {
 
   return (
     <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg px-4 py-3">
-      <Helmet>
-        <title>BookHaven | Manage Users</title>
-      </Helmet>
+      <HavenHelmet title={"All Users"} />
       <h1 className="text-xl font-bold mb-4">All Users ({data?.length})</h1>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white divide-y divide-gray-200">

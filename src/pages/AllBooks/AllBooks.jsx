@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
 import AllBooksCard from "../AllBooksCard/AllBooksCard";
 import useResLimit from "../../Hooks/useResLimit";
 import SkeletonCard from "../../Components/AllSkeleton/SkeletonCard";
 import useDataQuery from "../../Hooks/useDataQuery";
+import HavenHelmet from "../../Components/HavenHelmet";
 
 const AllBooks = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -37,9 +37,7 @@ const AllBooks = () => {
 
   return (
     <div>
-      <Helmet>
-        <title>BookHaven | All Books</title>
-      </Helmet>
+      <HavenHelmet title={"All Books"} />
       <div className="text-center mt-4">
         <input
           id="search"

@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import swal from "sweetalert";
 import toast from "react-hot-toast";
-import { Helmet } from "react-helmet-async";
 import updateImage from "../../assets/DocUpdate.png";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import SmallLoader from "../../Components/SmallLoader";
 import useDataQuery from "../../Hooks/useDataQuery";
 import { updateBook } from "../../Api/books";
+import HavenHelmet from "../../Components/HavenHelmet";
 
 const UpdateBook = () => {
   const { user } = useAuth();
@@ -96,9 +96,7 @@ const UpdateBook = () => {
 
   return (
     <div>
-      <Helmet>
-        <title>Update {book_name}</title>
-      </Helmet>
+      <HavenHelmet title={book_name} />
       <div className="flex flex-col md:flex-row justify-center items-center gap-3 mt-3 px-1 md:px-0">
         <div className="w-[50%] md:w-[31%]">
           <img

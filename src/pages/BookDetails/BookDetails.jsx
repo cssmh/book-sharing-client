@@ -1,13 +1,13 @@
 import { useState } from "react";
 import swal from "sweetalert";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
 import AddBooking from "../AddBooking/AddBooking";
 import useAuth from "../../Hooks/useAuth";
 import useAdmin from "../../Hooks/useAdmin";
 import SmallLoader from "../../Components/SmallLoader";
 import { deleteBook } from "../../Api/Delete";
 import useDataQuery from "../../Hooks/useDataQuery";
+import HavenHelmet from "../../Components/HavenHelmet";
 
 const BookDetails = () => {
   const [desc, setDesc] = useState(true);
@@ -56,9 +56,7 @@ const BookDetails = () => {
 
   return (
     <div>
-      <Helmet>
-        <title>BookHaven | {book_name}</title>
-      </Helmet>
+      <HavenHelmet title={book_name} />
       <div className="card max-w-xl mx-auto bg-gradient-to-r from-yellow-100 to-amber-100 shadow-xl p-6 mt-2 md:mt-4">
         <h2 className="text-center font-bold text-xl md:text-[22px] text-blue-800 italic">
           Book Provider Information

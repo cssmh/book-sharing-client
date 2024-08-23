@@ -1,12 +1,11 @@
-import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { Helmet } from "react-helmet-async";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import { saveUser } from "../Api/auth";
+import HavenHelmet from "./HavenHelmet";
 
 const Register = () => {
   const [view, setView] = useState(true);
@@ -98,14 +97,12 @@ const Register = () => {
 
   return (
     <div className="min-h-screen flex bg-base-200">
+      <HavenHelmet title={"Register"} />
       <div className="flex-1 flex items-center justify-center p-6 lg:p-12">
         <div
           data-aos="zoom-in"
           className="border max-w-[400px] w-full p-6 rounded-lg shadow-2xl"
         >
-          <Helmet>
-            <title>BookHaven | Register</title>
-          </Helmet>
           <h2 className="text-3xl font-bold text-center mb-5">
             Create your account
           </h2>

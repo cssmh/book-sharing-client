@@ -1,9 +1,9 @@
 import { useState } from "react";
 import AllBookingsCard from "./AllBookingsCard";
 import DeleteAllBookings from "./DeleteAllBookings";
-import { Helmet } from "react-helmet-async";
 import { ScaleLoader } from "react-spinners";
 import useDataQuery from "../Hooks/useDataQuery";
+import HavenHelmet from "../Components/HavenHelmet";
 
 const AllBookings = () => {
   const [filterType, setFilterType] = useState("All");
@@ -23,9 +23,7 @@ const AllBookings = () => {
 
   return (
     <div>
-      <Helmet>
-        <title>BookHaven | All Bookings</title>
-      </Helmet>
+      <HavenHelmet title={"All Bookings"} />
       <h1 className="text-center font-semibold text-xl mb-3 mt-2 md:mt-0">
         {filterType} Bookings ({allBookings.length})
       </h1>

@@ -1,9 +1,9 @@
 import swal from "sweetalert";
-import { Helmet } from "react-helmet-async";
 import SmallLoader from "../Components/SmallLoader";
 import { useQuery } from "@tanstack/react-query";
 import { deleteAllEmails, deleteEmail } from "../Api/Delete";
 import { getEmails } from "../Api/books";
+import HavenHelmet from "../Components/HavenHelmet";
 
 const UserToUpdate = () => {
   const {
@@ -55,9 +55,7 @@ const UserToUpdate = () => {
 
   return (
     <div className="max-w-6xl mx-auto py-2">
-      <Helmet>
-        <title>BookHaven | User To Update</title>
-      </Helmet>
+      <HavenHelmet title={"User To Update"} />
       <h1 className="text-xl font-semibold text-center mb-3">
         Users to Get Notified for New Books ({emails?.length})
       </h1>

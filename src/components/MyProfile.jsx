@@ -1,6 +1,5 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { Helmet } from "react-helmet-async";
 import useAuth from "../Hooks/useAuth";
 import { FaEdit, FaKey } from "react-icons/fa";
 import BGBlue from "../assets/Notified.jpg";
@@ -8,6 +7,7 @@ import EditProfileModal from "./Modal/EditProfileModal";
 import ChangePassModal from "./Modal/ChangePassModal";
 import useDataQuery from "../Hooks/useDataQuery";
 import { updateAllBooks } from "../Api/books";
+import HavenHelmet from "./HavenHelmet";
 
 const MyProfile = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -65,9 +65,7 @@ const MyProfile = () => {
 
   return (
     <div className="bg-gray-100 flex items-center justify-center md:p-8">
-      <Helmet>
-        <title>BookHaven | My Profile</title>
-      </Helmet>
+      <HavenHelmet title={"My Profile"} />
       <div className="bg-white shadow-lg rounded-lg w-full max-w-3xl mx-auto overflow-hidden">
         <div
           className="relative pt-16 pb-8 text-center bg-cover bg-center"

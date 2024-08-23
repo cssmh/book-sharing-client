@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import AdminBooksRow from "./AdminBooksRow";
 import useBookProviders from "../Hooks/useBookProviders";
-import { Helmet } from "react-helmet-async";
 import SmallLoader from "../Components/SmallLoader";
 import { getAllBooks } from "../Api/books";
 import useDataQuery from "../Hooks/useDataQuery";
+import HavenHelmet from "../Components/HavenHelmet";
 
 const AdminBooks = () => {
   const { totalBooks, bookProviders } = useBookProviders();
@@ -36,9 +36,7 @@ const AdminBooks = () => {
 
   return (
     <div>
-      <Helmet>
-        <title>BookHaven | All Books</title>
-      </Helmet>
+      <HavenHelmet title={"All Books"} />
       <h1 className="text-xl text-center font-bold mt-2 mb-3 mx-3 md:mx-0">
         Total {totalBooks || 0} Books, Total {bookProviders?.length || 0} Book
         Providers, and Total {allBookings?.length || 0} Bookings

@@ -1,11 +1,11 @@
 import swal from "sweetalert";
 import toast from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
-import { Helmet } from "react-helmet-async";
 import addBook from "../../assets/DataAdd.png";
 import SmallLoader from "../../Components/SmallLoader";
 import useDataQuery from "../../Hooks/useDataQuery";
 import { postBook } from "../../Api/books";
+import HavenHelmet from "../../Components/HavenHelmet";
 
 const AddBook = () => {
   const { user } = useAuth();
@@ -100,9 +100,7 @@ const AddBook = () => {
 
   return (
     <div className="mb-8">
-      <Helmet>
-        <title>BookHaven | Add-Book</title>
-      </Helmet>
+      <HavenHelmet title={"Add Book"} />
       <div className="flex flex-col md:flex-row justify-center items-center gap-3 mt-3 px-1 md:px-0">
         <div className="w-2/3 md:w-[31%]">
           <img

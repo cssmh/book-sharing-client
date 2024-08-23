@@ -1,6 +1,5 @@
 import toast from "react-hot-toast";
 import SocialLogin from "./SocialLogin";
-import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -8,6 +7,7 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 import ResetPassModal from "../Modal/ResetPassModal";
 import { saveUser } from "../../Api/auth";
+import HavenHelmet from "../HavenHelmet";
 
 const Login = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -90,9 +90,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex bg-base-200">
-      <Helmet>
-        <title>BookHaven | Login</title>
-      </Helmet>
+      <HavenHelmet title={"Login"} />
       <div className="flex-1 flex items-center justify-center p-5 lg:p-12">
         <div className="border max-w-sm w-full p-8 rounded-lg shadow-2xl">
           <h2 className="text-3xl font-bold text-center mb-6">

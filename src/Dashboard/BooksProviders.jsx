@@ -1,15 +1,13 @@
 import { Link } from "react-router-dom";
 import useBookProviders from "../Hooks/useBookProviders";
-import { Helmet } from "react-helmet-async";
+import HavenHelmet from "../Components/HavenHelmet";
 
 const BooksProviders = () => {
   const { loading, bookProviders } = useBookProviders();
 
   return (
     <div className="max-w-6xl mx-auto rounded-lg px-6 py-3">
-      <Helmet>
-        <title>BookHaven | Books Providers</title>
-      </Helmet>
+      <HavenHelmet title={"Books Providers"} />
       <h1 className="text-xl font-semibold text-center mb-4">
         All Books Providers ({(!loading && bookProviders?.length) || 0})
       </h1>

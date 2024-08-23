@@ -1,8 +1,8 @@
-import { Helmet } from "react-helmet-async";
 import MyBooksCard from "../MyBooksCard/MyBooksCard";
 import useAuth from "../../Hooks/useAuth";
 import MyBookSke from "../../Components/AllSkeleton/MyBookSke";
 import useDataQuery from "../../Hooks/useDataQuery";
+import HavenHelmet from "../../Components/HavenHelmet";
 
 const MyBooks = () => {
   const { user } = useAuth();
@@ -39,9 +39,7 @@ const MyBooks = () => {
 
   return (
     <div className="mb-4">
-      <Helmet>
-        <title>BookHaven | My Books</title>
-      </Helmet>
+      <HavenHelmet title={"My Books"} />
       {bookData?.length === 0 ? (
         <div className="flex flex-col justify-center items-center min-h-[70vh] my-2 md:mt-0 text-red-600">
           <p className="text-[21px] font-semibold text-center italic">

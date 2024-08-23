@@ -1,17 +1,15 @@
 import { useState } from "react";
-import { Helmet } from "react-helmet-async";
 import MyBookings from "../MyBookings/MyBookings";
 import MyPending from "../MyPending/MyPending";
 import { FaCalendarAlt, FaClock } from "react-icons/fa";
+import HavenHelmet from "../../Components/HavenHelmet";
 
 const MySchedules = () => {
   const [activeSchedule, setActiveSchedule] = useState("MyBookings");
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Helmet>
-        <title>BookHaven | My Schedule</title>
-      </Helmet>
+      <HavenHelmet title={"My Schedule"} />
       <header className="bg-gray-800 text-white md:px-7 py-[15px] flex flex-col md:flex-row justify-between items-center relative">
         <h1 className="text-[21px] font-semibold mb-2 md:mb-0">My Schedules</h1>
         <div className="flex flex-row gap-4">
