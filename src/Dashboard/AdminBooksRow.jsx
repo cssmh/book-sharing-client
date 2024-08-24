@@ -81,7 +81,9 @@ const AdminBooksRow = ({ getBooks, refetch }) => {
         </p>
       </td>
       <td className="py-3 px-4">
-        <Link to={`/book/${_id}`}>
+        <Link
+          to={`/book/${book_name.toLowerCase().replaceAll(/\s+/g, "_")}/${_id}`}
+        >
           <button className="rounded-md text-sm  px-2 py-1 bg-green-600 text-white transform active:translate-y-0.5 transition-transform duration-150 ease-in-out">
             Details
           </button>

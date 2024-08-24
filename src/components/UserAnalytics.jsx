@@ -52,16 +52,12 @@ const UserAnalytics = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 md:gap-3 md:my-5">
         <div className="bg-white p-4 shadow rounded-lg">
           <h2 className="text-lg font-semibold mb-3">Your Analytics</h2>
-          {!isDataEmpty ? (
-            <Chart
-              chartType="PieChart"
-              data={data}
-              width={"100%"}
-              height={"300px"}
-            />
-          ) : (
-            <p>No data available to display in the chart!</p>
-          )}
+          <Chart
+            chartType="PieChart"
+            data={data}
+            width={"100%"}
+            height={"300px"}
+          />
         </div>
         <div className="bg-white p-4 shadow rounded-lg">
           <h2 className="text-lg font-semibold mb-3">Books by Month</h2>

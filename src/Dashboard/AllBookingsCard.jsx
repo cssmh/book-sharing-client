@@ -46,8 +46,11 @@ const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
           src={book_image}
           className="rounded-lg w-24 h-[105px] object-cover mx-auto"
           alt={book_name}
+          onContextMenu={(e) => e.preventDefault()}
         />
-        <Link to={`/book/${book_id}`}>
+        <Link
+          to={`/book/${book_name.toLowerCase().replaceAll(/\s+/g, "_")}/${book_id}`}
+        >
           <p className="text-blue-900 text-lg font-semibold mt-2">
             {book_name}
           </p>

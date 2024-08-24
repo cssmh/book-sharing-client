@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Banner from "./Banner";
 import PopularBooks from "../pages/PopularBooks/PopularBooks";
 import AboutUs from "./AboutUs";
@@ -7,12 +8,13 @@ import Reviews from "./Reviews";
 import Count from "./Count/";
 import BookTypes from "./BookTypes/";
 import SupportScroll from "./SupportScroll";
-import HavenHelmet from "./HavenHelmet";
 
 const Home = () => {
   return (
     <div>
-      <HavenHelmet title={"Let's Share Books"} />
+      <Helmet>
+        <title>Let&apos;s Share and Discover Books</title>
+      </Helmet>
       <Banner />
       <PopularBooks />
       <AboutUs />

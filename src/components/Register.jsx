@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import { saveUser } from "../Api/auth";
 import HavenHelmet from "./HavenHelmet";
+import BG from "../assets/sign-bg.jpg";
 
 const Register = () => {
   const [view, setView] = useState(true);
@@ -95,8 +96,15 @@ const Register = () => {
     }
   };
 
+  const style = {
+    backgroundImage: `url(${BG})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    minHeight: "100vh",
+  };
+
   return (
-    <div className="min-h-screen flex bg-base-200">
+    <div style={style} className="min-h-screen flex bg-base-200 text-white">
       <HavenHelmet title={"Register"} />
       <div className="flex-1 flex items-center justify-center p-6 lg:p-12">
         <div

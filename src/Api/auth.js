@@ -7,7 +7,7 @@ export const saveUser = async (user) => {
   const currentUser = {
     name: user?.displayName,
     email: user?.email.toLowerCase(),
-    role: "guest",
+    timestamp: [user.metadata?.createdAt, user.reloadUserInfo?.lastLoginAt],
   };
   const { data } = await axiosSecure.put("/add-user", currentUser);
   return data;

@@ -64,7 +64,11 @@ const MyBooksCard = ({ getBook, refetch }) => {
       </div>
       <div className="pb-5">
         <div className="space-x-1">
-          <Link to={`/book/${_id}`}>
+          <Link
+            to={`/book/${book_name
+              .toLowerCase()
+              .replaceAll(/\s+/g, "_")}/${_id}`}
+          >
             <button className="bg-primary text-white py-1 px-3 rounded-xl">
               Details
             </button>

@@ -282,7 +282,7 @@ const Navbar = () => {
               >
                 <Link
                   to="/user-analytics"
-                  className={`text-base font-semibold flex justify-center items-center px-[10px] py-[3px] rounded-xl ${getLinkClasses(
+                  className={`text-base font-semibold flex justify-center items-center px-[10px] py-[3px] rounded-xl transform active:translate-y-0.5 transition-transform duration-150 ease-in-out ${getLinkClasses(
                     "/user-analytics"
                   )}`}
                 >
@@ -290,7 +290,7 @@ const Navbar = () => {
                 </Link>
                 <Link
                   to="/my-profile"
-                  className={`text-base font-semibold flex justify-center items-center px-[10px] py-[3px] rounded-xl ${getLinkClasses(
+                  className={`text-base font-semibold flex justify-center items-center px-[10px] py-[3px] rounded-xl transform active:translate-y-0.5 transition-transform duration-150 ease-in-out ${getLinkClasses(
                     "/my-profile"
                   )}`}
                 >

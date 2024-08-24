@@ -43,7 +43,11 @@ const PopularBookCard = ({ getBook }) => {
         <p className="text-green-500 font-semibold">Phone: {provider_phone}</p>
         <p className="text-gray-500">Location: {provider_location}</p>
         <div className="card-actions mt-2">
-          <Link to={`/book/${_id}`}>
+          <Link
+            to={`/book/${book_name
+              .toLowerCase()
+              .replaceAll(/\s+/g, "_")}/${_id}`}
+          >
             <button className="btn border-green-400 hover:border-green-400 bg-yellow-50 hover:bg-green-400 text-green-400 hover:text-white">
               View Details
             </button>

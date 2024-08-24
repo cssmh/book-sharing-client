@@ -62,7 +62,7 @@ const Root = createBrowserRouter([
         element: <AllBooks />,
       },
       {
-        path: "/book/:id",
+        path: "/book/:book_name/:id",
         element: (
           <PrivateRoute>
             <BookDetails />

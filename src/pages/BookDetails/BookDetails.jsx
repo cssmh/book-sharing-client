@@ -14,8 +14,8 @@ const BookDetails = () => {
   const { user } = useAuth();
   const { isAdmin } = useAdmin();
   const navigateTo = useNavigate();
-  const loadBookData = useLoaderData()
-  
+  const loadBookData = useLoaderData();
+
   const url = `/providers-books?email=${loadBookData?.provider_email}`;
   const { isLoading, data: bookData = [] } = useDataQuery(["myBooks"], url);
 
@@ -167,6 +167,7 @@ const BookDetails = () => {
                     <img
                       src={book.book_image}
                       alt={book.book_name}
+                      onContextMenu={(e) => e.preventDefault()}
                       className="w-24 h-32 mx-auto rounded-lg mb-2"
                     />
                     <h3 className="text-lg font-semibold text-blue-900">
@@ -176,7 +177,9 @@ const BookDetails = () => {
                   </div>
                   <div className="px-4 pb-4">
                     <Link
-                      to={`/book/${book._id}`}
+                      to={`/book/${book.book_name
+                        .toLowerCase()
+                        .replaceAll(/\s+/g, "_")}/${book._id}`}
                       className="btn btn-sm rounded-full bg-green-500 text-white"
                     >
                       View Details

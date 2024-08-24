@@ -33,7 +33,7 @@ const EditProfileModal = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <DialogPanel className="w-full max-w-md transform overflow-hidden rounded-xl bg-white p-6 text-left align-middle shadow-lg transition-all">
+              <DialogPanel className="w-full max-w-lg transform overflow-hidden rounded-xl bg-white p-6 text-left align-middle shadow-lg transition-all">
                 <Dialog.Title className="text-lg font-semibold text-gray-900 mb-4 text-center">
                   Edit Your Profile
                 </Dialog.Title>
@@ -54,7 +54,7 @@ const EditProfileModal = ({
                       className="text-sm w-full rounded-lg border border-gray-300 py-2 px-3 focus:border-transparent focus:ring-2 focus:ring-green-500"
                     />
                   </div>
-                  <div className="mb-4">
+                  <div className="mb-2">
                     <label
                       htmlFor="photo"
                       className="block text-sm font-medium text-gray-700 mb-1"
@@ -76,7 +76,7 @@ const EditProfileModal = ({
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-green-600 py-2 rounded-lg text-white mt-4 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full bg-green-500 py-2 rounded-lg text-white mt-4 transform active:translate-y-0.5 transition-transform duration-150 ease-in-out"
                   >
                     Update
                   </button>

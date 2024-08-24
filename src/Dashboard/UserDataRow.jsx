@@ -38,10 +38,7 @@ const UserDataRow = ({ user, refetch }) => {
     try {
       const res = await updateRole(user?.email, role);
       if (res?.modifiedCount > 0) {
-        swal(`Updated to ${role}`, {
-          icon: "success",
-          timer: 2000,
-        });
+        toast.success(`Updated to ${role}`);
         refetch();
         totalAdRefetch();
         if (userAuth?.email === user?.email && role === "guest") {
@@ -118,13 +115,44 @@ const UserDataRow = ({ user, refetch }) => {
       <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
         {user?.email}
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+      <td className="px-5 py-4 whitespace-nowrap text-sm text-gray-500">
         {user?.name}
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-        {new Date(user?.timestamp).toLocaleDateString("en-GB")}
+      <td className="px-5 py-4 whitespace-nowrap text-sm text-gray-700">
+        <div className="flex flex-col space-y-1">
+          <p className="text-green-500">
+            Created:{" "}
+            {new Date(parseInt(user?.timestamp[0], 10)).toLocaleString(
+              "en-GB",
+              {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: true,
+              }
+            )}
+          </p>
+          <p>
+            Last Login:{" "}
+            {new Date(parseInt(user?.timestamp[1], 10)).toLocaleString(
+              "en-GB",
+              {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: true,
+              }
+            )}
+          </p>
+        </div>
       </td>
-      <td className="px-6 py-4 whitespace-nowrap text-sm">
+      <td className="px-5 py-4 whitespace-nowrap text-sm">
         <span
           className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
             user?.role === "guest"

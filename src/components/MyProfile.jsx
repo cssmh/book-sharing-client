@@ -2,7 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import useAuth from "../Hooks/useAuth";
 import { FaEdit, FaKey } from "react-icons/fa";
-import BGBlue from "../assets/Notified.jpg";
+import BGPicture from "../assets/user-bg.svg";
 import EditProfileModal from "./Modal/EditProfileModal";
 import ChangePassModal from "./Modal/ChangePassModal";
 import useDataQuery from "../Hooks/useDataQuery";
@@ -69,9 +69,11 @@ const MyProfile = () => {
       <div className="bg-white shadow-lg rounded-lg w-full max-w-3xl mx-auto overflow-hidden">
         <div
           className="relative pt-16 pb-8 text-center bg-cover bg-center"
-          style={{ backgroundImage: `url(${BGBlue})` }}
+          style={{
+            backgroundImage: `url(${BGPicture})`,
+          }}
         >
-          <div className="absolute inset-0 bg-black opacity-40"></div>
+          <div className="absolute inset-0 bg-black opacity-30"></div>
           <img
             src={photoURL}
             className="relative rounded-full h-24 w-24 md:h-32 md:w-32 border-4 border-white mx-auto"
@@ -90,13 +92,32 @@ const MyProfile = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600 text-center">
             <div className="font-medium">Account Created:</div>
             <div className="text-gray-900">
-              {new Date(parseInt(metadata.createdAt, 10)).toLocaleString()}
+              {new Date(parseInt(metadata.createdAt, 10)).toLocaleString(
+                "en-GB",
+                {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  second: "2-digit",
+                  hour12: true,
+                }
+              )}
             </div>
             <div className="font-medium">Last Login:</div>
             <div className="text-gray-900">
               {new Date(
                 parseInt(reloadUserInfo.lastLoginAt, 10)
-              ).toLocaleString()}
+              ).toLocaleString("en-GB", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: true,
+              })}
             </div>
           </div>
           <div className="mt-4 md:mt-8 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 justify-center">

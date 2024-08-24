@@ -26,7 +26,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
     ["getBookData", book_id],
     `/book/${book_id}`
   );
-  
+
   const handleBookingDelete = async () => {
     const willDelete = await swal({
       title: "Are you sure?",
@@ -71,7 +71,11 @@ const MyBookingCard = ({ getBooking, refetch }) => {
           />
         </figure>
         <div className="text-center px-4 group-hover:scale-105 group-hover:transition-transform group-hover:duration-300">
-          <Link to={`/book/${book_id}`}>
+          <Link
+            to={`/book/${book_name
+              .toLowerCase()
+              .replaceAll(/\s+/g, "_")}/${_id}`}
+          >
             <h2 className="text-lg font-semibold text-blue-900 mt-2">
               {book_name}
             </h2>
