@@ -1,5 +1,5 @@
 import swal from "sweetalert";
-import Banner from "../assets/Notified.jpg";
+import Banner from "../assets/notified.jpg";
 import { postEmail } from "../Api/books";
 import useDataQuery from "../Hooks/useDataQuery";
 

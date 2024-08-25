@@ -21,8 +21,8 @@ const PopularBooks = () => {
   const {
     isLoading,
     error,
-    data: popularBooks,
-  } = useDataQuery(["popularBooks"], "/all-books?limit=6");
+    data: latestBooks = [],
+  } = useDataQuery(["latestBooks"], "/latest-books");
 
   if (isLoading) {
     return (
@@ -37,7 +37,7 @@ const PopularBooks = () => {
   if (error) {
     return (
       <div className="text-center text-xl md:text-2xl font-semibold text-red-600 italic my-6">
-        An error occurred while fetching popular books.
+        An error occurred while fetching latest books.
       </div>
     );
   }
@@ -50,7 +50,7 @@ const PopularBooks = () => {
         data-aos-offset="100"
         className="text-center my-5 md:my-8 font-bold text-xl md:text-2xl italic border-b-2 pb-3 max-w-md mx-auto border-blue-600"
       >
-        Our Popular Books
+        Our latest Books
       </h1>
       <Swiper
         speed={500}
@@ -82,7 +82,7 @@ const PopularBooks = () => {
           },
         }}
       >
-        {popularBooks?.result?.map((book) => (
+        {latestBooks?.map((book) => (
           <SwiperSlide key={book._id}>
             <PopularBookCard getBook={book} />
           </SwiperSlide>

@@ -57,7 +57,7 @@ const AdminBooks = () => {
             {isFetching || bookingLoading ? (
               <tr>
                 <td colSpan="6" className="py-4 text-center">
-                  <SmallLoader />
+                  <SmallLoader size={75} />
                 </td>
               </tr>
             ) : allBooks?.result?.length ? (

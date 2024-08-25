@@ -2,12 +2,12 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import useAuth from "../Hooks/useAuth";
 import { FaEdit, FaKey } from "react-icons/fa";
-import BGPicture from "../assets/user-bg.svg";
+import BGPicture from "../assets/blue-wavy.jpg";
+import HavenHelmet from "./HavenHelmet";
 import EditProfileModal from "./Modal/EditProfileModal";
 import ChangePassModal from "./Modal/ChangePassModal";
 import useDataQuery from "../Hooks/useDataQuery";
 import { updateAllBooks } from "../Api/books";
-import HavenHelmet from "./HavenHelmet";
 
 const MyProfile = () => {
   const [isOpen, setIsOpen] = useState(false);

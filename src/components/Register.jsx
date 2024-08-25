@@ -5,8 +5,8 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import { saveUser } from "../Api/auth";
+import BG from "../assets/login-background.avif";
 import HavenHelmet from "./HavenHelmet";
-import BG from "../assets/sign-bg.jpg";
 
 const Register = () => {
   const [view, setView] = useState(true);
@@ -99,12 +99,11 @@ const Register = () => {
   const style = {
     backgroundImage: `url(${BG})`,
     backgroundSize: "cover",
-    backgroundPosition: "center",
     minHeight: "100vh",
   };
 
   return (
-    <div style={style} className="min-h-screen flex bg-base-200 text-white">
+    <div style={style} className="min-h-screen flex bg-base-200">
       <HavenHelmet title={"Register"} />
       <div className="flex-1 flex items-center justify-center p-6 lg:p-12">
         <div
@@ -149,7 +148,7 @@ const Register = () => {
             <div className="mb-3">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-600 mb-1"
+                className="block text-sm font-medium text-gray-700 mb-1"
               >
                 Email address
               </label>
@@ -165,7 +164,7 @@ const Register = () => {
             <div className="relative">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-600 mb-1"
+                className="block text-sm font-medium text-gray-700 mb-1"
               >
                 Password
               </label>
@@ -181,7 +180,7 @@ const Register = () => {
               />
               {isPasswordEntered && (
                 <span
-                  className="absolute top-9 right-2 text-gray-500 cursor-pointer"
+                  className="absolute top-9 right-2 text-gray-700 cursor-pointer"
                   onClick={() => setView(!view)}
                 >
                   {view ? <FaRegEyeSlash /> : <FaRegEye />}
@@ -205,7 +204,7 @@ const Register = () => {
                 {loading ? (
                   <TbFidgetSpinner className="animate-spin text-xl" />
                 ) : (
-                  "Register"
+                  "Sign Up"
                 )}
               </button>
             </div>

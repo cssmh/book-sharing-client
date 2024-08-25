@@ -34,7 +34,7 @@ const UpdateBook = () => {
     checkMatching();
   }, [loading, myBooks, bookData, navigateTo]);
 
-  if (loading) return <SmallLoader />;
+  if (loading) return <SmallLoader size={76} />;
 
   const {
     _id,

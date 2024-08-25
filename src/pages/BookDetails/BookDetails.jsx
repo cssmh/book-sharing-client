@@ -1,42 +1,20 @@
 import { useState } from "react";
-import swal from "sweetalert";
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import AddBooking from "../AddBooking/AddBooking";
 import useAuth from "../../Hooks/useAuth";
-import useAdmin from "../../Hooks/useAdmin";
 import SmallLoader from "../../Components/SmallLoader";
-import { deleteBook } from "../../Api/Delete";
 import useDataQuery from "../../Hooks/useDataQuery";
 import HavenHelmet from "../../Components/HavenHelmet";
 
 const BookDetails = () => {
   const [desc, setDesc] = useState(true);
   const { user } = useAuth();
-  const { isAdmin } = useAdmin();
-  const navigateTo = useNavigate();
   const loadBookData = useLoaderData();
 
   const url = `/providers-books?email=${loadBookData?.provider_email}`;
   const { isLoading, data: bookData = [] } = useDataQuery(["myBooks"], url);
 
-  const handleDeleteByAdmin = async (idx, book) => {
-    const willDelete = await swal({
-      title: "Are you sure?",
-      text: "Once deleted, it can't be recovered!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    });
-    if (willDelete) {
-      const res = await deleteBook(idx, user?.email);
-      if (res.deletedCount > 0) {
-        swal(`${book} Deleted!`, { icon: "success", timer: 2000 });
-        navigateTo(-1);
-      }
-    }
-  };
-
-  if (isLoading) return <SmallLoader />;
+  if (isLoading) return <SmallLoader size={77} />;
 
   const {
     _id,
@@ -53,6 +31,13 @@ const BookDetails = () => {
     user_name,
     user_review,
   } = loadBookData;
+
+  const handleViewDetails = () => {
+    window.scrollTo({
+      top: 250,
+      behavior: "auto", // This will make the scroll instant
+    });
+  };
 
   return (
     <div>
@@ -104,25 +89,13 @@ const BookDetails = () => {
           {provider_email !== user?.email && book_status === "Unavailable" && (
             <p className="text-lg text-red-600">Unavailable to Collect..</p>
           )}
-          <p>
-            {book_status === "available" && provider_email === user?.email && (
-              <Link to={`/update-book/${_id}`}>
-                <button className="text-white bg-primary font-medium rounded-lg text-sm px-4 py-2 text-center me-2 mt-1 mx-2 md:mx-0">
-                  Update This Book
-                </button>
-              </Link>
-            )}
-          </p>
-          <p>
-            {book_status === "available" && isAdmin && (
-              <button
-                onClick={() => handleDeleteByAdmin(_id, book_name)}
-                className="text-white bg-pink-500 font-medium rounded-lg text-sm px-4 py-2 text-center mx-2 md:mx-0"
-              >
-                Delete This Book
+          {book_status === "available" && provider_email === user?.email && (
+            <Link to={`/update-book/${_id}`}>
+              <button className="text-white bg-primary font-medium rounded-lg text-sm px-4 py-2 text-center me-2 mt-2 mx-2 md:mx-0">
+                Update This Book
               </button>
-            )}
-          </p>
+            </Link>
+          )}
         </div>
       </div>
       <div className="max-w-[1200px] mx-4 lg:mx-auto mb-4">
@@ -181,6 +154,7 @@ const BookDetails = () => {
                         .toLowerCase()
                         .replaceAll(/\s+/g, "_")}/${book._id}`}
                       className="btn btn-sm rounded-full bg-green-500 text-white"
+                      onClick={handleViewDetails}
                     >
                       View Details
                     </Link>

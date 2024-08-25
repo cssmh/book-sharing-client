@@ -50,7 +50,7 @@ const AllBooks = () => {
         />
       </div>
       {isLoading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1250px] mx-auto my-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1250px] mx-auto mt-7 mb-9">
           {[...Array(3)].map((_, index) => (
             <SkeletonCard key={index} />
           ))}

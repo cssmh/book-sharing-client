@@ -60,7 +60,7 @@ const UserToUpdate = () => {
         Users to Get Notified for New Books ({emails?.length})
       </h1>
       {isLoading ? (
-        <SmallLoader />
+        <SmallLoader size={78} />
       ) : (
         <div className="space-y-6">
           {emails?.length > 0 && (

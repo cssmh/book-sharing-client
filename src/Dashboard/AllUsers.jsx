@@ -10,7 +10,7 @@ const AllUsers = () => {
     refetch,
   } = useDataQuery(["allUsers"], "/users");
 
-  if (isLoading) <SmallLoader />;
+  if (isLoading) return <SmallLoader size={84} />;
 
   return (
     <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg px-4 py-3">

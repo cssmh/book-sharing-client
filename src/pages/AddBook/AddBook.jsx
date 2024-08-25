@@ -96,7 +96,7 @@ const AddBook = () => {
     }
   };
 
-  if (isLoading) return <SmallLoader />;
+  if (isLoading) return <SmallLoader size={75} />;
 
   return (
     <div className="mb-8">

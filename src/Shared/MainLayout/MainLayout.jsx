@@ -6,6 +6,7 @@ import Footer from "../../Components/Footer";
 
 const MainLayout = () => {
   const [loading, setLoading] = useState(false);
+  const loc = useLocation();
 
   useEffect(() => {
     setLoading(true);
@@ -14,13 +15,12 @@ const MainLayout = () => {
     }, 1700);
   }, []);
 
-  const loc = useLocation();
   const noHeaderFooter =
     loc?.pathname?.startsWith("/admin-dashboard") ||
     loc?.pathname?.startsWith("/login") ||
     loc?.pathname?.startsWith("/register");
 
-  // if (loading) return <BigLoader />;
+  if (loading) return <BigLoader />;
 
   return (
     <div>

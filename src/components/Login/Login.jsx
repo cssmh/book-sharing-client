@@ -8,7 +8,7 @@ import useAuth from "../../Hooks/useAuth";
 import ResetPassModal from "../Modal/ResetPassModal";
 import { saveUser } from "../../Api/auth";
 import HavenHelmet from "../HavenHelmet";
-import BG from "../../assets/sign-bg.jpg";
+import BG from "../../assets/login-background.avif";
 
 const Login = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -91,14 +91,14 @@ const Login = () => {
   const style = {
     backgroundImage: `url(${BG})`,
     backgroundSize: "cover",
-    backgroundPosition: "center",
+    // backgroundPosition: "center",
     minHeight: "100vh",
   };
 
   return (
     <div style={style} className="min-h-screen flex bg-base-200">
       <HavenHelmet title={"Login"} />
-      <div className="flex-1 text-white flex items-center justify-center p-5 lg:p-12">
+      <div className="flex-1 flex items-center justify-center p-5 lg:p-12">
         <div className="border max-w-sm w-full p-8 rounded-lg shadow-2xl">
           <h2 className="text-3xl font-bold text-center mb-6">
             Sign in to your account

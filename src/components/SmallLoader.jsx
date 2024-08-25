@@ -1,8 +1,11 @@
 import { ScaleLoader } from "react-spinners";
 
-const SmallLoader = () => {
+const SmallLoader = ({ size }) => {
   return (
-    <div className="h-[82vh] flex justify-center items-center">
+    <div
+      style={{ height: `${size}vh` }}
+      className="flex justify-center items-center"
+    >
       <ScaleLoader size={100} color="red" />
     </div>
   );

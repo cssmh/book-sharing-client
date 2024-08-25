@@ -1,9 +1,9 @@
 import { useState } from "react";
 import AllBookingsCard from "./AllBookingsCard";
 import DeleteAllBookings from "./DeleteAllBookings";
-import { ScaleLoader } from "react-spinners";
 import useDataQuery from "../Hooks/useDataQuery";
 import HavenHelmet from "../Components/HavenHelmet";
+import SmallLoader from "../Components/SmallLoader";
 
 const AllBookings = () => {
   const [filterType, setFilterType] = useState("All");
@@ -42,9 +42,7 @@ const AllBookings = () => {
         </select>
       </div>
       {isLoading ? (
-        <div className="h-[72vh] flex justify-center items-center">
-          <ScaleLoader size={100} color="red" />
-        </div>
+        <SmallLoader size={70} />
       ) : allBookings?.length === 0 ? (
         <p className="text-center text-xl md:text-2xl font-semibold text-red-600 mt-10">
           No {filterType !== "All" && filterType} Booking
