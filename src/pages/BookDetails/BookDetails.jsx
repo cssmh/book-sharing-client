@@ -33,10 +33,13 @@ const BookDetails = () => {
   } = loadBookData;
 
   const handleViewDetails = () => {
-    window.scrollTo({
-      top: 250,
-      behavior: "auto", // This will make the scroll instant
-    });
+    setTimeout(() => {
+      window.scrollTo({
+        top: 200,
+        behavior: "smooth",
+        // behavior: "auto",  This will make the scroll instant
+      });
+    }, 500);
   };
 
   return (
@@ -69,7 +72,7 @@ const BookDetails = () => {
             <img
               src={book_image}
               onContextMenu={(e) => e.preventDefault()}
-              className="rounded-xl w-[140px] lg:w-[250px] mx-auto lg:mx-0 lg:ml-auto"
+              className="rounded-xl w-[140px] lg:w-[210px] md:h-[280px] mx-auto lg:mx-0 lg:ml-auto"
             />
           </figure>
         </div>

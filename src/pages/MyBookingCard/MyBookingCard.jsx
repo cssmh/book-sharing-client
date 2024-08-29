@@ -74,7 +74,7 @@ const MyBookingCard = ({ getBooking, refetch }) => {
           <Link
             to={`/book/${book_name
               .toLowerCase()
-              .replaceAll(/\s+/g, "_")}/${_id}`}
+              .replaceAll(/\s+/g, "_")}/${book_id}`}
           >
             <h2 className="text-lg font-semibold text-blue-900 mt-2">
               {book_name}

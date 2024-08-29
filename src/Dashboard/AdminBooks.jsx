@@ -17,7 +17,7 @@ const AdminBooks = () => {
     refetch,
   } = useQuery({
     queryKey: ["allBookings", limit],
-    queryFn:  () => getAllBooks(undefined, limit),
+    queryFn: () => getAllBooks(undefined, limit),
     keepPreviousData: true,
   });
 
@@ -27,10 +27,10 @@ const AdminBooks = () => {
   );
 
   const handleShowMore = () => {
-    if (allBooks?.totalBooks === limit) {
-      setLimit(6);
+    if (limit === 6) {
+      setLimit(allBooks?.totalBooks || 6); // Show all books
     } else {
-      setLimit((prevPage) => prevPage + 6);
+      setLimit(6); // Show only 6 books
     }
   };
 
@@ -82,10 +82,10 @@ const AdminBooks = () => {
             <button
               onClick={handleShowMore}
               className={`px-4 py-2 rounded-3xl text-white transform active:translate-y-0.5 transition-transform duration-150 ease-in-out ${
-                allBooks?.totalBooks === limit ? "bg-blue-500" : "bg-green-500"
+                limit === 6 ? "bg-green-500" : "bg-blue-500"
               }`}
             >
-              {allBooks?.totalBooks === limit ? "Show Less" : "Show More"}
+              {limit === 6 ? "Show All" : "Show Less"}
             </button>
           </div>
         )}
