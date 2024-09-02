@@ -11,9 +11,9 @@
 - [BookHaven on Surge](https://open-rest.surge.sh)
 
 ### Admin Dashboard
-<img src="https://i.ibb.co/Qf3Hc28/Screenshot-115.png" alt="Admin Dashboard" width="400" height="300" />
-*Screenshot of the Admin Dashboard showcasing administrative controls and statistics.*
 
+<img src="https://i.ibb.co/Qf3Hc28/Screenshot-115.png" width="48">
+*Screenshot of the Admin Dashboard showcasing administrative controls and statistics.*
 
 ## Table of Contents
 
@@ -32,7 +32,7 @@ MBSTU BookHaven is a comprehensive platform for book sharing, enabling users to 
    - Sign up with name, photo URL, email, and password.
    - Login with email or Google account.
    - Email verification required for new users.
-   - User added to database with their details and role.
+   - User added to the database with their details and role.
 
 2. **Navigation and Accessibility:**
 
@@ -78,7 +78,7 @@ MBSTU BookHaven is a comprehensive platform for book sharing, enabling users to 
 8. **New Feature: User Admin Panel**
    - Users can now be upgraded to admin.
    - Admins cannot downgrade their own role to 'guest' if they are the only admin left.
-   - Admins can delete user, but can't delete admin.
+   - Admins can delete users but can't delete admin.
 
 ## Packages Used
 
