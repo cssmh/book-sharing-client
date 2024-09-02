@@ -11,9 +11,8 @@
 - [BookHaven on Surge](https://open-rest.surge.sh)
 
 ### Admin Dashboard
-
-<img src="https://i.ibb.co/Qf3Hc28/Screenshot-115.png" height="350" width="600"/>
-<img src="https://i.ibb.co/Qf3Hc28/Screenshot-115.png" />
+![User Dashboard](./src/assets/Screenshot.png)
+<img src="./src/assets/Screenshot.png" height="350" width="600"/>
 *Screenshot of the Admin Dashboard showcasing administrative controls and statistics.*
 
 ## Table of Contents
