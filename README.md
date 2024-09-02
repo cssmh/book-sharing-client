@@ -12,8 +12,8 @@
 
 ### Admin Dashboard
 ![User Dashboard](./src/assets/Screenshot.png)
-<img src="./src/assets/Screenshot.png" height="350" width="600"/>
-*Screenshot of the Admin Dashboard showcasing administrative controls and statistics.*
+
+*Admin Dashboard showcasing administrative controls and statistics.*
 
 ## Table of Contents
 
