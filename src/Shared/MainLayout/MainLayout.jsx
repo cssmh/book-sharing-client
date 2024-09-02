@@ -5,14 +5,16 @@ import Navbar from "../../Components/Navbar";
 import Footer from "../../Components/Footer";
 
 const MainLayout = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const loc = useLocation();
 
   useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       setLoading(false);
     }, 1700);
+
+    return () => clearTimeout(timeout);
+    // Clean up the timeout on component unmount
   }, []);
 
   const noHeaderFooter =
@@ -32,4 +34,5 @@ const MainLayout = () => {
     </div>
   );
 };
+
 export default MainLayout;

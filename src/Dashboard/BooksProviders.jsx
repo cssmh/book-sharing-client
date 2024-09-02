@@ -34,7 +34,7 @@ const BooksProviders = () => {
                 {provider.email}
               </p>
               <Link
-                to={`/provider/${provider.email}`}
+                to={`/book/${provider.email}/${provider.firstBookId}`}
                 className="text-green-600 font-semibold hover:underline transform active:translate-y-0.5 transition-transform duration-150 ease-in-out"
               >
                 {provider.count} Books

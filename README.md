@@ -10,6 +10,10 @@
 - [BookHaven on Netlify](https://bookhaven1.netlify.app)
 - [BookHaven on Surge](https://open-rest.surge.sh)
 
+### Admin Dashboard
+<img src="https://i.ibb.co/Qf3Hc28/Screenshot-115.png" alt="Admin Dashboard" width="400" height="300" />
+*Screenshot of the Admin Dashboard showcasing administrative controls and statistics.*
+
 ## Table of Contents
 
 - [Description](#description)
