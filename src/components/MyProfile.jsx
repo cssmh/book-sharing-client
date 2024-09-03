@@ -25,8 +25,7 @@ const MyProfile = () => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
-    const defaultImageUrl =
-      "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/default.jpg";
+    const defaultImageUrl = import.meta.env.VITE_defaultUrl;
     const photo = form.photo.value || defaultImageUrl;
 
     if (name === displayName && photo === photoURL) {

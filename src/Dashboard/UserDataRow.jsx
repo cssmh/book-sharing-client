@@ -112,13 +112,20 @@ const UserDataRow = ({ user, refetch }) => {
 
   return (
     <tr>
-      <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+      <td className="py-4 whitespace-nowrap text-sm">
+        <div className="flex items-center gap-2">
+          <img
+            src={user?.photo}
+            className="w-9 h-9 rounded-full object-cover"
+            alt={user?.name}
+          />
+          <span className="font-semibold text-gray-700">{user?.name}</span>
+        </div>
+      </td>
+      <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
         {user?.email}
       </td>
-      <td className="px-5 py-4 whitespace-nowrap text-sm text-gray-500">
-        {user?.name}
-      </td>
-      <td className="px-5 py-4 whitespace-nowrap text-sm text-gray-700">
+      <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-700">
         <div className="flex flex-col space-y-1">
           <p className="text-green-500">
             Created:{" "}
@@ -160,10 +167,10 @@ const UserDataRow = ({ user, refetch }) => {
               : "bg-orange-100 text-red-600"
           }`}
         >
-          {user?.role.toUpperCase() || "Unavailable"}
+          {user?.role?.toUpperCase() || "Unavailable"}
         </span>
       </td>
-      <td className="pr-4 text-center py-4 whitespace-nowrap text-gray-500">
+      <td className="pr-2 text-center py-4 whitespace-nowrap text-gray-500">
         <button
           onClick={() => handleDelete(user._id, user?.role)}
           className="inline-flex items-center px-2 py-1 text-red-500 hover:text-red-700 transition-colors duration-200"
@@ -171,10 +178,10 @@ const UserDataRow = ({ user, refetch }) => {
           <FaTrashAlt />
         </button>
       </td>
-      <td className="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
+      <td className="px-3 py-4 whitespace-nowrap text-right text-sm font-medium">
         <button
           onClick={() => setIsOpen(true)}
-          className="inline-flex items-center px-2 py-1 text-base font-medium rounded-lg text-white bg-green-500 transform active:translate-y-0.5 transition-transform duration-150 ease-in-out"
+          className="inline-flex items-center px-2 py-1 text-base font-medium rounded-lg text-white bg-green-500 hover:bg-green-600 transform active:translate-y-0.5 transition-transform duration-150 ease-in-out"
         >
           Update Role
         </button>

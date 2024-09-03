@@ -5,18 +5,17 @@ import lottieLogo from "../assets/Logo.json";
 import defaultAvatar from "../assets/default.jpg";
 import useAuth from "../Hooks/useAuth";
 import { FaArrowRightToBracket } from "react-icons/fa6";
-import useMyCart from "../Hooks/useMyCart";
 import useAdmin from "../Hooks/useAdmin";
+import useMyCart from "../Hooks/useMyCart";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const { isAdmin } = useAdmin();
-  const { totalCart, myBookings } = useMyCart();
-  const [myProgress, setMyProgress] = useState(null);
   const [userDropdownVisible, setUserDropdownVisible] = useState(false);
+  const { totalCart, myProgress } = useMyCart();
+  const location = useLocation();
   const userRef = useRef(null);
 
-  const location = useLocation();
   const getLinkClasses = (path) => {
     return location.pathname === path ? "bg-green-400 text-white" : "";
   };
@@ -24,15 +23,6 @@ const Navbar = () => {
   const handleLogout = () => {
     logOut().then().catch();
   };
-
-  useEffect(() => {
-    if (totalCart > 0) {
-      const findProgress = myBookings?.find(
-        (booking) => booking.status === "Progress"
-      );
-      setMyProgress(findProgress);
-    }
-  }, [totalCart, myBookings]);
 
   const date = new Date();
   const currentTime = date.getHours();
@@ -165,7 +155,7 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1 space-x-1">
           <Link
             to="/"
-            className={`text-base font-semibold flex items-center px-[10px] py-1 rounded-full ${getLinkClasses(
+            className={`text-base font-semibold flex items-center px-[10px] py-[5px] rounded-full ${getLinkClasses(
               "/"
             )}`}
           >
@@ -173,25 +163,25 @@ const Navbar = () => {
           </Link>
           <Link
             to="/all-books"
-            className={`text-base font-semibold flex items-center px-[10px] py-1 rounded-full ${getLinkClasses(
+            className={`text-base font-semibold flex items-center px-[10px] py-[5px] rounded-full ${getLinkClasses(
               "/all-books"
             )}`}
           >
             All Books
           </Link>
+          <Link
+            to="/add-book"
+            className={`text-base font-semibold flex items-center px-[10px] py-[5px] rounded-full ${getLinkClasses(
+              "/add-book"
+            )}`}
+          >
+            Add Book
+          </Link>
           {user && (
             <>
               <Link
-                to="/add-book"
-                className={`text-base font-semibold flex items-center px-[10px] py-1 rounded-full ${getLinkClasses(
-                  "/add-book"
-                )}`}
-              >
-                Add Book
-              </Link>
-              <Link
                 to="/my-books"
-                className={`text-base font-semibold flex items-center px-[10px] py-1 rounded-full ${getLinkClasses(
+                className={`text-base font-semibold flex items-center px-[10px] py-[5px] rounded-full ${getLinkClasses(
                   "/my-books"
                 )}`}
               >
@@ -199,7 +189,7 @@ const Navbar = () => {
               </Link>
               <Link
                 to="/my-schedules"
-                className={`text-base font-semibold flex items-center px-[10px] py-1 rounded-full ${getLinkClasses(
+                className={`text-base font-semibold flex items-center px-[10px] py-[5px] rounded-full ${getLinkClasses(
                   "/my-schedules"
                 )}`}
               >
@@ -210,7 +200,7 @@ const Navbar = () => {
           {isAdmin && (
             <Link
               to="/admin-dashboard"
-              className={`text-base font-semibold flex items-center px-[10px] py-1 rounded-full ${getLinkClasses(
+              className={`text-base font-semibold flex items-center px-[10px] py-[5px] rounded-full ${getLinkClasses(
                 "/admin-dashboard"
               )}`}
             >

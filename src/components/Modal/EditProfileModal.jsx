@@ -67,8 +67,7 @@ const EditProfileModal = ({
                       name="photo"
                       className="text-sm w-full rounded-lg border border-gray-300 py-2 px-3 focus:border-transparent focus:ring-2 focus:ring-green-500"
                       defaultValue={
-                        photoURL ===
-                        "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/default.jpg"
+                        photoURL === import.meta.env.VITE_defaultUrl
                           ? ""
                           : photoURL
                       }

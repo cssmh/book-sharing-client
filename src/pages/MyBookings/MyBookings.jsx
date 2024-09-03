@@ -1,9 +1,9 @@
+import useMyBookings from "../../Hooks/useMyBookings";
 import MyBookingCard from "../MyBookingCard/MyBookingCard";
-import useMyCart from "../../Hooks/useMyCart";
 import MyBookSke from "../../Components/AllSkeleton/MyBookSke";
 
 const MyBookings = () => {
-  const { isLoading, myBookings, error, cartRefetch } = useMyCart();
+  const { isLoading, myBookings, refetch, error } = useMyBookings();
 
   if (isLoading) {
     return (
@@ -40,7 +40,7 @@ const MyBookings = () => {
               <MyBookingCard
                 key={booking._id}
                 getBooking={booking}
-                refetch={cartRefetch}
+                refetch={refetch}
               ></MyBookingCard>
             ))}
           </div>

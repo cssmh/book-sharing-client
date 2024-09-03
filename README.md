@@ -8,12 +8,11 @@
 
 - [BookHaven on Firebase](https://bookshare-c1817.web.app)
 - [BookHaven on Netlify](https://bookhaven1.netlify.app)
-- [BookHaven on Surge](https://open-rest.surge.sh)
+- [BookHaven on Surge](https://bookhaven.surge.sh)
 
 ### Admin Dashboard
 ![User Dashboard](./src/assets/Screenshot.png)
-
-*Admin Dashboard showcasing administrative controls and statistics.*
+*Screenshot of the Admin Dashboard showcasing administrative controls and statistics.*
 
 ## Table of Contents
 

@@ -5,8 +5,13 @@ export const addBooking = async (AddBookingData) => {
   return data;
 };
 
-export const getBookings = async (email) => {
+export const getMyBookings = async (email) => {
   const { data } = await axiosSecure(`/my-bookings?email=${email}`);
+  return data;
+};
+
+export const getMyCart = async (email) => {
+  const { data } = await axiosSecure(`/my-totalCart?email=${email}`);
   return data;
 };
 

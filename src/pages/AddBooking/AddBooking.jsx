@@ -2,40 +2,22 @@ import swal from "sweetalert";
 import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
 import toast from "react-hot-toast";
 import { useEffect, useRef, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import useMyCart from "../../Hooks/useMyCart";
-import { addBooking, getBookings } from "../../Api/bookings";
+import { addBooking } from "../../Api/bookings";
+import useMyBookings from "../../Hooks/useMyBookings";
 
 const AddBooking = ({ getBookData }) => {
   const { user } = useAuth();
   const { cartRefetch } = useMyCart();
-
   const { _id, book_image, book_name, provider_email, provider_phone } =
     getBookData;
 
   const [open, setOpen] = useState(false);
-  const [matchFound, setMatchFound] = useState([]);
   const [todayDateTime, setTodayDateTime] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { myBookings, refetch } = useMyBookings();
   const submitTimeoutRef = useRef(null);
-
-  const { data: allBookings = [], refetch } = useQuery({
-    queryKey: ["bookings", user?.email],
-    queryFn: async () => {
-      return getBookings(user?.email);
-    },
-  });
-
-  // Check if the selected book is already booked
-  useEffect(() => {
-    if (allBookings?.length > 0) {
-      const matching = allBookings.filter((myBooked) =>
-        book_name.includes(myBooked.book_name)
-      );
-      setMatchFound(matching);
-    }
-  }, [allBookings, book_name]);
 
   // Set today's date and time as default
   useEffect(() => {
@@ -56,13 +38,6 @@ const AddBooking = ({ getBookData }) => {
   // Set today's date and time as default end
 
   const handlePopUp = () => {
-    if (matchFound.length > 0) {
-      return swal({
-        text: "You already booked this!",
-        icon: "error",
-        timer: 2000,
-      });
-    }
     setOpen(true);
   };
 
@@ -95,6 +70,21 @@ const AddBooking = ({ getBookData }) => {
 
     if (!/^(\+?8801|01)(\d{9})$/.test(user_phone)) {
       return toast.error("Enter a valid phone number!");
+    }
+
+    const hasBooking = myBookings.some(
+      (booking) =>
+        booking.user_email === user_email && booking.book_name === book_name
+    );
+
+    if (hasBooking) {
+      swal({
+        text: "You already booked this!",
+        icon: "error",
+        timer: 2000,
+      });
+      setIsSubmitting(false);
+      return;
     }
 
     const AddBookingData = {

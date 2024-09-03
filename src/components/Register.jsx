@@ -58,9 +58,7 @@ const Register = () => {
     setLoading(true);
     const form = new FormData(e.currentTarget);
     const name = form.get("name");
-    const image =
-      form.get("photo") ||
-      "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/default.jpg";
+    const image = form.get("photo") || import.meta.env.VITE_defaultUrl;
     const email = form.get("email");
     const password = form.get("password");
 

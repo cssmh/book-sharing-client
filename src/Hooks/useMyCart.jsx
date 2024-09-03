@@ -1,28 +1,25 @@
 import useAuth from "./useAuth";
 import { useQuery } from "@tanstack/react-query";
-import { getBookings } from "../Api/bookings";
+import { getMyCart } from "../Api/bookings";
 
 const useMyCart = () => {
   const { loading, user } = useAuth();
-  
+
   const {
     isLoading,
-    data = [],
-    error,
+    data = {},
     refetch: cartRefetch,
   } = useQuery({
-    queryKey: ["myBookings", user?.email],
-    queryFn: () => getBookings(user?.email),
     enabled: !loading && !!user?.email,
+    queryKey: ["MyCart", user?.email],
+    queryFn: () => getMyCart(user?.email),
   });
-  const myBookings = data?.result;
-  const totalCart = data?.totalCart;
+  const { totalCart = 0, myProgress = 0 } = data;
 
   return {
     isLoading,
-    myBookings,
     totalCart,
-    error,
+    myProgress,
     cartRefetch,
   };
 };

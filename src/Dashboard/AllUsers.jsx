@@ -20,11 +20,11 @@ const AllUsers = () => {
         <table className="min-w-full bg-white divide-y divide-gray-200">
           <thead className="bg-gray-800 text-white">
             <tr>
-              <th className="px-5 py-3 text-left text-xs font-medium uppercase tracking-wider">
-                Email
-              </th>
               <th className="px-5 py-2 text-left text-xs font-medium uppercase tracking-wider">
                 Name
+              </th>
+              <th className="px-5 py-3 text-left text-xs font-medium uppercase tracking-wider">
+                Email
               </th>
               <th className="px-5 py-2 text-left text-xs font-medium uppercase tracking-wider">
                 Created & Last Login

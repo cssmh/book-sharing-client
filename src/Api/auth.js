@@ -5,8 +5,9 @@ const auth = getAuth(app);
 
 export const saveUser = async (user) => {
   const currentUser = {
-    name: user?.displayName,
+    name: user?.displayName || "anonymous",
     email: user?.email.toLowerCase(),
+    photo: user?.photoURL || import.meta.env.VITE_defaultUrl,
     timestamp: [user.metadata?.createdAt, user.reloadUserInfo?.lastLoginAt],
   };
   const { data } = await axiosSecure.put("/add-user", currentUser);
