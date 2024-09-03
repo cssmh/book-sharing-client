@@ -23,7 +23,7 @@ const AllBookings = () => {
 
   return (
     <div>
-      <HavenHelmet title={"All Bookings"} />
+      <HavenHelmet title="All Bookings" />
       <h1 className="text-center font-semibold text-xl mb-3 mt-2 md:mt-0">
         {filterType} Bookings ({allBookings.length})
       </h1>

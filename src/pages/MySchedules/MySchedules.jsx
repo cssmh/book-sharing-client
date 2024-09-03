@@ -9,7 +9,7 @@ const MySchedules = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <HavenHelmet title={"My Schedule"} />
+      <HavenHelmet title="My Schedule" />
       <header className="bg-gray-800 text-white md:px-7 py-[15px] flex flex-col md:flex-row justify-between items-center relative">
         <h1 className="text-[21px] font-semibold mb-2 md:mb-0">My Schedules</h1>
         <div className="flex flex-row gap-4">

@@ -59,9 +59,7 @@ const UpdateBook = () => {
     e.preventDefault();
     const form = e.target;
     const book_name = form.book_name.value;
-    const defaultBookImageUrl =
-      "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/CoverSoon.png";
-    const book_image = form.book_image.value || defaultBookImageUrl;
+    const book_image = form.book_image.value || import.meta.env.VITE_Cover_URL;
     const provider_phone = form.provider_phone.value;
     const provider_location = form.provider_location.value;
     const description = form.description.value;
@@ -138,10 +136,7 @@ const UpdateBook = () => {
               type="text"
               name="book_image"
               defaultValue={
-                book_image ===
-                "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/CoverSoon.png"
-                  ? ""
-                  : book_image
+                book_image === import.meta.env.VITE_Cover_URL ? "" : book_image
               }
               className="input input-bordered focus:border-transparent"
               style={{ outline: "none" }}

@@ -7,7 +7,7 @@ const BooksProviders = () => {
 
   return (
     <div className="max-w-6xl mx-auto rounded-lg px-6 py-3">
-      <HavenHelmet title={"Books Providers"} />
+      <HavenHelmet title="Books Providers" />
       <h1 className="text-xl font-semibold text-center mb-4">
         All Books Providers ({(!loading && bookProviders?.length) || 0})
       </h1>

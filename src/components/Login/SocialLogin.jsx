@@ -12,35 +12,28 @@ const SocialLogin = () => {
   const handleSocialLogin = async () => {
     try {
       const res = await googleLogin();
-      try {
-        await saveUser(res?.user);
+      if (res?.user) {
+        await saveUser(res.user);
         toast.success("User logged in successfully");
         navigateTo(location?.state || "/");
-      } catch (apiError) {
-        toast.error(
-          `Failed to add user: ${
-            apiError.response?.data?.message || apiError.message
-          }`
-        );
       }
-    } catch (err) {
-      toast.error(`Login failed: ${err.message}`);
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || error.message;
+      toast.error(`Login failed: ${errorMessage}`);
     }
   };
 
   return (
-    <>
+    <div className="text-center">
       <div className="divider max-w-2xl mx-auto italic">or</div>
-      <div className="flex justify-around">
-        <button
-          className="flex items-center gap-2 bg-green-200 text-black px-4 py-2 rounded-lg"
-          onClick={handleSocialLogin}
-        >
-          <FcGoogle className="text-2xl"></FcGoogle>{" "}
-          <span>Continue with Google</span>
-        </button>
-      </div>
-    </>
+      <button
+        className="flex items-center gap-2 bg-green-200 text-black px-4 py-2 rounded-lg mx-auto mt-4"
+        onClick={handleSocialLogin}
+      >
+        <FcGoogle className="text-2xl" />
+        <span>Continue with Google</span>
+      </button>
+    </div>
   );
 };
 

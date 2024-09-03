@@ -14,7 +14,7 @@ const AllUsers = () => {
 
   return (
     <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg px-4 py-3">
-      <HavenHelmet title={"All Users"} />
+      <HavenHelmet title="All Users" />
       <h1 className="text-xl font-bold mb-4">All Users ({data?.length})</h1>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white divide-y divide-gray-200">

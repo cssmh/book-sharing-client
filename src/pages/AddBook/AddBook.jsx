@@ -8,7 +8,7 @@ import { postBook } from "../../Api/books";
 import HavenHelmet from "../../Components/HavenHelmet";
 
 const AddBook = () => {
-  const { user } = useAuth();
+  const { loading, user } = useAuth();
   const url = `/providers-books?email=${user?.email}`;
   const {
     isLoading,
@@ -16,52 +16,22 @@ const AddBook = () => {
     refetch,
   } = useDataQuery(["myBooks"], url);
 
-  // Create a new Date object for today's date
-  let today = new Date();
-
-  // Define the months array for formatting
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
-  let month = months[today.getMonth()];
-  let day = today.getDate();
-  let year = today.getFullYear();
-  let todaysDate = `${month} ${day}, ${year}`;
+  const today = new Date();
+  const formattedDate = today.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
 
   const handleAddBook = async (e) => {
     e.preventDefault();
     const form = e.target;
     const book_name = form.book_name.value;
-
-    const duplicate = myBooks?.find((myBook) => myBook.book_name === book_name);
-    if (duplicate) {
+    if (myBooks.some((myBook) => myBook.book_name === book_name)) {
       return toast.error("You already added this Book!");
     }
-
-    const book_image =
-      form.book_image.value ||
-      "https://raw.githubusercontent.com/cssmh/bookhaven-client/main/src/assets/CoverSoon.png";
-    const provider_name = form.provider_name.value;
-    const provider_email = form.provider_email.value;
-    const provider_image = user?.photoURL;
+    const book_image = form.book_image.value || import.meta.env.VITE_Cover_URL;
     const provider_phone = form.provider_phone.value;
-    const provider_location = form.provider_location.value;
-    const description = form.description.value;
-    const added_time = todaysDate;
-    const book_status = "available";
-
     if (!/^(\+?8801|01)(\d{9})$/.test(provider_phone)) {
       return toast.error("Enter a valid phone number!");
     }
@@ -69,14 +39,14 @@ const AddBook = () => {
     const BookInformation = {
       book_name,
       book_image,
-      provider_name,
-      provider_email,
-      provider_image,
+      provider_name: form.provider_name.value,
+      provider_email: form.provider_email.value,
+      provider_image: user?.photoURL,
       provider_phone,
-      provider_location,
-      description,
-      added_time,
-      book_status,
+      provider_location: form.provider_location.value,
+      description: form.description.value,
+      added_time: formattedDate,
+      book_status: "available",
     };
 
     try {
@@ -96,11 +66,11 @@ const AddBook = () => {
     }
   };
 
-  if (isLoading) return <SmallLoader size={75} />;
+  if (loading || isLoading) return <SmallLoader size={75} />;
 
   return (
     <div className="mb-8">
-      <HavenHelmet title={"Add Book"} />
+      <HavenHelmet title="Add Book" />
       <div className="flex flex-col md:flex-row justify-center items-center gap-3 mt-3 px-1 md:px-0">
         <div className="w-2/3 md:w-[31%]">
           <img

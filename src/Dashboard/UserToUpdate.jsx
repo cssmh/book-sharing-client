@@ -55,7 +55,7 @@ const UserToUpdate = () => {
 
   return (
     <div className="max-w-6xl mx-auto py-2">
-      <HavenHelmet title={"User To Update"} />
+      <HavenHelmet title="User To Update" />
       <h1 className="text-xl font-semibold text-center mb-3">
         Users to Get Notified for New Books ({emails?.length})
       </h1>

@@ -39,7 +39,7 @@ const MyBooks = () => {
 
   return (
     <div className="mb-4">
-      <HavenHelmet title={"My Books"} />
+      <HavenHelmet title="My Books" />
       {bookData?.length === 0 ? (
         <div className="flex flex-col justify-center items-center min-h-[70vh] my-2 md:mt-0 text-red-600">
           <p className="text-[21px] font-semibold text-center italic">

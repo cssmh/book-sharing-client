@@ -37,7 +37,7 @@ const AllBooks = () => {
 
   return (
     <div>
-      <HavenHelmet title={"All Books"} />
+      <HavenHelmet title="All Books" />
       <div className="text-center mt-4">
         <input
           id="search"
