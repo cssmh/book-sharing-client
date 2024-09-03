@@ -6,45 +6,39 @@ import defaultAvatar from "../assets/default.jpg";
 import useAuth from "../Hooks/useAuth";
 import { FaArrowRightToBracket } from "react-icons/fa6";
 import useAdmin from "../Hooks/useAdmin";
-import useMyCart from "../Hooks/useMyCart";
+import useMyData from "../Hooks/useMyData";
+
+const getGreeting = () => {
+  const currentTime = new Date().getHours();
+  if (currentTime >= 4 && currentTime < 6) return "Whoa, early bird";
+  if (currentTime >= 6 && currentTime < 12) return "Good morning";
+  if (currentTime >= 12 && currentTime < 16) return "Good afternoon";
+  if (currentTime >= 16 && currentTime < 20) return "Good evening";
+  if (currentTime >= 20 || currentTime < 1) return "Good night";
+  return "Working late?";
+};
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const { isAdmin } = useAdmin();
   const [userDropdownVisible, setUserDropdownVisible] = useState(false);
-  const { totalCart, myProgress } = useMyCart();
+  const { cartLoading, totalCart, myProgress } = useMyData();
   const location = useLocation();
   const userRef = useRef(null);
 
-  const getLinkClasses = (path) => {
-    return location.pathname === path ? "bg-green-400 text-white" : "";
+  const getLinkClasses = (path) =>
+    `text-base font-semibold flex items-center px-[10px] py-[5px] rounded-full ${
+      location.pathname === path ? "bg-green-400 text-white" : ""
+    }`;
+
+  const handleLogout = async () => {
+    try {
+      await logOut();
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
   };
 
-  const handleLogout = () => {
-    logOut().then().catch();
-  };
-
-  const date = new Date();
-  const currentTime = date.getHours();
-
-  let greeting;
-  if (currentTime >= 4 && currentTime < 6) {
-    greeting = "Whoa, early bird";
-  } else if (currentTime >= 6 && currentTime < 12) {
-    greeting = "Good morning";
-  } else if (currentTime >= 12 && currentTime < 16) {
-    greeting = "Good afternoon";
-  } else if (currentTime >= 16 && currentTime < 20) {
-    greeting = "Good evening";
-  } else if (currentTime >= 20 && currentTime < 24) {
-    greeting = "Good night";
-  } else if (currentTime >= 24 || currentTime < 1) {
-    greeting = "Sleep tight";
-  } else if (currentTime >= 1 && currentTime < 4) {
-    greeting = "Working late?";
-  }
-
-  // Handle click outside the dropdown
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (userRef.current && !userRef.current.contains(event.target)) {
@@ -53,9 +47,7 @@ const Navbar = () => {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -153,45 +145,23 @@ const Navbar = () => {
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 space-x-1">
-          <Link
-            to="/"
-            className={`text-base font-semibold flex items-center px-[10px] py-[5px] rounded-full ${getLinkClasses(
-              "/"
-            )}`}
-          >
+          <Link to="/" className={getLinkClasses("/")}>
             Home
           </Link>
-          <Link
-            to="/all-books"
-            className={`text-base font-semibold flex items-center px-[10px] py-[5px] rounded-full ${getLinkClasses(
-              "/all-books"
-            )}`}
-          >
+          <Link to="/all-books" className={getLinkClasses("/all-books")}>
             All Books
-          </Link>
-          <Link
-            to="/add-book"
-            className={`text-base font-semibold flex items-center px-[10px] py-[5px] rounded-full ${getLinkClasses(
-              "/add-book"
-            )}`}
-          >
-            Add Book
           </Link>
           {user && (
             <>
-              <Link
-                to="/my-books"
-                className={`text-base font-semibold flex items-center px-[10px] py-[5px] rounded-full ${getLinkClasses(
-                  "/my-books"
-                )}`}
-              >
+              <Link to="/add-book" className={getLinkClasses("/add-book")}>
+                Add Book
+              </Link>
+              <Link to="/my-books" className={getLinkClasses("/my-books")}>
                 My Books
               </Link>
               <Link
                 to="/my-schedules"
-                className={`text-base font-semibold flex items-center px-[10px] py-[5px] rounded-full ${getLinkClasses(
-                  "/my-schedules"
-                )}`}
+                className={getLinkClasses("/my-schedules")}
               >
                 My Schedule
               </Link>
@@ -200,9 +170,7 @@ const Navbar = () => {
           {isAdmin && (
             <Link
               to="/admin-dashboard"
-              className={`text-base font-semibold flex items-center px-[10px] py-[5px] rounded-full ${getLinkClasses(
-                "/admin-dashboard"
-              )}`}
+              className={getLinkClasses("/admin-dashboard")}
             >
               Dashboard
             </Link>
@@ -218,9 +186,7 @@ const Navbar = () => {
               className={`${
                 myProgress ? "animate-bounce" : ""
               } btn btn-ghost btn-circle`}
-              style={{
-                animationIterationCount: myProgress ? "4" : "initial",
-              }}
+              style={{ animationIterationCount: myProgress ? "4" : "initial" }}
             >
               <div className="indicator">
                 <svg
@@ -249,7 +215,7 @@ const Navbar = () => {
           </Link>
         )}
         <div className="flex flex-col items-center justify-center font-semibold text-center text-sm mr-2 md:mx-2">
-          <p className="uppercase">{greeting}</p>
+          <p className="uppercase">{getGreeting()}</p>
           {user && <p className="hidden md:block">{user.displayName}</p>}
         </div>
         {user?.email ? (
@@ -272,7 +238,7 @@ const Navbar = () => {
               >
                 <Link
                   to="/user-analytics"
-                  className={`text-base font-semibold flex justify-center items-center px-[10px] py-[3px] rounded-xl transform active:translate-y-0.5 transition-transform duration-150 ease-in-out ${getLinkClasses(
+                  className={`justify-center py-[3px] ${getLinkClasses(
                     "/user-analytics"
                   )}`}
                 >
@@ -280,7 +246,7 @@ const Navbar = () => {
                 </Link>
                 <Link
                   to="/my-profile"
-                  className={`text-base font-semibold flex justify-center items-center px-[10px] py-[3px] rounded-xl transform active:translate-y-0.5 transition-transform duration-150 ease-in-out ${getLinkClasses(
+                  className={`justify-center py-[3px] ${getLinkClasses(
                     "/my-profile"
                   )}`}
                 >
@@ -290,16 +256,18 @@ const Navbar = () => {
                   className="text-base hover:bg-gray-100 font-semibold flex justify-center items-center px-[10px] py-1 rounded-full gap-1 transform active:translate-y-0.5 transition-transform duration-150 ease-in-out"
                   onClick={handleLogout}
                 >
-                  Logout <FaArrowRightToBracket />
+                  <FaArrowRightToBracket />
+                  <span>Log Out</span>
                 </button>
               </ul>
             )}
           </div>
         ) : (
-          <Link to="/login">
-            <button className="btn btn-sm border border-green-400 hover:border-green-400 hover:bg-green-400 hover:text-white">
-              Login
-            </button>
+          <Link
+            to="/login"
+            className="btn btn-sm border border-green-400 hover:border-green-400 hover:bg-green-400 hover:text-white"
+          >
+            Login
           </Link>
         )}
       </div>

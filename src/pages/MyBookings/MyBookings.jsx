@@ -1,9 +1,9 @@
-import useMyBookings from "../../Hooks/useMyBookings";
+import useMyData from "../../Hooks/useMyData";
 import MyBookingCard from "../MyBookingCard/MyBookingCard";
 import MyBookSke from "../../Components/AllSkeleton/MyBookSke";
 
 const MyBookings = () => {
-  const { isLoading, myBookings, refetch, error } = useMyBookings();
+  const { isLoading, myBookings, refetch, error } = useMyData();
 
   if (isLoading) {
     return (

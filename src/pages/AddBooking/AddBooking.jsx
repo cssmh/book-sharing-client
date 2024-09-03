@@ -1,23 +1,20 @@
 import swal from "sweetalert";
 import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
 import toast from "react-hot-toast";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
-import useMyCart from "../../Hooks/useMyCart";
 import { addBooking } from "../../Api/bookings";
-import useMyBookings from "../../Hooks/useMyBookings";
+import useMyData from "../../Hooks/useMyData";
 
 const AddBooking = ({ getBookData }) => {
   const { user } = useAuth();
-  const { cartRefetch } = useMyCart();
+  const { myBookings, refetch, cartRefetch } = useMyData();
   const { _id, book_image, book_name, provider_email, provider_phone } =
     getBookData;
 
   const [open, setOpen] = useState(false);
   const [todayDateTime, setTodayDateTime] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { myBookings, refetch } = useMyBookings();
-  const submitTimeoutRef = useRef(null);
 
   // Set today's date and time as default
   useEffect(() => {
@@ -32,31 +29,19 @@ const AddBooking = ({ getBookData }) => {
       minute: "2-digit",
       hour12: true,
     });
-    const dateTime = `${formattedDate}, ${formattedTime}`;
-    setTodayDateTime(dateTime);
+    setTodayDateTime(`${formattedDate}, ${formattedTime}`);
   }, []);
-  // Set today's date and time as default end
 
-  const handlePopUp = () => {
-    setOpen(true);
-  };
-
-  const closePop = () => {
-    setOpen(false);
-  };
+  const handlePopUp = () => setOpen(true);
+  const closePop = () => setOpen(false);
 
   const handleAddBooking = async (e) => {
     e.preventDefault();
-    // Prevent multiple submissions clicking
+
     if (isSubmitting) return;
+
     setIsSubmitting(true);
-    if (submitTimeoutRef.current) {
-      clearTimeout(submitTimeoutRef.current);
-    }
-    submitTimeoutRef.current = setTimeout(() => {
-      setIsSubmitting(false);
-    }, 1000);
-    //  more than one time in a second
+
     const form = e.target;
     const book_id = _id;
     const book_name = form.book_name.value;
@@ -69,6 +54,7 @@ const AddBooking = ({ getBookData }) => {
     const status = "Pending";
 
     if (!/^(\+?8801|01)(\d{9})$/.test(user_phone)) {
+      setIsSubmitting(false);
       return toast.error("Enter a valid phone number!");
     }
 
@@ -78,13 +64,12 @@ const AddBooking = ({ getBookData }) => {
     );
 
     if (hasBooking) {
-      swal({
+      setIsSubmitting(false);
+      return swal({
         text: "You already booked this!",
         icon: "error",
         timer: 2000,
       });
-      setIsSubmitting(false);
-      return;
     }
 
     const AddBookingData = {
@@ -117,6 +102,7 @@ const AddBooking = ({ getBookData }) => {
       console.error(err);
     } finally {
       setOpen(false);
+      setIsSubmitting(false);
     }
   };
 
@@ -231,8 +217,12 @@ const AddBooking = ({ getBookData }) => {
               ></textarea>
             </div>
             <div className="form-control mt-5">
-              <button className="btn btn-primary text-white">
-                Add Booking
+              <button
+                type="submit"
+                className="btn btn-primary text-white"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Submitting..." : "Add Booking"}
               </button>
             </div>
           </form>
