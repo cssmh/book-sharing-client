@@ -5,21 +5,6 @@ export const addBooking = async (AddBookingData) => {
   return data;
 };
 
-export const getMyBookings = async (email) => {
-  const { data } = await axiosSecure(`/my-bookings?email=${email}`);
-  return data;
-};
-
-export const getMyCart = async (email) => {
-  const { data } = await axiosSecure(`/my-totalCart?email=${email}`);
-  return data;
-};
-
-export const getPending = async (email) => {
-  const { data } = await axiosSecure(`/my-pending?email=${email}`);
-  return data;
-};
-
 // for myPendingCard
 export const updateBookingStatus = async (id, email, updatedPendingStatus) => {
   const { data } = await axiosSecure.put(`/booking-status/${id}/${email}`, {

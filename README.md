@@ -11,8 +11,9 @@
 - [BookHaven on Surge](https://bookhaven.surge.sh)
 
 ### Admin Dashboard
+
 ![User Dashboard](./src/assets/Screenshot.png)
-*Screenshot of the Admin Dashboard showcasing administrative controls and statistics.*
+_Screenshot of the Admin Dashboard showcasing administrative controls and statistics._
 
 ## Table of Contents
 
@@ -22,16 +23,17 @@
 
 ## Description
 
-MBSTU BookHaven is a comprehensive platform for book sharing, enabling users to sign up, add, manage, and book books efficiently. It incorporates various features to ensure a seamless and user-friendly experience.
+MBSTU BookHaven is a comprehensive platform for book sharing that enables users to sign up, add, manage, and book books efficiently. It incorporates various features to ensure a seamless and user-friendly experience.
 
 ## Features
 
 1. **User Authentication:**
 
    - Sign up with name, photo URL, email, and password.
-   - Login with email or Google account.
+   - Log in with email or Google account.
    - Email verification required for new users.
-   - User added to the database with their details and role.
+   - Change password and update profile options in the profile section.
+   - Users are added to the database with their details and role.
 
 2. **Navigation and Accessibility:**
 
@@ -42,13 +44,13 @@ MBSTU BookHaven is a comprehensive platform for book sharing, enabling users to 
 3. **User Interface:**
 
    - Responsive design for mobile and tablet devices.
-   - AOS animations and Lottie Animation for enhanced visuals.
-   - Skeleton loaders on the home page and react spinner.
+   - AOS animations and Lottie animations for enhanced visuals.
+   - Skeleton loaders on the home page and React spinner.
 
 4. **Book Management:**
 
    - Add, delete, and update books with validation.
-   - View all books and search by name or provider.
+   - View all books and search by name, provider, and location.
    - Swipeable book carousel using Swiper React.
 
 5. **User-Specific Features:**
@@ -64,20 +66,22 @@ MBSTU BookHaven is a comprehensive platform for book sharing, enabling users to 
    - Book and booking deletion capabilities.
    - Ability to upgrade users to admin.
    - Admin routes are protected with JWT and conditions.
-   - Admin users can access charts, view user book statistics, and perform various management tasks.
+   - Admins can access charts, view user book statistics, and perform various management tasks.
 
 7. **Advanced Functionalities:**
 
    - JWT for secure authorization.
    - React CountUp and Intersection Observer for dynamic counting.
+   - A single hook for all TanStack Query operations.
    - Booking status management and duplicate booking prevention.
-   - Provider marks a booking as 'Completed'; other bookings for the same book will be disabled.
-   - Implement pagination to integrate seamlessly with search, maintaining accurate page count and limiting results per page.
+   - Providers can mark a booking as 'Completed'; other bookings for the same book will be disabled.
+   - Pagination integrated with search, maintaining accurate page count and limiting results per page.
 
 8. **New Feature: User Admin Panel**
+   - New users are added to the database with all info, including accounts created time, last login and also effect on updating name and image.
    - Users can now be upgraded to admin.
    - Admins cannot downgrade their own role to 'guest' if they are the only admin left.
-   - Admins can delete users but can't delete admin.
+   - Admins can delete users but cannot delete other admins.
 
 ## Packages Used
 

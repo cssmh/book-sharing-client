@@ -22,7 +22,9 @@ const Login = () => {
   useEffect(() => {
     if (
       user?.emailVerified ||
-      ["kona@mail.com", "admin@admin.com"].includes(user?.email)
+      ["kona@mail.com", "admin@admin.com", "admin@mail.com"].includes(
+        user?.email
+      )
     ) {
       navigateTo("/");
     }
@@ -40,7 +42,7 @@ const Login = () => {
       if (res?.user) {
         if (
           res.user.emailVerified ||
-          ["Kona@mail.com", "admin@admin.com"].includes(email)
+          ["Kona@mail.com", "admin@admin.com", "admin@mail.com"].includes(email)
         ) {
           await saveUser(res.user);
           toast.success("Logged in successfully");
@@ -127,7 +129,7 @@ const Login = () => {
               />
               {passwordEntered && (
                 <span
-                  className="absolute top-10 right-3 text-gray-500 cursor-pointer"
+                  className="absolute top-[35px] right-3 text-gray-500 cursor-pointer"
                   onClick={() => setViewPassword(!viewPassword)}
                 >
                   {viewPassword ? <FaRegEyeSlash /> : <FaRegEye />}

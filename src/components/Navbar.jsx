@@ -6,7 +6,7 @@ import defaultAvatar from "../assets/default.jpg";
 import useAuth from "../Hooks/useAuth";
 import { FaArrowRightToBracket } from "react-icons/fa6";
 import useAdmin from "../Hooks/useAdmin";
-import useMyData from "../Hooks/useMyData";
+import useMyCart from "../Hooks/useMyCart";
 
 const getGreeting = () => {
   const currentTime = new Date().getHours();
@@ -22,7 +22,7 @@ const Navbar = () => {
   const { user, logOut } = useAuth();
   const { isAdmin } = useAdmin();
   const [userDropdownVisible, setUserDropdownVisible] = useState(false);
-  const { cartLoading, totalCart, myProgress } = useMyData();
+  const { isLoading, totalCart, totalProgress } = useMyCart();
   const location = useLocation();
   const userRef = useRef(null);
 
@@ -184,11 +184,13 @@ const Navbar = () => {
               tabIndex={0}
               role="button"
               className={`${
-                myProgress ? "animate-bounce" : ""
+                totalProgress ? "animate-bounce" : ""
               } btn btn-ghost btn-circle`}
-              style={{ animationIterationCount: myProgress ? "4" : "initial" }}
+              style={{
+                animationIterationCount: totalProgress ? "4" : "initial",
+              }}
             >
-              {cartLoading ? (
+              {isLoading ? (
                 <span className="loading loading-spinner loading-md"></span>
               ) : (
                 <div className="indicator">
@@ -208,7 +210,7 @@ const Navbar = () => {
                   </svg>
                   <span
                     className={`${
-                      myProgress ? "bg-green-400 text-white" : ""
+                      totalProgress ? "bg-green-400 text-white" : ""
                     } badge badge-sm indicator-item`}
                   >
                     {totalCart || 0}

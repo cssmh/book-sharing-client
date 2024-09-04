@@ -1,20 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
-import { getAllBooks, getBookProviders } from "../Api/books";
+import useDataQuery from "./useDataQuery";
 
 const useBookProviders = () => {
-  const { data: totalBooks = 0, isLoading } = useQuery({
-    queryKey: ["totalBooks"],
-    queryFn: async () => {
-      const res = await getAllBooks();
-      return res?.totalBooks;
-    },
-  });
+  const { data = {}, isLoading } = useDataQuery(["totalBooks"], "/all-books");
+  const totalBooks = data?.totalBooks;
 
-  const { data: bookProviders = [], isLoading: loading } = useQuery({
-    queryKey: ["bookProviders"],
-    queryFn: () => getBookProviders(),
-  });
-
+  const { data: bookProviders = [], isLoading: loading } = useDataQuery(
+    ["bookProviders"],
+    "/book-providers"
+  );
   return { isLoading, loading, totalBooks, bookProviders };
 };
 

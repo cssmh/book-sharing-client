@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import AdminBooksRow from "./AdminBooksRow";
 import useBookProviders from "../Hooks/useBookProviders";
 import SmallLoader from "../Components/SmallLoader";
-import { getAllBooks } from "../Api/books";
 import useDataQuery from "../Hooks/useDataQuery";
 import HavenHelmet from "../Components/HavenHelmet";
 
@@ -12,14 +10,10 @@ const AdminBooks = () => {
   const [limit, setLimit] = useState(6);
 
   const {
-    isFetching,
+    isLoading,
     data: allBooks,
     refetch,
-  } = useQuery({
-    queryKey: ["allBookings", limit],
-    queryFn: () => getAllBooks(undefined, limit),
-    keepPreviousData: true,
-  });
+  } = useDataQuery(["allBooks", limit], `/all-books?limit=${limit}`);
 
   const { data: allBookings, isLoading: bookingLoading } = useDataQuery(
     ["allBookings"],
@@ -54,7 +48,7 @@ const AdminBooks = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {isFetching || bookingLoading ? (
+            {isLoading || bookingLoading ? (
               <tr>
                 <td colSpan="6" className="py-4 text-center">
                   <SmallLoader size={75} />

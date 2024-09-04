@@ -38,7 +38,7 @@ const UserAnalytics = () => {
 
   const bookData = [
     ["Month", "Books"],
-    ...monthlyStats.map((stat) => [stat?.month, stat?.count]),
+    ...monthlyStats.map(({ month, count }) => [month, count]),
   ];
 
   const isDataEmpty =

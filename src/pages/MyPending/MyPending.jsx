@@ -1,10 +1,7 @@
-import MyPendingCard from "../MyPendingCard/MyPendingCard";
-import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import MyBookSke from "../../Components/AllSkeleton/MyBookSke";
-import { getUnavailableIds } from "../../Api/books";
-import { getPending } from "../../Api/bookings";
 import useDataQuery from "../../Hooks/useDataQuery";
+import MyPendingCard from "../MyPendingCard/MyPendingCard";
 
 const MyPending = () => {
   const { loading, user } = useAuth();
@@ -15,26 +12,28 @@ const MyPending = () => {
     url
   );
 
+  const idUrl = `/unavailable-ids?email=${user?.email}`;
   const {
     isLoading: idLoading,
     data: unavailableIds = [],
     refetch: refetchIds,
-  } = useQuery({
-    enabled: !loading && !!user?.email,
-    queryKey: ["unavailableIds", user?.email],
-    queryFn: () => getUnavailableIds(user?.email),
-  });
+  } = useDataQuery(
+    ["unavailableIds", user?.email],
+    idUrl,
+    !loading && !!user?.email
+  );
 
+  const pendingUrl = `/my-pending?email=${user?.email}`;
   const {
     isLoading,
     error,
     data: allMyPending = [],
     refetch,
-  } = useQuery({
-    enabled: !loading && !!user?.email,
-    queryKey: ["myPending", user?.email],
-    queryFn: () => getPending(user?.email),
-  });
+  } = useDataQuery(
+    ["myPending", user?.email],
+    pendingUrl,
+    !loading && !!user?.email
+  );
 
   if (idLoading || myBooksLoading || isLoading) {
     return (

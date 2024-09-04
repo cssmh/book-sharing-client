@@ -22,7 +22,9 @@ const Register = () => {
   useEffect(() => {
     if (
       user?.emailVerified ||
-      ["kona@mail.com", "admin@admin.com"].includes(user?.email)
+      ["kona@mail.com", "admin@admin.com", "admin@mail.com"].includes(
+        user?.email
+      )
     ) {
       navigate("/");
     }

@@ -4,11 +4,11 @@ import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import { addBooking } from "../../Api/bookings";
-import useMyData from "../../Hooks/useMyData";
+import useMyCart from "../../Hooks/useMyCart";
 
 const AddBooking = ({ getBookData }) => {
   const { user } = useAuth();
-  const { myBookings, refetch, cartRefetch } = useMyData();
+  const { myBookings, refetch } = useMyCart();
   const { _id, book_image, book_name, provider_email, provider_phone } =
     getBookData;
 
@@ -16,7 +16,6 @@ const AddBooking = ({ getBookData }) => {
   const [todayDateTime, setTodayDateTime] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Set today's date and time as default
   useEffect(() => {
     const today = new Date();
     const formattedDate = `${today.getDate().toString().padStart(2, "0")}-${(
@@ -32,8 +31,8 @@ const AddBooking = ({ getBookData }) => {
     setTodayDateTime(`${formattedDate}, ${formattedTime}`);
   }, []);
 
-  const handlePopUp = () => setOpen(true);
-  const closePop = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const handleAddBooking = async (e) => {
     e.preventDefault();
@@ -53,11 +52,14 @@ const AddBooking = ({ getBookData }) => {
     const user_phone = form.user_phone.value;
     const status = "Pending";
 
+    // Validate phone number
     if (!/^(\+?8801|01)(\d{9})$/.test(user_phone)) {
       setIsSubmitting(false);
-      return toast.error("Enter a valid phone number!");
+      toast.error("Enter a valid phone number!");
+      return;
     }
 
+    // Check for existing booking
     const hasBooking = myBookings.some(
       (booking) =>
         booking.user_email === user_email && booking.book_name === book_name
@@ -65,14 +67,15 @@ const AddBooking = ({ getBookData }) => {
 
     if (hasBooking) {
       setIsSubmitting(false);
-      return swal({
+      swal({
         text: "You already booked this!",
         icon: "error",
         timer: 2000,
       });
+      return;
     }
 
-    const AddBookingData = {
+    const bookingData = {
       book_id,
       book_name,
       book_image,
@@ -87,7 +90,7 @@ const AddBooking = ({ getBookData }) => {
     };
 
     try {
-      const res = await addBooking(AddBookingData);
+      const res = await addBooking(bookingData);
       if (res?.insertedId) {
         swal({
           title: "Congratulations",
@@ -96,24 +99,24 @@ const AddBooking = ({ getBookData }) => {
           timer: 2000,
         });
         refetch();
-        cartRefetch();
       }
     } catch (err) {
       console.error(err);
+      toast.error("An error occurred while adding the booking.");
     } finally {
-      setOpen(false);
+      handleClose();
       setIsSubmitting(false);
     }
   };
 
   return (
     <div>
-      <Button onClick={handlePopUp} color="primary" variant="contained">
+      <Button onClick={handleOpen} color="primary" variant="contained">
         Collect this Book
       </Button>
-      <Dialog open={open} fullWidth maxWidth="lg">
+      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="lg">
         <DialogActions>
-          <Button onClick={closePop} color="info">
+          <Button onClick={handleClose} color="info">
             x
           </Button>
         </DialogActions>

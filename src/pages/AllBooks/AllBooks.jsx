@@ -1,23 +1,16 @@
-import { useEffect, useState } from "react";
-import AllBooksCard from "../AllBooksCard/AllBooksCard";
-import useResLimit from "../../Hooks/useResLimit";
+import { useState } from "react";
 import SkeletonCard from "../../Components/AllSkeleton/SkeletonCard";
+import AllBooksCard from "../AllBooksCard/AllBooksCard";
 import useDataQuery from "../../Hooks/useDataQuery";
 import HavenHelmet from "../../Components/HavenHelmet";
 
 const AllBooks = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
-  const isMobile = useResLimit("(max-width: 767px)");
-  const [limit, setLimit] = useState(isMobile ? 6 : 9);
-
-  useEffect(() => {
-    setLimit(isMobile ? 6 : 9);
-    setPage(1);
-  }, [isMobile]);
+  const [limit, setLimit] = useState(9);
 
   const url = `/all-books?page=${page}&limit=${limit}&search=${searchTerm}`;
-  const { data = [], isLoading } = useDataQuery(
+  const { data = {}, isLoading } = useDataQuery(
     ["allBooksData", page, limit, searchTerm],
     url
   );
@@ -28,11 +21,11 @@ const AllBooks = () => {
   };
 
   const handlePrevious = () => {
-    if (page > 1) setPage(page - 1);
+    if (page > 1) setPage((prev) => prev - 1);
   };
 
   const handleNext = () => {
-    if (page < data?.totalPages) setPage(page + 1);
+    if (page < data?.totalPages) setPage((prev) => prev + 1);
   };
 
   return (
@@ -59,72 +52,67 @@ const AllBooks = () => {
         <div>
           {data?.result?.length === 0 ? (
             <p className="text-center text-xl md:text-2xl font-semibold text-red-600 mt-6">
-              No Book found!
+              No Books found!
             </p>
           ) : (
             <div>
               <h1 className="text-xl md:text-[22px] font-semibold italic text-center my-3">
-                All Books Available for you
+                All Books Available for You
               </h1>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-[1260px] mx-auto">
                 {data?.result?.map((book) => (
-                  <AllBooksCard key={book._id} getBook={book}></AllBooksCard>
+                  <AllBooksCard key={book._id} getBook={book} />
                 ))}
               </div>
             </div>
           )}
           {data?.result?.length > 0 && (
-            <div className="flex justify-center mb-6">
-              <div className="flex flex-col md:flex-row justify-center mt-8">
-                <div className="join">
-                  <button
-                    onClick={handlePrevious}
-                    className="join-item btn btn-active hover:border-green-400 hover:bg-yellow-50 border-green-400 bg-yellow-50 hover:text-green-40 text-green-400"
-                  >
-                    Previous
-                  </button>
-                  <div className="flex flex-wrap m-0 justify-center md:justify-start">
-                    {Array(data?.totalPages)
-                      .fill(0)
-                      .map((_, idx) => {
-                        const pageNumber = idx + 1;
-                        return (
-                          <button
-                            onClick={() => setPage(pageNumber)}
-                            key={pageNumber}
-                            className={
-                              page === pageNumber
-                                ? "btn border-green-400 hover:border-green-400 bg-green-400 text-white rounded-none mb-2"
-                                : "btn border-green-400 hover:border-green-400 bg-yellow-50 hover:bg-green-400 text-green-400 hover:text-white rounded-none mb-2 md:mb-0"
-                            }
-                          >
-                            {pageNumber}
-                          </button>
-                        );
-                      })}
-                  </div>
-                  <button
-                    onClick={handleNext}
-                    className="join-item btn btn-active hover:border-green-400 hover:bg-yellow-50 border-green-400 bg-yellow-50 hover:text-green-40 text-green-400"
-                  >
-                    Next
-                  </button>
+            <div className="flex flex-col items-center mb-4">
+              <div className="flex flex-col md:flex-row items-center mt-8">
+                <button
+                  onClick={handlePrevious}
+                  disabled={page === 1}
+                  className="btn border-green-400 bg-yellow-50 hover:bg-green-400 hover:text-white text-green-400 hover:border-green-400 disabled:opacity-50 mb-2 md:mb-0"
+                >
+                  Previous
+                </button>
+                <div className="flex flex-wrap m-0 justify-center md:justify-start mx-[6px]">
+                  {Array.from({ length: data?.totalPages || 1 }, (_, idx) => (
+                    <button
+                      key={idx + 1}
+                      onClick={() => setPage(idx + 1)}
+                      className={`btn border-green-400 ${
+                        page === idx + 1
+                          ? "bg-green-400 text-white"
+                          : "bg-yellow-50 text-green-400 hover:bg-green-400 hover:text-white"
+                      } rounded-none mb-2 md:mb-0 mx-[2px]`}
+                    >
+                      {idx + 1}
+                    </button>
+                  ))}
                 </div>
-                <div className="ml-6 md:ml-0 text-center md:text-left mt-2 md:mt-0">
-                  <select
-                    onChange={(e) => {
-                      setLimit(parseInt(e.target.value));
-                      setPage(1);
-                    }}
-                    value={limit}
-                    className="input input-bordered border-green-400 text-green-500 outline-none"
-                  >
-                    <option value="3">3</option>
-                    <option value="6">6</option>
-                    <option value="9">9</option>
-                    <option value="12">12</option>
-                  </select>
-                </div>
+                <button
+                  onClick={handleNext}
+                  disabled={page === data?.totalPages}
+                  className="btn border-green-400 bg-yellow-50 hover:bg-green-400 hover:text-white text-green-400 hover:border-green-400 disabled:opacity-50"
+                >
+                  Next
+                </button>
+              </div>
+              <div className="mt-2 text-center md:text-left">
+                <select
+                  onChange={(e) => {
+                    setLimit(parseInt(e.target.value, 10));
+                    setPage(1);
+                  }}
+                  value={limit}
+                  className="input input-bordered border-green-400 text-green-500 outline-none"
+                >
+                  <option value="3">3</option>
+                  <option value="6">6</option>
+                  <option value="9">9</option>
+                  <option value="12">12</option>
+                </select>
               </div>
             </div>
           )}

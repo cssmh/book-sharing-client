@@ -1,19 +1,15 @@
 import swal from "sweetalert";
 import SmallLoader from "../Components/SmallLoader";
-import { useQuery } from "@tanstack/react-query";
 import { deleteAllEmails, deleteEmail } from "../Api/Delete";
-import { getEmails } from "../Api/books";
 import HavenHelmet from "../Components/HavenHelmet";
+import useDataQuery from "../Hooks/useDataQuery";
 
 const UserToUpdate = () => {
   const {
     data: emails = [],
     isLoading,
     refetch,
-  } = useQuery({
-    queryKey: ["emails"],
-    queryFn: () => getEmails(),
-  });
+  } = useDataQuery(["emails"], "/emails");
 
   const handleDelete = async (idx) => {
     const willDelete = await swal({
