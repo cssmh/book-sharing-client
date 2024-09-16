@@ -12,7 +12,6 @@ const UserDataRow = ({ user, refetch }) => {
   const { loading, user: userAuth } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRole, setSelectedRole] = useState(user?.role);
-  const [showConfirmation, setShowConfirmation] = useState(false);
   const navigate = useNavigate();
   const modalRef = useRef(null);
 
@@ -48,8 +47,10 @@ const UserDataRow = ({ user, refetch }) => {
         }
       }
     } catch (error) {
-      console.error(error);
-      toast.error("Failed to update role.");
+      swal(error?.response?.data?.message, {
+        icon: "error",
+        timer: 3000,
+      });
     } finally {
       setIsModalOpen(false);
     }
@@ -61,6 +62,7 @@ const UserDataRow = ({ user, refetch }) => {
         title: "Action not allowed!",
         text: "Downgrade to a regular user before deletion?",
         icon: "warning",
+        timer: 1000,
       });
       setIsModalOpen(true);
       return;
@@ -85,8 +87,10 @@ const UserDataRow = ({ user, refetch }) => {
           refetch();
         }
       } catch (error) {
-        console.error(error);
-        toast.error("Failed to delete user.");
+        swal(error?.response?.data?.message, {
+          icon: "error",
+          timer: 3000,
+        });
       }
     }
   };

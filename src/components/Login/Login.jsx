@@ -1,34 +1,31 @@
-import { useState, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { TbFidgetSpinner } from "react-icons/tb";
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { useState, useEffect } from "react";
 import useAuth from "../../Hooks/useAuth";
+import { TbFidgetSpinner } from "react-icons/tb";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import ResetPassModal from "../Modal/ResetPassModal";
 import SocialLogin from "./SocialLogin";
 import HavenHelmet from "../HavenHelmet";
 import BG from "../../assets/login-background.avif";
 import { saveUser } from "../../Api/auth";
+import useAd from "../../Hooks/useAd";
 
 const Login = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [viewPassword, setViewPassword] = useState(true);
   const [passwordEntered, setPasswordEntered] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { user, login, resetPassword, verifyEmail, logOut } = useAuth();
   const location = useLocation();
   const navigateTo = useNavigate();
-  const { user, login, resetPassword, emailVerification, logOut } = useAuth();
+  const admins = useAd();
 
   useEffect(() => {
-    if (
-      user?.emailVerified ||
-      ["kona@mail.com", "admin@admin.com", "admin@mail.com"].includes(
-        user?.email
-      )
-    ) {
+    if (user?.emailVerified || admins.includes(user?.email)) {
       navigateTo("/");
     }
-  }, [user?.emailVerified, user?.email, navigateTo]);
+  }, [user?.emailVerified, admins, user?.email, navigateTo]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -40,15 +37,12 @@ const Login = () => {
     try {
       const res = await login(email, password);
       if (res?.user) {
-        if (
-          res.user.emailVerified ||
-          ["Kona@mail.com", "admin@admin.com", "admin@mail.com"].includes(email)
-        ) {
-          await saveUser(res.user);
+        if (res.user.emailVerified || admins.includes(email)) {
           toast.success("Logged in successfully");
+          await saveUser(res.user);
           navigateTo(location?.state || "/", { replace: true });
         } else {
-          await emailVerification();
+          await verifyEmail();
           toast.success("We sent you a verification email");
           await logOut();
           toast.error("Verify your email first, please!");

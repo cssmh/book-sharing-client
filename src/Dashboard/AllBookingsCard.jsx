@@ -19,22 +19,29 @@ const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
   } = getAllBooking;
 
   const handleDeleteByAdmin = async (id) => {
-    const willDelete = await swal({
-      title: "Are you sure?",
-      text: "Once deleted, it can't be recovered!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    });
-    if (willDelete) {
-      const res = await deleteBooking(id, user?.email);
-      if (res.deletedCount > 0) {
-        swal("Booking Deleted!", {
-          icon: "success",
-          timer: 2000,
-        });
-        refetch();
+    try {
+      const willDelete = await swal({
+        title: "Are you sure?",
+        text: "Once deleted, it can't be recovered!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      });
+      if (willDelete) {
+        const res = await deleteBooking(id, user?.email);
+        if (res.deletedCount > 0) {
+          swal("Booking Deleted!", {
+            icon: "success",
+            timer: 2000,
+          });
+          refetch();
+        }
       }
+    } catch (error) {
+      swal(error?.response?.data?.message, {
+        icon: "error",
+        timer: 3000,
+      });
     }
   };
 
@@ -49,7 +56,9 @@ const AllBookingsCard = ({ getIndex, getAllBooking, refetch }) => {
           onContextMenu={(e) => e.preventDefault()}
         />
         <Link
-          to={`/book/${book_name.toLowerCase().replaceAll(/\s+/g, "_")}/${book_id}`}
+          to={`/book/${book_name
+            .toLowerCase()
+            .replaceAll(/\s+/g, "_")}/${book_id}`}
         >
           <p className="text-blue-900 text-lg font-semibold mt-2">
             {book_name}

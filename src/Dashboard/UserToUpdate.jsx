@@ -12,19 +12,26 @@ const UserToUpdate = () => {
   } = useDataQuery(["emails"], "/emails");
 
   const handleDelete = async (idx) => {
-    const willDelete = await swal({
-      title: "Are you sure?",
-      text: "Once deleted, it can't be recovered!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    });
-    if (willDelete) {
-      const res = await deleteEmail(idx);
-      if (res.deletedCount > 0) {
-        swal({ text: "Email Deleted!", icon: "success", timer: 2000 });
-        refetch();
+    try {
+      const willDelete = await swal({
+        title: "Are you sure?",
+        text: "Once deleted, it can't be recovered!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      });
+      if (willDelete) {
+        const res = await deleteEmail(idx);
+        if (res.deletedCount > 0) {
+          swal({ text: "Email Deleted!", icon: "success", timer: 2000 });
+          refetch();
+        }
       }
+    } catch (error) {
+      swal(error?.response?.data?.message, {
+        icon: "error",
+        timer: 3000,
+      });
     }
   };
 

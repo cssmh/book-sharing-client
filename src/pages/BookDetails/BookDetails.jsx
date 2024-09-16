@@ -126,47 +126,70 @@ const BookDetails = () => {
           </p>
         )}
       </div>
-      {bookData?.length > 1 && provider_email !== user?.email && (
-        <div className="max-w-[1200px] mx-4 lg:mx-auto mb-10">
-          <h2 className="text-2xl font-bold text-blue-900 mb-7">
-            More Books by {provider_name}
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-            {bookData
-              .filter((book) => book._id !== _id)
-              .map((book) => (
-                <div
-                  key={book._id}
-                  className="flex flex-col bg-white shadow-md rounded-lg overflow-hidden"
-                >
-                  <div className="flex-grow px-4 pb-2">
-                    <img
-                      src={book.book_image}
-                      alt={book.book_name}
-                      onContextMenu={(e) => e.preventDefault()}
-                      className="w-24 h-32 mx-auto rounded-lg mb-2"
-                    />
-                    <h3 className="text-lg font-semibold text-blue-900">
-                      {book.book_name}
-                    </h3>
-                    <p className="text-gray-600 truncate">{book.description}</p>
+      <div className="max-w-[1200px] mx-4 lg:mx-auto mb-10">
+        <h2 className="text-2xl font-bold text-blue-900 mb-7">
+          More Books by {provider_name}
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+          {bookData
+            ?.filter((book) => book._id !== _id)
+            .map((book) => (
+              <div
+                key={book._id}
+                className="flex flex-col bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl"
+              >
+                <figure className="relative">
+                  <img
+                    src={book.book_image}
+                    alt={book.book_name}
+                    onContextMenu={(e) => e.preventDefault()}
+                    className="w-full h-44 object-contain rounded-lg pt-3"
+                  />
+                </figure>
+                <div className="p-4 flex flex-col justify-between flex-grow space-y-1">
+                  <h3 className="text-lg font-semibold text-blue-800 truncate">
+                    {book.book_name}
+                  </h3>
+                  <p className="text-gray-600 text-sm">
+                    {book.description.length > 0
+                      ? book.description.length > 100
+                        ? `${book.description.substring(0, 90)}...`
+                        : book.description
+                      : ".........."}
+                  </p>
+                  <div className="flex flex-col justify-between">
+                    <div className="text-sm flex items-center gap-1">
+                      Status:
+                      <span
+                        className={`font-semibold ${
+                          book.book_status === "available"
+                            ? "text-green-600"
+                            : "text-red-600"
+                        }`}
+                      >
+                        {book.book_status}
+                      </span>
+                    </div>
                   </div>
-                  <div className="px-4 pb-4">
+                  <div className="flex justify-between items-center text-sm text-gray-500 font-semibold">
+                    <span>{`Added: ${new Date(
+                      book.added_time
+                    ).toLocaleDateString()}`}</span>
                     <Link
                       to={`/book/${book.book_name
                         .toLowerCase()
                         .replaceAll(/\s+/g, "_")}/${book._id}`}
-                      className="btn btn-sm rounded-full bg-green-500 text-white"
+                      className="bg-green-600 hover:bg-green-700 text-white font-semibold rounded-full px-3 py-2 transition-colors"
                       onClick={handleViewDetails}
                     >
                       View Details
                     </Link>
                   </div>
                 </div>
-              ))}
-          </div>
+              </div>
+            ))}
         </div>
-      )}
+      </div>
     </div>
   );
 };

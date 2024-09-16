@@ -2,13 +2,14 @@ import useDataQuery from "./useDataQuery";
 
 const useBookProviders = () => {
   const { data = {}, isLoading } = useDataQuery(["totalBooks"], "/all-books");
-  const totalBooks = data?.totalBooks;
+  const { totalBooks } = data;
 
-  const { data: bookProviders = [], isLoading: loading } = useDataQuery(
+  const { data: data2 = [], isLoading: loading } = useDataQuery(
     ["bookProviders"],
     "/book-providers"
   );
-  return { isLoading, loading, totalBooks, bookProviders };
+  const { result: bookProviders, totalBookings } = data2;
+  return { isLoading, loading, totalBooks, bookProviders, totalBookings };
 };
 
 export default useBookProviders;

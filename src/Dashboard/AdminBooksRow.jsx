@@ -15,22 +15,29 @@ const AdminBooksRow = ({ getBooks, refetch }) => {
   } = getBooks;
 
   const handleDeleteByAdmin = async (idx, book) => {
-    const willDelete = await swal({
-      title: "Are you sure?",
-      text: "Once deleted, it can't be recovered!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    });
-    if (willDelete) {
-      const res = await deleteBook(idx, user?.email);
-      if (res.deletedCount > 0) {
-        swal(`${book} Deleted!`, {
-          icon: "success",
-          timer: 2000,
-        });
-        refetch();
+    try {
+      const willDelete = await swal({
+        title: "Are you sure?",
+        text: "Once deleted, it can't be recovered!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      });
+      if (willDelete) {
+        const res = await deleteBook(idx, user?.email);
+        if (res.deletedCount > 0) {
+          swal(`${book} Deleted!`, {
+            icon: "success",
+            timer: 2000,
+          });
+          refetch();
+        }
       }
+    } catch (error) {
+      swal(error?.response?.data?.message, {
+        icon: "error",
+        timer: 3000,
+      });
     }
   };
 

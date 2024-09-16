@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import useAd from "../Hooks/useAd";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -14,21 +15,17 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [passError, setPassError] = useState("");
   const [passSuccess, setPassSuccess] = useState("");
+  const { user, createUser, profileUpdate, verifyEmail, logOut } =
+    useAuth();
+  const admins = useAd();
   const location = useLocation();
   const navigate = useNavigate();
-  const { user, createUser, handleUpdateProfile, emailVerification, logOut } =
-    useAuth();
 
   useEffect(() => {
-    if (
-      user?.emailVerified ||
-      ["kona@mail.com", "admin@admin.com", "admin@mail.com"].includes(
-        user?.email
-      )
-    ) {
+    if (user?.emailVerified || admins.includes(user?.email)) {
       navigate("/");
     }
-  }, [user, location, navigate]);
+  }, [user, admins, location, navigate]);
 
   const validatePassword = (password) => {
     if (!password) {
@@ -71,8 +68,8 @@ const Register = () => {
       const res = await createUser(email, password);
       if (res?.user) {
         await saveUser(res.user);
-        await handleUpdateProfile(name, image);
-        await emailVerification();
+        await profileUpdate(name, image);
+        await verifyEmail();
         toast.success(
           "Register success! Check your inbox for a verification email!"
         );

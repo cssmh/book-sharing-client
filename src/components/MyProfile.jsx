@@ -12,7 +12,7 @@ import { updateAllBooks } from "../Api/books";
 const MyProfile = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isPassOpen, setIsPassOpen] = useState(false);
-  const { user, handleUpdateProfile, changePassword } = useAuth();
+  const { user, profileUpdate, changePassword } = useAuth();
   const { photoURL, email, displayName, metadata, reloadUserInfo } = user;
 
   const url = `/providers-books?email=${email}`;
@@ -32,7 +32,7 @@ const MyProfile = () => {
     }
 
     try {
-      await handleUpdateProfile(name, photo);
+      await profileUpdate(name, photo);
       if (bookData.length > 0) {
         const res = await updateAllBooks(email, { name, photo });
         if (res?.modifiedCount > 0) {
@@ -54,6 +54,7 @@ const MyProfile = () => {
     try {
       await changePassword(newPassword);
       toast.success("Password changed successfully");
+      setIsPassOpen(false);
     } catch (err) {
       toast.error(err.message);
     }

@@ -78,13 +78,13 @@ const EditProfileModal = ({
                       }
                       aria-describedby="photo-description"
                     />
-                    <p id="photo-description" className="text-xs text-gray-500">
+                    <p id="photo-description" className="text-xs text-gray-500 p-1">
                       (Optional) Provide a URL for your profile photo.
                     </p>
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-green-500 py-2 rounded-lg text-white mt-4 transition-transform duration-150 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-1"
+                    className="w-full bg-green-500 py-2 rounded-lg text-white transition-transform duration-150 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-1"
                   >
                     Update
                   </button>

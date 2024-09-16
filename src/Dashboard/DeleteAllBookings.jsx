@@ -26,7 +26,10 @@ const DeleteAllBookings = ({ refetch }) => {
           });
         }
       } catch (error) {
-        swal("Error deleting bookings", { icon: "error" });
+        swal(error?.response?.data?.message, {
+          icon: "error",
+          timer: 3000,
+        });
       }
     }
   };

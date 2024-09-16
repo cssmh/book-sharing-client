@@ -38,7 +38,7 @@ const AuthProviders = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const handleUpdateProfile = (name, image) => {
+  const profileUpdate = (name, image) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: image,
@@ -53,7 +53,7 @@ const AuthProviders = ({ children }) => {
     return updatePassword(auth.currentUser, newPass);
   };
 
-  const emailVerification = () => {
+  const verifyEmail = () => {
     return sendEmailVerification(auth.currentUser);
   };
 
@@ -91,11 +91,11 @@ const AuthProviders = ({ children }) => {
     login,
     logOut,
     loading,
-    handleUpdateProfile,
+    profileUpdate,
     changePassword,
     googleLogin,
     resetPassword,
-    emailVerification,
+    verifyEmail,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
