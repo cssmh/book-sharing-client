@@ -36,11 +36,11 @@ const Login = () => {
 
     try {
       const res = await login(email, password);
-      if (res?.user) {
+      toast.success("Logged in successfully");
+      if (res.user) {
         if (res.user.emailVerified || admins.includes(email)) {
-          toast.success("Logged in successfully");
-          await saveUser(res.user);
           navigateTo(location?.state || "/", { replace: true });
+          await saveUser(res.user);
         } else {
           await verifyEmail();
           toast.success("We sent you a verification email");

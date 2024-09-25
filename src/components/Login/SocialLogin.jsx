@@ -12,10 +12,10 @@ const SocialLogin = () => {
   const handleSocialLogin = async () => {
     try {
       const res = await googleLogin();
-      if (res?.user) {
-        await saveUser(res.user);
-        toast.success("User logged in successfully");
+      toast.success("User logged in successfully");
+      if (res.user) {
         navigateTo(location?.state || "/");
+        await saveUser(res.user);
       }
     } catch (error) {
       const errorMessage = error.response?.data?.message || error.message;
