@@ -36,9 +36,9 @@ const Login = () => {
 
     try {
       const res = await login(email, password);
-      toast.success("Logged in successfully");
       if (res.user) {
         if (res.user.emailVerified || admins.includes(email)) {
+          toast.success("Logged in successfully");
           navigateTo(location?.state || "/", { replace: true });
           await saveUser(res.user);
         } else {

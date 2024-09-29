@@ -13,10 +13,8 @@ const SocialLogin = () => {
     try {
       const res = await googleLogin();
       toast.success("User logged in successfully");
-      if (res.user) {
-        navigateTo(location?.state || "/");
-        await saveUser(res.user);
-      }
+      navigateTo(location?.state || "/");
+      await saveUser(res?.user);
     } catch (error) {
       const errorMessage = error.response?.data?.message || error.message;
       toast.error(`Login failed: ${errorMessage}`);

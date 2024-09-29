@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import pencil from "../assets/pencil.jpg";
 import CountUp from "react-countup";
 import useBookProviders from "../Hooks/useBookProviders";
@@ -8,13 +8,15 @@ const Count = () => {
     useBookProviders();
 
   const [inView, setInView] = useState(false);
+  const countSectionRef = useRef(null);
 
   const checkInView = () => {
-    const bounding = document
-      .getElementById("count-section")
-      .getBoundingClientRect();
-    if (bounding.top < window.innerHeight && bounding.bottom >= 0) {
-      setInView(true);
+    if (countSectionRef.current) {
+      // Check if the ref is not null
+      const bounding = countSectionRef.current.getBoundingClientRect();
+      if (bounding.top < window.innerHeight && bounding.bottom >= 0) {
+        setInView(true);
+      }
     }
   };
 
@@ -27,7 +29,7 @@ const Count = () => {
 
   return (
     <div
-      id="count-section"
+      ref={countSectionRef}
       className="hero min-h-[30vh] mb-4"
       style={{
         backgroundImage: `url(${pencil})`,
@@ -53,9 +55,7 @@ const Count = () => {
           <div>
             <p className="text-blue-500">Bookings</p>
             <p className={`${isLoading && "animate-pulse"} text-gray-500`}>
-              {inView && (
-                <CountUp end={totalBookings || 0} duration={3} />
-              )}
+              {inView && <CountUp end={totalBookings || 0} duration={3} />}
             </p>
           </div>
         </div>

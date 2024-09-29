@@ -8,7 +8,7 @@ const useAdmin = () => {
     `/role/${user?.email}`,
     !loading && !!user?.email
   );
-  
+
   const isLoading = loading || roleLoading;
   const isAdmin = role === "admin";
   return { isAdmin, isLoading };

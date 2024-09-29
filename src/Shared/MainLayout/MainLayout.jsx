@@ -11,7 +11,7 @@ const MainLayout = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setLoading(false);
-    }, 1700);
+    }, 1600);
 
     return () => clearTimeout(timeout);
     // Clean up the timeout on component unmount

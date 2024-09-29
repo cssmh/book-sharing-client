@@ -5,7 +5,7 @@ const useMyCart = () => {
   const { loading, user } = useAuth();
 
   const {
-    isLoading,
+    isLoading: dataLoading,
     data = {},
     refetch,
     error,
@@ -16,6 +16,7 @@ const useMyCart = () => {
   );
 
   const { result: myBookings = [], totalCart = 0, totalProgress = 0 } = data;
+  const isLoading = loading || dataLoading;
 
   return {
     isLoading,

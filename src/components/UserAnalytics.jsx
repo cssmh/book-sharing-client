@@ -16,7 +16,7 @@ const UserAnalytics = () => {
     `/monthly-stats?email=${user?.email}`
   );
 
-  if (loading || isLoading || statLoading) return <ChartSkeleton />;
+  if (loading || isLoading || statLoading) return <ChartSkeleton user={true} />;
 
   const {
     totalBooks,
@@ -40,9 +40,6 @@ const UserAnalytics = () => {
     ["Month", "Books"],
     ...monthlyStats.map(({ month, count }) => [month, count]),
   ];
-
-  const isDataEmpty =
-    data.every((item) => item[1] === 0) || myBooks === 0 || myBookings === 0;
 
   return (
     <div className="max-w-6xl mx-auto px-1 md:px-5 mt-6">

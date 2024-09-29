@@ -13,7 +13,7 @@ const BooksProviders = () => {
       </h1>
       {loading ? (
         <div className="flex flex-wrap gap-4 justify-center">
-          {Array.from({ length: 3 }).map((_, idx) => (
+          {Array.from({ length: 4 }).map((_, idx) => (
             <div
               key={idx}
               className="animate-pulse w-full md:w-1/3 bg-gray-100 border border-gray-300 rounded-lg p-6 flex flex-col items-center"
