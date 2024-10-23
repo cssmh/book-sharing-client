@@ -17,7 +17,7 @@ const PopularBooks = () => {
 
   if (isLoading) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto my-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 max-w-7xl mx-auto my-10">
         {Array.from({ length: 3 }, (_, index) => (
           <SkeletonCard key={index} />
         ))}
@@ -49,6 +49,9 @@ const PopularBooks = () => {
         autoplay={{
           delay: 1500,
           disableOnInteraction: false,
+          pauseOnMouseEnter: false,
+          waitForTransition: false,
+          // ensures autoplay starts immediately
         }}
         modules={[Pagination, Autoplay]}
         className="mySwiper"
@@ -58,7 +61,7 @@ const PopularBooks = () => {
           480: { slidesPerView: 1, spaceBetween: 20 },
           768: { slidesPerView: 2, spaceBetween: 20 },
           1000: { slidesPerView: 3, spaceBetween: 20 },
-          1200: { slidesPerView: 3, spaceBetween: 20 },
+          1540: { slidesPerView: 4, spaceBetween: 10 },
         }}
       >
         {latestBooks.map((book) => (

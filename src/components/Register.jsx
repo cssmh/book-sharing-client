@@ -67,8 +67,8 @@ const Register = () => {
     try {
       const res = await createUser(email, password);
       if (res?.user) {
-        await saveUser(res.user);
         await profileUpdate(name, image);
+        await saveUser(res.user);
         await verifyEmail();
         toast.success(
           "Register success! Check your inbox for a verification email!"

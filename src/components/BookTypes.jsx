@@ -35,6 +35,7 @@ const BookTypes = () => {
         autoplay={{
           delay: 1500,
           disableOnInteraction: false,
+          waitForTransition: false,
         }}
         modules={[Pagination, Autoplay]}
         className="mySwiper"

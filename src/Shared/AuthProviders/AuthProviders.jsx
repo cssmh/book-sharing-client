@@ -33,33 +33,33 @@ const AuthProviders = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  const login = (email, password) => {
+  const login =  (email, password) => {
     setLoading(true);
-    return signInWithEmailAndPassword(auth, email, password);
+    return  signInWithEmailAndPassword(auth, email, password);
   };
 
-  const profileUpdate = (name, image) => {
-    return updateProfile(auth.currentUser, {
+  const profileUpdate =  (name, image) => {
+    return  updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: image,
     });
   };
 
-  const resetPassword = (email) => {
-    return sendPasswordResetEmail(auth, email);
+  const resetPassword =  (email) => {
+    return  sendPasswordResetEmail(auth, email);
   };
 
-  const changePassword = (newPass) => {
-    return updatePassword(auth.currentUser, newPass);
+  const changePassword =  (newPass) => {
+    return  updatePassword(auth.currentUser, newPass);
   };
 
-  const verifyEmail = () => {
-    return sendEmailVerification(auth.currentUser);
+  const verifyEmail =  () => {
+    return  sendEmailVerification(auth.currentUser);
   };
 
   const logOut = async () => {
     await clearCookie();
-    return signOut(auth);
+    return  signOut(auth);
   };
 
   useEffect(() => {
@@ -73,7 +73,7 @@ const AuthProviders = ({ children }) => {
           await clearCookie();
         }
       } catch (error) {
-        console.log("Error during state change", error);
+        console.log("Error during on auth token", error);
       } finally {
         setLoading(false);
       }

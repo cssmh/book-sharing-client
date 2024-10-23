@@ -6,7 +6,7 @@ const auth = getAuth(app);
 export const saveUser = async (user) => {
   const currentUser = {
     name: user?.displayName || "anonymous",
-    email: user?.email.toLowerCase(),
+    email: user?.email,
     photo: user?.photoURL || import.meta.env.VITE_Default_URL,
     timestamp: [user.metadata?.createdAt, user.reloadUserInfo?.lastLoginAt],
   };
@@ -21,7 +21,6 @@ export const userLogout = async () => {
 // Get token from server
 export const setToken = async (email) => {
   const { data } = await axiosSecure.post("/jwt", { email });
-  // console.log("login user", data);
   return data;
 };
 

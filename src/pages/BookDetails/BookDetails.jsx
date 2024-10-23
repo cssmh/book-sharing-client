@@ -183,12 +183,12 @@ const BookDetails = () => {
                         Added: {new Date(book.added_time).toLocaleDateString()}
                       </span>
                     </div>
-                    <div className="flex justify-center mt-2">
+                    <div className="flex mt-2">
                       <Link
                         to={`/book/${book.book_name
                           .toLowerCase()
                           .replaceAll(/\s+/g, "_")}/${book._id}`}
-                        className="bg-green-600 hover:bg-green-700 text-white font-semibold rounded-full px-4 py-2 transition-colors"
+                        className="bg-green-600 hover:bg-green-700 text-white font-semibold rounded-2xl px-4 py-2 transition-colors"
                         onClick={handleViewDetails}
                       >
                         View Details

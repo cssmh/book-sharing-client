@@ -36,23 +36,30 @@ const UserToUpdate = () => {
   };
 
   const handleDeleteAll = async () => {
-    const willDelete = await swal({
-      title: "Are you sure?",
-      text: "Once deleted, it can't be recovered!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    });
-    if (willDelete) {
-      const res = await deleteAllEmails();
-      if (res.deletedCount > 0) {
-        swal({
-          text: "All Emails Deleted!",
-          icon: "success",
-          timer: 2000,
-        });
-        refetch();
+    try {
+      const willDelete = await swal({
+        title: "Are you sure?",
+        text: "Once deleted, it can't be recovered!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      });
+      if (willDelete) {
+        const res = await deleteAllEmails();
+        if (res.deletedCount > 0) {
+          swal({
+            text: "All Emails Deleted!",
+            icon: "success",
+            timer: 2000,
+          });
+          refetch();
+        }
       }
+    } catch (error) {
+      swal(error?.response?.data?.message, {
+        icon: "error",
+        timer: 3000,
+      });
     }
   };
 
