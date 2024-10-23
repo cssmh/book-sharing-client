@@ -20,7 +20,6 @@ axiosSecure.interceptors.response.use(
       await userLogout();
       history.push("/login");
     }
-
     return Promise.reject(error);
   }
 );
