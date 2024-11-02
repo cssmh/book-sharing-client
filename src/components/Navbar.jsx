@@ -90,36 +90,34 @@ const Navbar = () => {
             >
               All Books
             </Link>
-            {user && (
-              <>
-                <Link
-                  to="/add-book"
-                  className={`font-semibold flex items-center ${
-                    location.pathname === "/add-book" ? "text-green-500" : ""
-                  }`}
-                >
-                  Add Book
-                </Link>
-                <Link
-                  to="/my-books"
-                  className={`font-semibold flex items-center ${
-                    location.pathname === "/my-books" ? "text-green-500" : ""
-                  }`}
-                >
-                  My Books
-                </Link>
-                <Link
-                  to="/my-schedules"
-                  className={`font-semibold flex items-center ${
-                    location.pathname === "/my-schedules"
-                      ? "text-green-500"
-                      : ""
-                  }`}
-                >
-                  My Schedule
-                </Link>
-              </>
-            )}
+            {/* {user && (
+              <> */}
+            <Link
+              to="/add-book"
+              className={`font-semibold flex items-center ${
+                location.pathname === "/add-book" ? "text-green-500" : ""
+              }`}
+            >
+              Add Book
+            </Link>
+            <Link
+              to="/my-books"
+              className={`font-semibold flex items-center ${
+                location.pathname === "/my-books" ? "text-green-500" : ""
+              }`}
+            >
+              My Books
+            </Link>
+            <Link
+              to="/my-schedules"
+              className={`font-semibold flex items-center ${
+                location.pathname === "/my-schedules" ? "text-green-500" : ""
+              }`}
+            >
+              My Schedule
+            </Link>
+            {/* </>
+            )} */}
             {isAdmin && (
               <Link
                 to="/admin-dashboard"
@@ -151,22 +149,19 @@ const Navbar = () => {
           <Link to="/all-books" className={getLinkClasses("/all-books")}>
             All Books
           </Link>
-          {user && (
-            <>
-              <Link to="/add-book" className={getLinkClasses("/add-book")}>
-                Add Book
-              </Link>
-              <Link to="/my-books" className={getLinkClasses("/my-books")}>
-                My Books
-              </Link>
-              <Link
-                to="/my-schedules"
-                className={getLinkClasses("/my-schedules")}
-              >
-                My Schedule
-              </Link>
-            </>
-          )}
+          {/* {user && (
+            <> */}
+          <Link to="/add-book" className={getLinkClasses("/add-book")}>
+            Add Book
+          </Link>
+          <Link to="/my-books" className={getLinkClasses("/my-books")}>
+            My Books
+          </Link>
+          <Link to="/my-schedules" className={getLinkClasses("/my-schedules")}>
+            My Schedule
+          </Link>
+          {/* </>
+          )} */}
           {isAdmin && (
             <Link
               to="/admin-dashboard"
