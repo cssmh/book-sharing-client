@@ -14,6 +14,8 @@ import useAd from "../../Hooks/useAd";
 const Login = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [viewPassword, setViewPassword] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [passwordEntered, setPasswordEntered] = useState(false);
   const [loading, setLoading] = useState(false);
   const { user, login, resetPassword, verifyEmail, logOut } = useAuth();
@@ -30,9 +32,6 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const form = new FormData(e.currentTarget);
-    const email = form.get("email");
-    const password = form.get("password");
 
     try {
       const res = await login(email, password);
@@ -57,7 +56,6 @@ const Login = () => {
 
   const handleForgotPassword = async (e) => {
     e.preventDefault();
-    const email = e.target.email.value;
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       toast.error("Please provide a valid email address");
@@ -73,7 +71,15 @@ const Login = () => {
     }
   };
 
+  const handleDemoAdminLogin = () => {
+    setEmail("admin@mail.com");
+    setPassword("123456");
+    setPasswordEntered(true);
+    toast.success("Demo admin credentials filled!");
+  };
+
   const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
     setPasswordEntered(e.target.value.length > 0);
   };
 
@@ -91,6 +97,12 @@ const Login = () => {
           <h2 className="text-3xl font-bold text-center mb-6">
             Sign in to your account
           </h2>
+          <button
+            onClick={handleDemoAdminLogin}
+            className="text-sm mb-4 text-green-500 font-semibold hover:underline"
+          >
+            Use demo admin login
+          </button>
           <form onSubmit={handleLogin}>
             <div className="mb-4">
               <label htmlFor="email" className="block text-sm font-medium mb-1">
@@ -100,6 +112,8 @@ const Login = () => {
                 id="email"
                 name="email"
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
                 className="appearance-none rounded-lg w-full px-3 py-2 border border-gray-300 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
                 placeholder="Email address"
@@ -116,8 +130,9 @@ const Login = () => {
                 id="password"
                 name="password"
                 type={viewPassword ? "password" : "text"}
-                required
+                value={password}
                 onChange={handlePasswordChange}
+                required
                 className="appearance-none rounded-lg w-full px-3 py-2 border border-gray-300 placeholder-gray-500 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
                 placeholder="Password"
               />

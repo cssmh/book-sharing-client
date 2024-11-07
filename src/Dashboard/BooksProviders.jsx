@@ -6,7 +6,7 @@ const BooksProviders = () => {
   const { loading, bookProviders } = useBookProviders();
 
   return (
-    <div className="max-w-6xl mx-auto rounded-lg px-6 py-3">
+    <div className="rounded-lg px-6 py-3">
       <HavenHelmet title="Books Providers" />
       <h1 className="text-xl font-semibold text-center mb-4">
         All Books Providers ({(!loading && bookProviders?.length) || 0})

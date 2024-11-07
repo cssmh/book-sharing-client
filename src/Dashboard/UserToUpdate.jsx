@@ -64,7 +64,7 @@ const UserToUpdate = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto py-2">
+    <div className="p-2">
       <HavenHelmet title="User To Update" />
       <h1 className="text-xl font-semibold text-center mb-3">
         Users to Get Notified for New Books ({emails?.length})
@@ -87,7 +87,7 @@ const UserToUpdate = () => {
             {emails?.map((email, idx) => (
               <div
                 key={email._id}
-                className={`w-full md:w-[49%] p-4 mb-4 bg-base-200 rounded-lg shadow-md transition-shadow duration-300 ${
+                className={`w-full md:w-[49%] p-4 mb-3 bg-base-200 rounded-lg shadow-md transition-shadow duration-300 ${
                   idx % 2 === 0 ? "mr-auto" : "ml-auto"
                 }`}
               >

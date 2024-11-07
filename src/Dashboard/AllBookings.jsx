@@ -48,7 +48,7 @@ const AllBookings = () => {
           No {filterType !== "All" && filterType} Booking
         </p>
       ) : (
-        <div className="max-w-[1180px] mx-2 lg:mx-auto">
+        <div>
           {allBookings?.length === 0 ? (
             <p className="text-center text-xl md:text-2xl font-semibold text-red-600 mt-10">
               No {filterType} Booking!

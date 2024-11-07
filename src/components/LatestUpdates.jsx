@@ -41,7 +41,7 @@ const LatestUpdates = () => {
 
   return (
     <div
-      className="text-white md:rounded-md max-w-[1300px] mx-auto md:mt-5"
+      className="text-white md:rounded-md max-w-[1300px] 2xl:max-w-[91%] mx-auto md:mt-5"
       style={{
         backgroundImage: `url(${Banner})`,
         backgroundPosition: "center",

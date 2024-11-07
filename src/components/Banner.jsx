@@ -4,7 +4,7 @@ import banner from "../assets/book-share.jpeg";
 const Banner = () => {
   return (
     <div className="px-6 pt-10 lg:pt-20 mx-auto text-center dark:bg-gray-950">
-      <div className="max-w-4xl mx-auto flex flex-col justify-center items-center">
+      <div className="max-w-4xl 2xl:max-w-[90%] mx-auto flex flex-col justify-center items-center">
         <h1
           className="w-full bg-gradient-to-r from-green-300 via-blue-500 to-blue-500 bg-clip-text text-transparent text-3xl font-semibold md:text-5xl aos-init"
           data-aos="fade-up"

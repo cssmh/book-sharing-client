@@ -13,7 +13,7 @@ const AllUsers = () => {
   if (isLoading) return <SmallLoader size={84} />;
 
   return (
-    <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg px-4 py-3">
+    <div className="bg-white shadow-lg rounded-lg px-4 py-3">
       <HavenHelmet title="All Users" />
       <h1 className="text-xl font-bold mb-4">All Users ({data?.length})</h1>
       <div className="overflow-x-auto">

@@ -14,7 +14,6 @@ const MainLayout = () => {
     }, 1600);
 
     return () => clearTimeout(timeout);
-    // Clean up the timeout on component unmount
   }, []);
 
   const noHeaderFooter =

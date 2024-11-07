@@ -7,34 +7,27 @@ import { Link } from "react-router-dom";
 import SkeletonCard from "../../Components/AllSkeleton/SkeletonCard";
 import PopularBookCard from "../PopularBookCard/PopularBookCard";
 import useDataQuery from "../../Hooks/useDataQuery";
+import useIsLarge from "../../Hooks/useIsLarge";
 
 const PopularBooks = () => {
-  const {
-    isLoading,
-    error,
-    data: latestBooks = [],
-  } = useDataQuery(["latestBooks"], "/latest-books");
+  const cart = useIsLarge();
+  const { isLoading, data: latestBooks = [] } = useDataQuery(
+    ["latestBooks"],
+    "/latest-books"
+  );
 
   if (isLoading) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 max-w-7xl mx-auto my-10">
-        {Array.from({ length: 3 }, (_, index) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2 md:gap-6 max-w-[1250px] 2xl:max-w-[85%] mx-auto mt-7 mb-9">
+        {[...Array(cart)].map((_, index) => (
           <SkeletonCard key={index} />
         ))}
       </div>
     );
   }
 
-  if (error) {
-    return (
-      <div className="text-center text-xl md:text-2xl font-semibold text-red-600 italic my-6">
-        An error occurred while fetching latest books.
-      </div>
-    );
-  }
-
   return (
-    <div className="max-w-[1250px] mx-1 md:mx-auto">
+    <div className="max-w-[1250px] 2xl:max-w-[92%] mx-1 md:mx-auto">
       <h1
         data-aos="zoom-in"
         data-aos-delay="100"
@@ -51,7 +44,6 @@ const PopularBooks = () => {
           disableOnInteraction: false,
           pauseOnMouseEnter: false,
           waitForTransition: false,
-          // ensures autoplay starts immediately
         }}
         modules={[Pagination, Autoplay]}
         className="mySwiper"
@@ -61,7 +53,7 @@ const PopularBooks = () => {
           480: { slidesPerView: 1, spaceBetween: 20 },
           768: { slidesPerView: 2, spaceBetween: 20 },
           1000: { slidesPerView: 3, spaceBetween: 20 },
-          1540: { slidesPerView: 4, spaceBetween: 10 },
+          1536: { slidesPerView: 4, spaceBetween: 10 },
         }}
       >
         {latestBooks.map((book) => (

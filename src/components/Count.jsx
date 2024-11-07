@@ -37,7 +37,7 @@ const Count = () => {
     >
       <div className="hero-overlay bg-opacity-0"></div>
       <div className="hero-content text-center text-neutral-content">
-        <div className="grid grid-cols-1 md:grid-cols-3 text-4xl gap-8 lg:gap-52">
+        <div className="grid grid-cols-1 md:grid-cols-3 text-4xl gap-8 lg:gap-52 2xl:gap-72">
           <div>
             <p className="text-red-500">Books</p>
             <p className={`${isLoading && "animate-pulse"} text-gray-500`}>
