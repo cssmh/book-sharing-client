@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import Banner from "./Banner";
-import PopularBooks from "../pages/PopularBooks/PopularBooks";
+import PopularBooks from "../pages/PopularBooks";
 import AboutUs from "./AboutUs";
 import ShareMagic from "./ShareMagic";
 import LatestUpdates from "./LatestUpdates";
