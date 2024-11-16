@@ -5,7 +5,7 @@ const BigLoader = () => {
     position: "fixed",
     top: 0,
     right: 0,
-    bottom: 36,
+    bottom: 35,
     left: 0,
     backgroundColor: "white",
     zIndex: 5000,

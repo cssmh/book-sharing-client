@@ -6,15 +6,21 @@ import SmallLoader from "../Components/SmallLoader";
 import useDataQuery from "../Hooks/useDataQuery";
 import { postBook } from "../Api/books";
 import HavenHelmet from "../Components/HavenHelmet";
+import { useState } from "react";
 
 const AddBook = () => {
   const { loading, user } = useAuth();
+  const apiKey = import.meta.env.VITE_imgBbKey;
   const url = `/providers-books?email=${user?.email}`;
   const {
     isLoading,
     data: myBooks = [],
     refetch,
   } = useDataQuery(["myBooks"], url);
+
+  const [imagePreview, setImagePreview] = useState(null);
+  const [loadingImage, setLoadingImage] = useState(false);
+  const [bookImage, setBookImage] = useState("");
 
   const today = new Date();
   const formattedDate = today.toLocaleDateString("en-US", {
@@ -23,6 +29,36 @@ const AddBook = () => {
     year: "numeric",
   });
 
+  const handleImageUpload = async (e) => {
+    setLoadingImage(true);
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const response = await fetch(
+        `https://api.imgbb.com/1/upload?key=${apiKey}`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+      const data = await response.json();
+      if (data.success) {
+        setBookImage(data.data.url);
+        setImagePreview(URL.createObjectURL(file)); // Preview the image
+      } else {
+        toast.error("Image upload failed. Please try again.");
+      }
+    } catch (error) {
+      toast.error("Error uploading image.");
+    } finally {
+      setLoadingImage(false);
+    }
+  };
+
   const handleAddBook = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -30,7 +66,7 @@ const AddBook = () => {
     if (myBooks.some((myBook) => myBook.book_name === book_name)) {
       return toast.error("You already added this Book!");
     }
-    const book_image = form.book_image.value || import.meta.env.VITE_Cover_URL;
+
     const provider_phone = form.provider_phone.value;
     if (!/^(\+?8801|01)(\d{9})$/.test(provider_phone)) {
       return toast.error("Enter a valid phone number!");
@@ -38,7 +74,7 @@ const AddBook = () => {
 
     const BookInformation = {
       book_name,
-      book_image,
+      book_image: bookImage || import.meta.env.VITE_Cover_URL,
       provider_name: form.provider_name.value,
       provider_email: form.provider_email.value,
       provider_image: user?.photoURL,
@@ -92,6 +128,15 @@ const AddBook = () => {
         </div>
       </div>
       <form onSubmit={handleAddBook} className="max-w-6xl mx-auto">
+        <div className="flex justify-center">
+          {imagePreview && (
+            <img
+              src={imagePreview}
+              alt="Preview"
+              className="mt-2 w-[100px] h-auto"
+            />
+          )}
+        </div>
         <div className="flex flex-col md:flex-row gap-3">
           <div className="form-control md:w-1/2 mx-2 lg:mx-0">
             <label className="label">
@@ -107,12 +152,14 @@ const AddBook = () => {
           </div>
           <div className="form-control md:w-1/2 mx-2 lg:mx-0">
             <label className="label">
-              <span className="label-text">Book Image Url</span>
+              <span className="label-text">Book Image Upload</span>
             </label>
             <input
-              type="text"
+              type="file"
               name="book_image"
-              className="input input-bordered focus:border-transparent"
+              onChange={handleImageUpload}
+              accept="image/*"
+              className="file-input file-input-bordered focus:border-transparent"
               style={{ outline: "none" }}
             />
           </div>
