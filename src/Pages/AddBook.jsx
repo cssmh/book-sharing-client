@@ -1,3 +1,4 @@
+import axios from "axios";
 import swal from "sweetalert";
 import toast from "react-hot-toast";
 import useAuth from "../Hooks/useAuth";
@@ -38,17 +39,18 @@ const AddBook = () => {
     formData.append("image", file);
 
     try {
-      const response = await fetch(
+      const { data } = await axios.post(
         `https://api.imgbb.com/1/upload?key=${apiKey}`,
+        formData,
         {
-          method: "POST",
-          body: formData,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
-      const data = await response.json();
       if (data.success) {
         setBookImage(data.data.url);
-        setImagePreview(URL.createObjectURL(file)); // Preview the image
+        setImagePreview(URL.createObjectURL(file));
       } else {
         toast.error("Image upload failed. Please try again.");
       }
@@ -94,6 +96,7 @@ const AddBook = () => {
           icon: "success",
           timer: 2000,
         });
+        setImagePreview("");
         form.reset();
         refetch();
       }
@@ -128,15 +131,17 @@ const AddBook = () => {
         </div>
       </div>
       <form onSubmit={handleAddBook} className="max-w-6xl mx-auto">
-        <div className="flex justify-center">
-          {imagePreview && (
-            <img
-              src={imagePreview}
-              alt="Preview"
-              className="mt-2 w-[100px] h-auto"
-            />
-          )}
-        </div>
+        {imagePreview && (
+          <div className="flex justify-center lg:justify-end my-2">
+            <div className="w-[100px] h-[120px] rounded-lg overflow-hidden shadow-lg border border-gray-200">
+              <img
+                src={imagePreview}
+                alt="Preview"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        )}
         <div className="flex flex-col md:flex-row gap-3">
           <div className="form-control md:w-1/2 mx-2 lg:mx-0">
             <label className="label">
@@ -232,8 +237,11 @@ const AddBook = () => {
           ></textarea>
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-primary rounded-2xl mx-2 md:mx-0 text-white">
-            Add Book
+          <button
+            disabled={loadingImage}
+            className="btn btn-primary rounded-2xl mx-2 md:mx-0 text-white"
+          >
+            {loadingImage ? "Uploading..." : "Add Book"}
           </button>
         </div>
       </form>
