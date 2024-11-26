@@ -1,16 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../Shared/MainLayout/MainLayout";
-import ErrorPage from "../components/ErrorPage";
-import Home from "../components/Home";
-import Login from "../components/Login/Login";
-import Register from "../components/Register";
+import ErrorPage from "../Components/ErrorPage";
+import Home from "../Components/Home";
+import Login from "../Components/Login/Login";
+import Register from "../Components/Register";
 import PrivateRoute from "../Shared/PrivateRoute/PrivateRoute";
-import MyProfile from "../components/MyProfile";
+import MyProfile from "../Components/MyProfile";
 import AllBooks from "../Pages/AllBooks";
 import BookDetails from "../Pages/BookDetails";
 import AddBook from "../Pages/AddBook";
-import MyBooks from "../pages/MyBooks";
-import UpdateBook from "../pages/UpdateBook";
+import MyBooks from "../Pages/MyBooks";
+import UpdateBook from "../Pages/UpdateBook";
 import MySchedules from "../Pages/MySchedules";
 import DashLayout from "../Dashboard/DashLayout";
 import AdminBooks from "../Dashboard/AdminBooks";
@@ -63,11 +63,7 @@ const Root = createBrowserRouter([
       },
       {
         path: "/book/:book_name/:id",
-        element: (
-          <PrivateRoute>
-            <BookDetails />
-          </PrivateRoute>
-        ),
+        element: <BookDetails />,
         loader: ({ params }) => getBook(params.id),
       },
       {
@@ -89,19 +85,11 @@ const Root = createBrowserRouter([
       },
       {
         path: "/my-books",
-        element: (
-          <PrivateRoute>
-            <MyBooks />
-          </PrivateRoute>
-        ),
+        element: <MyBooks />,
       },
       {
         path: "/my-schedules",
-        element: (
-          <PrivateRoute>
-            <MySchedules />
-          </PrivateRoute>
-        ),
+        element: <MySchedules />,
       },
       {
         path: "/admin-dashboard",

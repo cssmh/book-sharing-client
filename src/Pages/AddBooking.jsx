@@ -5,9 +5,11 @@ import { useEffect, useState } from "react";
 import useAuth from "../Hooks/useAuth";
 import { addBooking } from "../Api/bookings";
 import useMyCart from "../Hooks/useMyCart";
+import { useNavigate } from "react-router-dom";
 
 const AddBooking = ({ getBookData }) => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const { myBookings, refetch } = useMyCart();
   const { _id, book_image, book_name, provider_email, provider_phone } =
     getBookData;
@@ -31,7 +33,15 @@ const AddBooking = ({ getBookData }) => {
     setTodayDateTime(`${formattedDate}, ${formattedTime}`);
   }, []);
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    if (!user) {
+      toast.error("Please login first");
+      navigate("/login");
+    } else {
+      setOpen(true);
+    }
+  };
+
   const handleClose = () => setOpen(false);
 
   const handleAddBooking = async (e) => {

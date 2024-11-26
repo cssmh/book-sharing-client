@@ -28,7 +28,7 @@ _Screenshot of the Admin Dashboard showcasing administrative controls and statis
 
 ## Description
 
-MBSTU BookHaven is a comprehensive platform for book sharing that enables users to sign up, add, manage, and book books efficiently. It incorporates various features to ensure a seamless and user-friendly experience.
+MBSTU BookHaven is my university final year project. It allows students to exchange hard-copy books, track borrowing, and review books. The platform includes role-based authentication with JWT, interactive dashboards using React Google Charts, and mobile-friendly design. A feature to prevent duplicate submissions has also been added.
 
 ## Features
 
