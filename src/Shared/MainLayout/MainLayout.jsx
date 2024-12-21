@@ -11,7 +11,7 @@ const MainLayout = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setLoading(false);
-    }, 1600);
+    }, 1700);
 
     return () => clearTimeout(timeout);
   }, []);

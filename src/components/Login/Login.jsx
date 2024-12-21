@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
 import { useState, useEffect } from "react";
 import useAuth from "../../Hooks/useAuth";
-import { TbFidgetSpinner } from "react-icons/tb";
+import { PiSpinnerGapLight } from "react-icons/pi";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import ResetPassModal from "../Modal/ResetPassModal";
@@ -9,7 +9,6 @@ import SocialLogin from "./SocialLogin";
 import HavenHelmet from "../HavenHelmet";
 import BG from "../../assets/login-background.avif";
 import { saveUser } from "../../Api/auth";
-import useAd from "../../Hooks/useAd";
 
 const Login = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,16 +17,17 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [passwordEntered, setPasswordEntered] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { user, login, resetPassword, verifyEmail, logOut } = useAuth();
+  const { user, login, resetPassword } = useAuth();
   const location = useLocation();
   const navigateTo = useNavigate();
-  const admins = useAd();
 
   useEffect(() => {
-    if (user?.emailVerified || admins.includes(user?.email)) {
+    if (user) {
+      // user?.emailVerified || admins.includes(user?.email);
       navigateTo("/");
     }
-  }, [user?.emailVerified, admins, user?.email, navigateTo]);
+    // ?.emailVerified, admins, user?.email
+  }, [user, navigateTo]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -35,18 +35,18 @@ const Login = () => {
 
     try {
       const res = await login(email, password);
-      if (res.user) {
-        if (res.user.emailVerified || admins.includes(email)) {
-          toast.success("Logged in successfully");
-          navigateTo(location?.state || "/", { replace: true });
-          await saveUser(res.user);
-        } else {
-          await verifyEmail();
-          toast.success("We sent you a verification email");
-          await logOut();
-          toast.error("Verify your email first, please!");
-        }
-      }
+      // if (res.user) {
+      //   if (res.user.emailVerified || admins.includes(email)) {
+      toast.success("Logged in successfully");
+      navigateTo(location?.state || "/", { replace: true });
+      await saveUser(res.user);
+      // } else {
+      //   await verifyEmail();
+      //   toast.success("We sent you a verification email");
+      //   await logOut();
+      //   toast.error("Verify your email first, please!");
+      // }
+      // }
     } catch (error) {
       toast.error(error.message);
     } finally {
@@ -159,7 +159,7 @@ const Login = () => {
               className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-400 flex items-center justify-center"
             >
               {loading ? (
-                <TbFidgetSpinner className="animate-spin text-xl" />
+                <PiSpinnerGapLight className="animate-spin text-xl" />
               ) : (
                 "Sign In"
               )}

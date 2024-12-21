@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import useAd from "../Hooks/useAd";
-import { TbFidgetSpinner } from "react-icons/tb";
+import { PiSpinnerGapLight } from "react-icons/pi";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import { saveUser } from "../Api/auth";
 import BG from "../assets/login-background.avif";
@@ -13,19 +12,21 @@ const Register = () => {
   const [view, setView] = useState(true);
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [imgLoading, setImgLoading] = useState(false);
   const [passError, setPassError] = useState("");
   const [passSuccess, setPassSuccess] = useState("");
-  const { user, createUser, profileUpdate, verifyEmail, logOut } =
-    useAuth();
-  const admins = useAd();
-  const location = useLocation();
+  const [uploadedImage, setUploadedImage] = useState("");
+  const { user, createUser, profileUpdate, verifyEmail, logOut } = useAuth();
+  const apiKey = import.meta.env.VITE_imgBbKey;
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user?.emailVerified || admins.includes(user?.email)) {
+    if (user) {
+      // ?.emailVerified || admins.includes(user?.email)
       navigate("/");
     }
-  }, [user, admins, location, navigate]);
+    //  admins, location,
+  }, [user, navigate]);
 
   const validatePassword = (password) => {
     if (!password) {
@@ -49,15 +50,39 @@ const Register = () => {
     validatePassword(passwordValue);
   };
 
+  const handleImageUpload = async (file) => {
+    if (!file) return;
+    setImgLoading(true);
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const res = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+      if (data.success) {
+        setUploadedImage(data.data.url);
+        toast.success("Image uploaded successfully!");
+      } else {
+        toast.error("Failed to upload image. Try again.");
+      }
+    } catch (error) {
+      toast.error("Error uploading image. Please try again.");
+    } finally {
+      setImgLoading(false);
+    }
+  };
+
   const handleRegister = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     const form = new FormData(e.currentTarget);
     const name = form.get("name");
-    const image = form.get("photo") || import.meta.env.VITE_Default_URL;
     const email = form.get("email");
-    const password = form.get("password");
+    const image = uploadedImage || import.meta.env.VITE_Default_URL;
 
     if (passError) {
       setLoading(false);
@@ -71,15 +96,15 @@ const Register = () => {
         await saveUser(res.user);
         await verifyEmail();
         toast.success(
-          "Register success! Check your inbox for a verification email!"
+          "Registration successful! Please check your inbox for a verification email."
         );
 
-        if (!res.user.emailVerified) {
-          await logOut();
-          navigate("/login");
-        } else {
-          navigate("/");
-        }
+        // if (!res.user.emailVerified) {
+        //   await logOut();
+        //   navigate("/login");
+        // } else {
+        navigate("/");
+        // }
       } else {
         toast.error("User creation failed. Please try again.");
       }
@@ -122,21 +147,6 @@ const Register = () => {
                 required
                 className="appearance-none rounded-lg block w-full px-3 py-[10px] border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
                 placeholder="Name"
-              />
-            </div>
-            <div className="mb-3">
-              <label
-                htmlFor="photo"
-                className="block text-sm font-medium text-gray-600 mb-1"
-              >
-                Photo URL
-              </label>
-              <input
-                id="photo"
-                name="photo"
-                type="text"
-                className="appearance-none rounded-lg block w-full px-3 py-[10px] border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                placeholder="Photo URL"
               />
             </div>
             <div className="mb-3">
@@ -188,6 +198,34 @@ const Register = () => {
                 </span>
               </div>
             </div>
+            <div className="mb-3 text-center">
+              <label
+                htmlFor="photo"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                Upload Photo
+              </label>
+              <div className="relative">
+                <input
+                  id="photo"
+                  name="photo"
+                  type="file"
+                  accept="image/*"
+                  className="absolute inset-0 opacity-0 cursor-pointer"
+                  onChange={(e) => handleImageUpload(e.target.files[0])}
+                />
+                <button
+                  type="button"
+                  className="flex flex-col items-center justify-center w-full p-2 border-2 border-dashed border-gray-300 rounded-md bg-white shadow-sm hover:border-green-400 transition duration-200"
+                >
+                  {imgLoading ? (
+                    <p className="animate-pulse">Uploading....</p>
+                  ) : (
+                    "Choose Image"
+                  )}
+                </button>
+              </div>
+            </div>
             <div>
               <button
                 type="submit"
@@ -195,7 +233,7 @@ const Register = () => {
                 disabled={loading}
               >
                 {loading ? (
-                  <TbFidgetSpinner className="animate-spin text-xl" />
+                  <PiSpinnerGapLight className="animate-spin text-xl" />
                 ) : (
                   "Sign Up"
                 )}

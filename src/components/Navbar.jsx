@@ -216,7 +216,7 @@ const Navbar = () => {
           </Link>
         )}
         <div className="flex flex-col items-center justify-center font-semibold text-center text-sm mr-2 md:mx-2">
-          <p className="uppercase">{getGreeting()}</p>
+          <p className="uppercase text-green-400">{getGreeting()}</p>
           {user && <p className="hidden md:block">{user.displayName}</p>}
         </div>
         {user?.email ? (

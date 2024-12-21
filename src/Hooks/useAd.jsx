@@ -1,6 +1,6 @@
-const useAd = () => {
-  const admins = import.meta.env.VITE_admin;
-  return admins ? admins.split(",") : [];
-};
+// const useAd = () => {
+//   const admins = import.meta.env.VITE_admin;
+//   return admins ? admins.split(",") : [];
+// };
 
-export default useAd;
+// export default useAd;
