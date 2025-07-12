@@ -49,12 +49,12 @@ const Reviews = () => {
           </p>
           <div className="flex gap-2">
             <img
-              src="https://i.ibb.co/QKd2Kss/kona.jpg"
+              src="https://lh3.googleusercontent.com/a/ACg8ocKbGz5rWOkxp_m2p8uaDy5j4qE3bm7PyHmv2C8_wiklM1kyYPVhYg=s288-c-no"
               className="w-12 rounded-3xl"
               onContextMenu={(e) => e.preventDefault()}
             />
             <div>
-              <p className="font-semibold">Sarah Johnson</p>
+              <p className="font-semibold">Tourist</p>
               <p className="text-gray-500">Happy Book Enthusiasts</p>
             </div>
           </div>
@@ -71,12 +71,12 @@ const Reviews = () => {
           </p>
           <div className="flex gap-2">
             <img
-              src="https://i.ibb.co/MR7wGzK/Reviewer3.webp"
+              src="https://lh3.googleusercontent.com/a/ACg8ocIKtdnufzB1CAfX6RDVomHy9udvurqYTawBgF1rn31A69kq5-w=s288-c-no"
               className="w-12 rounded-3xl"
               onContextMenu={(e) => e.preventDefault()}
             />
             <div>
-              <p className="font-semibold">Sydney Sweeney</p>
+              <p className="font-semibold">Momen</p>
               <p className="text-gray-500">Lovely Book Purchaser</p>
             </div>
           </div>
