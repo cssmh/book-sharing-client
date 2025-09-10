@@ -1,78 +1,50 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import banner from "../assets/book-share.jpeg";
 
 const Banner = () => {
   return (
-    <div className="px-6 pt-10 lg:pt-20 mx-auto text-center dark:bg-gray-950">
-      <div className="max-w-4xl 2xl:max-w-[90%] mx-auto flex flex-col justify-center items-center">
-        <h1
-          className="w-full bg-gradient-to-r from-green-300 via-blue-500 to-blue-500 bg-clip-text text-transparent text-3xl font-semibold md:text-5xl aos-init"
-          data-aos="fade-up"
-          data-aos-easing="ease-in"
-          data-aos-duration="900"
-        >
-          Share Exchange Unleashed
+    <section className="relative px-6 pt-16 lg:pt-24 text-center bg-white dark:bg-gray-900">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="max-w-3xl mx-auto"
+      >
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-100 leading-tight">
+          Share <span className="text-green-500">& Discover</span> Books
         </h1>
-        <p
-          className="max-w-lg mx-auto mt-4 text-gray-500 dark:text-gray-300 aos-init"
-          data-aos="fade-up"
-          data-aos-easing="ease-in"
-          data-aos-duration="900"
-        >
-          Discover new books, provide and share the knowledge that <br></br>{" "}
-          shape our future together.
+        <p className="max-w-xl mx-auto mt-4 text-gray-600 dark:text-gray-300 text-base">
+          Explore, exchange, and connect through the world of books.
         </p>
-        <Link to={"/add-book"}>
-          <button
-            data-aos="fade-up"
-            data-aos-easing="ease-in"
-            data-aos-duration="900"
-            className="px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white capitalize bg-green-400 rounded-md hover:bg-green-400/90 lg:mx-0 lg:w-auto focus:outline-none transition duration-300 flex gap-1 aos-init"
+        <Link to="/add-book">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            className="px-5 py-2.5 mt-6 text-white text-sm md:text-base font-medium bg-green-500 rounded-lg shadow hover:bg-green-600 transition"
           >
-            Start sharing now
-            <span>
-              <svg
-                stroke="currentColor"
-                fill="none"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                className="text-lg"
-                height="1em"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                ></path>
-              </svg>
-            </span>
-          </button>
+            Start Sharing
+          </motion.button>
         </Link>
-        <p
-          data-aos="fade-up"
-          data-aos-easing="ease-in"
-          data-aos-duration="900"
-          className="mt-2 font-medium text-gray-600 text-sm dark:text-gray-400 aos-init"
-        >
-          Have a good day!
+        <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+          Let’s build a culture of knowledge sharing
         </p>
-      </div>
-      <div
-        data-aos="fade-up"
-        data-aos-easing="ease-in"
-        data-aos-duration="900"
-        className="flex justify-center mt-10 aos-init"
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.4, duration: 0.8 }}
+        className="mt-10 flex justify-center"
       >
         <img
-          className="object-cover w-full lg:h-96 rounded-xl lg:w-3/4"
           src={banner}
+          alt="Books Banner"
+          className="rounded-xl object-cover w-full max-w-4xl shadow-md"
           onContextMenu={(e) => e.preventDefault()}
         />
-      </div>
-    </div>
+      </motion.div>
+    </section>
   );
 };
 

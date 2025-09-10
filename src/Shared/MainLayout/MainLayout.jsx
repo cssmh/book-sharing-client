@@ -26,7 +26,7 @@ const MainLayout = () => {
   return (
     <div>
       {!noHeaderFooter && <Navbar />}
-      <div className="min-h-[65vh] md:min-h-[70vh]">
+      <div className="min-h-[65vh] md:min-h-[70vh] container 2xl:max-w-[1370px] mx-auto">
         <Outlet />
       </div>
       {!noHeaderFooter && <Footer />}

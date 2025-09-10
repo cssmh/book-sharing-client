@@ -18,7 +18,7 @@ const PopularBooks = () => {
 
   if (isLoading) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2 md:gap-6 max-w-[1250px] 2xl:max-w-[85%] mx-auto mt-7 mb-9">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2 md:gap-6 mx-auto mt-7 mb-9">
         {[...Array(cart)].map((_, index) => (
           <SkeletonCard key={index} />
         ))}
@@ -27,7 +27,7 @@ const PopularBooks = () => {
   }
 
   return (
-    <div className="max-w-[1250px] 2xl:max-w-[92%] mx-1 md:mx-auto">
+    <div className="mx-1 md:mx-auto">
       <h1
         data-aos="zoom-in"
         data-aos-delay="100"

@@ -28,7 +28,7 @@ const BookTypes = () => {
   ];
 
   return (
-    <div className="max-w-7xl 2xl:max-w-[90%] mx-2 md:mx-auto">
+    <div className="mx-2 md:mx-auto">
       <Swiper
         speed={200}
         grabCursor={true}

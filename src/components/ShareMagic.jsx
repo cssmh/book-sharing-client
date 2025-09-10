@@ -2,7 +2,7 @@ import Reader from "../assets/Reader.png";
 
 const ShareMagic = () => {
   return (
-    <div className="max-w-5xl 2xl:max-w-[80%] mx-auto pt-5 pb-7">
+    <div className="pt-5 pb-7">
       <h2 className="text-2xl lg:text-3xl font-bold text-center mb-6 text-gray-800">
         The Magic of Sharing
       </h2>

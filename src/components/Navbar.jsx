@@ -1,278 +1,96 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import Lottie from "lottie-react";
-import lottieLogo from "../assets/Logo.json";
-import defaultAvatar from "../assets/default.jpg";
+import { FaBars } from "react-icons/fa6";
 import useAuth from "../Hooks/useAuth";
-import { FaArrowRightToBracket } from "react-icons/fa6";
-import useAdmin from "../Hooks/useAdmin";
-import useMyCart from "../Hooks/useMyCart";
-
-const getGreeting = () => {
-  const currentTime = new Date().getHours();
-  if (currentTime >= 4 && currentTime < 6) return "Whoa, early bird";
-  if (currentTime >= 6 && currentTime < 12) return "Good morning";
-  if (currentTime >= 12 && currentTime < 16) return "Good afternoon";
-  if (currentTime >= 16 && currentTime < 20) return "Good evening";
-  if (currentTime >= 20 || currentTime < 1) return "Good night";
-  return "Working late?";
-};
+import defaultAvatar from "../assets/default.jpg";
+import Lottie from "lottie-react";
+import bookAnim from "../assets/Logo.json";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
-  const { isAdmin } = useAdmin();
-  const [userDropdownVisible, setUserDropdownVisible] = useState(false);
-  const { isLoading, totalCart, totalProgress } = useMyCart();
   const location = useLocation();
-  const userRef = useRef(null);
+  const [open, setOpen] = useState(false);
 
-  const getLinkClasses = (path) =>
-    `text-base font-semibold flex items-center px-[10px] py-[5px] rounded-full ${
-      location.pathname === path ? "bg-green-400 text-white" : ""
-    }`;
-
-  const handleLogout = async () => {
-    try {
-      await logOut();
-    } catch (error) {
-      console.error("Logout failed", error);
-    }
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (userRef.current && !userRef.current.contains(event.target)) {
-        setUserDropdownVisible(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  const navLinks = [
+    { path: "/", label: "Home" },
+    { path: "/all-books", label: "All Books" },
+    { path: "/add-book", label: "Add Book" },
+    { path: "/my-books", label: "My Books" },
+    { path: "/my-schedules", label: "My Schedule" },
+  ];
 
   return (
-    <div className="navbar min-h-[58px] bg-base-100 rounded-lg md:px-5 py-0">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <label tabIndex={0} className="btn btn-ghost lg:hidden px-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </label>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 space-y-1"
-          >
-            <Link
-              to="/"
-              className={`font-semibold flex items-center ${
-                location.pathname === "/" ? "text-green-500" : ""
-              }`}
-            >
-              Home
-            </Link>
-            <Link
-              to="/all-books"
-              className={`font-semibold flex items-center ${
-                location.pathname === "/all-books" ? "text-green-500" : ""
-              }`}
-            >
-              All Books
-            </Link>
-            {/* {user && (
-              <> */}
-            <Link
-              to="/add-book"
-              className={`font-semibold flex items-center ${
-                location.pathname === "/add-book" ? "text-green-500" : ""
-              }`}
-            >
-              Add Book
-            </Link>
-            <Link
-              to="/my-books"
-              className={`font-semibold flex items-center ${
-                location.pathname === "/my-books" ? "text-green-500" : ""
-              }`}
-            >
-              My Books
-            </Link>
-            <Link
-              to="/my-schedules"
-              className={`font-semibold flex items-center ${
-                location.pathname === "/my-schedules" ? "text-green-500" : ""
-              }`}
-            >
-              My Schedule
-            </Link>
-            {/* </>
-            )} */}
-            {isAdmin && (
+    <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 shadow-sm">
+      <div className="container 2xl:max-w-[1370px] mx-auto px-4 py-3 flex items-center justify-between">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2">
+          <Lottie animationData={bookAnim} loop={true} className="w-8 h-8" />
+          <span className="text-green-600 font-bold text-lg md:text-xl">
+            MBSTU BookHaven
+          </span>
+        </Link>
+
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex gap-6 font-medium">
+          {navLinks.map((link) => (
+            <li key={link.path}>
               <Link
-                to="/admin-dashboard"
-                className={`font-semibold flex items-center ${
-                  location.pathname === "/admin-dashboard"
-                    ? "text-green-500"
-                    : ""
+                to={link.path}
+                className={`hover:text-green-500 transition ${
+                  location.pathname === link.path
+                    ? "text-green-500 font-semibold"
+                    : "text-gray-700 dark:text-gray-300"
                 }`}
               >
-                Dashboard
+                {link.label}
               </Link>
-            )}
-          </ul>
-        </div>
-        <Link to={"/"}>
-          <div className="flex items-center gap-1">
-            <Lottie className="w-0 md:w-[52px]" animationData={lottieLogo} />
-            <span className="md:ml-1 font-bold text-[17px] md:text-[21px]">
-              MBSTU BookHaven
-            </span>
-          </div>
-        </Link>
-      </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 space-x-1">
-          <Link to="/" className={getLinkClasses("/")}>
-            Home
-          </Link>
-          <Link to="/all-books" className={getLinkClasses("/all-books")}>
-            All Books
-          </Link>
-          {/* {user && (
-            <> */}
-          <Link to="/add-book" className={getLinkClasses("/add-book")}>
-            Add Book
-          </Link>
-          <Link to="/my-books" className={getLinkClasses("/my-books")}>
-            My Books
-          </Link>
-          <Link to="/my-schedules" className={getLinkClasses("/my-schedules")}>
-            My Schedule
-          </Link>
-          {/* </>
-          )} */}
-          {isAdmin && (
-            <Link
-              to="/admin-dashboard"
-              className={getLinkClasses("/admin-dashboard")}
-            >
-              Dashboard
-            </Link>
-          )}
+            </li>
+          ))}
         </ul>
-      </div>
-      <div className="navbar-end">
-        {user && (
-          <Link to="/my-schedules">
-            <div
-              tabIndex={0}
-              role="button"
-              className={`${
-                totalProgress ? "animate-bounce" : ""
-              } btn btn-ghost btn-circle`}
-              style={{
-                animationIterationCount: totalProgress ? "4" : "initial",
-              }}
-            >
-              {isLoading ? (
-                <span className="loading loading-spinner loading-md"></span>
-              ) : (
-                <div className="indicator">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
-                  </svg>
-                  <span
-                    className={`${
-                      totalProgress ? "bg-green-400 text-white" : ""
-                    } badge badge-sm indicator-item`}
-                  >
-                    {totalCart || 0}
-                  </span>
-                </div>
-              )}
-            </div>
-          </Link>
-        )}
-        <div className="flex flex-col items-center justify-center font-semibold text-center text-sm mr-2 md:mx-2">
-          <p className="uppercase text-green-400">{getGreeting()}</p>
-          {user && <p className="hidden md:block">{user.displayName}</p>}
-        </div>
-        {user?.email ? (
-          <div ref={userRef} className="dropdown dropdown-end">
-            <label
-              tabIndex={0}
-              className="cursor-pointer flex items-center"
-              onClick={() => setUserDropdownVisible((prev) => !prev)}
-            >
+
+        {/* Right Side */}
+        <div className="flex items-center gap-3">
+          {user ? (
+            <div className="relative group">
               <img
                 src={user.photoURL || defaultAvatar}
-                className="w-10 rounded-full hover:shadow-lg transition-shadow duration-300 ease-in-out"
-                alt="ava"
+                className="w-9 h-9 rounded-full border cursor-pointer"
+                alt="avatar"
               />
-            </label>
-            {userDropdownVisible && (
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-40"
-              >
-                <Link
-                  to="/user-analytics"
-                  className={`justify-center py-[3px] ${getLinkClasses(
-                    "/user-analytics"
-                  )}`}
-                >
-                  User Analytics
-                </Link>
+              <ul className="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-800 shadow-lg rounded-lg hidden group-hover:block">
                 <Link
                   to="/my-profile"
-                  className={`justify-center py-[3px] ${getLinkClasses(
-                    "/my-profile"
-                  )}`}
+                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
-                  View Profile
+                  Profile
                 </Link>
                 <button
-                  className="text-base hover:bg-gray-100 font-semibold flex justify-center items-center px-[10px] py-1 rounded-full gap-1 transform active:translate-y-0.5 transition-transform duration-150 ease-in-out"
-                  onClick={handleLogout}
+                  onClick={logOut}
+                  className="flex w-full px-4 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
-                  <FaArrowRightToBracket />
-                  <span>Log Out</span>
+                  Logout
                 </button>
               </ul>
-            )}
-          </div>
-        ) : (
-          <Link
-            to="/login"
-            className="btn btn-sm border border-green-400 hover:border-green-400 hover:bg-green-400 hover:text-white"
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              className="px-4 py-2 rounded-lg border border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition"
+            >
+              Login
+            </Link>
+          )}
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setOpen(!open)}
+            className="md:hidden text-gray-600 dark:text-gray-300"
           >
-            Login
-          </Link>
-        )}
+            <FaBars size={20} />
+          </button>
+        </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
