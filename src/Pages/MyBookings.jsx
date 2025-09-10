@@ -9,7 +9,7 @@ const MyBookings = () => {
 
   if (isLoading) {
     return (
-      <div className="max-w-7xl 2xl:max-w-[92%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-3 md:gap-5">
+      <div className="container 2xl:max-w-[1370px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-3 md:gap-5">
         {[...Array(cart)].map((_, index) => (
           <MyBookSke key={index} />
         ))}
@@ -37,7 +37,7 @@ const MyBookings = () => {
             <span className="italic">Your Bookings</span> (
             {myBookings?.length || 0})
           </h2>
-          <div className="max-w-7xl 2xl:max-w-[92%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-3 md:gap-5">
+          <div className="container 2xl:max-w-[1370px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-3 md:gap-5">
             {myBookings?.map((booking) => (
               <MyBookingCard
                 key={booking._id}

@@ -43,7 +43,7 @@ const AllBooks = () => {
         />
       </div>
       {isLoading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-6 mt-7 mb-9">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-6 container 2xl:max-w-[1370px] mx-auto mt-7 mb-9">
           {[...Array(3)].map((_, index) => (
             <SkeletonCard key={index} />
           ))}
@@ -59,7 +59,7 @@ const AllBooks = () => {
               <h1 className="text-xl md:text-[22px] font-semibold italic text-center my-3">
                 All Books Available for You
               </h1>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-5 container 2xl:max-w-[1370px] mx-auto">
                 {data?.result?.map((book) => (
                   <AllBooksCard key={book._id} getBook={book} />
                 ))}

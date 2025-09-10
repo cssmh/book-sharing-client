@@ -42,7 +42,7 @@ const UserAnalytics = () => {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto px-1 md:px-5 mt-6">
+    <div className="container 2xl:max-w-[1370px] mx-auto px-1 md:px-5 mt-6">
       <h1 className="text-xl md:text-2xl font-bold mt-3 mx-2 md:mx-0 md:mt-0 mb-1 md:mb-5">
         Hello and Welcome, {user?.displayName}
       </h1>

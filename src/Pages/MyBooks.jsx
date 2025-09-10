@@ -18,7 +18,7 @@ const MyBooks = () => {
 
   if (isLoading)
     return (
-      <div className="max-w-7xl 2xl:max-w-[92%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2 md:gap-6">
+      <div className="container 2xl:max-w-[1370px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2 md:gap-6">
         {[...Array(cart)].map((_, index) => (
           <MyBookSke key={index} />
         ))}
@@ -53,7 +53,7 @@ const MyBooks = () => {
           <p className="bg-gray-800 text-white md:px-7 py-2 md:py-4 md:flex flex-col md:flex-row justify-between items-center relative text-center text-[21px] mb-2 font-semibold">
             <span>All Books Added By You</span> ({bookData?.length})
           </p>
-          <div className="max-w-6xl 2xl:max-w-[92%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
+          <div className="container 2xl:max-w-[1370px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
             {bookData.map((book) => (
               <MyBooksCard key={book._id} getBook={book} refetch={refetch} />
             ))}

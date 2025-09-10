@@ -30,7 +30,7 @@ const Count = () => {
   return (
     <div
       ref={countSectionRef}
-      className="hero min-h-[30vh] mb-4"
+      className="hero min-h-[30vh] my-10"
       style={{
         backgroundImage: `url(${pencil})`,
       }}

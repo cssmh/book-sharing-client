@@ -39,7 +39,7 @@ const MyPending = () => {
 
   if (idLoading || myBooksLoading || isLoading) {
     return (
-      <div className="max-w-7xl 2xl:max-w-[92%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-3 md:gap-5">
+      <div className="container 2xl:max-w-[1370px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-3 md:gap-5">
         {[...Array(cart)].map((_, index) => (
           <MyBookSke key={index} />
         ))}
@@ -71,7 +71,7 @@ const MyPending = () => {
             <span className="italic">Pending Bookings</span> (
             {allMyPending?.length || 0})
           </h2>
-          <div className="max-w-7xl 2xl:max-w-[92%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-3 md:gap-4 2xl:gap-5">
+          <div className="container 2xl:max-w-[1370px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-3 md:gap-4 2xl:gap-5 mb-10">
             {allMyPending?.map((pending) => (
               <MyPendingCard
                 key={pending._id}

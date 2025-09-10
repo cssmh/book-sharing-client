@@ -65,7 +65,7 @@ const UpdateBook = () => {
       }
     } catch (error) {
       toast.error("Error uploading image.");
-    }finally{
+    } finally {
       setLoadingImage(false);
     }
   };
@@ -122,7 +122,10 @@ const UpdateBook = () => {
           </p>
         </div>
       </div>
-      <form onSubmit={handleUpdate} className="max-w-6xl mx-auto">
+      <form
+        onSubmit={handleUpdate}
+        className="container 2xl:max-w-[1370px] mx-auto"
+      >
         <div className="flex justify-center lg:justify-end my-2">
           <div className="w-[100px] h-[120px] rounded-lg overflow-hidden shadow-lg border border-gray-200">
             <img
