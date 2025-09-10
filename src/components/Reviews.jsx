@@ -1,6 +1,6 @@
 const Reviews = () => {
   return (
-    <div className="flex flex-col lg:flex-row justify-center items-center gap-4 my-7 md:my-12">
+    <div className="container 2xl:max-w-[1370px] mx-auto flex flex-col lg:flex-row justify-center items-center gap-4 my-7 md:my-12">
       <div
         data-aos="fade-up"
         data-aos-duration="500"

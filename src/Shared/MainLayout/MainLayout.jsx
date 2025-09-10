@@ -1,8 +1,10 @@
+// MainLayout.jsx
 import { useEffect, useState } from "react";
 import BigLoader from "../../Components/BigLoader";
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../../Components/Navbar";
 import Footer from "../../Components/Footer";
+import { AnimatePresence, motion } from "framer-motion";
 
 const MainLayout = () => {
   const [loading, setLoading] = useState(true);
@@ -11,7 +13,7 @@ const MainLayout = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setLoading(false);
-    }, 1700);
+    }, 1200);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -26,8 +28,18 @@ const MainLayout = () => {
   return (
     <div>
       {!noHeaderFooter && <Navbar />}
-      <div className="min-h-[65vh] md:min-h-[70vh] container 2xl:max-w-[1370px] mx-auto">
-        <Outlet />
+      <div className="min-h-[65vh] md:min-h-[70vh]">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={loc.pathname}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Outlet />
+          </motion.div>
+        </AnimatePresence>
       </div>
       {!noHeaderFooter && <Footer />}
     </div>

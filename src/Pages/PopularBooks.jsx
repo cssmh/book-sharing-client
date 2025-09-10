@@ -27,7 +27,7 @@ const PopularBooks = () => {
   }
 
   return (
-    <div className="mx-1 md:mx-auto">
+    <div className="container 2xl:max-w-[1370px] mx-1 md:mx-auto">
       <h1
         data-aos="zoom-in"
         data-aos-delay="100"
