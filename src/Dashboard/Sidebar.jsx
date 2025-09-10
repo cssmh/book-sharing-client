@@ -1,11 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { GrLogout } from "react-icons/gr";
-import { FcSettings } from "react-icons/fc";
-import { FaUsersGear } from "react-icons/fa6";
-import { MdLibraryBooks } from "react-icons/md";
+import {
+  FaBook,
+  FaHome,
+  FaClipboardList,
+  FaUsers,
+  FaUserCog,
+} from "react-icons/fa";
 import { AiOutlineBars } from "react-icons/ai";
-import { FaHome, FaBook, FaClipboardList } from "react-icons/fa";
 import logo from "../assets/Favicon.png";
 import useAuth from "../Hooks/useAuth";
 
@@ -17,6 +20,10 @@ const Sidebar = () => {
   const location = useLocation();
   const currentPath = location.pathname;
 
+  const handleToggle = () => {
+    setActive(!isActive);
+  };
+
   const handleLogout = () => {
     logOut().catch(() => {});
   };
@@ -24,22 +31,22 @@ const Sidebar = () => {
   const SidebarLink = ({ to, icon, label, currentPath }) => (
     <Link to={to}>
       <button
-        className={`flex items-center w-full px-4 py-2 text-gray-600 transition-colors duration-300 transform ${
-          currentPath === to ? "bg-gray-300" : ""
+        className={`flex items-center w-full px-4 py-3 text-gray-700 transition-colors duration-200 transform rounded-lg hover:bg-gray-200 hover:text-gray-900 ${
+          currentPath === to ? "bg-gray-200 text-gray-900 font-semibold" : ""
         }`}
       >
-        {icon}
-        <span className="mx-3 md:mx-4 font-medium">{label}</span>
+        <div className="text-xl mr-4">{icon}</div>
+        <span className="font-medium">{label}</span>
       </button>
     </Link>
   );
 
-  // Close sidebar when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
         sidebarRef.current &&
         !sidebarRef.current.contains(event.target) &&
+        buttonRef.current &&
         !buttonRef.current.contains(event.target) &&
         isActive
       ) {
@@ -55,14 +62,14 @@ const Sidebar = () => {
 
   return (
     <div>
-      <div className="bg-base-200 text-gray-800 flex justify-between md:hidden">
-        <Link to="/" className="block cursor-pointer px-5 py-2 font-bold">
-          <img src={logo} className="w-12" alt="Logo" />
+      <div className="bg-white text-gray-800 flex justify-between md:hidden shadow-sm">
+        <Link to="/" className="block cursor-pointer px-5 py-2">
+          <img src={logo} className="w-12 h-12" alt="Logo" />
         </Link>
         <button
           ref={buttonRef}
-          onClick={() => setActive(!isActive)}
-          className="mobile-menu-button p-4 focus:outline-none focus:bg-gray-200"
+          onClick={handleToggle}
+          className="p-4 focus:outline-none focus:bg-gray-200 rounded"
         >
           <AiOutlineBars className="h-6 w-7" />
         </button>
@@ -70,24 +77,24 @@ const Sidebar = () => {
       {/* Sidebar */}
       <div
         ref={sidebarRef}
-        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-[215px] md:w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
+        className={`z-50 md:fixed flex flex-col justify-between overflow-x-hidden bg-white w-64 space-y-6 px-4 py-6 absolute inset-y-0 left-0 transform ${
           isActive ? "translate-x-0" : "-translate-x-full"
-        } md:translate-x-0 transition duration-200 ease-in-out`}
+        } md:translate-x-0 transition-transform duration-300 ease-in-out shadow-xl`}
       >
         <div>
           <Link to="/" className="hidden md:block">
-            <div className="w-full hidden md:flex px-4 py-1 shadow-lg rounded-lg justify-center items-center bg-rose-100 mx-auto">
-              <img src={logo} className="h-14" alt="Logo" />
+            <div className="w-full hidden md:flex p-2 shadow-sm rounded-xl justify-center items-center bg-gray-100">
+              <img src={logo} className="h-14 w-14" alt="Logo" />
             </div>
           </Link>
-          {/* User Info */}
           {user && (
-            <div className="flex items-center px-4 my-4 text-gray-600">
-              <span className="font-medium">Hi, {user?.displayName || "User"}</span>
+            <div className="flex items-center px-4 my-6 text-gray-800">
+              <span className="font-semibold text-lg">
+                Hi, {user?.displayName || "Admin"}
+              </span>
             </div>
           )}
-          {/* Nav Items */}
-          <nav className="space-y-2 ">
+          <nav className="space-y-2">
             <SidebarLink
               to="/admin-dashboard"
               icon={<FaHome />}
@@ -108,32 +115,26 @@ const Sidebar = () => {
             />
             <SidebarLink
               to="/admin-dashboard/all-users"
-              icon={<FaUsersGear />}
+              icon={<FaUsers />}
               label="All Users"
               currentPath={currentPath}
             />
             <SidebarLink
               to="/admin-dashboard/books-providers"
-              icon={<MdLibraryBooks />}
+              icon={<FaUserCog />}
               label="Books Providers"
-              currentPath={currentPath}
-            />
-            <SidebarLink
-              to="/admin-dashboard/users-to-update"
-              icon={<FcSettings />}
-              label="Users to Update"
               currentPath={currentPath}
             />
           </nav>
         </div>
         <div>
-          <hr />
+          <hr className="my-4" />
           <button
             onClick={handleLogout}
-            className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300 hover:text-gray-700 transition-colors duration-300 transform"
+            className="flex w-full items-center px-4 py-3 text-red-500 hover:bg-red-50 hover:text-red-700 transition-colors duration-200 transform rounded-lg"
           >
             <GrLogout className="w-5 h-5" />
-            <span className="mx-3 md:mx-4 font-medium">Logout</span>
+            <span className="mx-3 font-semibold">Logout</span>
           </button>
         </div>
       </div>

@@ -50,12 +50,12 @@ const DashHome = () => {
   ];
 
   return (
-    <div className="">
-      <h1 className="text-2xl font-bold mb-5 mx-2 md:mx-0">
-        Hello and Welcome, Admin
+    <div>
+      <h1 className="text-2xl font-bold mb-6 text-gray-800">
+        Hello and Welcome, Admin 👋
       </h1>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div className="bg-white p-4 shadow rounded-lg">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+        <div className="bg-white p-6 shadow-md rounded-xl">
           <h2 className="text-lg font-semibold mb-3">Books by Users</h2>
           <Chart
             chartType="PieChart"
@@ -65,7 +65,7 @@ const DashHome = () => {
             height={"300px"}
           />
         </div>
-        <div className="bg-white p-4 shadow rounded-lg">
+        <div className="bg-white p-6 shadow-md rounded-xl">
           <h2 className="text-lg font-semibold mb-3">Books by Month</h2>
           <Chart
             chartType="ColumnChart"
@@ -79,7 +79,7 @@ const DashHome = () => {
             height={"300px"}
           />
         </div>
-        <div className="bg-white p-4 shadow rounded-lg">
+        <div className="bg-white p-6 shadow-md rounded-xl">
           <h2 className="text-lg font-semibold mb-3">Books Over Time</h2>
           <Chart
             chartType="LineChart"
@@ -94,7 +94,7 @@ const DashHome = () => {
             height={"300px"}
           />
         </div>
-        <div className="bg-white p-4 shadow rounded-lg">
+        <div className="bg-white p-6 shadow-md rounded-xl">
           <h2 className="text-lg font-semibold mb-3">Top Contributors</h2>
           <Chart
             chartType="Table"
@@ -106,8 +106,8 @@ const DashHome = () => {
             }}
           />
         </div>
-        <div className="lg:col-span-2 bg-white p-4 shadow rounded-lg">
-          <h2 className="text-lg font-semibold mb-2">Top Booked Books</h2>
+        <div className="lg:col-span-2 bg-white p-6 shadow-md rounded-xl">
+          <h2 className="text-lg font-semibold mb-3">Top Booked Books</h2>
           <Chart
             chartType="BarChart"
             data={topBookedBooks}

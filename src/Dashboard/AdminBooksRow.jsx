@@ -42,12 +42,12 @@ const AdminBooksRow = ({ getBooks, refetch }) => {
   };
 
   return (
-    <tr className="border-b border-gray-200 hover:bg-gray-100">
-      <th className="py-3 px-4">
+    <tr className="hover:bg-gray-50 transition-colors duration-200">
+      <td className="py-3 px-4">
         <div className="flex gap-4 items-center">
           <button
             onClick={() => handleDeleteByAdmin(_id, book_name)}
-            className="btn btn-sm btn-circle btn-outline"
+            className="p-2 text-red-500 hover:text-red-700 transition-colors duration-200"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -64,34 +64,36 @@ const AdminBooksRow = ({ getBooks, refetch }) => {
               />
             </svg>
           </button>
-          <div className="avatar">
-            <div className="mask w-16 rounded-sm">
-              <img src={book_image} alt="no image" />
-            </div>
+          <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+            <img
+              src={book_image}
+              alt={book_name}
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
-      </th>
-      <td className="text-sm py-3 px-4">
-        <p>{book_name}</p>
       </td>
-      <td className="text-sm py-3 px-4">
-        <p>{provider_name}</p>
+      <td className="text-sm py-3 px-4 text-gray-800 font-medium">
+        {book_name}
       </td>
-      <td className="text-sm py-3 px-4">{provider_location}</td>
+      <td className="text-sm py-3 px-4 text-gray-700">{provider_name}</td>
+      <td className="text-sm py-3 px-4 text-gray-700">{provider_location}</td>
       <td className="text-sm py-3 px-4">
-        <p
-          className={
-            book_status === "available" ? "text-green-400" : "text-red-400"
-          }
+        <span
+          className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
+            book_status === "available"
+              ? "bg-green-100 text-green-700"
+              : "bg-red-100 text-red-700"
+          }`}
         >
-          {book_status}
-        </p>
+          {book_status.toUpperCase()}
+        </span>
       </td>
       <td className="py-3 px-4">
         <Link
           to={`/book/${book_name.toLowerCase().replaceAll(/\s+/g, "_")}/${_id}`}
         >
-          <button className="rounded-md text-sm  px-2 py-1 bg-green-600 text-white transform active:translate-y-0.5 transition-transform duration-150 ease-in-out">
+          <button className="rounded-full text-sm px-4 py-2 bg-green-500 text-white font-semibold hover:bg-green-600 transition-colors duration-200">
             Details
           </button>
         </Link>
