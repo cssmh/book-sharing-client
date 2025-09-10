@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import swal from "sweetalert";
+import { Dialog } from "@headlessui/react";
 import {
   addTimeBooking,
   updateBookingStatus,
   updateBookStatus,
 } from "../Api/bookings";
-import toast from "react-hot-toast";
+import { motion } from "framer-motion";
+import { CiClock2 } from "react-icons/ci";
+import { MdCheckCircleOutline } from "react-icons/md";
+import { CiDeliveryTruck } from "react-icons/ci";
 
 const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
   const {
@@ -24,46 +27,35 @@ const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
   } = getPending;
 
   const [todayDateTime, setTodayDateTime] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState(status);
+  const [isUpdating, setIsUpdating] = useState(false);
 
-  const handleUpdateStatus = async (e, idx, book_id, provider_email) => {
-    const updatedPendingStatus = e.target.value;
-    const bookStatus =
-      updatedPendingStatus === "Pending" || updatedPendingStatus === "Progress"
-        ? "available"
-        : "Unavailable";
+  const handleUpdateStatus = async (newStatus) => {
+    setIsUpdating(true);
+    const bookStatus = newStatus === "Completed" ? "Unavailable" : "available";
 
     try {
-      const res = await updateBookingStatus(
-        idx,
-        provider_email,
-        updatedPendingStatus
-      );
+      const res = await updateBookingStatus(_id, provider_email, newStatus);
 
       if (res.modifiedCount > 0) {
-        swal({
-          title: "Thank You!",
-          text: `Updated to ${updatedPendingStatus}`,
-          icon: "success",
-          timer: 2000,
-        });
-        refetch();
+        setSelectedStatus(newStatus);
 
         await updateBookStatus(book_id, provider_email, bookStatus);
 
-        if (updatedPendingStatus === "Completed") {
-          await addTimeBooking(idx, provider_email, todayDateTime);
-          refetch();
+        if (newStatus === "Completed") {
+          await addTimeBooking(_id, provider_email, todayDateTime);
           refetchIds();
         }
-      } else {
-        toast.error("Failed to update booking status.");
+
+        refetch();
       }
     } catch (error) {
-      toast.error(error.message);
+      console.error("Failed to update status:", error);
+    } finally {
+      setIsUpdating(false);
     }
   };
 
-  // Set today's date and time for completed booking
   useEffect(() => {
     const today = new Date();
     const formattedDate = `${today.getDate().toString().padStart(2, "0")}-${(
@@ -80,59 +72,116 @@ const MyPendingCard = ({ getPending, unavailableIds, refetch, refetchIds }) => {
     setTodayDateTime(dateTime);
   }, []);
 
+  const statusOptions = [
+    {
+      value: "Pending",
+      label: "Pending",
+      icon: CiClock2,
+      color: "text-yellow-600 bg-yellow-100",
+    },
+    {
+      value: "Progress",
+      label: "In Progress",
+      icon: CiDeliveryTruck,
+      color: "text-blue-600 bg-blue-100",
+    },
+    {
+      value: "Completed",
+      label: "Completed",
+      icon: MdCheckCircleOutline,
+      color: "text-emerald-600 bg-emerald-100",
+    },
+  ];
+
+  const isDisabled =
+    status === "Completed" || unavailableIds?.includes(book_id);
+
   return (
-    <div
-      data-aos="zoom-in"
-      className="group bg-white shadow-xl rounded-lg p-4 flex flex-col space-y-4"
+    <motion.div
+      whileHover={{ y: -4 }}
+      className="bg-white rounded-xl shadow-md hover:shadow-lg border border-gray-100 p-6 transition-all duration-200"
     >
-      <div className="flex flex-col items-center text-center space-y-2">
-        <figure>
+      <div className="flex flex-col space-y-4">
+        {/* Book Info */}
+        <div className="flex items-center space-x-4">
           <img
             src={book_image}
             onContextMenu={(e) => e.preventDefault()}
-            className="rounded-lg w-[90px] h-[120px] object-cover"
+            className="w-16 h-20 object-cover rounded-lg"
           />
-        </figure>
-        <h2 className="text-lg font-semibold text-blue-900">{book_name}</h2>
-      </div>
-      <div className="flex flex-col space-y-2 px-2 md:px-0">
-        <h3 className="text-sm font-medium text-gray-700">Collector Info</h3>
-        <p className="text-sm text-gray-600">Phone: {user_phone}</p>
-        <p className="text-sm text-gray-600">Email: {user_email}</p>
-        {user_message.length > 0 && (
-          <div className="bg-gray-100 rounded-md p-3 border border-gray-200">
-            <h4 className="text-sm font-medium text-gray-700 text-left">
-              Message
-            </h4>
-            <p className="text-sm text-gray-600 text-left">{user_message}</p>
+          <div>
+            <h3 className="font-semibold text-gray-900 line-clamp-2">
+              {book_name}
+            </h3>
+            <p className="text-sm text-gray-600">Requested on {user_date}</p>
+          </div>
+        </div>
+
+        {/* Collector Info */}
+        <div className="space-y-2">
+          <h4 className="font-medium text-gray-900 text-sm">
+            Collector Information
+          </h4>
+          <div className="text-sm text-gray-600 space-y-1">
+            <p>📞 {user_phone}</p>
+            <p>📧 {user_email}</p>
+            <p>📍 {user_location}</p>
+          </div>
+        </div>
+
+        {/* Message */}
+        {user_message && (
+          <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+            <h4 className="font-medium text-gray-900 text-sm mb-1">Message</h4>
+            <p className="text-sm text-gray-600">{user_message}</p>
           </div>
         )}
-        <p className="text-sm text-gray-600">
-          <span className="font-medium">Booked:</span> {user_date}
-        </p>
-        {status === "Completed" && (
-          <p className="text-sm text-gray-600">
-            <span className="font-medium">Completed:</span>{" "}
-            <span className="text-cyan-500">{completed_at}</span>
-          </p>
-        )}
-        <p className="text-sm text-gray-600">
-          <span className="font-medium">Location:</span> {user_location}
-        </p>
+
+        {/* Status and Actions */}
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-sm font-medium text-gray-700">Status:</span>
+            <span
+              className={`px-2 py-1 rounded-full text-xs font-medium ${
+                statusOptions.find((opt) => opt.value === selectedStatus)?.color
+              }`}
+            >
+              {selectedStatus}
+            </span>
+          </div>
+
+          {!isDisabled && (
+            <div className="grid grid-cols-3 gap-2">
+              {statusOptions.map((option) => (
+                <motion.button
+                  key={option.value}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => handleUpdateStatus(option.value)}
+                  disabled={isUpdating || selectedStatus === option.value}
+                  className={`p-2 rounded-lg text-xs font-medium flex items-center justify-center gap-1 transition-colors ${
+                    selectedStatus === option.value
+                      ? option.color
+                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  } ${isUpdating ? "opacity-50 cursor-not-allowed" : ""}`}
+                >
+                  <option.icon className="w-3 h-3" />
+                  {option.label}
+                </motion.button>
+              ))}
+            </div>
+          )}
+
+          {isDisabled && (
+            <p className="text-xs text-gray-500 text-center">
+              {status === "Completed"
+                ? "This booking has been completed"
+                : "This book is currently unavailable"}
+            </p>
+          )}
+        </div>
       </div>
-      <div className="text-center">
-        <select
-          defaultValue={status}
-          onChange={(e) => handleUpdateStatus(e, _id, book_id, provider_email)}
-          className="border py-2 px-3 border-gray-300 rounded-lg text-sm focus:outline-none"
-          disabled={status === "Completed" || unavailableIds?.includes(book_id)}
-        >
-          <option value="Pending">Pending</option>
-          <option value="Progress">Progress</option>
-          <option value="Completed">Completed</option>
-        </select>
-      </div>
-    </div>
+    </motion.div>
   );
 };
 

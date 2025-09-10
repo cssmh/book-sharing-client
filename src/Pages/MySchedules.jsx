@@ -3,42 +3,61 @@ import MyBookings from "./MyBookings";
 import MyPending from "./MyPending";
 import { FaCalendarAlt, FaClock } from "react-icons/fa";
 import HavenHelmet from "../Components/HavenHelmet";
+import { motion } from "framer-motion";
+import { Tab } from "@headlessui/react";
 
 const MySchedules = () => {
   const [activeSchedule, setActiveSchedule] = useState("MyBookings");
 
+  const tabs = [
+    { key: "MyBookings", label: "My Bookings", icon: FaCalendarAlt },
+    { key: "MyPending", label: "My Pending", icon: FaClock },
+  ];
+
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="min-h-screen bg-gray-50">
       <HavenHelmet title="My Schedule" />
-      <header className="bg-gray-800 text-white md:px-7 py-[15px] flex flex-col md:flex-row justify-between items-center relative">
-        <h1 className="text-[21px] font-semibold mb-2 md:mb-0">My Schedules</h1>
-        <div className="flex flex-row gap-4">
-          <button
-            onClick={() => setActiveSchedule("MyBookings")}
-            className={`py-1.5 px-3 rounded-2xl text-md font-medium flex items-center transition-colors ${
-              activeSchedule === "MyBookings"
-                ? "bg-green-500 text-white"
-                : "bg-gray-700 text-gray-300 hover:bg-gray-600"
-            }`}
-          >
-            <FaCalendarAlt className="mr-2" />
-            My Bookings
-          </button>
-          <button
-            onClick={() => setActiveSchedule("MyPending")}
-            className={`py-1.5 px-3 rounded-2xl text-md font-medium flex items-center transition-colors ${
-              activeSchedule === "MyPending"
-                ? "bg-green-500 text-white"
-                : "bg-gray-700 text-gray-300 hover:bg-gray-600"
-            }`}
-          >
-            <FaClock className="mr-2" />
-            My Pending
-          </button>
+
+      <motion.header
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="bg-gradient-to-r from-emerald-600 to-emerald-700 text-white px-4 py-6 md:px-8"
+      >
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-2xl md:text-3xl font-bold mb-4">My Schedules</h1>
+
+          <Tab.Group>
+            <Tab.List className="flex space-x-1 rounded-xl bg-emerald-700/50 p-1 max-w-md">
+              {tabs.map((tab) => (
+                <Tab
+                  key={tab.key}
+                  onClick={() => setActiveSchedule(tab.key)}
+                  className={({ selected }) =>
+                    `w-full rounded-lg py-2.5 text-sm font-medium leading-5 focus:outline-none transition-all duration-200 flex items-center justify-center space-x-2 ${
+                      selected
+                        ? "bg-white text-emerald-700 shadow-lg"
+                        : "text-emerald-100 hover:bg-white/[0.12] hover:text-white"
+                    }`
+                  }
+                >
+                  <tab.icon className="w-4 h-4" />
+                  <span>{tab.label}</span>
+                </Tab>
+              ))}
+            </Tab.List>
+          </Tab.Group>
         </div>
-      </header>
-      <main className="flex-1 bg-white pb-1">
-        {activeSchedule === "MyBookings" ? <MyBookings /> : <MyPending />}
+      </motion.header>
+
+      <main className="max-w-7xl mx-auto px-4 py-6">
+        <motion.div
+          key={activeSchedule}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          {activeSchedule === "MyBookings" ? <MyBookings /> : <MyPending />}
+        </motion.div>
       </main>
     </div>
   );

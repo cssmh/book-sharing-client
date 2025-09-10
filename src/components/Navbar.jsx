@@ -31,7 +31,7 @@ const Navbar = () => {
   const menuRef = useRef(null);
 
   const getLinkClasses = (path) =>
-    `text-base font-medium flex items-center px-4 py-2 rounded-lg transition-colors duration-200 ${
+    `text-base font-medium flex items-center px-3 py-2 rounded-lg transition-colors duration-200 ${
       location.pathname === path
         ? "shadow-md"
         : "text-gray-700 hover:bg-gray-100"
