@@ -17,7 +17,7 @@
     "@mui/styled-engine-sc": "^6.0.0-alpha.4",
     "@tanstack/react-query": "^5.36.2",
     "aos": "^2.3.4",
-    "axios": "^1.6.0",
+    "axios": "^1.12.0",
     "firebase": "^10.5.2",
     "flowbite-react": "^0.9.0",
     "framer-motion": "^12.23.12",
